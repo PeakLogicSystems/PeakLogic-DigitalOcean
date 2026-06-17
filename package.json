@@ -8,9 +8,9 @@
   },
   "scripts": {
     "start": "node src/server.js",
+    "start:runtime": "node server.js",
     "dev": "node --watch src/server.js",
     "indexes": "node src/db/indexes.js",
-    "migrate": "node src/db/indexes.js",
     "test": "node --test test/limits.test.js test/cloudApi.test.js",
     "test:all": "node --test test/*.test.js"
   },

@@ -1,0 +1,64 @@
+# GitHub + Digital Ocean App Platform
+
+Use repo **`recycleroy/mooreview-cloud`** (not empty placeholder repos like `mvcloud`).
+
+Root must contain **`package.json`** (and now **`Dockerfile`** + **`.do/app.yaml`**) so Digital Ocean detects a Node service.
+
+## Recreate / fix GitHub repo
+
+### 1. Delete empty repos (if any)
+
+On GitHub, delete repos that only have a README or `.gitattributes` and no `package.json`:
+
+- `mvcloud`, `mn-cloud`, or other empty test repos
+
+Keep or recreate:
+
+- **`mooreview-cloud`** — cloud API (this folder)
+- **`mooreview-pc`** — desktop/server (`est-pc`)
+
+### 2. GitHub Desktop — push this folder
+
+1. **File → Add local repository** → `C:\Users\public\data\mooreview-cloud`
+2. **Repository → Repository settings**
+   - Remote: `https://github.com/recycleroy/mooreview-cloud.git`
+3. Commit any pending changes (Dockerfile, `.do/app.yaml`, `package.json`)
+4. **Push origin** — branch **`master`** (not an empty `main` with no code)
+
+Verify on GitHub: repo root shows `package.json`, `Dockerfile`, `src/server.js`.
+
+### 3. Digital Ocean App Platform
+
+1. **Create App → GitHub** → authorize → select **`recycleroy/mooreview-cloud`**
+2. Branch: **`master`**
+3. **Source directory:** `/` (repo root — do not use `mvcloud/` or `mn-cloud/`)
+4. DO should detect **Node.js** or **Dockerfile**
+   - Build: `npm ci --omit=dev`
+   - Run: `npm start`
+   - HTTP port: **3100**
+   - Health check: `/health`
+5. **Environment variables** (encrypted):
+   - `MONGODB_URI` — Digital Ocean Managed MongoDB connection string
+   - `JWT_SECRET` — long random string
+   - `MONGODB_DB` — `mooreview_cloud`
+   - `NODE_ENV` — `production`
+6. Add the app as a **trusted source** on your MongoDB cluster.
+7. Deploy.
+
+### 4. Custom domain
+
+**Settings → Domains** → add `api.mooreview.io` → set DNS CNAME per DO instructions.
+
+### Troubleshooting “No components detected”
+
+| Cause | Fix |
+|-------|-----|
+| Wrong repo (empty) | Use `mooreview-cloud` with `package.json` at root |
+| Wrong branch | Push `master`; select that branch in DO |
+| Source subdirectory | Set source dir to **`/`** |
+| Code not pushed | Push from GitHub Desktop; refresh DO import |
+| Permissions | Re-authorize GitHub in DO → Settings → GitHub |
+
+### mooreview-pc (separate app)
+
+`est-pc` is the full Windows/Linux MVP suite (`mooreview-mvp-suite`). Deploy **`mooreview-cloud`** only for the multi-tenant API on `api.mooreview.io`.

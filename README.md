@@ -19,6 +19,8 @@ npm start
 
 See **[DEPLOY.md](./DEPLOY.md)** for Digital Ocean + **mooreview.io** (`api.mooreview.io`, `app.mooreview.io`) and Managed MongoDB setup.
 
+**GitLab:** **[GITLAB.md](./GITLAB.md)** — create projects, change `origin`, push, connect DO App Platform.
+
 Environment template: **[.env.example](./.env.example)** (placeholders only — set real values in DO dashboard).
 
 ## Regenerate from est-pc fork

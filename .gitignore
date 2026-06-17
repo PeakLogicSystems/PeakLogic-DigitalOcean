@@ -3,6 +3,11 @@ node_modules/
 .env.*
 !.env.example
 
+# Nested empty GitHub Desktop repos — do not commit
+mvcloud/
+mn-cloud/
+mooreview/
+
 # Local runtime fork data
 data/drivers.json
 data/settings.json
