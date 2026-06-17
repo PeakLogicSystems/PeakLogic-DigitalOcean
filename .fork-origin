@@ -1,0 +1,6 @@
+﻿# Generated product fork â€” do not edit est-pc base here.
+# Regenerate: cd est-pc && powershell -File scripts/create-product-forks.ps1 -Products cloud
+# Docs: est-pc/docs/PRODUCT_FORKS.md
+generatedAt: 2026-06-11T12:58:34.2862638-04:00
+product: cloud
+base: est-pc

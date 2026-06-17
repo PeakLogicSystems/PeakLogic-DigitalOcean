@@ -1,0 +1,207 @@
+[
+  {
+    "id": "AVG1",
+    "type": "AVG",
+    "role": "fb",
+    "preset": 10,
+    "mode": "MOV",
+    "value": 0,
+    "fb": {
+      "pv": 0,
+      "avg": 0,
+      "samples": []
+    }
+  },
+  {
+    "id": "CTR",
+    "type": "COUNTER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 5,
+    "mode": "CTU",
+    "value": 0,
+    "fb": {
+      "count": 0,
+      "done": false
+    }
+  },
+  {
+    "id": "PID1",
+    "type": "PID",
+    "role": "fb",
+    "preset": 50,
+    "mode": "PI",
+    "kp": 1,
+    "ki": 0.5,
+    "kd": 0,
+    "outMin": 0,
+    "outMax": 100,
+    "value": 0,
+    "fb": {
+      "pv": 0,
+      "sp": 50,
+      "out": 0,
+      "enabled": true
+    }
+  },
+  {
+    "id": "TMR",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 1000,
+    "mode": "TON",
+    "value": false,
+    "fb": {
+      "input": false,
+      "elapsed": 0,
+      "done": false
+    }
+  },
+  {
+    "id": "VPB1",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "mock1",
+    "driverAddress": {
+      "channel": "DI"
+    }
+  },
+  {
+    "id": "VPB10",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB11",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB12",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB13",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB14",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB15",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB16",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB17",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB18",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB19",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB2",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "mock1",
+    "driverAddress": {
+      "channel": "DI2"
+    }
+  },
+  {
+    "id": "VPB20",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB3",
+    "type": "BOOL",
+    "role": "output",
+    "value": false
+  },
+  {
+    "id": "VPB4",
+    "type": "BOOL",
+    "role": "output",
+    "value": false
+  },
+  {
+    "id": "VPB5",
+    "type": "BOOL",
+    "role": "output",
+    "value": false
+  },
+  {
+    "id": "VPB6",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB7",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB8",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB9",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPI1",
+    "type": "INT",
+    "role": "input",
+    "value": 50,
+    "wordWidth": 16,
+    "driverId": "mock1",
+    "driverAddress": {
+      "channel": "AI"
+    }
+  },
+  {
+    "id": "VPR1",
+    "type": "REAL",
+    "role": "memory",
+    "value": 1,
+    "wordWidth": 32
+  }
+]

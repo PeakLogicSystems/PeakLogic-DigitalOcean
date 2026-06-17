@@ -1,0 +1,26 @@
+{
+  "id": "arduino_opta_eth",
+  "label": "Arduino Opta — Ethernet ST runtime",
+  "vendor": "Arduino",
+  "model": "Opta — MooreVIEW remote ST",
+  "transport": "opta_remote",
+  "driverId": "opta_eth",
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "host": "192.168.1.50",
+    "port": 80,
+    "remoteExecution": true,
+    "scanMs": 100
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 8000
+  },
+  "tags": {
+    "discrete": [{ "prefix": "I", "count": 8, "start": 0 }],
+    "coil": [{ "prefix": "R", "count": 4, "start": 0 }],
+    "input": [{ "prefix": "I", "suffix": "_RAW", "count": 8, "start": 0 }]
+  }
+}

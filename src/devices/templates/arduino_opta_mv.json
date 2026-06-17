@@ -1,0 +1,32 @@
+{
+  "id": "arduino_opta_mv",
+  "label": "Arduino Opta — Modbus RTU (official mV map)",
+  "vendor": "Arduino",
+  "model": "Opta RS485 — opta_modbus_rtu_slave",
+  "transport": "modbus_rtu",
+  "driverId": "opta_mv",
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 16,
+  "hrCount": 4,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 19200,
+    "slaveId": 1,
+    "parity": "even",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 1000
+  },
+  "tags": {
+    "discrete": [{ "prefix": "I", "count": 8, "start": 0 }],
+    "coil": [{ "prefix": "R", "count": 4, "start": 0 }],
+    "input": [
+      { "prefix": "I", "suffix": "_RAW", "count": 8, "start": 0 },
+      { "prefix": "I", "suffix": "_MV", "count": 8, "start": 8 }
+    ],
+    "holding": [{ "prefix": "H", "count": 4, "start": 0 }]
+  }
+}

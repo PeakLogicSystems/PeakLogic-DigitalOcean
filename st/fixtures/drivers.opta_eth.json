@@ -1,0 +1,12 @@
+[
+  {
+    "id": "opta_eth",
+    "type": "opta_remote",
+    "enabled": true,
+    "host": "192.168.1.50",
+    "port": 80,
+    "remoteExecution": true,
+    "scanMs": 100,
+    "timeoutMs": 8000
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "devices": {
+    "opta_st_01": {
+      "deviceId": "opta_st_01",
+      "name": "opta_st_01",
+      "platform": "",
+      "reportIntervalSec": 300,
+      "lastReportAt": "2026-06-07T20:43:03.838Z",
+      "runtime": null,
+      "tags": [
+        {
+          "id": "I1",
+          "type": "BOOL",
+          "value": true
+        },
+        {
+          "id": "R1",
+          "type": "BOOL",
+          "value": false
+        }
+      ],
+      "driverHealth": [],
+      "meta": {},
+      "attach": {
+        "active": false
+      }
+    }
+  },
+  "settings": {
+    "enabled": true,
+    "defaultReportIntervalSec": 300,
+    "staleAfterSec": 900
+  }
+}

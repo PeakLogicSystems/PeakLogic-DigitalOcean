@@ -1,0 +1,263 @@
+{
+  "id": "scan_spectrolyser",
+  "label": "S::CAN spectro::lyser — Modbus RTU",
+  "vendor": "s::can",
+  "model": "spectro::lyser UV-Vis probe",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "scan_spec",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 26,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 38400,
+    "slaveId": 4,
+    "parity": "odd",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 3000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "SCAN_DEV_STATUS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 120,
+        "signed": false,
+        "comment": "Device status bitmap (IR 120)"
+      },
+      {
+        "id": "SCAN_PARM_COUNT",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 22,
+        "signed": false
+      },
+      {
+        "id": "SCAN_PARM_SCALE",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 24,
+        "signed": false,
+        "comment": "Parameter scale factor from setup block"
+      },
+      {
+        "id": "PARM1_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 120,
+        "signed": false,
+        "comment": "Parameter 1 public status (same IR as device status for index 0)"
+      },
+      {
+        "id": "PARM1_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 121,
+        "signed": false
+      },
+      {
+        "id": "PARM1_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 122,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM2_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 128,
+        "signed": false
+      },
+      {
+        "id": "PARM2_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 129,
+        "signed": false
+      },
+      {
+        "id": "PARM2_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 130,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM3_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 136,
+        "signed": false
+      },
+      {
+        "id": "PARM3_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 137,
+        "signed": false
+      },
+      {
+        "id": "PARM3_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 138,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM4_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 144,
+        "signed": false
+      },
+      {
+        "id": "PARM4_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 145,
+        "signed": false
+      },
+      {
+        "id": "PARM4_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 146,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM5_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 152,
+        "signed": false
+      },
+      {
+        "id": "PARM5_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 153,
+        "signed": false
+      },
+      {
+        "id": "PARM5_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 154,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM6_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 160,
+        "signed": false
+      },
+      {
+        "id": "PARM6_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 161,
+        "signed": false
+      },
+      {
+        "id": "PARM6_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 162,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM7_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 168,
+        "signed": false
+      },
+      {
+        "id": "PARM7_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 169,
+        "signed": false
+      },
+      {
+        "id": "PARM7_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 170,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      },
+      {
+        "id": "PARM8_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 176,
+        "signed": false
+      },
+      {
+        "id": "PARM8_SPEC_STS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 177,
+        "signed": false
+      },
+      {
+        "id": "PARM8_VAL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 178,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE"
+      }
+    ]
+  }
+}

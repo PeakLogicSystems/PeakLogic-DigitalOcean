@@ -1,0 +1,23 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Local runtime fork data
+data/drivers.json
+data/settings.json
+data/tags.json
+data/projects/
+data/.cache/
+data/*.log
+data/#Untitled-1#
+
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+dist/
+coverage/
+*.tmp
+*~

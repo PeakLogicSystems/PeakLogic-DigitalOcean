@@ -1,0 +1,167 @@
+[
+  {
+    "id": "VPB1",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "mb1",
+    "driverAddress": {
+      "table": "discrete",
+      "address": 0
+    }
+  },
+  {
+    "id": "VPB10",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB11",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB12",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB13",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB14",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB15",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB16",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB17",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB18",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB19",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB2",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "mb1",
+    "driverAddress": {
+      "table": "discrete",
+      "address": 1
+    }
+  },
+  {
+    "id": "VPB20",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB3",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "mb1",
+    "driverAddress": {
+      "table": "coil",
+      "address": 0
+    }
+  },
+  {
+    "id": "VPB4",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "mb1",
+    "driverAddress": {
+      "table": "coil",
+      "address": 1
+    }
+  },
+  {
+    "id": "VPB5",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "mb1",
+    "driverAddress": {
+      "table": "coil",
+      "address": 2
+    }
+  },
+  {
+    "id": "VPB6",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB7",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB8",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB9",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPI1",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "signed": true,
+    "driverId": "mb1",
+    "driverAddress": {
+      "table": "input",
+      "address": 0
+    }
+  },
+  {
+    "id": "VPR1",
+    "type": "REAL",
+    "role": "memory",
+    "value": 1,
+    "wordWidth": 32
+  }
+]

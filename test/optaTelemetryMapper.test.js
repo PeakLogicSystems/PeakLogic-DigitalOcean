@@ -1,0 +1,17 @@
+'use strict';
+
+const { describe, it } = require('node:test');
+const assert = require('node:assert/strict');
+const { optaStatusToFleetReport } = require('../src/fleet/optaTelemetryMapper');
+
+describe('optaStatusToFleetReport', () => {
+  it('maps built-in DI and mA to tags', () => {
+    const report = optaStatusToFleetReport('opta_full_io_01', {
+      di_builtIn: [true, false],
+      analog: { mA: [12.5, 4.0], scaled_mA: [50, 0] },
+    });
+    assert.equal(report.deviceId, 'opta_full_io_01');
+    assert.ok(report.tags.find((t) => t.id === 'DI1' && t.value === true));
+    assert.ok(report.tags.find((t) => t.id === 'mA_AI3' && t.value === 12.5));
+  });
+});

@@ -1,0 +1,9 @@
+IF IsON(DI_01) AND WithInLimits(AI_TEMP, 20.0, 80.0) THEN
+  TurnON(Q_HEATER);
+ELSE
+  TurnOFF(Q_HEATER);
+END_IF;
+
+IF TimerDone(T_DELAY) THEN
+  TurnON(Q_HEATER);
+END_IF;

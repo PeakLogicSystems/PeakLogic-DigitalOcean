@@ -1,0 +1,12 @@
+[
+  {
+    "id": "mock1",
+    "type": "mock",
+    "enabled": true,
+    "simValues": {
+      "DI": false,
+      "DI2": false,
+      "AI": 50
+    }
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "opta_mqtt_st",
+    "type": "mqtt_fleet",
+    "enabled": true,
+    "deviceId": "opta_st_01",
+    "remoteExecution": true,
+    "scanMs": 100,
+    "reportIntervalSec": 180
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ws_rtu_8",
+    "type": "modbus_rtu",
+    "enabled": true,
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "timeoutMs": 1000
+  }
+]

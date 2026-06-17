@@ -1,0 +1,2 @@
+(* Either VPB1 or VPB2 on *)
+IF IsON(VPB1) OR IsON(VPB2) THEN TurnON(VPB3); END_IF;

@@ -1,0 +1,26 @@
+{
+  "id": "datexel_dat10148",
+  "label": "Datexel DAT10148 — 16 DI Modbus RTU",
+  "vendor": "Datexel",
+  "model": "DAT10148",
+  "transport": "modbus_rtu",
+  "driverId": "dat10148",
+  "diCount": 16,
+  "doCount": 0,
+  "aiCount": 0,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 1000
+  },
+  "tags": {
+    "discrete": [{ "prefix": "DI", "count": 16, "start": 0 }]
+  }
+}

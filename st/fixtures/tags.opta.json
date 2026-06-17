@@ -1,0 +1,42 @@
+[
+  { "id": "I1", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 0 } },
+  { "id": "I2", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 1 } },
+  { "id": "I3", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 2 } },
+  { "id": "I4", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 3 } },
+  { "id": "I5", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 4 } },
+  { "id": "I6", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 5 } },
+  { "id": "I7", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 6 } },
+  { "id": "I8", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 7 } },
+
+  { "id": "R1", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 0 } },
+  { "id": "R2", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 1 } },
+  { "id": "R3", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 2 } },
+  { "id": "R4", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 3 } },
+
+  { "id": "I1_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 0 } },
+  { "id": "I2_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 1 } },
+  { "id": "I3_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 2 } },
+  { "id": "I4_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 3 } },
+  { "id": "I5_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 4 } },
+  { "id": "I6_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 5 } },
+  { "id": "I7_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 6 } },
+  { "id": "I8_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 7 } },
+
+  { "id": "H1", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 0 } },
+  { "id": "H2", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 1 } },
+  { "id": "H3", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 2 } },
+  { "id": "H4", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 3 } },
+  { "id": "H5", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 4 } },
+  { "id": "H6", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 5 } },
+  { "id": "H7", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 6 } },
+  { "id": "H8", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "holding", "address": 7 } },
+
+  { "id": "HM1", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 8 } },
+  { "id": "HM2", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 9 } },
+  { "id": "HM3", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 10 } },
+  { "id": "HM4", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 11 } },
+  { "id": "HM5", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 12 } },
+  { "id": "HM6", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 13 } },
+  { "id": "HM7", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 14 } },
+  { "id": "HM8", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "opta_rtu", "driverAddress": { "table": "input", "address": 15 } }
+]

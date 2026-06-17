@@ -1,0 +1,6 @@
+﻿normalize ok screens= 5
+screen screen_1 tiles 3 keyLen 797
+screen screen_2 tiles 8 keyLen 946
+screen screen_3 tiles 0 keyLen 12
+screen screen_4 tiles 0 keyLen 12
+screen screen_5 tiles 0 keyLen 12

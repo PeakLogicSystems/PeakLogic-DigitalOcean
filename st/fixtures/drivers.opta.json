@@ -1,0 +1,14 @@
+[
+  {
+    "id": "opta_rtu",
+    "type": "modbus_rtu",
+    "enabled": false,
+    "serialPort": "COM11",
+    "baud": 9600,
+    "slaveId": 2,
+    "parity": "none",
+    "stopBits": 1,
+    "timeoutMs": 1000
+  }
+]
+

@@ -1,0 +1,2 @@
+(* Generic VPB1 or VPB2 -> VPB3 *)
+IF IsON(VPB1) OR IsON(VPB2) THEN TurnON(VPB3); END_IF;

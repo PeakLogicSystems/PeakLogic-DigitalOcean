@@ -1,0 +1,151 @@
+[
+  {
+    "id": "VPB1",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "mqtt1",
+    "driverAddress": {
+      "topic": "mooreview/in/bool",
+      "payloadTemplate": "bool"
+    }
+  },
+  {
+    "id": "VPB10",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB11",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB12",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB13",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB14",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB15",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB16",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB17",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB18",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB19",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB20",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB3",
+    "type": "BOOL",
+    "role": "output",
+    "value": false
+  },
+  {
+    "id": "VPB4",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB5",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB6",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "mqtt1",
+    "driverAddress": {
+      "topic": "mooreview/out/do",
+      "payloadTemplate": "bool"
+    }
+  },
+  {
+    "id": "VPB7",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB8",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB9",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPI1",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "driverId": "mqtt1",
+    "driverAddress": {
+      "topic": "mooreview/in/ai",
+      "payloadTemplate": "number"
+    }
+  },
+  {
+    "id": "VPR1",
+    "type": "REAL",
+    "role": "memory",
+    "value": 1,
+    "wordWidth": 32
+  }
+]

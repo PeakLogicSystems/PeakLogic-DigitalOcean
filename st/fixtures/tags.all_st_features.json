@@ -1,0 +1,373 @@
+[
+  {
+    "id": "AVG30",
+    "type": "AVG",
+    "role": "fb",
+    "preset": 5,
+    "mode": "MOV",
+    "value": 0,
+    "fb": { "pv": 0, "avg": 0, "samples": [], "count": 0, "ready": false }
+  },
+  {
+    "id": "AVG31",
+    "type": "AVG",
+    "role": "fb",
+    "preset": 8,
+    "mode": "EMA",
+    "value": 0,
+    "fb": { "pv": 0, "avg": 0, "ema": 0, "count": 0, "ready": false }
+  },
+  {
+    "id": "CTR30",
+    "type": "COUNTER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 5,
+    "mode": "CTU",
+    "value": 0,
+    "fb": { "count": 0, "done": false }
+  },
+  {
+    "id": "CTR31",
+    "type": "COUNTER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 5,
+    "mode": "CTD",
+    "value": 5,
+    "fb": { "count": 5, "done": false }
+  },
+  {
+    "id": "PID30",
+    "type": "PID",
+    "role": "fb",
+    "preset": 50,
+    "mode": "PI",
+    "kp": 1,
+    "ki": 0.2,
+    "kd": 0,
+    "outMin": 0,
+    "outMax": 100,
+    "value": 0,
+    "fb": { "pv": 0, "sp": 50, "out": 0, "enabled": false }
+  },
+  {
+    "id": "TMR30",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 500,
+    "mode": "TON",
+    "value": false,
+    "fb": { "input": false, "elapsed": 0, "done": false, "running": false }
+  },
+  {
+    "id": "TMR31",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 500,
+    "mode": "TOF",
+    "value": false,
+    "fb": { "input": false, "elapsed": 0, "done": false, "running": false }
+  },
+  {
+    "id": "TMR32",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 500,
+    "mode": "TP",
+    "value": false,
+    "fb": { "input": false, "elapsed": 0, "done": false, "running": false, "prevIn": false }
+  },
+  {
+    "id": "VPB30",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB31",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB32",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB33",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB34",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB35",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "VPB36",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB37",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB38",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB40",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB41",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB42",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB43",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB44",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB45",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB46",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB47",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB48",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB49",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB50",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB51",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB52",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB53",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB54",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB55",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB56",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB57",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB58",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB59",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB60",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB61",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB62",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB63",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB64",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB65",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB66",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB67",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB68",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB69",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPB70",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "VPI30",
+    "type": "INT",
+    "role": "memory",
+    "value": 60,
+    "wordWidth": 16
+  },
+  {
+    "id": "VPI31",
+    "type": "INT",
+    "role": "memory",
+    "value": 40,
+    "wordWidth": 16
+  },
+  {
+    "id": "VPI32",
+    "type": "INT",
+    "role": "memory",
+    "value": 50,
+    "wordWidth": 16
+  },
+  {
+    "id": "VPI33",
+    "type": "INT",
+    "role": "memory",
+    "value": 50,
+    "wordWidth": 16
+  },
+  {
+    "id": "VPR30",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 32
+  },
+  {
+    "id": "VPR31",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 32
+  },
+  {
+    "id": "VPR32",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 32
+  }
+]

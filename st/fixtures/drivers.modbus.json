@@ -1,0 +1,21 @@
+[
+  {
+    "id": "mb1",
+    "type": "modbus_tcp",
+    "enabled": false,
+    "host": "127.0.0.1",
+    "port": 502,
+    "slaveId": 1,
+    "timeoutMs": 1000
+  },
+  {
+    "id": "mb_rtu",
+    "type": "modbus_rtu",
+    "enabled": false,
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "timeoutMs": 1000
+  }
+]

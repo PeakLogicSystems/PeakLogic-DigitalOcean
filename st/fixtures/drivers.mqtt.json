@@ -1,0 +1,24 @@
+[
+
+  {
+
+    "id": "mqtt1",
+
+    "type": "mqtt",
+
+    "enabled": true,
+
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+
+    "clientId": "mooreview-test",
+
+    "subscriptions": ["mooreview/in/bool", "mooreview/in/ai"],
+
+    "publishQos": 0,
+
+    "subscribeQos": 0
+
+  }
+
+]
+
