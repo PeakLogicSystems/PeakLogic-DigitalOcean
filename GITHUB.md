@@ -1,6 +1,8 @@
 # GitHub + Digital Ocean App Platform
 
-Use repo **`recycleroy/mooreview-cloud`** (not empty placeholder repos like `mvcloud`).
+Use repo **`RoyMooreACE/mooreview-cloud`** (not empty placeholder repos like `mvcloud`).
+
+GitHub account: **RoyMooreACE** (not `recycleroy`).
 
 Root must contain **`package.json`** (and now **`Dockerfile`** + **`.do/app.yaml`**) so Digital Ocean detects a Node service.
 
@@ -21,7 +23,7 @@ Keep or recreate:
 
 1. **File → Add local repository** → `C:\Users\public\data\mooreview-cloud`
 2. **Repository → Repository settings**
-   - Remote: `https://github.com/recycleroy/mooreview-cloud.git`
+   - Remote: `https://github.com/RoyMooreACE/mooreview-cloud.git`
 3. Commit any pending changes (Dockerfile, `.do/app.yaml`, `package.json`)
 4. **Push origin** — branch **`master`** (not an empty `main` with no code)
 
@@ -29,8 +31,8 @@ Verify on GitHub: repo root shows `package.json`, `Dockerfile`, `src/server.js`.
 
 ### 3. Digital Ocean App Platform
 
-1. **Create App → GitHub** → authorize → select **`recycleroy/mooreview-cloud`**
-2. Branch: **`master`**
+1. **Create App → GitHub** → authorize → select **`RoyMooreACE/mooreview-cloud`**
+2. Branch: **`main`**
 3. **Source directory:** `/` (repo root — do not use `mvcloud/` or `mn-cloud/`)
 4. DO should detect **Node.js** or **Dockerfile**
    - Build: `npm ci --omit=dev`
