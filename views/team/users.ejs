@@ -1,0 +1,85 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <h1 class="h3 mb-2">Team</h1>
+  <p class="text-muted small mb-4">Invite people to sign in to <%= tenant.name %>. They receive an email to set their password.</p>
+
+  <% if (error) { %>
+    <div class="alert alert-danger py-2 small"><%= error %></div>
+  <% } %>
+  <% if (message) { %>
+    <div class="alert alert-success py-2 small"><%= message %></div>
+  <% } %>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="h5 mb-3">Invite user</h2>
+      <form action="/team/users/invite" method="POST" class="row g-3 align-items-end">
+        <div class="col-md-4">
+          <label class="form-label small" for="invite-email">Email</label>
+          <input type="email" class="form-control" id="invite-email" name="email" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label small" for="invite-name">Display name</label>
+          <input type="text" class="form-control" id="invite-name" name="displayName" placeholder="Optional">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label small" for="invite-role">Role</label>
+          <select class="form-select" id="invite-role" name="role">
+            <option value="operator">Operator</option>
+            <option value="viewer">Viewer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-purple w-100">Send invite</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>User</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% teamUsers.forEach(function(u) { %>
+            <tr>
+              <td>
+                <strong><%= u.profile?.displayName || u.email %></strong><br>
+                <span class="text-muted small"><%= u.email %></span>
+              </td>
+              <td><span class="badge bg-light text-dark border"><%= u.role %></span></td>
+              <td>
+                <% if (u.invitePending) { %>
+                  <span class="badge bg-warning text-dark">Invite pending</span>
+                <% } else if (u.active) { %>
+                  <span class="badge bg-success">Active</span>
+                <% } else { %>
+                  <span class="badge bg-secondary">Inactive</span>
+                <% } %>
+              </td>
+              <td class="text-end">
+                <% if (u.invitePending && u.id !== user.id) { %>
+                  <form action="/team/users/<%= u.id %>/resend-invite" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-outline-purple">Resend invite</button>
+                  </form>
+                <% } %>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/shell-foot') %>
