@@ -6,7 +6,7 @@
     "value": false,
     "driverId": "mqtt1",
     "driverAddress": {
-      "topic": "mooreview/in/bool",
+      "topic": "peaklogic/in/bool",
       "payloadTemplate": "bool"
     }
   },
@@ -107,7 +107,7 @@
     "value": false,
     "driverId": "mqtt1",
     "driverAddress": {
-      "topic": "mooreview/out/do",
+      "topic": "peaklogic/out/do",
       "payloadTemplate": "bool"
     }
   },
@@ -137,7 +137,7 @@
     "wordWidth": 16,
     "driverId": "mqtt1",
     "driverAddress": {
-      "topic": "mooreview/in/ai",
+      "topic": "peaklogic/in/ai",
       "payloadTemplate": "number"
     }
   },

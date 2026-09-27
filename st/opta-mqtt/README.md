@@ -1,26 +1,26 @@
 # Arduino Opta — ST over MQTT fleet
 
-Structured Text runs **on the Opta**; MooreVIEW **est-pc** deploys and starts programs over **MQTT** (same workflow as Ethernet `opta_remote`, different transport).
+Structured Text runs **on the Opta**; PeakLogic **est-pc** deploys and starts programs over **MQTT** (same workflow as Ethernet `opta_remote`, different transport).
 
 ## 1. Flash firmware
 
-`firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt/`
+`firmware/arduino-opta-mqtt-st/PeakLogicOptaMqttSt/`
 
 Libraries: **ArduinoJson** 7, **PubSubClient**, **Arduino_Opta_Blueprint**, and optionally **EthernetWebServer** (Khoi Hoang) for local `/setup` HTTP. Without EthernetWebServer the sketch still builds — ST + MQTT only.
 
-In `MooreviewOptaMqttSt.ino`, set:
+In `PeakLogicOptaMqttSt.ino`, set:
 
 ```cpp
-static MvMqttConfig g_mqttCfg = {
+static PlMqttConfig g_mqttCfg = {
   "192.168.1.100",  // MQTT broker IP
   1883,
   "opta_st_01",     // fleet device id — must match driver below
-  "mooreview/v1",
+  "peaklogic/v1",
   180000,
 };
 ```
 
-Commission Ethernet via `/setup` (WiFi AP `MooreVIEW-Opta` on WiFi models).
+Commission Ethernet via `/setup` (WiFi AP `PeakLogic-Opta` on WiFi models).
 
 ## 2. est-pc MQTT hub
 
@@ -30,13 +30,13 @@ Commission Ethernet via `/setup` (WiFi AP `MooreVIEW-Opta` on WiFi models).
 "mqttFleet": {
   "enabled": true,
   "brokerUrl": "mqtt://192.168.1.100:1883",
-  "topicPrefix": "mooreview/v1"
+  "topicPrefix": "peaklogic/v1"
 }
 ```
 
 Restart est-pc after enabling.
 
-## 3. MooreVIEW project
+## 3. PeakLogic project
 
 1. **Drivers → Apply template → Arduino Opta — MQTT fleet ST runtime**
 2. Confirm **device id** = `opta_st_01` (same as firmware)
@@ -80,4 +80,4 @@ POST /api/fleet/devices/opta_st_01/program
 | Firmware | `arduino-opta-st` | `arduino-opta-mqtt-st` |
 | Driver type | `opta_remote` | `mqtt_fleet` |
 | Deploy | HTTP | MQTT `put_program` |
-| Fleet overview | — | `mooreview/v1/.../telemetry` |
+| Fleet overview | — | `peaklogic/v1/.../telemetry` |

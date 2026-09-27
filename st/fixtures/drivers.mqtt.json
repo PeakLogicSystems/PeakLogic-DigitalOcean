@@ -10,9 +10,9 @@
 
     "brokerUrl": "mqtt://127.0.0.1:1883",
 
-    "clientId": "mooreview-test",
+    "clientId": "peaklogic-test",
 
-    "subscriptions": ["mooreview/in/bool", "mooreview/in/ai"],
+    "subscriptions": ["peaklogic/in/bool", "peaklogic/in/ai"],
 
     "publishQos": 0,
 
