@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1342" height="774" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1342 774">
+  <defs>
+    <linearGradient id="linear-gradient" x1="513.822" y1="666.31" x2="347.347" y2="201.755" gradientUnits="userSpaceOnUse">
+      <stop offset=".008" stop-color="#39c"/>
+      <stop offset=".211" stop-color="#fff"/>
+      <stop offset=".452" stop-color="#39c"/>
+      <stop offset=".643" stop-color="#3196c9"/>
+      <stop offset=".747" stop-color="#2c8ec2"/>
+      <stop offset=".83" stop-color="#2480b4"/>
+      <stop offset=".902" stop-color="#186da2"/>
+      <stop offset=".966" stop-color="#0a548a"/>
+      <stop offset="1" stop-color="#00447a"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="944.377" y1="85.063" x2="1067.4" y2="399.92" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="1040.256" y1="408.737" x2="924.863" y2="123.236" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-4" x1="1073.789" y1="393.837" x2="1082.626" y2="416.455" xlink:href="#linear-gradient"/>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="linear">
+      <path d="M891.826,522.158c-43.44,15.507-113.269-68.889-155.969-188.504-42.699-119.615-42.098-229.153,1.342-244.659L50.931,326.848c-43.44,15.507-44.041,125.045-1.341,244.659,42.699,119.615,112.529,204.011,155.969,188.504l686.267-237.853Z" fill="url(#linear-gradient)" stroke="#00467f" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1083.925,222.195c-34.192-95.783-90.109-163.364-124.894-150.947l-25.02,8.64c-34.785,12.417-35.266,100.131-1.074,195.914,34.192,95.783,90.109,163.364,124.894,150.947l25.02-8.64c34.785-12.417,35.266-100.131,1.074-195.914ZM1059.623,392.964c-27.396-8.565-63.669-59.835-87.862-127.609-24.325-68.143-28.632-131.103-12.546-154.786,27.396,8.565,63.669,59.835,87.862,127.609,24.325,68.143,28.632,131.103,12.546,154.786Z" fill="url(#linear-gradient-2)" stroke="#00467f" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="995.921" cy="253.318" rx="66.877" ry="184.149" transform="translate(-27.194 349.567) rotate(-19.645)" fill="none" stroke="#00467f" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M971.761,265.355c-24.325-68.143-28.632-131.103-12.546-154.786-5.125-1.602-9.94-1.713-14.307-.155-27.707,9.891-26.887,83.128,1.832,163.581,28.719,80.452,74.462,137.654,102.169,127.763,4.239-1.513,7.807-4.516,10.713-8.795-27.396-8.565-63.669-59.835-87.862-127.609Z" fill="url(#linear-gradient-3)" stroke="#00467f" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="1073.93" y1="393.119" x2="1082.851" y2="418.109" fill="url(#linear-gradient-4)" stroke="#00467f" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g id="dark">
+      <path d="M1058.905,230.835c-34.192-95.783-90.109-163.364-124.894-150.947-34.785,12.417-35.266,100.131-1.074,195.914,34.192,95.783,90.109,163.364,124.894,150.947,34.785-12.417,35.266-100.131,1.074-195.914ZM1048.91,401.759c-27.707,9.891-73.45-47.311-102.169-127.763-28.719-80.452-29.54-153.69-1.832-163.581,27.707-9.891,73.45,47.311,102.169,127.763,28.719,80.452,29.54,153.69,1.832,163.581Z" fill="#39c"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "id": "alarm_list",
+  "label": "Alarm list",
+  "group": "Alarms",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/composites/alarm_list.svg",
+  "parts": [
+    {
+      "role": "panel",
+      "z": 0,
+      "kind": "alarmList",
+      "svg": "/hmi/svg/composites/alarm_list.svg"
+    }
+  ],
+  "defaultBindings": []
+}

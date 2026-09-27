@@ -1,0 +1,32 @@
+{
+  "id": "pool_backwash",
+  "label": "Pool backwash sequence",
+  "group": "Process equipment",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_backwash.svg",
+  "tagRoles": {
+    "bwSta": { "pick": "tagId", "tagId": "POOL_BW_STA", "types": ["INT"] },
+    "bwBusy": { "pick": "tagId", "tagId": "POOL_BW_BUSY", "types": ["BOOL"] },
+    "bwCmd": { "pick": "tagId", "tagId": "POOL_BW_CMD", "types": ["BOOL"] },
+    "bwDone": { "pick": "tagId", "tagId": "POOL_BW_DONE", "types": ["BOOL"] },
+    "tmrBw": { "pick": "tagId", "tagId": "TMR_BW", "types": ["TIMER"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_backwash.svg"
+    }
+  ],
+  "defaultBindings": [
+    { "elementId": "bw_state", "property": "text", "tagRole": "bwSta", "format": "poolBwSta", "min": 0, "max": 4, "colors": ["#64748b", "#2563eb", "#06b6d4", "#f59e0b", "#22c55e"] },
+    { "elementId": "bw_step_lamp", "property": "fill5", "tagRole": "bwSta", "min": 0, "max": 4, "colors": ["#64748b", "#2563eb", "#06b6d4", "#f59e0b", "#22c55e"] },
+    { "elementId": "bw_busy_lamp", "property": "fill", "tagRole": "bwBusy", "onValue": "#2563eb", "offValue": "#64748b" },
+    { "elementId": "bw_timer", "property": "text", "tagRole": "tmrBw", "tagField": "elapsed", "format": "int", "min": 0, "max": 600000 },
+    { "elementId": "bw_done_lamp", "property": "fill", "tagRole": "bwDone", "onValue": "#22c55e", "offValue": "#64748b" },
+    { "elementId": "btn_bw_normal", "property": "fill", "tagRole": "bwBusy", "onValue": "#cbd5e1", "offValue": "#64748b" },
+    { "elementId": "btn_bw_backwash", "property": "fill", "tagRole": "bwBusy", "onValue": "#64748b", "offValue": "#cbd5e1" },
+    { "elementId": "btn_bw_start", "property": "fill", "tagRole": "bwCmd", "onValue": "#2563eb", "offValue": "#94a3b8" }
+  ]
+}

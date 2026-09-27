@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="frame">
+	<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+		<path fill="#006837" d="M50,97.578L10.807,58.384V5.632l5.034-1.458c19.153-5.551,49.162-5.55,68.318,0l5.035,1.458v52.752
+			L50,97.578z"/>
+		<rect x="48" y="92.792" fill="#006837" width="4" height="7.208"/>
+</g>
+<g id="dark">
+	<path fill="#009245" d="M50,97.225L11.057,58.28V5.82l4.854-1.406c19.114-5.538,49.062-5.539,68.179,0l4.854,1.406v52.46L50,97.225
+		z"/>
+	<rect x="48.25" y="92.792" fill="#009245" width="3.5" height="7.208"/>
+</g>
+<g id="light">
+	<path fill="#96D48D" d="M50,96.518L11.557,58.073V6.195l4.493-1.301c19.037-5.515,48.862-5.515,67.9,0l4.494,1.301v51.878
+		L50,96.518z"/>
+	<rect x="48.75" y="92.792" fill="#96D48D" width="2.5" height="7.208"/>
+</g>
+<g id="hlight">
+	<path fill="#FFFFFF" d="M50,95.987L11.932,57.918V6.477l4.222-1.223c18.979-5.499,48.711-5.5,67.692,0l4.224,1.223v51.441
+		l-0.256,0.257L50,95.987z"/>
+	<rect x="49.125" y="92.792" fill="#FFFFFF" width="1.75" height="7.208"/>
+</g>
+</g>
+</svg>

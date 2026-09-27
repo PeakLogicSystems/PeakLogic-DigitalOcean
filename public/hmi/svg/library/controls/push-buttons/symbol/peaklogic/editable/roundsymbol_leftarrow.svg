@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="shape">
+        <circle cx="50" cy="50" r="49" fill="#187aa0"/>
+    </g>
+    <g id="light">
+      <path d="M62.692,26.288l-41.992,21.042c-2.198,1.101-2.198,4.238,0,5.34l41.992,21.042c1.986.995,4.324-.449,4.324-2.67V28.958c0-2.221-2.338-3.665-4.324-2.67Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>

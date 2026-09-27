@@ -1,0 +1,29 @@
+{
+  "id": "numeric_keypad",
+  "label": "Numeric keypad (INT/REAL)",
+  "group": "Numeric displays",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/numeric-displays/entry/peaklogic/nd-canonical/numeric_keypad.svg",
+  "tagRoles": {
+    "pv": { "pick": "firstNumeric", "types": ["INT", "REAL"] }
+  },
+  "parts": [
+    {
+      "role": "keypad",
+      "z": 0,
+      "kind": "dynamicImage",
+      "svg": "/hmi/svg/library/numeric-displays/entry/peaklogic/nd-canonical/numeric_keypad.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "hmi_label",
+      "property": "text",
+      "tagRole": "pv",
+      "min": 0,
+      "max": 100,
+      "format": "int",
+      "interaction": "edit"
+    }
+  ]
+}

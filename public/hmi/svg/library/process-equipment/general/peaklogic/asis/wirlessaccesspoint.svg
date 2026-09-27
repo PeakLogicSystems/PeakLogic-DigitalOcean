@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="194.094" height="199.301" version="1.1" viewBox="0 0 194.094 199.301">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g>
+        <g>
+          <rect x="1.5" y="95.461" width="191.094" height="102.34" rx="4" ry="4" fill="#333"/>
+          <rect x="1.5" y="95.461" width="191.094" height="102.34" rx="4" ry="4" fill="none" stroke="#333" stroke-miterlimit="10" stroke-width="3"/>
+        </g>
+        <rect x="87.991" y="77.801" width="15.396" height="190.189" transform="translate(-77.206 268.584) rotate(-90)" fill="#c1272d"/>
+        <path d="M3.736,196.551v-94.759c0-2.2,1.8-4,4-4h184.859" fill="none" stroke="gray" stroke-miterlimit="10" stroke-width="3"/>
+        <path d="M35.415,79.442v14.208h-14.896v-14.208c0-1.657,1.343-3,3-3h8.896c1.657,0,3,1.343,3,3Z" fill="#333" stroke="#333" stroke-miterlimit="10" stroke-width="3"/>
+        <path d="M30.558,77.763l-8.361,1.777L9.316,7.5c-.377-2.107.986-4.133,3.08-4.578h0c2.094-.445,4.163.852,4.675,2.93l16.539,67.04c.541,2.194-.841,4.401-3.052,4.871Z" fill="#333"/>
+        <path d="M167.358,79.442v14.208h-14.896v-14.208c0-1.657,1.343-3,3-3h8.896c1.657,0,3,1.343,3,3Z" fill="#333" stroke="#333" stroke-miterlimit="10" stroke-width="3"/>
+        <path d="M162.754,76.368l-8.502.878-5.153-73c-.151-2.135,1.42-4.005,3.549-4.225h0c2.129-.22,4.049,1.289,4.338,3.41l9.321,68.418c.305,2.239-1.304,4.287-3.552,4.519Z" fill="#333"/>
+        <g>
+          <line x1="7.429" y1="160.381" x2="79.627" y2="160.381" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="155.355" x2="79.627" y2="155.355" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="150.328" x2="79.627" y2="150.328" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="145.302" x2="79.627" y2="145.302" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="140.275" x2="79.627" y2="140.275" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="135.249" x2="79.627" y2="135.249" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="130.222" x2="79.627" y2="130.222" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="125.196" x2="79.627" y2="125.196" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="120.17" x2="79.627" y2="120.17" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="115.143" x2="79.627" y2="115.143" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="7.429" y1="110.117" x2="79.627" y2="110.117" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+        </g>
+        <g>
+          <line x1="113.391" y1="160.381" x2="185.59" y2="160.381" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="155.355" x2="185.59" y2="155.355" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="150.328" x2="185.59" y2="150.328" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="145.302" x2="185.59" y2="145.302" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="140.275" x2="185.59" y2="140.275" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="135.249" x2="185.59" y2="135.249" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="130.222" x2="185.59" y2="130.222" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="125.196" x2="185.59" y2="125.196" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="120.17" x2="185.59" y2="120.17" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="115.143" x2="185.59" y2="115.143" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <line x1="113.391" y1="110.117" x2="185.59" y2="110.117" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+        </g>
+        <rect x="19" y="192.886" width="8.83" height="2.038" fill="#2f9e32"/>
+        <rect x="41.755" y="192.886" width="8.83" height="2.038" fill="#2f9e32"/>
+        <rect x="73" y="192.886" width="8.83" height="2.038" fill="#2f9e32"/>
+        <rect x="89.981" y="192.886" width="8.83" height="2.038" fill="#2f9e32"/>
+        <rect x="106.962" y="192.886" width="8.83" height="2.038" fill="#2f9e32"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="New_Gradient_Swatch_10" data-name="New Gradient Swatch 10" x1="87.643" y1="62.585" x2="87.643" y2="36.453" gradientTransform="translate(0 102) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="New_Gradient_Swatch_10-2" data-name="New Gradient Swatch 10" x1="9.467" x2="9.467" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-3" data-name="New Gradient Swatch 10" x1="96.093" y1="62.585" x2="96.093" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-4" data-name="New Gradient Swatch 10" x1="74.46" y1="62.585" x2="74.46" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-5" data-name="New Gradient Swatch 10" x1="50.365" y1="62.585" x2="50.365" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-6" data-name="New Gradient Swatch 10" x1="26.293" y1="62.585" x2="26.293" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-7" data-name="New Gradient Swatch 10" x1="5.647" y1="62.585" x2="5.647" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-8" data-name="New Gradient Swatch 10" x1="49.824" y1="62.585" x2="49.824" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-9" data-name="New Gradient Swatch 10" x1="73.543" y1="62.585" x2="73.543" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+    <linearGradient id="New_Gradient_Swatch_10-10" data-name="New Gradient Swatch 10" x1="26.293" y1="62.585" x2="26.293" y2="36.453" xlink:href="#New_Gradient_Swatch_10"/>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g id="frame">
+        <g id="frame-2" data-name="frame">
+          <rect width="100" height="100" fill="none"/>
+        </g>
+      </g>
+      <g id="shape">
+        <path d="M98.26,37.116h-6.074c-.335,0-.647.85-.912,2.299h-5.569c-.344-2.643-.793-4.254-1.285-4.254h-7.517v-2.644c.776-.093,1.261-.218,1.261-.355v-.698c0-.287-2.069-.52-4.622-.52s-4.622.233-4.622.52v.698c0,.138.484.262,1.261.355v2.644h-7.61c-.011,0-.022.013-.033.015-.223-.719-.463-1.132-.714-1.132h-1.681c-.25,0-.488.407-.71,1.117h-6.247v-2.644c.776-.093,1.261-.218,1.261-.355v-.698c0-.287-2.069-.52-4.622-.52s-4.622.233-4.622.52v.698c0,.138.484.262,1.261.355v2.644h-7.834c-.222-.71-.46-1.117-.71-1.117h-1.681c-.25,0-.488.407-.71,1.117h-5.873v-2.644c.776-.093,1.261-.218,1.261-.355v-.698c0-.287-2.069-.52-4.622-.52s-4.622.233-4.622.52v.698c0,.138.484.262,1.261.355v2.644h-8.544c-.433,0-.832,1.254-1.156,3.352h-.805c-.196,0-.382.328-.555.902h-3.149c-.265-1.448-.577-2.299-.912-2.299H1.74c-.961,0-1.74,6.879-1.74,15.365s.779,15.365,1.74,15.365h6.074c.335,0,.647-.85.912-2.299h3.146c.173.573.359.902.555.902h.805c.324,2.098.723,3.352,1.156,3.352h1.017v.279l3.185,5.707h6.723v-5.987h10.215c.222.71.46,1.117.71,1.117h1.681c.25,0,.488-.407.71-1.117h8.712v.279l3.185,5.707h6.723v-5.987h2.185c.222.71.46,1.117.71,1.117h1.681c.251,0,.491-.413.714-1.132.011.002.022.015.033.015h13.624v.279l3.185,5.707h6.723v-10.238h5.172c.265,1.448.577,2.299.912,2.299h6.074c.961,0,1.74-6.879,1.74-15.365s-.781-15.365-1.742-15.365Z"/>
+      </g>
+      <g id="linear">
+        <path d="M92.187,65.547c.817,0,1.479-5.85,1.479-13.066s-.662-13.066-1.479-13.066h-9.087c-.817,0-1.479,5.85-1.479,13.066s.662,13.066,1.479,13.066h9.087Z" fill="url(#New_Gradient_Swatch_10)"/>
+        <path d="M14.011,65.547c.817,0,1.479-5.85,1.479-13.066s-.662-13.066-1.479-13.066H4.924c-.817,0-1.479,5.85-1.479,13.066s.662,13.066,1.479,13.066h9.087Z" fill="url(#New_Gradient_Swatch_10-2)"/>
+        <path d="M98.26,37.116h-6.074c.961,0,1.74,6.879,1.74,15.365s-.779,15.365-1.74,15.365h6.074c.961,0,1.74-6.879,1.74-15.365s-.779-15.365-1.74-15.365Z" fill="url(#New_Gradient_Swatch_10-3)"/>
+        <path d="M84.422,35.161h-21.851c-.011,0-.022.013-.033.015.8,2.58,1.373,9.343,1.373,17.305s-.573,14.726-1.373,17.305c.011.002.022.015.033.015h21.851c1.083,0,1.961-7.754,1.961-17.32,0-9.566-.878-17.32-1.961-17.32Z" fill="url(#New_Gradient_Swatch_10-4)"/>
+        <path d="M60.143,35.161h-21.515c.803,2.569,1.378,9.343,1.378,17.32s-.575,14.751-1.378,17.32h21.514c1.083,0,1.961-7.754,1.961-17.32.001-9.566-.877-17.32-1.96-17.32Z" fill="url(#New_Gradient_Swatch_10-5)"/>
+        <path d="M36.238,35.161H14.387c1.083,0,1.961,7.754,1.961,17.32s-.878,17.32-1.961,17.32h21.851c1.083,0,1.961-7.754,1.961-17.32,0-9.566-.878-17.32-1.961-17.32Z" fill="url(#New_Gradient_Swatch_10-6)"/>
+        <path d="M7.813,37.116H1.74c.961,0,1.74,6.879,1.74,15.365s-.78,15.364-1.74,15.364h6.074c.961,0,1.74-6.879,1.74-15.365s-.78-15.364-1.741-15.364Z" fill="url(#New_Gradient_Swatch_10-7)"/>
+        <path d="M49.824,32.682c-1.329,0-2.518-.064-3.362-.165v2.824c0,.209,1.505.378,3.362.378s3.362-.169,3.362-.378v-2.824c-.843.101-2.033.165-3.362.165Z" fill="url(#New_Gradient_Swatch_10-8)"/>
+        <path d="M73.543,32.682c-1.329,0-2.518-.064-3.362-.165v2.824c0,.209,1.505.378,3.362.378s3.362-.169,3.362-.378v-2.824c-.844.101-2.033.165-3.362.165Z" fill="url(#New_Gradient_Swatch_10-9)"/>
+        <path d="M26.293,32.682c-1.329,0-2.518-.064-3.362-.165v2.824c0,.209,1.505.378,3.362.378s3.362-.169,3.362-.378v-2.824c-.844.101-2.033.165-3.362.165Z" fill="url(#New_Gradient_Swatch_10-10)"/>
+      </g>
+      <g id="dark">
+        <rect x="79.379" y="61.141" width="6.723" height="14.647" fill="gray"/>
+        <rect x="50.525" y="61.141" width="6.723" height="14.647" fill="gray"/>
+        <rect x="18.589" y="61.141" width="6.723" height="14.647" fill="gray"/>
+      </g>
+      <g id="shadow">
+        <path d="M79.399,61.142c-.339,5.176-.973,8.659-1.699,8.659h-1.496l-.01.279,3.185,5.707.02-14.645Z" fill="#4d4d4d"/>
+        <path d="M50.544,61.142c-.339,5.176-.973,8.659-1.699,8.659h-1.495l-.01.279,3.185,5.707.019-14.645Z" fill="#4d4d4d"/>
+        <path d="M18.608,61.142c-.339,5.176-.973,8.659-1.699,8.659h-1.496l-.01.279,3.185,5.707.02-14.645Z" fill="#4d4d4d"/>
+      </g>
+      <g id="hlight">
+        <ellipse cx="49.824" cy="31.463" rx="4.622" ry=".52" fill="#f2f2f2"/>
+        <ellipse cx="73.543" cy="31.463" rx="4.622" ry=".52" fill="#f2f2f2"/>
+        <ellipse cx="26.293" cy="31.463" rx="4.622" ry=".52" fill="#f2f2f2"/>
+      </g>
+    </g>
+  </g>
+</svg>

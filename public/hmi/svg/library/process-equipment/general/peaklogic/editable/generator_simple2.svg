@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 60">
+  <defs>
+    <linearGradient id="New_Gradient_Swatch_8" data-name="New Gradient Swatch 8" x1="93.998" y1="755.866" x2="93.998" y2="764.134" gradientTransform="translate(0 -730)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#009245"/>
+      <stop offset="1" stop-color="#006837"/>
+    </linearGradient>
+    <linearGradient id="New_Gradient_Swatch_8-2" data-name="New Gradient Swatch 8" x1="86.043" y1="746.498" x2="86.043" y2="773.48" xlink:href="#New_Gradient_Swatch_8"/>
+    <linearGradient id="New_Gradient_Swatch_8-3" data-name="New Gradient Swatch 8" x1="19.847" y1="736.879" x2="19.847" y2="783.119" xlink:href="#New_Gradient_Swatch_8"/>
+    <linearGradient id="New_Gradient_Swatch_8-4" data-name="New Gradient Swatch 8" x1="51.619" y1="736.879" x2="51.619" y2="783.121" xlink:href="#New_Gradient_Swatch_8"/>
+    <linearGradient id="New_Gradient_Swatch_8-5" data-name="New Gradient Swatch 8" x1="7.115" x2="7.115" xlink:href="#New_Gradient_Swatch_8"/>
+    <linearGradient id="New_Gradient_Swatch_8-6" data-name="New Gradient Swatch 8" x1="16.529" y1="746.498" x2="16.529" y2="773.48" xlink:href="#New_Gradient_Swatch_8"/>
+    <linearGradient id="New_Gradient_Swatch_8-7" data-name="New Gradient Swatch 8" x1="11.766" y1="746.561" x2="11.766" y2="773.441" xlink:href="#New_Gradient_Swatch_8"/>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g id="shape">
+        <path d="M97.739,35.134H2.35c-.316,0-1.155,0-1.155-5.134s.839-5.134,1.155-5.134h95.389c.316,0,1.155,0,1.155,5.134s-.839,5.134-1.155,5.134Z" fill="#000d06"/>
+        <path d="M87.722,44.48H11.697c-2.406,0-2.476-12.998-2.476-14.48s.069-14.48,2.476-14.48h76.024c2.406,0,2.476,12.998,2.476,14.48s-.069,14.48-2.475,14.48Z" fill="#000d06"/>
+        <path d="M79.654,54.121H19.522c-3.036,0-3.838-15.778-3.838-24.121s.802-24.121,3.838-24.121h60.132c3.036,0,3.838,15.778,3.838,24.121s-.802,24.121-3.838,24.121Z" fill="#000d06"/>
+        <ellipse cx="19.522" cy="30" rx="3.838" ry="24.121" fill="#000d06"/>
+        <path d="M18.86,44.48h-7.163c-2.406,0-2.476-12.998-2.476-14.48s.069-14.48,2.476-14.48h7.163c2.406,0,2.476,12.998,2.476,14.48s-.07,14.48-2.476,14.48Z" fill="#000d06"/>
+      </g>
+      <g id="linear">
+        <path d="M97.894,30c0-2.266-.223-3.687-.379-4.134h-7.412c.087,2.018.095,3.661.095,4.134s-.007,2.116-.095,4.134h7.412c.155-.447.379-1.868.379-4.134Z" fill="url(#New_Gradient_Swatch_8)"/>
+        <path d="M89.197,30c0-7.992-.926-13.057-1.565-13.502h-4.742c.443,4.611.603,9.791.603,13.502s-.159,8.876-.601,13.48h4.83c.549-.423,1.475-5.488,1.475-13.48Z" fill="url(#New_Gradient_Swatch_8-2)"/>
+        <path d="M22.36,30c0-14.859-1.848-22.948-2.839-23.121-.614.108-1.559,3.275-2.188,9.217.377-1.366.873-2.259,1.527-2.259,2.637,0,2.713,14.508,2.713,16.162s-.076,16.162-2.713,16.162c-.654,0-1.15-.893-1.526-2.258.628,5.937,1.572,9.102,2.188,9.216.992-.18,2.838-8.267,2.838-23.119Z" fill="url(#New_Gradient_Swatch_8-3)"/>
+        <path d="M79.652,6.879H20.746c2.034,3.59,2.614,16.035,2.614,23.121s-.58,19.531-2.614,23.121h58.907c.992-.173,2.839-8.262,2.839-23.121s-1.849-22.952-2.84-23.121Z" fill="url(#New_Gradient_Swatch_8-4)"/>
+        <path d="M11.225,34.134c.215-.759.365-2.316.365-4.134s-.149-3.375-.365-4.134H2.641c.215.759.364,2.316.364,4.134s-.149,3.375-.365,4.134h8.585Z" fill="url(#New_Gradient_Swatch_8-5)"/>
+        <path d="M20.335,30c0-7.992-.926-13.057-1.565-13.502l-6.046.018c1.399,3.064,1.448,12.251,1.448,13.484s-.049,10.413-1.447,13.48h6.134c.551-.423,1.476-5.488,1.476-13.48Z" fill="url(#New_Gradient_Swatch_8-6)"/>
+        <path d="M11.664,16.561c-.42.45-1.033,3.454-1.304,8.305h.894c.316,0,1.155,0,1.155,5.134s-.839,5.134-1.155,5.134h-.893c.271,4.787.887,7.779,1.368,8.307.553-.585,1.444-5.597,1.444-13.441,0-7.763-.873-12.75-1.509-13.439Z" fill="url(#New_Gradient_Swatch_8-7)"/>
+      </g>
+      <g id="hlight">
+        <path d="M80.148,12.459H23.186c-.276,0-.5-.224-.5-.5s.224-.5.5-.5h56.962c.276,0,.5.224.5.5s-.223.5-.5.5Z" fill="#fff"/>
+        <path d="M87.142,18.424h-3.382c-.276,0-.5-.224-.5-.5s.224-.5.5-.5h3.382c.276,0,.5.224.5.5s-.224.5-.5.5Z" fill="#fff"/>
+        <path d="M97.241,27.778h-6.632c-.138,0-.25-.112-.25-.25s.112-.25.25-.25h6.632c.138,0,.25.112.25.25s-.112.25-.25.25Z" fill="#fff"/>
+        <path d="M18.646,18.424h-4.382c-.276,0-.5-.224-.5-.5s.224-.5.5-.5h4.382c.276,0,.5.224.5.5s-.224.5-.5.5Z" fill="#fff"/>
+        <path d="M10.939,27.778H3.523c-.138,0-.25-.112-.25-.25s.112-.25.25-.25h7.416c.138,0,.25.112.25.25s-.111.25-.25.25Z" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

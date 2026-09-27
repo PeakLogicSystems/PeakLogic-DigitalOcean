@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1080 1080" enable-background="new 0 0 1080 1080" xml:space="preserve">
+<g transform="matrix(9.3405555556 0 0 9.3405555556 540 540)">
+<path style="stroke: rgb(107,194,227); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(135,194,235); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M 0 -54.60061 C 30.13953 -54.60061 54.60061 -30.139540000000004 54.60061 0 C 54.60061 30.13953 30.139540000000004 54.60061 0 54.60061 C -30.13953 54.60061 -54.60061 30.139540000000004 -54.60061 0 C -54.60061 -30.13953 -30.139540000000004 -54.60061 0 -54.60061 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(9.8716851852 0 0 9.8716851852 540 540)">
+<path style="stroke: rgb(107,194,227); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M 0 -54.60061 C 30.13953 -54.60061 54.60061 -30.139540000000004 54.60061 0 C 54.60061 30.13953 30.139540000000004 54.60061 0 54.60061 C -30.13953 54.60061 -54.60061 30.139540000000004 -54.60061 0 C -54.60061 -30.13953 -30.139540000000004 -54.60061 0 -54.60061 z" stroke-linecap="round" />
+</g>
+</svg>

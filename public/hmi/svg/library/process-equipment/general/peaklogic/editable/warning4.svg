@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="light">
+		<path d="M50,6.7L0,93.3h100L50,6.7z M50,25.5l34,58.9H16L50,25.5z"/>
+	</g>
+	<g id="medium">
+		<polygon fill="#FFFF00" points="50,25.5 16,84.4 84,84.4 		"/>
+	</g>
+	<g id="hlight">
+		<path d="M54.3,67h-9V41h9V67z M54.3,71h-9v9h9V71z"/>
+	</g>
+</g>
+</svg>

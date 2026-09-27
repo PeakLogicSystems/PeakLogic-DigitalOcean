@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="shape">
+      <rect x="0" y="0" width="100" height="100" rx="10" ry="10" transform="translate(0 100) rotate(-90)" fill="#187aa0"/>
+    </g>
+    <g id="light">
+      <path d="M73.712,62.692l-21.042-41.992c-1.101-2.198-4.238-2.198-5.34,0l-21.042,41.992c-.995,1.986.449,4.324,2.67,4.324h42.085c2.221,0,3.665-2.338,2.67-4.324Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>

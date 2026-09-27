@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g>
+        <g id="frame">
+          <g id="frame-2">
+            <rect width="100" height="100" fill="none"/>
+          </g>
+        </g>
+        <g id="shape">
+          <circle cx="50" cy="50" r="19" fill="#006837"/>
+          <rect x="40.5" y="94.333" width="19" height="5.667" fill="#006837"/>
+          <rect x="42" y="64.887" width="16" height="35.113" fill="#006837"/>
+          <rect y="40.5" width="5.667" height="19" fill="#006837"/>
+          <rect x="94.333" y="40.5" width="5.667" height="19" fill="#006837"/>
+          <rect y="42" width="100" height="16" fill="#006837"/>
+        </g>
+        <g id="dark">
+          <rect x="43.006" y="64.028" width="13.988" height="35.972" fill="#009245"/>
+          <rect y="43.006" width="100" height="13.988" fill="#009245"/>
+          <circle cx="50" cy="50" r="17.5" fill="#009245"/>
+        </g>
+        <g id="light">
+          <circle cx="50" cy="50" r="12.5" fill="#96d48d"/>
+          <g>
+            <path d="M100,45.004h-48.154c.412,1.6.654,3.268.654,4.996s-.242,3.396-.654,4.996h48.154s0-9.992,0-9.992Z" fill="#96d48d"/>
+            <path d="M32.904,45.004H0v9.992h32.905c-.413-1.6-.655-3.268-.655-4.996s.242-3.396.654-4.996Z" fill="#96d48d"/>
+          </g>
+          <path d="M45.004,69.346v30.654h9.992v-30.655c-1.6.413-3.268.655-4.996.655s-3.396-.242-4.996-.654Z" fill="#96d48d"/>
+          <path d="M54.996,100v-40.654c-1.6.412-3.268.654-4.996.654s-3.396-.242-4.996-.654v40.654s9.992,0,9.992,0Z" fill="#96d48d"/>
+        </g>
+        <g id="hlight">
+			<g class="alt" id="a1">
+          		<path d="M30.75,50c0-1.195.122-2.358.31-3.5H0v7h31.06c-.188-1.142-.31-2.305-.31-3.5Z" fill="#fff"/>
+			</g>
+			<g class="alt" id="a2">
+          		<path d="M100,46.5h-39.578c-1.463-4.357-5.572-7.5-10.422-7.5-6.075,0-11,4.925-11,11,0,4.85,3.143,8.958,7.5,10.422v39.578h7v-39.578c3.257-1.094,5.828-3.665,6.922-6.922h39.578v-7Z" fill="#fff"/>
+			</g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+  <rect width="1024" height="768" fill="#f1f5f9"/>
+  <text x="512" y="48" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" font-weight="600" fill="#0f172a">Commercial Kitchen &#8212; Cold Storage &amp; Prep Line</text>
+  
+  <rect x="60" y="90" width="280" height="320" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+  <text x="200" y="125" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#312e81">Walk-in Freezer</text>
+  <text x="130" y="168" font-size="13" fill="#334155">Air temp &#176;F</text>
+  <text id="val_freezer_temp" x="200" y="198" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#0f172a">&#8212;</text>
+  <text x="130" y="248" font-size="13" fill="#334155">Slab / pan leak</text>
+  <circle id="lamp_freezer_leak" cx="200" cy="268" r="12" fill="#64748b"/>
+  <text x="130" y="308" font-size="13" fill="#334155">Door ajar</text>
+  <circle id="lamp_freezer_door" cx="200" cy="328" r="12" fill="#64748b"/>
+  <circle id="lamp_freezer_alm" cx="200" cy="378" r="12" fill="#64748b"/>
+  <text x="218" y="384" font-size="12" fill="#334155">Zone alarm</text>
+  
+  <rect x="372" y="90" width="280" height="320" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="512" y="125" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#1e3a8a">Walk-in Reefer</text>
+  <text x="442" y="168" font-size="13" fill="#334155">Air temp &#176;F</text>
+  <text id="val_reefer_temp" x="512" y="198" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#0f172a">&#8212;</text>
+  <text x="442" y="248" font-size="13" fill="#334155">Slab / pan leak</text>
+  <circle id="lamp_reefer_leak" cx="512" cy="268" r="12" fill="#64748b"/>
+  <text x="442" y="308" font-size="13" fill="#334155">Door ajar</text>
+  <circle id="lamp_reefer_door" cx="512" cy="328" r="12" fill="#64748b"/>
+  <circle id="lamp_reefer_alm" cx="512" cy="378" r="12" fill="#64748b"/>
+  <text x="530" y="384" font-size="12" fill="#334155">Zone alarm</text>
+  <rect x="684" y="90" width="280" height="320" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+  <text x="824" y="125" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#9a3412">Cooking Line &#8212; 6 Sinks</text>
+  <text x="710" y="168" font-size="12" fill="#334155">Sink leak indicators</text>
+  <circle id="lamp_sink1_leak" cx="730" cy="200" r="10" fill="#64748b"/>
+  <text x="748" y="205" font-size="11" fill="#334155">1</text>
+  <circle id="lamp_sink2_leak" cx="790" cy="200" r="10" fill="#64748b"/>
+  <text x="808" y="205" font-size="11" fill="#334155">2</text>
+  <circle id="lamp_sink3_leak" cx="850" cy="200" r="10" fill="#64748b"/>
+  <text x="868" y="205" font-size="11" fill="#334155">3</text>
+  <circle id="lamp_sink4_leak" cx="730" cy="250" r="10" fill="#64748b"/>
+  <text x="748" y="255" font-size="11" fill="#334155">4</text>
+  <circle id="lamp_sink5_leak" cx="790" cy="250" r="10" fill="#64748b"/>
+  <text x="808" y="255" font-size="11" fill="#334155">5</text>
+  <circle id="lamp_sink6_leak" cx="850" cy="250" r="10" fill="#64748b"/>
+  <text x="868" y="255" font-size="11" fill="#334155">6</text>
+  <rect x="684" y="680" width="280" height="44" rx="4" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+  <circle id="lamp_kitch_alm" cx="714" cy="702" r="12" fill="#64748b"/>
+  <text x="736" y="708" font-size="13" fill="#991b1b">Kitchen area alarm</text>
+  <rect x="60" y="680" width="592" height="44" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+  <circle id="lamp_area_alm" cx="90" cy="702" r="12" fill="#64748b"/>
+  <text x="112" y="708" font-family="Segoe UI,sans-serif" font-size="14" fill="#991b1b">Area alarm summary</text>
+</svg>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 242 468" enable-background="new 0 0 242 468" xml:space="preserve">
+<g id="shape">
+	<path fill="#CCCCCC" d="M3.267,11.643v448h202v-448C205.267,11.643,3.267,11.643,3.267,11.643z M13.267,21.643h182v428h-182V21.643
+		z"/>
+	<polygon fill="#CCCCCC" points="13.267,449.643 19.153,444.51 189.382,444.51 195.267,449.643 	"/>
+	<polygon fill="#CCCCCC" points="13.267,21.643 19.153,26.777 189.382,26.777 195.267,21.643 	"/>
+</g>
+<g id="light">
+	<polygon fill="#E6E6E6" points="13.267,449.643 19.153,444.51 19.153,26.777 13.267,21.643 	"/>
+	<polygon fill="#E6E6E6" points="195.267,449.643 189.382,444.51 189.382,26.777 195.267,21.643 	"/>
+</g>
+<g id="dark">
+	<path fill="#0F0F0F" d="M228.15,139.966l5.65-0.958c2.442-0.414,4.669,1.468,4.669,3.944v158.462c0,2.477-2.227,4.358-4.669,3.944
+		l-5.65-0.958V139.966z"/>
+	<path fill="#0F0F0F" d="M196.338,16.229v436.586l27.312,15h7.338l0-466.586h-7.338L196.338,16.229z M204.01,22.84l16.534-9.081
+		l0,442.658l-16.534-9.081V22.84z"/>
+	<polygon fill="#0F0F0F" points="8.017,455.4 193.752,455.4 193.752,452.4 11.017,452.4 11.017,19.022 193.752,19.022 
+		193.752,16.022 8.017,16.022 	"/>
+</g>
+<g id="linear">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="21.457" y1="234.912" x2="40.9578" y2="234.912" gradientTransform="matrix(-1 0 0 -1 242 470)">
+		<stop  offset="0.2633" style="stop-color:#C9EAFF"/>
+		<stop  offset="0.3617" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.7899" style="stop-color:#C9EAFF"/>
+		<stop  offset="1" style="stop-color:#0071BC"/>
+	</linearGradient>
+	<polygon opacity="0.39" fill="url(#SVGID_1_)" enable-background="new    " points="204.01,22.84 204.01,447.336 220.543,456.417 
+		220.543,13.759 	"/>
+</g>
+<g id="hlight">
+	<path fill="#E6E6E6" d="M237.968,143.952h1c0-1.328-0.582-2.582-1.596-3.438c-1.015-0.856-2.347-1.22-3.656-0.999l-5.65,0.958
+		l0.167,0.986l5.65-0.958c1.017-0.171,2.054,0.11,2.844,0.777C237.515,141.944,237.968,142.919,237.968,143.952z"/>
+	<rect x="233.901" y="145.096" fill="#E6E6E6" width="1" height="154.777"/>
+	<polygon opacity="0.5" fill="#FFFFFF" enable-background="new    " points="201.043,445.707 204.01,447.336 204.01,22.84 
+		201.043,24.469 	"/>
+</g>
+</svg>

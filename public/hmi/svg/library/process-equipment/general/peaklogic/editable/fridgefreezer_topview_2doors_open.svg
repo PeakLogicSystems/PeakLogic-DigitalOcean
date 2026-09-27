@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+    <g id="frame">
+		<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+	<g>
+		<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M96.032,49.468h1.544V7.085H2.516v42.383H4.06
+			c0,0.421,0.123,0.81,0.326,1.146H2.973v43.224h3.685V50.614H6.29v-1.146h87.511v0.894h-0.285v43.224h3.685V50.362h-1.358
+			C95.963,50.088,96.032,49.786,96.032,49.468z"/>
+		<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M1.562,88.8v-5.657
+			c0-0.363-0.294-0.657-0.657-0.657c-0.363,0-0.657,0.294-0.657,0.657v7.939c0,0.479,0.388,0.867,0.867,0.867h1.761V89.32H2.082
+			C1.795,89.32,1.562,89.087,1.562,88.8z"/>
+		<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M99.269,82.234
+			c-0.363,0-0.657,0.294-0.657,0.657v5.657c0,0.287-0.233,0.52-0.52,0.52h-0.794v2.629h1.761c0.479,0,0.867-0.388,0.867-0.867
+			v-7.939C99.926,82.528,99.632,82.234,99.269,82.234z"/>
+	</g>
+	<rect x="2.515" y="7.085" fill="#CADAD9" width="95.061" height="42.383"/>
+</g>
+<g id="radial">
+</g>
+<g id="linear">
+</g>
+<g id="dark">
+	<rect x="2.973" y="50.614" fill="#1A1A1A" width="3.685" height="43.224"/>
+	<rect x="93.516" y="50.362" fill="#1A1A1A" width="3.685" height="43.224"/>
+	<path fill="#1A1A1A" d="M4.06,49.468c0,1.232,0.999,2.231,2.231,2.231v-2.231H4.06z"/>
+	<path fill="#1A1A1A" d="M96.032,49.468c0,1.232-0.999,2.231-2.231,2.231v-2.231H96.032z"/>
+</g>
+<g id="light">
+	<path fill="#CCCCCC" d="M2.876,89.32H2.082c-0.287,0-0.52-0.233-0.52-0.52v-5.657c0-0.363-0.294-0.657-0.657-0.657h0
+		c-0.363,0-0.657,0.294-0.657,0.657v7.939c0,0.479,0.388,0.867,0.867,0.867h1.761V89.32z"/>
+	<path fill="#CCCCCC" d="M97.298,89.068h0.794c0.287,0,0.52-0.233,0.52-0.52v-5.657c0-0.363,0.294-0.657,0.657-0.657h0
+		c0.363,0,0.657,0.294,0.657,0.657v7.939c0,0.479-0.388,0.867-0.867,0.867h-1.761V89.068z"/>
+</g>
+<g id="shadow">
+</g>
+<g id="hlight">
+	<rect x="3.104" y="51.047" fill="#FFFFFF" width="0.173" height="42.357"/>
+	<rect x="5.512" y="51.481" fill="#FFFFFF" width="0.173" height="41.923"/>
+	<rect x="96.897" y="50.795" fill="#FFFFFF" width="0.173" height="42.357"/>
+	<rect x="94.489" y="51.229" fill="#FFFFFF" width="0.173" height="41.923"/>
+</g>
+    </g>
+</svg>

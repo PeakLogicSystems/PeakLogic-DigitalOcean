@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="shape">
+		<path fill="#999999" d="M81.081,33.34H59.495v-7.358c0-1.089-4.237-1.972-9.464-1.972c-5.227,0-9.464,0.883-9.464,1.972v7.358
+			H18.982c-10.466,0-18.95,8.484-18.95,18.95c0,10.466,8.484,18.95,18.95,18.95h0.292v9.329h6.414v-9.329h48.688v9.329h6.414v-9.329
+			h0.292c10.466,0,18.95-8.484,18.95-18.95C100.031,41.824,91.547,33.34,81.081,33.34z"/>
+	</g>
+	<g id="linear">
+		<linearGradient class="linear" id="SVGID_1_tank_sublike" gradientUnits="userSpaceOnUse" x1="50.0313" y1="33.3399" x2="50.0313" y2="71.2407">
+			<stop  offset="0" style="stop-color:#B3B3B3"/>
+			<stop  offset="1" style="stop-color:#808080"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_1_tank_sublike)" d="M18.982,71.241c-10.466,0-18.95-8.484-18.95-18.95s8.484-18.95,18.95-18.95h62.099
+			c10.466,0,18.95,8.484,18.95,18.95s-8.484,18.95-18.95,18.95H18.982z"/>
+		<linearGradient class="linear" id="SVGID_2_tank_sublike" gradientUnits="userSpaceOnUse" x1="40.5677" y1="29.7441" x2="59.495" y2="29.7441">
+			<stop  offset="0" style="stop-color:#B3B3B3"/>
+			<stop  offset="1" style="stop-color:#808080"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_2_tank_sublike)" d="M40.568,25.982c0-1.089,4.237-1.972,9.464-1.972s9.464,0.883,9.464,1.972v7.524
+			c0,1.089-4.237,1.972-9.464,1.972s-9.464-0.883-9.464-1.972V25.982z"/>
+	</g>
+	<g id="shadow">
+		<path fill="#666666" d="M81.081,69.407H18.982c-10.466,0-18.95-7.664-18.95-17.117c0,10.466,8.484,18.95,18.95,18.95h62.099
+			c10.466,0,18.95-8.484,18.95-18.95C100.031,61.744,91.547,69.407,81.081,69.407z"/>
+	</g>
+	<g id="dark">
+		<rect x="19.273" y="59.87" fill="#808080" width="6.414" height="20.7"/>
+		<rect x="74.375" y="59.87" fill="#808080" width="6.414" height="20.7"/>
+	</g>
+	<g id="light">
+		<rect x="19.273" y="59.87" fill="#B3B3B3" width="6.414" height="3.2"/>
+		<rect x="74.375" y="59.87" fill="#B3B3B3" width="6.414" height="3.2"/>
+		<ellipse fill="#B3B3B3" cx="50.031" cy="25.982" rx="9.464" ry="1.972"/>
+	</g>
+	<g id="hlight">
+		<path fill="#CCCCCC" d="M91.175,36.813c-2.922-1.778-6.384-2.807-10.094-2.807H61.676c-0.583,0.464-1.949,0.861-3.796,1.126
+			h23.201C84.791,35.132,88.532,35.206,91.175,36.813z"/>
+		<path fill="#CCCCCC" d="M18.982,34.007c-10.466,0-18.95,8.186-18.95,18.284c0-9.476,8.484-17.158,18.95-17.158h25.701
+			c-1.847-0.264-3.212-0.662-3.796-1.126H18.982z"/>
+		<path fill="#CCCCCC" d="M49.75,25.625l-5.649,1.894c-1.21-0.203-2.176-0.467-2.79-0.769L49.75,25.625z"/>
+	</g>
+</g>
+</svg>

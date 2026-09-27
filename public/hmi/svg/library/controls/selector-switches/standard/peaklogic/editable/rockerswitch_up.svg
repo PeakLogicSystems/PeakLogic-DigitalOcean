@@ -1,0 +1,28 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="shape">
+		<rect x="20.914" y="0.75" fill="#E6E6E6" width="58.173" height="98"></rect>
+	</g>
+	<g id="shadow">
+		<rect x="25.142" y="4.842" width="49.716" height="89.816"></rect>
+		<polygon opacity="0.5" enable-background="new    " points="74.994,94.658 25.278,94.658 21.186,98.75 79.086,98.75 		"></polygon>
+	</g>
+	<g id="dark">
+		<polygon fill="#999999" points="77.45,79.314 28.939,79.314 26.915,48.625 73.562,48.625 		"></polygon>
+		<polygon fill="#999999" points="28.939,79.314 26.915,91.589 73.562,91.589 77.45,79.314 		"></polygon>
+	</g>
+	<g id="light">
+		<rect x="26.915" y="7.706" fill="#F2F2F2" stroke="#000000" stroke-miterlimit="10" width="46.647" height="40.919"></rect>
+	</g>
+	<g id="hlight">
+		<path fill="#FFFFFF" d="M76.95,79.223H29.439v-1h46.944L72.66,48.896l0.992-0.126l3.794,29.89
+			c0.018,0.142-0.026,0.285-0.121,0.393C77.23,79.161,77.094,79.223,76.95,79.223z"></path>
+		
+			<rect x="13.399" y="63.424" transform="matrix(0.0637 0.998 -0.998 0.0637 90.2089 31.1973)" fill="#FFFFFF" width="30.158" height="0.5"></rect>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" x1="31.007" y1="46.374" x2="70.289" y2="46.374"></line>
+		<rect x="31.007" y="9.911" fill="#FFFFFF" width="39.282" height="0.5"></rect>
+		<rect x="29.12" y="12.616" fill="#FFFFFF" width="0.5" height="31.303"></rect>
+		<rect x="70.857" y="12.616" fill="#FFFFFF" width="0.5" height="31.303"></rect>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<linearGradient id="SVGID_1_bluetank" gradientUnits="userSpaceOnUse" x1="1.0503" y1="49.521" x2="99.0503" y2="49.521">
+		<stop  offset="0.0699" style="stop-color:#29ABE2"/>
+		<stop  offset="0.2796" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.3075" style="stop-color:#D5EEF9"/>
+		<stop  offset="0.3392" style="stop-color:#ADDFF4"/>
+		<stop  offset="0.3741" style="stop-color:#89D1EF"/>
+		<stop  offset="0.4117" style="stop-color:#6BC5EB"/>
+		<stop  offset="0.4529" style="stop-color:#53BBE8"/>
+		<stop  offset="0.4992" style="stop-color:#40B4E5"/>
+		<stop  offset="0.5535" style="stop-color:#33AFE3"/>
+		<stop  offset="0.6234" style="stop-color:#2BACE2"/>
+		<stop  offset="0.7634" style="stop-color:#29ABE2"/>
+		<stop  offset="1" style="stop-color:#0B6CB8"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_bluetank)" stroke="#000000" stroke-width="0.3424" stroke-miterlimit="10" d="M1.05,21.372
+		c0-4.318,21.938-7.819,49-7.819s49,3.501,49,7.819V77.67c0,4.318-21.938,7.819-49,7.819s-49-3.501-49-7.819V21.372z"/>
+	
+		<radialGradient id="SVGID_2_bluetank" cx="32.4014" cy="21.2085" r="77.9243" gradientTransform="matrix(0.9981 0.0624 -0.0294 0.4705 0.6867 9.2093)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#C9E8F5"/>
+		<stop  offset="1" style="stop-color:#006BC2"/>
+	</radialGradient>
+	<ellipse fill="url(#SVGID_2_bluetank)" cx="50.05" cy="21.372" rx="49" ry="7.819"/>
+	<path fill="none" stroke="#FFFFFF" stroke-width="0.3424" d="M50.05,29.191c-27.062,0-49-3.501-49-7.819"/>
+	<path fill="none" stroke="#000000" stroke-width="0.1712" stroke-miterlimit="10" d="M99.05,49.391c0,4.318-21.938,7.819-49,7.819
+		s-49-3.501-49-7.819"/>
+	<g>
+		
+			<line fill="#FFFFFF" stroke="#000000" stroke-width="0.1712" stroke-miterlimit="10" x1="15.719" y1="29.166" x2="15.719" y2="53.3"/>
+		<g>
+			<circle cx="17.654" cy="31.666" r="0.546"/>
+			<circle cx="17.654" cy="35.702" r="0.546"/>
+			<circle cx="17.654" cy="39.738" r="0.546"/>
+			<circle cx="17.654" cy="43.775" r="0.546"/>
+			<circle cx="17.654" cy="47.811" r="0.546"/>
+			<circle cx="17.654" cy="51.847" r="0.546"/>
+		</g>
+	</g>
+	<g>
+		
+			<line fill="#FFFFFF" stroke="#000000" stroke-width="0.1712" stroke-miterlimit="10" x1="77.751" y1="29.166" x2="77.751" y2="53.3"/>
+		<g>
+			<circle cx="79.686" cy="31.666" r="0.546"/>
+			<circle cx="79.686" cy="35.702" r="0.546"/>
+			<circle cx="79.686" cy="39.738" r="0.546"/>
+			<circle cx="79.686" cy="43.775" r="0.546"/>
+			<circle cx="79.686" cy="47.811" r="0.546"/>
+			<circle cx="79.686" cy="51.847" r="0.546"/>
+		</g>
+	</g>
+	<g>
+		
+			<line fill="#FFFFFF" stroke="#000000" stroke-width="0.1712" stroke-miterlimit="10" x1="49.081" y1="59.139" x2="49.081" y2="83.274"/>
+		<g>
+			<circle cx="51.015" cy="61.639" r="0.546"/>
+			<circle cx="51.015" cy="65.675" r="0.546"/>
+			<circle cx="51.015" cy="69.712" r="0.546"/>
+			<circle cx="51.015" cy="73.748" r="0.546"/>
+			<circle cx="51.015" cy="77.784" r="0.546"/>
+			<circle cx="51.015" cy="81.821" r="0.546"/>
+		</g>
+	</g>
+</g>
+</svg>

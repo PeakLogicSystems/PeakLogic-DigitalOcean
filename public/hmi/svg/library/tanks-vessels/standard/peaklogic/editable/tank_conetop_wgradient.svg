@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="shape">
+		<path fill="#999999" d="M89.881,28.724c0.83,0.673,1.271,1.378,1.271,2.105v60.736c0,4.659-18.128,8.436-40.491,8.436
+			S10.17,96.223,10.17,91.564V30.829c0-0.736,0.453-1.451,1.304-2.131L44.219,1.728c0.857-0.571,3.417-0.986,6.442-0.986
+			c3.159,0,5.811,0.452,6.546,1.063L89.881,28.724z"/>
+	</g>
+	<g id="dark">
+	</g>
+	<g id="linear">
+		<linearGradient class="linear" id="SVGID_1_tank_conetop_wgradient" gradientUnits="userSpaceOnUse" x1="10.1704" y1="20.4249" x2="91.1516" y2="20.4249">
+			<stop  offset="0" style="stop-color:#9C9C9C"/>
+			<stop  offset="1" style="stop-color:#666666"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_1_tank_conetop_wgradient)" d="M50.661,39.686c22.362,0,40.491-3.777,40.491-8.436c0-0.727-0.441-1.432-1.271-2.105L57.207,2.227
+			c-0.735-0.611-3.387-1.063-6.546-1.063c-3.025,0-5.585,0.415-6.442,0.986L11.474,29.119c-0.851,0.681-1.304,1.395-1.304,2.131
+			C10.17,35.909,28.299,39.686,50.661,39.686z"/>
+		<linearGradient class="linear" id="SVGID_2_tank_conetop_wgradient" gradientUnits="userSpaceOnUse" x1="10.5922" y1="65.4145" x2="91.5734" y2="65.4145">
+			<stop  offset="0" style="stop-color:#9C9C9C"/>
+			<stop  offset="1" style="stop-color:#666666"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_2_tank_conetop_wgradient)" d="M51.083,39.264c-22.362,0-40.491-3.777-40.491-8.436v60.736c0,4.659,18.128,8.436,40.491,8.436
+			s40.491-3.777,40.491-8.436V30.829C91.573,35.488,73.445,39.264,51.083,39.264z"/>
+	</g>
+	<g id="shadow">
+		<path fill="#666666" d="M87.929,94.867c2.073-1.014,3.222-2.13,3.222-3.302V30.829c0-0.727-0.441-1.432-1.271-2.105L57.207,1.805
+			c-0.239-0.198-0.697-0.377-1.292-0.532l32.014,32.858V94.867z"/>
+	</g>
+	<g id="light">
+		<path fill="#B3B3B3" d="M16.83,96.062c1.797,0.568,3.913,1.088,6.298,1.55v-60.6L48.07,0.854
+			c-0.324,0.028-0.633,0.061-0.929,0.099L16.83,35.462V96.062z"/>
+		<path fill="#B3B3B3" d="M50.661,38.843c23.968,0,40.069-4.144,40.069-8.014h0.844c0,5.544-20.802,8.857-40.912,8.857V38.843z"/>
+	</g>
+	<g id="hlight">
+		<path fill="#CCCCCC" d="M50.661,39.686c-20.111,0-40.912-3.313-40.912-8.857h0.844c0,3.87,16.101,8.014,40.069,8.014V39.686z"/>
+		<path fill="#CCCCCC" d="M44.219,1.728c0.857-0.571,3.417-0.986,6.442-0.986c3.159,0,5.811,0.452,6.546,1.063
+			c-0.857,0.571-3.417,0.986-6.442,0.986C47.606,2.791,44.953,2.339,44.219,1.728z"/>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="light">
+	<rect x="0.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="5.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="10.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="15.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="20.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="25.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="30.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="35.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="40.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="45.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="55.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="60.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="65.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="70.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="75.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="80.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="85.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="90.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="95.208" fill="#29ABE2" width="0.25" height="100"/>
+	<rect x="100.208" fill="#29ABE2" width="0.25" height="100"/>
+</g>
+<g id="dark">
+	<rect x="0.333" y="99.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="94.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="89.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="84.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="79.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="74.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="69.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="64.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="59.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="54.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="44.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="39.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="34.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="29.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="24.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="19.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="14.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="9.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="4.875" fill="#29ABE2" width="100" height="0.25"/>
+	<rect x="0.333" y="-0.125" fill="#29ABE2" width="100" height="0.25"/>
+</g>
+<g id="shape">
+	<polygon fill="#1A1A1A" points="100.333,49 50.833,49 50.833,0 49.833,0 49.833,49 0.333,49 0.333,50 49.833,50 49.833,100 
+		50.833,100 50.833,50 100.333,50 	"/>
+</g>
+<g id="hlight">
+	<path fill="#ED1C24" d="M27.109,83.609c-9.226,0-17.786-12.015-24.102-33.831c-0.154-0.531,0.152-1.085,0.682-1.239
+		c0.531-0.153,1.085,0.152,1.239,0.682c5.959,20.583,14.043,32.388,22.181,32.388c8.138,0,16.222-11.805,22.181-32.387
+		c6.316-21.816,14.875-33.831,24.101-33.831s17.786,12.015,24.103,33.831c0.153,0.53-0.152,1.084-0.683,1.239
+		c-0.531,0.153-1.085-0.152-1.239-0.683c-5.958-20.582-14.043-32.387-22.181-32.387s-16.222,11.805-22.18,32.387
+		C44.895,71.595,36.335,83.609,27.109,83.609z"/>
+</g>
+</g>
+</svg>

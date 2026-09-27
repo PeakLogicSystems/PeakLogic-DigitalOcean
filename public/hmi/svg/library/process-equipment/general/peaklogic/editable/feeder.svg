@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g id="frame">
+	<g id="frame_1_">
+		<rect fill="none" width="100" height="100"/>
+	</g>
+</g>
+<g id="shape">
+	<path fill="#E6E6E6" d="M1.504,65.19l8.389-8.093V26.188L0,11.688V6.853l1.798-3.116H100v5.793L91.305,25.11v38.008
+		c0,11.336-8.257,20.983-19.457,22.733L5.789,96.228c-1.329,0.209-2.625-0.531-3.12-1.782l-1.164-2.939V65.19z"/>
+</g>
+<g id="radial">
+</g>
+<g id="linear">
+</g>
+<g id="dark">
+</g>
+<g id="light">
+</g>
+<g id="shadow">
+	<polygon fill="#1A1A1A" points="1.798,9.531 11.691,25.11 9.893,26.188 0,11.688 	"/>
+	<polygon fill="#1A1A1A" points="3.302,66.628 11.691,58.055 11.691,57.456 3.302,66.029 	"/>
+	<ellipse fill="#1A1A1A" cx="2.476" cy="80.713" rx="0.755" ry="13.096"/>
+	<rect x="11.691" y="25.11" fill="#1A1A1A" width="79.615" height="0.88"/>
+	<polygon fill="#1A1A1A" points="99.521,10.41 2.517,10.41 1.798,9.531 100,9.531 	"/>
+	<rect x="11.691" y="25.9" fill="#1A1A1A" width="0.673" height="69.762"/>
+</g>
+<g id="hlight">
+	<g>
+		<polygon fill="#FFFFFF" points="11.691,57.456 3.302,66.029 1.504,65.19 9.893,57.097 		"/>
+	</g>
+</g>
+</svg>

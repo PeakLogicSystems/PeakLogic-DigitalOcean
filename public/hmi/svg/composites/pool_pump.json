@@ -1,0 +1,44 @@
+{
+  "id": "pool_pump",
+  "label": "Pool filter pump",
+  "group": "Process equipment",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_pump.svg",
+  "tagRoles": {
+    "pumpRpm": { "pick": "tagId", "tagId": "PUMP_RPM", "types": ["INT"] },
+    "pumpSpeed": { "pick": "tagId", "tagId": "PUMP_SPEED", "types": ["INT"] },
+    "pumpHoa": { "pick": "tagId", "tagId": "MOTOR1_HOA", "types": ["INT"] },
+    "pumpRun": { "pick": "tagId", "tagId": "MOTOR1_RUN", "types": ["BOOL"] },
+    "filterTod": { "pick": "tagId", "tagId": "FILTER_TOD", "types": ["INT"] },
+    "filterStart": { "pick": "tagId", "tagId": "FILTER_START", "types": ["INT"] },
+    "filterEnd": { "pick": "tagId", "tagId": "FILTER_END", "types": ["INT"] },
+    "filter24hr": { "pick": "tagId", "tagId": "FILTER_24HR", "types": ["BOOL"] },
+    "filterEn": { "pick": "tagId", "tagId": "FILTER_EN", "types": ["BOOL"] },
+    "flowOk": { "pick": "tagId", "tagId": "POOL_FLOW_OK", "types": ["BOOL"] },
+    "flowGpm": { "pick": "tagId", "tagId": "FLOW_GPM", "types": ["REAL", "INT"] },
+    "bwBusy": { "pick": "tagId", "tagId": "POOL_BW_BUSY", "types": ["BOOL"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_pump.svg"
+    }
+  ],
+  "defaultBindings": [
+    { "elementId": "pump_rpm_pv", "property": "text", "tagRole": "pumpRpm", "format": "int", "min": 0, "max": 3600 },
+    { "elementId": "pump_speed_sp", "property": "text", "tagRole": "pumpSpeed", "format": "int", "interaction": "edit", "min": 600, "max": 3600 },
+    { "elementId": "pump_hoa_state", "property": "text", "tagRole": "pumpHoa", "format": "state3", "min": 0, "max": 2 },
+    { "elementId": "pump_run_lamp", "property": "fill", "tagRole": "pumpRun", "onValue": "#22c55e", "offValue": "#64748b" },
+    { "elementId": "btn_normal_mode", "property": "fill", "tagRole": "bwBusy", "onValue": "#cbd5e1", "offValue": "#64748b" },
+    { "elementId": "btn_bw_mode", "property": "fill", "tagRole": "bwBusy", "onValue": "#64748b", "offValue": "#cbd5e1" },
+    { "elementId": "flow_lamp", "property": "fill", "tagRole": "flowOk", "onValue": "#22c55e", "offValue": "#ef4444" },
+    { "elementId": "flow_gpm", "property": "text", "tagRole": "flowGpm", "format": "fixed1", "min": 0, "max": 500 },
+    { "elementId": "tod_value", "property": "text", "tagRole": "filterTod", "format": "hhmm" },
+    { "elementId": "chk_24hr", "property": "fill", "tagRole": "filter24hr", "interaction": "toggle", "onValue": "#22c55e", "offValue": "#ffffff" },
+    { "elementId": "window_start", "property": "text", "tagRole": "filterStart", "format": "hhmm", "interaction": "edit", "min": 0, "max": 1439 },
+    { "elementId": "window_end", "property": "text", "tagRole": "filterEnd", "format": "hhmm", "interaction": "edit", "min": 0, "max": 1439 },
+    { "elementId": "btn_filter_enable", "property": "fill", "tagRole": "filterEn", "interaction": "toggle", "onValue": "#22c55e", "offValue": "#94a3b8" }
+  ]
+}

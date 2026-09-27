@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="150"
+   height="55">
+
+<defs>
+
+	<!-- The following filter is used to add a drop shadown. -->
+	<filter id="MB_DropShadowFilter">
+		<feGaussianBlur stdDeviation="2">
+		</feGaussianBlur>
+	</filter>
+
+</defs>
+
+<!-- Illuminated push button. -->
+<g
+	>
+
+	<rect id="button" x="7" y="7" width="140" height="50" rx="15" fill="grey" 
+		stroke="none" stroke-width="0px" filter="url(#MB_DropShadowFilter)"/>
+	<rect x="0" y="0" width="140" height="50" rx="15"/>
+	<text x="70" y="30" font-size="24" stroke-width="2px" stroke="red" fill="red" text-anchor="middle">PB</text>
+
+</g>
+
+</svg>
+

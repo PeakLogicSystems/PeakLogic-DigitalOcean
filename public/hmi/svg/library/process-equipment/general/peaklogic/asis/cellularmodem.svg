@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="161.329" version="1.1" viewBox="0 0 100 161.329">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="frame">
+      <g id="frame-2" data-name="frame">
+        <rect y="61.329" width="100" height="100" fill="none"/>
+      </g>
+    </g>
+    <g id="shape">
+      <g>
+        <polygon points="66.743 36.242 65.973 41.484 39.637 41.484 38.867 36.242 33.372 36.242 33.372 154.193 38.867 154.193 39.637 148.919 65.973 148.919 66.743 154.193 72.238 154.193 72.238 36.242 66.743 36.242" fill="#666" stroke="#000" stroke-miterlimit="10"/>
+        <path d="M45.713,85.72l-.18-8.639h-8.198l-.635-58.983c.432-.584.691-1.304.691-2.085V5.157c0-1.941-1.573-3.514-3.514-3.514h-2.601c-1.941,0-3.514,1.573-3.514,3.514v10.854c0,.942.373,1.795.976,2.426l-.684,61.304c-.068,3.281,2.573,5.978,5.855,5.978h11.804Z"/>
+        <rect x="38.867" y="51.173" width="27.876" height="88.089" rx="2.053" ry="2.053"/>
+        <rect x="42.583" y="28.379" width="23.391" height="13.105" fill="#39b54a" stroke="#000" stroke-miterlimit="10"/>
+        <rect x="42.583" y="146.581" width="23.391" height="13.105" fill="#39b54a" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="40.224" y1="46.465" x2="64.054" y2="46.465" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+        <line x1="40.224" y1="143.697" x2="64.054" y2="143.697" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+        <line x1="31.641" y1="20.396" x2="30.984" y2="75.395" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+        <circle cx="47.301" cy="60.106" r="2.752" fill="#ed1c24"/>
+        <circle cx="59.096" cy="60.106" r="2.752" fill="#ed1c24"/>
+        <circle cx="47.301" cy="69.269" r="2.752" fill="#ed1c24"/>
+        <circle cx="59.096" cy="69.269" r="2.752" fill="#ed1c24"/>
+        <circle cx="59.096" cy="88.141" r="2.752" fill="#39b54a"/>
+        <circle cx="59.096" cy="97.577" r="2.752" fill="#39b54a"/>
+        <circle cx="59.096" cy="107.799" r="2.752" fill="#39b54a"/>
+      </g>
+    </g>
+  </g>
+</svg>

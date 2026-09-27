@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assisted Living Facility — 3D Orthographic Sample</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }
+    #canvas-wrap { position: absolute; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel {
+      position: absolute; z-index: 10; background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 10px;
+      backdrop-filter: blur(8px); padding: 14px 16px; font-size: 13px; line-height: 1.45;
+    }
+    #title-panel { top: 14px; left: 14px; max-width: 320px; }
+    #title-panel h1 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    #title-panel p { color: #94a3b8; font-size: 12px; }
+    #controls { top: 14px; right: 14px; display: flex; flex-direction: column; gap: 8px; min-width: 200px; }
+    #controls label { display: flex; flex-direction: column; gap: 4px; color: #cbd5e1; font-size: 12px; }
+    #controls select, #controls button {
+      background: #1e293b; color: #f1f5f9; border: 1px solid #334155;
+      border-radius: 6px; padding: 6px 10px; font-size: 12px; cursor: pointer;
+    }
+    #controls button:hover, #controls select:hover { border-color: #64748b; }
+    #controls .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    #legend { bottom: 14px; left: 14px; max-width: 280px; }
+    #legend h2 { font-size: 12px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; color: #94a3b8; }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 12px; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.15); }
+    #stats { bottom: 14px; right: 14px; text-align: right; font-size: 12px; color: #94a3b8; }
+    #stats strong { color: #f1f5f9; display: block; font-size: 13px; margin-bottom: 4px; }
+    .hint { margin-top: 8px; font-size: 11px; color: #64748b; }
+    #peaklogic-status { top: 14px; left: 50%; transform: translateX(-50%); font-size: 12px; padding: 8px 14px; }
+    #peaklogic-status.ok { border-color: rgba(34, 197, 94, 0.45); color: #86efac; }
+    #peaklogic-status.err { border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
+    #detail-panel {
+      position: absolute; z-index: 20; right: 14px; bottom: 14px; width: 340px; max-height: 52vh;
+      overflow: auto; display: none;
+    }
+    #detail-panel.open { display: block; }
+    #detail-panel h2 { font-size: 15px; margin-bottom: 8px; }
+    #detail-panel dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 12px; }
+    #detail-panel dt { color: #94a3b8; }
+    #detail-panel dd { text-align: right; font-family: Consolas, monospace; }
+    #detail-panel .alarm-on { color: #f87171; font-weight: 600; }
+    #detail-panel .actions { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+    #detail-panel .detail-room-links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    #detail-panel .detail-room-links.view-hidden { display: none; }
+    #detail-panel .detail-room-link {
+      background: #1e293b; color: #f1f5f9; border: 1px solid #334155;
+      border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer;
+    }
+    #detail-panel .detail-room-link:hover { border-color: #64748b; }
+    #detail-panel .actions .view-hidden { display: none; }
+    #hover-tip {
+      position: fixed; z-index: 30; pointer-events: none; display: none;
+      max-width: 300px; padding: 10px 12px; font-size: 12px; line-height: 1.45;
+      background: rgba(15, 23, 42, 0.96); border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+    #hover-tip.visible { display: block; }
+    #hover-tip strong { display: block; font-size: 13px; margin-bottom: 4px; color: #f1f5f9; }
+    #hover-tip p { color: #cbd5e1; margin: 0; }
+    #hover-tip .hover-meta { margin-top: 6px; font-size: 11px; color: #64748b; }
+    #canvas-wrap.hover-space { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="canvas-wrap"></div>
+  <div id="peaklogic-status" class="panel err">PeakLogic live: connecting…</div>
+
+  <div id="title-panel" class="panel">
+    <h1>Assisted Living Facility</h1>
+    <p>Sample 3D orthographic layout — client rooms 101+, common lounges, nurse stations, kitchen, mechanical, and pool.</p>
+  </div>
+
+  <div id="controls" class="panel">
+    <label>
+      View
+      <select id="view-select">
+        <option value="iso">Isometric (ortho)</option>
+        <option value="top">Top (plan)</option>
+        <option value="front">Front elevation</option>
+        <option value="side">Side elevation</option>
+      </select>
+    </label>
+    <label>
+      Floor visibility
+      <select id="floor-select">
+        <option value="1" selected>Floor 1 — Ground / Pool</option>
+        <option value="2">Floor 2 — Residential</option>
+        <option value="3">Floor 3 — Residential</option>
+        <option value="all">All floors (spread plan)</option>
+      </select>
+    </label>
+    <div class="btn-row">
+      <button type="button" id="btn-explode">Explode floors</button>
+      <button type="button" id="btn-reset">Reset camera</button>
+      <button type="button" id="btn-export-png">Export top PNG</button>
+    </div>
+    <p class="hint">Drag orbit · Scroll zoom · Hover for description · Click for live detail</p>
+  </div>
+
+  <div id="hover-tip" aria-hidden="true">
+    <strong id="hover-tip-title"></strong>
+    <p id="hover-tip-desc"></p>
+    <div id="hover-tip-meta" class="hover-meta"></div>
+  </div>
+
+  <div id="detail-panel" class="panel">
+    <h2 id="detail-title">Zone</h2>
+    <p id="detail-sub" class="hint"></p>
+    <dl id="detail-tags"></dl>
+    <div id="detail-room-links" class="detail-room-links view-hidden" aria-label="Linked resident rooms"></div>
+    <div class="actions">
+      <button type="button" id="btn-open-hmi" class="btn-row">Open in PeakLogic HMI</button>
+      <button type="button" id="btn-close-detail">Close</button>
+    </div>
+  </div>
+
+  <div id="legend" class="panel">
+    <h2>Space types</h2>
+    <div id="legend-items"></div>
+  </div>
+
+  <div id="stats" class="panel">
+    <strong>Program summary</strong>
+    <div>84 client rooms (24 floor 1 · 30 × floors 2–3) — numbered 101, 201, 301…</div>
+    <div>3 common lounges (2 restrooms each) + 2 dining areas</div>
+    <div>Kitchen &amp; mechanical — combined PeakLogic summary zones · default view Floor 1</div>
+    <div>Indoor therapy pool (ground floor)</div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const COLORS = {
+      room:       0x60a5fa,
+      suite:      0x3b82f6,
+      common:     0x34d399,
+      dining:     0xfbbf24,
+      office:     0xcbd5e1,
+      conference: 0xc4b5fd,
+      kitchen:    0xf97316,
+      mechanical: 0x94a3b8,
+      corridor:   0x475569,
+      nurse:      0xa78bfa,
+      bathroom:   0x2dd4bf,
+      sink:       0x67e8f6,
+      lobby:      0x22d3ee,
+      pool:       0x06b6d4,
+      poolDeck:   0x64748b,
+      structure:  0x1e293b,
+      slab:       0x334155,
+    };
+
+    const LEGEND = [
+      ['Resident room', COLORS.room],
+      ['Corner suite', COLORS.suite],
+      ['Common / lounge', COLORS.common],
+      ['Dining', COLORS.dining],
+      ['Admin office', COLORS.office],
+      ['Conference room', COLORS.conference],
+      ['Kitchen', COLORS.kitchen],
+      ['Mechanical / MEP', COLORS.mechanical],
+      ['Corridor', COLORS.corridor],
+      ['Nurse station', COLORS.nurse],
+      ['Restroom', COLORS.bathroom],
+      ['Sink / handwash', COLORS.sink],
+      ['Lobby / entry', COLORS.lobby],
+      ['Therapy pool', COLORS.pool],
+    ];
+
+    const legendEl = document.getElementById('legend-items');
+    for (const [label, hex] of LEGEND) {
+      const row = document.createElement('div');
+      row.className = 'legend-item';
+      row.innerHTML = `<span class="swatch" style="background:#${hex.toString(16).padStart(6, '0')}"></span><span>${label}</span>`;
+      legendEl.appendChild(row);
+    }
+
+    // Building constants (meters)
+    const FLOOR_H = 3.6;
+    const SLAB_T = 0.25;
+    const WALL_H = 2.8;
+    const WALL_T = 0.15;
+    const ROOM_W = 4.0;
+    const ROOM_D = 5.5;
+    const BATH_W = 2.4;
+    const BATH_D = 2.6;
+    const CORR_W = 2.4;
+    /** PeakLogic REST root — appliance `/api`, cloud Studio `/api/studio`. */
+    let peaklogicApiRoot = String(window.PEAKLOGIC_API_BASE || '').trim();
+    if (!peaklogicApiRoot) {
+      try {
+        if (window.parent !== window && window.parent.PEAKLOGIC_API_BASE) {
+          peaklogicApiRoot = String(window.parent.PEAKLOGIC_API_BASE).trim();
+        }
+      } catch { /* ignore */ }
+    }
+    if (!peaklogicApiRoot) peaklogicApiRoot = '/api';
+    const zoneMeshes = [];
+    const hoverMeshes = [];
+    let liveMap = {};
+    let selectedZone = null;
+    let hoveredMesh = null;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+
+    /** Defined hover copy for named building spaces (exact label match). */
+    const SPACE_DESCRIPTIONS = {
+      'Main lobby': 'Public entry and reception. Connects dining wings, main corridor, and visitor seating.',
+      'Dining A': 'West-wing resident dining (~40 seats). Quick links to nearby Floor 1 rooms 101 and 105.',
+      'Dining B': 'East-wing resident dining (~40 seats). Quick links to nearby Floor 1 rooms 112 and 118.',
+      'Commercial kitchen': 'Production kitchen — walk-in freezer, walk-in reefer, six prep sinks, and area alarm summary (PeakLogic screen_7).',
+      'Room 125 (office)': 'Ground-floor administration office (client room 125 in plan) — not a monitored resident suite.',
+      'Common lounge': 'Ground-floor resident lounge — TV, reading, and social seating. Two corridor restrooms attached.',
+      'Activity room': 'Ground-floor day/activity program space — crafts, games, and group events. Two corridor restrooms attached.',
+      'Mechanical room': 'House mechanical — three domestic water heaters, recirculation flow, and area alarm (PeakLogic screen_6).',
+      'Nurse station': 'Ground-floor staffing hub — call response, charting, and medication prep. Staff bath and handwash sink adjacent.',
+      'Pool deck': 'Non-slip deck around therapy pool — wet area, no standing water alarm on deck itself.',
+      'Therapy pool': 'Indoor warm-water therapy pool — pH, ORP, temperature, flow, and pump monitoring (PeakLogic screen_5).',
+      'Pool coping': 'Pool edge coping and trim — visual only in this sample.',
+    };
+
+    function descForLabel(label) {
+      const key = String(label || '').trim();
+      if (!key) return '';
+      if (SPACE_DESCRIPTIONS[key]) return SPACE_DESCRIPTIONS[key];
+      if (/^Room \d{3}/.test(key)) {
+        return key.includes('suite')
+          ? 'Corner suite — living, bedroom, kitchen, bath, and split A/C. Leak, stove timer, and HVAC points aggregated to room alarm.'
+          : 'Private client suite — living, bedroom, kitchen, bath, and split A/C. Leak, stove, and HVAC monitored per room.';
+      }
+      if (key === 'Room 125 (office)' || key === 'Admin office') {
+        return 'Administration and business office adjacent to the main lobby — layout reference only (not a resident room alarm zone).';
+      }
+      if (/ — restroom [12]$/.test(key)) {
+        return 'Shared accessible restroom for the adjacent common area — typical floor leak and fixture monitoring points.';
+      }
+      if (/ — bath$/.test(key)) {
+        return 'Staff restroom with tub/shower at nurse station — mid-point leak and area alarm ready.';
+      }
+      if (/ — sink$/.test(key)) {
+        return 'Clinical handwash sink at nurse station — splash zone and supply line monitoring point.';
+      }
+      if (/^Floor [23] lounge$/.test(key)) {
+        return 'Upper-floor resident lounge at corridor end — seating and activities. Two restrooms toward the corridor.';
+      }
+      if (/^Floor [23] nurse station$/.test(key)) {
+        return 'Floor nurse charting and call station — staff bath and handwash sink attached.';
+      }
+      if (/^Floor [23] MEP closet$/.test(key)) {
+        return 'Small floor closet — electrical, telco, or local MEP equipment.';
+      }
+      return 'Building space in assisted-living sample layout.';
+    }
+
+    function applySpaceMeta(mesh, label, extra = {}) {
+      const text = String(label || '').trim();
+      if (!text) return;
+      mesh.userData.label = text;
+      mesh.userData.description = extra.description || descForLabel(text);
+      if (!hoverMeshes.includes(mesh)) hoverMeshes.push(mesh);
+    }
+
+    function clientRoomNum(floor, indexOnFloor) { return floor * 100 + indexOnFloor; }
+    function formatRoomNum(n) { return String(n); }
+    function roomTag(n) { return `RM${String(n).padStart(3, '0')}`; }
+    function detailScreenForRoom(n) {
+      return '';
+    }
+
+    const hmiScreenCatalog = new Map();
+
+    function applyHmiScreenCatalog(screens) {
+      hmiScreenCatalog.clear();
+      for (const s of screens || []) {
+        const id = String(s?.id || '').trim();
+        if (!id) continue;
+        hmiScreenCatalog.set(id, {
+          id,
+          number: Number(s.number) || 0,
+          name: String(s.name || '').trim(),
+        });
+      }
+    }
+
+    function hmiScreenLabel(screenId) {
+      const sid = String(screenId || '').trim();
+      if (!sid) return '';
+      const s = hmiScreenCatalog.get(sid);
+      if (!s) return `HMI ${sid} (not in project — re-open assisted-living)`;
+      if (s.number === 1) return s.name ? `Screen 1 — ${s.name}` : 'Screen 1 — Home';
+      return s.name ? `Screen ${s.number} — ${s.name}` : `Screen ${s.number}`;
+    }
+
+    function hmiScreenConfigured(screenId) {
+      return hmiScreenCatalog.has(String(screenId || '').trim());
+    }
+
+    const ROOM_DETAIL_TAGS = (p) => [
+      ['Area alarm', `${p}_ALM`],
+      ['Bath mid leak', `${p}_BATH_MID_LEAK`],
+      ['Toilet leak', `${p}_TOILET_LEAK`],
+      ['Stove ON', `${p}_STOVE_ON`],
+      ['Stove excess', `${p}_STOVE_EXCESS`],
+      ['A/C pan leak', `${p}_AC_PAN_LEAK`],
+      ['A/C blower', `${p}_AC_BLOWER_FLT`],
+      ['Living temp', `${p}_LIV_TEMP`],
+      ['Bedroom temp', `${p}_BED_TEMP`],
+    ];
+
+    const ZONE_CATALOG = {
+      pool: {
+        label: 'Therapy Pool',
+        description: 'Exterior warm-water therapy pool — pH, ORP, temperature, flow, and pump monitoring (PeakLogic screen_5).',
+        alarmTag: 'ALF_POOL_ALM',
+        detailScreen: 'screen_5',
+        floorNum: 0,
+        tags: [['Area alarm', 'ALF_POOL_ALM'], ['pH', 'POOL_PH'], ['ORP', 'POOL_ORP'], ['Temp', 'POOL_TEMP'], ['Flow OK', 'POOL_FLOW_OK'], ['Pump fault', 'POOL_PUMP_FLT']],
+      },
+      mech: {
+        label: 'Mechanical — 3× HWH + flow',
+        description: 'House mechanical — three domestic water heaters, recirculation flow, and area alarm (PeakLogic screen_6).',
+        alarmTag: 'ALF_MECH_ALM',
+        detailScreen: 'screen_6',
+        tags: [['Area alarm', 'ALF_MECH_ALM'], ['DHW flow GPM', 'MECH_FLOW_GPM'], ['Meter kWh', 'MECH_METER_KWH'], ['WH1 °F', 'MECH_WH1_TEMP'], ['WH2 °F', 'MECH_WH2_TEMP'], ['WH3 °F', 'MECH_WH3_TEMP']],
+      },
+      kitchen: {
+        label: 'Commercial Kitchen',
+        description: 'Production kitchen — walk-in freezer, walk-in reefer, six prep sinks, and area alarm summary (PeakLogic screen_7).',
+        alarmTag: 'ALF_KITCH_ALM',
+        detailScreen: 'screen_7',
+        tags: [['Area alarm', 'ALF_KITCH_ALM'], ['Freezer °F', 'KITCH_FREEZER_TEMP'], ['Reefer °F', 'KITCH_REEFER_TEMP'], ['Freezer alarm', 'KITCH_FREEZER_ALM'], ['Reefer alarm', 'KITCH_REEFER_ALM'], ['Sink 1 leak', 'KITCH_SINK1_SINK_LEAK'], ['Sink 2 leak', 'KITCH_SINK2_SINK_LEAK']],
+      },
+    };
+
+    function fixtureZone(label, prefix, detailScreen, tags) {
+      return { label, alarmTag: `${prefix}_ALM`, detailScreen, tags };
+    }
+
+    const FIXTURE_ZONES = {
+      'Common lounge — restroom 1': fixtureZone('GF Lounge RR 1', 'COMM_GF_LOUNGE_R1', 'screen_8', [['Area alarm', 'COMM_GF_LOUNGE_R1_ALM'], ['Bath mid leak', 'COMM_GF_LOUNGE_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_LOUNGE_R1_TOILET_LEAK']]),
+      'Common lounge — restroom 2': fixtureZone('GF Lounge RR 2', 'COMM_GF_LOUNGE_R2', 'screen_9', [['Area alarm', 'COMM_GF_LOUNGE_R2_ALM'], ['Bath mid leak', 'COMM_GF_LOUNGE_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_LOUNGE_R2_TOILET_LEAK']]),
+      'Activity room — restroom 1': fixtureZone('GF Activity RR 1', 'COMM_GF_ACT_R1', 'screen_10', [['Area alarm', 'COMM_GF_ACT_R1_ALM'], ['Bath mid leak', 'COMM_GF_ACT_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_ACT_R1_TOILET_LEAK']]),
+      'Activity room — restroom 2': fixtureZone('GF Activity RR 2', 'COMM_GF_ACT_R2', 'screen_11', [['Area alarm', 'COMM_GF_ACT_R2_ALM'], ['Bath mid leak', 'COMM_GF_ACT_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_ACT_R2_TOILET_LEAK']]),
+      'Floor 2 lounge — restroom 1': fixtureZone('F2 Lounge RR 1', 'COMM_F2_LOUNGE_R1', 'screen_12', [['Area alarm', 'COMM_F2_LOUNGE_R1_ALM'], ['Bath mid leak', 'COMM_F2_LOUNGE_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F2_LOUNGE_R1_TOILET_LEAK']]),
+      'Floor 2 lounge — restroom 2': fixtureZone('F2 Lounge RR 2', 'COMM_F2_LOUNGE_R2', 'screen_13', [['Area alarm', 'COMM_F2_LOUNGE_R2_ALM'], ['Bath mid leak', 'COMM_F2_LOUNGE_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F2_LOUNGE_R2_TOILET_LEAK']]),
+      'Floor 3 lounge — restroom 1': fixtureZone('F3 Lounge RR 1', 'COMM_F3_LOUNGE_R1', 'screen_14', [['Area alarm', 'COMM_F3_LOUNGE_R1_ALM'], ['Bath mid leak', 'COMM_F3_LOUNGE_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F3_LOUNGE_R1_TOILET_LEAK']]),
+      'Floor 3 lounge — restroom 2': fixtureZone('F3 Lounge RR 2', 'COMM_F3_LOUNGE_R2', 'screen_15', [['Area alarm', 'COMM_F3_LOUNGE_R2_ALM'], ['Bath mid leak', 'COMM_F3_LOUNGE_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F3_LOUNGE_R2_TOILET_LEAK']]),
+      'Nurse station — bath': fixtureZone('GF Nurse bath', 'NRS_GF_BATH', 'screen_16', [['Area alarm', 'NRS_GF_BATH_ALM'], ['Bath mid leak', 'NRS_GF_BATH_BATH_MID_LEAK'], ['Toilet leak', 'NRS_GF_BATH_TOILET_LEAK']]),
+      'Nurse station — sink': fixtureZone('GF Nurse sink', 'NRS_GF_SINK', 'screen_17', [['Area alarm', 'NRS_GF_SINK_ALM'], ['Sink leak', 'NRS_GF_SINK_SINK_LEAK']]),
+      'Floor 2 nurse station — bath': fixtureZone('F2 Nurse bath', 'NRS_F2_BATH', 'screen_18', [['Area alarm', 'NRS_F2_BATH_ALM'], ['Bath mid leak', 'NRS_F2_BATH_BATH_MID_LEAK'], ['Toilet leak', 'NRS_F2_BATH_TOILET_LEAK']]),
+      'Floor 2 nurse station — sink': fixtureZone('F2 Nurse sink', 'NRS_F2_SINK', 'screen_19', [['Area alarm', 'NRS_F2_SINK_ALM'], ['Sink leak', 'NRS_F2_SINK_SINK_LEAK']]),
+      'Floor 3 nurse station — bath': fixtureZone('F3 Nurse bath', 'NRS_F3_BATH', 'screen_20', [['Area alarm', 'NRS_F3_BATH_ALM'], ['Bath mid leak', 'NRS_F3_BATH_BATH_MID_LEAK'], ['Toilet leak', 'NRS_F3_BATH_TOILET_LEAK']]),
+      'Floor 3 nurse station — sink': fixtureZone('F3 Nurse sink', 'NRS_F3_SINK', 'screen_21', [['Area alarm', 'NRS_F3_SINK_ALM'], ['Sink leak', 'NRS_F3_SINK_SINK_LEAK']]),
+    };
+
+    const wrap = document.getElementById('canvas-wrap');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f172a);
+    scene.fog = new THREE.Fog(0x0f172a, 120, 280);
+
+    const aspect = wrap.clientWidth / wrap.clientHeight;
+    const frustum = 55;
+    const camera = new THREE.OrthographicCamera(
+      -frustum * aspect, frustum * aspect, frustum, -frustum, 0.1, 500
+    );
+    camera.position.set(70, 55, 70);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    renderer.shadowMap.enabled = true;
+    wrap.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.target.set(0, 8, 0);
+    controls.maxPolarAngle = Math.PI / 2.05;
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+    sun.position.set(40, 80, 30);
+    sun.castShadow = true;
+    scene.add(sun);
+    scene.add(new THREE.HemisphereLight(0x93c5fd, 0x1e293b, 0.35));
+
+    const building = new THREE.Group();
+    scene.add(building);
+
+    const floorGroups = { 1: new THREE.Group(), 2: new THREE.Group(), 3: new THREE.Group() };
+    for (const fg of Object.values(floorGroups)) building.add(fg);
+
+    function mat(color, opacity = 1) {
+      const m = new THREE.MeshStandardMaterial({
+        color,
+        transparent: opacity < 1,
+        opacity,
+        roughness: 0.72,
+        metalness: 0.05,
+      });
+      m.userData.baseColor = new THREE.Color(color);
+      return m;
+    }
+
+    function registerZone(mesh, meta) {
+      if (!meta) return mesh;
+      const isZone = meta.alarmTag || meta.detailScreen || meta.roomNum > 0 || meta.linkedRooms?.length || meta.office;
+      if (!isZone) return mesh;
+      mesh.userData.zone = true;
+      mesh.userData.label = meta.label || mesh.userData.label || '';
+      mesh.userData.description = meta.description || mesh.userData.description || descForLabel(mesh.userData.label);
+      mesh.userData.alarmTag = meta.alarmTag || '';
+      mesh.userData.detailScreen = meta.detailScreen || '';
+      mesh.userData.roomNum = meta.roomNum || 0;
+      mesh.userData.linkedRooms = meta.linkedRooms || null;
+      mesh.userData.office = !!meta.office;
+      mesh.userData.floorNum = Number(meta.floorNum) || 0;
+      mesh.userData.detailTags = meta.detailTags || meta.tags || [];
+      if (!hoverMeshes.includes(mesh)) hoverMeshes.push(mesh);
+      if (meta.alarmTag) zoneMeshes.push(mesh);
+      return mesh;
+    }
+
+    function addBox(parent, x, y, z, w, h, d, color, opts = {}) {
+      const geo = new THREE.BoxGeometry(w, h, d);
+      const mesh = new THREE.Mesh(geo, mat(color, opts.opacity ?? 1));
+      mesh.position.set(x, y, z);
+      mesh.castShadow = !opts.noShadow;
+      mesh.receiveShadow = true;
+      if (opts.raycast === false) mesh.raycast = () => {};
+      if (opts.name && opts.hover !== false) applySpaceMeta(mesh, opts.name, opts);
+      if (opts.zone) {
+        const hoverLabel = opts.name || opts.zone.label || 'Zone';
+        const desc = opts.zone.description || descForLabel(hoverLabel);
+        applySpaceMeta(mesh, hoverLabel, { description: desc });
+        registerZone(mesh, { ...opts.zone, label: hoverLabel, description: desc });
+      }
+      parent.add(mesh);
+      return mesh;
+    }
+
+    function addRoom(parent, cx, cz, w, d, color, label, yBase, roomNum = 0, floorNum = 0) {
+      const y = yBase + WALL_H / 2;
+      const opts = { name: label };
+      const fl = floorNum || (roomNum >= 100 ? Math.floor(roomNum / 100) : 0);
+      if (roomNum > 0) {
+        const p = roomTag(roomNum);
+        opts.zone = {
+          label: `Room ${formatRoomNum(roomNum)}`,
+          alarmTag: `${p}_ALM`,
+          detailScreen: detailScreenForRoom(roomNum),
+          roomNum,
+          floorNum: fl,
+          detailTags: ROOM_DETAIL_TAGS(p),
+        };
+      } else if (FIXTURE_ZONES[label]) {
+        opts.zone = { ...FIXTURE_ZONES[label], floorNum: fl };
+      } else if (fl > 0) {
+        opts.zone = { label, floorNum: fl };
+      }
+      addBox(parent, cx, y, cz, w, WALL_H, d, color, opts);
+      addBox(parent, cx, yBase + 0.02, cz, w - 0.08, 0.04, d - 0.08, COLORS.slab, { noShadow: true, raycast: false });
+    }
+
+    function addCorridor(parent, cx, cz, w, d, yBase) {
+      addBox(parent, cx, yBase + 0.03, cz, w, 0.06, d, COLORS.corridor, { noShadow: true });
+    }
+
+    /** Common lounge/activity with two restrooms on the corridor-facing edge. */
+    function addCommonLoungeWithRestrooms(parent, cx, cz, yBase, label, corridorSide, floorNum = 1) {
+      const mainW = 9.5;
+      const mainD = 9;
+      const inset = (mainW / 2) + (BATH_W / 2) + 0.55;
+      const mainCx = corridorSide === 'east' ? cx - 0.75 : cx + 0.75;
+      addRoom(parent, mainCx, cz, mainW, mainD, COLORS.common, label, yBase, 0, floorNum);
+      const bathX = corridorSide === 'east' ? cx + inset - 1.1 : cx - inset + 1.1;
+      addRoom(parent, bathX, cz - 2.25, BATH_W, BATH_D, COLORS.bathroom, `${label} — restroom 1`, yBase, 0, floorNum);
+      addRoom(parent, bathX, cz + 2.25, BATH_W, BATH_D, COLORS.bathroom, `${label} — restroom 2`, yBase, 0, floorNum);
+    }
+
+    function addDiningZone(parent, cx, cz, w, d, yBase, label, linkedRooms, floorNum = 1) {
+      const links = linkedRooms.map((n) => formatRoomNum(n)).join(' & ');
+      const desc = `${SPACE_DESCRIPTIONS[label] || label} Open linked rooms ${links} from the detail panel.`;
+      const detailTags = linkedRooms.flatMap((n) => {
+        const p = roomTag(n);
+        return [[`Room ${formatRoomNum(n)} alarm`, `${p}_ALM`]];
+      });
+      addBox(parent, cx, yBase + WALL_H / 2, cz, w, WALL_H, d, COLORS.dining, {
+        name: label,
+        zone: { label, description: desc, linkedRooms, detailTags, floorNum },
+      });
+    }
+
+    /** Nurse hub — desk on corridor with staff bath/sink behind (north). */
+    function addNurseStation(parent, cx, cz, yBase, label, floorNum = 1) {
+      addRoom(parent, cx, cz, 5.2, 2.5, COLORS.nurse, label, yBase, 0, floorNum);
+      addRoom(parent, cx - 1.65, cz + 1.35, 1.55, 1.35, COLORS.bathroom, `${label} — bath`, yBase, 0, floorNum);
+      addRoom(parent, cx + 1.65, cz + 1.35, 1.15, 1.15, COLORS.sink, `${label} — sink`, yBase, 0, floorNum);
+    }
+
+    function addConferenceRoom(parent, cx, cz, w, d, yBase, label) {
+      addBox(parent, cx, yBase + WALL_H / 2, cz, w, WALL_H, d, COLORS.conference, {
+        name: label,
+        zone: { label, description: 'Ground-floor conference and meeting room.', detailScreen: 'screen_22', floorNum: 1 },
+      });
+      addBox(parent, cx, yBase + 0.02, cz, w - 0.12, 0.04, d - 0.12, 0xddd6fe, { noShadow: true, raycast: false });
+    }
+
+    function addOfficeRoom(parent, cx, cz, w, d, yBase, label) {
+      addBox(parent, cx, yBase + WALL_H / 2, cz, w, WALL_H, d, COLORS.office, {
+        name: label,
+        zone: { label, description: descForLabel(label), office: true, floorNum: 1 },
+      });
+      addBox(parent, cx, yBase + 0.02, cz, w - 0.08, 0.04, d - 0.08, COLORS.slab, { noShadow: true, raycast: false });
+    }
+
+    /** Upper-floor lounge with restrooms on the corridor (south) side. */
+    function addCommonAreaWithBaths(parent, cx, cz, w, d, label, yBase, bathSide, floorNum) {
+      const gap = 0.3;
+      if (bathSide === 'north' || bathSide === 'south') {
+        const mainD = d - BATH_D - gap;
+        const shift = (BATH_D + gap) / 2;
+        const mainCz = bathSide === 'north' ? cz - shift / 2 : cz + shift / 2;
+        const bathZ = bathSide === 'north'
+          ? cz + mainD / 2 + BATH_D / 2 + gap / 2 - shift / 2
+          : cz - mainD / 2 - BATH_D / 2 - gap / 2 + shift / 2;
+        addRoom(parent, cx, mainCz, w, mainD, COLORS.common, label, yBase, 0, floorNum);
+        addRoom(parent, cx - w * 0.22, bathZ, BATH_W, BATH_D, COLORS.bathroom, `${label} — restroom 1`, yBase, 0, floorNum);
+        addRoom(parent, cx + w * 0.22, bathZ, BATH_W, BATH_D, COLORS.bathroom, `${label} — restroom 2`, yBase, 0, floorNum);
+        return;
+      }
+      const mainW = w - BATH_W - gap;
+      const shift = (BATH_W + gap) / 2;
+      const mainCx = bathSide === 'east' ? cx - shift / 2 : cx + shift / 2;
+      const bathX = bathSide === 'east'
+        ? cx + mainW / 2 + BATH_W / 2 + gap / 2 - shift / 2
+        : cx - mainW / 2 - BATH_W / 2 - gap / 2 + shift / 2;
+      addRoom(parent, mainCx, cz, mainW, d, COLORS.common, label, yBase, 0, floorNum);
+      addRoom(parent, bathX, cz - d * 0.22, BATH_W, BATH_D, COLORS.bathroom, `${label} — restroom 1`, yBase, 0, floorNum);
+      addRoom(parent, bathX, cz + d * 0.22, BATH_W, BATH_D, COLORS.bathroom, `${label} — restroom 2`, yBase, 0, floorNum);
+    }
+
+    const ROOMS_ON_FLOOR = [24, 30, 30];
+
+    function perimeterSideCounts(roomCount) {
+      const base = Math.floor(roomCount / 4);
+      const rem = roomCount % 4;
+      return {
+        north: base + (rem > 0 ? 1 : 0),
+        east: base + (rem > 1 ? 1 : 0),
+        south: base + (rem > 2 ? 1 : 0),
+        west: base + (rem > 3 ? 1 : 0),
+      };
+    }
+
+    /** Client suites on building perimeter; corridor runs inside. */
+    function addPerimeterClientRooms(parent, floorNum, yBase, roomCount) {
+      const s = perimeterSideCounts(roomCount);
+      const hw = 27;
+      const hd = 23;
+      let idx = 1;
+      const northSpan = Math.max(ROOM_W, 2 * hw - ROOM_W);
+      for (let i = 0; i < s.north; i++) {
+        const roomNum = clientRoomNum(floorNum, idx++);
+        const x = s.north === 1 ? 0 : -hw + ROOM_W / 2 + i * (northSpan / (s.north - 1));
+        const z = hd - ROOM_D / 2 - 0.2;
+        const isSuite = roomNum % 100 === 1;
+        addRoom(parent, x, z, ROOM_W, ROOM_D, isSuite ? COLORS.suite : COLORS.room,
+          `Room ${roomNum}${isSuite ? ' (suite)' : ''}`, yBase, roomNum, floorNum);
+      }
+      const eastSpan = Math.max(ROOM_D, 2 * hd - 2 * ROOM_D);
+      for (let i = 0; i < s.east; i++) {
+        const roomNum = clientRoomNum(floorNum, idx++);
+        const x = hw - ROOM_W / 2 - 0.2;
+        const z = hd - ROOM_D - 0.5 - i * (eastSpan / Math.max(1, s.east - 1));
+        addRoom(parent, x, z, ROOM_W, ROOM_D, COLORS.room, `Room ${roomNum}`, yBase, roomNum, floorNum);
+      }
+      for (let i = 0; i < s.south; i++) {
+        const roomNum = clientRoomNum(floorNum, idx++);
+        const si = s.south - 1 - i;
+        const x = s.south === 1 ? 0 : -hw + ROOM_W / 2 + si * (northSpan / (s.south - 1));
+        const z = -hd + ROOM_D / 2 + 0.2;
+        addRoom(parent, x, z, ROOM_W, ROOM_D, COLORS.room, `Room ${roomNum}`, yBase, roomNum, floorNum);
+      }
+      for (let i = 0; i < s.west; i++) {
+        const roomNum = clientRoomNum(floorNum, idx++);
+        const si = s.west - 1 - i;
+        const x = -hw + ROOM_W / 2 + 0.2;
+        const z = hd - ROOM_D - 0.5 - si * (eastSpan / Math.max(1, s.west - 1));
+        addRoom(parent, x, z, ROOM_W, ROOM_D, COLORS.room, `Room ${roomNum}`, yBase, roomNum, floorNum);
+      }
+    }
+
+    function buildFloor(floorNum, yBase) {
+      const g = floorGroups[floorNum];
+      const isGround = floorNum === 1;
+
+      // Slab
+      const slabW = isGround ? 62 : 58;
+      const slabD = isGround ? 48 : 52;
+      addBox(g, 0, yBase - SLAB_T / 2, isGround ? -2 : 0, slabW, SLAB_T, slabD, COLORS.structure);
+
+      if (isGround) {
+        // --- GROUND FLOOR: perimeter client suites; interior = services only (no pool) ---
+        addPerimeterClientRooms(g, 1, yBase, ROOMS_ON_FLOOR[0]);
+        addOfficeRoom(g, -5, 1, ROOM_W + 1, ROOM_D + 0.5, yBase, 'Room 125 (office)');
+        addConferenceRoom(g, 5, 1, ROOM_W + 2, ROOM_D + 0.5, yBase, 'Conference room');
+
+        addRoom(g, 0, 0, 12, 10, COLORS.lobby, 'Main lobby', yBase, 0, 1);
+        addDiningZone(g, -6, -4, 9, 6, yBase, 'Dining A', [101, 105], 1);
+        addDiningZone(g, 8, -4, 9, 6, yBase, 'Dining B', [112, 118], 1);
+        addBox(g, -10, yBase + WALL_H / 2, 6, 10, WALL_H, 6, COLORS.kitchen, {
+          name: 'Commercial kitchen',
+          zone: { ...ZONE_CATALOG.kitchen, floorNum: 1 },
+        });
+        addCommonLoungeWithRestrooms(g, 10, 2, yBase, 'Common lounge', 'west', 1);
+        addCommonLoungeWithRestrooms(g, -10, -10, yBase, 'Activity room', 'east', 1);
+        addBox(g, 10, yBase + WALL_H / 2, -10, 10, WALL_H, 8, COLORS.mechanical, {
+          name: 'Mechanical room',
+          zone: { ...ZONE_CATALOG.mech, floorNum: 1 },
+        });
+        addNurseStation(g, 0, 4, yBase, 'Nurse station', 1);
+        addCorridor(g, 0, 0, 18, CORR_W, yBase);
+        addCorridor(g, 0, 0, CORR_W, 16, yBase);
+      } else {
+        // --- UPPER FLOORS: perimeter suites + interior nurse / lounge ---
+        const label = floorNum === 2 ? 'Floor 2' : 'Floor 3';
+        addPerimeterClientRooms(g, floorNum, yBase, ROOMS_ON_FLOOR[floorNum - 1]);
+        addNurseStation(g, 0, 0, yBase, `${label} nurse station`, floorNum);
+        addCommonAreaWithBaths(g, 0, -6, 10, 6, `${label} lounge`, yBase, 'south', floorNum);
+        addRoom(g, 8, 8, 4, 4, COLORS.mechanical, `${label} MEP closet`, yBase, 0, floorNum);
+        addCorridor(g, 0, 0, 16, CORR_W, yBase);
+        addCorridor(g, 0, 0, CORR_W, 14, yBase);
+      }
+
+      // Perimeter outline (thin walls)
+      const outlineMat = mat(0x64748b, 0.35);
+      const bw = slabW;
+      const bd = slabD;
+      const oz = isGround ? -2 : -2;
+      const edges = [
+        [0, yBase + WALL_H / 2, oz - bd / 2, bw, WALL_H, WALL_T],
+        [0, yBase + WALL_H / 2, oz + bd / 2, bw, WALL_H, WALL_T],
+        [-bw / 2, yBase + WALL_H / 2, oz, WALL_T, WALL_H, bd],
+        [bw / 2, yBase + WALL_H / 2, oz, WALL_T, WALL_H, bd],
+      ];
+      for (const [x, y, z, w, h, d] of edges) {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), outlineMat);
+        m.position.set(x, y, z);
+        g.add(m);
+      }
+
+      // Floor label sprite
+      const canvas = document.createElement('canvas');
+      canvas.width = 256; canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'rgba(15,23,42,0.75)';
+      ctx.fillRect(0, 0, 256, 64);
+      ctx.fillStyle = '#f1f5f9';
+      ctx.font = 'bold 28px Segoe UI, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`Floor ${floorNum}`, 128, 42);
+      const tex = new THREE.CanvasTexture(canvas);
+      const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+      spr.scale.set(8, 2, 1);
+      spr.position.set(-28, yBase + WALL_H + 1.2, isGround ? 18 : 16);
+      g.add(spr);
+    }
+
+    buildFloor(1, 0);
+    buildFloor(2, FLOOR_H);
+    buildFloor(3, FLOOR_H * 2);
+
+    // Exterior therapy pool — outside building footprint
+    addBox(building, 42, -0.35, -42, 16, 0.1, 14, COLORS.poolDeck, { name: 'Pool deck (exterior)', raycast: false });
+    addBox(building, 42, -0.35, -42, 14, 0.7, 10, COLORS.pool, {
+      name: 'Therapy pool (exterior)', opacity: 0.92, zone: { ...ZONE_CATALOG.pool },
+    });
+    addBox(building, 42, -0.05, -42, 14.4, 0.35, 10.4, 0x0891b2, { name: 'Pool coping', opacity: 0.6, raycast: false });
+
+    // Site pad
+    addBox(building, 0, -0.4, -2, 88, 0.2, 62, 0x14532d);
+
+    // Ground grid
+    const grid = new THREE.GridHelper(100, 50, 0x334155, 0x1e293b);
+    grid.position.y = -0.28;
+    scene.add(grid);
+
+    let exploded = false;
+    const explodeOffsets = { 1: 0, 2: 6, 3: 12 };
+    /** When all floors are visible, offset each plan so stacks do not visually merge. */
+    const floorPlanSpread = { 1: [0, 0], 2: [30, 0], 3: [-30, 0] };
+
+    function applyFloorLayout(mode) {
+      for (const [n, g] of Object.entries(floorGroups)) {
+        const num = Number(n);
+        if (mode === 'all') {
+          g.visible = true;
+          g.position.y = exploded ? explodeOffsets[num] : 0;
+          g.position.x = floorPlanSpread[num][0];
+          g.position.z = floorPlanSpread[num][1];
+        } else {
+          g.visible = num === Number(mode);
+          g.position.set(0, 0, 0);
+        }
+      }
+    }
+
+    function setExplode(on) {
+      exploded = on;
+      applyFloorLayout(document.getElementById('floor-select').value);
+    }
+
+    const viewPresets = {
+      iso:   { pos: [70, 55, 70], target: [0, 8, 0] },
+      top:   { pos: [0, 95, 0.01], target: [0, 0, 0] },
+      front: { pos: [0, 20, 90], target: [0, 10, 0] },
+      side:  { pos: [90, 20, 0], target: [0, 10, 0] },
+    };
+
+    function applyView(name) {
+      const p = viewPresets[name] || viewPresets.iso;
+      camera.position.set(...p.pos);
+      controls.target.set(...p.target);
+      controls.update();
+    }
+
+    function setFloorVisibility(mode) {
+      applyFloorLayout(mode);
+    }
+
+    document.getElementById('view-select').addEventListener('change', (e) => applyView(e.target.value));
+    document.getElementById('floor-select').addEventListener('change', (e) => setFloorVisibility(e.target.value));
+    document.getElementById('btn-explode').addEventListener('click', () => {
+      setExplode(!exploded);
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => applyView(document.getElementById('view-select').value));
+
+    function isAlarmActive(tagId) {
+      const e = liveMap[tagId];
+      if (!e) return false;
+      if (e.alarmLevel && e.alarmLevel !== 'normal') return true;
+      if (typeof e.value === 'boolean') return e.value;
+      if (typeof e.value === 'number') return e.value !== 0;
+      return !!e.value;
+    }
+
+    function formatLive(tagId) {
+      const e = liveMap[tagId];
+      if (!e) return '—';
+      if (typeof e.value === 'boolean') return e.value ? 'ON / ALM' : 'OFF';
+      if (e.value == null) return '—';
+      return String(e.value);
+    }
+
+    function applyAlarmVisuals() {
+      const t = performance.now() * 0.004;
+      for (const mesh of zoneMeshes) {
+        const tag = mesh.userData.alarmTag;
+        const mat = mesh.material;
+        const base = mat.userData.baseColor;
+        if (!base) continue;
+        if (isAlarmActive(tag)) {
+          const pulse = 0.55 + 0.45 * Math.sin(t * 4);
+          mat.emissive.setRGB(0.9 * pulse, 0.1 * pulse, 0.1 * pulse);
+          mat.color.copy(base).lerp(new THREE.Color(0xef4444), 0.35 + 0.25 * pulse);
+        } else {
+          mat.emissive.setRGB(0, 0, 0);
+          mat.color.copy(base);
+        }
+      }
+    }
+
+    async function pollPeakLogicLive() {
+      const el = document.getElementById('peaklogic-status');
+      try {
+        const res = await fetch(`${peaklogicApiRoot}/dashboard`, { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(res.statusText);
+        const data = await res.json();
+        liveMap = Object.fromEntries((data.live || []).map((row) => [row.tagId || row.id, row]));
+        el.textContent = `PeakLogic live: ${Object.keys(liveMap).length} tags · runtime ${data.runtime?.running ? 'ON' : 'off'}`;
+        el.classList.remove('err');
+        el.classList.add('ok');
+        if (selectedZone) updateDetailPanelValues(selectedZone);
+      } catch (e) {
+        el.textContent = `PeakLogic live: offline (${e.message}) — open from PeakLogic server`;
+        el.classList.remove('ok');
+        el.classList.add('err');
+      }
+    }
+
+    function updateDetailPanelValues(mesh) {
+      const ud = mesh.userData;
+      document.getElementById('detail-title').textContent = ud.label || 'Zone';
+      const sub = document.getElementById('detail-sub');
+      if (ud.office) {
+        sub.textContent = 'Administration office — layout reference (not a resident alarm zone)';
+      } else if (ud.linkedRooms?.length) {
+        sub.textContent = 'Dining area — open linked resident rooms below';
+      } else {
+        sub.textContent = ud.roomNum > 0
+          ? 'Resident room — opens room sensor popup in PeakLogic'
+          : (ud.detailScreen
+            ? (hmiScreenConfigured(ud.detailScreen)
+              ? hmiScreenLabel(ud.detailScreen)
+              : `${hmiScreenLabel(ud.detailScreen)} — click Open in PeakLogic HMI`)
+            : '');
+      }
+      const dl = document.getElementById('detail-tags');
+      dl.innerHTML = '';
+      const rows = ud.detailTags?.length ? ud.detailTags : (ud.alarmTag ? [['Alarm', ud.alarmTag]] : []);
+      for (const [label, tagId] of rows) {
+        const dt = document.createElement('dt');
+        dt.textContent = label;
+        const dd = document.createElement('dd');
+        dd.textContent = formatLive(tagId);
+        if (isAlarmActive(tagId)) dd.className = 'alarm-on';
+        dl.appendChild(dt);
+        dl.appendChild(dd);
+      }
+    }
+
+    function renderDetailPanel(mesh) {
+      const ud = mesh.userData;
+      selectedZone = mesh;
+      updateDetailPanelValues(mesh);
+      const linksEl = document.getElementById('detail-room-links');
+      const btnHmi = document.getElementById('btn-open-hmi');
+      linksEl.innerHTML = '';
+      if (ud.linkedRooms?.length) {
+        linksEl.classList.remove('view-hidden');
+        btnHmi.classList.add('view-hidden');
+        for (const n of ud.linkedRooms) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'btn-row';
+          b.textContent = `Room ${formatRoomNum(n)}`;
+          b.addEventListener('click', () => {
+            if (window.parent !== window) {
+              window.parent.postMessage({ type: 'peaklogic-hmi-open-room', roomNum: n }, window.location.origin);
+            }
+          });
+          linksEl.appendChild(b);
+        }
+      } else {
+        linksEl.classList.add('view-hidden');
+        btnHmi.classList.toggle('view-hidden', !!ud.office);
+      }
+      document.getElementById('detail-panel').classList.add('open');
+      btnHmi.dataset.screen = ud.detailScreen || 'screen_1';
+      btnHmi.textContent = ud.detailScreen && hmiScreenConfigured(ud.detailScreen)
+        ? `Open ${hmiScreenLabel(ud.detailScreen)}`
+        : 'Open in PeakLogic HMI';
+    }
+
+    function notifyParentHmiOpen(ud) {
+      if (window.parent === window || !ud) return;
+      if (ud.office) return;
+      if (ud.linkedRooms?.length && !ud.detailScreen) return;
+      try {
+        if (ud.roomNum > 0) {
+          window.parent.postMessage({ type: 'peaklogic-hmi-open-room', roomNum: ud.roomNum }, window.location.origin);
+        } else if (ud.detailScreen) {
+          window.parent.postMessage({
+            type: 'peaklogic-hmi-open-area',
+            screenId: ud.detailScreen,
+            label: ud.label || '',
+          }, window.location.origin);
+        }
+      } catch { /* cross-origin or detached */ }
+    }
+
+    function activeFloorSelection() {
+      const mode = document.getElementById('floor-select')?.value;
+      if (!mode || mode === 'all') return null;
+      const n = Number(mode);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function raycastTargetMeshes() {
+      const want = activeFloorSelection();
+      if (want == null) return hoverMeshes;
+      return hoverMeshes.filter((mesh) => {
+        const fn = Number(mesh.userData.floorNum);
+        if (fn === 0) return want === 1;
+        return fn === want;
+      });
+    }
+
+    function raycastHits(clientX, clientY) {
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      return raycaster.intersectObjects(raycastTargetMeshes(), false);
+    }
+
+    function pickHoverMesh(clientX, clientY) {
+      const hits = raycastHits(clientX, clientY);
+      for (const h of hits) {
+        if (h.object.userData.zone) return h.object;
+      }
+      return hits.length ? hits[0].object : null;
+    }
+
+    function pickZoneMesh(clientX, clientY) {
+      for (const h of raycastHits(clientX, clientY)) {
+        if (h.object.userData.zone) return h.object;
+      }
+      return null;
+    }
+
+    function onCanvasClick(ev) {
+      const mesh = pickZoneMesh(ev.clientX, ev.clientY);
+      if (!mesh) return;
+      renderDetailPanel(mesh);
+    }
+
+    function openMvHmiForSelection() {
+      const ud = selectedZone?.userData;
+      if (!ud) return;
+      if (window.parent !== window) {
+        notifyParentHmiOpen(ud);
+        return;
+      }
+      const sid = ud.detailScreen || document.getElementById('btn-open-hmi')?.dataset?.screen || 'screen_1';
+      window.open(`${location.origin}/?hmi=${encodeURIComponent(sid)}`, '_blank');
+    }
+
+    const hoverTip = document.getElementById('hover-tip');
+    const hoverTipTitle = document.getElementById('hover-tip-title');
+    const hoverTipDesc = document.getElementById('hover-tip-desc');
+    const hoverTipMeta = document.getElementById('hover-tip-meta');
+
+    function hoverMetaLine(ud) {
+      if (ud.office) return 'Administration office · click for description';
+      if (ud.linkedRooms?.length) {
+        return `Linked rooms ${ud.linkedRooms.map(formatRoomNum).join(' & ')} · click for room links`;
+      }
+      if (ud.roomNum > 0) return `Room ${formatRoomNum(ud.roomNum)} · click to open PeakLogic room popup`;
+      if (ud.detailScreen) {
+        const label = hmiScreenLabel(ud.detailScreen);
+        return hmiScreenConfigured(ud.detailScreen)
+          ? `${label} · click for live tags and area popup`
+          : `${label} · screen missing from project`;
+      }
+      if (ud.alarmTag) return `Tag ${ud.alarmTag} · click for live detail`;
+      return 'Sample layout space';
+    }
+
+    function hideHoverTip() {
+      hoverTip.classList.remove('visible');
+      hoverTip.setAttribute('aria-hidden', 'true');
+      wrap.classList.remove('hover-space');
+      hoveredMesh = null;
+    }
+
+    function positionHoverTip(ev) {
+      const pad = 14;
+      hoverTip.style.left = '0';
+      hoverTip.style.top = '0';
+      hoverTip.classList.add('visible');
+      const tipRect = hoverTip.getBoundingClientRect();
+      let x = ev.clientX + pad;
+      let y = ev.clientY + pad;
+      if (x + tipRect.width > window.innerWidth - 8) x = ev.clientX - tipRect.width - pad;
+      if (y + tipRect.height > window.innerHeight - 8) y = ev.clientY - tipRect.height - pad;
+      hoverTip.style.left = `${Math.max(8, x)}px`;
+      hoverTip.style.top = `${Math.max(8, y)}px`;
+    }
+
+    function showHoverTip(ev, mesh) {
+      const ud = mesh.userData;
+      hoverTipTitle.textContent = ud.label || 'Space';
+      hoverTipDesc.textContent = ud.description || descForLabel(ud.label);
+      hoverTipMeta.textContent = hoverMetaLine(ud);
+      hoverTip.setAttribute('aria-hidden', 'false');
+      wrap.classList.add('hover-space');
+      positionHoverTip(ev);
+      hoveredMesh = mesh;
+    }
+
+    function onCanvasPointerMove(ev) {
+      const mesh = pickHoverMesh(ev.clientX, ev.clientY);
+      if (!mesh) {
+        hideHoverTip();
+        return;
+      }
+      if (hoveredMesh !== mesh) showHoverTip(ev, mesh);
+      else positionHoverTip(ev);
+    }
+
+    renderer.domElement.addEventListener('pointermove', onCanvasPointerMove);
+    renderer.domElement.addEventListener('pointerleave', hideHoverTip);
+
+    function exportTopViewPng() {
+      const prev = camera.position.clone();
+      const prevT = controls.target.clone();
+      applyView('top');
+      renderer.render(scene, camera);
+      const link = document.createElement('a');
+      link.download = 'assisted-living-top-1024.png';
+      link.href = renderer.domElement.toDataURL('image/png');
+      link.click();
+      camera.position.copy(prev);
+      controls.target.copy(prevT);
+      controls.update();
+    }
+
+    renderer.domElement.addEventListener('click', onCanvasClick);
+    document.getElementById('btn-close-detail').addEventListener('click', () => {
+      document.getElementById('detail-panel').classList.remove('open');
+      selectedZone = null;
+    });
+    document.getElementById('btn-open-hmi').addEventListener('click', () => openMvHmiForSelection());
+    document.getElementById('btn-export-png').addEventListener('click', exportTopViewPng);
+
+    let peaklogicPollMs = 60000;
+    let peaklogicPollTimer = null;
+    function scheduleMvPoll() {
+      if (peaklogicPollTimer) clearInterval(peaklogicPollTimer);
+      pollPeakLogicLive();
+      peaklogicPollTimer = setInterval(pollPeakLogicLive, peaklogicPollMs);
+    }
+    window.addEventListener('message', (e) => {
+      if (e.origin !== window.location.origin) return;
+      const data = e.data;
+      if (!data || typeof data !== 'object') return;
+      if (data.type === 'peaklogic-hmi-poll-config') {
+        if (typeof data.apiBase === 'string' && data.apiBase.trim()) {
+          peaklogicApiRoot = data.apiBase.trim();
+        }
+        if (Number.isFinite(Number(data.pollMs))) {
+          peaklogicPollMs = Math.max(5000, Number(data.pollMs));
+        }
+        scheduleMvPoll();
+      } else if (data.type === 'peaklogic-hmi-screen-catalog' && Array.isArray(data.screens)) {
+        applyHmiScreenCatalog(data.screens);
+        if (selectedZone) updateDetailPanelValues(selectedZone);
+      }
+    });
+    scheduleMvPoll();
+
+    function onResize() {
+      const a = wrap.clientWidth / wrap.clientHeight;
+      camera.left = -frustum * a;
+      camera.right = frustum * a;
+      camera.top = frustum;
+      camera.bottom = -frustum;
+      camera.updateProjectionMatrix();
+      renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    }
+    window.addEventListener('resize', onResize);
+
+    setFloorVisibility('1');
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      applyAlarmVisuals();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>

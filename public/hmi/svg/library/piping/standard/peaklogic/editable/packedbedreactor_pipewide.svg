@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+    <g id="frame" display="none">
+		<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+	<path fill="#006837" d="M50,98.922c-8.356,0-16.713-3.181-23.075-9.543l-0.586-0.586V11.207l0.586-0.586
+		c12.724-12.725,33.426-12.725,46.149,0l0.586,0.586v77.586l-0.586,0.586C66.713,95.741,58.356,98.922,50,98.922z"/>
+</g>
+<g id="dark">
+	<path fill="#009245" d="M72.721,10.975c-12.528-12.529-32.914-12.529-45.442,0l-0.439,0.439v77.172l0.439,0.439
+		C33.543,95.29,41.771,98.422,50,98.422s16.457-3.132,22.721-9.396l0.439-0.439V11.414L72.721,10.975z M35.206,78.33h-3V21.67h3
+		V78.33z M40.637,78.33h-3V21.67h3V78.33z M46.068,78.33h-3V21.67h3V78.33z M51.5,78.33h-3V21.67h3V78.33z M56.932,78.33h-3V21.67h3
+		V78.33z M62.363,78.33h-3V21.67h3V78.33z M67.794,78.33h-3V21.67h3V78.33z"/>
+	<rect x="32.706" y="21.67" fill="#009245" width="2" height="56.66"/>
+	<rect x="38.137" y="21.67" fill="#009245" width="2" height="56.66"/>
+	<rect x="43.568" y="21.67" fill="#009245" width="2" height="56.66"/>
+	<rect x="49" y="21.67" fill="#009245" width="2" height="56.66"/>
+	<rect x="54.432" y="21.67" fill="#009245" width="2" height="56.66"/>
+	<rect x="59.863" y="21.67" fill="#009245" width="2" height="56.66"/>
+	<rect x="65.294" y="21.67" fill="#009245" width="2" height="56.66"/>
+</g>
+<g id="light">
+	<rect x="35.206" y="23.702" fill="#96D48D" width="2.432" height="52.596"/>
+	<rect x="40.637" y="23.702" fill="#96D48D" width="2.431" height="52.596"/>
+	<rect x="27.589" y="23.702" fill="#96D48D" width="4.616" height="52.596"/>
+	<path fill="#96D48D" d="M72.411,21.404v-9.68l-0.22-0.22c-12.236-12.236-32.146-12.236-44.382,0l-0.22,0.22v9.68H72.411z"/>
+	<rect x="46.068" y="23.702" fill="#96D48D" width="2.432" height="52.596"/>
+	<rect x="62.363" y="23.702" fill="#96D48D" width="2.432" height="52.596"/>
+	<rect x="67.794" y="23.702" fill="#96D48D" width="4.616" height="52.596"/>
+	<rect x="51.5" y="23.702" fill="#96D48D" width="2.432" height="52.596"/>
+	<path fill="#96D48D" d="M27.589,78.596v9.68l0.22,0.22c6.118,6.118,14.154,9.177,22.191,9.177s16.073-3.059,22.191-9.177l0.22-0.22
+		v-9.68H27.589z"/>
+	<rect x="56.932" y="23.702" fill="#96D48D" width="2.431" height="52.596"/>
+	<rect x="32.956" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+	<rect x="38.387" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+	<rect x="43.818" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+	<rect x="49.25" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+	<rect x="54.682" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+	<rect x="60.113" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+	<rect x="65.544" y="21.67" fill="#96D48D" width="1.5" height="56.66"/>
+</g>
+<g id="shadow">
+	<rect x="46.068" y="23.702" fill="#29ABE2" width="2.432" height="52.596"/>
+	<rect x="40.637" y="23.702" fill="#29ABE2" width="2.431" height="52.596"/>
+	<rect x="51.5" y="23.702" fill="#29ABE2" width="2.432" height="52.596"/>
+	<rect x="35.206" y="23.702" fill="#29ABE2" width="2.432" height="52.596"/>
+	<rect x="62.363" y="23.702" fill="#29ABE2" width="2.432" height="52.596"/>
+	<rect x="67.794" y="23.702" fill="#29ABE2" width="3.866" height="52.596"/>
+	<rect x="28.34" y="23.702" fill="#29ABE2" width="3.866" height="52.596"/>
+	<rect x="56.932" y="23.702" fill="#29ABE2" width="2.431" height="52.596"/>
+</g>
+<g id="hlight">
+	<path fill="#FFFFFF" d="M71.66,21.404v-9.369c-11.963-11.963-31.358-11.963-43.321,0v9.369H71.66z"/>
+	<path fill="#FFFFFF" d="M28.34,78.596v9.369c11.963,11.963,31.358,11.963,43.321,0v-9.369H28.34z"/>
+	<rect x="33.206" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+	<rect x="38.637" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+	<rect x="44.068" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+	<rect x="49.5" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+	<rect x="54.932" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+	<rect x="60.363" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+	<rect x="65.794" y="21.67" fill="#FFFFFF" width="1" height="56.66"/>
+</g>
+</g></svg>

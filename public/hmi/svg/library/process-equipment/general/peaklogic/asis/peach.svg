@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	
+		<radialGradient id="SVGID_1_peach" cx="50.3" cy="720.4042" r="76.3003" gradientTransform="matrix(1 0 0 1 0 -690)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FFD147"/>
+		<stop  offset="0.4632" style="stop-color:#BF3545"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</radialGradient>
+	<path fill="url(#SVGID_1_peach)" stroke="#000000" stroke-width="1.4006" stroke-miterlimit="10" d="M97.8,51.2C97.8,76.8,77,98,50.6,98
+		S2.8,76.8,2.8,51.2S27.2,5,53.6,5S97.8,25.6,97.8,51.2z"/>
+</g>
+<g>
+	<g>
+		<path fill="#FFD147" d="M65.2,8.4c0,0-13.7,3.6-17.2,19c0,0-5.9-7.1,1.8-20.8C49.7,6.6,58.8,4.1,65.2,8.4z"/>
+		<path fill="#FFD147" d="M17.6,19.1c0,0,16.6,2.4,24.4,13.7c-11.9-13.1-20.8-7.7-20.8-7.7S21.6,21.9,17.6,19.1z"/>
+		<path fill="#FFD147" d="M25.3,33.4c0,0-9.5,3-14.3,10.7s6.5-1.8,9.5-3s5.3-6.5,8.9-7.7C25.3,33.4,25.3,33.4,25.3,33.4z"/>
+		<path fill="#FFD147" d="M70.5,16.1c0,0-11.3,1.2-17.8,5.9s-1.8,4.8-1.8,4.8S61,23.3,70.5,16.1z"/>
+		<path fill="#FFD147" d="M58.8,23.9c0,0,12.7-1.6,25,15.5s0.4-16.2-12.3-17C58.8,21.5,58.8,23.9,58.8,23.9z"/>
+	</g>
+</g>
+<g>
+	<path fill="#754C24" stroke="#000000" stroke-width="1.4006" stroke-miterlimit="10" d="M45.5,29.5l4.6-2.1l-6.4-3.6
+		c0,0-4.8-1.2-4.8,1.2s4.2,4.8,4.2,4.8L45.5,29.5z"/>
+	<path fill="#772B34" d="M67.5,19.7c0,0,27.9,3,27.9,42.8C95.5,62.5,99.2,21.9,67.5,19.7z"/>
+	<path fill="#772B34" d="M45.5,30.4c0,0,17.1-12.5,23-10.7c0,0-3.9,1-7.8,3.1C55.8,25.4,50.1,29.4,45.5,30.4z"/>
+	<path fill="#772B34" d="M43.2,29.8c0,0-12.2,0.8-20.6,10.7C22.6,40.5,32.7,29,43.2,29.8z"/>
+	<path fill="#C7B299" d="M40.5,26.8c0,0,2,1.2,4.8-0.4C42.7,30.4,40.5,26.8,40.5,26.8z"/>
+</g>
+</svg>
