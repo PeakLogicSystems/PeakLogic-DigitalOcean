@@ -9,7 +9,7 @@ function defaultCentralSettings() {
   return {
     enabled: false,
     brokerUrl: 'mqtt://127.0.0.1:1883',
-    topicPrefix: 'mooreview/v1',
+    topicPrefix: 'peaklogic/v1',
     clientId: 'mv-central-hmi',
     username: '',
     password: '',

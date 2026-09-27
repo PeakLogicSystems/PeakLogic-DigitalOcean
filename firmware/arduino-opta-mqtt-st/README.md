@@ -1,10 +1,10 @@
-# MooreVIEW Opta — ST + MQTT fleet
+# PeakLogic Opta — ST + MQTT fleet
 
-Combines the **ST runtime** from `arduino-opta-st` with **MooreVIEW fleet MQTT** (`mooreview/v1`).
+Combines the **ST runtime** from `arduino-opta-st` with **PeakLogic fleet MQTT** (`peaklogic/v1`).
 
 ## Flash
 
-1. Open `MooreviewOptaMqttSt/MooreviewOptaMqttSt.ino`
+1. Open `PeakLogicOptaMqttSt/PeakLogicOptaMqttSt.ino`
 2. Board: Arduino Opta (WiFi variant for setup AP)
 3. Install libraries (**Sketch → Include Library → Manage Libraries**):
 
@@ -22,7 +22,7 @@ Without **EthernetWebServer**, the sketch still compiles: **ST + MQTT** work; on
 
 ## ST environment
 
-- Full on-device ST executor (`mv_st.cpp`) — same AST as MooreVIEW PC parser
+- Full on-device ST executor (`mv_st.cpp`) — same AST as PeakLogic PC parser
 - Tag model: `I1`–`I8`, `R1`–`R4`, `I1_RAW`–`I8_RAW`, PID/AVG/TIMER/COUNTER
 - Expansion modules via setup GUI (AFX00005, AFX00007)
 - Programs: `st/opta/*.st` — see `st/opta-mqtt/README.md`
@@ -31,9 +31,9 @@ Without **EthernetWebServer**, the sketch still compiles: **ST + MQTT** work; on
 
 | Topic | Role |
 |-------|------|
-| `mooreview/v1/{id}/telemetry` | Tag snapshot + runtime status |
-| `mooreview/v1/{id}/cmd` | `put_program`, `runtime_start`, `runtime_stop`, … |
-| `mooreview/v1/{id}/config` | Pause telemetry during debug attach |
+| `peaklogic/v1/{id}/telemetry` | Tag snapshot + runtime status |
+| `peaklogic/v1/{id}/cmd` | `put_program`, `runtime_start`, `runtime_stop`, … |
+| `peaklogic/v1/{id}/config` | Pause telemetry during debug attach |
 
 ## Local HTTP (unchanged)
 
@@ -44,7 +44,7 @@ Without **EthernetWebServer**, the sketch still compiles: **ST + MQTT** work; on
 | PUT `/api/program` | Deploy AST (local engineering) |
 | GET `/setup` | Ethernet/WiFi/expansion config |
 
-## MooreVIEW PC
+## PeakLogic PC
 
 Driver type **`mqtt_fleet`** — use template **Arduino Opta — MQTT fleet ST runtime**. Enable **Remote execution**, **Connect**, **Start** (same as `opta_remote`). See `st/opta-mqtt/README.md`.
 

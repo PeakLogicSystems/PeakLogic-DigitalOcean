@@ -1,6 +1,6 @@
-# MooreVIEW Opta ST Runtime (Ethernet + WiFi setup)
+# PeakLogic Opta ST Runtime (Ethernet + WiFi setup)
 
-Runs MooreVIEW ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_remote`** driver in `est-pc`.
+Runs PeakLogic ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_remote`** driver in `est-pc`.
 
 ## Requirements
 
@@ -12,7 +12,7 @@ Runs MooreVIEW ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_
 
 ## Flash
 
-1. Open `MooreviewOptaSt/MooreviewOptaSt.ino`
+1. Open `PeakLogicOptaSt/PeakLogicOptaSt.ino`
 2. Board: Opta Lite / RS485 / **WiFi**
 3. Install **ArduinoJson** and **Arduino_Opta_Blueprint**
 4. Upload
@@ -23,8 +23,8 @@ On **Opta WiFi**, the firmware starts a setup access point (default):
 
 | Setting | Default |
 |---------|---------|
-| SSID | `MooreVIEW-Opta` |
-| Password | `mooreview` |
+| SSID | `PeakLogic-Opta` |
+| Password | `peaklogic` |
 | AP IP | `192.168.4.1` |
 | Setup HTTP | port **8080** |
 
@@ -47,7 +47,7 @@ Settings are stored in flash (mbed KVStore when available).
 
 Slot **1** is the module closest to the Opta base. Use **Scan expansions** in the setup GUI to detect installed hardware.
 
-## MooreVIEW PC setup
+## PeakLogic PC setup
 
 1. **Drivers** → **`opta_remote`**, host = Opta Ethernet IP
 2. Apply template **Arduino Opta — Ethernet ST runtime** or **+ expansions**
@@ -83,6 +83,6 @@ Full ST subset: logic, timers (TON/TOF/TP), counters (CTU/CTD), PID, AVG, REAL t
 
 ## Limits
 
-- **128** tags (`MV_MAX_TAGS`)
+- **128** tags (`PL_MAX_TAGS`)
 - **5** expansion slots
 - AVG MOV window ≤ **16** on device

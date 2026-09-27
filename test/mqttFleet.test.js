@@ -6,17 +6,17 @@ const { topics, deviceIdFromTopic, normalizeDeviceId } = require('../src/fleet/m
 
 describe('mqttProtocol', () => {
   it('builds topics for device', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     const t = topics(cfg, 'site-01');
-    assert.equal(t.telemetry, 'mooreview/v1/site-01/telemetry');
-    assert.equal(t.cmd, 'mooreview/v1/site-01/cmd');
-    assert.equal(t.cmdResponse, 'mooreview/v1/site-01/cmd/response');
+    assert.equal(t.telemetry, 'peaklogic/v1/site-01/telemetry');
+    assert.equal(t.cmd, 'peaklogic/v1/site-01/cmd');
+    assert.equal(t.cmdResponse, 'peaklogic/v1/site-01/cmd/response');
   });
 
   it('parses deviceId from topic', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     assert.equal(
-      deviceIdFromTopic('mooreview/v1/rpi-02/telemetry', cfg),
+      deviceIdFromTopic('peaklogic/v1/rpi-02/telemetry', cfg),
       'rpi-02'
     );
     assert.equal(deviceIdFromTopic('other/rpi-02/telemetry', cfg), null);

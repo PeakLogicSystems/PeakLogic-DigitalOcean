@@ -93,10 +93,10 @@ function buildModbusFixture() {
 
 function buildMqttFixture() {
   return mergeDefaults([
-    { id: 'VPB1', type: 'BOOL', role: 'input', value: false, driverId: 'mqtt1', driverAddress: { topic: 'mooreview/in/bool', payloadTemplate: 'bool' } },
-    { id: 'VPI1', type: 'INT', role: 'input', value: 0, driverId: 'mqtt1', driverAddress: { topic: 'mooreview/in/ai', payloadTemplate: 'number' } },
+    { id: 'VPB1', type: 'BOOL', role: 'input', value: false, driverId: 'mqtt1', driverAddress: { topic: 'peaklogic/in/bool', payloadTemplate: 'bool' } },
+    { id: 'VPI1', type: 'INT', role: 'input', value: 0, driverId: 'mqtt1', driverAddress: { topic: 'peaklogic/in/ai', payloadTemplate: 'number' } },
     { id: 'VPB3', type: 'BOOL', role: 'output', value: false },
-    { id: 'VPB6', type: 'BOOL', role: 'output', value: false, driverId: 'mqtt1', driverAddress: { topic: 'mooreview/out/do', payloadTemplate: 'bool' } },
+    { id: 'VPB6', type: 'BOOL', role: 'output', value: false, driverId: 'mqtt1', driverAddress: { topic: 'peaklogic/out/do', payloadTemplate: 'bool' } },
   ]);
 }
 

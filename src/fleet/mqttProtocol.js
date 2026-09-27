@@ -11,7 +11,7 @@ function normalizeDeviceId(id) {
 }
 
 function topicPrefix(cfg) {
-  const p = (cfg?.topicPrefix || 'mooreview/v1').replace(/\/+$/, '');
+  const p = (cfg?.topicPrefix || 'peaklogic/v1').replace(/\/+$/, '');
   return p;
 }
 
