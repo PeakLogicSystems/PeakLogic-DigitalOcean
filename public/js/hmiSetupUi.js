@@ -36,9 +36,9 @@ window.PeakLogicHmi = (function () {
   const HMI_TPO_TEXT_COLORS = ['#64748b', '#64748b', '#16a34a', '#f59e0b', '#94a3b8'];
   const HMI_POOL_BW_TEXT_COLORS = ['#64748b', '#2563eb', '#06b6d4', '#f59e0b', '#22c55e'];
   const HMI_TREND_DEFAULT_COLOR = '#2563eb';
-  const HMI_STRIP_CHART = '/hmi/svg/library/charts-trends/strip-charts/mv/chart-strip/strip_chart.svg';
-  const HMI_GAUGE_COLUMN = '/hmi/svg/library/gauges-meters/column/mv/gauge-column/gauge_column.svg';
-  const HMI_PUSH_BUTTON_CANONICAL = '/hmi/svg/library/controls/push-buttons/mv/pb-canonical/push_button_square.svg';
+  const HMI_STRIP_CHART = '/hmi/svg/library/charts-trends/strip-charts/peaklogic/chart-strip/strip_chart.svg';
+  const HMI_GAUGE_COLUMN = '/hmi/svg/library/gauges-meters/column/peaklogic/gauge-column/gauge_column.svg';
+  const HMI_PUSH_BUTTON_CANONICAL = '/hmi/svg/library/controls/push-buttons/peaklogic/pb-canonical/push_button_square.svg';
   const PUSH_BUTTON_SHAPES = ['square', 'rectangle', 'oblong', 'round'];
   const PUSH_BUTTON_DEFAULT_COLORS = { background: '#22c55e', text: '#0f172a', bezel: '#64748b' };
   let hmiStripChartUnifiedFilter = false;
@@ -807,8 +807,8 @@ window.PeakLogicHmi = (function () {
         return { group: row.group, subgroup: sub };
       }
     }
-    if (s.includes('/mv/')) {
-      const folder = s.match(/\/mv\/([^/]+)/)?.[1] || '';
+    if (s.includes('/peaklogic/')) {
+      const folder = s.match(/\/peaklogic\/([^/]+)/)?.[1] || '';
       if (/gauge_dialpointer|dial-pointer|dialpointer/i.test(s)) {
         return { group: 'Gauges & meters', subgroup: 'dial-pointers' };
       }
@@ -1108,12 +1108,12 @@ window.PeakLogicHmi = (function () {
       if (e.origin !== window.location.origin) return;
       const data = e.data;
       if (!data || typeof data !== 'object') return;
-      if (data.type === 'mv-hmi-open-area' && data.screenId) {
+      if (data.type === 'peaklogic-hmi-open-area' && data.screenId) {
         const key = `area:${data.screenId}`;
         if (hmiPopupMessageIsDuplicate(key)) return;
         ensureHmiConfigLoaded();
         openHmiAreaPopup(data.screenId, { force: true }).catch(console.error);
-      } else if (data.type === 'mv-hmi-open-room' && data.roomNum) {
+      } else if (data.type === 'peaklogic-hmi-open-room' && data.roomNum) {
         const n = Math.trunc(Number(data.roomNum));
         const key = `room:${n}`;
         if (hmiPopupMessageIsDuplicate(key)) return;
@@ -1145,7 +1145,7 @@ window.PeakLogicHmi = (function () {
     const pollMs = hmiPollMsForSettings(lastSettings?.());
     try {
       frame.contentWindow.postMessage({
-        type: 'mv-hmi-poll-config',
+        type: 'peaklogic-hmi-poll-config',
         pollMs,
         apiBase: window.PEAKLOGIC_API_BASE || '/api',
       }, window.location.origin);
@@ -1163,7 +1163,7 @@ window.PeakLogicHmi = (function () {
       name: String(s.name || '').trim(),
     }));
     try {
-      frame.contentWindow.postMessage({ type: 'mv-hmi-screen-catalog', screens }, window.location.origin);
+      frame.contentWindow.postMessage({ type: 'peaklogic-hmi-screen-catalog', screens }, window.location.origin);
     } catch { /* iframe not ready */ }
   }
 
@@ -6686,7 +6686,7 @@ window.PeakLogicHmi = (function () {
 
   function canonicalPushButtonPath(shape) {
     const s = PUSH_BUTTON_SHAPES.includes(shape) ? shape : 'square';
-    return `/hmi/svg/library/controls/push-buttons/mv/pb-canonical/push_button_${s}.svg`;
+    return `/hmi/svg/library/controls/push-buttons/peaklogic/pb-canonical/push_button_${s}.svg`;
   }
 
   function normalizePushButtonPlacementPath(path) {
@@ -7112,7 +7112,7 @@ window.PeakLogicHmi = (function () {
 
   function canonicalPilotLightPath(shape) {
     const s = PILOT_LIGHT_SHAPES.includes(shape) ? shape : 'round';
-    return `/hmi/svg/library/controls/pilot-lights/mv/pl-canonical/pilot_light_${s}.svg`;
+    return `/hmi/svg/library/controls/pilot-lights/peaklogic/pl-canonical/pilot_light_${s}.svg`;
   }
 
   function inferPilotLightKind(path) {

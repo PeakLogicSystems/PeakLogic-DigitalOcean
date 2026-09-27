@@ -11,11 +11,11 @@
   --ps-shadow: rgba(111, 66, 193, 0.3);
 
   /* aliases used in templates */
-  --mv-primary: var(--ps-purple);
-  --mv-primary-dark: var(--ps-purple-dark);
-  --mv-accent: var(--ps-purple-light);
-  --mv-gradient-start: var(--ps-gradient-start);
-  --mv-gradient-end: var(--ps-gradient-end);
+  --peaklogic-primary: var(--ps-purple);
+  --peaklogic-primary-dark: var(--ps-purple-dark);
+  --peaklogic-accent: var(--ps-purple-light);
+  --peaklogic-gradient-start: var(--ps-gradient-start);
+  --peaklogic-gradient-end: var(--ps-gradient-end);
 }
 
 .text-purple,

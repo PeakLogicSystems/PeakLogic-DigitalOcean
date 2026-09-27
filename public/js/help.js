@@ -498,9 +498,9 @@ window.PeakLogicHelp = (function () {
         <h4>Force &amp; I/O</h4>
         <p>Opta uses a PLC-style mux: <strong>logic</strong> fields hold hardware reads; <strong>effective</strong> values reflect forces. PC <strong>Tags â†’ Force</strong> sends <code>set_force</code> over MQTT when Remote is on. Relay outputs R1â€“R4 mirror to on-board relay LEDs (D0â€“D3). Expansion modules <strong>AFX00005 (D1608E)</strong> and <strong>AFX00007 (A0602)</strong> appear on <strong>/io-map</strong> and in telemetry after <strong>Scan expansions</strong>.</p>
         <h4>Time sync (RTC)</h4>
-        <p>PeakLogic sends <code>sync_time</code> on <strong>Connect</strong> and daily for linked Opta drivers. Firmware uses a <strong>software wall clock</strong> (immediate) and queues HAL RTC when safe â€” <code>put_program</code> does not sync time. Serial <code>[MV â€¦]</code> timestamps show wall clock after sync; before sync, uptime format (<code>00:04:14</code> = 4 min since boot).</p>
+        <p>PeakLogic sends <code>sync_time</code> on <strong>Connect</strong> and daily for linked Opta drivers. Firmware uses a <strong>software wall clock</strong> (immediate) and queues HAL RTC when safe â€” <code>put_program</code> does not sync time. Serial <code>[PL …]</code> timestamps show wall clock after sync; before sync, uptime format (<code>00:04:14</code> = 4 min since boot).</p>
         <h4>Serial debug</h4>
-        <p>USB serial <strong>115200</strong>. Always-on milestones use <code>[MV*]</code> (boot, MQTT subscribe, cmd rx) even when verbose debug is off. Look for <code>MQTT subscribed cmd+config</code> after boot.</p>
+        <p>USB serial <strong>115200</strong>. Always-on milestones use <code>[PL*]</code> (boot, MQTT subscribe, cmd rx) even when verbose debug is off. Look for <code>MQTT subscribed cmd+config</code> after boot.</p>
         <h4>Quick start (PC)</h4>
         <ol>
           <li>Flash <strong>PeakLogicOptaMqttSt</strong> v2.3.41+ via Arduino IDE; set broker on <code>/setup</code>.</li>
@@ -1178,7 +1178,7 @@ HTTPS full:    { "url": "https://other.host/status", "payloadTemplate": "bool" }
         </ol>
         <p>On the live HMI page, use <strong>Hide</strong> / <strong>Show status</strong> to collapse the screen title and hint below the navigation bar. Configure default visibility under <strong>Project layout â†’ Live status</strong> in the composer.</p>
         <p>With two or more screens configured, a navigation bar appears above the live HMI. The starting screen is independent of <strong>Screen 1</strong> â€” Screen 1 is the first page in the composer and cannot be removed, but any screen can be chosen as the startup page.</p>
-        <p>Symbol library: SVG, PNG, GIF, and <strong>composites</strong> (multi-layer gauges, HOA switch) under <code>public/hmi/svg/library/</code> (vendor folder <code>mv</code>). Refresh imports with <code>npm run download-opto-svgs</code> and <code>npm run download-mblogic-svgs</code>, then <code>npm run organize-hmi-graphics</code>.</p>
+        <p>Symbol library: SVG, PNG, GIF, and <strong>composites</strong> (multi-layer gauges, HOA switch) under <code>public/hmi/svg/library/</code> (vendor folder <code>peaklogic</code>). Refresh imports with <code>npm run download-opto-svgs</code> and <code>npm run download-mblogic-svgs</code>, then <code>npm run organize-hmi-graphics</code>.</p>
         <p>Unsaved composer edits show a confirm dialog when closing. The live view reads saved settings, not unsaved dirty config.</p>
       `,
     },

@@ -3019,7 +3019,7 @@
   }
 
   function fillModbusPortSelect() {
-    const sel = $('mv-rtu-port');
+    const sel = $('peaklogic-rtu-port');
     if (!sel) return;
     const cur = sel.value;
     const ports = serialPorts.length ? serialPorts : [{ path: 'COM3', label: 'COM3' }];
@@ -5920,7 +5920,7 @@
       brokerUrl: $('proj-mqtt-parc-broker')?.value?.trim() || prev.brokerUrl || 'mqtt://127.0.0.1:1883',
       globalSiteKey: $('proj-mqtt-parc-global-site-key')?.value?.trim() || '0x0001',
       topicPrefix: prev.topicPrefix || 'peaklogic/v1',
-      clientId: prev.clientId || 'mv-central-hmi',
+      clientId: prev.clientId || 'peaklogic-central-hmi',
       username: prev.username || '',
       password: prev.password || '',
       autoDiscoverDrivers: !!$('proj-mqtt-parc-auto-discover')?.checked,
@@ -7315,12 +7315,12 @@
   }
 
   function modbusCfg() {
-    const portEl = $('mv-rtu-port');
+    const portEl = $('peaklogic-rtu-port');
     const port = portEl?.value || 'COM3';
     return {
-      rtu: { serialPort: port, baud: +$('mv-rtu-baud').value, slaveId: +$('mv-rtu-slave').value },
-      tcp: { host: $('mv-tcp-host').value, port: +$('mv-tcp-port').value, slaveId: +$('mv-rtu-slave').value },
-      moveMaps: [{ table: 'holding', rtuAddress: +$('mv-rtu-addr').value, tcpAddress: +$('mv-tcp-addr').value, count: +$('mv-count').value }],
+      rtu: { serialPort: port, baud: +$('peaklogic-rtu-baud').value, slaveId: +$('peaklogic-rtu-slave').value },
+      tcp: { host: $('peaklogic-tcp-host').value, port: +$('peaklogic-tcp-port').value, slaveId: +$('peaklogic-rtu-slave').value },
+      moveMaps: [{ table: 'holding', rtuAddress: +$('peaklogic-rtu-addr').value, tcpAddress: +$('peaklogic-tcp-addr').value, count: +$('peaklogic-count').value }],
     };
   }
 
@@ -8530,8 +8530,8 @@
       }
       if (!r.ok) alert(r.error || 'Print failed');
     });
-    $('mv-rtu-tcp').onclick = () => api.modbusMove(modbusCfg()).then((r) => { $('mv-result').textContent = JSON.stringify(r, null, 2); });
-    $('mv-tcp-rtu').onclick = () => api.modbusMove({ ...modbusCfg(), direction: 'tcp_to_rtu' }).then((r) => { $('mv-result').textContent = JSON.stringify(r, null, 2); });
+    $('peaklogic-rtu-tcp').onclick = () => api.modbusMove(modbusCfg()).then((r) => { $('peaklogic-result').textContent = JSON.stringify(r, null, 2); });
+    $('peaklogic-tcp-rtu').onclick = () => api.modbusMove({ ...modbusCfg(), direction: 'tcp_to_rtu' }).then((r) => { $('peaklogic-result').textContent = JSON.stringify(r, null, 2); });
 
     $('nc-fill-example')?.addEventListener('click', () => { fillNextcenturyFromExample(); });
     $('nc-test')?.addEventListener('click', () => { testNextcenturySetup(); });

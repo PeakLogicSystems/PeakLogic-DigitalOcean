@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  const API = '/api/mv-draw';
+  const API = '/api/peaklogic-draw';
   const DEFAULT_PPU = 8;
   const MAX_UNDO = 50;
 
@@ -27,12 +27,12 @@
   const undoStack = [];
   const redoStack = [];
 
-  const canvas = document.getElementById('mv-canvas');
+  const canvas = document.getElementById('peaklogic-canvas');
   const ctx = canvas.getContext('2d');
-  const statusEl = document.getElementById('mv-status');
-  const scaleLabel = document.getElementById('mv-scale-label');
-  const extentsLabel = document.getElementById('mv-extents-label');
-  const cursorLabel = document.getElementById('mv-cursor-label');
+  const statusEl = document.getElementById('peaklogic-status');
+  const scaleLabel = document.getElementById('peaklogic-scale-label');
+  const extentsLabel = document.getElementById('peaklogic-extents-label');
+  const cursorLabel = document.getElementById('peaklogic-cursor-label');
 
   function ppu() {
     return state.project?.scale?.pixelsPerUnit || DEFAULT_PPU;
@@ -195,8 +195,8 @@
   }
 
   function updateUndoButtons() {
-    const undoBtn = document.getElementById('mv-btn-undo');
-    const redoBtn = document.getElementById('mv-btn-redo');
+    const undoBtn = document.getElementById('peaklogic-btn-undo');
+    const redoBtn = document.getElementById('peaklogic-btn-redo');
     if (undoBtn) undoBtn.disabled = undoStack.length === 0;
     if (redoBtn) redoBtn.disabled = redoStack.length === 0;
   }
@@ -252,10 +252,10 @@
   function updateExtentsPanel() {
     const ext = state.project?.extents;
     const units = state.project?.units || 'ft';
-    const info = document.getElementById('mv-extents-info');
-    const labelInp = document.getElementById('mv-extents-label-inp');
-    const clearBtn = document.getElementById('mv-btn-clear-extents');
-    const fitBtn = document.getElementById('mv-btn-fit-extents');
+    const info = document.getElementById('peaklogic-extents-info');
+    const labelInp = document.getElementById('peaklogic-extents-label-inp');
+    const clearBtn = document.getElementById('peaklogic-btn-clear-extents');
+    const fitBtn = document.getElementById('peaklogic-btn-fit-extents');
     const size = formatExtentsSize(ext);
     if (extentsLabel) extentsLabel.textContent = `Extents: ${size}`;
     if (info) {
@@ -288,8 +288,8 @@
   }
 
   function fillInspector() {
-    const form = document.getElementById('mv-inspector-form');
-    const empty = document.getElementById('mv-inspector-empty');
+    const form = document.getElementById('peaklogic-inspector-form');
+    const empty = document.getElementById('peaklogic-inspector-empty');
     const node = (state.project?.nodes || []).find((n) => n.id === state.selectedId);
     if (!node) {
       form.classList.add('view-hidden');
@@ -298,33 +298,33 @@
     }
     empty.classList.add('view-hidden');
     form.classList.remove('view-hidden');
-    document.getElementById('mv-insp-label').value = node.label || '';
-    document.getElementById('mv-insp-type').value = node.type;
-    document.getElementById('mv-insp-x').value = node.x.toFixed(2);
-    document.getElementById('mv-insp-y').value = node.y.toFixed(2);
-    document.getElementById('mv-insp-rot').value = node.rotation || 0;
+    document.getElementById('peaklogic-insp-label').value = node.label || '';
+    document.getElementById('peaklogic-insp-type').value = node.type;
+    document.getElementById('peaklogic-insp-x').value = node.x.toFixed(2);
+    document.getElementById('peaklogic-insp-y').value = node.y.toFixed(2);
+    document.getElementById('peaklogic-insp-rot').value = node.rotation || 0;
   }
 
   function fillProjectFields() {
     const p = state.project;
     if (!p) return;
-    document.getElementById('mv-proj-name').value = p.name || '';
-    document.getElementById('mv-proj-site').value = p.meta?.site || '';
-    document.getElementById('mv-proj-client').value = p.meta?.client || '';
-    document.getElementById('mv-proj-notes').value = p.meta?.notes || '';
+    document.getElementById('peaklogic-proj-name').value = p.name || '';
+    document.getElementById('peaklogic-proj-site').value = p.meta?.site || '';
+    document.getElementById('peaklogic-proj-client').value = p.meta?.client || '';
+    document.getElementById('peaklogic-proj-notes').value = p.meta?.notes || '';
   }
 
   function readProjectFields() {
     if (!state.project) return;
-    state.project.name = document.getElementById('mv-proj-name').value.trim() || 'untitled';
+    state.project.name = document.getElementById('peaklogic-proj-name').value.trim() || 'untitled';
     state.project.meta = state.project.meta || {};
-    state.project.meta.site = document.getElementById('mv-proj-site').value.trim();
-    state.project.meta.client = document.getElementById('mv-proj-client').value.trim();
-    state.project.meta.notes = document.getElementById('mv-proj-notes').value.trim();
+    state.project.meta.site = document.getElementById('peaklogic-proj-site').value.trim();
+    state.project.meta.client = document.getElementById('peaklogic-proj-client').value.trim();
+    state.project.meta.notes = document.getElementById('peaklogic-proj-notes').value.trim();
   }
 
   function renderSymbolLibrary() {
-    const root = document.getElementById('mv-symbol-list');
+    const root = document.getElementById('peaklogic-symbol-list');
     if (!root) return;
     const groups = new Map();
     for (const s of state.symbols) {
@@ -334,20 +334,20 @@
     root.innerHTML = '';
     for (const [group, items] of groups) {
       const gt = document.createElement('div');
-      gt.className = 'mv-symbol-group-title';
+      gt.className = 'peaklogic-symbol-group-title';
       gt.textContent = group;
       root.appendChild(gt);
       for (const s of items) {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'mv-symbol-btn';
+        btn.className = 'peaklogic-symbol-btn';
         btn.dataset.type = s.type;
-        btn.innerHTML = `<span class="mv-symbol-thumb" style="background:#64748b"></span><span>${s.label}</span>`;
+        btn.innerHTML = `<span class="peaklogic-symbol-thumb" style="background:#64748b"></span><span>${s.label}</span>`;
         btn.addEventListener('click', () => {
           state.placeType = s.type;
           state.tool = 'place';
-          document.querySelectorAll('.mv-tool').forEach((b) => b.classList.toggle('active', b.dataset.tool === 'place'));
-          document.querySelectorAll('.mv-symbol-btn').forEach((b) => b.classList.toggle('selected', b.dataset.type === s.type));
+          document.querySelectorAll('.peaklogic-tool').forEach((b) => b.classList.toggle('active', b.dataset.tool === 'place'));
+          document.querySelectorAll('.peaklogic-symbol-btn').forEach((b) => b.classList.toggle('selected', b.dataset.type === s.type));
           setStatus(`Place: ${s.label}`);
         });
         root.appendChild(btn);
@@ -581,7 +581,7 @@
     state.connectFrom = null;
     state.pointerWorld = null;
     state.extentsDraft = null;
-    document.querySelectorAll('.mv-tool').forEach((b) => b.classList.toggle('active', b.dataset.tool === tool));
+    document.querySelectorAll('.peaklogic-tool').forEach((b) => b.classList.toggle('active', b.dataset.tool === tool));
     if (tool !== 'place') state.placeType = null;
     canvas.style.cursor = (tool === 'calibrate' || tool === 'extents') ? 'crosshair' : tool === 'connect' ? 'pointer' : 'default';
   }
@@ -589,8 +589,8 @@
   function applyCalibrateScale() {
     const c = state.calibrate;
     if (!c?.p1 || !c?.p2) return;
-    const dist = +document.getElementById('mv-calibrate-dist').value;
-    const units = document.getElementById('mv-calibrate-units').value;
+    const dist = +document.getElementById('peaklogic-calibrate-dist').value;
+    const units = document.getElementById('peaklogic-calibrate-units').value;
     const s1 = worldToScreen(c.p1[0], c.p1[1]);
     const s2 = worldToScreen(c.p2[0], c.p2[1]);
     const pixelDist = Math.hypot(s2.x - s1.x, s2.y - s1.y);
@@ -606,7 +606,7 @@
       distance: dist,
     };
     state.calibrate = null;
-    document.getElementById('mv-calibrate-dialog').close();
+    document.getElementById('peaklogic-calibrate-dialog').close();
     updateScaleLabel();
     markDirty();
     setStatus(`Scale set: ${state.project.scale.pixelsPerUnit.toFixed(2)} px/${units}`);
@@ -622,12 +622,12 @@
       if (!state.calibrate) state.calibrate = { p1: null, p2: null };
       if (!state.calibrate.p1) {
         state.calibrate.p1 = [w.x, w.y];
-        document.getElementById('mv-calibrate-step').textContent = 'Step 2: click second point';
+        document.getElementById('peaklogic-calibrate-step').textContent = 'Step 2: click second point';
       } else if (!state.calibrate.p2) {
         state.calibrate.p2 = [w.x, w.y];
-        document.getElementById('mv-calibrate-apply').disabled = false;
-        document.getElementById('mv-calibrate-step').textContent = 'Enter known distance and Apply';
-        document.getElementById('mv-calibrate-dialog').showModal();
+        document.getElementById('peaklogic-calibrate-apply').disabled = false;
+        document.getElementById('peaklogic-calibrate-step').textContent = 'Enter known distance and Apply';
+        document.getElementById('peaklogic-calibrate-dialog').showModal();
       }
       markDirty();
       return;
@@ -640,7 +640,7 @@
         setStatus('Extents: click opposite corner');
         markDirty();
       } else {
-        const label = document.getElementById('mv-extents-label-inp')?.value.trim() || 'Site extents';
+        const label = document.getElementById('peaklogic-extents-label-inp')?.value.trim() || 'Site extents';
         const ext = extentsFromCorners(state.extentsDraft.p1, [w.x, w.y], label);
         if (!ext) {
           setStatus('Extents too small — try again', true);
@@ -818,22 +818,22 @@
   }
 
   function bindUi() {
-    document.querySelectorAll('.mv-tool').forEach((btn) => {
+    document.querySelectorAll('.peaklogic-tool').forEach((btn) => {
       btn.addEventListener('click', () => {
         setTool(btn.dataset.tool);
         if (btn.dataset.tool === 'calibrate') {
           state.calibrate = { p1: null, p2: null };
-          document.getElementById('mv-calibrate-step').textContent = 'Step 1: click first point on canvas';
-          document.getElementById('mv-calibrate-apply').disabled = true;
+          document.getElementById('peaklogic-calibrate-step').textContent = 'Step 1: click first point on canvas';
+          document.getElementById('peaklogic-calibrate-apply').disabled = true;
         }
       });
     });
 
-    document.getElementById('mv-btn-save')?.addEventListener('click', () => saveProject().catch((e) => setStatus(e.message, true)));
-    document.getElementById('mv-btn-undo')?.addEventListener('click', () => undo());
-    document.getElementById('mv-btn-redo')?.addEventListener('click', () => redo());
-    document.getElementById('mv-btn-fit-extents')?.addEventListener('click', () => fitExtentsView());
-    document.getElementById('mv-btn-clear-extents')?.addEventListener('click', () => {
+    document.getElementById('peaklogic-btn-save')?.addEventListener('click', () => saveProject().catch((e) => setStatus(e.message, true)));
+    document.getElementById('peaklogic-btn-undo')?.addEventListener('click', () => undo());
+    document.getElementById('peaklogic-btn-redo')?.addEventListener('click', () => redo());
+    document.getElementById('peaklogic-btn-fit-extents')?.addEventListener('click', () => fitExtentsView());
+    document.getElementById('peaklogic-btn-clear-extents')?.addEventListener('click', () => {
       if (!state.project?.extents) return;
       pushUndo();
       state.project.extents = null;
@@ -841,21 +841,21 @@
       markDirty();
       setStatus('Extents cleared');
     });
-    document.getElementById('mv-extents-label-inp')?.addEventListener('change', () => {
+    document.getElementById('peaklogic-extents-label-inp')?.addEventListener('change', () => {
       if (!state.project?.extents) return;
       pushUndo();
-      state.project.extents.label = document.getElementById('mv-extents-label-inp').value.trim() || 'Drawing extents';
+      state.project.extents.label = document.getElementById('peaklogic-extents-label-inp').value.trim() || 'Drawing extents';
       updateExtentsPanel();
       markDirty();
     });
-    document.getElementById('mv-btn-pdf')?.addEventListener('click', () => {
+    document.getElementById('peaklogic-btn-pdf')?.addEventListener('click', () => {
       readProjectFields();
       setStatus('Building PDF…');
       downloadExport('/export/pdf', state.project)
         .then(() => setStatus('PDF downloaded'))
         .catch((e) => setStatus(e.message, true));
     });
-    document.getElementById('mv-btn-dxf')?.addEventListener('click', () => {
+    document.getElementById('peaklogic-btn-dxf')?.addEventListener('click', () => {
       readProjectFields();
       setStatus('Building DXF…');
       downloadExport('/export/dxf', state.project)
@@ -863,8 +863,8 @@
         .catch((e) => setStatus(e.message, true));
     });
 
-    document.getElementById('mv-btn-bg')?.addEventListener('click', () => document.getElementById('mv-bg-file').click());
-    document.getElementById('mv-bg-file')?.addEventListener('change', async (ev) => {
+    document.getElementById('peaklogic-btn-bg')?.addEventListener('click', () => document.getElementById('peaklogic-bg-file').click());
+    document.getElementById('peaklogic-bg-file')?.addEventListener('change', async (ev) => {
       const file = ev.target.files?.[0];
       if (!file) return;
       const reader = new FileReader();
@@ -885,33 +885,33 @@
       ev.target.value = '';
     });
 
-    document.getElementById('mv-calibrate-cancel')?.addEventListener('click', () => {
+    document.getElementById('peaklogic-calibrate-cancel')?.addEventListener('click', () => {
       state.calibrate = null;
-      document.getElementById('mv-calibrate-dialog').close();
+      document.getElementById('peaklogic-calibrate-dialog').close();
       markDirty();
     });
-    document.getElementById('mv-calibrate-dialog')?.addEventListener('close', () => {
+    document.getElementById('peaklogic-calibrate-dialog')?.addEventListener('close', () => {
       if (state.calibrate?.p1 && !state.project?.scale) setTool('select');
     });
-    document.getElementById('mv-calibrate-dialog')?.addEventListener('submit', (ev) => {
+    document.getElementById('peaklogic-calibrate-dialog')?.addEventListener('submit', (ev) => {
       ev.preventDefault();
       applyCalibrateScale();
     });
 
-    ['mv-insp-label', 'mv-insp-x', 'mv-insp-y', 'mv-insp-rot'].forEach((id) => {
+    ['peaklogic-insp-label', 'peaklogic-insp-x', 'peaklogic-insp-y', 'peaklogic-insp-rot'].forEach((id) => {
       document.getElementById(id)?.addEventListener('change', () => {
         const node = state.project.nodes.find((n) => n.id === state.selectedId);
         if (!node) return;
         pushUndo();
-        node.label = document.getElementById('mv-insp-label').value;
-        node.x = +document.getElementById('mv-insp-x').value || node.x;
-        node.y = +document.getElementById('mv-insp-y').value || node.y;
-        node.rotation = +document.getElementById('mv-insp-rot').value || 0;
+        node.label = document.getElementById('peaklogic-insp-label').value;
+        node.x = +document.getElementById('peaklogic-insp-x').value || node.x;
+        node.y = +document.getElementById('peaklogic-insp-y').value || node.y;
+        node.rotation = +document.getElementById('peaklogic-insp-rot').value || 0;
         markDirty();
       });
     });
 
-    document.getElementById('mv-insp-delete')?.addEventListener('click', () => {
+    document.getElementById('peaklogic-insp-delete')?.addEventListener('click', () => {
       if (!state.selectedId) return;
       pushUndo();
       state.project.nodes = state.project.nodes.filter((n) => n.id !== state.selectedId);

@@ -3,7 +3,7 @@
   "label": "HOA selector (Auto / Off / Hand)",
   "group": "Controls — Switches",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_auto.svg",
+  "preview": "/hmi/svg/library/controls/selector-switches/standard/peaklogic/editable/switch_hoa_auto.svg",
   "tagRoles": {
     "pv": { "pick": "firstNumeric", "types": ["INT"] }
   },
@@ -12,19 +12,19 @@
       "role": "hoa_auto",
       "z": 0,
       "kind": "dynamicImage",
-      "svg": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_auto.svg"
+      "svg": "/hmi/svg/library/controls/selector-switches/standard/peaklogic/editable/switch_hoa_auto.svg"
     },
     {
       "role": "hoa_off",
       "z": 1,
       "kind": "dynamicImage",
-      "svg": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_off.svg"
+      "svg": "/hmi/svg/library/controls/selector-switches/standard/peaklogic/editable/switch_hoa_off.svg"
     },
     {
       "role": "hoa_hand",
       "z": 2,
       "kind": "dynamicImage",
-      "svg": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_hand.svg"
+      "svg": "/hmi/svg/library/controls/selector-switches/standard/peaklogic/editable/switch_hoa_hand.svg"
     }
   ],
   "defaultBindings": [
