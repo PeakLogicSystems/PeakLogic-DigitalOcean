@@ -104,7 +104,7 @@ function listHmiComposites(publicRoot) {
         type: 'composite',
         group: manifest.group,
         subgroup: manifest.subgroup,
-        vendor: 'mooreview',
+        vendor: 'peaklogic',
         label: manifest.label,
         preview: manifest.preview,
         composite: manifest,

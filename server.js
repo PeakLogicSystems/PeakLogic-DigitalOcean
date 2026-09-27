@@ -28,7 +28,7 @@ app.use('/api', createExpressApi({ tagStore, driverManager, scanEngine, graphHis
 app.get('/health', (req, res) => {
   res.json({
     ok: true,
-    app: 'MooreVIEW',
+    app: 'PeakLogic',
     product: 'cloud',
     version: APP_VERSION,
     runtime: scanEngine.status(),
@@ -41,7 +41,7 @@ app.get('/health', (req, res) => {
 
 app.get('/', (req, res) => {
   res.type('text/plain').send(
-    `MooreVIEW Cloud ${APP_VERSION}\nAPI: /api/dashboard\nHealth: /health\nUse mooreview-client for operator UI.\n`
+    `PeakLogic Cloud ${APP_VERSION}\nAPI: /api/dashboard\nHealth: /health\nUse peaklogic-client for operator UI.\n`
   );
 });
 
@@ -76,7 +76,7 @@ async function boot() {
     console.error('[unhandledRejection]', err?.message || err);
   });
   app.listen(port, '0.0.0.0', () => {
-    console.log(`MooreVIEW Cloud  http://0.0.0.0:${port}  (API + historian + fleet)`);
+    console.log(`PeakLogic Cloud  http://0.0.0.0:${port}  (API + historian + fleet)`);
     console.log(`Data: ${DATA_DIR}`);
     console.log(`ST programs: ${ST_DIR}`);
   });

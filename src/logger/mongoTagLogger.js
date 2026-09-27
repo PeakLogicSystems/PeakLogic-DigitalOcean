@@ -146,10 +146,10 @@ async function connect() {
       await collection.createIndex({ at: -1 });
       await collection.createIndex({ event: 1, 'tag.id': 1 });
       await collection.createIndex({ event: 1, at: -1, 'pen.tagId': 1 });
-      console.log(`[MooreVIEW] MongoDB logger connected: ${dbName()}.${collectionName()}`);
+      console.log(`[PeakLogic] MongoDB logger connected: ${dbName()}.${collectionName()}`);
       return true;
     } catch (e) {
-      console.warn('[MooreVIEW] MongoDB logger:', e.message);
+      console.warn('[PeakLogic] MongoDB logger:', e.message);
       client = null;
       collection = null;
       return false;
@@ -182,7 +182,7 @@ async function insertOne(doc) {
     await collection.insertOne({ ...doc, at: doc.at || new Date() });
     return true;
   } catch (e) {
-    console.warn('[MooreVIEW] MongoDB insert:', e.message);
+    console.warn('[PeakLogic] MongoDB insert:', e.message);
     return false;
   }
 }
@@ -197,7 +197,7 @@ async function insertMany(docs) {
     );
     return true;
   } catch (e) {
-    console.warn('[MooreVIEW] MongoDB insertMany:', e.message);
+    console.warn('[PeakLogic] MongoDB insertMany:', e.message);
     return false;
   }
 }

@@ -1,1 +1,1 @@
-(* New MooreVIEW project *)
+(* New PeakLogic project *)

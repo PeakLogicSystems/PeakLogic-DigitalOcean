@@ -53,12 +53,12 @@ function createStudioRoutes() {
         return res.redirect('/studio');
       }
       res.render('cellular-sims', {
-        title: 'Connectivity — MooreVIEW',
+        title: 'Connectivity — PeakLogic',
         assetV: APP_VERSION,
         appVersion: APP_VERSION,
         product: 'cloud-studio',
         deployment: DEPLOYMENT_MODE,
-        mooreviewApiBase: '/api/studio',
+        peaklogicApiBase: '/api/studio',
         homeUrl: '/studio',
         connectivityBuild: 'email-sms-v2',
       });
@@ -68,10 +68,10 @@ function createStudioRoutes() {
     '/',
     withTenantRuntime((req, res) => {
       res.render('scada-dashboard', {
-        title: 'mooreVIEW Studio',
+        title: 'PeakLogic Studio',
         assetV: APP_VERSION,
         product: 'cloud-studio',
-        mooreviewApiBase: '/api/studio',
+        peaklogicApiBase: '/api/studio',
       });
     }),
   );

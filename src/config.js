@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const PORT = Number(process.env.PORT) || 3100;
 const MONGODB_URI = process.env.MONGODB_URI || process.env.MONGO_URL || '';
-const MONGODB_DB = process.env.MONGODB_DB || 'mooreview_cloud';
+const MONGODB_DB = process.env.MONGODB_DB || 'peaklogic_cloud';
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-only-change-in-production';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
 const PUBLIC_API_URL = process.env.PUBLIC_API_URL || '';

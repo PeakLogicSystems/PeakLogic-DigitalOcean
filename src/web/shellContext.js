@@ -6,7 +6,7 @@ const tenantService = require('../services/tenantService');
 const { buildCmmsUser } = require('../cmms/cmmsRoles');
 
 /**
- * Load tenant shell context for mooreVIEW pages.
+ * Load tenant shell context for PeakLogic pages.
  * @param {import('express').Request} req
  */
 async function loadShellContext(req) {

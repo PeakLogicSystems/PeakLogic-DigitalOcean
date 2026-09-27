@@ -46,7 +46,7 @@ describe('cloud API (MongoDB)', () => {
   before(async () => {
     mongod = await MongoMemoryServer.create();
     process.env.MONGODB_URI = mongod.getUri();
-    process.env.MONGODB_DB = 'mooreview_cloud_test';
+    process.env.MONGODB_DB = 'peaklogic_cloud_test';
     process.env.JWT_SECRET = 'test-jwt-secret-min-32-chars-long';
     process.env.PLATFORM_ADMIN_KEY = 'test-platform-admin-key';
     process.env.NODE_ENV = 'test';
@@ -78,7 +78,7 @@ describe('cloud API (MongoDB)', () => {
     const res = await request('GET', '/health');
     assert.equal(res.status, 200);
     assert.equal(res.json.ok, true);
-    assert.equal(res.json.service, 'mooreview-cloud');
+    assert.equal(res.json.service, 'peaklogic-cloud');
   });
 
   it('serves HMI static assets without login', async () => {
@@ -94,7 +94,7 @@ describe('cloud API (MongoDB)', () => {
   it('GET / returns service info as JSON', async () => {
     const res = await request('GET', '/?format=json');
     assert.equal(res.status, 200);
-    assert.equal(res.json.service, 'mooreview-cloud');
+    assert.equal(res.json.service, 'peaklogic-cloud');
     assert.equal(res.json.version, '0.1.0');
     assert.ok(res.json.links.health);
     assert.ok(res.json.links.login);
@@ -103,7 +103,7 @@ describe('cloud API (MongoDB)', () => {
   it('GET /login returns login page', async () => {
     const res = await request('GET', '/login');
     assert.equal(res.status, 200);
-    assert.match(res.text, /mooreVIEW/i);
+    assert.match(res.text, /PeakLogic/i);
     assert.match(res.text, /Welcome Back/);
     assert.match(res.text, /tenantSlug/);
   });
@@ -607,7 +607,7 @@ describe('cloud API (MongoDB)', () => {
     assert.match(tenantsPage.text, /Tenants/);
   });
 
-  it('platform admin web saves CMMS and MooreVIEW plan', async () => {
+  it('platform admin web saves CMMS and PeakLogic plan', async () => {
     const signup = await request('POST', '/api/auth/signup', {
       body: {
         tenantName: 'Plan Save Co',
@@ -627,7 +627,7 @@ describe('cloud API (MongoDB)', () => {
     const save = await request('POST', `/admin/tenants/${tenantId}/cmms`, {
       cookies: adminCookie.split(';')[0],
       form: {
-        mooreviewPlan: 'professional',
+        peaklogicPlan: 'professional',
         enabled: 'true',
         cmmsPlan: 'enterprise',
       },
@@ -651,7 +651,7 @@ describe('cloud API (MongoDB)', () => {
     assert.equal(apiTenant.json.tenant.cmmsEnabled, true);
   });
 
-  it('platform admin API patches MooreVIEW tier and CMMS plan', async () => {
+  it('platform admin API patches PeakLogic tier and CMMS plan', async () => {
     const signup = await request('POST', '/api/auth/signup', {
       body: {
         tenantName: 'Tier Co',

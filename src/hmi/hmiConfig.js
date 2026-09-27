@@ -416,7 +416,7 @@ function defaultDemoHmi() {
         number: 3,
         id: 'screen_3',
         name: 'PID faceplate',
-        svg: '/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg',
+        svg: '/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg',
         width: 480,
         height: 360,
         fit: 'native',

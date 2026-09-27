@@ -50,7 +50,7 @@ describe('estFile', () => {
     assert.equal(doc.project.name, 'my_test');
     assert.ok(doc.tags.length >= 22);
     assert.deepEqual(doc.drivers, []);
-    assert.equal(doc.program, '(* New MooreVIEW project *)\n');
+    assert.equal(doc.program, '(* New PeakLogic project *)\n');
     assert.equal(doc.activeProgram, 'logic/program.st');
     assert.ok(doc.settings?.hmi?.screens?.length);
   });
@@ -62,10 +62,10 @@ describe('estFile', () => {
     assert.equal(driverManager.list().length, 0);
     const programStore = require('../src/programs/programStore');
     assert.equal(programStore.activeRel(), 'logic/program.st');
-    assert.equal(programStore.readActive(), '(* New MooreVIEW project *)\n');
+    assert.equal(programStore.readActive(), '(* New PeakLogic project *)\n');
   });
 
-  it('packs mooreview-est document', () => {
+  it('packs peaklogic-est document', () => {
     const doc = pack(deps, { name: 'demo' });
     assert.equal(doc.format, EST_FORMAT);
     assert.equal(doc.version, EST_VERSION);

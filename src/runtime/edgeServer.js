@@ -57,7 +57,7 @@ async function boot() {
   const port = settings.port || DEFAULT_PORT;
   await driverManager.rebuild();
   server.listen(port, '0.0.0.0', () => {
-    console.log(`MooreVIEW edge runtime listening on :${port}`);
+    console.log(`PeakLogic edge runtime listening on :${port}`);
   });
 }
 

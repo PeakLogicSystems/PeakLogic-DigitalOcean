@@ -130,11 +130,11 @@ router.get('/tenants/:id', requirePlatformAdminWeb, asyncHandler(async (req, res
 router.post('/tenants/:id/cmms', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
   const enabled = req.body.enabled === 'on' || req.body.enabled === 'true';
   const cmmsPlan = req.body.cmmsPlan || req.body.plan || 'standard';
-  const mooreviewPlan = req.body.mooreviewPlan || req.body.tenantPlan || 'standard';
+  const peaklogicPlan = req.body.peaklogicPlan || req.body.tenantPlan || 'standard';
   const result = await tenantService.updateTenantSettings(
     req.params.id,
     {
-      plan: mooreviewPlan,
+      plan: peaklogicPlan,
       cmms: { enabled, plan: cmmsPlan },
     },
     { enabledBy: 'platform-admin' },
