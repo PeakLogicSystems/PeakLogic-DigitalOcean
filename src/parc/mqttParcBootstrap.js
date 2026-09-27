@@ -33,7 +33,7 @@ function defaultMqttParcSettings(prev = {}) {
     enabled: true,
     brokerUrl: String(prev.brokerUrl || DEFAULT_MQTT_PARC_BROKER).trim() || DEFAULT_MQTT_PARC_BROKER,
     topicPrefix: String(prev.topicPrefix || 'peaklogic/v1').trim().replace(/\/+$/, '') || 'peaklogic/v1',
-    clientId: prev.clientId || 'mv-central-hmi',
+    clientId: prev.clientId || 'peaklogic-central-hmi',
     username: prev.username || '',
     password: prev.password || '',
     autoDiscoverDrivers: prev.autoDiscoverDrivers === true,

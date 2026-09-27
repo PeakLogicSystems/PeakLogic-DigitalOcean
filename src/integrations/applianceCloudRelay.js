@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Appliance → cloud uplink for Parc telemetry (appliance acts as remote edge to mv-cloud).
+ * Appliance → cloud uplink for Parc telemetry (appliance acts as remote edge to peaklogic-cloud).
  */
 
 const mqtt = require('mqtt');
@@ -31,7 +31,7 @@ function reloadConfig(next) {
 
 function mqttOptions(cfg) {
   const opts = {
-    clientId: cfg.clientId || `mv-appliance-${cfg.gatewayId || 'remote'}`,
+    clientId: cfg.clientId || `peaklogic-appliance-${cfg.gatewayId || 'remote'}`,
     reconnectPeriod: 5000,
     keepalive: 60,
   };

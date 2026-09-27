@@ -103,7 +103,7 @@ async function pairAppliance(input) {
     gatewayDeviceId: gatewayDevice.id,
     brokerUrl,
     topicPrefix: 'peaklogic/v1',
-    clientId: `mv-appliance-${applianceId.slice(0, 8)}`,
+    clientId: `peaklogic-appliance-${applianceId.slice(0, 8)}`,
     relayParc: true,
     relayAlarms: false,
     cloudApiUrl: process.env.PUBLIC_API_URL || '',
