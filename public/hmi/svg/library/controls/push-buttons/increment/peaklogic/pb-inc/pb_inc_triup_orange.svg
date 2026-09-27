@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="50"
+   height="50">
+
+<defs>
+
+	<!-- Colour Gradients. -->
+	<linearGradient id="MB_OrangeGradient" x1="1" y1="1" x2="0" y2="0">
+		<stop offset="50%" stop-color="orange" />
+		<stop offset="100%" stop-color="white" />
+	</linearGradient>
+
+</defs>
+
+<!-- This provides a triangular button pointing up. -->
+<g fill="url(#MB_OrangeGradient)" stroke="black"
+	>
+
+	<!-- This provides the relief. -->
+	<polygon points="0,40 4,42 44,42 40,40 0,40" />
+	<polygon points="20,0 24,2 44,42 40,40 20,0" /> 
+
+	<!-- This is the button. -->
+	<polygon points="0,40 20,0 40,40 0,40"/>
+
+</g>
+
+</svg>
+

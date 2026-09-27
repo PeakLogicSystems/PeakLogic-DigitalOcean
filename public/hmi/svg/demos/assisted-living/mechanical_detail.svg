@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 640" width="1024" height="640">
+  <rect width="1024" height="640" fill="#f1f5f9"/>
+  <text x="512" y="36" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" font-weight="600" fill="#0f172a">Mechanical Room  Hot Water</text>
+  <text x="512" y="62" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#64748b">3 water heaters · individual electric meters · common flow meter</text>
+  <!-- WH1 -->
+  <rect x="60" y="100" width="280" height="220" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <text x="200" y="130" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#334155">Water Heater 1</text>
+  <text x="80" y="170" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">Supply temp:</text>
+  <text id="wh1_temp" x="200" y="170" font-family="Consolas,monospace" font-size="12" fill="#0f172a"> °F</text>
+  <text x="80" y="200" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">kWh meter:</text>
+  <text id="wh1_kwh" x="200" y="200" font-family="Consolas,monospace" font-size="12" fill="#0f172a"></text>
+  <text x="80" y="230" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">kW now:</text>
+  <text id="wh1_kw" x="200" y="230" font-family="Consolas,monospace" font-size="12" fill="#0f172a"></text>
+  <!-- WH2 -->
+  <rect x="372" y="100" width="280" height="220" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <text x="512" y="130" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#334155">Water Heater 2</text>
+  <text x="392" y="170" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">Supply temp:</text>
+  <text id="wh2_temp" x="512" y="170" font-family="Consolas,monospace" font-size="12" fill="#0f172a"> °F</text>
+  <text x="392" y="200" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">kWh meter:</text>
+  <text id="wh2_kwh" x="512" y="200" font-family="Consolas,monospace" font-size="12" fill="#0f172a"></text>
+  <text x="392" y="230" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">kW now:</text>
+  <text id="wh2_kw" x="512" y="230" font-family="Consolas,monospace" font-size="12" fill="#0f172a"></text>
+  <!-- WH3 -->
+  <rect x="684" y="100" width="280" height="220" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+  <text x="824" y="130" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#334155">Water Heater 3</text>
+  <text x="704" y="170" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">Supply temp:</text>
+  <text id="wh3_temp" x="824" y="170" font-family="Consolas,monospace" font-size="12" fill="#0f172a"> °F</text>
+  <text x="704" y="200" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">kWh meter:</text>
+  <text id="wh3_kwh" x="824" y="200" font-family="Consolas,monospace" font-size="12" fill="#0f172a"></text>
+  <text x="704" y="230" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">kW now:</text>
+  <text id="wh3_kw" x="824" y="230" font-family="Consolas,monospace" font-size="12" fill="#0f172a"></text>
+  <!-- Common flow -->
+  <rect x="200" y="360" width="624" height="120" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+  <text x="512" y="395" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#0e7490">Combined domestic hot water flow</text>
+  <text x="240" y="440" font-family="Segoe UI,sans-serif" font-size="13" fill="#334155">Flow meter (all 3 heaters):</text>
+  <text id="wh_flow" x="480" y="440" font-family="Consolas,monospace" font-size="14" fill="#0f172a"> GPM</text>
+</svg>

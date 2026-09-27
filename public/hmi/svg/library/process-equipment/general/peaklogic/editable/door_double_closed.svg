@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="157.783" height="96.331" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 157.783 96.331">
+  <defs>
+    <linearGradient id="linear-gradient" x1="37.363" y1="54.499" x2="74.183" y2="17.678" gradientTransform="translate(0 98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".487" stop-color="#a0bdd9"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="37.363" y1="92.797" x2="74.183" y2="55.976" gradientTransform="translate(0 98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".487" stop-color="#a0bdd9"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="82.519" y1="54.499" x2="119.339" y2="17.678" gradientTransform="translate(0 98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".487" stop-color="#a0bdd9"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="82.519" y1="92.797" x2="119.339" y2="55.976" gradientTransform="translate(0 98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".487" stop-color="#a0bdd9"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g id="shape">
+        <polyline points="130.358 81.724 124.743 81.724 124.743 1.567 32.041 1.567 32.041 81.724 27.046 81.724" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+        <path d="M33.596,3.229v79.37h44.354V3.229h-44.354ZM75.698,78.806h-39.85v-33.79h39.85v33.79ZM75.698,40.509h-39.85V6.718h39.85v33.791Z" fill="#333"/>
+        <path d="M78.752,3.229v79.37h44.354V3.229h-44.354ZM120.855,78.806h-39.85v-33.79h39.85v33.79ZM120.855,40.509h-39.85V6.718h39.85v33.791Z" fill="#333"/>
+      </g>
+      <g id="linear">
+        <rect x="35.848" y="45.016" width="39.85" height="33.791" fill="url(#linear-gradient)" isolation="isolate" opacity=".19"/>
+        <rect x="35.848" y="6.718" width="39.85" height="33.791" fill="url(#linear-gradient-2)" isolation="isolate" opacity=".19"/>
+        <rect x="81.004" y="45.016" width="39.85" height="33.791" fill="url(#linear-gradient-3)" isolation="isolate" opacity=".19"/>
+        <rect x="81.004" y="6.718" width="39.85" height="33.791" fill="url(#linear-gradient-4)" isolation="isolate" opacity=".19"/>
+      </g>
+    </g>
+  </g>
+</svg>

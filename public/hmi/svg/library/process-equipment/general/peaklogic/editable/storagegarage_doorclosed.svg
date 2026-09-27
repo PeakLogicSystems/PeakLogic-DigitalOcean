@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="shape">
+	<polygon fill="#99B3CC" points="98.976,79.765 98.976,22.803 98.936,22.803 1.048,22.803 1.048,79.765 23.355,79.765 23.355,34.97 
+		73.865,34.97 73.865,79.765 	"/>
+</g>
+<g id="light">
+	<path fill="#E6E6E6" d="M69.067,17.029h-6.68c-0.269-1.875-1.878-3.318-3.827-3.318c-1.95,0-3.558,1.443-3.827,3.318h-0.597v0.721
+		h-3.612c-2.291,0-4.149,1.858-4.149,4.149v0.904h3.89v-0.472c0-0.382,0.31-0.692,0.691-0.692h3.18v0.347v0.817h14.932V17.029z"/>
+</g>
+<g id="hlight">
+	<path fill="#F5E97D" d="M76.108,79.971V69.74c0-0.764,0.619-1.383,1.383-1.383l0,0c0.764,0,1.383,0.619,1.383,1.383v10.231"/>
+	<path fill="#F5E97D" d="M18.593,79.971V69.74c0-0.764,0.619-1.383,1.383-1.383h0c0.764,0,1.383,0.619,1.383,1.383v10.231"/>
+</g>
+<g id="dark">
+	<rect x="23.355" y="34.97" fill="#F2F2F2" width="50.51" height="44.795"/>
+	<polygon fill="#1A1A1A" points="73.865,34.97 24,34.97 23.355,34.97 23.355,36.125 23.355,79.765 24,79.765 24,36.125 
+		73.865,36.125 	"/>
+</g>
+<g id="shadow">
+	<polygon fill="#1A1A1A" points="78.663,79.971 78.163,79.971 78.163,69.99 78.663,69.74 	"/>
+	<polygon fill="#1A1A1A" points="21.24,79.971 20.74,79.971 20.74,69.99 21.24,69.74 	"/>
+	<rect x="3.259" y="23.803" fill="#1A1A1A" width="1.125" height="54.962"/>
+	<g>
+		<rect x="25.029" y="38.44" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="42.311" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="46.182" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="50.053" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="53.925" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="57.796" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="61.667" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="65.538" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="69.409" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="73.28" fill="#1A1A1A" width="47.136" height="0.5"/>
+		<rect x="25.029" y="77.151" fill="#1A1A1A" width="47.136" height="0.5"/>
+	</g>
+</g>
+<g id="transparency">
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="97.092" y1="79.015" x2="97.092" y2="23.803"/>
+	<g opacity="0.71">
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="39.19" x2="72.165" y2="39.19"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="43.061" x2="72.165" y2="43.061"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="46.932" x2="72.165" y2="46.932"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="50.803" x2="72.165" y2="50.803"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="54.674" x2="72.165" y2="54.674"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="58.546" x2="72.165" y2="58.546"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="62.417" x2="72.165" y2="62.417"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="66.288" x2="72.165" y2="66.288"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="70.159" x2="72.165" y2="70.159"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="74.03" x2="72.165" y2="74.03"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="0.5" x1="25.029" y1="77.902" x2="72.165" y2="77.902"/>
+	</g>
+</g>
+</g>
+</svg>

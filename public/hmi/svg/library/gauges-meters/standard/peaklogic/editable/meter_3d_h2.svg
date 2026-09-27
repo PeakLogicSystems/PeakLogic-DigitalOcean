@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="frame">
+	<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+	<polygon fill="#006837" points="69.333,42.007 64,39.34 36,39.34 30.667,42.007 30.667,57.993 36,60.66 64,60.66 69.333,57.993 	
+		"/>
+	<rect x="0" y="40.5" fill="#006837" width="5.667" height="19"/>
+	<rect x="94.333" y="40.5" fill="#006837" width="5.667" height="19"/>
+	<rect x="0" y="42.007" fill="#006837" width="100" height="15.987"/>
+</g>
+<g id="dark">
+	<rect x="0" y="43.006" fill="#009245" width="100" height="13.988"/>
+	<polygon fill="#009245" points="68.833,43.007 63.5,40.34 36.5,40.34 31.167,43.007 31.167,56.993 36.5,59.66 63.5,59.66 
+		68.833,56.993 	"/>
+</g>
+<g id="light">
+	<polygon fill="#96D48D" points="60.347,45.004 56.5,46.383 43.5,46.383 39.653,45.004 0,45.004 0,54.996 39.653,54.996 
+		43.5,53.617 56.5,53.617 60.347,54.996 100,54.996 100,45.004 	"/>
+</g>
+<g id="hlight">
+	<polygon fill="#FFFFFF" points="61.35,46.503 57,47.883 43,47.883 38.65,46.503 0,46.503 0,53.497 38.65,53.497 43,52.117 
+		57,52.117 61.35,53.497 100,53.497 100,46.503 	"/>
+</g>
+</g>
+</svg>

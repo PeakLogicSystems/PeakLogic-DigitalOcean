@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+  <rect width="1024" height="768" fill="#e2e8f0"/>
+  <text x="512" y="48" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" font-weight="600" fill="#0f172a">Assisted Living — Facility Overview</text>
+  <text x="512" y="72" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#64748b">Client suites on perimeter · pool outside building · services inside</text>
+  <!-- Exterior therapy pool (outside main footprint) -->
+  <rect id="zone_pool" x="48" y="280" width="168" height="200" rx="8" fill="#67e8f9" stroke="#0891b2" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="132" y="370" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#164e63">Therapy Pool</text>
+  <text x="132" y="394" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#0e7490">Exterior — outside building</text>
+  <path d="M 216 380 L 268 380" stroke="#0891b2" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+  <!-- Main building -->
+  <rect x="268" y="88" width="688" height="592" rx="10" fill="#cbd5e1" stroke="#64748b" stroke-width="3"/>
+  <rect x="284" y="104" width="656" height="88" rx="4" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="612" y="152" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="17" fill="#1e3a8a">Floor 3 — perimeter suites 301–330</text>
+  <rect x="284" y="204" width="656" height="88" rx="4" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="612" y="252" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="17" fill="#1e3a8a">Floor 2 — perimeter suites 201–230</text>
+  <rect x="284" y="304" width="656" height="88" rx="4" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="612" y="352" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="17" fill="#1e3a8a">Floor 1 — suites 101–124 · office 125 · conference</text>
+  <rect x="320" y="420" width="120" height="100" rx="4" fill="#fdba74" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="380" y="475" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#7c2d12">Kitchen</text>
+  <rect x="460" y="420" width="160" height="100" rx="4" fill="#86efac" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="540" y="475" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#14532d">Dining &amp; Lounge</text>
+  <rect x="640" y="420" width="120" height="100" rx="4" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+  <text x="700" y="465" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#0f172a">Mechanical</text>
+  <text x="700" y="485" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11" fill="#334155">3× HWH</text>
+  <text x="612" y="560" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#475569">Ground-floor interior services (inside building only)</text>
+  <rect x="284" y="580" width="656" height="84" rx="4" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="8 5"/>
+  <text x="612" y="628" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11" fill="#2563eb">Perimeter ring — all client rooms face outward</text>
+</svg>

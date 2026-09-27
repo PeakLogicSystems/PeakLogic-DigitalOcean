@@ -1,0 +1,357 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1512 2344" width="1512" height="2344">
+  <rect width="1512" height="2344" fill="#f1f5f9"/>
+  <text id="sched_title" x="756" y="40" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="34" font-weight="700" fill="#0f172a">Weekly filter schedules</text>
+  <text x="756" y="72" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="20" fill="#64748b">Pump count in Project → Hardware &#183; schedules side by side &#183; 7 days &#183; 6 starts/day</text>
+  
+  <rect x="20" y="96" width="1472" height="72" rx="12" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="40" y="130" font-size="24" font-weight="700" fill="#334155">Filter pumps on this body</text>
+  <text x="40" y="154" font-size="17" fill="#64748b">Count set in Project → Hardware (max 8 site-wide)</text>
+  <rect x="1384" y="110" width="96" height="52" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text id="sch_fp_cnt" x="1432" y="146" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">1</text>
+  
+  <rect x="20" y="176" width="728" height="2152" rx="14" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+  <text x="384" y="212" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="30" font-weight="700" fill="#0f172a">Filter pump 1</text>
+  <text x="384" y="234" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" fill="#64748b">Tap time or % to edit</text>
+  <rect x="24" y="248" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="288" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Sun</text>
+      <rect x="112" y="262" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d0_s1_t" x="210" y="324" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d0_s1_p" x="210" y="364" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="262" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d0_s2_t" x="422" y="324" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d0_s2_p" x="422" y="364" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="262" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d0_s3_t" x="634" y="324" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d0_s3_p" x="634" y="364" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="396" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d0_s4_t" x="210" y="458" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d0_s4_p" x="210" y="498" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="396" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d0_s5_t" x="422" y="458" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d0_s5_p" x="422" y="498" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="396" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d0_s6_t" x="634" y="458" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d0_s6_p" x="634" y="498" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="24" y="540" width="720" height="282" rx="10" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="580" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Mon</text>
+      <rect x="112" y="554" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="578" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d1_s1_t" x="210" y="616" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d1_s1_p" x="210" y="656" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="554" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="578" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d1_s2_t" x="422" y="616" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d1_s2_p" x="422" y="656" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="554" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="578" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d1_s3_t" x="634" y="616" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d1_s3_p" x="634" y="656" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="688" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="712" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d1_s4_t" x="210" y="750" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d1_s4_p" x="210" y="790" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="688" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="712" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d1_s5_t" x="422" y="750" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d1_s5_p" x="422" y="790" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="688" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="712" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d1_s6_t" x="634" y="750" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d1_s6_p" x="634" y="790" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="24" y="832" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="872" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Tue</text>
+      <rect x="112" y="846" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="870" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d2_s1_t" x="210" y="908" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d2_s1_p" x="210" y="948" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="846" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="870" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d2_s2_t" x="422" y="908" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d2_s2_p" x="422" y="948" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="846" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="870" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d2_s3_t" x="634" y="908" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d2_s3_p" x="634" y="948" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="980" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1004" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d2_s4_t" x="210" y="1042" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d2_s4_p" x="210" y="1082" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="980" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1004" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d2_s5_t" x="422" y="1042" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d2_s5_p" x="422" y="1082" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="980" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1004" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d2_s6_t" x="634" y="1042" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d2_s6_p" x="634" y="1082" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="24" y="1124" width="720" height="282" rx="10" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="1164" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Wed</text>
+      <rect x="112" y="1138" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1162" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d3_s1_t" x="210" y="1200" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d3_s1_p" x="210" y="1240" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="1138" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1162" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d3_s2_t" x="422" y="1200" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d3_s2_p" x="422" y="1240" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="1138" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1162" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d3_s3_t" x="634" y="1200" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d3_s3_p" x="634" y="1240" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="1272" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1296" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d3_s4_t" x="210" y="1334" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d3_s4_p" x="210" y="1374" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="1272" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1296" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d3_s5_t" x="422" y="1334" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d3_s5_p" x="422" y="1374" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="1272" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1296" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d3_s6_t" x="634" y="1334" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d3_s6_p" x="634" y="1374" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="24" y="1416" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="1456" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Thu</text>
+      <rect x="112" y="1430" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1454" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d4_s1_t" x="210" y="1492" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d4_s1_p" x="210" y="1532" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="1430" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1454" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d4_s2_t" x="422" y="1492" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d4_s2_p" x="422" y="1532" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="1430" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1454" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d4_s3_t" x="634" y="1492" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d4_s3_p" x="634" y="1532" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="1564" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1588" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d4_s4_t" x="210" y="1626" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d4_s4_p" x="210" y="1666" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="1564" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1588" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d4_s5_t" x="422" y="1626" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d4_s5_p" x="422" y="1666" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="1564" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1588" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d4_s6_t" x="634" y="1626" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d4_s6_p" x="634" y="1666" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="24" y="1708" width="720" height="282" rx="10" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="1748" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Fri</text>
+      <rect x="112" y="1722" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1746" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d5_s1_t" x="210" y="1784" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d5_s1_p" x="210" y="1824" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="1722" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1746" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d5_s2_t" x="422" y="1784" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d5_s2_p" x="422" y="1824" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="1722" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1746" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d5_s3_t" x="634" y="1784" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d5_s3_p" x="634" y="1824" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="1856" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="1880" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d5_s4_t" x="210" y="1918" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d5_s4_p" x="210" y="1958" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="1856" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="1880" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d5_s5_t" x="422" y="1918" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d5_s5_p" x="422" y="1958" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="1856" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="1880" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d5_s6_t" x="634" y="1918" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d5_s6_p" x="634" y="1958" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="24" y="2000" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="70" y="2040" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Sat</text>
+      <rect x="112" y="2014" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="2038" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp1_d6_s1_t" x="210" y="2076" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d6_s1_p" x="210" y="2116" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="2014" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="2038" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp1_d6_s2_t" x="422" y="2076" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d6_s2_p" x="422" y="2116" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="2014" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="2038" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp1_d6_s3_t" x="634" y="2076" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d6_s3_p" x="634" y="2116" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="112" y="2148" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="210" y="2172" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp1_d6_s4_t" x="210" y="2210" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d6_s4_p" x="210" y="2250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="324" y="2148" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="422" y="2172" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp1_d6_s5_t" x="422" y="2210" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d6_s5_p" x="422" y="2250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="536" y="2148" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="634" y="2172" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp1_d6_s6_t" x="634" y="2210" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp1_d6_s6_p" x="634" y="2250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+<g id="grp_sch_fp2">
+  <rect x="764" y="176" width="728" height="2152" rx="14" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+  <text x="1128" y="212" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="30" font-weight="700" fill="#0f172a">Filter pump 2</text>
+  <text x="1128" y="234" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" fill="#64748b">Tap time or % to edit</text>
+  <rect x="768" y="248" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="288" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Sun</text>
+      <rect x="856" y="262" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d0_s1_t" x="954" y="324" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d0_s1_p" x="954" y="364" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="262" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d0_s2_t" x="1166" y="324" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d0_s2_p" x="1166" y="364" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="262" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d0_s3_t" x="1378" y="324" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d0_s3_p" x="1378" y="364" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="396" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d0_s4_t" x="954" y="458" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d0_s4_p" x="954" y="498" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="396" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d0_s5_t" x="1166" y="458" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d0_s5_p" x="1166" y="498" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="396" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="420" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d0_s6_t" x="1378" y="458" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d0_s6_p" x="1378" y="498" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="768" y="540" width="720" height="282" rx="10" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="580" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Mon</text>
+      <rect x="856" y="554" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="578" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d1_s1_t" x="954" y="616" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d1_s1_p" x="954" y="656" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="554" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="578" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d1_s2_t" x="1166" y="616" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d1_s2_p" x="1166" y="656" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="554" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="578" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d1_s3_t" x="1378" y="616" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d1_s3_p" x="1378" y="656" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="688" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="712" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d1_s4_t" x="954" y="750" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d1_s4_p" x="954" y="790" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="688" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="712" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d1_s5_t" x="1166" y="750" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d1_s5_p" x="1166" y="790" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="688" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="712" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d1_s6_t" x="1378" y="750" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d1_s6_p" x="1378" y="790" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="768" y="832" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="872" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Tue</text>
+      <rect x="856" y="846" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="870" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d2_s1_t" x="954" y="908" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d2_s1_p" x="954" y="948" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="846" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="870" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d2_s2_t" x="1166" y="908" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d2_s2_p" x="1166" y="948" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="846" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="870" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d2_s3_t" x="1378" y="908" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d2_s3_p" x="1378" y="948" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="980" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1004" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d2_s4_t" x="954" y="1042" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d2_s4_p" x="954" y="1082" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="980" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1004" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d2_s5_t" x="1166" y="1042" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d2_s5_p" x="1166" y="1082" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="980" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1004" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d2_s6_t" x="1378" y="1042" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d2_s6_p" x="1378" y="1082" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="768" y="1124" width="720" height="282" rx="10" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="1164" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Wed</text>
+      <rect x="856" y="1138" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1162" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d3_s1_t" x="954" y="1200" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d3_s1_p" x="954" y="1240" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="1138" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1162" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d3_s2_t" x="1166" y="1200" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d3_s2_p" x="1166" y="1240" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="1138" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1162" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d3_s3_t" x="1378" y="1200" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d3_s3_p" x="1378" y="1240" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="1272" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1296" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d3_s4_t" x="954" y="1334" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d3_s4_p" x="954" y="1374" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="1272" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1296" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d3_s5_t" x="1166" y="1334" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d3_s5_p" x="1166" y="1374" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="1272" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1296" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d3_s6_t" x="1378" y="1334" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d3_s6_p" x="1378" y="1374" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="768" y="1416" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="1456" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Thu</text>
+      <rect x="856" y="1430" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1454" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d4_s1_t" x="954" y="1492" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d4_s1_p" x="954" y="1532" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="1430" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1454" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d4_s2_t" x="1166" y="1492" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d4_s2_p" x="1166" y="1532" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="1430" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1454" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d4_s3_t" x="1378" y="1492" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d4_s3_p" x="1378" y="1532" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="1564" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1588" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d4_s4_t" x="954" y="1626" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d4_s4_p" x="954" y="1666" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="1564" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1588" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d4_s5_t" x="1166" y="1626" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d4_s5_p" x="1166" y="1666" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="1564" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1588" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d4_s6_t" x="1378" y="1626" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d4_s6_p" x="1378" y="1666" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="768" y="1708" width="720" height="282" rx="10" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="1748" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Fri</text>
+      <rect x="856" y="1722" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1746" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d5_s1_t" x="954" y="1784" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d5_s1_p" x="954" y="1824" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="1722" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1746" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d5_s2_t" x="1166" y="1784" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d5_s2_p" x="1166" y="1824" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="1722" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1746" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d5_s3_t" x="1378" y="1784" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d5_s3_p" x="1378" y="1824" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="1856" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="1880" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d5_s4_t" x="954" y="1918" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d5_s4_p" x="954" y="1958" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="1856" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="1880" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d5_s5_t" x="1166" y="1918" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d5_s5_p" x="1166" y="1958" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="1856" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="1880" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d5_s6_t" x="1378" y="1918" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d5_s6_p" x="1378" y="1958" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text><rect x="768" y="2000" width="720" height="282" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="814" y="2040" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700" fill="#0f172a">Sat</text>
+      <rect x="856" y="2014" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="2038" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S1</text>
+      <text id="sch_fp2_d6_s1_t" x="954" y="2076" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d6_s1_p" x="954" y="2116" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="2014" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="2038" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S2</text>
+      <text id="sch_fp2_d6_s2_t" x="1166" y="2076" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d6_s2_p" x="1166" y="2116" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="2014" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="2038" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S3</text>
+      <text id="sch_fp2_d6_s3_t" x="1378" y="2076" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d6_s3_p" x="1378" y="2116" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="856" y="2148" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="954" y="2172" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S4</text>
+      <text id="sch_fp2_d6_s4_t" x="954" y="2210" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d6_s4_p" x="954" y="2250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1068" y="2148" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1166" y="2172" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S5</text>
+      <text id="sch_fp2_d6_s5_t" x="1166" y="2210" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d6_s5_p" x="1166" y="2250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text>
+      <rect x="1280" y="2148" width="196" height="118" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+      <text x="1378" y="2172" text-anchor="middle" font-size="18" font-weight="700" fill="#64748b">S6</text>
+      <text id="sch_fp2_d6_s6_t" x="1378" y="2210" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="700" fill="#0f172a">06:00</text>
+      <text id="sch_fp2_d6_s6_p" x="1378" y="2250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="700" fill="#0369a1">80%</text></g>
+</svg>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="frame">
+		<rect x="0" y="-0.1" fill="none" width="100" height="100"/>
+	</g>
+	<g id="shape">
+		<rect x="42.8" y="98.8" fill="#8C6239" width="14.2" height="1.1"/>
+		
+			<rect x="42.8" y="94.6" transform="matrix(0.9962 -8.715553e-02 8.715553e-02 0.9962 -8.1344 4.6994)" fill="#8C6239" width="13.8" height="1.9"/>
+		
+			<rect x="42.3" y="90.3" transform="matrix(0.9848 -0.1736 0.1736 0.9848 -15.0868 9.9266)" fill="#8C6239" width="13.9" height="1.9"/>
+		
+			<rect x="41.4" y="85.9" transform="matrix(0.9659 -0.2588 0.2588 0.9659 -20.84 15.4708)" fill="#8C6239" width="13.8" height="1.9"/>
+		
+			<rect x="40.1" y="81.9" transform="matrix(0.9397 -0.342 0.342 0.9397 -25.4892 21.0544)" fill="#8C6239" width="13.8" height="1.9"/>
+		
+			<rect x="38.3" y="77.7" transform="matrix(0.9063 -0.4226 0.4226 0.9063 -29.0083 26.5283)" fill="#8C6239" width="14" height="1.9"/>
+		<rect x="36.4" y="73.9" transform="matrix(0.866 -0.5 0.5 0.866 -31.6291 31.7097)" fill="#8C6239" width="14" height="1.9"/>
+		
+			<rect x="33.9" y="70.2" transform="matrix(0.8192 -0.5736 0.5736 0.8192 -33.4104 36.3859)" fill="#8C6239" width="14.1" height="1.9"/>
+		
+			<rect x="31.3" y="66.7" transform="matrix(0.766 -0.6428 0.6428 0.766 -34.5435 40.4664)" fill="#8C6239" width="14" height="1.9"/>
+		
+			<rect x="28.3" y="63.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -35.2704 43.8864)" fill="#8C6239" width="14" height="1.9"/>
+		
+			<rect x="25.3" y="60.6" transform="matrix(0.6428 -0.766 0.766 0.6428 -35.6497 46.6572)" fill="#8C6239" width="13.9" height="1.9"/>
+		
+			<rect x="21.7" y="57.9" transform="matrix(0.5736 -0.8192 0.8192 0.5736 -35.9729 48.6194)" fill="#8C6239" width="14" height="1.9"/>
+		<rect x="18.1" y="55.7" transform="matrix(0.5 -0.866 0.866 0.5 -36.5037 49.9822)" fill="#8C6239" width="13.9" height="1.9"/>
+		
+			<rect x="14.2" y="53.6" transform="matrix(0.4226 -0.9063 0.9063 0.4226 -37.1782 50.7126)" fill="#8C6239" width="14.1" height="1.9"/>
+		
+			<rect x="10.2" y="51.9" transform="matrix(0.342 -0.9397 0.9397 0.342 -38.345 50.8862)" fill="#8C6239" width="13.9" height="1.9"/>
+		<rect x="6" y="50.7" transform="matrix(0.2588 -0.9659 0.9659 0.2588 -40.2141 50.794)" fill="#8C6239" width="14" height="1.9"/>
+		
+			<rect x="1.6" y="49.7" transform="matrix(0.1736 -0.9848 0.9848 0.1736 -42.6941 50.3992)" fill="#8C6239" width="14.1" height="1.9"/>
+		
+			<rect x="-2.7" y="49.1" transform="matrix(8.715096e-02 -0.9962 0.9962 8.715096e-02 -45.9492 50.0413)" fill="#8C6239" width="14" height="1.9"/>
+		<rect x="0" y="42.9" fill="#8C6239" width="1" height="13.8"/>
+	</g>
+	<g id="dark">
+		<path fill="#4D4D4D" d="M45.3,99.8h-0.8c0-24.6-20-44.6-44.6-44.6v-0.8C25,54.4,45.3,74.8,45.3,99.8z"/>
+		<path fill="#4D4D4D" d="M55.3,99.8h-0.8c0-30.1-24.5-54.6-54.6-54.6v-0.8C30.5,44.4,55.3,69.3,55.3,99.8z"/>
+	</g>
+	<g id="light">
+		<path fill="#E6E6E6" d="M0,45.1c30.1,0,54.7,24.5,54.7,54.7l0.1,0.1l0,0C54.8,69.6,30.2,45,0,45.1L0,45.1L0,45.1z"/>
+		<path fill="#E6E6E6" d="M44.8,99.8L44.8,99.8C44.7,75.1,24.6,55.1,0,55.1V55C24.7,55,44.8,75.1,44.8,99.8z"/>
+	</g>
+</g>
+</svg>

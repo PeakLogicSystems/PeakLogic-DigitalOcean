@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" version="1.1" viewBox="0 0 120 40">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="frame">
+      <g id="frame-2" data-name="frame">
+        <rect x="-1.925" y="-30.755" width="100" height="100" fill="none"/>
+      </g>
+    </g>
+    <g id="shape">
+      <g>
+        <polygon points="2.42 25.291 2.42 3.877 102.861 3.877 117.58 14.709 117.58 36.123 17.139 36.123 2.42 25.291" fill="#666" stroke="#000" stroke-miterlimit="10"/>
+        <rect x="17.139" y="14.709" width="100.441" height="21.414" fill="#4d4d4d" stroke="#000" stroke-linejoin="round" stroke-width=".25"/>
+        <g>
+          <rect x="20.17" y="18.489" width="6.494" height="2.165" fill="#8cc63f" stroke="#000" stroke-miterlimit="10"/>
+          <rect x="20.17" y="22.497" width="6.494" height="2.165" fill="#f8cb66" stroke="#000" stroke-miterlimit="10"/>
+          <rect x="20.17" y="26.504" width="6.494" height="2.165" fill="#8cc63f" stroke="#000" stroke-miterlimit="10"/>
+          <rect x="20.17" y="30.511" width="6.494" height="2.165" fill="#f8cb66" stroke="#000" stroke-miterlimit="10"/>
+        </g>
+        <line x1="100.273" y1="14.709" x2="100.273" y2="35.494" fill="none" stroke="#000" stroke-linejoin="round"/>
+        <line x1="78.245" y1="14.709" x2="78.245" y2="35.494" fill="none" stroke="#000" stroke-linejoin="round"/>
+        <line x1="78.42" y1="21.008" x2="29.694" y2="21.008" fill="none" stroke="#000" stroke-linejoin="round"/>
+        <line x1="78.183" y1="29.037" x2="29.694" y2="29.037" fill="none" stroke="#000" stroke-linejoin="round"/>
+        <line x1="100.273" y1="15.339" x2="100.273" y2="36.123" fill="#4d4d4d" stroke="#fff" stroke-linejoin="round"/>
+        <line x1="78.245" y1="15.339" x2="78.245" y2="36.123" fill="#4d4d4d" stroke="#fff" stroke-linejoin="round"/>
+        <line x1="78.42" y1="21.637" x2="29.694" y2="21.637" fill="#4d4d4d" stroke="#fff" stroke-linejoin="round"/>
+        <line x1="78.183" y1="29.666" x2="29.694" y2="29.666" fill="#4d4d4d" stroke="#fff" stroke-linejoin="round"/>
+        <line x1="17.139" y1="14.709" x2="117.58" y2="14.709" fill="#4d4d4d" stroke="#fff" stroke-linejoin="round"/>
+      </g>
+    </g>
+  </g>
+</svg>

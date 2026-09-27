@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="160"
+   height="70">
+
+<defs>
+	<!-- The following filter is used to add a drop shadown. -->
+	<filter id="MB_DropShadowFilter">
+		<feGaussianBlur stdDeviation="2">
+		</feGaussianBlur>
+	</filter>
+</defs>
+
+<!-- Rectangular push button mask.  160 x 70 px -->
+<g
+	>
+
+	<rect fill="grey" opacity=".75" filter="url(#MB_DropShadowFilter)" y="0" width="160" height="70" rx="15"/>
+
+</g>
+
+</svg>

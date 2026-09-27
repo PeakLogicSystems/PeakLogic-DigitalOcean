@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<ellipse fill="#808080" cx="38.45" cy="81.83" rx="1.116" ry="0.62"/>
+	<ellipse fill="#808080" cx="35.629" cy="81.307" rx="1.116" ry="0.62"/>
+	<ellipse fill="#808080" cx="55.09" cy="78.801" rx="1.116" ry="0.62"/>
+	<ellipse fill="#808080" cx="58.223" cy="79.01" rx="1.116" ry="0.62"/>
+	<polygon fill="#007B20" points="49.73,77.025 45.761,78.07 48.895,78.592 52.864,77.547 	"/>
+	<polygon fill="#007B20" points="48.477,73.369 50.566,73.369 50.566,78.174 48.477,77.652 	"/>
+	<line fill="none" stroke="#333333" stroke-width="0.4547" x1="48.477" y1="77.652" x2="48.477" y2="73.369"/>
+	<g>
+		<linearGradient id="SVGID_1_greentanks" gradientUnits="userSpaceOnUse" x1="46.7011" y1="26.6786" x2="83.0497" y2="26.6786">
+			<stop  offset="0" style="stop-color:#1A2640"/>
+			<stop  offset="0.4945" style="stop-color:#9AD18F"/>
+			<stop  offset="1" style="stop-color:#D6E8D2"/>
+		</linearGradient>
+		<path fill="url(#SVGID_1_greentanks)" d="M46.701,32.286c0-1.002,15.354-11.215,18.174-11.215c2.193,0,18.174,10.213,18.174,11.215"/>
+		<linearGradient id="SVGID_2_greentanks" gradientUnits="userSpaceOnUse" x1="46.7011" y1="51.3656" x2="83.0497" y2="51.3656">
+			<stop  offset="0" style="stop-color:#1A2640"/>
+			<stop  offset="0.4945" style="stop-color:#9AD18F"/>
+			<stop  offset="1" style="stop-color:#D6E8D2"/>
+		</linearGradient>
+		<path fill="url(#SVGID_2_greentanks)" d="M83.05,32.286v37.323c0,1.464-8.137,2.65-18.174,2.65s-18.174-1.187-18.174-2.65V32.286
+			c0-1.002,8.137-1.814,18.174-1.814"/>
+		<line fill="none" stroke="#4D6948" stroke-width="0.2274" x1="80.021" y1="70.654" x2="80.021" y2="32.007"/>
+		
+			<line fill="none" stroke="#4D6948" stroke-width="0.4547" stroke-linecap="round" stroke-dasharray="0.2274,2.2736" x1="78.349" y1="70.654" x2="78.349" y2="32.007"/>
+		<line fill="none" stroke="#4D6948" stroke-width="0.2274" x1="61.22" y1="71.489" x2="61.22" y2="31.276"/>
+		
+			<line fill="none" stroke="#4D6948" stroke-width="0.4547" stroke-linecap="round" stroke-dasharray="0.2274,2.2736" x1="59.548" y1="71.489" x2="59.548" y2="31.276"/>
+		<path fill="none" stroke="#FFFFFF" stroke-width="0.4062" stroke-linejoin="round" d="M64.875,30.472
+			c10.037,0,18.174,0.812,18.174,1.814"/>
+		<path fill="#F2F2F2" d="M66.233,22.607l9.658,6.267c0,0-3.996-0.273-5.995-0.273C69.23,26.149,66.233,22.607,66.233,22.607z"/>
+	</g>
+	<g>
+		<linearGradient id="SVGID_3_greentanks" gradientUnits="userSpaceOnUse" x1="1.335" y1="22.3727" x2="47.0144" y2="22.3727">
+			<stop  offset="0" style="stop-color:#1A2640"/>
+			<stop  offset="0.4945" style="stop-color:#9AD18F"/>
+			<stop  offset="1" style="stop-color:#D6E8D2"/>
+		</linearGradient>
+		<path fill="url(#SVGID_3_greentanks)" d="M1.335,29.646c0-1.112,19.358-14.547,22.84-14.547c2.785,0,22.84,13.435,22.84,14.547"/>
+		<path fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linejoin="round" d="M24.175,27.633
+			c12.614,0,22.84,0.901,22.84,2.013"/>
+		<linearGradient id="SVGID_4_greentanks" gradientUnits="userSpaceOnUse" x1="1.335" y1="52.5876" x2="47.0144" y2="52.5876">
+			<stop  offset="0" style="stop-color:#1A2640"/>
+			<stop  offset="0.4945" style="stop-color:#9AD18F"/>
+			<stop  offset="1" style="stop-color:#D6E8D2"/>
+		</linearGradient>
+		<path fill="url(#SVGID_4_greentanks)" d="M1.335,29.646c0-1.112,10.226-2.013,22.84-2.013s22.84,0.901,22.84,2.013v44.565
+			c0,1.839-10.226,3.331-22.84,3.331s-22.84-1.492-22.84-3.331V29.646z"/>
+		<line fill="none" stroke="#4D6948" stroke-width="0.2274" x1="42.001" y1="76.294" x2="42.001" y2="28.456"/>
+		
+			<line fill="none" stroke="#4D6948" stroke-width="0.4547" stroke-linecap="round" stroke-dasharray="0.2274,2.2736" x1="40.33" y1="76.398" x2="40.33" y2="28.456"/>
+		<line fill="none" stroke="#4D6948" stroke-width="0.2274" x1="22.782" y1="77.338" x2="22.782" y2="28.038"/>
+		
+			<line fill="none" stroke="#4D6948" stroke-width="0.4547" stroke-linecap="round" stroke-dasharray="0.2274,2.2736" x1="21.111" y1="77.338" x2="21.111" y2="28.038"/>
+		<path fill="#F2F2F2" d="M26.124,16.758l12.116,9.609c0,0-5.014-0.418-7.52-0.418C29.885,22.189,26.124,16.758,26.124,16.758z"/>
+	</g>
+	<line fill="none" stroke="#666666" stroke-width="0.9094" x1="55.371" y1="67.59" x2="55.371" y2="79.044"/>
+	<line fill="none" stroke="#666666" stroke-width="0.9094" x1="58.156" y1="67.903" x2="58.156" y2="79.253"/>
+	<path fill="none" stroke="#808080" stroke-width="0.4547" d="M83.05,69.609c0,1.464-8.137,2.65-18.174,2.65"/>
+	<path fill="none" stroke="#808080" stroke-width="0.4547" d="M47.014,74.211c0,1.839-10.226,3.331-22.84,3.331"/>
+	<g>
+		
+			<line fill="none" stroke="#999999" stroke-width="1.3641" stroke-linecap="round" x1="56.624" y1="56.483" x2="86.149" y2="55.056"/>
+		
+			<line fill="none" stroke="#999999" stroke-width="1.3641" stroke-linecap="round" x1="56.624" y1="59.269" x2="86.149" y2="57.563"/>
+		
+			<line fill="none" stroke="#999999" stroke-width="1.3641" stroke-linecap="round" x1="56.624" y1="62.054" x2="86.149" y2="60.069"/>
+		
+			<line fill="none" stroke="#999999" stroke-width="1.3641" stroke-linecap="round" x1="56.624" y1="64.839" x2="86.149" y2="62.576"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" x1="56.624" y1="56.17" x2="86.149" y2="54.742"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" x1="56.624" y1="58.955" x2="86.149" y2="57.249"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" x1="56.624" y1="61.741" x2="86.149" y2="59.756"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" x1="56.624" y1="64.526" x2="86.149" y2="62.263"/>
+	</g>
+	<line fill="none" stroke="#666666" stroke-width="0.9094" x1="35.734" y1="69.47" x2="35.734" y2="81.029"/>
+	<g>
+		<g>
+			<path fill="#CCCCCC" d="M82.829,65.851c0.016,2.158-1.248,3.997-2.823,4.109c-1.575,0.111-2.865-1.547-2.882-3.705
+				c-0.016-2.157,1.248-3.997,2.823-4.108C81.523,62.036,82.813,63.694,82.829,65.851z"/>
+			<path fill="#E6E6E6" d="M83.756,65.851c0.016,2.158-1.248,3.997-2.823,4.109c-1.575,0.111-2.865-1.547-2.882-3.705
+				c-0.016-2.157,1.248-3.997,2.823-4.108C82.449,62.036,83.74,63.694,83.756,65.851z"/>
+			<path fill="#E6E6E6" stroke="#666666" stroke-width="0.3667" stroke-linecap="round" stroke-dasharray="0.1833,0.7333" d="
+				M83.307,65.883c0.014,1.818-1.051,3.367-2.378,3.462c-1.327,0.094-2.414-1.303-2.428-3.121c-0.014-1.817,1.051-3.367,2.378-3.461
+				C82.206,62.668,83.293,64.066,83.307,65.883z"/>
+			<path fill="#CCCCCC" d="M82.857,65.915c0.011,1.478-0.855,2.738-1.934,2.815c-1.079,0.076-1.963-1.06-1.974-2.538
+				c-0.011-1.477,0.855-2.737,1.934-2.814C81.962,63.301,82.846,64.437,82.857,65.915z"/>
+			<path fill="#E6E6E6" d="M84.113,66.088c0.011,1.478-0.855,2.738-1.934,2.814c-1.079,0.076-1.963-1.06-1.974-2.538
+				c-0.011-1.478,0.855-2.737,1.934-2.814C83.218,63.474,84.102,64.61,84.113,66.088z"/>
+		</g>
+		
+			<line fill="none" stroke="#E6E6E6" stroke-width="3.6666" stroke-linejoin="round" x1="92.94" y1="67.237" x2="82.665" y2="66.31"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.7333" stroke-linejoin="round" x1="92.94" y1="66.394" x2="82.665" y2="65.468"/>
+		
+			<line fill="none" stroke="#B3B3B3" stroke-width="0.7333" stroke-linejoin="round" x1="92.94" y1="68.5" x2="82.665" y2="67.574"/>
+		<g>
+			<path fill="#CCCCCC" d="M96.305,67.114c0.016,2.158-1.248,3.997-2.823,4.109c-1.575,0.111-2.865-1.547-2.882-3.705
+				c-0.016-2.157,1.248-3.997,2.823-4.108C94.999,63.299,96.289,64.957,96.305,67.114z"/>
+			<path fill="#E6E6E6" d="M97.232,67.114c0.016,2.158-1.248,3.997-2.823,4.109c-1.575,0.111-2.865-1.547-2.882-3.705
+				c-0.016-2.157,1.248-3.997,2.823-4.108C95.925,63.299,97.216,64.957,97.232,67.114z"/>
+			<path fill="#E6E6E6" stroke="#666666" stroke-width="0.3667" stroke-linecap="round" stroke-dasharray="0.1833,0.7333" d="
+				M96.782,67.146c0.014,1.818-1.051,3.367-2.378,3.461c-1.327,0.094-2.414-1.303-2.428-3.121c-0.014-1.817,1.051-3.367,2.378-3.461
+				C95.682,63.932,96.769,65.329,96.782,67.146z"/>
+			<path fill="#CCCCCC" d="M96.333,67.178c0.011,1.478-0.855,2.738-1.934,2.814c-1.079,0.076-1.963-1.06-1.974-2.538
+				c-0.011-1.478,0.855-2.737,1.934-2.814C95.438,64.565,96.322,65.7,96.333,67.178z"/>
+			<path fill="#E6E6E6" d="M97.589,67.351c0.011,1.478-0.855,2.738-1.934,2.814c-1.079,0.077-1.963-1.06-1.974-2.538
+				c-0.011-1.477,0.855-2.737,1.934-2.814C96.694,64.737,97.578,65.873,97.589,67.351z"/>
+		</g>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.189" stroke-linejoin="round" d="M82.78,64.794
+			c-0.593,0-1.074,0.754-1.074,1.684c0,0.931,0.481,1.685,1.074,1.685"/>
+		<polygon fill="#007B20" points="89.403,68.669 85.865,68.5 85.865,67.826 89.403,67.995 		"/>
+		<line fill="none" stroke="#666666" stroke-width="0.6821" x1="77.826" y1="64.664" x2="77.826" y2="73.229"/>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="1.1" stroke-linecap="round" d="M88.055,66.984L65.9,69.793
+				c-0.6,0.076-1.091,0.633-1.091,1.238v3.443c0,0.605-0.494,1.064-1.097,1.02L44.09,74.059"/>
+		</g>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.3094" stroke-linecap="round" x1="63.461" y1="75.223" x2="44.09" y2="73.806"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.3309" stroke-linecap="round" x1="78.269" y1="68.035" x2="65.969" y2="69.595"/>
+		<g>
+			<line fill="none" stroke="#B3B3B3" stroke-width="0.995" stroke-linecap="round" x1="89.992" y1="65.3" x2="89.992" y2="64.12"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<path fill="#CCCCCC" d="M43.041,70.92c0.02,2.676-1.547,4.957-3.501,5.096c-1.953,0.138-3.554-1.918-3.574-4.594
+				c-0.02-2.675,1.547-4.956,3.501-5.095C41.42,66.188,43.021,68.245,43.041,70.92z"/>
+			<path fill="#E6E6E6" d="M44.19,70.92c0.02,2.676-1.547,4.957-3.501,5.096c-1.953,0.138-3.554-1.918-3.574-4.594
+				c-0.02-2.675,1.547-4.956,3.501-5.095C42.569,66.188,44.17,68.245,44.19,70.92z"/>
+			<path fill="#E6E6E6" stroke="#666666" stroke-width="0.4547" stroke-linecap="round" stroke-dasharray="0.2274,0.9094" d="
+				M43.632,70.959c0.017,2.254-1.304,4.176-2.95,4.293c-1.646,0.117-2.994-1.616-3.011-3.871c-0.017-2.254,1.304-4.176,2.95-4.292
+				C42.267,66.973,43.616,68.706,43.632,70.959z"/>
+			<path fill="#CCCCCC" d="M43.075,70.999c0.014,1.833-1.06,3.395-2.398,3.49c-1.338,0.095-2.434-1.314-2.448-3.147
+				c-0.014-1.832,1.06-3.395,2.398-3.49C41.966,67.758,43.062,69.166,43.075,70.999z"/>
+			<path fill="#E6E6E6" d="M44.633,71.213c0.014,1.833-1.06,3.395-2.398,3.49c-1.338,0.095-2.434-1.314-2.448-3.147
+				c-0.014-1.832,1.06-3.395,2.398-3.49C43.523,67.972,44.619,69.381,44.633,71.213z"/>
+		</g>
+		
+			<line fill="none" stroke="#E6E6E6" stroke-width="4.5471" stroke-linejoin="round" x1="55.579" y1="72.638" x2="42.836" y2="71.489"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.9094" stroke-linejoin="round" x1="55.579" y1="71.594" x2="42.836" y2="70.445"/>
+		
+			<line fill="none" stroke="#B3B3B3" stroke-width="0.9094" stroke-linejoin="round" x1="55.579" y1="74.205" x2="42.836" y2="73.056"/>
+		<g>
+			<path fill="#CCCCCC" d="M59.753,72.486c0.02,2.676-1.547,4.957-3.501,5.096c-1.953,0.138-3.554-1.918-3.574-4.594
+				c-0.02-2.675,1.547-4.956,3.501-5.095C58.132,67.755,59.733,69.811,59.753,72.486z"/>
+			<path fill="#E6E6E6" d="M60.902,72.486c0.02,2.676-1.547,4.957-3.501,5.096c-1.953,0.138-3.554-1.918-3.574-4.594
+				c-0.02-2.675,1.547-4.956,3.501-5.095C59.281,67.755,60.882,69.811,60.902,72.486z"/>
+			<path fill="#E6E6E6" stroke="#666666" stroke-width="0.4547" stroke-linecap="round" stroke-dasharray="0.2274,0.9094" d="
+				M60.344,72.526c0.017,2.254-1.304,4.176-2.95,4.293c-1.646,0.117-2.994-1.616-3.011-3.871c-0.017-2.254,1.304-4.176,2.95-4.292
+				C58.979,68.539,60.328,70.273,60.344,72.526z"/>
+			<path fill="#CCCCCC" d="M59.787,72.566c0.014,1.833-1.06,3.395-2.398,3.49c-1.338,0.095-2.434-1.314-2.448-3.147
+				c-0.014-1.832,1.06-3.395,2.398-3.49C58.678,69.324,59.774,70.733,59.787,72.566z"/>
+			<path fill="#E6E6E6" d="M61.345,72.78c0.014,1.833-1.06,3.395-2.398,3.49c-1.338,0.095-2.434-1.314-2.448-3.147
+				c-0.014-1.832,1.06-3.395,2.398-3.49C60.235,69.539,61.331,70.947,61.345,72.78z"/>
+		</g>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2344" stroke-linejoin="round" d="M42.98,69.609
+			c-0.735,0-1.332,0.935-1.332,2.089s0.596,2.089,1.332,2.089"/>
+		<polygon fill="#007B20" points="51.192,74.414 46.806,74.205 46.806,73.369 51.192,73.578 		"/>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="1.3641" stroke-linecap="round" d="M49.521,72.325l-27.475,3.484
+				c-0.744,0.094-1.353,0.785-1.353,1.536v4.27c0,0.75-0.611,1.308-1.358,1.239L0.25,81.099"/>
+		</g>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.3837" stroke-linecap="round" x1="19.022" y1="82.543" x2="0.25" y2="80.785"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.4104" stroke-linecap="round" x1="37.385" y1="73.629" x2="22.132" y2="75.563"/>
+		<g>
+			
+				<line fill="none" stroke="#B3B3B3" stroke-width="1.2339" stroke-linecap="round" x1="51.924" y1="70.236" x2="51.924" y2="68.774"/>
+		</g>
+	</g>
+	<g>
+		<defs>
+			<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="48.664" y="66.254" width="1.17" height="2.311">
+				<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+				<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+			</filter>
+		</defs>
+		<mask maskUnits="userSpaceOnUse" x="48.664" y="66.254" width="1.17" height="2.311" id="SVGID_5_greentanks">
+			<g filter="url(#Adobe_OpacityMaskFilter)">
+				
+					<image overflow="visible" width="6" height="7" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF1AAABgwAAAbj/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAcABgMBIgACEQEDEQH/
+xABqAAEBAAAAAAAAAAAAAAAAAAAABgEBAAAAAAAAAAAAAAAAAAAAABAAAgMAAAAAAAAAAAAAAAAA
+AAQCAwURAAEEAgMAAAAAAAAAAAAAAAIBERIDIQQAExQSAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEA
+AhEDEQAAAIoH/9oACAECAAEFAD//2gAIAQMAAQUAP//aAAgBAQABBQBizOkj/9oACAECAgY/AH//
+2gAIAQMCBj8Af//aAAgBAQEGPwDTDXqMN0O32WkrhY5PVBJK0RwuE5//2Q==" transform="matrix(1 0 0 1 46 64)">
+				</image>
+			</g>
+		</mask>
+		<g mask="url(#SVGID_5_greentanks)">
+			<rect x="48.664" y="66.254" fill="#999999" width="1.17" height="2.311"/>
+		</g>
+	</g>
+	<g>
+		<path fill="none" stroke="#999999" stroke-width="2.2736" d="M54.953,54.29V14.825c0-2.001-1.637-3.623-3.638-3.605l-23.364,0.213
+			c-2.001,0.018-3.638,1.004-3.638,2.192s0,2.159,0,2.159"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#4D4D4D" stroke-width="0.9094" x1="23.897" y1="12.719" x2="23.897" y2="15.783"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="0.6821" stroke-linecap="round" d="M55.58,54.29V14.407
+			c0-2.001-1.637-3.629-3.638-3.618L27.9,10.919"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#999999" stroke-width="2.2736" d="M92.149,53.037V20.018c0-2.001-1.637-3.624-3.638-3.606
+			l-20.139,0.174c-2.001,0.017-3.638,1.116-3.638,2.442s0,2.41,0,2.41"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#4D4D4D" stroke-width="0.9094" x1="64.108" y1="18.707" x2="64.108" y2="21.438"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="0.6821" stroke-linecap="round" d="M92.566,53.037v-33.54
+			c0-2.001-1.637-3.623-3.638-3.604l-21.896,0.203"/>
+	</g>
+	
+		<line fill="none" stroke="#CCCCCC" stroke-width="0.4547" stroke-linecap="round" x1="49.312" y1="72.116" x2="37.385" y2="73.629"/>
+	<line fill="none" stroke="#666666" stroke-width="0.9094" x1="38.52" y1="69.992" x2="38.52" y2="81.864"/>
+	<g>
+		<g>
+			<polygon fill="#F2F2F2" stroke="#333333" stroke-width="0.4062" stroke-linejoin="round" points="62.264,54.011 62.264,67.067 
+				37.962,69.783 32.67,69.052 32.67,54.429 57.181,53.593 			"/>
+			<linearGradient id="SVGID_6_greentanks" gradientUnits="userSpaceOnUse" x1="34.8944" y1="54.0057" x2="60.7982" y2="67.7932">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="0.544" style="stop-color:#999999"/>
+				<stop  offset="0.6703" style="stop-color:#F2F2F2"/>
+				<stop  offset="1" style="stop-color:#CCCCCC"/>
+			</linearGradient>
+			<polygon fill="url(#SVGID_6_greentanks)" points="62.264,67.067 37.962,69.783 37.962,55.16 62.264,54.429 			"/>
+			<polyline fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" points="33.54,54.777 37.962,55.16 
+				57.042,54.36 			"/>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_1_greentanks" filterUnits="userSpaceOnUse" x="40.831" y="57.793" width="8.377" height="5.571">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="40.831" y="57.793" width="8.377" height="5.571" id="SVGID_7_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_1_greentanks)">
+						
+							<image overflow="visible" width="14" height="11" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAGHAAABnQAAAgX/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAsADgMBIgACEQEDEQH/
+xAB6AAADAQAAAAAAAAAAAAAAAAACAwQFAQEAAAAAAAAAAAAAAAAAAAAAEAACAgMBAAAAAAAAAAAA
+AAADBgABBDQFRhEAAAQFAgUFAAAAAAAAAAAAARECAwAhEgQFMTNRsSIyNcFiwkWFEgEAAAAAAAAA
+AAAAAAAAAAAA/9oADAMBAAIRAxEAAADDaMx//9oACAECAAEFAJ//2gAIAQMAAQUAn//aAAgBAQAB
+BQC1QuQrdBPoBFjS9T//2gAIAQICBj8Af//aAAgBAwIGPwB//9oACAEBAQY/ALPMY5DlxdOOOBcs
+oCsaK1NoFCUz6aJyEeo9AjFY5lw8td277tywaRJxtAvNoKqVU26jKR8Yd83uj4nZ7U9/v9Cj7XX9
+Ta5/GP/Z" transform="matrix(1 0 0 1 38 55)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_7_greentanks)">
+					<path fill="#999999" d="M42.001,60.829c0,0.75,0.614,1.346,1.364,1.324l2.913-0.085c0.75-0.022,1.425-0.65,1.499-1.397
+						l0.147-1.475c0.075-0.747,0.394-1.365,0.71-1.374c0.316-0.009,0.574,0.597,0.574,1.348v2.39c0,0.75-0.613,1.402-1.361,1.449
+						l-5.654,0.352c-0.749,0.047-1.361-0.529-1.361-1.279v-2.925c0-0.75,0.263-1.364,0.585-1.364c0.322,0,0.585,0.614,0.585,1.364
+						V60.829z"/>
+				</g>
+			</g>
+			<g>
+				<path fill="none" stroke="#808080" stroke-width="1.8189" stroke-linecap="round" d="M41.305,58.433l2.611,0.252
+					c0.747,0.072,1.971,0.098,2.72,0.058l4.448-0.238c0.749-0.04,0.755-0.165,0.014-0.277l-2.551-0.387"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#E6E6E6" stroke-width="1.8189" stroke-linecap="round" d="M41.305,58.119l2.611,0.252
+					c0.747,0.072,1.971,0.098,2.72,0.058l4.448-0.238c0.749-0.04,0.755-0.165,0.014-0.277l-2.551-0.387"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" d="M41.096,57.701l2.611,0.252
+					c0.747,0.072,1.971,0.098,2.72,0.058l4.769-0.255"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_2_greentanks" filterUnits="userSpaceOnUse" x="40.622" y="67.089" width="1.17" height="2.311">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="40.622" y="67.089" width="1.17" height="2.311" id="SVGID_8_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_2_greentanks)">
+						
+							<image overflow="visible" width="6" height="7" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF1AAABgwAAAbj/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAcABgMBIgACEQEDEQH/
+xABqAAEBAAAAAAAAAAAAAAAAAAAABgEBAAAAAAAAAAAAAAAAAAAAABAAAgMAAAAAAAAAAAAAAAAA
+AAQCAwURAAEEAgMAAAAAAAAAAAAAAAIBERIDIQQAExQSAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEA
+AhEDEQAAAIoH/9oACAECAAEFAD//2gAIAQMAAQUAP//aAAgBAQABBQBizOkj/9oACAECAgY/AH//
+2gAIAQMCBj8Af//aAAgBAQEGPwDTDXqMN0O32WkrhY5PVBJK0RwuE5//2Q==" transform="matrix(1 0 0 1 38 65)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_8_greentanks)">
+					<rect x="40.622" y="67.089" fill="#999999" width="1.17" height="2.311"/>
+				</g>
+			</g>
+			<g>
+				<path fill="none" stroke="#808080" stroke-width="1.8189" stroke-linecap="round" d="M41.305,66.963l2.618,0.367
+					c0.743,0.104,1.963,0.142,2.711,0.084l4.452-0.346c0.748-0.058,0.756-0.218,0.019-0.355l-2.036-0.378"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#E6E6E6" stroke-width="1.8189" stroke-linecap="round" d="M41.305,66.754l2.618,0.367
+					c0.743,0.104,1.963,0.142,2.711,0.084l4.452-0.346c0.748-0.058,0.756-0.218,0.019-0.355l-2.036-0.378"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#FFFFFF" stroke-width="0.4547" stroke-linecap="round" d="M41.096,66.441l2.618,0.367
+					c0.743,0.104,1.963,0.142,2.711,0.084l4.979-0.386"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_3_greentanks" filterUnits="userSpaceOnUse" x="56.527" y="56.53" width="3.536" height="4.85">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="56.527" y="56.53" width="3.536" height="4.85" id="SVGID_9_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_3_greentanks)">
+						
+							<image overflow="visible" width="9" height="10" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF6AAABiwAAAcP/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAoACQMBIgACEQEDEQH/
+xABuAAEBAQAAAAAAAAAAAAAAAAAABQYBAQAAAAAAAAAAAAAAAAAAAAAQAAIDAQAAAAAAAAAAAAAA
+AAAFEAMEBhEAAQMDBQAAAAAAAAAAAAAAAgERAxITBSAhMSIyEgEAAAAAAAAAAAAAAAAAAAAA/9oA
+DAMBAAIRAxEAAACbkQ//2gAIAQIAAQUAP//aAAgBAwABBQA//9oACAEBAAEFAMqFHZw0/wD/2gAI
+AQICBj8Af//aAAgBAwIGPwB//9oACAEBAQY/AJ8vIbZAFJ5aiK2aSIIRWwVE7i3pNqn40f/Z" transform="matrix(1 0 0 1 54 54)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_9_greentanks)">
+					<path fill="#999999" d="M60.063,58.83c0.01,1.337-0.773,2.478-1.75,2.547c-0.977,0.069-1.776-0.959-1.786-2.297
+						c-0.01-1.337,0.773-2.477,1.75-2.547C59.253,56.464,60.053,57.493,60.063,58.83z"/>
+				</g>
+			</g>
+			<path fill="#0071BC" d="M60.063,57.785c0.01,1.337-0.773,2.478-1.75,2.547c-0.977,0.069-1.776-0.959-1.786-2.297
+				c-0.01-1.337,0.773-2.477,1.75-2.547C59.253,55.42,60.053,56.448,60.063,57.785z"/>
+			<path fill="#0071BC" stroke="#FFFFFF" stroke-width="0.4547" d="M56.527,58.036c-0.01-1.337,0.773-2.477,1.75-2.547"/>
+			<path fill="#FFFFFF" d="M59.501,57.825c0.007,0.912-0.527,1.69-1.193,1.737c-0.666,0.047-1.211-0.654-1.218-1.566
+				c-0.007-0.912,0.527-1.689,1.193-1.736C58.948,56.212,59.494,56.914,59.501,57.825z"/>
+			<path fill="none" stroke="#FFFFFF" stroke-width="0.4547" d="M59.501,57.825c0.007,0.912-0.527,1.69-1.193,1.737"/>
+			<path fill="none" stroke="#000000" stroke-width="0.4547" d="M57.298,58.1c-0.007-0.912,0.527-1.689,1.193-1.736"/>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_4_greentanks" filterUnits="userSpaceOnUse" x="56.527" y="62.171" width="3.536" height="4.85">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="56.527" y="62.171" width="3.536" height="4.85" id="SVGID_10_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_4_greentanks)">
+						
+							<image overflow="visible" width="9" height="10" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF4AAABhwAAAb//2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAoACQMBIgACEQEDEQH/
+xABsAAEBAQAAAAAAAAAAAAAAAAAABQYBAQAAAAAAAAAAAAAAAAAAAAAQAAEFAAAAAAAAAAAAAAAA
+AAAQAwUGFhEAAgEEAwAAAAAAAAAAAAAAAQIhETEDEyASBRIBAAAAAAAAAAAAAAAAAAAAAP/aAAwD
+AQACEQMRAAAAjZgP/9oACAECAAEFAD//2gAIAQMAAQUAP//aAAgBAQABBQBqMrmLX//aAAgBAgIG
+PwB//9oACAEDAgY/AH//2gAIAQEBBj8Ayeg+VT7BaF2VdCcvRU1B1hkUmQTci1OH/9k=" transform="matrix(1 0 0 1 54 60)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_10_greentanks)">
+					<path fill="#999999" d="M60.063,64.47c0.01,1.337-0.773,2.478-1.75,2.547c-0.977,0.069-1.776-0.96-1.786-2.297
+						c-0.01-1.337,0.773-2.477,1.75-2.547C59.253,62.105,60.053,63.133,60.063,64.47z"/>
+				</g>
+			</g>
+			<path fill="#0071BC" d="M60.063,63.426c0.01,1.337-0.773,2.478-1.75,2.547c-0.977,0.069-1.776-0.959-1.786-2.297
+				c-0.01-1.337,0.773-2.477,1.75-2.547C59.253,61.06,60.053,62.089,60.063,63.426z"/>
+			<path fill="#0071BC" stroke="#FFFFFF" stroke-width="0.4547" d="M56.527,63.676c-0.01-1.337,0.773-2.477,1.75-2.547"/>
+			<path fill="#FFFFFF" d="M59.501,63.465c0.007,0.912-0.527,1.69-1.193,1.737c-0.666,0.047-1.211-0.654-1.218-1.566
+				c-0.007-0.912,0.527-1.689,1.193-1.736C58.948,61.853,59.494,62.554,59.501,63.465z"/>
+			<path fill="none" stroke="#FFFFFF" stroke-width="0.4547" d="M59.501,63.465c0.007,0.912-0.527,1.69-1.193,1.737"/>
+			<path fill="none" stroke="#000000" stroke-width="0.4547" d="M57.298,63.741c-0.007-0.912,0.527-1.689,1.193-1.736"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<polygon fill="#F2F2F2" stroke="#333333" stroke-width="0.3229" stroke-linejoin="round" points="99.338,52.359 99.338,62.737 
+				80.02,64.896 75.814,64.315 75.814,52.691 95.298,52.027 			"/>
+			<linearGradient id="SVGID_11_greentanks" gradientUnits="userSpaceOnUse" x1="77.5816" y1="52.3544" x2="98.1729" y2="63.3142">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="0.544" style="stop-color:#999999"/>
+				<stop  offset="0.6703" style="stop-color:#F2F2F2"/>
+				<stop  offset="1" style="stop-color:#CCCCCC"/>
+			</linearGradient>
+			<polygon fill="url(#SVGID_11_greentanks)" points="99.338,62.737 80.02,64.896 80.02,53.272 99.338,52.691 			"/>
+			<polyline fill="none" stroke="#FFFFFF" stroke-width="0.3615" stroke-linecap="round" points="76.505,52.968 80.02,53.272 
+				95.187,52.636 			"/>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_5_greentanks" filterUnits="userSpaceOnUse" x="82.301" y="55.365" width="6.659" height="4.429">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="82.301" y="55.365" width="6.659" height="4.429" id="SVGID_12_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_5_greentanks)">
+						
+							<image overflow="visible" width="11" height="9" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAGFAAABlgAAAd7/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAkACwMBIgACEQEDEQH/
+xAB5AAADAQAAAAAAAAAAAAAAAAAAAQUGAQEAAAAAAAAAAAAAAAAAAAAAEAACAwEAAAAAAAAAAAAA
+AAAABRAEFAYRAAECAgYLAAAAAAAAAAAAAAECAxIEABARITIzMUGhUmITFAUVNUUSAQAAAAAAAAAA
+AAAAAAAAAAD/2gAMAwEAAhEDEQAAAI6zAf/aAAgBAgABBQA//9oACAEDAAEFAD//2gAIAQEAAQUA
+ooUrBZg5uf/aAAgBAgIGPwB//9oACAEDAgY/AH//2gAIAQEBBj8A7U8Z6Uk3o3fKB2ZDbym+bYiB
+CokhQQDZcNWmmY17vp87529jwce2v//Z" transform="matrix(1 0 0 1 80 53)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_12_greentanks)">
+					<path fill="#999999" d="M83.231,57.778c0,0.596,0.488,1.07,1.084,1.053l2.316-0.067c0.596-0.017,1.132-0.517,1.192-1.111
+						l0.117-1.173c0.059-0.593,0.313-1.085,0.564-1.092s0.456,0.475,0.456,1.071v1.9c0,0.596-0.487,1.115-1.082,1.152l-4.495,0.28
+						c-0.595,0.037-1.082-0.42-1.082-1.017v-2.325c0-0.596,0.209-1.084,0.465-1.084c0.256,0,0.465,0.488,0.465,1.084V57.778z"/>
+				</g>
+			</g>
+			<g>
+				<path fill="none" stroke="#808080" stroke-width="1.4458" stroke-linecap="round" d="M82.678,55.873l2.076,0.201
+					c0.594,0.057,1.567,0.078,2.162,0.046l3.535-0.189c0.596-0.032,0.6-0.131,0.011-0.221l-2.027-0.308"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#E6E6E6" stroke-width="1.4458" stroke-linecap="round" d="M82.678,55.624l2.076,0.201
+					c0.594,0.057,1.567,0.078,2.162,0.046l3.535-0.189c0.596-0.032,0.6-0.131,0.011-0.221l-2.027-0.308"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#FFFFFF" stroke-width="0.3615" stroke-linecap="round" d="M82.511,55.292l2.076,0.2
+					c0.594,0.057,1.567,0.078,2.162,0.046l3.791-0.202"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_6_greentanks" filterUnits="userSpaceOnUse" x="82.134" y="62.754" width="0.93" height="1.837">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="82.134" y="62.754" width="0.93" height="1.837" id="SVGID_13_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_6_greentanks)">
+						
+							<image overflow="visible" width="6" height="7" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF3AAABhQAAAbv/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAcABgMBIgACEQEDEQH/
+xABsAAEBAAAAAAAAAAAAAAAAAAAABgEBAAAAAAAAAAAAAAAAAAAAABAAAgMAAAAAAAAAAAAAAAAA
+AAUCAwQRAAEDAwUAAAAAAAAAAAAAAAECAwQhEiIAgTITFBIBAAAAAAAAAAAAAAAAAAAAAP/aAAwD
+AQACEQMRAAAAiwf/2gAIAQIAAQUAP//aAAgBAwABBQA//9oACAEBAAEFANNq2S//2gAIAQICBj8A
+f//aAAgBAwIGPwB//9oACAEBAQY/AITcZlaJzfb7nVHBy5QLNmR4poaDfX//2Q==" transform="matrix(1 0 0 1 80 60)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_13_greentanks)">
+					<rect x="82.134" y="62.754" fill="#999999" width="0.93" height="1.837"/>
+				</g>
+			</g>
+			<g>
+				<path fill="none" stroke="#808080" stroke-width="1.4458" stroke-linecap="round" d="M82.678,62.654l2.081,0.292
+					c0.591,0.083,1.56,0.113,2.155,0.067l3.539-0.275c0.595-0.046,0.601-0.173,0.015-0.282l-1.618-0.3"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#E6E6E6" stroke-width="1.4458" stroke-linecap="round" d="M82.678,62.488l2.081,0.292
+					c0.591,0.083,1.56,0.113,2.155,0.067l3.539-0.275c0.595-0.046,0.601-0.173,0.015-0.282l-1.618-0.3"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#FFFFFF" stroke-width="0.3615" stroke-linecap="round" d="M82.511,62.239l2.082,0.292
+					c0.591,0.083,1.56,0.113,2.155,0.067l3.958-0.307"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_7_greentanks" filterUnits="userSpaceOnUse" x="94.778" y="54.361" width="2.811" height="3.856">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="94.778" y="54.361" width="2.811" height="3.856" id="SVGID_14_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_7_greentanks)">
+						
+							<image overflow="visible" width="8" height="9" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF2AAABhQAAAb7/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAkACAMBIgACEQEDEQH/
+xABqAAEBAQAAAAAAAAAAAAAAAAAABQYBAQAAAAAAAAAAAAAAAAAAAAAQAAMBAAAAAAAAAAAAAAAA
+AAACBgQRAAICAgMBAAAAAAAAAAAAAAECERIhAwATBAUSAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEA
+AhEDEQAAAILOj//aAAgBAgABBQA//9oACAEDAAEFAD//2gAIAQEAAQUAXNMrHH//2gAIAQICBj8A
+f//aAAgBAwIGPwB//9oACAEBAQY/AH9J2BvutsqELtdD2DC6xAr1CbEHJiZgDn//2Q==" transform="matrix(1 0 0 1 92 52)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_14_greentanks)">
+					<path fill="#999999" d="M97.589,56.189c0.008,1.063-0.615,1.969-1.391,2.025c-0.776,0.055-1.412-0.763-1.42-1.826
+						c-0.008-1.063,0.615-1.969,1.391-2.024C96.945,54.308,97.581,55.126,97.589,56.189z"/>
+				</g>
+			</g>
+			<path fill="#0071BC" d="M97.589,55.359c0.008,1.063-0.615,1.969-1.391,2.025c-0.776,0.055-1.412-0.763-1.42-1.826
+				c-0.008-1.063,0.615-1.969,1.391-2.024C96.945,53.479,97.581,54.296,97.589,55.359z"/>
+			<path fill="#0071BC" stroke="#FFFFFF" stroke-width="0.3615" d="M94.778,55.558c-0.008-1.063,0.615-1.969,1.391-2.024"/>
+			<path fill="#FFFFFF" d="M97.142,55.39c0.005,0.725-0.419,1.343-0.949,1.381c-0.529,0.038-0.963-0.52-0.968-1.245
+				c-0.006-0.725,0.419-1.343,0.948-1.38C96.703,54.108,97.136,54.666,97.142,55.39z"/>
+			<path fill="none" stroke="#FFFFFF" stroke-width="0.3615" d="M97.142,55.39c0.005,0.725-0.419,1.343-0.949,1.381"/>
+			<path fill="none" stroke="#000000" stroke-width="0.3615" d="M95.391,55.609c-0.005-0.725,0.419-1.343,0.948-1.38"/>
+		</g>
+		<g>
+			<g>
+				<defs>
+					<filter id="Adobe_OpacityMaskFilter_8_greentanks" filterUnits="userSpaceOnUse" x="94.778" y="58.845" width="2.811" height="3.856">
+						<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+						<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+					</filter>
+				</defs>
+				<mask maskUnits="userSpaceOnUse" x="94.778" y="58.845" width="2.811" height="3.856" id="SVGID_15_greentanks">
+					<g filter="url(#Adobe_OpacityMaskFilter_8_greentanks)">
+						
+							<image overflow="visible" width="8" height="9" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAF4AAABhwAAAb//2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAAkACAMBIgACEQEDEQH/
+xABsAAEBAQAAAAAAAAAAAAAAAAAABQYBAQAAAAAAAAAAAAAAAAAAAAAQAAMBAAAAAAAAAAAAAAAA
+AAACBgQRAAEEAQUBAAAAAAAAAAAAAAERAhIDExAxMkIEFRIBAAAAAAAAAAAAAAAAAAAAAP/aAAwD
+AQACEQMRAAAAgs6P/9oACAECAAEFAD//2gAIAQMAAQUAP//aAAgBAQABBQBcE40cf//aAAgBAgIG
+PwB//9oACAEDAgY/AH//2gAIAQEBBj8Af7BePuMsU1GyL0yBkG1Hk3GZKBv2QEaf/9k=" transform="matrix(1 0 0 1 92 56)">
+						</image>
+					</g>
+				</mask>
+				<g mask="url(#SVGID_15_greentanks)">
+					<path fill="#999999" d="M97.589,60.673c0.008,1.063-0.615,1.97-1.391,2.025c-0.776,0.055-1.412-0.763-1.42-1.826
+						c-0.008-1.063,0.615-1.969,1.391-2.025C96.945,58.792,97.581,59.61,97.589,60.673z"/>
+				</g>
+			</g>
+			<path fill="#0071BC" d="M97.589,59.842c0.008,1.063-0.615,1.97-1.391,2.025c-0.776,0.055-1.412-0.762-1.42-1.826
+				c-0.008-1.063,0.615-1.969,1.391-2.024C96.945,57.962,97.581,58.78,97.589,59.842z"/>
+			<path fill="#0071BC" stroke="#FFFFFF" stroke-width="0.3615" d="M94.778,60.041c-0.008-1.063,0.615-1.969,1.391-2.024"/>
+			<path fill="#FFFFFF" d="M97.142,59.874c0.005,0.725-0.419,1.343-0.949,1.381c-0.529,0.038-0.963-0.52-0.968-1.245
+				c-0.006-0.725,0.419-1.343,0.948-1.38C96.703,58.592,97.136,59.149,97.142,59.874z"/>
+			<path fill="none" stroke="#FFFFFF" stroke-width="0.3615" d="M97.142,59.874c0.005,0.725-0.419,1.343-0.949,1.381"/>
+			<path fill="none" stroke="#000000" stroke-width="0.3615" d="M95.391,60.093c-0.005-0.725,0.419-1.343,0.948-1.38"/>
+		</g>
+	</g>
+	<line fill="none" stroke="#666666" stroke-width="0.6821" x1="80.542" y1="73.369" x2="80.542" y2="64.881"/>
+</g>
+</svg>

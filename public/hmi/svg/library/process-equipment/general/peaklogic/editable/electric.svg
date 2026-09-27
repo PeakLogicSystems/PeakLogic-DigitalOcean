@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g id="frame">
+	<g id="frame_1_">
+		<rect fill="none" width="100" height="100"/>
+	</g>
+</g>
+<g id="shape">
+	<circle fill="#187AA0" cx="50" cy="50" r="49"/>
+</g>
+<g id="radial">
+</g>
+<g id="linear">
+</g>
+<g id="dark">
+</g>
+<g id="shadow">
+</g>
+<g id="hlight">
+	<g id="light">
+		<path fill="#FFFFFF" d="M50,92.588c-0.064,0-0.13-0.006-0.196-0.02c-0.495-0.099-0.839-0.55-0.802-1.054l2.596-35.528
+			l-15.571-5.558c-0.512-0.183-0.784-0.74-0.613-1.257L49.051,8.097c0.159-0.479,0.646-0.77,1.145-0.665
+			c0.495,0.099,0.839,0.55,0.802,1.054l-2.596,35.528l15.571,5.558c0.512,0.183,0.784,0.74,0.613,1.257L50.949,91.903
+			C50.811,92.318,50.424,92.588,50,92.588z"/>
+	</g>
+</g>
+</svg>

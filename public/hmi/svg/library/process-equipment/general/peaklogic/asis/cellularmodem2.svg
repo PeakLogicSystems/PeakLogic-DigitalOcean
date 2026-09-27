@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="56.911" height="122.735" version="1.1" viewBox="0 0 56.911 122.735">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="shape">
+      <g>
+        <rect x="1.5" y="43.75" width="53.911" height="77.485" rx="8.209" ry="8.209" fill="#666" stroke="#000" stroke-linejoin="round" stroke-width="3"/>
+        <rect x="37.432" y="37.468" width="8.167" height="5.654"/>
+        <rect x="23.995" y="37.468" width="8.167" height="5.654"/>
+        <rect x="10.557" y="37.468" width="8.167" height="5.654"/>
+        <path d="M29.768,43.75h10.774s-.539-38.95-.539-38.95C39.976,2.142,37.814,0,35.155,0h0c-2.659,0-4.822,2.142-4.848,4.801l-.539,38.95Z"/>
+        <rect x="37.432" y="37.468" width="8.167" height="5.654"/>
+        <rect x="23.995" y="37.468" width="8.167" height="5.654"/>
+        <rect x="10.557" y="37.468" width="8.167" height="5.654"/>
+        <rect x="14.566" y="42.56" width="10.217" height="7.073"/>
+        <rect x="16.944" y="55.539" width="5.502" height="11.789" transform="translate(39.389 122.867) rotate(-180)" fill="#4bf062"/>
+        <rect x="26.768" y="55.539" width="5.502" height="11.789" transform="translate(59.037 122.867) rotate(-180)" fill="#4bf062"/>
+      </g>
+    </g>
+  </g>
+</svg>

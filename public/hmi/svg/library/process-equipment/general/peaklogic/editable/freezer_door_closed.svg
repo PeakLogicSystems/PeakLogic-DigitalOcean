@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 148 200" enable-background="new 0 0 148 200" xml:space="preserve">
+<g id="shape">
+	<rect x="18.969" y="12.337" fill="#187AA0" width="110.063" height="185.663"/>
+	<polygon fill="#187AA0" points="148.419,198 132.371,198 132.371,10.028 16.316,10.028 16.316,198 0,198 0,187.972 6.288,187.972 
+		6.288,0 142.4,0 142.4,187.972 148.419,187.972 	"/>
+</g>
+<g id="radial">
+</g>
+<g id="linear">
+</g>
+<g id="dark">
+</g>
+<g id="light">
+	<g>
+		<polygon fill="#9EDAE2" points="111.242,124.234 111.242,88.464 119.314,80.391 119.314,21.509 28.686,21.509 28.686,187.269 
+			119.314,187.269 119.314,132.307 		"/>
+		<polygon fill="#9EDAE2" points="119.314,126.42 119.314,86.305 115.242,90.964 115.242,121.734 		"/>
+	</g>
+</g>
+<g id="shadow">
+</g>
+<g id="hlight">
+	
+		<rect x="27.641" y="59.407" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -26.0174 60.0019)" fill="#187AA0" width="63.557" height="4"/>
+	
+		<rect x="26.941" y="70.872" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -29.9611 73.4122)" fill="#187AA0" width="93.39" height="4"/>
+	
+		<rect x="40.918" y="144.408" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -81.6643 95.6618)" fill="#187AA0" width="67.448" height="4"/>
+	
+		<rect x="63.821" y="159.084" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -89.892 105.149)" fill="#187AA0" width="36.319" height="4"/>
+</g>
+</svg>

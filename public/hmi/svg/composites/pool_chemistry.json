@@ -1,0 +1,40 @@
+{
+  "id": "pool_chemistry",
+  "label": "Pool chemistry",
+  "group": "Process equipment",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_chemistry.svg",
+  "tagRoles": {
+    "phPv": { "pick": "tagId", "tagId": "PH_PV", "types": ["REAL"] },
+    "orpPv": { "pick": "tagId", "tagId": "ORP_PV", "types": ["REAL"] },
+    "condPv": { "pick": "tagId", "tagId": "COND_PV", "types": ["REAL"] },
+    "orpSp": { "pick": "tagId", "tagId": "ORP_SP", "types": ["REAL"] },
+    "orpAuto": { "pick": "tagId", "tagId": "POOL_ORP_AUTO", "types": ["BOOL"] },
+    "phAuto": { "pick": "tagId", "tagId": "POOL_PH_AUTO", "types": ["BOOL"] },
+    "condAuto": { "pick": "tagId", "tagId": "POOL_COND_AUTO", "types": ["BOOL"] },
+    "flowOk": { "pick": "tagId", "tagId": "POOL_FLOW_OK", "types": ["BOOL"] },
+    "flowGpm": { "pick": "tagId", "tagId": "FLOW_GPM", "types": ["REAL", "INT"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_chemistry.svg"
+    }
+  ],
+  "defaultBindings": [
+    { "elementId": "flow_lamp", "property": "fill", "tagRole": "flowOk", "onValue": "#22c55e", "offValue": "#ef4444" },
+    { "elementId": "flow_gpm", "property": "text", "tagRole": "flowGpm", "format": "fixed1", "min": 0, "max": 500 },
+    { "elementId": "ph_pv", "property": "text", "tagRole": "phPv", "format": "fixed1", "min": 0, "max": 14 },
+    { "elementId": "orp_pv", "property": "text", "tagRole": "orpPv", "format": "int", "min": 0, "max": 1200 },
+    { "elementId": "cond_pv", "property": "text", "tagRole": "condPv", "format": "int", "min": 0, "max": 10000 },
+    { "elementId": "orp_sp_value", "property": "text", "tagRole": "orpSp", "format": "int", "interaction": "edit", "min": 400, "max": 900 },
+    { "elementId": "btn_cl2_auto", "property": "fill", "tagRole": "orpAuto", "interaction": "toggle", "onValue": "#64748b", "offValue": "#cbd5e1" },
+    { "elementId": "btn_cl2_manual", "property": "fill", "tagRole": "orpAuto", "onValue": "#cbd5e1", "offValue": "#64748b" },
+    { "elementId": "btn_ph_auto", "property": "fill", "tagRole": "phAuto", "interaction": "toggle", "onValue": "#64748b", "offValue": "#cbd5e1" },
+    { "elementId": "btn_ph_manual", "property": "fill", "tagRole": "phAuto", "onValue": "#cbd5e1", "offValue": "#64748b" },
+    { "elementId": "btn_cond_auto", "property": "fill", "tagRole": "condAuto", "interaction": "toggle", "onValue": "#64748b", "offValue": "#cbd5e1" },
+    { "elementId": "btn_cond_manual", "property": "fill", "tagRole": "condAuto", "onValue": "#cbd5e1", "offValue": "#64748b" }
+  ]
+}

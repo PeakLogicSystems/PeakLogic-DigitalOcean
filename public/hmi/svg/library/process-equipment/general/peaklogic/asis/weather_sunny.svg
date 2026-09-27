@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 267.932 198.28" enable-background="new 0 0 267.932 198.28" xml:space="preserve">
+<g id="sunny">
+	
+		<radialGradient id="SVGID_1_" cx="133.9655" cy="100.86" r="63.604" gradientTransform="matrix(1 0 0 -1 0 200)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0.3678" style="stop-color:#FFFF00"/>
+		<stop  offset="0.4437" style="stop-color:#FEF20A"/>
+		<stop  offset="0.6817" style="stop-color:#FDCE24"/>
+		<stop  offset="0.8756" style="stop-color:#FBB835"/>
+		<stop  offset="1" style="stop-color:#FBB03B"/>
+	</radialGradient>
+	<polygon fill="url(#SVGID_1_)" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="133.966,66.374 147.299,35.711 
+		147.008,69.147 171.66,46.557 157.795,76.984 189.504,66.374 164.461,88.531 197.744,91.736 165.855,101.791 194.957,118.257 
+		161.735,114.472 181.624,141.351 152.813,124.381 160.05,157.025 140.632,129.804 133.966,162.569 127.299,129.804 
+		107.882,157.025 115.118,124.381 86.308,141.351 106.197,114.472 72.975,118.257 102.076,101.791 70.187,91.736 103.47,88.531 
+		78.428,66.374 110.137,76.984 96.271,46.557 120.924,69.147 120.632,35.711 	"/>
+</g>
+</svg>

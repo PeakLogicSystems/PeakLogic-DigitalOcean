@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="pl_silver" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="50%" stop-color="silver"/>
+      <stop offset="100%" stop-color="white"/>
+    </linearGradient>
+    <filter id="pl_shadow"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <g>
+    <polygon transform="translate(5,5)" fill="#64748b" stroke="none" filter="url(#pl_shadow)"
+      points="63,0 27,0 0,27 0,63 27,90 63,90 90,63 90,27 63,0"/>
+    <polygon fill="url(#pl_silver)" stroke="none"
+      points="63,0 27,0 0,27 0,63 27,90 63,90 90,63 90,27 63,0"/>
+    <polygon id="lamp" fill="#22c55e" stroke="#000" stroke-width="5"
+      points="58,10 32,10 10,32 10,58 32,80 58,80 80,58 80,32 58,10"/>
+  </g>
+</svg>

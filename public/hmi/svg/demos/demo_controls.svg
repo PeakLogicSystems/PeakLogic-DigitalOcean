@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 800" width="1024" height="800">
+  <rect width="1024" height="800" fill="#f1f5f9"/>
+  <text x="32" y="40" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#0f172a">PeakLogic  Control graphics demo</text>
+  <text x="32" y="68" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">PeakLogic round pilot + start/stop buttons � browse PeakLogic symbols in HMI Setup � vendor folder peaklogic</text>
+
+  <!-- PeakLogic round pilot (DI1) -->
+  <text x="180" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">PeakLogic pilot (DI1)</text>
+  <g transform="translate(130, 140) scale(1.1)">
+    <g id="pilot_di1">
+      <g id="frame"><rect fill="none" width="100" height="100"/></g>
+      <g id="shape"><circle fill="#64748b" cx="50" cy="50" r="49"/></g>
+      <g id="hlight">
+        <path fill="#FFFFFF" d="M34.3,83.692c-0.181,0-0.365-0.032-0.543-0.102c-0.772-0.301-1.155-1.17-0.854-1.942l6.334-16.289c0.3-0.771,1.169-1.155,1.941-0.854s1.155,1.17,0.854,1.942l-6.334,16.289C35.467,83.329,34.9,83.692,34.3,83.692z"/>
+        <path fill="#FFFFFF" d="M65.204,83.692c-0.601,0-1.168-0.363-1.398-0.956l-6.334-16.289c-0.3-0.772,0.082-1.642,0.854-1.942c0.769-0.3,1.642,0.083,1.941,0.854l6.334,16.289c0.3,0.772-0.082,1.642-0.854,1.942C65.568,83.66,65.384,83.692,65.204,83.692z"/>
+        <path fill="#FFFFFF" d="M50,49.658c7.66,0,20.885,1.008,25.499,4.488c-1.471-7.328-8.704-13.286-18.241-15.326c-0.761-5.317-2.47-9.533-4.628-11.461v-1.605c0-1.451,1.18-2.631,2.631-2.631H60c1.451,0,2.631,1.18,2.631,2.631v3.05c0,4.352,3.541,7.893,7.893,7.893h0.792c0.241,4.594,1.341,8.067,2.665,8.067c1.499,0,2.715-4.456,2.715-9.954c0-5.497-1.215-9.954-2.715-9.954c-1.176,0-2.174,2.745-2.551,6.579h-0.905c-1.451,0-2.631-1.18-2.631-2.631v-3.05c0-4.352-3.541-7.893-7.893-7.893h-4.738c-4.352,0-7.893,3.54-7.893,7.893v1.605c-2.158,1.927-3.867,6.144-4.628,11.461c-9.537,2.04-16.77,7.998-18.241,15.326C29.115,50.666,42.34,49.658,50,49.658z"/>
+        <path fill="#FFFFFF" d="M55.855,51.172c-0.904,2.363-3.174,4.051-5.855,4.051c-2.681,0-4.95-1.688-5.855-4.051C32.724,51.776,24.21,54.11,24.21,56.899c0,3.248,11.546,5.882,25.79,5.882s25.79-2.633,25.79-5.882C75.79,54.11,67.276,51.776,55.855,51.172z"/>
+      </g>
+    </g>
+  </g>
+  <text id="label_di1" x="180" y="290" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#0f172a">DI1 OFF</text>
+
+  <!-- PeakLogic round START (Q1 run indicator) -->
+  <text x="420" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">PeakLogic START (Q1)</text>
+  <g transform="translate(370, 140) scale(1.1)">
+    <g id="btn_start">
+      <circle cx="50" cy="50" r="49" fill="#64748b"/>
+      <path d="M76.923,43.218h-20.141v-20.141c0-1.361-1.104-2.465-2.465-2.465h-8.634c-1.361,0-2.465,1.103-2.465,2.465v20.141h-20.141c-1.361,0-2.465,1.104-2.465,2.465v8.634c0,1.361,1.103,2.465,2.465,2.465h20.141v20.141c0,1.361,1.104,2.465,2.465,2.465h8.634c1.361,0,2.465-1.103,2.465-2.465v-20.141h20.141c1.361,0,2.465-1.103,2.465-2.465v-8.634c0-1.361-1.103-2.465-2.465-2.465Z" fill="#fff"/>
+    </g>
+  </g>
+
+  <!-- PeakLogic round STOP -->
+  <text x="580" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">PeakLogic STOP</text>
+  <g transform="translate(530, 140) scale(1.1)">
+    <g id="btn_stop">
+      <circle cx="50" cy="50" r="49" fill="#187aa0"/>
+      <rect x="28.658" y="26.153" width="42.685" height="47.694" rx="2" ry="2" fill="#fff"/>
+    </g>
+  </g>
+  <text id="label_q1" x="500" y="290" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" font-weight="600" fill="#0f172a">Pump STOP</text>
+
+  <!-- PeakLogic round pilot (Q1) -->
+  <text x="820" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">PeakLogic pilot (Q1)</text>
+  <g transform="translate(770, 130)">
+    <g id="mb_pilot_q1">
+      <polygon transform="translate(5,5)" fill="grey" stroke="none" points="63,0 27,0 0,27 0,63 27,90 63,90 90,63 90,27 63,0"/>
+      <polygon fill="#cbd5e1" stroke="none" points="63,0 27,0 0,27 0,63 27,90 63,90 90,63 90,27 63,0"/>
+      <circle cx="45" cy="45" r="35" fill="#64748b" stroke="black" stroke-width="5"/>
+    </g>
+  </g>
+
+  <!-- PeakLogic momentary push button (visual) -->
+  <text x="820" y="320" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">PeakLogic push button</text>
+  <g transform="translate(765, 340)">
+    <g id="mb_btn_red">
+      <rect x="7" y="7" width="100" height="35" rx="15" fill="grey" stroke="none"/>
+      <rect fill="#dc2626" x="0" y="0" width="100" height="35" rx="15"/>
+      <text x="50" y="26" font-size="20" font-family="Segoe UI, Arial" text-anchor="middle" fill="white">STOP</text>
+    </g>
+  </g>
+
+  <rect x="32" y="420" width="960" height="340" rx="12" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="56" y="458" font-family="Segoe UI, Arial" font-size="18" font-weight="600" fill="#0f172a">PeakLogic symbol library (3400+ SVGs)</text>
+  <text x="56" y="488" font-family="Segoe UI, Arial" font-size="14" fill="#475569">HMI Setup � filter vendor peaklogic � Pilot_Light � PB_Momentary � Gauge_Dial � Pump � Pipes � Tanks</text>
+  <text x="56" y="518" font-family="Segoe UI, Arial" font-size="14" fill="#475569">Examples: library/controls/pilot-lights/peaklogic/ � library/controls/push-buttons/momentary/peaklogic/</text>
+  <text x="56" y="548" font-family="Segoe UI, Arial" font-size="14" fill="#475569">Bind element id <tspan font-family="Consolas, monospace">lamp</tspan> (pilot) or <tspan font-family="Consolas, monospace">button</tspan> (push button) to your tags.</text>
+  <text x="56" y="600" font-family="Segoe UI, Arial" font-size="14" fill="#64748b">Use Force tab to toggle Q1 � DI1 reflects input state on the PeakLogic pilot above.</text>
+</svg>

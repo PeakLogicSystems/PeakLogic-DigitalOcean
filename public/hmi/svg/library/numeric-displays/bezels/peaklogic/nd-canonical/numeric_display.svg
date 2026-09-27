@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="85" height="42" viewBox="0 0 85 42">
+  <defs>
+    <filter id="nd_shadow">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <linearGradient id="nd_bezel_grad" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="80" height="40" rx="2" fill="#64748b" filter="url(#nd_shadow)"/>
+  <rect x="0" y="0" width="80" height="40" rx="2" fill="url(#nd_bezel_grad)"/>
+  <rect x="2" y="2" width="76" height="36" rx="2" fill="url(#nd_bezel_grad)" stroke="#0f172a"/>
+  <rect x="5" y="5" width="70" height="30" rx="2" fill="#0f172a"/>
+</svg>

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g>
+		<g>
+			<linearGradient id="SVGID_1_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="7.8011" y1="55.0151" x2="7.8011" y2="35.644">
+				<stop  offset="0" style="stop-color:#758BA3"/>
+				<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+				<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+			</linearGradient>
+			<path fill="url(#SVGID_1_gasturbinegenerator)" d="M5.266,55.259c-1.953,0-3.536-4.445-3.536-9.928s1.583-9.928,3.536-9.928h5.644
+				c1.636,0,2.963,4.445,2.963,9.928s-1.326,9.928-2.963,9.928H5.266z"/>
+			<linearGradient id="SVGID_2_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="10.205" y1="54.8804" x2="14.3074" y2="36.3757">
+				<stop  offset="0" style="stop-color:#758BA3"/>
+				<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+				<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+			</linearGradient>
+			<path fill="url(#SVGID_2_gasturbinegenerator)" d="M11.14,35.432c-0.076-0.02-0.153-0.03-0.23-0.03c-1.636,0-2.963,4.445-2.963,9.928
+				s1.326,9.928,2.963,9.928c0.068,0,0.136-0.008,0.203-0.023c0,0,2.915-0.686,2.961-0.698c1.519-0.398,2.711-4.368,2.711-9.207
+				c0-4.784-1.166-8.719-2.66-9.192L11.14,35.432z"/>
+			<linearGradient id="SVGID_3_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="15.043" y1="54.3435" x2="15.043" y2="36.3159">
+				<stop  offset="0" style="stop-color:#758BA3"/>
+				<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+				<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+			</linearGradient>
+			<path fill="url(#SVGID_3_gasturbinegenerator)" d="M13.823,54.571c-1.636,0-2.963-4.137-2.963-9.24s1.326-9.24,2.963-9.24h2.867
+				c1.4,0,2.535,4.137,2.535,9.24s-1.135,9.24-2.535,9.24H13.823z"/>
+			<linearGradient id="SVGID_4_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="15.7882" y1="54.1318" x2="20.197" y2="37.2059">
+				<stop  offset="0" style="stop-color:#758BA3"/>
+				<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+				<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+			</linearGradient>
+			<path fill="url(#SVGID_4_gasturbinegenerator)" d="M16.939,36.135c-0.082-0.029-0.164-0.044-0.248-0.044c-1.4,0-2.535,4.137-2.535,9.24
+				s1.135,9.24,2.535,9.24c0.089,0,0.177-0.017,0.264-0.049l3.158-1.056c1.126-0.438,2.003-3.913,2.003-8.134
+				c0-4.284-0.904-7.799-2.054-8.151L16.939,36.135z"/>
+			<polyline fill="none" stroke="#4781C4" stroke-width="0.5462" stroke-linecap="round" stroke-miterlimit="10" points="
+				17.359,48.153 14.742,48.654 11.442,48.585 8.916,49.291 			"/>
+			<path fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-miterlimit="10" d="M10.91,35.403
+				c-1.636,0-2.963,4.445-2.963,9.928"/>
+			<path fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-miterlimit="10" d="M16.691,36.091
+				c-1.4,0-2.535,4.137-2.535,9.24"/>
+		</g>
+		<linearGradient id="SVGID_5_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="21.3962" y1="53.3103" x2="21.3962" y2="37.3493">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="0.7701" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_5_gasturbinegenerator)" d="M19.871,53.511c-1.24,0-2.244-3.663-2.244-8.181s1.005-8.181,2.244-8.181h3.05
+			c1.24,0,2.244,3.663,2.244,8.181s-1.005,8.181-2.244,8.181H19.871z"/>
+		<linearGradient id="SVGID_6_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="23.008" y1="55.1002" x2="28.306" y2="34.761">
+			<stop  offset="0" style="stop-color:#758BA3"/>
+			<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+			<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_6_gasturbinegenerator)" d="M26.681,34.395c0.165-0.112,0.334-0.17,0.508-0.17c1.598,0,2.893,4.972,2.893,11.106
+			s-1.295,11.106-2.893,11.106c-0.183,0-0.363-0.065-0.537-0.191l-4.237-2.944c-0.995-0.838-1.738-4.088-1.738-7.971
+			c0-3.948,0.767-7.242,1.788-8.011L26.681,34.395z"/>
+		<linearGradient id="SVGID_7_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="32.7524" y1="56.1637" x2="32.7524" y2="34.4951">
+			<stop  offset="0" style="stop-color:#758BA3"/>
+			<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+			<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_7_gasturbinegenerator)" d="M27.188,56.437c-1.598,0-2.893-4.972-2.893-11.106s1.295-11.106,2.893-11.106h11.905
+			c1.169,0,2.116,4.972,2.116,11.106s-0.948,11.106-2.116,11.106H27.188z"/>
+		<linearGradient id="SVGID_8_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="37.712" y1="55.8175" x2="43.0042" y2="35.5003">
+			<stop  offset="0" style="stop-color:#758BA3"/>
+			<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+			<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_8_gasturbinegenerator)" d="M39.416,56.309c-0.105,0.084-0.213,0.128-0.322,0.128c-1.169,0-2.116-4.972-2.116-11.106
+			s0.948-11.106,2.116-11.106c0.11,0,0.217,0.044,0.322,0.128c0,0,3.489,2.436,3.531,2.465c0.635,0.438,1.13,4.082,1.13,8.513
+			c0,4.423-0.494,8.062-1.127,8.511L39.416,56.309z"/>
+		<polyline fill="none" stroke="#4B75A3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" points="
+			22.648,53.17 26.463,53.729 37.341,53.729 41.938,53 		"/>
+		<path fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-miterlimit="10" d="M36.977,45.331
+			c0-6.134,0.948-11.106,2.116-11.106"/>
+		<linearGradient id="SVGID_9_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="44.355" y1="53.6775" x2="44.355" y2="36.9812">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="0.7701" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_9_gasturbinegenerator)" d="M42.818,53.888c-0.695,0-1.259-3.831-1.259-8.557s0.564-8.557,1.259-8.557h3.277
+			c0.7-0.065,1.257,3.718,0.986,8.557c-0.264,4.718-0.441,8.557-0.986,8.557H42.818z"/>
+		<linearGradient id="SVGID_10_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="47.4607" y1="54.3435" x2="47.4607" y2="36.3159">
+			<stop  offset="0" style="stop-color:#758BA3"/>
+			<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+			<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_10_gasturbinegenerator)" d="M48.465,36.104c0.022-0.008,0.044-0.012,0.067-0.012c0.707,0,1.28,4.137,1.28,9.24
+			s-0.573,9.24-1.28,9.24c-0.022,0-0.044-0.004-0.066-0.012l-2.422-0.682c-0.521-0.228-0.936-3.967-0.936-8.546
+			c0-4.578,0.416-8.269,0.936-8.541L48.465,36.104z"/>
+		<linearGradient id="SVGID_11_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="51.2631" y1="55.5422" x2="51.2631" y2="35.1169">
+			<stop  offset="0" style="stop-color:#758BA3"/>
+			<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+			<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_11_gasturbinegenerator)" d="M48.491,36.096c-0.688,0.158-1.239,4.232-1.239,9.235c0,4.973,0.544,9.029,1.226,9.232
+			l4.931,1.224c0.03,0.009,0.06,0.013,0.09,0.013c0.98,0,1.775-4.687,1.775-10.469s-0.795-10.469-1.775-10.469
+			c-0.025,0-0.049,0.003-0.074,0.009L48.491,36.096z"/>
+		<linearGradient id="SVGID_12_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="57.3909" y1="55.5422" x2="57.3909" y2="35.1169">
+			<stop  offset="0" style="stop-color:#758BA3"/>
+			<stop  offset="0.8556" style="stop-color:#A7D1E2"/>
+			<stop  offset="0.9893" style="stop-color:#95BAC9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_12_gasturbinegenerator)" d="M53.499,55.8c-0.98,0-1.775-4.687-1.775-10.469s0.795-10.469,1.775-10.469h8.739
+			c0.452,0,0.819,4.687,0.819,10.469S62.691,55.8,62.238,55.8H53.499z"/>
+		<polyline fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" points="
+			46.079,53.069 52.088,54.161 62.488,54.229 		"/>
+		<ellipse fill="#4B75A3" cx="62.238" cy="45.331" rx="0.819" ry="10.469"/>
+		<path fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-miterlimit="10" d="M61.419,45.331
+			c0-5.782,0.367-10.469,0.819-10.469"/>
+		<path fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-miterlimit="10" d="M51.724,45.331
+			c0-5.782,0.795-10.469,1.775-10.469"/>
+		<g>
+			<path fill="none" stroke="#000000" stroke-width="0.2731" stroke-miterlimit="10" d="M20.776,53.917
+				c-1.301,0-2.356-3.844-2.356-8.586s1.055-8.586,2.356-8.586"/>
+			<g>
+				<linearGradient id="SVGID_13_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="21.0498" y1="36.9105" x2="21.0498" y2="37.3198">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="19.635" y="36.911" fill="url(#SVGID_13_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_14_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="20.1622" y1="38.9929" x2="20.1622" y2="39.4022">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.748" y="38.993" fill="url(#SVGID_14_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_15_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="19.8209" y1="41.0752" x2="19.8209" y2="41.4845">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.406" y="41.075" fill="url(#SVGID_15_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_16_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="19.4795" y1="43.1576" x2="19.4795" y2="43.5669">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.065" y="43.158" fill="url(#SVGID_16_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_17_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="19.4795" y1="45.2399" x2="19.4795" y2="45.6492">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.065" y="45.24" fill="url(#SVGID_17_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_18_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="19.4795" y1="47.3223" x2="19.4795" y2="47.7316">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.065" y="47.322" fill="url(#SVGID_18_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_19_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="19.8209" y1="49.4046" x2="19.8209" y2="49.8139">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.406" y="49.405" fill="url(#SVGID_19_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_20_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="20.1622" y1="51.487" x2="20.1622" y2="51.8963">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="18.748" y="51.487" fill="url(#SVGID_20_gasturbinegenerator)" width="2.829" height="0.409"/>
+				<linearGradient id="SVGID_21_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="21.0498" y1="53.5693" x2="21.0498" y2="53.9786">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="19.635" y="53.569" fill="url(#SVGID_21_gasturbinegenerator)" width="2.829" height="0.409"/>
+			</g>
+			<linearGradient id="SVGID_22_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="19.0349" y1="36.7449" x2="19.0349" y2="53.917">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#000000"/>
+			</linearGradient>
+			<path fill="url(#SVGID_22_gasturbinegenerator)" d="M20.571,53.917c-1.301,0-2.356-3.844-2.356-8.586s1.055-8.586,2.356-8.586h-0.717
+				c-1.301,0-2.356,3.844-2.356,8.586s1.055,8.586,2.356,8.586H20.571z"/>
+			<linearGradient id="SVGID_23_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="21.9024" y1="36.7449" x2="21.9024" y2="53.917">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#000000"/>
+			</linearGradient>
+			<path fill="url(#SVGID_23_gasturbinegenerator)" d="M23.439,53.917c-1.301,0-2.356-3.844-2.356-8.586s1.055-8.586,2.356-8.586h-0.717
+				c-1.301,0-2.356,3.844-2.356,8.586s1.055,8.586,2.356,8.586H23.439z"/>
+		</g>
+		<path d="M58.872,51.931c0.033,0.522,0.07,1.002,0.111,1.434h1.365c-0.04-0.432-0.077-0.912-0.111-1.434H58.872z"/>
+		
+			<line fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" x1="60.237" y1="51.931" x2="58.872" y2="51.931"/>
+		<circle fill="#B3B3B3" cx="59.53" cy="52.713" r="0.282"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M59.53,52.995
+			c0.068,0.62,0.523,2.896,0.25,3.26s-2.003,0.637-4.278,0.546c-2.276-0.091-13.81-2.313-16.086-0.492"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-miterlimit="10" d="M20.455,37.775l-0.182-2.253
+			c0,0,0.91-1.639,2.367-1.639l0.387,2.708"/>
+		<path fill="none" stroke="#FFFFFF" stroke-width="0.2731" stroke-miterlimit="10" d="M20.272,35.386c0,0,0.91-1.639,2.367-1.639"
+			/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M19.726,42.509
+			l0.023-1.57c0,0,1.945-0.77,1.866,0.137c-0.25,2.89-1.628,3.938-1.434,6.85c0.182,2.731,2.257,7.558,3.778,7.829l0.956-0.091"/>
+		<path fill="none" stroke="#FFFFFF" stroke-width="0.1365" stroke-miterlimit="10" d="M19.749,40.666c0,0,1.945-0.77,1.866,0.137
+			c-0.25,2.89-1.628,3.938-1.434,6.85"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M19.598,45.331
+			h-2.812c0,0-0.883,2.822,1.621,9.194"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.5462" stroke-linecap="round" stroke-miterlimit="10" x1="19.598" y1="45.194" x2="16.786" y2="45.194"/>
+		
+			<line fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" x1="17.542" y1="50.702" x2="20.272" y2="50.565"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="0.1365" stroke-linecap="round" stroke-miterlimit="10" x1="17.542" y1="50.497" x2="20.272" y2="50.36"/>
+		<g>
+			<path fill="#005EAB" d="M1.525,45.331c0,3.76,0.745,7.031,1.842,8.716h6.169l0.683-0.273c-1.098-1.685-1.842-4.956-1.842-8.716
+				l-2.738,0.137H1.798L1.525,45.331z"/>
+			<path fill="#2C5A7F" d="M7.694,45.331H1.525c0,3.76,0.745,7.031,1.842,8.716h6.169C8.439,52.362,7.694,49.091,7.694,45.331z"/>
+		</g>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="2.544" y1="46.241" x2="6.823" y2="46.241"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="2.544" y1="47.038" x2="6.823" y2="47.038"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="2.544" y1="47.857" x2="6.823" y2="47.857"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="2.681" y1="48.563" x2="6.959" y2="48.563"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="3.864" y1="53.433" x2="8.142" y2="53.433"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="3.568" y1="52.727" x2="7.847" y2="52.727"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="3.272" y1="51.908" x2="7.551" y2="51.908"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="3.09" y1="51.134" x2="7.369" y2="51.134"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="2.885" y1="50.36" x2="7.164" y2="50.36"/>
+		<ellipse fill="#4D4D4D" cx="28.123" cy="34.475" rx="0.616" ry="0.25"/>
+		<rect x="27.986" y="33.292" width="0.388" height="1.138"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M27.986,33.292
+			c0.115-0.341-2.07-0.068-2.206,1.57"/>
+		<ellipse fill="#4D4D4D" cx="27.077" cy="37.502" rx="0.717" ry="0.455"/>
+		<ellipse fill="#4D4D4D" cx="26.576" cy="42.145" rx="0.717" ry="0.455"/>
+		<ellipse fill="#4D4D4D" cx="26.69" cy="46.992" rx="0.717" ry="0.398"/>
+		<ellipse fill="#333333" cx="27.214" cy="51.271" rx="0.717" ry="0.373"/>
+		<ellipse fill="#1A1A1A" cx="28.556" cy="55.026" rx="0.717" ry="0.303"/>
+		<rect x="26.781" y="36.683" width="0.546" height="0.637"/>
+		<rect x="26.838" y="51.476" fill="#4D4D4D" width="0.717" height="0.373"/>
+		<rect x="28.42" y="55.162" width="0.273" height="0.728"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M27.054,36.683l-0.205-0.478
+			c0,0-2.19-0.59-3.929,0.945"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M26.281,42.054c0,0-2.003-0.546-5.007,0.091"
+			/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M26.69,46.992l-0.501,0.614
+			c0,0-1.548,0.637-5.007-0.091"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M27.197,51.662v0.587
+			c0,0-2.828,0.637-5.012-0.091"/>
+		<path fill="none" stroke="#B3B3B3" stroke-width="0.2731" stroke-miterlimit="10" d="M28.42,55.891c0,0-2.321,0.091-4.87-0.819"/>
+		<g>
+			<path fill="none" stroke="#000000" stroke-width="0.2731" stroke-miterlimit="10" d="M43.334,53.917
+				c-0.793,0-1.435-3.844-1.435-8.586s0.643-8.586,1.435-8.586"/>
+			<g>
+				<linearGradient id="SVGID_24_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="44.2747" y1="36.9105" x2="44.2747" y2="37.3198">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="42.628" y="36.911" fill="url(#SVGID_24_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_25_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.734" y1="38.9929" x2="43.734" y2="39.4022">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="42.087" y="38.993" fill="url(#SVGID_25_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_26_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.526" y1="41.0752" x2="43.526" y2="41.4845">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="41.879" y="41.075" fill="url(#SVGID_26_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_27_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.3181" y1="43.1576" x2="43.3181" y2="43.5669">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="41.671" y="43.158" fill="url(#SVGID_27_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_28_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.3181" y1="45.2399" x2="43.3181" y2="45.6492">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="41.671" y="45.24" fill="url(#SVGID_28_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_29_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.3181" y1="47.3223" x2="43.3181" y2="47.7316">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="41.671" y="47.322" fill="url(#SVGID_29_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_30_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.526" y1="49.4046" x2="43.526" y2="49.8139">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="41.879" y="49.405" fill="url(#SVGID_30_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_31_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="43.734" y1="51.487" x2="43.734" y2="51.8963">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="42.087" y="51.487" fill="url(#SVGID_31_gasturbinegenerator)" width="3.294" height="0.409"/>
+				<linearGradient id="SVGID_32_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="44.2747" y1="53.5693" x2="44.2747" y2="53.9786">
+					<stop  offset="0" style="stop-color:#FFFFFF"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</linearGradient>
+				<rect x="42.628" y="53.569" fill="url(#SVGID_32_gasturbinegenerator)" width="3.294" height="0.409"/>
+			</g>
+			<linearGradient id="SVGID_33_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="42.2621" y1="36.7449" x2="42.2621" y2="53.917">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#000000"/>
+			</linearGradient>
+			<path fill="url(#SVGID_33_gasturbinegenerator)" d="M43.198,53.917c-0.793,0-1.435-3.844-1.435-8.586s0.643-8.586,1.435-8.586h-0.437
+				c-0.793,0-1.435,3.844-1.435,8.586s0.643,8.586,1.435,8.586H43.198z"/>
+			<linearGradient id="SVGID_34_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="45.5793" y1="36.7449" x2="45.5793" y2="53.917">
+				<stop  offset="0" style="stop-color:#FFFFFF"/>
+				<stop  offset="1" style="stop-color:#000000"/>
+			</linearGradient>
+			<path fill="url(#SVGID_34_gasturbinegenerator)" d="M46.515,53.917c-0.793,0-1.435-3.844-1.435-8.586s0.643-8.586,1.435-8.586h-0.437
+				c-0.793,0-1.435,3.844-1.435,8.586s0.643,8.586,1.435,8.586H46.515z"/>
+		</g>
+	</g>
+	<polyline fill="none" stroke="#035DC4" stroke-width="0.5462" stroke-linecap="round" stroke-miterlimit="10" points="
+		3.367,54.047 9.536,54.047 12.444,53.615 17.086,53.387 	"/>
+	<polyline fill="none" stroke="#3FA2CC" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" points="
+		45.579,47.607 52.134,48.335 61.419,48.335 	"/>
+	<g>
+		<linearGradient id="SVGID_35_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="63.6038" y1="53.1548" x2="63.6038" y2="38.3243">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_35_gasturbinegenerator)" d="M64.287,53.342c0.452,0,0.819-3.403,0.819-7.601s-0.367-7.601-0.819-7.601h-1.365
+			c-0.452,0-0.819,3.403-0.819,7.601s0.367,7.601,0.819,7.601H64.287z"/>
+		<ellipse fill="#999999" cx="64.287" cy="45.741" rx="0.819" ry="7.601"/>
+		<linearGradient id="SVGID_36_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="65.4536" y1="56.8916" x2="65.4536" y2="42.4163">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_36_gasturbinegenerator)" d="M64.043,57.074c-0.27,0-0.49-3.322-0.49-7.419s0.219-7.419,0.49-7.419h2.822
+			c0.27,0,0.49,3.322,0.49,7.419s-0.219,7.419-0.49,7.419H64.043z"/>
+		<ellipse fill="#999999" cx="66.865" cy="49.655" rx="0.49" ry="7.419"/>
+		<linearGradient id="SVGID_37_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="68.1512" y1="56.9173" x2="68.1512" y2="44.4846">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_37_gasturbinegenerator)" d="M67.163,57.074c-0.311,0-0.563-2.853-0.563-6.372s0.252-6.372,0.563-6.372h1.976
+			c0.311,0,0.563,2.853,0.563,6.372s-0.252,6.372-0.563,6.372H67.163z"/>
+	</g>
+	<g>
+		<linearGradient id="SVGID_38_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="67.7606" y1="34.0849" x2="74.0454" y2="67.8732">
+			<stop  offset="0" style="stop-color:#187AA0"/>
+			<stop  offset="0.2299" style="stop-color:#4EB2D9"/>
+			<stop  offset="0.492" style="stop-color:#187AA0"/>
+			<stop  offset="1" style="stop-color:#0D4257"/>
+		</linearGradient>
+		<path fill="url(#SVGID_38_gasturbinegenerator)" d="M69.052,64.539c-0.311,0-0.563-6.195-0.563-13.837s0.252-13.837,0.563-13.837l2.881-3.778
+			c0.392,0,0.709,7.886,0.709,17.615s-0.318,17.615-0.709,17.615L69.052,64.539z"/>
+		<linearGradient id="SVGID_39_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="100.502" y1="34.7689" x2="91.4018" y2="67.9099">
+			<stop  offset="0" style="stop-color:#187AA0"/>
+			<stop  offset="0.2299" style="stop-color:#8BD3F0"/>
+			<stop  offset="0.492" style="stop-color:#187AA0"/>
+			<stop  offset="1" style="stop-color:#0D4257"/>
+		</linearGradient>
+		<path fill="url(#SVGID_39_gasturbinegenerator)" d="M98.091,64.539c0.311,0,0.563-6.195,0.563-13.837s-0.252-13.837-0.563-13.837l-2.881-3.778
+			c-0.392,0-0.709,7.886-0.709,17.615s0.318,17.615,0.709,17.615L98.091,64.539z"/>
+		<path fill="none" stroke="#5FBBE2" stroke-width="0.2731" stroke-miterlimit="10" d="M95.21,33.087
+			c0.392,0,0.709,7.886,0.709,17.615"/>
+		<g>
+			<path fill="#0D4257" d="M68.699,61.49c0.097,1.906,0.219,3.048,0.353,3.048l2.881,3.778c0.196,0,0.374-1.981,0.502-5.18
+				L68.699,61.49z"/>
+		</g>
+		<linearGradient id="SVGID_40_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="83.5716" y1="33.5204" x2="83.5716" y2="67.8882">
+			<stop  offset="0" style="stop-color:#187AA0"/>
+			<stop  offset="0.2299" style="stop-color:#4EB2D9"/>
+			<stop  offset="0.492" style="stop-color:#187AA0"/>
+			<stop  offset="1" style="stop-color:#0D4257"/>
+		</linearGradient>
+		<path fill="url(#SVGID_40_gasturbinegenerator)" d="M71.933,68.316c-0.392,0-0.709-7.886-0.709-17.615s0.318-17.615,0.709-17.615H95.21
+			c0.392,0,0.709,7.886,0.709,17.615s-0.318,17.615-0.709,17.615H71.933z"/>
+	</g>
+	<g>
+		
+			<linearGradient id="SVGID_41_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="84.2073" y1="-4.8262" x2="84.2073" y2="-6.2471" gradientTransform="matrix(0.7864 0.6177 -0.6177 0.7864 0.3997 -11.1562)">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_41_gasturbinegenerator)" d="M69.758,36.276c-0.248,0.316-0.322,0.673-0.163,0.798c0.158,0.124,0.488-0.032,0.736-0.348
+			c0.248-0.316,0.322-0.673,0.163-0.798C70.336,35.804,70.006,35.96,69.758,36.276z"/>
+		
+			<linearGradient id="SVGID_42_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="74.7973" y1="-15.8062" x2="74.7973" y2="-17.3569" gradientTransform="matrix(0.5883 0.6157 -0.6157 0.5883 15.8283 3.6334)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#B9B9B9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_42_gasturbinegenerator)" d="M69.739,39.662c-0.237,0.292-0.293,0.649-0.125,0.798c0.169,0.149,0.498,0.033,0.735-0.259
+			s0.293-0.649,0.125-0.798S69.976,39.37,69.739,39.662z"/>
+		
+			<linearGradient id="SVGID_43_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="57.5487" y1="-25.7806" x2="57.5487" y2="-27.4305" gradientTransform="matrix(0.3902 0.6138 -0.6138 0.3902 31.2569 18.4229)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#A6A6A6"/>
+		</linearGradient>
+		<path fill="url(#SVGID_43_gasturbinegenerator)" d="M69.72,43.048c-0.226,0.268-0.265,0.625-0.086,0.798s0.508,0.097,0.734-0.17
+			c0.226-0.268,0.265-0.625,0.086-0.798C70.275,42.705,69.946,42.781,69.72,43.048z"/>
+		
+			<linearGradient id="SVGID_44_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="31.1172" y1="-27.5699" x2="31.1172" y2="-29.2439" gradientTransform="matrix(0.1921 0.6118 -0.6118 0.1921 46.6855 33.2124)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#939393"/>
+		</linearGradient>
+		<path fill="url(#SVGID_44_gasturbinegenerator)" d="M69.701,46.435c-0.215,0.243-0.236,0.601-0.047,0.799c0.19,0.198,0.518,0.162,0.734-0.082
+			s0.236-0.601,0.047-0.799C70.244,46.155,69.916,46.191,69.701,46.435z"/>
+		
+			<linearGradient id="SVGID_45_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="3.5153" y1="-12.2082" x2="3.5153" y2="-13.8657" gradientTransform="matrix(-0.006 0.6099 -0.6099 -0.006 62.114 48.002)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#808080"/>
+		</linearGradient>
+		<path fill="url(#SVGID_45_gasturbinegenerator)" d="M69.682,49.821c-0.204,0.219-0.208,0.576-0.008,0.799c0.2,0.223,0.528,0.226,0.733,0.007
+			s0.208-0.576,0.008-0.799S69.886,49.602,69.682,49.821z"/>
+		
+			<linearGradient id="SVGID_46_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="-9.7856" y1="16.4564" x2="-9.7856" y2="14.7823" gradientTransform="matrix(-0.2041 0.6079 -0.6079 -0.2041 77.5426 62.7915)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#6C6C6C"/>
+		</linearGradient>
+		<path fill="url(#SVGID_46_gasturbinegenerator)" d="M69.663,53.207c-0.194,0.194-0.18,0.552,0.031,0.8c0.211,0.247,0.538,0.29,0.732,0.096
+			c0.194-0.194,0.18-0.552-0.031-0.8C70.184,53.056,69.856,53.013,69.663,53.207z"/>
+		
+			<linearGradient id="SVGID_47_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="-6.0477" y1="42.6722" x2="-6.0477" y2="41.0222" gradientTransform="matrix(-0.4022 0.606 -0.606 -0.4022 92.9712 77.5811)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#595959"/>
+		</linearGradient>
+		<path fill="url(#SVGID_47_gasturbinegenerator)" d="M69.644,56.593c-0.183,0.17-0.151,0.528,0.07,0.8c0.221,0.272,0.548,0.355,0.731,0.185
+			c0.183-0.17,0.151-0.528-0.07-0.8C70.153,56.506,69.826,56.423,69.644,56.593z"/>
+		
+			<linearGradient id="SVGID_48_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="5.2162" y1="59.0882" x2="5.2162" y2="57.5374" gradientTransform="matrix(-0.6003 0.6041 -0.6041 -0.6003 108.3998 92.3706)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#464646"/>
+		</linearGradient>
+		<path fill="url(#SVGID_48_gasturbinegenerator)" d="M69.625,59.979c-0.172,0.145-0.123,0.504,0.109,0.8c0.232,0.297,0.559,0.419,0.73,0.273
+			c0.172-0.145,0.123-0.504-0.109-0.8C70.123,59.956,69.796,59.834,69.625,59.979z"/>
+		
+			<linearGradient id="SVGID_49_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="16.9225" y1="67.5966" x2="16.9225" y2="66.1757" gradientTransform="matrix(-0.7984 0.6021 -0.6021 -0.7984 123.8283 107.1601)">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#333333"/>
+		</linearGradient>
+		<path fill="url(#SVGID_49_gasturbinegenerator)" d="M70.335,63.728c-0.242-0.321-0.569-0.483-0.729-0.362s-0.094,0.48,0.148,0.801
+			s0.569,0.483,0.729,0.362S70.577,64.049,70.335,63.728z"/>
+	</g>
+	<g>
+		
+			<linearGradient id="SVGID_50_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="139.2323" y1="-48.0416" x2="139.2323" y2="-49.4625" gradientTransform="matrix(-0.7864 0.6177 0.6177 0.7864 236.6003 -11.1562)">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#CCCCCC"/>
+		</linearGradient>
+		<path fill="url(#SVGID_50_gasturbinegenerator)" d="M97.276,36.276c0.248,0.316,0.322,0.673,0.163,0.798c-0.158,0.124-0.488-0.032-0.736-0.348
+			c-0.248-0.316-0.322-0.673-0.163-0.798C96.698,35.804,97.027,35.96,97.276,36.276z"/>
+		
+			<linearGradient id="SVGID_51_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="131.556" y1="-75.2058" x2="131.556" y2="-76.7565" gradientTransform="matrix(-0.5883 0.6157 0.6157 0.5883 221.1717 3.6334)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#B9B9B9"/>
+		</linearGradient>
+		<path fill="url(#SVGID_51_gasturbinegenerator)" d="M97.295,39.662c0.237,0.292,0.293,0.649,0.125,0.798c-0.169,0.149-0.498,0.033-0.735-0.259
+			s-0.293-0.649-0.125-0.798S97.057,39.37,97.295,39.662z"/>
+		
+			<linearGradient id="SVGID_52_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="109.1619" y1="-106.9596" x2="109.1619" y2="-108.6096" gradientTransform="matrix(-0.3902 0.6138 0.6138 0.3902 205.7431 18.4229)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#A6A6A6"/>
+		</linearGradient>
+		<path fill="url(#SVGID_52_gasturbinegenerator)" d="M97.314,43.048c0.226,0.268,0.265,0.625,0.086,0.798s-0.508,0.097-0.734-0.17
+			c-0.226-0.268-0.265-0.625-0.086-0.798C96.758,42.705,97.087,42.781,97.314,43.048z"/>
+		
+			<linearGradient id="SVGID_53_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="63.8041" y1="-131.6619" x2="63.8041" y2="-133.336" gradientTransform="matrix(-0.1921 0.6118 0.6118 0.1921 190.3145 33.2124)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#939393"/>
+		</linearGradient>
+		<path fill="url(#SVGID_53_gasturbinegenerator)" d="M97.333,46.435c0.215,0.243,0.236,0.601,0.047,0.799c-0.19,0.198-0.518,0.162-0.734-0.082
+			s-0.236-0.601-0.047-0.799C96.789,46.155,97.117,46.191,97.333,46.435z"/>
+		
+			<linearGradient id="SVGID_54_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="2.3905" y1="-126.9178" x2="2.3905" y2="-128.5753" gradientTransform="matrix(0.006 0.6099 0.6099 -0.006 174.886 48.002)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#808080"/>
+		</linearGradient>
+		<path fill="url(#SVGID_54_gasturbinegenerator)" d="M97.352,49.821c0.204,0.219,0.208,0.576,0.008,0.799c-0.2,0.223-0.528,0.226-0.733,0.007
+			c-0.204-0.219-0.208-0.576-0.008-0.799C96.819,49.605,97.147,49.602,97.352,49.821z"/>
+		
+			<linearGradient id="SVGID_55_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="-44.5076" y1="-86.9747" x2="-44.5076" y2="-88.6488" gradientTransform="matrix(0.2041 0.6079 0.6079 -0.2041 159.4574 62.7915)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#6C6C6C"/>
+		</linearGradient>
+		<path fill="url(#SVGID_55_gasturbinegenerator)" d="M97.371,53.207c0.194,0.194,0.18,0.552-0.031,0.8c-0.211,0.247-0.538,0.29-0.732,0.096
+			c-0.194-0.194-0.18-0.552,0.031-0.8C96.85,53.056,97.177,53.013,97.371,53.207z"/>
+		
+			<linearGradient id="SVGID_56_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="-59.2429" y1="-37.4791" x2="-59.2429" y2="-39.1291" gradientTransform="matrix(0.4022 0.606 0.606 -0.4022 144.0288 77.5811)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#595959"/>
+		</linearGradient>
+		<path fill="url(#SVGID_56_gasturbinegenerator)" d="M97.39,56.593c0.183,0.17,0.151,0.528-0.07,0.8c-0.221,0.272-0.548,0.355-0.731,0.185
+			c-0.183-0.17-0.151-0.528,0.07-0.8C96.88,56.506,97.207,56.423,97.39,56.593z"/>
+		
+			<linearGradient id="SVGID_57_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="-52.6964" y1="0.8131" x2="-52.6964" y2="-0.7377" gradientTransform="matrix(0.6003 0.6041 0.6041 -0.6003 128.6002 92.3706)">
+			<stop  offset="0" style="stop-color:#939598"/>
+			<stop  offset="1" style="stop-color:#464646"/>
+		</linearGradient>
+		<path fill="url(#SVGID_57_gasturbinegenerator)" d="M97.409,59.979c0.172,0.145,0.123,0.504-0.109,0.8c-0.232,0.297-0.559,0.419-0.73,0.273
+			c-0.172-0.145-0.123-0.504,0.109-0.8C96.91,59.956,97.237,59.834,97.409,59.979z"/>
+		
+			<linearGradient id="SVGID_58_gasturbinegenerator" gradientUnits="userSpaceOnUse" x1="-38.9395" y1="25.4685" x2="-38.9395" y2="24.0476" gradientTransform="matrix(0.7984 0.6021 0.6021 -0.7984 113.1717 107.1601)">
+			<stop  offset="0" style="stop-color:#808080"/>
+			<stop  offset="1" style="stop-color:#333333"/>
+		</linearGradient>
+		<path fill="url(#SVGID_58_gasturbinegenerator)" d="M96.699,63.728c0.242-0.321,0.569-0.483,0.729-0.362s0.094,0.48-0.148,0.801
+			c-0.242,0.321-0.569,0.483-0.729,0.362S96.456,64.049,96.699,63.728z"/>
+	</g>
+	<g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,36.071
+				c0,0-0.156-0.303-0.346-0.673c-0.19-0.37,0.145-0.673,0.746-0.673h26.627c0.601,0,0.957,0.303,0.792,0.673
+				c-0.165,0.37-0.301,0.673-0.301,0.673"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="70.431" y1="34.521" x2="97.467" y2="34.521"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,39.598
+				c0,0-0.156-0.227-0.346-0.505c-0.19-0.277,0.145-0.505,0.746-0.505h26.627c0.601,0,0.957,0.227,0.792,0.505
+				c-0.165,0.277-0.301,0.505-0.301,0.505"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,43.125
+				c0,0-0.156-0.151-0.346-0.336c-0.19-0.185,0.145-0.336,0.746-0.336h26.627c0.601,0,0.957,0.151,0.792,0.336
+				c-0.165,0.185-0.301,0.336-0.301,0.336"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,46.653
+				c0,0-0.156-0.076-0.346-0.168s0.145-0.168,0.746-0.168h26.627c0.601,0,0.957,0.076,0.792,0.168
+				c-0.165,0.092-0.301,0.168-0.301,0.168"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="69.885" y1="38.384" x2="97.467" y2="38.384"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="69.885" y1="42.316" x2="97.467" y2="42.316"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="69.885" y1="46.18" x2="97.467" y2="46.18"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,50.18
+				c0,0-0.156,0-0.346,0s0.145,0,0.746,0h26.627c0.601,0,0.957,0,0.792,0c-0.165,0-0.301,0-0.301,0"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,53.707
+				c0,0-0.156,0.076-0.346,0.168c-0.19,0.092,0.145,0.168,0.746,0.168h26.627c0.601,0,0.957-0.076,0.792-0.168
+				c-0.165-0.092-0.301-0.168-0.301-0.168"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,57.234
+				c0,0-0.156,0.151-0.346,0.336c-0.19,0.185,0.145,0.336,0.746,0.336h26.627c0.601,0,0.957-0.151,0.792-0.336
+				c-0.165-0.185-0.301-0.336-0.301-0.336"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,60.761
+				c0,0-0.156,0.227-0.346,0.505c-0.19,0.277,0.145,0.505,0.746,0.505h26.627c0.601,0,0.957-0.227,0.792-0.505
+				c-0.165-0.277-0.301-0.505-0.301-0.505"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#B3B3B3" stroke-width="0.8193" stroke-linecap="round" stroke-miterlimit="10" d="M69.758,64.288
+				c0,0-0.156,0.303-0.346,0.673c-0.19,0.37,0.145,0.673,0.746,0.673h26.627c0.601,0,0.957-0.303,0.792-0.673
+				c-0.165-0.37-0.301-0.673-0.301-0.673"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#333333" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="69.748" y1="58.316" x2="97.331" y2="58.316"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#333333" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="69.748" y1="62.18" x2="97.331" y2="62.18"/>
+		</g>
+		<g>
+			
+				<line fill="none" stroke="#333333" stroke-width="0.2731" stroke-linecap="round" stroke-miterlimit="10" x1="69.748" y1="65.975" x2="97.331" y2="65.975"/>
+		</g>
+	</g>
+</g>
+</svg>

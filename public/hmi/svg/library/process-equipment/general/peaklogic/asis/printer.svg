@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="70" version="1.1" viewBox="0 0 100 70">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="shape">
+      <g>
+        <polygon points="92.299 29.658 92.299 59.38 7.701 59.38 7.701 29.658 12.179 22.942 87.821 22.942 92.299 29.658" fill="#e6e6e6" stroke="#000" stroke-width="2"/>
+        <polygon points="18.379 47.057 18.379 57.512 81.621 57.512 81.621 47.057 79.383 44.37 20.617 44.37 18.379 47.057" fill="#f2f2f2" stroke="#000"/>
+        <polyline points="70.055 23.88 70.055 9.129 26.471 9.129 26.471 23.88" fill="#f2f2f2" stroke="#000" stroke-width="1.633"/>
+        <line x1="17.557" y1="29.658" x2="17.557" y2="40.335" fill="none" stroke="#000"/>
+        <line x1="82.443" y1="29.658" x2="82.443" y2="40.335" fill="none" stroke="#000"/>
+        <rect x="18.379" y="57.512" width="63.243" height="3.359"/>
+        <rect x="9.642" y="55.869" width="6.498" height=".747" fill="none" stroke="#000"/>
+        <g>
+          <line x1="36.194" y1="14.525" x2="36.194" y2="23.913" fill="none" stroke="#000" stroke-width=".816"/>
+          <line x1="48.431" y1="14.525" x2="48.431" y2="23.745" fill="none" stroke="#000" stroke-width=".816"/>
+          <line x1="60.668" y1="14.525" x2="60.668" y2="23.577" fill="none" stroke="#000" stroke-width=".816"/>
+        </g>
+        <line x1="18.789" y1="54.041" x2="81.005" y2="54.041" fill="#f2f2f2" stroke="#000"/>
+        <polygon points="72.381 28.28 24.949 28.28 25.845 25.2 71.486 25.2 72.381 28.28"/>
+        <line x1="7.701" y1="29.658" x2="92.299" y2="29.658" fill="#f2f2f2" stroke="#000"/>
+      </g>
+    </g>
+  </g>
+</svg>

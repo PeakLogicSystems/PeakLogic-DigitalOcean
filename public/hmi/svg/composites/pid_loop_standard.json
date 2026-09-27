@@ -1,0 +1,135 @@
+{
+  "id": "pid_loop_standard",
+  "label": "PID loop faceplate",
+  "group": "PID faceplates",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg",
+  "tagRoles": {
+    "pid": { "pick": "firstPid", "types": ["PID"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "loop_label",
+      "property": "text",
+      "tagRole": "pid",
+      "tagField": "label"
+    },
+    {
+      "elementId": "pv_value",
+      "property": "text",
+      "tagRole": "pid",
+      "tagField": "pv",
+      "format": "fixed2",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "sp_value",
+      "property": "text",
+      "tagRole": "pid",
+      "tagField": "sp",
+      "format": "fixed1",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "out_value",
+      "property": "text",
+      "tagRole": "pid",
+      "tagField": "out",
+      "format": "fixed1",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "pv_needle",
+      "property": "rotation",
+      "tagRole": "pid",
+      "tagField": "pv",
+      "min": 0,
+      "max": 100,
+      "onValue": 330,
+      "offValue": 30
+    },
+    {
+      "elementId": "out_bar_fill",
+      "property": "opacity",
+      "tagRole": "pid",
+      "tagField": "out",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "mode_auto",
+      "property": "fill",
+      "tagRole": "pid",
+      "tagField": "auto",
+      "onValue": "#64748b",
+      "offValue": "#cbd5e1"
+    },
+    {
+      "elementId": "mode_manual",
+      "property": "fill",
+      "tagRole": "pid",
+      "tagField": "manual",
+      "onValue": "#64748b",
+      "offValue": "#cbd5e1"
+    },
+    {
+      "elementId": "alarm_hi",
+      "property": "fill",
+      "tagRole": "pid",
+      "tagField": "alarmHi",
+      "onValue": "#ef4444",
+      "offValue": "#64748b"
+    },
+    {
+      "elementId": "alarm_lo",
+      "property": "fill",
+      "tagRole": "pid",
+      "tagField": "alarmLo",
+      "onValue": "#3b82f6",
+      "offValue": "#64748b"
+    },
+    {
+      "elementId": "trend_pen1",
+      "property": "trend",
+      "tagRole": "pid",
+      "tagField": "pv",
+      "min": 0,
+      "max": 100,
+      "samples": 64
+    },
+    {
+      "elementId": "trend_pen2",
+      "property": "trend",
+      "tagRole": "pid",
+      "tagField": "sp",
+      "min": 0,
+      "max": 100,
+      "samples": 64
+    },
+    {
+      "elementId": "trend_pen3",
+      "property": "trend",
+      "tagRole": "pid",
+      "tagField": "out",
+      "min": 0,
+      "max": 100,
+      "samples": 64
+    }
+  ],
+  "stripChartStyles": {
+    "standard": { "label": "PV / SP / OUT (blue, amber, green)" },
+    "cool": { "label": "Cool (cyan, indigo, blue)" },
+    "mono": { "label": "Monochrome" }
+  }
+}

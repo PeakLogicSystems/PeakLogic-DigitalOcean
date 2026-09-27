@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="light">
+		<ellipse fill="#E6E6E6" cx="50.657" cy="18.548" rx="42.085" ry="17.349"/>
+	</g>
+	<g id="shape">
+		<path fill="#E6E6E6" d="M50.657,99.301c-23.482,0-42.585-8.007-42.585-17.849V18.548c0-9.842,19.104-17.849,42.585-17.849
+			s42.585,8.007,42.585,17.849v62.904C93.242,91.294,74.139,99.301,50.657,99.301z M50.657,1.699
+			c-22.93,0-41.585,7.558-41.585,16.849v62.904c0,9.29,18.655,16.849,41.585,16.849s41.585-7.559,41.585-16.849V18.548
+			C92.242,9.257,73.587,1.699,50.657,1.699z"/>
+	</g>
+	<g id="linear">
+		<linearGradient class="linear" id="linear_2_database" gradientUnits="userSpaceOnUse" x1="9.072" y1="59.7629" x2="92.242" y2="59.7629">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#000000"/>
+		</linearGradient>
+		<path class="linear" fill="url(#linear_2_database)" d="M50.657,35.897c-21.034,0-38.462-6.362-41.585-14.672v60.227
+			c0,9.29,18.655,16.849,41.585,16.849c22.93,0,41.585-7.559,41.585-16.849V21.225C89.119,29.535,71.691,35.897,50.657,35.897z"/>
+	</g>
+</g>
+</svg>
