@@ -1,31 +1,44 @@
+<%
+  const badgePalette = ['#f97316', '#8b5cf6', '#0ea5e9', '#22c55e', '#ec4899', '#eab308', '#06b6d4'];
+  const badgeSeedSrc = String(tenant?.name || 'PeakLogic');
+  let badgeSeed = 0;
+  for (const ch of badgeSeedSrc) badgeSeed = (badgeSeed * 31 + ch.charCodeAt(0)) >>> 0;
+  const badgeColor = badgePalette[badgeSeed % badgePalette.length];
+  const tenantInitials = badgeSeedSrc.trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase() || 'PL';
+  const userLabel = user.profile?.displayName || user.email;
+  const userInitial = String(userLabel || '?').trim()[0]?.toUpperCase() || '?';
+%>
 <nav class="navbar navbar-expand-lg navbar-dark nav-peaklogic px-3">
-  <a class="navbar-brand brand-mark mb-0 h1 text-white text-decoration-none" href="/">Peak<span>Logic</span></a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mvNav">
+  <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none mb-0" href="/">
+    <span class="tenant-badge" style="background-color: <%= badgeColor %>"><%= tenantInitials %></span>
+    <span class="fw-semibold text-white"><%= tenant?.name || 'PeakLogic' %></span>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="mvNav">
+  <div class="collapse navbar-collapse" id="mainNav">
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'home' ? 'active fw-semibold' : '' %>" href="/">Home</a>
+        <a class="nav-link <%= activeNav === 'home' ? 'active' : '' %>" href="/"><i class="bi bi-grid-1x2"></i> Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'fleet' ? 'active fw-semibold' : '' %>" href="/fleet">Fleet</a>
+        <a class="nav-link <%= activeNav === 'fleet' ? 'active' : '' %>" href="/fleet"><i class="bi bi-diagram-3"></i> Fleet</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'sites' ? 'active fw-semibold' : '' %>" href="/sites">Sites</a>
+        <a class="nav-link <%= activeNav === 'sites' ? 'active' : '' %>" href="/sites"><i class="bi bi-geo-alt"></i> Sites</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'studio' ? 'active fw-semibold' : '' %>" href="/studio">Studio</a>
+        <a class="nav-link <%= activeNav === 'studio' ? 'active' : '' %>" href="/studio"><i class="bi bi-sliders"></i> Studio</a>
       </li>
       <% if (user.role === 'admin') { %>
         <li class="nav-item">
-          <a class="nav-link <%= activeNav === 'team' ? 'active fw-semibold' : '' %>" href="/team/users">Team</a>
+          <a class="nav-link <%= activeNav === 'team' ? 'active' : '' %>" href="/team/users"><i class="bi bi-people"></i> Team</a>
         </li>
       <% } %>
       <% if (cmmsEnabled) { %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <%= activeNav === 'cmms' ? 'active fw-semibold' : '' %>"
-             href="#" role="button" data-bs-toggle="dropdown">CMMS</a>
+          <a class="nav-link dropdown-toggle <%= activeNav === 'cmms' ? 'active' : '' %>"
+             href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-tools"></i> CMMS</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/cmms">Dashboard</a></li>
             <li><a class="dropdown-item" href="/cmms/work-orders">Work Orders</a></li>
@@ -39,18 +52,22 @@
           </ul>
         </li>
       <% } %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">API</a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/health">Health</a></li>
-          <li><a class="dropdown-item" href="/?format=json">Service JSON</a></li>
-          <li><a class="dropdown-item" href="/api/locations">Locations API</a></li>
-        </ul>
-      </li>
     </ul>
-    <div class="d-flex align-items-center gap-2 text-white-50 small">
-      <span><%= user.email %> · <%= tenant.name %></span>
-      <a href="/logout" class="btn btn-outline-light btn-sm">Log out</a>
+    <div class="dropdown">
+      <button class="btn d-flex align-items-center gap-2 text-white user-menu-btn" type="button" data-bs-toggle="dropdown">
+        <span class="user-avatar"><%= userInitial %></span>
+        <span class="d-none d-md-inline small"><%= userLabel %></span>
+        <i class="bi bi-chevron-down small"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><span class="dropdown-item-text small text-muted"><%= user.email %> · <%= tenant.name %></span></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/health"><i class="bi bi-heart-pulse me-1"></i> Health</a></li>
+        <li><a class="dropdown-item" href="/?format=json"><i class="bi bi-code-slash me-1"></i> Service JSON</a></li>
+        <li><a class="dropdown-item" href="/api/locations"><i class="bi bi-hdd-network me-1"></i> Locations API</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right me-1"></i> Log out</a></li>
+      </ul>
     </div>
   </div>
 </nav>

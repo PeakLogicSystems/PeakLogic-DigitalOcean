@@ -1,4 +1,4 @@
-/* PeakLogic — Purple Standard theme (shared with est-pc, tpscmms) */
+/* PeakLogic — shared theme for the cloud/admin portal (login, team, CMMS, fleet, sites) */
 
 :root {
   --ps-purple: #6f42c1;
@@ -9,6 +9,11 @@
   --ps-gradient-start: rgba(111, 66, 193, 0.9);
   --ps-gradient-end: rgba(78, 42, 132, 0.95);
   --ps-shadow: rgba(111, 66, 193, 0.3);
+  --peaklogic-green: #22c55e;
+  --peaklogic-green-dark: #15803d;
+  --peaklogic-navy: #0f172a;
+  --peaklogic-navy-soft: #1e293b;
+  --peaklogic-navy-border: #334155;
 
   /* aliases used in templates */
   --peaklogic-primary: var(--ps-purple);
@@ -16,6 +21,12 @@
   --peaklogic-accent: var(--ps-purple-light);
   --peaklogic-gradient-start: var(--ps-gradient-start);
   --peaklogic-gradient-end: var(--ps-gradient-end);
+}
+
+.top-accent-bar {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ps-purple-deep), var(--ps-purple) 55%, var(--peaklogic-green-dark));
 }
 
 .text-purple,
@@ -78,11 +89,72 @@
 }
 
 .nav-peaklogic {
-  background: linear-gradient(90deg, var(--ps-purple-dark), var(--ps-purple));
+  background: var(--peaklogic-navy);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.nav-peaklogic .nav-link {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem !important;
+}
+
+.nav-peaklogic .nav-link:hover,
+.nav-peaklogic .nav-link:focus {
+  color: #f1f5f9;
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .nav-peaklogic .nav-link.active {
-  background-color: var(--ps-purple-dark);
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+.nav-peaklogic .navbar-toggler {
+  border-color: var(--peaklogic-navy-border);
+}
+
+.tenant-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.user-menu-btn {
+  border: 1px solid transparent;
+}
+
+.user-menu-btn:hover,
+.user-menu-btn:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--peaklogic-navy-border);
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--peaklogic-navy-soft);
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
 .splash-gradient {

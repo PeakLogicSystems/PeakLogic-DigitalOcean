@@ -701,7 +701,7 @@ describe('cloud API (MongoDB)', () => {
     const home = await request('GET', '/?cmms=disabled', { cookies: cookieNoCmms.split(';')[0] });
     assert.equal(home.status, 200);
     assert.match(home.text, /CMMS is not enabled/);
-    assert.doesNotMatch(home.text, /data-bs-toggle="dropdown">CMMS<\/a>/);
+    assert.doesNotMatch(home.text, /data-bs-toggle="dropdown">[\s\S]*?CMMS<\/a>/);
 
     const signup = await request('POST', '/api/auth/signup', {
       platformAdminKey: 'test-platform-admin-key',
@@ -727,7 +727,7 @@ describe('cloud API (MongoDB)', () => {
     assert.match(dash.text, /Work Orders/);
 
     const homeEntitled = await request('GET', '/', { cookies: cookieCmms.split(';')[0] });
-    assert.match(homeEntitled.text, /data-bs-toggle="dropdown">CMMS<\/a>/);
+    assert.match(homeEntitled.text, /data-bs-toggle="dropdown">[\s\S]*?CMMS<\/a>/);
   });
 
   it('pairs appliance as remote gateway for tenant site', async () => {
