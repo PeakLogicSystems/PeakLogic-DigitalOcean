@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Sims — PeakLogic</title>
+  <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
+</head>
+<body class="cellular-sims-body">
+  <header class="topbar standalone-topbar">
+    <div class="topbar-brand"><a href="/" class="standalone-home-link"><img src="/branding/peaklogic-icon.svg" alt="Logo" class="topbar-logo"></a></div>
+    <h1 class="standalone-title">Cloud Sims</h1>
+    <div class="standalone-meta popup-header-actions">
+      <span id="cloud-sims-status" class="muted cell-mono" aria-live="polite">Loading…</span>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+      <a href="/" class="btn popup-close page-close" title="Return to dashboard">Close</a>
+    </div>
+  </header>
+
+  <main class="cellular-sims-main">
+    <p class="panel-hint">Simulated cloud-connected devices — useful for load-testing MQTT ingest and dashboards without real hardware.</p>
+
+    <section class="cellular-sims-messaging panel cloud-sims-create">
+      <div class="cellular-sims-list-head">
+        <h2>New simulated device</h2>
+        <button type="button" class="btn" id="cloud-sims-refresh">Refresh</button>
+      </div>
+      <p id="cloud-sims-create-msg" class="muted" role="status"></p>
+      <form id="cloud-sims-create-form" class="cellular-sims-form">
+        <label>Name
+          <input type="text" id="sim-name" placeholder="Simulated Opta 01" required>
+        </label>
+        <label>Device ID
+          <input type="text" id="sim-device-id" placeholder="sim-opta-01" required>
+        </label>
+        <label>Tenant
+          <input type="text" id="sim-tenant" placeholder="demo">
+        </label>
+        <label>Type
+          <select id="sim-type">
+            <option value="opta">Arduino Opta</option>
+            <option value="generic">Generic telemetry</option>
+          </select>
+        </label>
+        <label>Report interval (sec)
+          <input type="number" id="sim-interval" min="5" value="60">
+        </label>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div id="cloud-sims-table-wrap" class="muted">Loading…</div>
+    </section>
+  </main>
+
+  <script>window.PEAKLOGIC_CLOUD_SIMS_ENABLED = <%= cloudSimsEnabled ? 'true' : 'false' %>;</script>
+  <script src="/js/api.js?v=<%= assetV %>"></script>
+  <script src="/js/cloudSimsPage.js?v=<%= assetV %>"></script>
+</body>
+</html>
