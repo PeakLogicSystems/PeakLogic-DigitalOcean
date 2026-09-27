@@ -1,0 +1,405 @@
+[
+
+
+
+  {
+
+
+
+    "id": "TPO1_EN",
+
+
+
+    "label": "TPO-1 enable",
+
+
+
+    "type": "BOOL",
+
+
+
+    "role": "memory",
+
+
+
+    "value": false
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_OFFLINE",
+
+
+
+    "label": "TPO-1 offline latch",
+
+
+
+    "type": "BOOL",
+
+
+
+    "role": "memory",
+
+
+
+    "value": false
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_24HR",
+
+
+
+    "label": "TPO-1 24 hour schedule",
+
+
+
+    "type": "BOOL",
+
+
+
+    "role": "memory",
+
+
+
+    "value": true
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_OUT",
+
+
+
+    "label": "TPO-1 output",
+
+
+
+    "type": "BOOL",
+
+
+
+    "role": "memory",
+
+
+
+    "value": false
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_GAP",
+
+
+
+    "label": "TPO-1 wait between applications",
+
+
+
+    "type": "BOOL",
+
+
+
+    "role": "memory",
+
+
+
+    "value": false
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_STA",
+
+
+
+    "label": "TPO-1 status",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 0,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_TOD",
+
+
+
+    "label": "TPO-1 time of day (min)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 0,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_TOD_STEP",
+
+
+
+    "label": "TPO-1 clock step (min/scan)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 1,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_START",
+
+
+
+    "label": "TPO-1 window start (min)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 0,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_END",
+
+
+
+    "label": "TPO-1 window end (min)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 1440,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_ON_MIN",
+
+
+
+    "label": "TPO-1 application time (min)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 30,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_OFF_MIN",
+
+
+
+    "label": "TPO-1 repeat between (min)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 120,
+
+
+
+    "wordWidth": 16
+
+
+
+  },
+
+
+
+  {
+
+
+
+    "id": "TPO1_PULSE_REM",
+
+
+
+    "label": "TPO-1 pulse remaining (min)",
+
+
+
+    "type": "INT",
+
+
+
+    "role": "memory",
+
+
+
+    "value": 0,
+
+
+
+    "wordWidth": 16
+
+
+
+  }
+
+
+
+]
+
+
+
+

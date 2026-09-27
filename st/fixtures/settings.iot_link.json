@@ -1,0 +1,30 @@
+{
+  "scanMs": 100,
+  "autoStartRuntime": false,
+  "remoteExecution": false,
+  "project": {
+    "name": "iot-link"
+  },
+  "startup": {
+    "mode": "blank",
+    "promptOnBoot": false
+  },
+  "mqttParc": {
+    "enabled": false,
+    "autoDiscoverDrivers": false,
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+    "topicPrefix": "peaklogic/v1",
+    "clientId": "mv-iot-link"
+  },
+  "hmi": {
+    "activeScreen": "screen_1",
+    "screens": [],
+    "bindings": []
+  },
+  "features": {
+    "poolController": false,
+    "pentairHeatPump": false,
+    "optaIo": false,
+    "modbusChemistryBus": false
+  }
+}

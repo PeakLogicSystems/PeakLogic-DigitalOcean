@@ -1,0 +1,123 @@
+{
+  "schema": "peaklogic.device-config.v1",
+  "purpose": "Port Datexel DAT10148 (16 DI Modbus RTU) to PeakLogic C / embedded runtimes",
+  "device": {
+    "vendor": "Datexel",
+    "model": "DAT10148",
+    "label": "Datexel DAT10148 — 16 DI Modbus RTU",
+    "presetId": "datexel_dat10148",
+    "driverId": "dat10148",
+    "firmwareRef": "5103",
+    "sourceDoc": "st/fixtures/dat10148-modbus-extract.txt",
+    "sourcePdf": "https://www.datexel.it/wp-content/archive/User%20Guide/EN/UG%20DAT%2010148%20EN.pdf"
+  },
+  "transport": {
+    "type": "modbus_rtu",
+    "serialPort": "COM3",
+    "baud": 9600,
+    "parity": "none",
+    "dataBits": 8,
+    "stopBits": 1,
+    "slaveId": 1,
+    "timeoutMs": 1000,
+    "notes": "INIT mode forces 9600 8N1 slave 1. Manufacturer EEPROM default is 38400 RTU NONE. Match DIP switches or register 40006/40007."
+  },
+  "pollBlocks": [
+    {
+      "id": "di_word",
+      "description": "Primary scan — 16 DI as one holding register word (recommended single FC03 read)",
+      "functionCode": 3,
+      "table": "holding",
+      "startAddress": 10,
+      "count": 1,
+      "plcAddress": "40011",
+      "unpack": "Each bit 0..15 maps to hardware input D0..D15 (1 = ON, 10–30 VDC)"
+    },
+    {
+      "id": "di_discrete",
+      "description": "Alternative scan — individual discrete inputs (PeakLogic default template)",
+      "functionCode": 2,
+      "table": "discrete",
+      "startAddress": 0,
+      "count": 16,
+      "plcAddress": "10001–10016",
+      "notes": "PDU address = PLC address − 10001. DAT10000 series mirrors 0xxxx and 1xxxx coil groups."
+    }
+  ],
+  "tags": {
+    "default": [
+      { "id": "DI1", "type": "BOOL", "role": "input", "table": "discrete", "address": 0, "hardware": "D0", "plc": "10001" },
+      { "id": "DI2", "type": "BOOL", "role": "input", "table": "discrete", "address": 1, "hardware": "D1", "plc": "10002" },
+      { "id": "DI3", "type": "BOOL", "role": "input", "table": "discrete", "address": 2, "hardware": "D2", "plc": "10003" },
+      { "id": "DI4", "type": "BOOL", "role": "input", "table": "discrete", "address": 3, "hardware": "D3", "plc": "10004" },
+      { "id": "DI5", "type": "BOOL", "role": "input", "table": "discrete", "address": 4, "hardware": "D4", "plc": "10005" },
+      { "id": "DI6", "type": "BOOL", "role": "input", "table": "discrete", "address": 5, "hardware": "D5", "plc": "10006" },
+      { "id": "DI7", "type": "BOOL", "role": "input", "table": "discrete", "address": 6, "hardware": "D6", "plc": "10007" },
+      { "id": "DI8", "type": "BOOL", "role": "input", "table": "discrete", "address": 7, "hardware": "D7", "plc": "10008" },
+      { "id": "DI9", "type": "BOOL", "role": "input", "table": "discrete", "address": 8, "hardware": "D8", "plc": "10009" },
+      { "id": "DI10", "type": "BOOL", "role": "input", "table": "discrete", "address": 9, "hardware": "D9", "plc": "10010" },
+      { "id": "DI11", "type": "BOOL", "role": "input", "table": "discrete", "address": 10, "hardware": "D10", "plc": "10011" },
+      { "id": "DI12", "type": "BOOL", "role": "input", "table": "discrete", "address": 11, "hardware": "D11", "plc": "10012" },
+      { "id": "DI13", "type": "BOOL", "role": "input", "table": "discrete", "address": 12, "hardware": "D12", "plc": "10013" },
+      { "id": "DI14", "type": "BOOL", "role": "input", "table": "discrete", "address": 13, "hardware": "D13", "plc": "10014" },
+      { "id": "DI15", "type": "BOOL", "role": "input", "table": "discrete", "address": 14, "hardware": "D14", "plc": "10015" },
+      { "id": "DI16", "type": "BOOL", "role": "input", "table": "discrete", "address": 15, "hardware": "D15", "plc": "10016" }
+    ],
+    "optional": [
+      { "id": "DAT10148_DI_WORD", "type": "INT", "role": "input", "table": "holding", "address": 10, "plc": "40011", "comment": "All 16 DI in one 16-bit word" },
+      { "id": "DAT10148_RISE_LATCH", "type": "INT", "role": "input", "table": "holding", "address": 11, "plc": "40012", "comment": "Rising-edge latch per channel" },
+      { "id": "DAT10148_FALL_LATCH", "type": "INT", "role": "input", "table": "holding", "address": 12, "plc": "40013", "comment": "Falling-edge latch per channel" },
+      { "id": "DAT10148_CNT0", "type": "INT", "role": "input", "table": "holding", "address": 14, "plc": "40015", "comment": "Pulse counter CH0 (0–65535)" },
+      { "id": "DAT10148_CNT1", "type": "INT", "role": "input", "table": "holding", "address": 15, "plc": "40016" },
+      { "id": "DAT10148_CNT2", "type": "INT", "role": "input", "table": "holding", "address": 16, "plc": "40017" },
+      { "id": "DAT10148_CNT3", "type": "INT", "role": "input", "table": "holding", "address": 17, "plc": "40018" },
+      { "id": "DAT10148_CNT4", "type": "INT", "role": "input", "table": "holding", "address": 18, "plc": "40019" },
+      { "id": "DAT10148_CNT5", "type": "INT", "role": "input", "table": "holding", "address": 19, "plc": "40020" },
+      { "id": "DAT10148_CNT6", "type": "INT", "role": "input", "table": "holding", "address": 20, "plc": "40021" },
+      { "id": "DAT10148_CNT7", "type": "INT", "role": "input", "table": "holding", "address": 21, "plc": "40022" }
+    ]
+  },
+  "registers": {
+    "holdingZeroBased": {
+      "HR_TEST": 0,
+      "HR_FIRMWARE0": 1,
+      "HR_FIRMWARE1": 2,
+      "HR_NAME0": 3,
+      "HR_NAME1": 4,
+      "HR_COMM": 5,
+      "HR_ADDRESS": 6,
+      "HR_DELAY_RXTX": 7,
+      "HR_WATCHDOG_SEC": 8,
+      "HR_SYSTEM_FLAGS": 9,
+      "HR_DIGITAL_INPUTS": 10,
+      "HR_RISE_LATCH": 11,
+      "HR_FALL_LATCH": 12,
+      "HR_SYNC_VALUE": 13,
+      "HR_COUNTER0": 14,
+      "HR_COUNTER7": 21
+    },
+    "coilsZeroBased": {
+      "COIL_INPUT0": 22,
+      "COIL_INPUT15": 37,
+      "note": "Coil 00024 (dec) = Input #0; subtract 1 from PLC coil address for PDU"
+    }
+  },
+  "cPort": {
+    "headerGuards": "PEAKLOGIC_DAT10148_H",
+    "defines": {
+      "DAT10148_DI_COUNT": 16,
+      "DAT10148_DEFAULT_BAUD": 9600,
+      "DAT10148_DEFAULT_SLAVE": 1,
+      "DAT10148_HR_DI_WORD": 10,
+      "DAT10148_HR_COUNTER0": 14,
+      "DAT10148_FC_READ_DISCRETE": 2,
+      "DAT10148_FC_READ_HOLDING": 3
+    },
+    "scanExample": "Read FC03 @ HR 10 (1 word), set tag DI(n) = (word >> (n-1)) & 1 for n=1..16; or FC02 @ discrete 0, count 16.",
+    "peaklogicTemplate": "src/devices/templates/datexel_dat10148.json"
+  },
+  "multiModule": {
+    "sharedBus": true,
+    "note": "Apply two templates on the same COM port — tags continue DI17..DI32 with per-tag slaveId on second module."
+  }
+}

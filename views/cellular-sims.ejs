@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Connectivity — PeakLogic</title>
+
+  <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
+
+</head>
+
+<body class="cellular-sims-body">
+
+  <header class="topbar standalone-topbar">
+
+    <div class="topbar-brand"><a href="<%= homeUrl || '/' %>" class="standalone-home-link">Peak<span>Logic</span></a></div>
+
+    <h1 class="standalone-title">Connectivity</h1>
+    <% if (typeof connectivityBuild !== 'undefined' && connectivityBuild) { %>
+    <p class="muted cellular-sims-build-stamp" style="margin:0;font-size:0.75rem">build <%= connectivityBuild %></p>
+    <% } %>
+
+    <div class="standalone-meta popup-header-actions">
+
+      <span id="cellular-sims-status" class="muted cell-mono" aria-live="polite">Loading…</span>
+
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+
+      <a href="<%= homeUrl || '/' %>" class="btn popup-close page-close" title="Return to dashboard">Close</a>
+
+    </div>
+
+  </header>
+
+
+
+  <main class="cellular-sims-main">
+
+    <p class="panel-hint cellular-sims-hint">
+
+      One place for alarm <strong>email</strong>, <strong>SMS</strong>, cellular vendor credentials, and SIM inventory.
+
+      Twilio account SID and auth token are shared between SMS and Twilio Super SIM vendor sync.
+
+    </p>
+
+
+
+    <section class="cellular-sims-messaging panel" id="messaging-mail-section">
+
+      <div class="cellular-sims-list-head">
+
+        <h2>Alarm email (SMTP / SendGrid)</h2>
+
+        <button type="button" class="btn" id="messaging-mail-refresh">Refresh</button>
+
+      </div>
+
+      <div id="messaging-mail-status" class="messaging-status-grid muted">Loading…</div>
+
+      <form id="messaging-mail-config-form" class="cellular-sims-form messaging-config-form">
+
+        <label>SMTP host
+
+          <input type="text" id="messaging-mail-host" placeholder="smtp.sendgrid.net" autocomplete="off">
+
+        </label>
+
+        <label>Port
+
+          <input type="number" id="messaging-mail-port" min="1" max="65535" value="587">
+
+        </label>
+
+        <label class="historian-ctl">
+
+          <input type="checkbox" id="messaging-mail-secure"> Use SSL (port 465)
+
+        </label>
+
+        <label class="historian-ctl span-all">
+
+          <input type="checkbox" id="messaging-mail-sendgrid-api"> SendGrid HTTPS API (when SMTP ports are blocked)
+
+        </label>
+
+        <label>SMTP user
+
+          <input type="text" id="messaging-mail-user" placeholder="apikey" autocomplete="off">
+
+        </label>
+
+        <label>SMTP password
+
+          <input type="password" id="messaging-mail-pass" placeholder="Leave blank to keep current" autocomplete="new-password">
+
+        </label>
+
+        <label>From address
+
+          <input type="email" id="messaging-mail-from" placeholder="noreply@yourdomain.com">
+
+        </label>
+
+        <label>From name
+
+          <input type="text" id="messaging-mail-from-name" value="PeakLogic">
+
+        </label>
+
+        <button type="submit" class="btn btn-primary" id="messaging-mail-save-btn">Save email settings</button>
+
+      </form>
+
+      <form id="messaging-mail-test-form" class="cellular-sims-form messaging-test-form">
+
+        <label>Send test to
+
+          <input type="email" id="messaging-mail-test-to" placeholder="you@example.com" autocomplete="email">
+
+        </label>
+
+        <button type="submit" class="btn" id="messaging-mail-test-btn">Send test email</button>
+
+      </form>
+
+      <p id="messaging-mail-msg" class="cellular-sims-msg muted" aria-live="polite"></p>
+
+    </section>
+
+
+
+    <section class="cellular-sims-messaging panel" id="messaging-sms-section">
+
+      <div class="cellular-sims-list-head">
+
+        <h2>Alarm SMS (Twilio)</h2>
+
+        <button type="button" class="btn" id="messaging-sms-refresh">Refresh</button>
+
+      </div>
+
+      <div id="messaging-sms-status" class="messaging-status-grid muted">Loading…</div>
+
+      <form id="messaging-sms-config-form" class="cellular-sims-form messaging-config-form">
+
+        <label>Account SID
+
+          <input type="text" id="messaging-sms-account-sid" placeholder="ACxxxxxxxx" autocomplete="off">
+
+        </label>
+
+        <label>Auth token
+
+          <input type="password" id="messaging-sms-auth-token" placeholder="Leave blank to keep current" autocomplete="new-password">
+
+        </label>
+
+        <label>SMS from (E.164)
+
+          <input type="tel" id="messaging-sms-from" placeholder="+15551234567">
+
+        </label>
+
+        <label>Default country code
+
+          <input type="text" id="messaging-sms-country" maxlength="4" value="1" placeholder="1">
+
+        </label>
+
+        <button type="submit" class="btn btn-primary" id="messaging-sms-save-btn">Save SMS settings</button>
+
+      </form>
+
+      <form id="messaging-sms-test-form" class="cellular-sims-form messaging-test-form">
+
+        <label>Send test to
+
+          <input type="tel" id="messaging-sms-test-to" placeholder="+15551234567" autocomplete="tel">
+
+        </label>
+
+        <button type="submit" class="btn" id="messaging-sms-test-btn">Send test SMS</button>
+
+      </form>
+
+      <p id="messaging-sms-msg" class="cellular-sims-msg muted" aria-live="polite"></p>
+
+    </section>
+
+
+
+    <section class="cellular-sims-vendors panel">
+
+      <div class="cellular-sims-list-head">
+
+        <h2>Vendor credentials</h2>
+
+        <button type="button" class="btn" id="cellular-vendors-refresh">Refresh</button>
+
+      </div>
+
+      <form id="cellular-vendor-form" class="cellular-sims-form">
+
+        <label>Vendor
+
+          <select id="vendor-id" required></select>
+
+        </label>
+
+        <label>Label <input type="text" id="vendor-label" maxlength="128" placeholder="Production Hologram"></label>
+
+        <div id="vendor-credential-fields" class="cellular-vendor-cred-grid"></div>
+
+        <button type="submit" class="btn btn-primary">Add vendor</button>
+
+      </form>
+
+      <p id="cellular-vendor-msg" class="cellular-sims-msg muted" aria-live="polite"></p>
+
+      <div id="cellular-vendors-table-wrap"><p class="muted">Loading vendors…</p></div>
+
+    </section>
+
+
+
+    <section class="cellular-sims-list panel">
+
+      <div class="cellular-sims-list-head">
+
+        <h2>SIM inventory</h2>
+
+        <div class="cellular-sims-actions">
+
+          <button type="button" class="btn btn-primary" id="cellular-sync-all">Sync all vendors</button>
+
+          <button type="button" class="btn" id="cellular-sims-refresh">Refresh</button>
+
+        </div>
+
+      </div>
+
+      <div id="cellular-sims-table-wrap">
+
+        <p class="muted">Loading SIMs…</p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <script>window.PEAKLOGIC_API_BASE = '<%= peaklogicApiBase || "/api" %>';</script>
+
+  <script>window.PEAKLOGIC_DEPLOYMENT = '<%= deployment %>';</script>
+
+  <script src="/js/api.js?v=<%= assetV %>"></script>
+
+  <script src="/js/cellularSimsPage.js?v=<%= assetV %>"></script>
+
+</body>
+
+</html>
+
+

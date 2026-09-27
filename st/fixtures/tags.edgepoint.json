@@ -1,0 +1,834 @@
+[
+  {
+    "id": "EPI_VARIANT",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:variant"
+    },
+    "comment": "Hardware variant"
+  },
+  {
+    "id": "EPI_TZ",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:tz"
+    },
+    "comment": "Time zone offset"
+  },
+  {
+    "id": "EPI_DST",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:dst"
+    },
+    "comment": "Daylight savings indicator"
+  },
+  {
+    "id": "EPI_AC_IN1",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.0.9010"
+    },
+    "comment": "AC input 1 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN1_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.0.9011"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN2",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.1.9020"
+    },
+    "comment": "AC input 2 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN2_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.1.9021"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN3",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.2.9030"
+    },
+    "comment": "AC input 3 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN3_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.2.9031"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN4",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.3.9040"
+    },
+    "comment": "AC input 4 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN4_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.3.9041"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN5",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.4.9050"
+    },
+    "comment": "AC input 5 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN5_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.4.9051"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN6",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.5.9060"
+    },
+    "comment": "AC input 6 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN6_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.5.9061"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN7",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.6.9070"
+    },
+    "comment": "AC input 7 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN7_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.6.9071"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN8",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.7.9080"
+    },
+    "comment": "AC input 8 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN8_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.7.9081"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN9",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.8.9090"
+    },
+    "comment": "AC input 9 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN9_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.8.9091"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN10",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.9.9100"
+    },
+    "comment": "AC input 10 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN10_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.9.9101"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN11",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.10.9110"
+    },
+    "comment": "AC input 11 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN11_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.10.9111"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN12",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.11.9120"
+    },
+    "comment": "AC input 12 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN12_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.11.9121"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN13",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.12.9130"
+    },
+    "comment": "AC input 13 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN13_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.12.9131"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN14",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.13.9140"
+    },
+    "comment": "AC input 14 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN14_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.13.9141"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN15",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.14.9150"
+    },
+    "comment": "AC input 15 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN15_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.14.9151"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AC_IN16",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.15.9160"
+    },
+    "comment": "AC input 16 state (0=OFF, 1=ON)"
+  },
+  {
+    "id": "EPI_AC_IN16_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.15.9161"
+    },
+    "comment": "Input type (0=discrete)"
+  },
+  {
+    "id": "EPI_AN1_V",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 32,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.16.9170"
+    },
+    "comment": "Analog input 1 voltage (V)"
+  },
+  {
+    "id": "EPI_AN1_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.16.9171"
+    },
+    "comment": "Input type (3=analog)"
+  },
+  {
+    "id": "EPI_AN2_V",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 32,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.17.9180"
+    },
+    "comment": "Analog input 2 voltage (V)"
+  },
+  {
+    "id": "EPI_AN2_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.17.9181"
+    },
+    "comment": "Input type (3=analog)"
+  },
+  {
+    "id": "EPI_AN3_V",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 32,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.18.9190"
+    },
+    "comment": "Analog input 3 voltage (V)"
+  },
+  {
+    "id": "EPI_AN3_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.18.9191"
+    },
+    "comment": "Input type (3=analog)"
+  },
+  {
+    "id": "EPI_AN4_V",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 32,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.19.9200"
+    },
+    "comment": "Analog input 4 voltage (V)"
+  },
+  {
+    "id": "EPI_AN4_TYPE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:inputs.19.9201"
+    },
+    "comment": "Input type (3=analog)"
+  },
+  {
+    "id": "EPI_RELAY1",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.0.9410"
+    },
+    "comment": "Relay 1 state"
+  },
+  {
+    "id": "EPI_RELAY1_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9410"
+    },
+    "comment": "Relay 1 command"
+  },
+  {
+    "id": "EPI_RELAY2",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.1.9420"
+    },
+    "comment": "Relay 2 state"
+  },
+  {
+    "id": "EPI_RELAY2_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9420"
+    },
+    "comment": "Relay 2 command"
+  },
+  {
+    "id": "EPI_RELAY3",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.2.9430"
+    },
+    "comment": "Relay 3 state"
+  },
+  {
+    "id": "EPI_RELAY3_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9430"
+    },
+    "comment": "Relay 3 command"
+  },
+  {
+    "id": "EPI_SINK1",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.3.9440"
+    },
+    "comment": "Current sink 1 state"
+  },
+  {
+    "id": "EPI_SINK1_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9440"
+    },
+    "comment": "Current sink 1 command"
+  },
+  {
+    "id": "EPI_SINK2",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.4.9450"
+    },
+    "comment": "Current sink 2 state"
+  },
+  {
+    "id": "EPI_SINK2_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9450"
+    },
+    "comment": "Current sink 2 command"
+  },
+  {
+    "id": "EPI_SINK3",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.5.9460"
+    },
+    "comment": "Current sink 3 state"
+  },
+  {
+    "id": "EPI_SINK3_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9460"
+    },
+    "comment": "Current sink 3 command"
+  },
+  {
+    "id": "EPI_SINK4",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.6.9470"
+    },
+    "comment": "Current sink 4 state"
+  },
+  {
+    "id": "EPI_SINK4_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9470"
+    },
+    "comment": "Current sink 4 command"
+  },
+  {
+    "id": "EPI_SINK5",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.7.9480"
+    },
+    "comment": "Current sink 5 state"
+  },
+  {
+    "id": "EPI_SINK5_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9480"
+    },
+    "comment": "Current sink 5 command"
+  },
+  {
+    "id": "EPI_SINK6",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.8.9490"
+    },
+    "comment": "Current sink 6 state"
+  },
+  {
+    "id": "EPI_SINK6_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9490"
+    },
+    "comment": "Current sink 6 command"
+  },
+  {
+    "id": "EPI_SINK7",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.9.9500"
+    },
+    "comment": "Current sink 7 state"
+  },
+  {
+    "id": "EPI_SINK7_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9500"
+    },
+    "comment": "Current sink 7 command"
+  },
+  {
+    "id": "EPI_SINK8",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.10.9510"
+    },
+    "comment": "Current sink 8 state"
+  },
+  {
+    "id": "EPI_SINK8_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9510"
+    },
+    "comment": "Current sink 8 command"
+  },
+  {
+    "id": "EPI_SINK9",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.11.9520"
+    },
+    "comment": "Current sink 9 state"
+  },
+  {
+    "id": "EPI_SINK9_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9520"
+    },
+    "comment": "Current sink 9 command"
+  },
+  {
+    "id": "EPI_SINK10",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/events/",
+      "payloadTemplate": "json:outputs.12.9530"
+    },
+    "comment": "Current sink 10 state"
+  },
+  {
+    "id": "EPI_SINK10_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "edgepoint1",
+    "driverAddress": {
+      "topic": "/devices/40a36bcd7113/messages/devicebound/",
+      "payloadTemplate": "edgepoint:output:9530"
+    },
+    "comment": "Current sink 10 command"
+  }
+]

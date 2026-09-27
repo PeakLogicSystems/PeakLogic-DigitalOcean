@@ -1,0 +1,10 @@
+{
+  "deviceId": "halow_01",
+  "ts": "2026-06-14T12:00:00Z",
+  "CH1": { "leak": false, "flow_gpm": 0.0, "total_gal": 1520.4 },
+  "CH2": { "leak": true, "flow_gpm": 2.35, "total_gal": 890.1 },
+  "CH3": { "leak": false, "flow_gpm": 0.12, "total_gal": 4410.0 },
+  "CH4": { "leak": false, "flow_gpm": 0.0, "total_gal": 220.5 },
+  "CH5": { "leak": false, "flow_gpm": 1.05, "total_gal": 6789.2 },
+  "CH6": { "leak": false, "flow_gpm": 0.0, "total_gal": 0.0 }
+}

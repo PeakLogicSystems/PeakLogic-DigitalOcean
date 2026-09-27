@@ -1,0 +1,105 @@
+126-1041   © Icon Process Controls Ltd.
+ProCon® — IS-750 Series
+Ion Sensors
+MODBUS Communication Protocol
+Read the user's manual carefully before starting to use the unit.
+Producer reserves the right to implement changes without prior notice.
+226-1041   © Icon Process Controls Ltd.
+ProCon® — IS-750 Series
+Ion Sensors
+Communication Protocol
+Communication Configuration: 9600 N 8 1
+Address: 1, can be modified by broadcasting address 255
+Communication Protocol: MODBUS RTU | 03 Read, 06 Input
+Definition Address Items Default Decimal Range Limitation Explanation
+Measurement 
+value
+0 mV - 1 -20000 – 20000 Read-Only
+1 Ion - 0 0 – 10000 Read-Only
+2 Decimal Point 
+of Ion - 0 0 – 2 Read-Only
+3 Temperature - 0 Read-Only
+User 
+Calibration
+4 Temperature 
+Resistance - 0 Write-Only
+5 Calibration 
+Point 1 -20000 0 0.01 Read & Write
+Calibration point default value 
+annotation:
+For example; The corresponding 
+concentration value formula of
+calibration point -20000 is as 
+follows :
+-20000/10000=Lg
+(concentration 0.01)
+The formula of concentration 
+value corresponding to calibration
+point 0 is as follows :
+0/10000=Lg (concentration 1)
+The formula of concentration 
+value corresponding to 10000
+calibration point is as follows:
+10000/10000=Lg (concentration 10)
+6 Calibration 
+Point 2 0 0 1 Read & Write
+7 Calibration 
+Point 3 10000 0 10 Read & Write
+8 Calibration 
+Point 4 20000 0 100 Read & Write
+9 Calibration 
+Point 5 30000 0 1000 Read & Write
+10 Voltage 1 -3000 1 Read & Write
+11 Voltage 2 -2500 1 Read & Write
+12 Voltage 3 -2000 1 Read & Write
+13 Voltage 4 -1500 1 Read & Write
+14 Voltage 5 -500 1 Read & Write
+User Settings 15 Buffer Coefficient 30 0 0 – 50 Read & Write
+326-1041   © Icon Process Controls Ltd.
+ProCon® — IS-750 Series
+Ion Sensors
+Definition Address Items Default Decimal Range Limitation Explanation
+User Settings
+16 Correspondence 
+Address 1 0 1 – 254 Read & Write Broadcast address 255
+17 Temperature 
+State 0 0 0: Automatic
+1: Artificial Read & Write
+18 Artificial 
+Temperature 250 1 Read & Write
+19 Temperature 
+Correction 0 1 Read & Write
+20 Linear 
+Compensation 1000 3 Read & Write
+21 Dynamic 
+Correction 0
+This will change 
+with ion decimal 
+point
+Read & Write
+Standard 
+Liquid 
+Calibration 
+Query
+22 Factory 
+Voltage 1 -3000
+23 Factory 
+Voltage 2 -2500
+24 Factory 
+Voltage 3 -2000
+25 Factory 
+Voltage 4 -1500
+26 Factory 
+Voltage 5 -500
+Restore 
+Factory 
+Settings
+200 Restore the 
+factory Settings 0 0 1: Factory 
+Restore Write-Only
+Version
+109 Number 1 Read & Write
+110 Month of 
+Manufacture 610 Read & Write
+111 Year of 
+Manufacture Read & Write

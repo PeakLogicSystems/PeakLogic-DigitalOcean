@@ -1,0 +1,168 @@
+[
+
+  {
+
+    "id": "MOTOR1_HOA",
+
+    "label": "Motor 1 HOA mode",
+
+    "type": "INT",
+
+    "role": "memory",
+
+    "value": 0,
+
+    "wordWidth": 16
+
+  },
+
+  {
+
+    "id": "MOTOR1_STA",
+
+    "label": "Motor 1 status",
+
+    "type": "INT",
+
+    "role": "memory",
+
+    "value": 0,
+
+    "wordWidth": 16
+
+  },
+
+  {
+
+    "id": "MOTOR1_START",
+
+    "label": "Motor 1 start",
+
+    "type": "BOOL",
+
+    "role": "memory",
+
+    "value": false
+
+  },
+
+  {
+
+    "id": "MOTOR1_STOP",
+
+    "label": "Motor 1 stop",
+
+    "type": "BOOL",
+
+    "role": "memory",
+
+    "value": false
+
+  },
+
+  {
+
+    "id": "MOTOR1_RESET",
+
+    "label": "Motor 1 reset",
+
+    "type": "BOOL",
+
+    "role": "memory",
+
+    "value": false
+
+  },
+
+  {
+
+    "id": "MOTOR1_OFFLINE",
+
+    "label": "Motor 1 offline latch",
+
+    "type": "BOOL",
+
+    "role": "memory",
+
+    "value": false
+
+  },
+
+  {
+
+    "id": "MOTOR1_RUN",
+
+    "label": "Motor 1 run",
+
+    "type": "BOOL",
+
+    "role": "memory",
+
+    "value": false
+
+  },
+
+  {
+
+    "id": "MOTOR1_HRS",
+
+    "label": "Motor 1 run hours",
+
+    "type": "REAL",
+
+    "role": "memory",
+
+    "value": 0
+
+  },
+
+  {
+
+    "id": "MOTOR1_STARTS",
+
+    "label": "Motor 1 start count",
+
+    "type": "INT",
+
+    "role": "memory",
+
+    "value": 0,
+
+    "wordWidth": 16
+
+  },
+
+  {
+
+    "id": "MOTOR1_CNTR",
+
+    "label": "Motor 1 start counter",
+
+    "type": "COUNTER",
+
+    "role": "memory",
+
+    "value": 0,
+
+    "preset": 999999,
+
+    "mode": "CTU"
+
+  },
+
+  {
+
+    "id": "VPB1",
+
+    "label": "VPB permissive",
+
+    "type": "BOOL",
+
+    "role": "memory",
+
+    "value": false
+
+  }
+
+]
+

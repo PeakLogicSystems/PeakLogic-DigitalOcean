@@ -1,0 +1,9 @@
+{
+  "driverId": "nextcentury1",
+  "email": "user@example.com",
+  "password": "",
+  "reportId": "rt_4510",
+    "pollIntervalMs": 900000,
+    "propertyIds": [39990, 40074],
+    "autoSyncTags": true
+}

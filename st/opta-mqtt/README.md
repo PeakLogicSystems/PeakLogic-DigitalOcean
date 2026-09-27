@@ -1,83 +1,91 @@
-# Arduino Opta — ST over MQTT fleet
+# Arduino Opta — ST over MQTT Parc (bytecode IR)
 
-Structured Text runs **on the Opta**; PeakLogic **est-pc** deploys and starts programs over **MQTT** (same workflow as Ethernet `opta_remote`, different transport).
+Structured Text runs **on the Opta**; PeakLogic **est-pc** deploys **bytecode** (`MVBC`) and controls runtime over **MQTT** (`mqtt_parc` driver). Alpha — JSON AST (protocol v1) is removed.
 
 ## 1. Flash firmware
 
 `firmware/arduino-opta-mqtt-st/PeakLogicOptaMqttSt/`
 
-Libraries: **ArduinoJson** 7, **PubSubClient**, **Arduino_Opta_Blueprint**, and optionally **EthernetWebServer** (Khoi Hoang) for local `/setup` HTTP. Without EthernetWebServer the sketch still builds — ST + MQTT only.
+Add **`mv_bc.cpp`**, **`mv_base64.cpp`** to the sketch (same folder as `mv_st.cpp`).
 
-In `PeakLogicOptaMqttSt.ino`, set:
+In `PeakLogicOptaMqttSt.ino`, set MQTT broker + device id:
 
 ```cpp
 static PlMqttConfig g_mqttCfg = {
-  "192.168.1.100",  // MQTT broker IP
+  "192.168.1.233",  // MQTT broker IP (PeakLogic PC LAN)
   1883,
-  "opta_st_01",     // fleet device id — must match driver below
+  "opta_st_01",     // must match driver deviceId
   "peaklogic/v1",
   180000,
 };
 ```
 
-Commission Ethernet via `/setup` (WiFi AP `PeakLogic-Opta` on WiFi models).
+## 2. Local MQTT broker (Windows)
 
-## 2. est-pc MQTT hub
+PeakLogic PC runs the **Parc hub**; Opta connects to the same broker on the LAN.
+
+| Item | Value |
+|------|-------|
+| Executable | `C:\Program Files\mosquitto\mosquitto.exe` |
+| Service config | `C:\Program Files\mosquitto\mosquitto.conf` |
+| Dev config (repo) | `config/mosquitto-dev.conf` — `listener 1883 0.0.0.0`, `allow_anonymous true` |
+
+**One-time (Administrator):** patch the Windows service to listen on all interfaces:
+
+```powershell
+cd C:\Users\public\data\est-pc
+.\scripts\setup-mqtt-broker-admin.ps1
+```
+
+**Start / verify (normal shell):**
+
+```bash
+npm run mqtt:start   # patch service if Admin, else dev broker on 0.0.0.0:1883
+npm run mqtt:stop    # stop dev broker PID; service stop needs Admin
+```
+
+Set `mqttParc.brokerUrl` to your PC LAN IP (e.g. `mqtt://192.168.1.233:1883`). Flash firmware with the same broker IP in `g_mqttCfg`.
+
+## 3. est-pc MQTT hub
 
 `data/settings.json`:
 
 ```json
-"mqttFleet": {
+"mqttParc": {
   "enabled": true,
-  "brokerUrl": "mqtt://192.168.1.100:1883",
+  "brokerUrl": "mqtt://192.168.1.233:1883",
   "topicPrefix": "peaklogic/v1"
 }
 ```
 
 Restart est-pc after enabling.
 
-## 3. PeakLogic project
+## 4. PeakLogic project
 
-1. **Drivers → Apply template → Arduino Opta — MQTT fleet ST runtime**
-2. Confirm **device id** = `opta_st_01` (same as firmware)
+1. **Drivers → Apply template → Arduino Opta — MQTT Parc ST runtime**
+2. **deviceId** = `opta_st_01` (same as firmware)
 3. **Save drivers**
-4. **Program → Remote execution** ✓ (auto-enabled by template)
-5. Load `st/opta/01_i1_to_r1.st` with **Load matching fixtures** → `tags.opta_mqtt_st.json` + `drivers.opta_mqtt_st.json`
-6. **Connect** (Program panel) — links via MQTT
-7. **Validate** → **Start** — deploys AST + starts scan on device
+4. **Program → Remote** → **Connect** → **Start**
 
-## ST programs
+Deploy payload is `{ protocolVersion: 2, bc: "<base64 MVBC>", programName }` — typically **5–20× smaller** than JSON AST.
 
-Use programs under `st/opta/` (each header lists **required tags**). **Load matching fixtures** loads only those tags.
+While attached, PeakLogic sets Parc `reportMs` ≈ `2× scanMs` for HMI tag refresh (default firmware telemetry is 180 s when idle).
 
-| File | Description | Required tags |
-|------|-------------|---------------|
-| `opta/01_i1_to_r1.st` | `I1` → `R1` | `I1`, `R1` |
-| `opta/02_analog_alarm_to_r2.st` | Analog alarm → `R2` | `I1_RAW`, `R2` |
-| `opta/03_pid_avg.st` | PID + moving average | `I1`, `R1`, `R2`, `I1_RAW`, `H1`–`H3`, `PID1`, `AVG1` |
-| `opta/04_timer_counter.st` | Timer + counter on `I1` | `I1`, `R1`, `R2`, `TMR1`, `CTR1` |
+## Wire format
 
-## Fleet HMI (other devices keep reporting)
+| Field | Description |
+|-------|-------------|
+| Magic | `MVBC` |
+| Tags | Name + compact meta (type, preset, PID tuning) |
+| Code | Stack IR opcodes (`PUSH_*`, `CALL`, `ACTION`, `JMP_IFNOT`, …) |
 
-While programming this Opta, telemetry still flows unless paused by attach. Overview bindings:
+PC compiler: `src/engine/stBytecode.js` · Firmware VM: `mv_bc.cpp`
 
-```
-fleet.opta_st_01.I1
-fleet.opta_st_01.R1
-```
+## Compare (legacy removed)
 
-## API (alternative to UI)
-
-```http
-POST /api/fleet/devices/opta_st_01/program
-{ "start": true, "scanMs": 100 }
-```
-
-## Compare
-
-| | Ethernet ST | **MQTT ST** |
-|--|-------------|-------------|
+| | Old HTTP `opta_remote` | **MQTT Parc bytecode** |
+|--|------------------------|-------------------------|
 | Firmware | `arduino-opta-st` | `arduino-opta-mqtt-st` |
-| Driver type | `opta_remote` | `mqtt_fleet` |
-| Deploy | HTTP | MQTT `put_program` |
-| Fleet overview | — | `peaklogic/v1/.../telemetry` |
+| Program | JSON AST | **MVBC bytecode** |
+| Runtime comms | HTTP `/api/scan` each tick | Device scan + MQTT telemetry |
+| Protocol | v1 | **v2** |

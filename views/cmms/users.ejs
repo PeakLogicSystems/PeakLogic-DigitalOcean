@@ -1,0 +1,25 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <h1 class="h3 mb-3">Users</h1>
+  <p class="text-muted small">Tenant users from PeakLogic — managed via API or admin tools.</p>
+  <div class="card dashboard-card">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light"><tr><th>Email</th><th>Role</th><th>Status</th></tr></thead>
+        <tbody>
+          <% cmmsUsers.forEach(function(u) { %>
+            <tr>
+              <td><%= u.email %></td>
+              <td><span class="badge bg-light text-dark border"><%= u.role %></span></td>
+              <td><%= u.active ? 'active' : 'inactive' %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/shell-foot') %>

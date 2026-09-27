@@ -1,0 +1,448 @@
+[
+  {
+    "id": "ALT1",
+    "label": "duplex 1",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT2",
+    "preset": 2,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "onlineIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "unitOutIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "leadSelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lagSelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lag2SelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "levelInputMode": "digital",
+      "levelControlEnabled": false,
+      "leadIndex": 0,
+      "lagIndex": -1,
+      "activeUnit": 0
+    }
+  },
+  {
+    "id": "SYS_RUN",
+    "label": "Run duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_OFF",
+    "label": "Off duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_HIGH",
+    "label": "High duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_LAG",
+    "label": "Lag duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_BUMP",
+    "label": "Bump duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_ONLINE",
+    "label": "Pump 1 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR2_ONLINE",
+    "label": "Pump 2 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR1_RUN",
+    "label": "Pump 1 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_RUN",
+    "label": "Pump 2 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LEAD_RUN",
+    "label": "Lead duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_FAULT",
+    "label": "Fault duplex 1",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO1_EN",
+    "label": "TPO1 enable",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "TPO1_OFFLINE",
+    "label": "TPO1 offline",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO1_24HR",
+    "label": "TPO1 24hr",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "TPO1_OUT",
+    "label": "TPO1 output",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO1_GAP",
+    "label": "TPO1 gap",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO1_STA",
+    "label": "TPO1 status",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_TOD",
+    "label": "TPO1 TOD",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_TOD_STEP",
+    "label": "TPO1 step",
+    "type": "INT",
+    "role": "memory",
+    "value": 1,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_START",
+    "label": "TPO1 start",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_END",
+    "label": "TPO1 end",
+    "type": "INT",
+    "role": "memory",
+    "value": 1440,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_ON_MIN",
+    "label": "TPO1 on min",
+    "type": "INT",
+    "role": "memory",
+    "value": 30,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_OFF_MIN",
+    "label": "TPO1 off min",
+    "type": "INT",
+    "role": "memory",
+    "value": 120,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO1_PULSE_REM",
+    "label": "TPO1 pulse rem",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "ALT2",
+    "label": "duplex 2",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT2",
+    "preset": 2,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "onlineIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "unitOutIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "leadSelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lagSelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lag2SelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "levelInputMode": "digital",
+      "levelControlEnabled": false,
+      "leadIndex": 0,
+      "lagIndex": -1,
+      "activeUnit": 0
+    }
+  },
+  {
+    "id": "SYS_RUN2",
+    "label": "Run duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_OFF2",
+    "label": "Off duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_HIGH2",
+    "label": "High duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_LAG2",
+    "label": "Lag duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_BUMP2",
+    "label": "Bump duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_ONLINE",
+    "label": "Pump 3 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR4_ONLINE",
+    "label": "Pump 4 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR3_RUN",
+    "label": "Pump 3 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR4_RUN",
+    "label": "Pump 4 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LEAD_RUN2",
+    "label": "Lead duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_FAULT2",
+    "label": "Fault duplex 2",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO2_EN",
+    "label": "TPO2 enable",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "TPO2_OFFLINE",
+    "label": "TPO2 offline",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO2_24HR",
+    "label": "TPO2 24hr",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "TPO2_OUT",
+    "label": "TPO2 output",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO2_GAP",
+    "label": "TPO2 gap",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TPO2_STA",
+    "label": "TPO2 status",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_TOD",
+    "label": "TPO2 TOD",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_TOD_STEP",
+    "label": "TPO2 step",
+    "type": "INT",
+    "role": "memory",
+    "value": 1,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_START",
+    "label": "TPO2 start",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_END",
+    "label": "TPO2 end",
+    "type": "INT",
+    "role": "memory",
+    "value": 1440,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_ON_MIN",
+    "label": "TPO2 on min",
+    "type": "INT",
+    "role": "memory",
+    "value": 30,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_OFF_MIN",
+    "label": "TPO2 off min",
+    "type": "INT",
+    "role": "memory",
+    "value": 120,
+    "wordWidth": 16
+  },
+  {
+    "id": "TPO2_PULSE_REM",
+    "label": "TPO2 pulse rem",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  }
+]

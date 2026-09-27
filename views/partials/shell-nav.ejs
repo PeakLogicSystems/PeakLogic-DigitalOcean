@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-dark nav-mv px-3">
+  <a class="navbar-brand brand-mark mb-0 h1 text-white text-decoration-none" href="/">Peak<span>Logic</span></a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mvNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mvNav">
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link <%= activeNav === 'home' ? 'active fw-semibold' : '' %>" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= activeNav === 'fleet' ? 'active fw-semibold' : '' %>" href="/fleet">Fleet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= activeNav === 'sites' ? 'active fw-semibold' : '' %>" href="/sites">Sites</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= activeNav === 'studio' ? 'active fw-semibold' : '' %>" href="/studio">Studio</a>
+      </li>
+      <% if (user.role === 'admin') { %>
+        <li class="nav-item">
+          <a class="nav-link <%= activeNav === 'team' ? 'active fw-semibold' : '' %>" href="/team/users">Team</a>
+        </li>
+      <% } %>
+      <% if (cmmsEnabled) { %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <%= activeNav === 'cmms' ? 'active fw-semibold' : '' %>"
+             href="#" role="button" data-bs-toggle="dropdown">CMMS</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/cmms">Dashboard</a></li>
+            <li><a class="dropdown-item" href="/cmms/work-orders">Work Orders</a></li>
+            <li><a class="dropdown-item" href="/cmms/assets">Assets</a></li>
+            <li><a class="dropdown-item" href="/cmms/facilities">Facilities</a></li>
+            <% if (user.role === 'admin') { %>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/team/users">Team invites</a></li>
+              <li><a class="dropdown-item" href="/cmms/users">Users (read-only)</a></li>
+            <% } %>
+          </ul>
+        </li>
+      <% } %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">API</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/health">Health</a></li>
+          <li><a class="dropdown-item" href="/?format=json">Service JSON</a></li>
+          <li><a class="dropdown-item" href="/api/locations">Locations API</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="d-flex align-items-center gap-2 text-white-50 small">
+      <span><%= user.email %> · <%= tenant.name %></span>
+      <a href="/logout" class="btn btn-outline-light btn-sm">Log out</a>
+    </div>
+  </div>
+</nav>

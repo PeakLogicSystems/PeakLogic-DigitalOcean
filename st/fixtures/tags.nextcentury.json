@@ -1,0 +1,119 @@
+[
+  {
+    "id": "NC_STATUS_DEVICES",
+    "label": "NC device count",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "_meta", "field": "_deviceCount" }
+  },
+  {
+    "id": "NC_FA003195_USAGE",
+    "label": "Bathroom toilet usage",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA003195", "field": "totalUsage" }
+  },
+  {
+    "id": "NC_FA003195_TEMP",
+    "label": "Bathroom toilet temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA003195", "field": "temperature" }
+  },
+  {
+    "id": "NC_FA003195_LEAK",
+    "label": "Bathroom toilet leak",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA003195", "field": "leakActive" }
+  },
+  {
+    "id": "NC_FA0032CF_USAGE",
+    "label": "Kitchen sink usage",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA0032CF", "field": "totalUsage" }
+  },
+  {
+    "id": "NC_FA0032CF_TEMP",
+    "label": "Kitchen sink temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA0032CF", "field": "temperature" }
+  },
+  {
+    "id": "NC_FA0032A8_USAGE",
+    "label": "Toilet light-leak usage",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA0032A8", "field": "totalUsage" }
+  },
+  {
+    "id": "NC_FA0032A8_LEAK",
+    "label": "Toilet light-leak active",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA0032A8", "field": "leakActive" }
+  },
+  {
+    "id": "NC_11F01BBC_USAGE",
+    "label": "Power meter kWh total",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "11F01BBC", "field": "totalUsage" }
+  },
+  {
+    "id": "NC_11F01BBC_TEMP",
+    "label": "Power meter temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "11F01BBC", "field": "temperature" }
+  },
+  {
+    "id": "NC_FA003A8C_USAGE",
+    "label": "A/C pan usage",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "FA003A8C", "field": "totalUsage" }
+  },
+  {
+    "id": "NC_BC0077DF_USAGE",
+    "label": "Freezer transceiver usage",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "BC0077DF", "field": "totalUsage" }
+  },
+  {
+    "id": "NC_BC0077DF_TEMP",
+    "label": "Freezer transceiver temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "nextcentury1",
+    "driverAddress": { "deviceId": "BC0077DF", "field": "temperature" }
+  }
+]

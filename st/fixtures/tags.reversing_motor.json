@@ -1,0 +1,114 @@
+[
+  {
+    "id": "RMOTOR1",
+    "label": "Reversing motor 1",
+    "type": "RMOTOR",
+    "role": "fb",
+    "mode": "RMOTOR",
+    "preset": 500,
+    "value": 0,
+    "wordWidth": 16,
+    "fb": {}
+  },
+  {
+    "id": "RM1_FWD_CMD",
+    "label": "RM1 forward command",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_REV_CMD",
+    "label": "RM1 reverse command",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_FWD_AUX",
+    "label": "RM1 forward aux contact",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_REV_AUX",
+    "label": "RM1 reverse aux contact",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_OVL",
+    "label": "RM1 overload",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_HOA",
+    "label": "RM1 HOA mode",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "RM1_FWD_OUT",
+    "label": "RM1 forward contactor",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_REV_OUT",
+    "label": "RM1 reverse contactor",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_STA",
+    "label": "RM1 status",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "RM1_HRS",
+    "label": "RM1 run hours",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0
+  },
+  {
+    "id": "RM1_STARTS",
+    "label": "RM1 start count",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "RM1_RESET",
+    "label": "RM1 reset",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_OFFLINE",
+    "label": "RM1 offline latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "RM1_FAULT_LAMP",
+    "label": "RM1 fault lamp",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  }
+]

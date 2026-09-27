@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> — PeakLogic</title>
+  <link rel="stylesheet" href="/css/pc.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">Peak<span>Logic</span></div>
+    <nav>
+      <a href="/" class="<%= contentPage === 'dashboard' ? 'active' : '' %>">Dashboard</a>
+      <a href="/tags" class="<%= contentPage === 'tags' ? 'active' : '' %>">Tags</a>
+      <a href="/drivers" class="<%= contentPage === 'drivers' ? 'active' : '' %>">Drivers</a>
+      <a href="/program" class="<%= contentPage === 'program' ? 'active' : '' %>">Program</a>
+      <a href="/debug" class="<%= contentPage === 'debug' ? 'active' : '' %>">Debug / Force</a>
+      <a href="/graphs" class="<%= contentPage === 'graphs' ? 'active' : '' %>">Graphs</a>
+      <a href="/modbus" class="<%= contentPage === 'modbus' ? 'active' : '' %>">Modbus Move</a>
+      <a href="/runtime" class="<%= contentPage === 'runtime' ? 'active' : '' %>">Runtime</a>
+      <a href="/settings" class="<%= contentPage === 'settings' ? 'active' : '' %>">Settings</a>
+    </nav>
+    <div class="runtime-link">Built-in runtime · single process</div>
+  </aside>
+  <main class="content">
+    <header><h1><%= title %></h1></header>
+    <%- include('pages/' + contentPage) %>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/graph.js"></script>
+  <script src="/js/app.js"></script>
+  <script>window.PEAKLOGIC_PAGE = '<%= contentPage %>';</script>
+</body>
+</html>
+
+

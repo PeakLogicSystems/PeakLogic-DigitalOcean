@@ -1,0 +1,37 @@
+[
+  {
+    "id": "badu_pump",
+    "type": "vgreen_epc",
+    "enabled": true,
+    "serialPort": "/dev/ttyLP6",
+    "baud": 19200,
+    "slaveId": 21,
+    "parity": "none",
+    "stopBits": 1,
+    "timeoutMs": 2000,
+    "pollIntervalMs": 120000
+  },
+  {
+    "id": "pentair_hp",
+    "type": "pentair_rs485",
+    "enabled": true,
+    "serialPort": "/dev/ttyLP4",
+    "baud": 9600,
+    "deviceAddr": 112,
+    "deviceClass": "ultratemp",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 300000,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  {
+    "id": "opta_mqtt_st",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "opta_st_01",
+    "remoteExecution": false,
+    "scanMs": 100,
+    "reportIntervalSec": 180
+  }
+]

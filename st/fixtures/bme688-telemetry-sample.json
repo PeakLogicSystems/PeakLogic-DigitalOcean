@@ -1,0 +1,14 @@
+{
+  "deviceId": "env_01",
+  "ts": "2026-06-14T12:00:00Z",
+  "bme688": {
+    "temp_C": 22.6,
+    "rh_pct": 47.8,
+    "press_hPa": 1013.42,
+    "gas_ohm": 142500,
+    "iaq": 38,
+    "iaq_acc": 3,
+    "voc_ppm": 0.72,
+    "co2_eq_ppm": 408
+  }
+}

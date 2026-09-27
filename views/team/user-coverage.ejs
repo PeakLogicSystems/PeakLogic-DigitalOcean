@@ -1,0 +1,97 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small mb-0">
+      <li class="breadcrumb-item"><a href="/team/users">Team</a></li>
+      <li class="breadcrumb-item active">County coverage</li>
+    </ol>
+  </nav>
+
+  <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+    <div>
+      <h1 class="h3 mb-1">Map coverage — <%= targetUser.profile?.displayName || targetUser.email %></h1>
+      <p class="text-muted small mb-0">
+        Select Florida counties this user can view on the fleet map.
+        <% if (targetUser.role === 'admin') { %>
+          Admins always see all counties; assignments apply if role changes.
+        <% } %>
+      </p>
+    </div>
+    <span class="badge bg-light text-dark border"><%= targetUser.role %></span>
+  </div>
+
+  <% if (error) { %>
+    <div class="alert alert-danger py-2 small"><%= error %></div>
+  <% } %>
+  <% if (message) { %>
+    <div class="alert alert-success py-2 small"><%= message %></div>
+  <% } %>
+
+  <form action="/team/users/<%= targetUser.id %>/coverage" method="POST">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header bg-white d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span class="fw-semibold">Florida counties (<%= Object.values(regions).reduce(function(n, list) { return n + list.length; }, 0) %>)</span>
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-outline-secondary" id="county-select-all">Select all</button>
+          <button type="button" class="btn btn-outline-secondary" id="county-clear-all">Clear all</button>
+        </div>
+      </div>
+      <div class="card-body county-coverage-grid">
+        <% Object.keys(regions).sort().forEach(function(region) { %>
+          <div class="county-region-block mb-4">
+            <h2 class="h6 text-muted mb-2"><%= region %></h2>
+            <div class="row g-2">
+              <% regions[region].forEach(function(c) { %>
+                <div class="col-md-4 col-lg-3">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input county-cb"
+                      type="checkbox"
+                      name="counties"
+                      value="<%= c.slug %>"
+                      id="county-<%= c.slug %>"
+                      <%= assigned.has(c.slug) ? 'checked' : '' %>
+                    >
+                    <label class="form-check-label small" for="county-<%= c.slug %>"><%= c.name %></label>
+                  </div>
+                </div>
+              <% }); %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+        <span class="text-muted small" id="county-selected-count"></span>
+        <div class="d-flex gap-2">
+          <a href="/team/users" class="btn btn-outline-secondary">Cancel</a>
+          <button type="submit" class="btn btn-purple">Save coverage</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</main>
+
+<script>
+(function () {
+  const boxes = Array.from(document.querySelectorAll('.county-cb'));
+  const countEl = document.getElementById('county-selected-count');
+  function refreshCount() {
+    const n = boxes.filter((b) => b.checked).length;
+    countEl.textContent = n + ' of ' + boxes.length + ' counties selected';
+  }
+  document.getElementById('county-select-all')?.addEventListener('click', () => {
+    boxes.forEach((b) => { b.checked = true; });
+    refreshCount();
+  });
+  document.getElementById('county-clear-all')?.addEventListener('click', () => {
+    boxes.forEach((b) => { b.checked = false; });
+    refreshCount();
+  });
+  boxes.forEach((b) => b.addEventListener('change', refreshCount));
+  refreshCount();
+})();
+</script>
+
+<%- include('../partials/shell-foot') %>

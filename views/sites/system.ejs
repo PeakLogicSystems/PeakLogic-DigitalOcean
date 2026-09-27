@@ -1,0 +1,128 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small mb-0">
+      <li class="breadcrumb-item"><a href="/sites">Sites</a></li>
+      <li class="breadcrumb-item"><a href="/sites/<%= location.id %>"><%= location.name %></a></li>
+      <li class="breadcrumb-item active"><%= system.name %></li>
+    </ol>
+  </nav>
+
+  <% if (error) { %>
+    <div class="alert alert-danger py-2 small"><%= error %></div>
+  <% } %>
+  <% if (message) { %>
+    <div class="alert alert-success py-2 small"><%= message %></div>
+  <% } %>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h1 class="h4 mb-1"><%= system.name %></h1>
+      <p class="text-muted small mb-0">
+        Location <code><%= location.slug %></code> · System <code><%= system.slug %></code> · Scan <%= system.scanMs %> ms
+      </p>
+    </div>
+  </div>
+
+  <% if (canManage) { %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Add device</h2>
+        <form action="/sites/<%= location.id %>/systems/<%= system.id %>/devices" method="POST" class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label small" for="dev-name">Name</label>
+            <input type="text" class="form-control" id="dev-name" name="name" required placeholder="Opta ST 01">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small" for="dev-slug">Slug</label>
+            <input type="text" class="form-control" id="dev-slug" name="slug" required placeholder="opta-st-01"
+                   pattern="[a-z0-9][a-z0-9-]*" title="Lowercase letters, numbers, hyphens">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small" for="dev-driver">Driver</label>
+            <select class="form-select" id="dev-driver" name="driverType">
+              <% driverTypes.forEach(function(d) { %>
+                <option value="<%= d %>" <%= d === defaultDriverType ? 'selected' : '' %>><%= d %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small" for="dev-id">MQTT device ID</label>
+            <input type="text" class="form-control" id="dev-id" name="deviceId" placeholder="opta_st_01">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label small" for="dev-template">Template</label>
+            <input type="text" class="form-control" id="dev-template" name="templateId"
+                   placeholder="arduino_opta_parc">
+          </div>
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-purple w-100">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white fw-semibold">Devices</div>
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Driver</th>
+            <th>Device ID</th>
+            <th>Status</th>
+            <% if (user.role === 'admin') { %><th></th><% } %>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!devices.length) { %>
+            <tr>
+              <td colspan="<%= user.role === 'admin' ? 6 : 5 %>" class="text-muted p-4">
+                No devices yet.<% if (canManage) { %> Add one above.<% } %>
+              </td>
+            </tr>
+          <% } else { %>
+            <% devices.forEach(function(dev) { %>
+              <tr>
+                <td><strong><%= dev.name %></strong></td>
+                <td><code><%= dev.slug %></code></td>
+                <td><%= dev.driverType %></td>
+                <td><code><%= dev.driverConfig?.deviceId || '—' %></code></td>
+                <td>
+                  <% if (dev.enabled) { %>
+                    <span class="badge bg-success">enabled</span>
+                  <% } else { %>
+                    <span class="badge bg-secondary">disabled</span>
+                  <% } %>
+                </td>
+                <% if (user.role === 'admin') { %>
+                  <td class="text-end">
+                    <form action="/sites/<%= location.id %>/systems/<%= system.id %>/devices/<%= dev.id %>/delete"
+                          method="POST" class="d-inline"
+                          onsubmit="return confirm('Delete this device?');">
+                      <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                  </td>
+                <% } %>
+              </tr>
+            <% }); %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <% if (user.role === 'admin') { %>
+    <form action="/sites/<%= location.id %>/systems/<%= system.id %>/delete" method="POST"
+          onsubmit="return confirm('Delete this system and all its devices?');">
+      <button type="submit" class="btn btn-outline-danger btn-sm">Delete system</button>
+    </form>
+  <% } %>
+</main>
+
+<%- include('../partials/shell-foot') %>

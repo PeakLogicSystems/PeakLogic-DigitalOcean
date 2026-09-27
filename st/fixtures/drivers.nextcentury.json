@@ -1,0 +1,15 @@
+[
+  {
+    "id": "nextcentury1",
+    "type": "nextcentury",
+    "enabled": true,
+    "email": "",
+    "password": "",
+    "reportId": "rt_4510",
+    "pollIntervalMs": 900000,
+    "propertyIds": [39990, 40074],
+    "propertyDelayMs": 600,
+    "timeoutMs": 20000,
+    "autoSyncTags": true
+  }
+]

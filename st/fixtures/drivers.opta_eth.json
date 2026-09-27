@@ -1,12 +1,11 @@
 [
   {
-    "id": "opta_eth",
-    "type": "opta_remote",
+    "id": "opta_st_01",
+    "type": "mqtt_parc",
     "enabled": true,
-    "host": "192.168.1.50",
-    "port": 80,
+    "deviceId": "opta_st_01",
     "remoteExecution": true,
     "scanMs": 100,
-    "timeoutMs": 8000
+    "reportIntervalMs": 200
   }
 ]
