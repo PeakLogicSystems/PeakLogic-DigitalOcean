@@ -22,7 +22,7 @@ function defaultEnabledSettings(prev = {}) {
       autoDiscoverDrivers: true,
       brokerUrl: prev.mqttParc?.brokerUrl || DEFAULT_MQTT_PARC_BROKER,
       topicPrefix: prev.mqttParc?.topicPrefix || 'peaklogic/v1',
-      clientId: prev.mqttParc?.clientId || 'mv-central-hmi',
+      clientId: prev.mqttParc?.clientId || 'peaklogic-central-hmi',
     },
   };
 }

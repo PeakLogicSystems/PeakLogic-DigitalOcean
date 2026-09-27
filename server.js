@@ -4,13 +4,15 @@ process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'applianc
 
 const path = require('path');
 const express = require('express');
-const { DEFAULT_PORT, DATA_DIR, ST_DIR } = require('./src/config');
+const { DEFAULT_PORT, DATA_DIR, ST_DIR, DEPLOYMENT_MODE } = require('./src/config');
+const { EST_VERSION } = require('./src/project/estFile');
 const persistence = require('./src/persistence');
 const { TagStore } = require('./src/tags/tagStore');
 const { DriverManager } = require('./src/drivers');
 const { ScanEngine } = require('./src/runtime/scanEngine');
 const { GraphHistory } = require('./src/runtime/graphHistory');
 const { createExpressApi } = require('./src/api/expressRouter');
+const { createPageRoutes } = require('./src/routes/pages');
 const programStore = require('./src/programs/programStore');
 const mongoTagLogger = require('./src/logger/mongoTagLogger');
 const { registry } = require('./src/fleet/deviceRegistry');
@@ -22,8 +24,12 @@ const graphHistory = new GraphHistory();
 const scanEngine = new ScanEngine(tagStore, driverManager, graphHistory);
 
 const { version: APP_VERSION } = require('./package.json');
+const PRODUCT = process.env.PEAKLOGIC_PRODUCT || 'peaklogic-suite';
 
 const app = express();
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json({ limit: '4mb' }));
 app.use('/api', createExpressApi({ tagStore, driverManager, scanEngine, graphHistory }));
 
@@ -41,11 +47,13 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.type('text/plain').send(
-    `PeakLogic Cloud ${APP_VERSION}\nAPI: /api/dashboard\nHealth: /health\nUse peaklogic-client for operator UI.\n`
-  );
-});
+app.use(createPageRoutes({
+  appVersion: APP_VERSION,
+  companyName: 'PeakLogic',
+  product: PRODUCT,
+  deployment: DEPLOYMENT_MODE,
+  estVersion: EST_VERSION,
+}));
 
 async function boot() {
   persistence.ensureDataDir();

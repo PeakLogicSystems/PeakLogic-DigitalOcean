@@ -8,7 +8,7 @@
 </head>
 <body class="dashboard-body">
   <header class="topbar">
-    <div class="topbar-brand"><a href="/" class="text-white text-decoration-none">Peak<span>Logic</span></a></div>
+    <div class="topbar-brand"><a href="/" class="text-white text-decoration-none"><img src="/branding/peaklogic-icon.svg" alt="Logo" class="topbar-logo"></a></div>
     <a href="/" class="btn btn-sm btn-outline-light ms-2" style="align-self:center">Cloud home</a>
     <a href="/sites" class="btn btn-sm btn-outline-light ms-1" style="align-self:center">Sites</a>
     <div class="topbar-project-bar">
@@ -427,21 +427,21 @@
             <p class="panel-hint">One-shot register block copy between Modbus RTU (USB/serial) and Modbus TCP — useful for commissioning and migration.</p>
             <div class="form-grid compact">
               <label>RTU port
-                <select id="mv-rtu-port"></select>
+                <select id="peaklogic-rtu-port"></select>
               </label>
-              <label>Baud <input id="mv-rtu-baud" type="number" value="9600"></label>
-              <label>RTU slave <input id="mv-rtu-slave" type="number" value="1"></label>
-              <label>TCP host <input id="mv-tcp-host" value="127.0.0.1"></label>
-              <label>TCP port <input id="mv-tcp-port" type="number" value="502"></label>
-              <label>RTU addr <input id="mv-rtu-addr" type="number" value="0"></label>
-              <label>TCP addr <input id="mv-tcp-addr" type="number" value="0"></label>
-              <label>Count <input id="mv-count" type="number" value="10"></label>
+              <label>Baud <input id="peaklogic-rtu-baud" type="number" value="9600"></label>
+              <label>RTU slave <input id="peaklogic-rtu-slave" type="number" value="1"></label>
+              <label>TCP host <input id="peaklogic-tcp-host" value="127.0.0.1"></label>
+              <label>TCP port <input id="peaklogic-tcp-port" type="number" value="502"></label>
+              <label>RTU addr <input id="peaklogic-rtu-addr" type="number" value="0"></label>
+              <label>TCP addr <input id="peaklogic-tcp-addr" type="number" value="0"></label>
+              <label>Count <input id="peaklogic-count" type="number" value="10"></label>
             </div>
             <div class="toolbar">
-              <button type="button" id="mv-rtu-tcp" class="btn primary">Move RTU → TCP</button>
-              <button type="button" id="mv-tcp-rtu" class="btn">Move TCP → RTU</button>
+              <button type="button" id="peaklogic-rtu-tcp" class="btn primary">Move RTU → TCP</button>
+              <button type="button" id="peaklogic-tcp-rtu" class="btn">Move TCP → RTU</button>
             </div>
-            <pre id="mv-result" class="log"></pre>
+            <pre id="peaklogic-result" class="log"></pre>
           </section>
           <section class="drivers-panel setup-panel view-hidden" data-drivers-tab="nextcentury">
             <p class="panel-hint">Cloud API polling for NextCentury Meters — <strong>not</strong> Modbus or a COM port. On each poll the driver can <strong>auto-create tags</strong> from report rows (deviceId + usage/temp/leak). Use <strong>Fill from example</strong> for credentials; <strong>Load example tags</strong> is optional when auto-sync is off.</p>

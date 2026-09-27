@@ -1,28 +1,28 @@
 <div class="form-grid" id="modbus-form">
   <fieldset>
     <legend>RTU (serial)</legend>
-    <label>Port <input id="mv-rtu-port" value="COM3"></label>
-    <label>Baud <input id="mv-rtu-baud" type="number" value="9600"></label>
-    <label>Slave ID <input id="mv-rtu-slave" type="number" value="1"></label>
+    <label>Port <input id="peaklogic-rtu-port" value="COM3"></label>
+    <label>Baud <input id="peaklogic-rtu-baud" type="number" value="9600"></label>
+    <label>Slave ID <input id="peaklogic-rtu-slave" type="number" value="1"></label>
   </fieldset>
   <fieldset>
     <legend>TCP</legend>
-    <label>Host <input id="mv-tcp-host" value="127.0.0.1"></label>
-    <label>Port <input id="mv-tcp-port" type="number" value="502"></label>
-    <label>Slave ID <input id="mv-tcp-slave" type="number" value="1"></label>
+    <label>Host <input id="peaklogic-tcp-host" value="127.0.0.1"></label>
+    <label>Port <input id="peaklogic-tcp-port" type="number" value="502"></label>
+    <label>Slave ID <input id="peaklogic-tcp-slave" type="number" value="1"></label>
   </fieldset>
   <fieldset>
     <legend>Register block</legend>
     <label>Table
-      <select id="mv-table"><option value="holding">holding</option><option value="input">input</option></select>
+      <select id="peaklogic-table"><option value="holding">holding</option><option value="input">input</option></select>
     </label>
-    <label>RTU address <input id="mv-rtu-addr" type="number" value="0"></label>
-    <label>TCP address <input id="mv-tcp-addr" type="number" value="0"></label>
-    <label>Count <input id="mv-count" type="number" value="10"></label>
+    <label>RTU address <input id="peaklogic-rtu-addr" type="number" value="0"></label>
+    <label>TCP address <input id="peaklogic-tcp-addr" type="number" value="0"></label>
+    <label>Count <input id="peaklogic-count" type="number" value="10"></label>
   </fieldset>
 </div>
 <div class="toolbar">
-  <button type="button" id="mv-rtu-tcp" class="btn primary">Move RTU → TCP</button>
-  <button type="button" id="mv-tcp-rtu" class="btn">Move TCP → RTU</button>
+  <button type="button" id="peaklogic-rtu-tcp" class="btn primary">Move RTU → TCP</button>
+  <button type="button" id="peaklogic-tcp-rtu" class="btn">Move TCP → RTU</button>
 </div>
-<pre id="mv-result" class="log"></pre>
+<pre id="peaklogic-result" class="log"></pre>

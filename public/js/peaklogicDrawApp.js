@@ -18,6 +18,7 @@
     zoom: 1,
     dragging: null,
     dragUndoPushed: false,
+    suppressNextClick: false,
     calibrate: null,
     extentsDraft: null,
     bgImage: null,
@@ -370,33 +371,6 @@
     state.bgImage = img;
   }
 
-  function drawGrid() {
-    const step = 10;
-    const s = ppu() * state.zoom;
-    const w = canvas.width;
-    const h = canvas.height;
-    const tl = screenToWorld(0, h);
-    const br = screenToWorld(w, 0);
-    ctx.strokeStyle = '#1e293b';
-    ctx.lineWidth = 1;
-    const startX = Math.floor(tl.x / step) * step;
-    const startY = Math.floor(tl.y / step) * step;
-    for (let x = startX; x <= br.x; x += step) {
-      const sx = worldToScreen(x, 0).x;
-      ctx.beginPath();
-      ctx.moveTo(sx, 0);
-      ctx.lineTo(sx, h);
-      ctx.stroke();
-    }
-    for (let y = startY; y <= br.y; y += step) {
-      const sy = worldToScreen(0, y).y;
-      ctx.beginPath();
-      ctx.moveTo(0, sy);
-      ctx.lineTo(w, sy);
-      ctx.stroke();
-    }
-  }
-
   function drawBackground() {
     const bg = state.project?.background;
     if (!state.bgImage || !bg) return;
@@ -558,7 +532,6 @@
     const h = rect.height;
     ctx.fillStyle = '#020617';
     ctx.fillRect(0, 0, w, h);
-    drawGrid();
     drawBackground();
     drawExtentsOverlay();
     for (const edge of state.project?.edges || []) drawEdge(edge);
@@ -613,6 +586,16 @@
   }
 
   function onCanvasClick(ev) {
+    // A mousedown that hit a node already handled selection (and possibly a
+    // drag) in onCanvasMouseDown — the browser still fires this click right
+    // after mouseup regardless of whether the pointer moved. Without this
+    // guard, re-running the click hit-test at the post-drag pointer position
+    // could immediately deselect (or reselect a different node under) the
+    // node the user just dragged, if the drop point wasn't over any node.
+    if (state.suppressNextClick) {
+      state.suppressNextClick = false;
+      return;
+    }
     const rect = canvas.getBoundingClientRect();
     const sx = ev.clientX - rect.left;
     const sy = ev.clientY - rect.top;
@@ -729,6 +712,7 @@
     const w = screenToWorld(ev.clientX - rect.left, ev.clientY - rect.top);
     const node = hitTestNode(w.x, w.y);
     if (!node) return;
+    state.suppressNextClick = true;
     pushUndo();
     state.dragUndoPushed = true;
     state.selectedId = node.id;

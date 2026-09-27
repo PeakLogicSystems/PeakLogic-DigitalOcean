@@ -16,7 +16,7 @@ function defaultCentralSettings() {
     enabled: false,
     brokerUrl: 'mqtt://127.0.0.1:1883',
     topicPrefix: 'peaklogic/v1',
-    clientId: 'mv-central-hmi',
+    clientId: 'peaklogic-central-hmi',
     username: '',
     password: '',
     commandTimeoutMs: 15000,
@@ -180,9 +180,9 @@ class MqttCentralHub {
     await this.stop({ rejectPending: false });
     this.cfg = nextCfg;
 
-    const baseClientId = this.cfg.clientId || 'mv-central-hmi';
-    const clientId = baseClientId === 'mv-central-hmi'
-      ? `mv-central-hmi-${process.pid}`
+    const baseClientId = this.cfg.clientId || 'peaklogic-central-hmi';
+    const clientId = baseClientId === 'peaklogic-central-hmi'
+      ? `peaklogic-central-hmi-${process.pid}`
       : baseClientId;
 
     this.client = mqtt.connect(this.cfg.brokerUrl, {
