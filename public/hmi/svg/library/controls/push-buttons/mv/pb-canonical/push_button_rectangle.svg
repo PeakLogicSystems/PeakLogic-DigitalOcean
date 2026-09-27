@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 55" width="150" height="55">
+  <defs>
+    <filter id="pb_drop_shadow">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <g>
+    <rect id="button_bezel" x="7" y="7" width="140" height="50" rx="15" fill="#64748b" stroke="none" filter="url(#pb_drop_shadow)"/>
+    <rect id="button" x="0" y="0" width="140" height="50" rx="15" fill="#22c55e"/>
+    <text id="button_text" x="70" y="30" font-size="24" font-family="Segoe UI, Arial, sans-serif" fill="#0f172a" text-anchor="middle">PB</text>
+  </g>
+</svg>

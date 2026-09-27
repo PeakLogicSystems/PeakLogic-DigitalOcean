@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+  <rect width="1024" height="768" fill="#f1f5f9"/>
+  <text x="32" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0f172a">Plant Overview</text>
+  <text x="32" y="78" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">Two parallel 125K gal integrated MLE circular tanks</text>
+
+  <g transform="translate(120, 200)" font-family="Segoe UI, Arial, sans-serif">
+    <circle cx="100" cy="80" r="70" fill="#e2e8f0" stroke="#334155" stroke-width="3"/>
+    <circle cx="100" cy="80" r="28" fill="#6366f1" opacity="0.4"/>
+    <text x="100" y="85" text-anchor="middle" font-size="13" fill="#334155">T1</text>
+    <text x="100" y="165" text-anchor="middle" font-size="12" fill="#64748b">125K gal MLE</text>
+
+    <circle cx="380" cy="80" r="70" fill="#e2e8f0" stroke="#334155" stroke-width="3"/>
+    <circle cx="380" cy="80" r="28" fill="#6366f1" opacity="0.4"/>
+    <text x="380" y="85" text-anchor="middle" font-size="13" fill="#334155">T2</text>
+    <text x="380" y="165" text-anchor="middle" font-size="12" fill="#64748b">125K gal MLE</text>
+
+    <path d="M 0 80 L 30 80" stroke="#475569" stroke-width="3"/>
+    <text x="-8" y="74" text-anchor="end" font-size="12" fill="#64748b">In</text>
+    <path d="M 450 80 L 480 80" stroke="#475569" stroke-width="3"/>
+    <text x="492" y="74" font-size="12" fill="#64748b">Out</text>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#0f172a">
+    <text x="560" y="180">Influent GPM</text>
+    <text id="val_flow_in" x="760" y="180" font-weight="600"></text>
+    <text x="560" y="230">Effluent GPM</text>
+    <text id="val_flow_out" x="760" y="230" font-weight="600"></text>
+    <text x="560" y="290">Tank 1 alarm</text>
+    <circle id="lamp_t1_alm" cx="760" cy="282" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="560" y="350">Tank 2 alarm</text>
+    <circle id="lamp_t2_alm" cx="760" cy="342" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="560" y="410">Plant alarm</text>
+    <circle id="lamp_plant_alm" cx="760" cy="402" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+  </g>
+</svg>

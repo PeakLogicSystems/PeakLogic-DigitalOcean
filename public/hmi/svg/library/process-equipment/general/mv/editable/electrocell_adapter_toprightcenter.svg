@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+    <g id="frame">
+	
+		<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+	<polygon fill="#006837" points="60,100.16 56,100.16 56,81.473 48,56.473 48,25.66 52,25.66 52,55.848 60,80.848 	"/>
+</g>
+<g id="radial">
+</g>
+<g id="linear">
+</g>
+<g id="dark">
+	<polygon fill="#009245" points="59.75,100.16 56.25,100.16 56.25,81.434 48.25,56.434 48.25,25.66 51.75,25.66 51.75,55.887 
+		59.75,80.887 	"/>
+</g>
+<g id="light">
+	<polygon fill="#96D48D" points="59.25,100.16 56.75,100.16 56.75,81.355 48.75,56.355 48.75,25.66 51.25,25.66 51.25,55.965 
+		59.25,80.965 	"/>
+</g>
+<g id="shadow">
+</g>
+<g id="hlight">
+	<g>
+		<polygon fill="#FFFFFF" points="58.875,100.16 57.125,100.16 57.125,81.297 49.125,56.297 49.125,25.66 50.875,25.66 
+			50.875,56.023 58.875,81.023 		"/>
+	</g>
+</g>
+    </g>
+</svg>

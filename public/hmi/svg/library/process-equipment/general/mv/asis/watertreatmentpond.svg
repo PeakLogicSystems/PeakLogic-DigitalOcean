@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="100" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 100">
+  <defs>
+    <linearGradient id="New_Gradient_Swatch_17" data-name="New Gradient Swatch 17" x1="4.525" y1="52.264" x2="228.321" y2="52.264" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="gray"/>
+      <stop offset="1" stop-color="#ccc"/>
+    </linearGradient>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="frame">
+      <g id="frame-2" data-name="frame">
+        <rect x="70" width="100" height="100" fill="none"/>
+      </g>
+    </g>
+    <g id="shape">
+      <g>
+        <path d="M228.321,46.014c0-18.236-50.098-33.019-111.898-33.019S4.525,27.778,4.525,46.014v12.5c0,18.236,50.098,33.019,111.898,33.019s111.898-14.783,111.898-33.019v-12.5Z" fill="url(#New_Gradient_Swatch_17)" stroke="#000" stroke-miterlimit="10"/>
+        <ellipse cx="116.423" cy="46.014" rx="111.898" ry="33.019" fill="#e6e6e6"/>
+        <ellipse cx="116.423" cy="46.014" rx="104.739" ry="30.907" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <g>
+          <path d="M116.423,21.358c54.271,0,98.9,12.18,104.209,27.782.35-1.028.53-2.07.53-3.125,0-17.069-46.893-30.907-104.739-30.907S11.684,28.945,11.684,46.014c0,1.055.18,2.097.53,3.125,5.309-15.602,49.938-27.782,104.209-27.782Z" fill="#ccc"/>
+          <path d="M116.423,76.921c54.271,0,98.9-12.18,104.209-27.782-5.309-15.602-49.938-27.782-104.209-27.782S17.523,33.538,12.214,49.139c5.309,15.602,49.938,27.782,104.209,27.782Z" fill="#7698b8" stroke="#000" stroke-miterlimit="10"/>
+        </g>
+        <path d="M219.771,50.218c-8.164-14.669-51.326-25.86-103.348-25.86-52.42,0-95.845,11.364-103.53,26.198l-.679-1.416c5.309-15.602,49.938-27.782,104.209-27.782s98.9,12.18,104.209,27.782l-.861,1.079Z"/>
+        <rect x="124.55" y="48.96" width="95.221" height="1.758" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="106.155" y1="49.764" x2="46.283" y2="30.422" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="109.569" y1="52.129" x2="64.932" y2="72.307" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="123.939" y1="53.046" x2="181.111" y2="69.861" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="121.799" y1="46.931" x2="160.932" y2="27.976" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+        <g>
+          <path d="M106.155,49.764v6.255c0,1.673,4.597,3.03,10.268,3.03s10.268-1.356,10.268-3.03v-6.255"/>
+          <path d="M126.69,46.014c0-1.673-4.597-3.03-10.268-3.03s-10.268,1.356-10.268,3.03v6.255c0,1.673,4.597,3.03,10.268,3.03s10.268-1.356,10.268-3.03v-6.255Z" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+          <ellipse cx="116.423" cy="46.014" rx="10.268" ry="3.03" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <polyline points="116.423 49.044 234.837 49.044 230.587 43.091 116.423 43.091" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+          <path d="M235.475,61.912v-21.008h-112.76c-1.739.399-3.919.639-6.293.639-5.671,0-10.268-1.357-10.268-3.03s4.597-3.03,10.268-3.03c2.374,0,4.554.24,6.293.639h109.564v9.306" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="106.155" y1="38.514" x2="106.155" y2="46.014" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="111.098" y1="35.619" x2="111.098" y2="43.263" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="112.015" y1="41.122" x2="112.015" y2="48.766" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="117.824" y1="35.619" x2="117.824" y2="42.957" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="119.047" y1="41.428" x2="119.047" y2="48.766" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="232.474" y1="49.377" x2="232.474" y2="58.243" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <g>
+            <line x1="124.55" y1="40.817" x2="124.55" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="133.984" y1="40.817" x2="133.984" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="143.418" y1="40.817" x2="143.418" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="152.851" y1="40.817" x2="152.851" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="162.285" y1="40.817" x2="162.285" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="171.719" y1="40.817" x2="171.719" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="181.152" y1="40.817" x2="181.152" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="190.586" y1="40.817" x2="190.586" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="200.02" y1="40.817" x2="200.02" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="209.453" y1="40.817" x2="209.453" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="218.887" y1="40.817" x2="218.887" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="228.321" y1="40.817" x2="228.321" y2="48.46" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <line x1="123.744" y1="36.369" x2="123.744" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="133.178" y1="36.369" x2="133.178" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="142.612" y1="36.369" x2="142.612" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="152.046" y1="36.369" x2="152.046" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="161.479" y1="36.369" x2="161.479" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="170.913" y1="36.369" x2="170.913" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="180.347" y1="36.369" x2="180.347" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="189.78" y1="36.369" x2="189.78" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="199.214" y1="36.369" x2="199.214" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="208.648" y1="36.369" x2="208.648" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="218.081" y1="36.369" x2="218.081" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="227.515" y1="36.369" x2="227.515" y2="44.013" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

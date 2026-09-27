@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="frame">
+	<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+	<polygon fill="#1A1A1A" points="99.845,91.667 0.155,91.667 50,5.333 	"/>
+</g>
+<g id="light">
+	<polygon fill="#FCEE21" points="10.548,85.667 89.452,85.667 50,17.333 	"/>
+</g>
+<g id="dark">
+	<polygon fill="#1A1A1A" points="64.808,54.924 59.767,49.883 50,59.65 40.233,49.883 35.192,54.924 44.959,64.691 35.192,74.459 
+		40.233,79.5 50,69.733 59.767,79.5 64.808,74.459 55.041,64.691 	"/>
+</g>
+</g>
+</svg>

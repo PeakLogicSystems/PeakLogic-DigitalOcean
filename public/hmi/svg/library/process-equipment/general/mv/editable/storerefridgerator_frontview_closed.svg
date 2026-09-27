@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 242 468" enable-background="new 0 0 242 468" xml:space="preserve">
+<g id="shape">
+	<path fill="#CCCCCC" d="M36.733,11.643v448h202v-448C238.733,11.643,36.733,11.643,36.733,11.643z M228.733,449.643h-182v-428h182
+		V449.643z"/>
+	<polygon fill="#CCCCCC" points="46.733,449.643 52.618,444.51 222.847,444.51 228.733,449.643 	"/>
+	<polygon fill="#CCCCCC" points="46.733,24.143 52.618,29.277 222.847,29.277 228.733,24.143 	"/>
+</g>
+<g id="light">
+	<polygon fill="#E6E6E6" points="228.733,24.143 222.847,29.277 222.847,444.51 228.733,449.643 	"/>
+	<polygon fill="#E6E6E6" points="46.733,24.143 52.618,29.277 52.618,444.51 46.733,449.643 	"/>
+</g>
+<g id="dark">
+	<path fill="#0F0F0F" d="M41.49,16.643v437.51h192.242V16.643H41.49z M226.233,447.653H48.99V25.143h177.242L226.233,447.653
+		L226.233,447.653z"/>
+	<path fill="#0F0F0F" d="M231.854,304.4l-5.65,0.958c-2.442,0.414-4.669-1.467-4.669-3.944V142.952c0-2.476,2.227-4.358,4.669-3.944
+		l5.65,0.958V304.4z"/>
+	<rect x="37" y="29" fill="#0F0F0F" width="7" height="38"/>
+	<rect x="37" y="216.5" fill="#0F0F0F" width="7" height="38"/>
+	<rect x="37" y="404" fill="#0F0F0F" width="7" height="38"/>
+</g>
+<g id="linear">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="48.99" y1="234.602" x2="226.232" y2="234.602" gradientTransform="matrix(1 0 0 -1 0 470)">
+		<stop  offset="0.2633" style="stop-color:#C9EAFF"/>
+		<stop  offset="0.3617" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.7899" style="stop-color:#C9EAFF"/>
+		<stop  offset="1" style="stop-color:#0071BC"/>
+	</linearGradient>
+	<rect x="48.99" y="24.143" opacity="0.39" fill="url(#SVGID_1_)" enable-background="new    " width="177.242" height="422.51"/>
+</g>
+<g id="hlight">
+	<path fill="#E6E6E6" d="M222.535,301.915h-1V143.452c0-1.328,0.582-2.582,1.597-3.438c1.015-0.856,2.347-1.218,3.656-0.999
+		l5.649,0.958l-0.168,0.986l-5.649-0.958c-1.016-0.172-2.054,0.11-2.843,0.777c-0.79,0.667-1.242,1.641-1.242,2.674V301.915z"/>
+</g>
+</svg>

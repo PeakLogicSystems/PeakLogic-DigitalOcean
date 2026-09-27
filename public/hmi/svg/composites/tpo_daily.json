@@ -1,0 +1,236 @@
+{
+
+  "id": "tpo_daily",
+
+  "label": "TPO daily irrigation cycle",
+
+  "group": "Schedules",
+
+  "subgroup": "composites",
+
+  "preview": "/hmi/svg/library/schedules/peaklogic/tpo_daily.svg",
+
+  "tagRoles": {
+
+    "enable": { "pick": "tagId", "tagId": "TPO1_EN", "types": ["BOOL"] },
+
+    "offline": { "pick": "tagId", "tagId": "TPO1_OFFLINE", "types": ["BOOL"] },
+
+    "allDay": { "pick": "tagId", "tagId": "TPO1_24HR", "types": ["BOOL"] },
+
+    "status": { "pick": "tagId", "tagId": "TPO1_STA", "types": ["INT"] },
+
+    "output": { "pick": "tagId", "tagId": "TPO1_OUT", "types": ["BOOL"] },
+
+    "gap": { "pick": "tagId", "tagId": "TPO1_GAP", "types": ["BOOL"] },
+
+    "tod": { "pick": "tagId", "tagId": "TPO1_TOD", "types": ["INT"] },
+
+    "winStart": { "pick": "tagId", "tagId": "TPO1_START", "types": ["INT"] },
+
+    "winEnd": { "pick": "tagId", "tagId": "TPO1_END", "types": ["INT"] },
+
+    "appMin": { "pick": "tagId", "tagId": "TPO1_ON_MIN", "types": ["INT"] },
+
+    "repeatMin": { "pick": "tagId", "tagId": "TPO1_OFF_MIN", "types": ["INT"] }
+
+  },
+
+  "parts": [
+
+    {
+
+      "role": "faceplate",
+
+      "z": 0,
+
+      "kind": "staticImage",
+
+      "svg": "/hmi/svg/library/schedules/peaklogic/tpo_daily.svg"
+
+    }
+
+  ],
+
+  "defaultBindings": [
+
+    {
+
+      "elementId": "status_lamp",
+
+      "property": "fill",
+
+      "tagRole": "output",
+
+      "onValue": "#22c55e",
+
+      "offValue": "#ef4444"
+
+    },
+
+    {
+
+      "elementId": "run_state",
+
+      "property": "text",
+
+      "tagRole": "status",
+
+      "format": "tpoSta",
+
+      "min": 0,
+
+      "max": 4
+
+    },
+
+    {
+
+      "elementId": "tod_value",
+
+      "property": "text",
+
+      "tagRole": "tod",
+
+      "format": "hhmm"
+
+    },
+
+    {
+
+      "elementId": "chk_24hr",
+
+      "property": "fill",
+
+      "tagRole": "allDay",
+
+      "interaction": "toggle",
+
+      "onValue": "#22c55e",
+
+      "offValue": "#ffffff"
+
+    },
+
+    {
+
+      "elementId": "window_start",
+
+      "property": "text",
+
+      "tagRole": "winStart",
+
+      "format": "hhmm",
+
+      "interaction": "edit",
+
+      "min": 0,
+
+      "max": 1439
+
+    },
+
+    {
+
+      "elementId": "window_end",
+
+      "property": "text",
+
+      "tagRole": "winEnd",
+
+      "format": "hhmm",
+
+      "interaction": "edit",
+
+      "min": 0,
+
+      "max": 1439
+
+    },
+
+    {
+
+      "elementId": "param_app_min",
+
+      "property": "text",
+
+      "tagRole": "appMin",
+
+      "format": "int",
+
+      "interaction": "edit",
+
+      "min": 1,
+
+      "max": 1440
+
+    },
+
+    {
+
+      "elementId": "param_repeat_min",
+
+      "property": "text",
+
+      "tagRole": "repeatMin",
+
+      "format": "int",
+
+      "interaction": "edit",
+
+      "min": 1,
+
+      "max": 1440
+
+    },
+
+    {
+
+      "elementId": "btn_enable",
+
+      "property": "fill",
+
+      "tagRole": "enable",
+
+      "interaction": "toggle",
+
+      "onValue": "#22c55e",
+
+      "offValue": "#94a3b8"
+
+    },
+
+    {
+
+      "elementId": "btn_offline",
+
+      "property": "fill",
+
+      "tagRole": "offline",
+
+      "interaction": "toggle",
+
+      "onValue": "#64748b",
+
+      "offValue": "#22c55e"
+
+    },
+
+    {
+
+      "elementId": "btn_offline_label",
+
+      "property": "text",
+
+      "tagRole": "offline",
+
+      "onValue": "OFFLINE",
+
+      "offValue": "ONLINE"
+
+    }
+
+  ]
+
+}
+

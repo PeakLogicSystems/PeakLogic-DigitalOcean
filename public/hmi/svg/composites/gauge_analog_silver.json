@@ -1,0 +1,52 @@
+{
+  "id": "gauge_analog_silver",
+  "label": "Analog dial — silver (PV)",
+  "group": "Gauges & meters",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/gauges-meters/dial-backgrounds/mv/gauge-dial-bg/gauge_dialbg_silver.svg",
+  "tagRoles": {
+    "pv": { "pick": "firstNumeric", "types": ["REAL", "INT"] }
+  },
+  "parts": [
+    {
+      "role": "dial_face",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/gauges-meters/dial-backgrounds/mv/gauge-dial-bg/gauge_dialbg_silver.svg"
+    },
+    {
+      "role": "dial_pointer",
+      "z": 1,
+      "kind": "dynamicImage",
+      "svg": "/hmi/svg/library/gauges-meters/dial-pointers/mv/gauge-dial-pointer/gauge_dialpointer_silver.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "dial_face",
+      "property": "fill",
+      "tagRole": "pv",
+      "min": 0,
+      "max": 100,
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "dial_pointer",
+      "property": "rotation",
+      "tagRole": "pv",
+      "min": 0,
+      "max": 100,
+      "onValue": 330,
+      "offValue": 30
+    },
+    {
+      "elementId": "hmi_label",
+      "property": "text",
+      "tagRole": "pv",
+      "min": 0,
+      "max": 100,
+      "format": "fixed2"
+    }
+  ]
+}

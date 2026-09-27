@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="frame">
+      <g id="frame-2" data-name="frame">
+        <rect width="100" height="100" fill="none"/>
+      </g>
+    </g>
+    <g id="shape">
+      <rect x="4.743" y="2.396" width="90.514" height="94.868" rx="6.56" ry="6.56" fill="#4d4d4d"/>
+    </g>
+    <g id="shadow">
+      <rect x="9.86" y="10.524" width="80.28" height="45.718" fill="#1a1a1a"/>
+    </g>
+    <g id="dark">
+      <path d="M31.311,83.151v-15.458c0-1.683-1.822-2.735-3.28-1.894l-13.387,7.729c-1.458.842-1.458,2.946,0,3.787l13.387,7.729c1.458.842,3.28-.21,3.28-1.894Z" fill="#1a1a1a"/>
+      <path d="M69.184,67.692v15.458c0,1.683,1.822,2.735,3.28,1.894l13.387-7.729c1.458-.842,1.458-2.946,0-3.787l-13.387-7.729c-1.458-.842-3.28.21-3.28,1.894Z" fill="#1a1a1a"/>
+      <rect x="37.912" y="66.02" width="23.763" height="20.122" rx="2.187" ry="2.187" fill="#1a1a1a"/>
+    </g>
+    <g id="hlight">
+      <rect x="11.302" y="4.309" width="77.396" height=".546" fill="#fff"/>
+      <rect x="9.86" y="55.968" width="80.28" height=".546" fill="#fff"/>
+      <polygon points="14.781 73.765 14.507 73.29 27.895 65.561 28.168 66.036 14.781 73.765" fill="#fff"/>
+      <rect x="40.099" y="65.747" width="19.39" height=".546" fill="#fff"/>
+    </g>
+  </g>
+</svg>

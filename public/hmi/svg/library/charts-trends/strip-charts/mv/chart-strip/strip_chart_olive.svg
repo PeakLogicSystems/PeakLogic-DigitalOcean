@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+  <rect id="strip_bg" x="0" y="0" width="200" height="100" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+  <polyline id="trend_pen1" fill="none" stroke="olive" stroke-width="2" points="0,0 20,0 40,100 60,0 80,40 100,10 120,85 140,100 160,0 200,0"/>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="55" height="225" viewBox="0 0 55 225">
+  <defs>
+    <linearGradient id="tank_col_grad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="90%" stop-color="#93c5fd"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#tank_col_grad)">
+    <polygon stroke="#0f172a" stroke-width="2" points="0,0 10,50 0,87 10,125 0,150 5,187 0,205 12,225 37,225 50,200 37,162 50,137 37,87 50,62 37,32 50,0 0,0"/>
+  </g>
+</svg>

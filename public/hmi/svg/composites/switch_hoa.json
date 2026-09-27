@@ -1,0 +1,39 @@
+{
+  "id": "switch_hoa",
+  "label": "HOA selector (Auto / Off / Hand)",
+  "group": "Controls — Switches",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_auto.svg",
+  "tagRoles": {
+    "pv": { "pick": "firstNumeric", "types": ["INT"] }
+  },
+  "parts": [
+    {
+      "role": "hoa_auto",
+      "z": 0,
+      "kind": "dynamicImage",
+      "svg": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_auto.svg"
+    },
+    {
+      "role": "hoa_off",
+      "z": 1,
+      "kind": "dynamicImage",
+      "svg": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_off.svg"
+    },
+    {
+      "role": "hoa_hand",
+      "z": 2,
+      "kind": "dynamicImage",
+      "svg": "/hmi/svg/library/controls/selector-switches/standard/mv/editable/switch_hoa_hand.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "hoa_switch",
+      "property": "state3",
+      "tagRole": "pv",
+      "min": 0,
+      "max": 2
+    }
+  ]
+}

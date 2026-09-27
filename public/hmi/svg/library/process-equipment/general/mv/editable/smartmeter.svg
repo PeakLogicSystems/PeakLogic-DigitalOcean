@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="Linear_Gradient_1" data-name="Linear Gradient 1" x1="44.656" y1="87.288" x2="55.344" y2="87.288" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="Linear_Gradient_1-2" data-name="Linear Gradient 1" x1="38.6" y1="76.208" x2="61.4" y2="76.208" xlink:href="#Linear_Gradient_1"/>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="frame">
+      <g id="frame-2" data-name="frame">
+        <rect width="100" height="100" fill="none"/>
+      </g>
+    </g>
+    <g id="shape">
+      <rect x="17.431" y="2.396" width="65.137" height="68.27" rx="4.721" ry="4.721" fill="#4d4d4d"/>
+    </g>
+    <g id="shadow">
+      <rect x="21.114" y="8.245" width="57.772" height="27.863" fill="#1a1a1a"/>
+    </g>
+    <g id="linear">
+      <rect x="44.656" y="76.6" width="10.688" height="21.376" fill="url(#Linear_Gradient_1)"/>
+      <rect x="38.6" y="70.827" width="22.801" height="10.761" fill="url(#Linear_Gradient_1-2)"/>
+    </g>
+    <g id="dark">
+      <path d="M36.551,56.912v-11.124c0-1.211-1.311-1.968-2.36-1.363l-9.634,5.562c-1.049.606-1.049,2.12,0,2.725l9.634,5.562c1.049.606,2.36-.151,2.36-1.363Z" fill="#1a1a1a"/>
+      <path d="M63.805,45.787v11.124c0,1.211,1.311,1.968,2.36,1.363l9.634-5.562c1.049-.606,1.049-2.12,0-2.725l-9.634-5.562c-1.049-.606-2.36.151-2.36,1.363Z" fill="#1a1a1a"/>
+      <rect x="41.301" y="44.584" width="17.101" height="14.481" rx="1.574" ry="1.574" fill="#1a1a1a"/>
+    </g>
+    <g id="hlight">
+      <rect x="22.152" y="3.773" width="55.697" height=".393" fill="#fff"/>
+      <rect x="21.114" y="35.911" width="57.772" height=".393" fill="#fff"/>
+      <polygon points="24.655 50.158 24.458 49.816 34.093 44.254 34.289 44.595 24.655 50.158" fill="#fff"/>
+      <rect x="42.875" y="44.387" width="13.954" height=".393" fill="#fff"/>
+    </g>
+  </g>
+</svg>

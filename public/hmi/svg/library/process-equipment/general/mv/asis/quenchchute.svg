@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="176" height="466" version="1.1" viewBox="0 0 176 466">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <path d="M55.694,7.282c67,0,65,145.797,65,145.797V7.282s-65,0-65,0Z" fill="#a6c1d9" opacity=".19"/>
+      <path d="M55.535,417.332c67,0,65-145.797,65-145.797v145.797H55.535Z" fill="#a6c1d9" opacity=".19"/>
+      <path d="M72.939,7.282C5.939,7.282,7.939,153.079,7.939,153.079V7.282h65Z" fill="#a6c1d9" opacity=".19"/>
+      <g id="shape">
+        <polygon points="168.966 464.797 120.694 416.524 30.439 416.524 78.712 464.797 168.966 464.797" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+        <polygon points="163.453 462.876 119.023 418.445 35.952 418.445 80.382 462.876 163.453 462.876" fill="none" stroke="#b3b3b3" stroke-miterlimit="10" stroke-width=".92"/>
+        <line x1="120.694" y1="7.282" x2="120.694" y2="416.524" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+        <polyline points="56.212 55.555 56.212 406.654 56.212 406.654 78.712 464.797 30.439 416.524 7.939 358.382 7.939 75.816" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <polyline points="168.966 55.555 168.966 464.797 78.712 464.797 30.439 416.524 7.939 358.382 7.939 7.282" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <polyline points="35.952 418.445 13.452 360.303 13.452 267.363" fill="none" stroke="#b3b3b3" stroke-miterlimit="10" stroke-width=".92"/>
+        <line x1="7.939" y1="358.382" x2="56.212" y2="406.654" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <path d="M119.023,418.445" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+        <line x1="119.023" y1="418.445" x2="119.023" y2="333.174" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+        <path d="M35.952,418.445" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+        <line x1="163.453" y1="462.876" x2="163.453" y2="367.287" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+      </g>
+      <path d="M102.966,464.297c67,0,65-145.797,65-145.797v145.797h-65Z" fill="#a6c1d9" opacity=".19"/>
+      <path d="M121.212,55.555c-67,0-65,145.797-65,145.797V55.555h65Z" fill="#a6c1d9" opacity=".19"/>
+      <path d="M103.966,55.555c67,0,65,145.797,65,145.797V55.555s-65,0-65,0Z" fill="#a6c1d9" opacity=".19"/>
+    </g>
+  </g>
+</svg>

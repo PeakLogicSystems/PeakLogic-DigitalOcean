@@ -1,0 +1,90 @@
+/* PeakLogic — Purple Standard theme (shared with est-pc, tpscmms) */
+
+:root {
+  --ps-purple: #6f42c1;
+  --ps-purple-dark: #5a32a3;
+  --ps-purple-deep: #4e2a84;
+  --ps-purple-light: #e9d5ff;
+  --ps-purple-muted: rgba(111, 66, 193, 0.12);
+  --ps-gradient-start: rgba(111, 66, 193, 0.9);
+  --ps-gradient-end: rgba(78, 42, 132, 0.95);
+  --ps-shadow: rgba(111, 66, 193, 0.3);
+
+  /* aliases used in templates */
+  --mv-primary: var(--ps-purple);
+  --mv-primary-dark: var(--ps-purple-dark);
+  --mv-accent: var(--ps-purple-light);
+  --mv-gradient-start: var(--ps-gradient-start);
+  --mv-gradient-end: var(--ps-gradient-end);
+}
+
+.text-purple,
+.text-mv { color: var(--ps-purple) !important; }
+
+.bg-purple,
+.bg-mv { background-color: var(--ps-purple) !important; }
+
+.btn-purple,
+.btn-mv {
+  background-color: var(--ps-purple);
+  border-color: var(--ps-purple);
+  color: #fff;
+}
+.btn-purple:hover,
+.btn-mv:hover {
+  background-color: var(--ps-purple-dark);
+  border-color: var(--ps-purple-dark);
+  color: #fff;
+}
+
+.btn-outline-purple {
+  border-color: var(--ps-purple);
+  color: var(--ps-purple);
+}
+.btn-outline-purple:hover {
+  background-color: var(--ps-purple);
+  border-color: var(--ps-purple);
+  color: #fff;
+}
+
+.transition-btn {
+  transition: all 0.3s ease;
+}
+.transition-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--ps-shadow) !important;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.brand-mark {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.brand-mark span {
+  color: var(--ps-purple-light);
+}
+
+.bg-light .brand-mark span,
+.card .brand-mark span {
+  color: var(--ps-purple);
+}
+
+.dashboard-card {
+  border-radius: 0.75rem;
+  border: 1px solid #e9ecef;
+}
+
+.nav-mv {
+  background: linear-gradient(90deg, var(--ps-purple-dark), var(--ps-purple));
+}
+
+.nav-mv .nav-link.active {
+  background-color: var(--ps-purple-dark);
+}
+
+.splash-gradient {
+  background: linear-gradient(135deg, var(--ps-gradient-start) 0%, var(--ps-gradient-end) 100%);
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="347.248" height="133.076" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 347.248 133.076">
+  <defs>
+    <linearGradient id="linear-gradient" x1="720.223" y1=".5" x2="720.223" y2="109.188" gradientTransform="translate(-1131.779) scale(1.812 1)" gradientUnits="userSpaceOnUse">
+      <stop offset=".356" stop-color="#fff"/>
+      <stop offset=".846" stop-color="#9ea9ad"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="linear">
+      <path d="M45.528.5C20.66.5.5,24.831.5,54.844s20.16,54.344,45.028,54.344h256.193c24.868,0,45.028-24.331,45.028-54.344S326.589.5,301.72.5H45.528Z" fill="url(#linear-gradient)" stroke="#000" stroke-miterlimit="10"/>
+    </g>
+    <g id="dark">
+      <g>
+        <polyline points="97.134 98.299 97.134 132.576 72.369 132.576 72.369 98.299" fill="#99a7b0" stroke="#000" stroke-miterlimit="10"/>
+        <polyline points="277.379 98.299 277.379 132.576 252.615 132.576 252.615 98.299" fill="#99a7b0" stroke="#000" stroke-miterlimit="10"/>
+      </g>
+    </g>
+  </g>
+</svg>

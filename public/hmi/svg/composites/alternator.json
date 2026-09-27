@@ -1,0 +1,114 @@
+{
+  "id": "alternator",
+  "label": "Alternator (lead/lag status)",
+  "group": "Motor control",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/alternator-faceplates/peaklogic/alternator.svg",
+  "tagRoles": {
+    "alt": { "pick": "firstAlt", "types": ["ALT"] },
+    "pump1Run": { "pick": "tagId", "tagId": "MOTOR1_RUN", "types": ["BOOL"] },
+    "pump2Run": { "pick": "tagId", "tagId": "MOTOR2_RUN", "types": ["BOOL"] },
+    "pump3Run": { "pick": "tagId", "tagId": "MOTOR3_RUN", "types": ["BOOL"] },
+    "pump4Run": { "pick": "tagId", "tagId": "MOTOR4_RUN", "types": ["BOOL"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/alternator-faceplates/peaklogic/alternator.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "alt_label",
+      "property": "text",
+      "tagRole": "alt",
+      "tagField": "label"
+    },
+    {
+      "elementId": "lead_unit",
+      "property": "text",
+      "tagRole": "alt",
+      "tagField": "activeUnit",
+      "format": "int",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "elementId": "stage_text",
+      "property": "text",
+      "tagRole": "alt",
+      "tagField": "pumpStage",
+      "format": "altStage"
+    },
+    {
+      "elementId": "lamp_off",
+      "property": "fill",
+      "tagRole": "alt",
+      "tagField": "offActive",
+      "onValue": "#64748b",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "lamp_high",
+      "property": "fill",
+      "tagRole": "alt",
+      "tagField": "highActive",
+      "onValue": "#ef4444",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "lamp_lag",
+      "property": "fill",
+      "tagRole": "alt",
+      "tagField": "lowActive",
+      "onValue": "#f59e0b",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "lamp_lag2",
+      "property": "fill",
+      "tagRole": "alt",
+      "tagField": "low2Active",
+      "onValue": "#3b82f6",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "lamp_fault",
+      "property": "fill",
+      "tagRole": "alt",
+      "tagField": "fault",
+      "onValue": "#ef4444",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "pump1_run",
+      "property": "fill",
+      "tagRole": "pump1Run",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "pump2_run",
+      "property": "fill",
+      "tagRole": "pump2Run",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "pump3_run",
+      "property": "fill",
+      "tagRole": "pump3Run",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "pump4_run",
+      "property": "fill",
+      "tagRole": "pump4Run",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    }
+  ]
+}

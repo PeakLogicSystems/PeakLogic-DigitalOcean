@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g>
+        <g id="shape">
+          <circle cx="50" cy="50" r="19" fill="#006837"/>
+          <rect x="40.5" y="94.333" width="19" height="5.667" fill="#006837"/>
+          <rect x="42" y="64.887" width="16" height="35.113" fill="#006837"/>
+          <rect y="40.5" width="5.667" height="19" fill="#006837"/>
+          <rect x="94.333" y="40.5" width="5.667" height="19" fill="#006837"/>
+          <rect y="42" width="100" height="16" fill="#006837"/>
+        </g>
+        <g id="dark">
+          <rect x="43.006" y="64.028" width="13.988" height="35.972" fill="#009245"/>
+          <rect y="43.006" width="100" height="13.988" fill="#009245"/>
+          <circle cx="50" cy="50" r="17.5" fill="#009245"/>
+        </g>
+        <g id="light">
+          <circle cx="50" cy="50" r="12.5" fill="#96d48d"/>
+          <path d="M100,45.004H0v9.992h100v-9.992Z" fill="#96d48d"/>
+          <path d="M45.004,69.346v30.654h9.992v-30.655c-1.6.413-3.268.655-4.996.655s-3.396-.242-4.996-.654Z" fill="#96d48d"/>
+          <path d="M54.996,100v-33.154c-1.6.412-3.268.654-4.996.654s-3.396-.242-4.996-.654v33.154s9.992,0,9.992,0Z" fill="#96d48d"/>
+        </g>
+        <g id="hlight">
+          <rect y="46.5" width="100" height="7" fill="#fff"/>
+          <circle cx="50" cy="50" r="11" fill="#fff"/>
+        </g>
+        <g id="shadow">
+          <path d="M50,69.25c-1.195,0-2.358-.122-3.5-.31v31.06h7v-31.06c-1.142.188-2.305.31-3.5.31Z" fill="#0a0000"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="frame">
+	<rect fill="none" width="100" height="100"/>
+</g>
+<g id="shape">
+	<rect y="46.83" fill="#006837" width="100" height="6.34"/>
+</g>
+<g id="dark">
+	<rect y="47.226" fill="#009245" width="100" height="5.548"/>
+</g>
+<g id="light">
+	<rect y="48.019" fill="#96D48D" width="100" height="3.963"/>
+</g>
+<g id="hlight">
+	<rect y="48.613" fill="#FFFFFF" width="100" height="2.774"/>
+</g>
+</g>
+</svg>

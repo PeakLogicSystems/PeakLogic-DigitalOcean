@@ -1,0 +1,105 @@
+{
+  "id": "motor_hoa",
+  "label": "Motor / pump (HOA + commands)",
+  "group": "Motor control",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/motor-faceplates/peaklogic/motor_hoa.svg",
+  "tagRoles": {
+    "hoa": { "pick": "tagId", "tagId": "MOTOR1_HOA", "types": ["INT"] },
+    "status": { "pick": "tagId", "tagId": "MOTOR1_STA", "types": ["INT"] },
+    "start": { "pick": "tagId", "tagId": "MOTOR1_START", "types": ["BOOL"] },
+    "stop": { "pick": "tagId", "tagId": "MOTOR1_STOP", "types": ["BOOL"] },
+    "reset": { "pick": "tagId", "tagId": "MOTOR1_RESET", "types": ["BOOL"] },
+    "offline": { "pick": "tagId", "tagId": "MOTOR1_OFFLINE", "types": ["BOOL"] },
+    "run": { "pick": "tagId", "tagId": "MOTOR1_RUN", "types": ["BOOL"] },
+    "runHrs": { "pick": "tagId", "tagId": "MOTOR1_HRS", "types": ["REAL", "INT"] },
+    "starts": { "pick": "tagId", "tagId": "MOTOR1_STARTS", "types": ["INT"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/motor-faceplates/peaklogic/motor_hoa.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "status_lamp",
+      "property": "fill5",
+      "tagRole": "status",
+      "min": 0,
+      "max": 4,
+      "colors": ["#64748b", "#22c55e", "#ef4444", "#fbed20", "#94a3b8"],
+      "flashStates": [2, 3]
+    },
+    {
+      "elementId": "hoa_state",
+      "property": "text",
+      "tagRole": "hoa",
+      "format": "state3",
+      "min": 0,
+      "max": 2
+    },
+    {
+      "elementId": "run_state",
+      "property": "text",
+      "tagRole": "status",
+      "format": "state5",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "elementId": "run_hrs",
+      "property": "text",
+      "tagRole": "runHrs",
+      "format": "fixed1",
+      "min": 0,
+      "max": 99999
+    },
+    {
+      "elementId": "starts_count",
+      "property": "text",
+      "tagRole": "starts",
+      "format": "int",
+      "min": 0,
+      "max": 999999
+    },
+    {
+      "elementId": "btn_offline",
+      "property": "fill",
+      "tagRole": "offline",
+      "interaction": "toggle",
+      "onValue": "#64748b",
+      "offValue": "#22c55e"
+    },
+    {
+      "elementId": "btn_offline_label",
+      "property": "text",
+      "tagRole": "offline",
+      "onValue": "OFFLINE",
+      "offValue": "ONLINE"
+    },
+    {
+      "elementId": "btn_start",
+      "property": "fill",
+      "tagRole": "start",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "btn_stop",
+      "property": "fill",
+      "tagRole": "stop",
+      "onValue": "#ef4444",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "btn_reset",
+      "property": "fill",
+      "tagRole": "reset",
+      "onValue": "#f59e0b",
+      "offValue": "#94a3b8"
+    }
+  ]
+}

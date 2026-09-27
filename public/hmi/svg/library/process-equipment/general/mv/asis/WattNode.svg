@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="384.199" height="206.489" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.199 206.489">
+  <defs>
+    <filter id="luminosity-noclip" x="90.673" y="4.198" width="84" height="73" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask" x="90.673" y="4.198" width="84" height="73" maskUnits="userSpaceOnUse">
+      <g filter="url(#luminosity-noclip)">
+        <image width="84" height="73" transform="translate(90.673 4.198)" xlink:href="data:image/png;base64,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"/>
+      </g>
+    </mask>
+    <filter id="luminosity-noclip-2" x="109.673" y="75.198" width="55" height="33" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask-1" x="109.673" y="75.198" width="55" height="33" maskUnits="userSpaceOnUse">
+      <g filter="url(#luminosity-noclip-2)">
+        <image width="55" height="33" transform="translate(109.673 75.198)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAAhCAYAAAB9VDPAAAAACXBIWXMAAAsSAAALEgHS3X78AAAEXUlEQVRYhd2Z207rOhCG/xzqJG5aIrUIuIX3fyNEBeuCpqc4aQ7Oyd0XS57lntiwt4CyfslypDpSPntmPDO1AOzwl8r+7g/4TLn6wfM8hGEIzjmCIIDneRgMBnBdF67rwrZtOI4Dy7JgWRYA0PzZ2u12NO92O/R9T6NtWzRNg6qqUBQF0jSFlHIfjnOOm5sbTKdTXF1dYTweIwxD+L4PxhgYY3Ac58sBTTClFJRSaNsWbduirmuUZYk8z5EkCZbLJQAcwzHGEIYhJpMJ7u7uMJ1OEUURRqMROOdgjGEwGMBxHNi2/aVweiil6LSklCjLEtvtFuv1GpxzKKUghKB3Ca6ua9i2vQd4fX2NKIoQhiGCIDiC+wqzNE/ONEXzxDzPQ9/3EEKAMXYMJ4RA0zRwHAecc0RRhOl0islkgvF4vAdngtn258YkpRTBacCmaSClRJqmcF0XbdtCCAHf9+G6hPQHDgCapoFSCo7jwPd9DIdD8r8gCCiwfKeUUui6DlJKWJZFYJ7nwbZt9H1Pa/fgsixDVVXo+x6WZYExBs/zKKhcgmzbBmOMwHzfx2AwAAC0bYuiKP6sNV98eXlBkiSQUtIO6Cvg0qSvKG1NSilst1v8+vWL1hzZWFVVqKoKTdOg73ty6EuTZVl7wU1fEaaO4MqyRFEUPwZQBzYdcEwdwW02G2RZhrIsUdc12raliHXJehfc8/MzFosF0jRFURQEeIkyL3c9TJ2M62maEpyU8mJP7zDPfBfcarXCer0mQO17lyQN1nUdJc9d1+2tOQn3+PiIOI4hhCDTPHzxu6XhdAKth6mz6Uae5zTKskTTNBcVNc1MpSxLCCGw2Wz21pyFK4oCWZYhz/O9a+FSZJ5almVYrVaYzWZ7a87CmX633W4hpbwo0+y6Dk3ToK5rSCmphjN1Fm42m2E+n2Oz2WC73ZLvXULUPPS3tm1PbvybKb4QAkmS0Olp3/tuaX9rmoaq8lMu8ybccrnEcrkk89SZy3df6odR8tQ1AByUPId6enrC/f09+V8YhhgMBtjtdlQGmVX5V1TmSinUdY2qqiClpPnDcMDvGm+9XmO5XIJzTnXUcDg82TQyeyv6Wf+uN+K/tim6rqOmUFEUFAt0JvVhuDRNsVqtEMcxGGNo2xZ5noNzDs/z4Lru3sebYCaMXqfnw015q8LXqZW+17Iso1gghKD5w3BJkiCOY3DO0fc9sizDaDRCEARgjFGxeGie+oM1mOu61CI87KSZm3Ios3ei4fI8x3q9phHHMV5eXj4Ot1gsMB6PYVkW8jynxq0GO2WWh4AajHOO4XBIrQFzY86dnFKKMn+dR+qWXhzHdFWd0r/CAcB8Pkdd13h9faUPM6FO9TFNQMdx4HkeNXx1MDrVJjSLT3M2yxqlFKqqokas2Tf5MJzOMf+vHh4eEEUR+eo5MC0zl9XPtm3D930Av1siQoizJ2fhB/7Lc3t7C9/3oZSiAHMqWv5IuPfqr/4L6x9/H5QoAxqqkQAAAABJRU5ErkJggg=="/>
+      </g>
+    </mask>
+    <filter id="luminosity-noclip-3" x="119.673" y="102.198" width="40" height="35" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask-2" x="119.673" y="102.198" width="40" height="35" maskUnits="userSpaceOnUse">
+      <g filter="url(#luminosity-noclip-3)">
+        <image width="40" height="35" transform="translate(119.673 102.198)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAjCAYAAADmOUiuAAAACXBIWXMAAAsSAAALEgHS3X78AAAEMUlEQVRYhc2YW2+bShRGFxgMBCfk3vS1//8vtYmiSk0AY2AMw81wHo5mDr4ltmqf9pNG5sGIpW/P3rP3GMDAXyzzTwN8Jks9uK7L5eUlFxcXuK6L4zjYto1lWUwmEyzLwjAMvQD9e4iGYdC/wzCwWq3o+57VakXbtjRNg5SSoijIsgwp5Tqg7/s8PT1xf39PEARcXV3h+z6u6zKdTrFtm8lkgmmaW6DHwvV9T9d1tG1LXdeUZclyuSRNU6IowjCMbUDP87i5ueHLly88PT1xd3dHEAT4vs/FxQXT6RTLsjBNcw3yWEDlWtd1Gi7Pc9I05e3tDYAkSfS7GtAwDKbTKdfX1zw8PPD161cNqcKuXDzWwU33VFirqqIoChaLBWEY0vc9eZ7jed42YFVVGIaB4zgEQcDt7S2Pj4/c3t4ym81wHGfNQaXx8z71fb8FqQCFENi2zWq10nCWpbH+A4yiiLIstZOz2YwgCLi+vsb3fRzH0e79rlSSVFXFZDKh6zryPMd1XZ2MW4AAbdvS9z2maWLbNo7j4Lounucd5NShMgwDy7LwPI+u63AcB8dxME1TwyutfbVpGpqm0X8wTVNn7jmkypcKad/3SCnJsmw3YJqmCCGo65qu63T2nVMqnMMwIKVksVjw+vq6G/Dl5YU4jhFCUFUVXdfpDX5OqaRRa6yt2EkpkVJSVZUO9zmdHGe2Wh8CLpdLhBBIKWma5uwubsJ9CpgkCXmeUxQFUkqd2f8X4Ga0tgBfXl6Ioog8z5FSUtf1WtqfC04df5vf2lk/iqKgKArKsqSu662Ne2pABXcUoBCCsix1spwjzJuNQ13XNE3zOeB8PmexWJDnOWVZrhXvU0qdGk3T6HN5sVh8Dvj9+3fe3t7IsoyiKHRNPAfguHFIkoQfP358DgjoJrIoCm39qeuhcnAc4k3tBRRCaAfPVW7UHhwnycGASZKQZdla0T71PlQlRmXvLgP2Aj4/PxOG4ZqLmxl2CsBxeTkKEP499tQ6tYtjuLZt9x6pHwKqETDP8zXIU6jrOl1eVILsOhA+BJzP5yRJQpqmuldUdfF34dQMrNa+UmbteF/r+fmZb9++Eccxj4+PBEGAbdsMw4DneVtTHqwP8/vm4aqqWC6XZFlGmqZkWUaWZZRleRwgQJ7nJElCHMf4vo9hGLRti+/7W7PyPsBxQ9C2LWVZIoQgjmO95vP5Wqt/FGAcx4RhyHQ6pW1biqLA8zw9hY2H+U2NOxa176SUCCGYz+f8+vWL9/d3wjDk58+fxwOqodr3fVarFUIILi8v9f2NAtw1zG86qADrutYhjqKIKIp2uncQYBiGXF1dAWi48VXIZDLZ2oebDo4vi8bZq6pEFEUsl8ud3zc44H5wNptxc3OjL5PGF0kfhXcMqbrlcYvVti1SSsqyJE3TnUlyEOCf1F9/gfkP+sUTtMW/otsAAAAASUVORK5CYII="/>
+      </g>
+    </mask>
+    <filter id="luminosity-noclip-4" x="121.673" y="132.198" width="35" height="34" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask-3" x="121.673" y="132.198" width="35" height="34" maskUnits="userSpaceOnUse">
+      <g filter="url(#luminosity-noclip-4)">
+        <image width="35" height="34" transform="translate(121.673 132.198)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAiCAYAAADVhWD8AAAACXBIWXMAAAsSAAALEgHS3X78AAAEAUlEQVRYhc2Y2XLiSBBFj1bEYsAG24Sf/P//5DBvDQak0lpon4fpqhGb2z2tiXFGVISCpThx62ZWJgbQ8k3C/L8BumGrB8/zuLu7YzQa4Xkeg8EAx3GwbRvLsjBNE9M0MQyDtm1pmoa6rimKAt/3eX9//2MYg5/HtFgseHl5YblcMpvNmE6nGsx1XRzH0TAATdNQliV5nhOGIb7vk+c5VVVp2LZtaduWuq71KsuSoiiQUpJlGUIIjsfjqTLD4ZDZbMbz8zOr1YqHhwfm8znj8ZjhcIjjOFohBVNV1cnGCqaua5qm0epVVaXBpZQkSYIQgt1uR9u2lzDqqObzOY+Pj6xWK5bL5YlCtm2fwKgfyvOcsiwpy1K/pt5XaiiQKIoQQrDZbAAQQlx6Js9zDMNgMBgwm81YLBY8PT1xf3/PZDJhMBhg2zaGYVz4RgGo564qCkZKSZqmCCH4+PigaRriOGY4HF7C7HY7sizDMAxc12UymTCdTpnP5xpGeUbBdNe5R7qwSpk4jvE8j7ZtSdOU8XiM4ziXMABlWdI0DaZp4jgOnucxHA7xPA/Lsk6d/xPqV6GA8jzHcRzatiXLMu7u7rQXr8IURUFRFNR1DYBpmliWdQHyO6FKgmVZ2qzj8ViXj+7eJ0VPCEEcxxyPR61SX2GaJq7r6lKhPKgS4gJmvV6z3+9JkkSnaZ9AlmVh2zau654U06swAFJKpJRaHWXGPqJ77Gp9CpMkCXEcI6WkKIpe1VGm72ZlNwkuYHzfJ4oi0jRFStm7d7oQ59l4AbNer/n4+CCKIqSU2jt9gqjn87jaQmRZRpqmJ/dNn9EF+fSYANI0JY5jsizjeDxSFEWvR3UN5CbM4XAgCAKiKCLLMm3k/zquwry9vbHZbBBCkKYpx+NRV+U+Q91ln8LAP75RMEVR9FZvbu1zEyaOY8Iw1DB9pPj5TX8OdRPG933CMNRG7iOrbrUcv4R5f39nu91q36iK/Kcw5w1YV+1PRxV1NfSlzrWu8EvKwN/1JooiwjAkiiKSJEFK+a8yq21b3fGpdX7v2Z98n8PhwH6/x/d9giBgOp3iui6A7v66t+6tUPOVytDzruBLMOv1mtfXV3a7HYvFgtFohGEYVFV1Mb5cg1Ke6PbAQgjCMCRJErIsOzn2T2EAwjBkv9+z3W5xXZeyLEmShNFopJukbkugotucK5gkSQiCgP1+TxiGurp/GSaKIrbbLaPRiLquiaKIyWSilenCdNVRqdudrdI0JUkSDocD2+2WIAiQUn4dxvd9fvz4ocFUV696WHVM55det54oz3QHOaVQmqZfhwmCANM0EUIwmUz03N1tG2+NLOdAVVVpldRQF4ah/rwe/L9DfKv/Z/4Ce/S6y9Q+chgAAAAASUVORK5CYII="/>
+      </g>
+    </mask>
+    <filter id="luminosity-noclip-5" x="129.673" y="32.198" width="38" height="41" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask-4" x="129.673" y="32.198" width="38" height="41" maskUnits="userSpaceOnUse">
+      <g filter="url(#luminosity-noclip-5)">
+        <image width="38" height="41" transform="translate(129.673 32.198)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAApCAYAAABZa1t7AAAACXBIWXMAAAsSAAALEgHS3X78AAADhElEQVRYhe2YbW+yMBiFD1AKWjLEaXTxw+L+/69atsXBhm9UoCA8n9oUkL09c/PDTtJgDMl95e6h6X0MADUuUOZvA/SJtP+YTqcIggDD4RCUUhBCQAiBYRhqAVDP91TXtXrWdY3j8ahWnuc4HA7YbDaIoqgfbLFYYLlcYj6fw/d9eJ4Hx3FAKYVlWTBNswP4FSghBPI8R5Ik2G63WK1WoJTi8fGxCzadTrFcLnF3d4fFYoHJZALf98EYU52zLOvLYFVV4Xg8oixL5HkOzjm22y1eX18xHA4BAEII1TkFFgQB5vM5FosFbm9vMZvNEAQBGGNwXfdLYHq3dLA0TcE5x3q9hud5AIA0TRFFURdsOBzC931MJhPMZjPc3NxgPB6r7bQsS4FJmebb305VVR042bH9fg/XdWEYBjjneHl5UZ1rgFFK4XkefN9HEAQYj8cYj8dgjMG2beWv/5H0WVEUoJTCMAzkeY7RaKQs0wEjhMBxHDDGwBiD53lgjMFxnP8GkjIMo2EJIYSqI+0ipfaCEAJKKSilcF0XjuPAtu1vg2oD2rYN13VVLfmBdcAMw4BlWercksfDuWSaJgghsG1b1dTrNcBM01Qmbxv9u9Wu1/ZwA6y9zi0JpB/cHbA23E9Jdq5ds7djPwXVV7fX3ec0/kd0EdeeUzv062ByZ3o9dmn6A/us/sA+qz+wPum3XF2/DgZ0oQANTN7L9fv5b6rRMR3sJ9Ruhl63F+wn4KqqUrvT6zF9C+U6t/R5sw2nwPSBtCxL9fI5oWQ9GR3o9RSYnPf0VZbl2cDKskRRFBBCqFrH47EfLMsypGmKLMuQ53nj5e+STHrSNFW1hBCNWmqQK8sSWZaBc479fo/dbgdCCKqqguu6amrSb7bvXcF1z0gPSSjOOXa7Hfb7PZIkQZqmKIqiCyaEULFQHMdwHAd1XSPLMgwGg8as+dGMrC/tybIMSZJgvV4jjmNsNhskSQIhRBdMpi9RFGEwGKCuaxwOhzczsrfg2tmYBGtnY2EYIooixHEMznkXbL1eIwxDMMYAAIfDAVdXVxgMBo0Y6tQMqAO2z6NTMZT0sczHnp6esFqtsNvtumBxHOP+/h51XYNzjjAMVbds2+4dTj/TMQlXFEWja8/Pz3h4eGjEnQZaqfX19TVGo1Ejg5XGtyyrA/MemP5bh5PHhfwI2hlsB+xSdBHXnlP6Bz7Op3ZGvc+FAAAAAElFTkSuQmCC"/>
+      </g>
+    </mask>
+    <filter id="luminosity-noclip-6" x="146.673" y="33.198" width="90" height="18" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask-5" x="146.673" y="33.198" width="90" height="18" maskUnits="userSpaceOnUse">
+      <g filter="url(#luminosity-noclip-6)">
+        <image width="90" height="18" transform="translate(146.673 33.198)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAASCAYAAADbo8kDAAAACXBIWXMAAAsSAAALEgHS3X78AAADEElEQVRYhe1YvU7zMBQ9KRUCdWDtBgIkJMbyBB29MLIjpWNIYOoLsEGSpgODgYGRkaUTj9A3KCpUMFQCCSGhCgkwQ2Xjv7gwkG/4cqRI9j2+vrcnvjdJPQAMJf4clX+dwP+CUuiCUApdEKxC7+3tGbaDgwNlHoYh4jhGHMeIoggA4Pv+zL1sa/JACPmV/a9g04P/Zg5KKSilyLIM+/v7xvqqbjg5OcH7+7uxcGNjA1dXV9je3gYhBJ1Ox1jjeZ4y73a7M9fI8H0fnueBUgoA6PV6CMNQiRUEgXXfIAhQr9cxHo+RZZlz359yQL4ea2troJSi1WoBAKrVKnZ3d515Mvk6OztjAFgURcIWBAEDwJ6fn1m/32e6j3zJfp1OR7HJnH75vm8dx3GsrDs8PDR8CSHKnOerc/q6vJg/1eP8/FzYLi4unHkarYOfuNXVVWGr1+sAgKWlJTQaDePuypD9bm9vAUzvvs7lxdXHOsbjsWHr9XrKnOcbhqHC8Qr5TUyXHjJqtZozT6N1cMzPz+c6ucD9oihCkiQAgIWFBWNPHZRSaxmPRiMx1ttIHni+y8vLBifb8mLaMEuP9fV1XF5e4vHxEYPBAHEcK7whNGPT75e3tzcAU8HSNHUmIYP7ySegUqkonK2fEkJwenoqxvwkpmkq+p0sUl5PJoQYPToPtpj6vi49OAcAg8EAOzs7Sn5yjzaE/vz8BPBd9isrK4J7enrC3d2dM3nuZzu9nNMfEr7vix8MTEtcttlK1fZAlG8QoFaDbsuLqe/r0oNzAPD6+qr46TkbPXoymQAAkiTB0dERFhcXBXd9fY2trS3n61WSJDg+Psbc3JySUJZlopXosPVH2cZL1SYcR7vdNnp1mqZKroQQcRpnxeRw6cE5APj4+FD8Zvbo4XAoxg8PD4o4/X4fwPdDhZfyaDRS2sv9/b3i12q1rO+WHJRS535Zliki6Wi322g2m9jc3MTLywtubm5EfH5S9T48K+ZP9JA5xhgopZhMJhgOh8ah8lD+qVQIyk/wglAKXRBKoQtCKXRB+ALgrgLP+MTAGQAAAABJRU5ErkJggg=="/>
+      </g>
+    </mask>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g>
+        <text transform="translate(208.174 187.326)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">A</tspan></text>
+        <path d="M382.521,94.11l-37.859-84.976C342.423,4.11,336.093,0,330.593,0H53.606C48.106,0,41.775,4.11,39.537,9.134L1.679,94.11c-2.238,5.024-2.238,13.245,0,18.269l37.858,84.976c2.238,5.024,8.569,9.135,14.069,9.135h276.986c5.5,0,11.83-4.11,14.068-9.135l37.859-84.976c2.238-5.024,2.238-13.245,0-18.269ZM16.923,109.494c-3.451,0-6.25-2.798-6.25-6.249s2.799-6.249,6.25-6.249,6.25,2.798,6.25,6.249-2.799,6.249-6.25,6.249ZM367.173,109.494c-3.451,0-6.25-2.798-6.25-6.249s2.799-6.249,6.25-6.249,6.25,2.798,6.25,6.249-2.799,6.249-6.25,6.249Z"/>
+        <circle cx="367.173" cy="103.244" r="10.5" fill="none" stroke="#999"/>
+        <circle cx="16.923" cy="103.244" r="10.5" fill="none" stroke="#999"/>
+        <rect x="44.606" y="1.925" width="294.986" height="202.638" rx="10" ry="10" fill="#333"/>
+        <path d="M46.356,197.063V12.175c0-5.5,5.25-8.75,10.75-8.75h274.986c2.115,0,4.078,1.67,5.697,2.802-1.811-2.593-4.812-4.302-8.197-4.302H54.606c-5.5,0-10,4.5-10,10v182.638c0,3.385,1.709,6.387,4.302,8.198-1.132-1.62-2.552-3.583-2.552-5.698Z" fill="gray"/>
+        <path d="M329.593,1.925H54.606c-5.5,0-10,4.5-10,10v27.271" fill="none" stroke="#e6e6e6" stroke-miterlimit="10"/>
+        <path d="M54.606.5c-5.5,0-11.831,4.11-14.069,9.134L2.679,94.61" fill="none" stroke="#ccc" stroke-miterlimit="10"/>
+        <g>
+          <rect x="50.106" y="4.519" width="283.986" height="197.451" rx="10" ry="10" fill="#1e5ca3"/>
+          <g mask="url(#mask)">
+            <path d="M101.173,6.198c-5.5,0-9.003,4.388-7.784,9.751l10.568,46.497c1.219,5.363,6.712,9.953,12.206,10.199l47.02,2.105c5.494.246,9.73-4.045,9.411-9.536l-2.843-49.034c-.318-5.491-5.079-9.983-10.579-9.983h-58Z" fill="#2a6cb8"/>
+          </g>
+          <path d="M50.585,110.56c39.144-7.019,102.609-7.019,141.751,0,39.145,7.02,102.612,7.02,141.757,0v-29.269c-39.145,7.02-102.611,7.02-141.757,0-39.142-7.02-102.607-7.02-141.751,0v29.269Z"/>
+          <g mask="url(#mask-1)">
+            <polygon points="159.173 105.448 119.173 103.198 111.673 77.198 162.423 77.198 159.173 105.448" fill="#262626"/>
+          </g>
+          <path d="M50.585,110.56c39.144-7.019,102.609-7.019,141.751,0,39.145,7.02,102.612,7.02,141.757,0v29.27c-39.145,7.019-102.611,7.019-141.757,0-39.142-7.02-102.607-7.02-141.751,0v-29.27Z" fill="#ed3232"/>
+          <g mask="url(#mask-2)">
+            <polygon points="154.173 134.948 129.173 134.698 121.673 104.198 157.423 104.198 154.173 134.948" fill="#fc5b5b"/>
+          </g>
+          <path d="M50.585,139.831c39.144-7.02,102.609-7.02,141.751,0,39.145,7.019,102.612,7.019,141.757,0v29.269c-39.145,7.021-102.611,7.021-141.757,0-39.142-7.019-102.607-7.019-141.751,0v-29.269Z" fill="#459bff"/>
+          <g mask="url(#mask-3)">
+            <polygon points="154.222 163.698 130.848 163.464 123.835 134.948 154.011 135.448 154.222 163.698" fill="#5ca7ff"/>
+          </g>
+          <path d="M334.093,81.291c-39.145,7.02-102.611,7.02-141.757,0-39.142-7.02-102.607-7.02-141.751,0" fill="none" stroke="#fff" stroke-width="2"/>
+          <path d="M50.585,110.56c39.144-7.019,102.609-7.019,141.751,0,39.145,7.02,102.612,7.02,141.757,0" fill="none" stroke="#fff"/>
+          <path d="M334.093,169.1c-39.145,7.021-102.611,7.021-141.757,0-39.142-7.019-102.607-7.019-141.751,0" fill="none" stroke="#fff" stroke-width="2"/>
+          <path d="M50.585,139.831c39.144-7.02,102.609-7.02,141.751,0,39.145,7.019,102.612,7.019,141.757,0" fill="none" stroke="#fff"/>
+        </g>
+        <rect x="77.673" y="172.198" width="69" height="29"/>
+        <rect x="80.36" y="175.198" width="65.875" height="26" fill="#aaf0fa"/>
+        <g>
+          <g>
+            <rect x="82.964" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="82.964" y1="185.559" x2="88.099" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="82.964" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="89.011" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="89.011" y1="185.559" x2="94.146" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="89.011" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="95.058" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="95.058" y1="185.559" x2="100.192" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="95.058" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="101.103" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="101.103" y1="185.559" x2="106.237" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="101.103" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="107.149" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="107.149" y1="185.559" x2="112.284" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="107.149" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="113.196" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="113.196" y1="185.559" x2="118.331" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="113.196" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="119.242" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="119.242" y1="185.559" x2="124.377" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="119.242" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="125.288" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="125.288" y1="185.559" x2="130.423" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="125.288" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="131.335" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="131.335" y1="185.559" x2="136.47" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="131.335" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+          <g>
+            <rect x="137.381" y="185.559" width="5.135" height="13.777" fill="#fff"/>
+            <line x1="137.381" y1="185.559" x2="142.516" y2="185.559" fill="none" stroke="#999" stroke-miterlimit="10"/>
+            <rect x="137.381" y="191.893" width="4.635" height="7.444" fill="#e6e6e6"/>
+          </g>
+        </g>
+        <polyline points="85.673 62.53 85.673 70.448 50.173 70.448" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+        <polyline points="50.173 24.698 85.673 24.698 85.673 32.53" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+        <rect x="132.173" y="34.198" width="122" height="38" rx="5" ry="5" fill="#ccc"/>
+        <g mask="url(#mask-4)">
+          <rect x="132.173" y="34.198" width="33" height="37" rx="5" ry="5" fill="#e6e6e6"/>
+        </g>
+        <path d="M333.423,30.198c-60.25,0-53.25,53-88.25,55.75" fill="none" stroke="#fff" stroke-width="2"/>
+        <path d="M245.173,85.948c16.975-1.333,23.728-14.742,33.748-27.678,6.252-8.072,55.252-5.072,55.252-5.072l-.08,28.093c-39.145,7.02-102.611,7.02-141.757,0" fill="#fff"/>
+        <g>
+          <path d="M62.501,31.277c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="#fff"/>
+          <path d="M62.501,42.225c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="#fff"/>
+          <path d="M62.501,53.172c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="#fff"/>
+          <path d="M62.501,64.12c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="#fff"/>
+        </g>
+        <g>
+          <path d="M62.501,86.803c0,1.563-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="#fff"/>
+          <path d="M62.501,101.501c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+        </g>
+        <g>
+          <path d="M62.501,116.198c0,1.563-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.829,2.828-2.829,2.828,1.267,2.828,2.829Z" fill="#fff"/>
+          <path d="M62.501,130.895c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.828,2.828-2.828,2.828,1.266,2.828,2.828Z"/>
+        </g>
+        <g>
+          <path d="M62.501,145.198c0,1.563-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.828,2.828-2.828,2.828,1.266,2.828,2.828Z" fill="#fff"/>
+          <path d="M62.501,159.895c0,1.562-1.266,2.829-2.828,2.829s-2.828-1.267-2.828-2.829,1.266-2.828,2.828-2.828,2.828,1.266,2.828,2.828Z"/>
+        </g>
+        <g>
+          <circle cx="97.532" cy="63.053" r="6.109" fill="#5d5e61" stroke="#000"/>
+          <path d="M102.677,63.969c0,2.473-2.005,4.478-4.477,4.478s-4.478-2.005-4.478-4.478,2.005-4.477,4.478-4.477,4.477,2.005,4.477,4.477Z" fill="#e6e6e6"/>
+        </g>
+        <g>
+          <circle cx="172.673" cy="93.115" r="6.109" transform="translate(-15.268 149.371) rotate(-45)" fill="#5d5e61" stroke="#000"/>
+          <path d="M177.817,94.032c0,2.473-2.006,4.477-4.478,4.477s-4.477-2.005-4.477-4.477,2.004-4.478,4.477-4.478,4.478,2.005,4.478,4.478Z" fill="#d9e021"/>
+        </g>
+        <g>
+          <circle cx="172.673" cy="124.448" r="6.109" transform="translate(-38.241 153.06) rotate(-43.506)" fill="#5d5e61" stroke="#000"/>
+          <path d="M177.817,125.365c0,2.473-2.006,4.478-4.478,4.478s-4.477-2.005-4.477-4.478,2.004-4.477,4.477-4.477,4.478,2.005,4.478,4.477Z" fill="#e6e6e6"/>
+        </g>
+        <g>
+          <circle cx="172.673" cy="151.781" r="6.109" transform="translate(-57.178 156.466) rotate(-42.483)" fill="#5d5e61" stroke="#000"/>
+          <path d="M177.817,152.698c0,2.473-2.006,4.478-4.478,4.478s-4.477-2.005-4.477-4.478,2.004-4.477,4.477-4.477,4.478,2.005,4.478,4.477Z" fill="#e6e6e6"/>
+        </g>
+        <path d="M268.595,39.887c0,2.441-1.98,4.42-4.422,4.42s-4.42-1.979-4.42-4.42,1.978-4.421,4.42-4.421,4.422,1.979,4.422,4.421Z"/>
+        <path d="M311.173,68.198h-25c-4.4,0-8,3.6-8,8v40.25" fill="none" stroke="#666" stroke-miterlimit="10" stroke-width="4"/>
+        <path d="M311.173,68.198h-25c-4.4,0-8,3.6-8,8v72.5c0,4.4,3.6,8,8,8h25" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+        <g>
+          <rect x="245.673" y="96.698" width="65.25" height="37" rx="8" ry="8" fill="#ccc"/>
+          <rect x="245.673" y="96.698" width="65.25" height="37" rx="8" ry="8" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+        </g>
+        <g>
+          <path d="M317.384,24.642c-.877,0-1.234-.62-.797-1.378l6.412-11.106c.437-.758,1.154-.758,1.592,0l6.412,11.106c.438.758.08,1.378-.795,1.378h-12.824Z" fill="none" stroke="#fff"/>
+          <path d="M323.456,20.231c0,.157.127.284.283.284s.283-.127.283-.284c0,0,.324-2.427.324-3.601,0-.335-.272-.607-.607-.607-.334,0-.605.271-.605.607,0,1.457.322,3.601.322,3.601Z" fill="#fff"/>
+          <path d="M324.347,21.729c0,.335-.272.606-.607.606-.334,0-.605-.271-.605-.606s.272-.607.605-.607c.336,0,.607.272.607.607Z" fill="#fff"/>
+        </g>
+        <g>
+          <line x1="323.423" y1="35.006" x2="323.423" y2="43.584" fill="none" stroke="#fff"/>
+          <g>
+            <line x1="316.405" y1="43.584" x2="330.442" y2="43.584" fill="none" stroke="#fff"/>
+            <line x1="318.452" y1="45.923" x2="328.394" y2="45.923" fill="none" stroke="#fff"/>
+            <line x1="320.499" y1="48.263" x2="326.347" y2="48.263" fill="none" stroke="#fff"/>
+          </g>
+        </g>
+        <text transform="translate(70.715 33.726) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="7.754"><tspan x="0" y="0">A</tspan></text>
+        <text transform="translate(87.284 61.492) rotate(-90) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="6"><tspan x="0" y="0">MODBUS</tspan></text>
+        <text transform="translate(91.282 55.013) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="6"><tspan x="0" y="0">Com</tspan></text>
+        <text transform="translate(183.449 95.679) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">Status</tspan></text>
+        <text transform="translate(183.449 126.347) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">Status</tspan></text>
+        <text transform="translate(183.449 153.681) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">Status</tspan></text>
+        <text transform="translate(70.715 44.866) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="7.754"><tspan x="0" y="0">B</tspan></text>
+        <text transform="translate(70.715 55.705) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="7.754"><tspan x="0" y="0">C</tspan></text>
+        <text transform="translate(70.715 67.008) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="7.754"><tspan x="0" y="0">X</tspan></text>
+        <text transform="translate(70.715 190.037) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="7.754"><tspan x="0" y="0">1</tspan></text>
+        <text transform="translate(70.715 199.59) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="7.754"><tspan x="0" y="0">0</tspan></text>
+        <text transform="translate(321.173 71.199)" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="10" font-weight="700"><tspan x="0" y="0">N</tspan></text>
+        <text transform="translate(95.173 126.199)" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="10" font-weight="700"><tspan x="0" y="0">CT</tspan></text>
+        <text transform="translate(95.173 152.199)" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="10" font-weight="700"><tspan x="0" y="0">CT</tspan></text>
+        <text transform="translate(95.173 95.199)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="10" font-weight="700"><tspan x="0" y="0">CT</tspan></text>
+        <g>
+          <text transform="translate(323.389 99.648)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">A</tspan></text>
+          <g>
+            <path d="M322.386,95.853c-.16,1.4-1.426,2.535-2.826,2.535s-2.404-1.135-2.244-2.535c.16-1.4,1.428-2.536,2.828-2.536s2.402,1.136,2.242,2.536Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+            <line x1="319.384" y1="99.922" x2="320.319" y2="91.783" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <g>
+          <text transform="translate(324.166 128.239)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">B</tspan></text>
+          <g>
+            <path d="M322.386,124.63c-.16,1.4-1.426,2.535-2.826,2.535s-2.404-1.135-2.244-2.535c.16-1.399,1.428-2.535,2.828-2.535s2.402,1.136,2.242,2.535Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+            <line x1="319.384" y1="128.698" x2="320.319" y2="120.56" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <g>
+          <text transform="translate(323.744 159.8)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">C</tspan></text>
+          <g>
+            <path d="M322.386,155.82c-.16,1.4-1.426,2.535-2.826,2.535s-2.404-1.135-2.244-2.535c.16-1.399,1.428-2.535,2.828-2.535s2.402,1.136,2.242,2.535Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+            <line x1="319.384" y1="159.889" x2="320.319" y2="151.751" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <g>
+          <text transform="translate(71.738 96.872)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">A</tspan></text>
+          <g>
+            <path d="M70.735,93.077c-.16,1.399-1.428,2.534-2.826,2.534s-2.404-1.135-2.244-2.534c.16-1.4,1.427-2.536,2.826-2.536s2.404,1.135,2.244,2.536Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+            <line x1="67.733" y1="97.146" x2="68.669" y2="89.007" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <g>
+          <text transform="translate(72.516 125.463)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">B</tspan></text>
+          <g>
+            <path d="M70.735,121.854c-.16,1.399-1.428,2.535-2.826,2.535s-2.404-1.136-2.244-2.535c.16-1.4,1.427-2.535,2.826-2.535s2.404,1.135,2.244,2.535Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+            <line x1="67.733" y1="125.923" x2="68.669" y2="117.784" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <g>
+          <text transform="translate(72.094 157.025)" fill="#f2f2f2" font-family="MyriadPro-Bold, &apos;Myriad Pro&apos;" font-size="11.104" font-weight="700"><tspan x="0" y="0">C</tspan></text>
+          <g>
+            <path d="M70.735,153.045c-.16,1.399-1.428,2.535-2.826,2.535s-2.404-1.136-2.244-2.535c.16-1.4,1.427-2.535,2.826-2.535s2.404,1.135,2.244,2.535Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+            <line x1="67.733" y1="157.113" x2="68.669" y2="148.975" fill="none" stroke="#f2f2f2" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <text transform="translate(110.173 94.199) scale(1.178 1)" fill="#e6e6e6" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">0.333V~</tspan></text>
+        <text transform="translate(110.173 124.699) scale(1.178 1)" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">0.333V~</tspan></text>
+        <text transform="translate(110.173 150.699) scale(1.178 1)" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">0.333V~</tspan></text>
+        <g>
+          <line x1="175.673" y1="61.823" x2="175.673" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="178.03" y1="61.823" x2="178.03" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="180.388" y1="61.823" x2="180.388" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="182.744" y1="61.823" x2="182.744" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="185.102" y1="61.823" x2="185.102" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="187.458" y1="61.823" x2="187.458" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="189.815" y1="61.823" x2="189.815" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="192.173" y1="61.823" x2="192.173" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="194.53" y1="61.823" x2="194.53" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="196.888" y1="61.823" x2="196.888" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="199.245" y1="61.823" x2="199.245" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="201.603" y1="61.823" x2="201.603" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="203.96" y1="61.823" x2="203.96" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="206.315" y1="61.823" x2="206.315" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="208.673" y1="61.823" x2="208.673" y2="71.573" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        </g>
+        <g>
+          <text transform="translate(256.09 107.866) scale(1.178 1)" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0" xml:space="preserve">    -N  120V~</tspan><tspan x="0" y="9.6" xml:space="preserve">    -     240V~</tspan><tspan x="0" y="19.2">240 V CAT III</tspan></text>
+          <g>
+            <path d="M261.976,105.201c-.133,1.157-1.18,2.096-2.338,2.096s-1.988-.938-1.855-2.096c.133-1.159,1.18-2.098,2.338-2.098s1.988.939,1.855,2.098Z" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="259.493" y1="108.566" x2="260.267" y2="101.834" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <path d="M261.976,114.531c-.133,1.158-1.18,2.095-2.338,2.095s-1.988-.937-1.855-2.095c.133-1.159,1.18-2.098,2.338-2.098s1.988.939,1.855,2.098Z" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="259.493" y1="117.895" x2="260.267" y2="111.164" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <path d="M272.601,114.531c-.133,1.158-1.18,2.095-2.338,2.095s-1.988-.937-1.855-2.095c.133-1.159,1.18-2.098,2.338-2.098s1.988.939,1.855,2.098Z" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <line x1="270.118" y1="117.895" x2="270.892" y2="111.164" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <text transform="translate(82.839 183.199) scale(1.327 1)" fill="gray" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">1 2 3 4 5 6 7 8</tspan></text>
+        <text transform="translate(114.589 30.29) scale(1.178 1)" fill="#e6e6e6" font-family="BookAntiqua-BoldItalic, &apos;Book Antiqua&apos;" font-style="italic" font-weight="700"><tspan x="0" y="0" font-size="13.695">W</tspan><tspan x="13.695" y="0" font-size="10.956" letter-spacing="0em">ATT</tspan><tspan x="34.992" y="0" font-size="13.695">N</tspan><tspan x="45.644" y="0" font-size="10.956">ODE</tspan><tspan x="69.984" y="-3" font-size="10.956">®</tspan><tspan x="78.169" y="0" xml:space="preserve" font-size="10.956">  </tspan><tspan x="83.647" y="0" font-size="13.695" letter-spacing="0em">M</tspan><tspan x="96.573" y="0" font-size="10.956">ODBUS</tspan></text>
+        <g mask="url(#mask-5)">
+          <text transform="translate(149.173 46.199)" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="12"><tspan x="0" y="0">MCW-8V-208-MB</tspan></text>
+        </g>
+        <text transform="translate(154.922 56.189)" fill="#666" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="9"><tspan x="0" y="0">120V~ 50-60Hz 3W</tspan></text>
+        <g>
+          <rect x="339.856" y="41.343" width="10.629" height="134.856" fill="#75a66e"/>
+          <rect x="339.856" y="41.343" width="3.629" height="134.856" fill="#4d6948"/>
+          <rect x="348.751" y="39.032" width="18.006" height="136.356" fill="#96d48d"/>
+          <polyline points="348.751 175.388 348.751 39.032 366.257 39.032" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+          <path d="M361.94,60.442c0,2.552-2.07,4.622-4.621,4.622s-4.623-2.07-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+          <path d="M361.94,87.084c0,2.553-2.07,4.623-4.621,4.623s-4.623-2.07-4.623-4.623,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+          <path d="M361.94,113.726c0,2.553-2.07,4.622-4.621,4.622s-4.623-2.069-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+          <path d="M361.94,140.369c0,2.552-2.07,4.622-4.621,4.622s-4.623-2.069-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+          <path d="M361.94,167.01c0,2.553-2.07,4.622-4.621,4.622s-4.623-2.069-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.069,4.621,4.622Z" fill="#009245"/>
+          <g>
+            <rect x="364.157" y="43.655" width="2.6" height="5.777" fill="#90b091"/>
+            <rect x="364.157" y="57.008" width="2.6" height="5.777" fill="#90b091"/>
+            <rect x="364.157" y="70.361" width="2.6" height="5.777" fill="#90b091"/>
+            <rect x="364.157" y="83.714" width="2.6" height="5.777" fill="#90b091"/>
+            <rect x="364.157" y="97.067" width="2.6" height="5.777" fill="#90b091"/>
+            <rect x="364.157" y="110.42" width="2.6" height="5.778" fill="#90b091"/>
+            <rect x="364.157" y="123.773" width="2.6" height="5.778" fill="#90b091"/>
+            <rect x="364.157" y="137.126" width="2.6" height="5.778" fill="#90b091"/>
+            <rect x="364.157" y="150.479" width="2.6" height="5.778" fill="#90b091"/>
+            <rect x="364.157" y="163.832" width="2.6" height="5.778" fill="#90b091"/>
+          </g>
+          <g>
+            <path d="M361.94,47.121c0,2.553-2.07,4.622-4.621,4.622s-4.623-2.069-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+            <path d="M361.593,47.699c0,2.042-1.654,3.698-3.697,3.698s-3.697-1.656-3.697-3.698,1.656-3.698,3.697-3.698,3.697,1.656,3.697,3.698Z" fill="#f2f2f2"/>
+            <line x1="356.741" y1="46.255" x2="359.728" y2="49.913" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <path d="M361.94,153.689c0,2.552-2.07,4.622-4.621,4.622s-4.623-2.07-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+            <path d="M361.593,154.267c0,2.042-1.654,3.699-3.697,3.699s-3.697-1.657-3.697-3.699,1.656-3.697,3.697-3.697,3.697,1.655,3.697,3.697Z" fill="#f2f2f2"/>
+            <line x1="356.741" y1="152.822" x2="359.728" y2="156.48" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <path d="M361.94,73.764c0,2.553-2.07,4.622-4.621,4.622s-4.623-2.069-4.623-4.622,2.068-4.622,4.623-4.622,4.621,2.07,4.621,4.622Z" fill="#009245"/>
+            <path d="M361.593,74.341c0,2.041-1.654,3.697-3.697,3.697s-3.697-1.656-3.697-3.697,1.656-3.698,3.697-3.698,3.697,1.656,3.697,3.698Z" fill="#f2f2f2"/>
+            <line x1="357.896" y1="71.388" x2="357.993" y2="77.646" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <path d="M361.94,100.405c0,2.553-2.07,4.623-4.621,4.623s-4.623-2.07-4.623-4.623,2.068-4.622,4.623-4.622,4.621,2.069,4.621,4.622Z" fill="#009245"/>
+            <path d="M361.593,100.983c0,2.041-1.654,3.698-3.697,3.698s-3.697-1.656-3.697-3.698,1.656-3.698,3.697-3.698,3.697,1.656,3.697,3.698Z" fill="#f2f2f2"/>
+            <line x1="359.341" y1="98.35" x2="355.97" y2="104.32" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          </g>
+          <g>
+            <path d="M361.94,127.047c0,2.553-2.07,4.623-4.621,4.623s-4.623-2.07-4.623-4.623,2.068-4.621,4.623-4.621,4.621,2.069,4.621,4.621Z" fill="#009245"/>
+            <path d="M361.593,127.625c0,2.042-1.654,3.699-3.697,3.699s-3.697-1.657-3.697-3.699,1.656-3.698,3.697-3.698,3.697,1.656,3.697,3.698Z" fill="#f2f2f2"/>
+            <line x1="359.341" y1="125.121" x2="355.97" y2="131.091" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          </g>
+        </g>
+        <g>
+          <rect x="34.176" y="49.198" width="9.5" height="44.75" fill="#333"/>
+          <rect x="34.176" y="98.198" width="9.5" height="58.75" fill="#333"/>
+          <rect x="21.176" y="47.198" width="14.5" height="44.75" fill="#1a1a1a"/>
+          <polyline points="21.676 91.948 21.676 47.698 36.176 47.698" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          <g>
+            <circle cx="30.426" cy="54.198" r="4" fill="#4d4d4d"/>
+            <circle cx="30.426" cy="64.059" r="4" fill="#4d4d4d"/>
+            <path d="M26.726,64.559c0,1.767,1.434,3.2,3.2,3.2s3.2-1.433,3.2-3.2-1.434-3.2-3.2-3.2-3.2,1.433-3.2,3.2Z" fill="#f2f2f2"/>
+            <circle cx="30.426" cy="73.92" r="4" fill="#4d4d4d"/>
+            <circle cx="30.426" cy="83.782" r="4" fill="#4d4d4d"/>
+            <circle cx="29.926" cy="84.282" r="3.2" fill="#f2f2f2"/>
+            <path d="M26.726,54.698c0,1.767,1.433,3.2,3.2,3.2s3.2-1.433,3.2-3.2-1.433-3.2-3.2-3.2-3.2,1.433-3.2,3.2Z" fill="#f2f2f2"/>
+            <path d="M26.726,74.42c0,1.767,1.433,3.2,3.2,3.2s3.2-1.433,3.2-3.2-1.433-3.2-3.2-3.2-3.2,1.433-3.2,3.2Z" fill="#f2f2f2"/>
+          </g>
+          <g>
+            <rect x="21.176" y="51.198" width="2.25" height="5" fill="#4d4d4d"/>
+            <rect x="21.176" y="61.087" width="2.25" height="5" fill="#4d4d4d"/>
+            <rect x="21.176" y="70.976" width="2.25" height="5" fill="#4d4d4d"/>
+            <rect x="21.176" y="80.865" width="2.25" height="5" fill="#4d4d4d"/>
+          </g>
+          <line x1="31.676" y1="52.698" x2="28.342" y2="56.614" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          <line x1="31.426" y1="82.698" x2="28.342" y2="86.364" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          <line x1="32.426" y1="64.198" x2="27.592" y2="64.864" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+          <line x1="29.926" y1="71.864" x2="29.842" y2="77.28" fill="none" stroke="#b3b3b3" stroke-miterlimit="10"/>
+        </g>
+        <line x1="36.173" y1="58.948" x2="43.673" y2="58.948" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="68.948" x2="43.673" y2="68.948" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="78.948" x2="43.673" y2="78.948" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="106.448" x2="43.673" y2="106.448" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="116.448" x2="43.673" y2="116.448" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="126.448" x2="43.673" y2="126.448" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="135.948" x2="43.673" y2="135.948" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="145.948" x2="43.673" y2="145.948" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <line x1="36.173" y1="155.948" x2="43.673" y2="155.948" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <g>
+          <path d="M298.817,24.642c-.877,0-1.234-.62-.797-1.378l6.412-11.106c.437-.758,1.154-.758,1.592,0l6.412,11.106c.437.758.08,1.378-.795,1.378h-12.824Z" fill="none" stroke="#fff"/>
+          <polygon points="305.956 15.298 304.626 15.298 302.995 20.235 305.79 18.748 304.54 22.555 304.493 23.305 305.278 22.805 307.456 17.262 304.452 18.838 305.956 15.298" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

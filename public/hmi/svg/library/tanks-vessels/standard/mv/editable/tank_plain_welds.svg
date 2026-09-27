@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="linear">
+		
+			<linearGradient class="linear" id="SVGID_1_tank_plain_welds" gradientUnits="userSpaceOnUse" x1="2" y1="744.0005" x2="98" y2="744.0005" gradientTransform="matrix(1 0 0 1 -512 -691)">
+			<stop  offset="0" style="stop-color:#B5B5B5"/>
+			<stop  offset="1" style="stop-color:#3F3F3F"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_1_tank_plain_welds)" d="M2.25,31.701c0-5.523,21.49-10,48-10s48,4.477,48,10V74.3c0,5.523-21.49,10-48,10s-48-4.477-48-10
+			V31.701z"/>
+		
+			<linearGradient class="linear" id="SVGID_2_tank_plain_welds" gradientUnits="userSpaceOnUse" x1="2" y1="770.549" x2="98" y2="770.549" gradientTransform="matrix(1 0 0 1 -512 -691)">
+			<stop  offset="0" style="stop-color:#B5B5B5"/>
+			<stop  offset="1" style="stop-color:#3F3F3F"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_2_tank_plain_welds)" d="M50.25,84.799c-23.84,0-48.5-3.928-48.5-10.5h1c0,4.588,19.087,9.5,47.5,9.5s47.5-4.912,47.5-9.5h1
+			C98.75,80.871,74.091,84.799,50.25,84.799z"/>
+		
+			<linearGradient class="linear" id="SVGID_3_tank_plain_welds" gradientUnits="userSpaceOnUse" x1="2" y1="756.35" x2="98" y2="756.35" gradientTransform="matrix(1 0 0 1 -512 -691)">
+			<stop  offset="0" style="stop-color:#B5B5B5"/>
+			<stop  offset="1" style="stop-color:#3F3F3F"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_3_tank_plain_welds)" d="M50.25,70.6c-23.84,0-48.5-3.928-48.5-10.5h1c0,4.588,19.087,9.5,47.5,9.5s47.5-4.912,47.5-9.5h1
+			C98.75,66.672,74.091,70.6,50.25,70.6z"/>
+		
+			<linearGradient class="linear" id="SVGID_4_tank_plain_welds" gradientUnits="userSpaceOnUse" x1="2" y1="742.15" x2="98" y2="742.15" gradientTransform="matrix(1 0 0 1 -512 -691)">
+			<stop  offset="0" style="stop-color:#B5B5B5"/>
+			<stop  offset="1" style="stop-color:#3F3F3F"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_4_tank_plain_welds)" d="M50.25,56.4c-23.84,0-48.5-3.928-48.5-10.5h1c0,4.588,19.087,9.5,47.5,9.5s47.5-4.912,47.5-9.5h1
+			C98.75,52.473,74.091,56.4,50.25,56.4z"/>
+		
+			<linearGradient class="linear" d="SVGID_5_tank_plain_welds" gradientUnits="userSpaceOnUse" x1="2" y1="727.951" x2="98" y2="727.951" gradientTransform="matrix(1 0 0 1 -512 -691)">
+			<stop  offset="0" style="stop-color:#B5B5B5"/>
+			<stop  offset="1" style="stop-color:#3F3F3F"/>
+		</linearGradient>
+		<path class="linear" fill="url(#SVGID_5_tank_plain_welds)" d="M50.25,42.201c-23.84,0-48.5-3.928-48.5-10.5h1c0,4.588,19.087,9.5,47.5,9.5s47.5-4.912,47.5-9.5h1
+			C98.75,38.273,74.091,42.201,50.25,42.201z"/>
+	</g>
+	<g id="dark">
+		<line fill="none" stroke="#4F4F4F" stroke-miterlimit="10" x1="33.25" y1="41.88" x2="33.25" y2="54.817"/>
+		<line fill="none" stroke="#4F4F4F" stroke-miterlimit="10" x1="33.25" y1="69.795" x2="33.25" y2="83.792"/>
+		<line fill="none" stroke="#4F4F4F" stroke-miterlimit="10" x1="58.5" y1="56.188" x2="58.5" y2="69.55"/>
+	</g>
+	<g id="light">
+		<ellipse fill="#7F7F7F" cx="50.25" cy="31.701" rx="48" ry="10"/>
+		<line fill="none" stroke="#757575" stroke-miterlimit="10" x1="13.25" y1="52.757" x2="13.25" y2="66.331"/>
+	</g>
+	<g id="hlight">
+		<ellipse fill="#B5B5B5" cx="23.417" cy="28.701" rx="13.167" ry="2.743"/>
+	</g>
+	<g id="shadow">
+		<line fill="none" stroke="#3F3F3F" stroke-miterlimit="10" x1="79.25" y1="40.184" x2="79.25" y2="53.545"/>
+		<line fill="none" stroke="#3F3F3F" stroke-miterlimit="10" x1="79.25" y1="68.31" x2="79.25" y2="81.247"/>
+	</g>
+</g>
+</svg>

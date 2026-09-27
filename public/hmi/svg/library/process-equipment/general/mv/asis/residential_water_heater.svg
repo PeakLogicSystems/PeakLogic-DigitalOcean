@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<linearGradient id="SVGID_1_residential_water_heater" gradientUnits="userSpaceOnUse" x1="38.8948" y1="6.6361" x2="41.232" y2="6.6361">
+		<stop  offset="0" style="stop-color:#B3B3B3"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</linearGradient>
+	<rect x="38.895" fill="url(#SVGID_1_residential_water_heater)" width="2.337" height="13.272"/>
+	<linearGradient id="SVGID_2_residential_water_heater" gradientUnits="userSpaceOnUse" x1="62.3505" y1="6.6361" x2="64.6878" y2="6.6361">
+		<stop  offset="0" style="stop-color:#FFBB66"/>
+		<stop  offset="0.0999" style="stop-color:#F2A54C"/>
+		<stop  offset="0.2339" style="stop-color:#E48E30"/>
+		<stop  offset="0.3792" style="stop-color:#D97C1B"/>
+		<stop  offset="0.5393" style="stop-color:#D2700C"/>
+		<stop  offset="0.7256" style="stop-color:#CD6803"/>
+		<stop  offset="1" style="stop-color:#CC6600"/>
+	</linearGradient>
+	<rect x="62.351" fill="url(#SVGID_2_residential_water_heater)" width="2.337" height="13.272"/>
+	<g>
+		<polygon fill="#1A1A1A" points="37.382,100 32.791,100 32.791,94.825 38.509,94.825 		"/>
+		<polygon fill="#1A1A1A" points="65.637,100 70.228,100 70.228,94.825 64.51,94.825 		"/>
+	</g>
+	<linearGradient id="SVGID_3_residential_water_heater" gradientUnits="userSpaceOnUse" x1="48.4886" y1="10.2671" x2="54.4262" y2="10.2671">
+		<stop  offset="0" style="stop-color:#B3B3B3"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</linearGradient>
+	<polyline fill="url(#SVGID_3_residential_water_heater)" stroke="#000000" stroke-width="0.5008" points="54.426,0 54.426,20.534 48.489,20.534 48.489,0 	
+		"/>
+	<linearGradient id="SVGID_4_residential_water_heater" gradientUnits="userSpaceOnUse" x1="32.0037" y1="54.3406" x2="71.0154" y2="54.3406">
+		<stop  offset="0" style="stop-color:#E6E6E6"/>
+		<stop  offset="0.1534" style="stop-color:#F6F6F6"/>
+		<stop  offset="0.2849" style="stop-color:#FFFFFF"/>
+		<stop  offset="0.5012" style="stop-color:#FCFCFC"/>
+		<stop  offset="0.6496" style="stop-color:#F3F3F3"/>
+		<stop  offset="0.7776" style="stop-color:#E4E4E4"/>
+		<stop  offset="0.8933" style="stop-color:#CECECE"/>
+		<stop  offset="1" style="stop-color:#B3B3B3"/>
+	</linearGradient>
+	<path fill="url(#SVGID_4_residential_water_heater)" stroke="#000000" stroke-width="0.5008" d="M70.014,95.659H33.005c-0.553,0-1.002-0.448-1.002-1.002
+		V14.023c0-0.553,0.448-1.002,1.002-1.002h37.008c0.553,0,1.002,0.448,1.002,1.002v80.634
+		C71.015,95.211,70.567,95.659,70.014,95.659z"/>
+	<polygon fill="#E6E6E6" stroke="#000000" stroke-width="0.5008" points="46.449,7.888 46.449,12.896 44.947,12.896 44.947,7.888 
+		46.199,3.631 56.716,3.631 57.968,7.888 57.968,12.896 56.466,12.896 56.466,7.888 	"/>
+	<path fill="#666666" stroke="#000000" stroke-width="0.5008" d="M71.015,14.023c0-0.553-0.448-1.002-1.002-1.002H33.005
+		c-0.553,0-1.002,0.448-1.002,1.002v1.377h39.012V14.023z"/>
+	<path fill="#666666" stroke="#000000" stroke-width="0.5008" d="M32.004,94.658c0,0.553,0.448,1.002,1.002,1.002h37.008
+		c0.553,0,1.002-0.448,1.002-1.002V93.28H32.004V94.658z"/>
+	<rect x="47.159" y="68.114" fill="#B3B3B3" width="8.347" height="8.013"/>
+	<circle fill="#FF0000" cx="51.374" cy="73.289" r="2.17"/>
+	<g>
+		<rect x="35.817" y="81.219" fill="#666666" width="0.595" height="9.349"/>
+		<rect x="36.844" y="81.219" fill="#666666" width="0.548" height="9.349"/>
+		<rect x="37.872" y="81.219" fill="#666666" width="0.501" height="9.349"/>
+		<rect x="34.789" y="81.219" fill="#666666" width="0.642" height="9.349"/>
+		<rect x="33.761" y="81.219" fill="#666666" width="0.689" height="9.349"/>
+		<rect x="40.955" y="81.219" fill="#666666" width="0.36" height="9.349"/>
+		<rect x="32.885" y="81.219" fill="#666666" width="0.584" height="9.349"/>
+		<rect x="38.9" y="81.219" fill="#666666" width="0.454" height="9.349"/>
+		<rect x="41.983" y="81.219" fill="#666666" width="0.376" height="9.349"/>
+		<rect x="39.928" y="81.219" fill="#666666" width="0.407" height="9.349"/>
+	</g>
+	<g>
+		<rect x="66.754" y="81.219" fill="#666666" width="0.595" height="9.349"/>
+		<rect x="65.773" y="81.219" fill="#666666" width="0.548" height="9.349"/>
+		<rect x="64.792" y="81.219" fill="#666666" width="0.501" height="9.349"/>
+		<rect x="67.735" y="81.219" fill="#666666" width="0.642" height="9.349"/>
+		<rect x="68.715" y="81.219" fill="#666666" width="0.689" height="9.349"/>
+		<rect x="61.85" y="81.219" fill="#666666" width="0.36" height="9.349"/>
+		<rect x="69.696" y="81.219" fill="#666666" width="0.584" height="9.349"/>
+		<rect x="63.811" y="81.219" fill="#666666" width="0.454" height="9.349"/>
+		<rect x="60.806" y="81.219" fill="#666666" width="0.376" height="9.349"/>
+		<rect x="62.831" y="81.219" fill="#666666" width="0.407" height="9.349"/>
+	</g>
+	<g>
+		<linearGradient id="SVGID_5_residential_water_heater" gradientUnits="userSpaceOnUse" x1="69.5748" y1="17.2788" x2="69.5748" y2="22.0367">
+			<stop  offset="0" style="stop-color:#FFBB66"/>
+			<stop  offset="0.0999" style="stop-color:#F2A54C"/>
+			<stop  offset="0.2339" style="stop-color:#E48E30"/>
+			<stop  offset="0.3792" style="stop-color:#D97C1B"/>
+			<stop  offset="0.5393" style="stop-color:#D2700C"/>
+			<stop  offset="0.7256" style="stop-color:#CD6803"/>
+			<stop  offset="1" style="stop-color:#CC6600"/>
+		</linearGradient>
+		<ellipse fill="url(#SVGID_5_residential_water_heater)" cx="69.575" cy="19.658" rx="1.006" ry="2.379"/>
+		<path fill="#FBB03B" d="M71.658,18.599h-1.851c-0.247,0-0.447,0.474-0.447,1.059c0,0.585,0.2,1.059,0.447,1.059h1.851V18.599z"/>
+		<path fill="#EB9119" d="M69.448,20.284c0.081,0.261,0.211,0.433,0.359,0.433h1.851v-0.433H69.448z"/>
+		<path fill="#F8D27C" d="M69.558,18.781c-0.068,0.109-0.123,0.26-0.158,0.438h2.257v-0.438H69.558z"/>
+		<linearGradient id="SVGID_6_residential_water_heater" gradientUnits="userSpaceOnUse" x1="71.9499" y1="56.3439" x2="73.202" y2="56.3439">
+			<stop  offset="0" style="stop-color:#FFBB66"/>
+			<stop  offset="0.0999" style="stop-color:#F2A54C"/>
+			<stop  offset="0.2339" style="stop-color:#E48E30"/>
+			<stop  offset="0.3792" style="stop-color:#D97C1B"/>
+			<stop  offset="0.5393" style="stop-color:#D2700C"/>
+			<stop  offset="0.7256" style="stop-color:#CD6803"/>
+			<stop  offset="1" style="stop-color:#CC6600"/>
+		</linearGradient>
+		<rect x="71.95" y="18.406" fill="url(#SVGID_6_residential_water_heater)" width="1.252" height="75.876"/>
+		<linearGradient id="SVGID_7_residential_water_heater" gradientUnits="userSpaceOnUse" x1="71.6458" y1="19.6578" x2="73.506" y2="19.6578">
+			<stop  offset="0" style="stop-color:#FFBB66"/>
+			<stop  offset="0.0999" style="stop-color:#F2A54C"/>
+			<stop  offset="0.2339" style="stop-color:#E48E30"/>
+			<stop  offset="0.3792" style="stop-color:#D97C1B"/>
+			<stop  offset="0.5393" style="stop-color:#D2700C"/>
+			<stop  offset="0.7256" style="stop-color:#CD6803"/>
+			<stop  offset="1" style="stop-color:#CC6600"/>
+		</linearGradient>
+		<path fill="url(#SVGID_7_residential_water_heater)" d="M72.934,21.661h-0.715c-0.316,0-0.572-0.256-0.572-0.572v-2.862c0-0.316,0.256-0.572,0.572-0.572
+			h0.715c0.316,0,0.572,0.256,0.572,0.572v2.862C73.506,21.405,73.25,21.661,72.934,21.661z"/>
+	</g>
+	<polygon fill="#FF0000" points="52.835,68.114 52.459,66.653 50.805,66.653 50.664,66.277 48.828,66.277 48.828,67.279 
+		50.044,67.279 49.83,68.114 	"/>
+	<rect x="55.965" y="68.948" fill="#B3B3B3" width="1.377" height="7.012"/>
+	<polygon fill="#FFFFFF" points="44.947,7.888 46.199,3.631 56.716,3.631 57.968,7.888 	"/>
+	<path fill="#8AB2B8" d="M49.193,79.382c0,0.346,1.051,0.626,2.348,0.626c1.297,0,2.348-0.28,2.348-0.626h4.539v9.078h-4.539
+		c0,0.346-1.051,0.626-2.348,0.626c-1.297,0-2.348-0.28-2.348-0.626h-4.539v-9.078H49.193z"/>
+	<path fill="#CCCCCC" d="M51.796,77.291c0-0.133-0.054-0.244-0.13-0.307V76.79c0.076-0.063,0.13-0.174,0.13-0.307
+		c0-0.133-0.054-0.244-0.13-0.307V76.12h-0.13h-1.168h-0.13v0.056c-0.076,0.063-0.13,0.174-0.13,0.307
+		c0,0.133,0.054,0.244,0.13,0.307v0.193c-0.076,0.063-0.13,0.174-0.13,0.307c0,0.133,0.054,0.244,0.13,0.307v0.193
+		c-0.076,0.063-0.13,0.174-0.13,0.307c0,0.133,0.054,0.244,0.13,0.307v0.193c-0.076,0.063-0.13,0.174-0.13,0.307
+		c0,0.133,0.054,0.244,0.13,0.307v0.193c-0.076,0.063-0.13,0.174-0.13,0.307c0,0.133,0.054,0.244,0.13,0.307v0.056h0.13h1.168h0.13
+		v-0.056c0.076-0.063,0.13-0.174,0.13-0.307c0-0.133-0.054-0.244-0.13-0.307v-0.193c0.076-0.063,0.13-0.174,0.13-0.307
+		c0-0.133-0.054-0.244-0.13-0.307v-0.193c0.076-0.063,0.13-0.174,0.13-0.307c0-0.133-0.054-0.244-0.13-0.307v-0.193
+		C51.742,77.535,51.796,77.423,51.796,77.291z"/>
+	<path fill="none" stroke="#FF9900" stroke-width="0.5008" stroke-miterlimit="10" d="M56.549,75.876
+		c0,2.504-3.506,2.003-3.506,4.007"/>
+	<g>
+		<path fill="#CCCCCC" d="M37.322,80.515L37.322,80.515c-0.226,0.226-0.593,0.226-0.819,0l-0.992-0.992
+			c-0.226-0.226-0.226-0.593,0-0.819l0,0c0.226-0.226,0.593-0.226,0.819,0l0.992,0.992C37.548,79.922,37.548,80.289,37.322,80.515z"
+			/>
+		
+			<rect x="36.119" y="77.789" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -44.7584 49.4512)" fill="#CCCCCC" width="2.39" height="1.93"/>
+		<path fill="#CCCCCC" d="M39.839,78.942c0-0.807,0.654-1.461,1.461-1.461c0.051,0,0.1,0.01,0.15,0.015
+			c0.065-0.216,0.101-0.445,0.101-0.683s-0.036-0.466-0.101-0.683c-0.05,0.005-0.098,0.015-0.15,0.015
+			c-0.807,0-1.461-0.654-1.461-1.461c0-0.051,0.01-0.1,0.015-0.15c-0.216-0.065-0.445-0.101-0.683-0.101
+			c-0.267,0-0.524,0.046-0.764,0.128c0.003,0.041,0.012,0.081,0.012,0.123c0,0.807-0.654,1.461-1.461,1.461
+			c-0.023,0-0.045-0.006-0.068-0.007c-0.063,0.214-0.099,0.44-0.099,0.675s0.035,0.461,0.099,0.675
+			c0.023-0.001,0.045-0.007,0.068-0.007c0.807,0,1.461,0.654,1.461,1.461c0,0.042-0.009,0.082-0.012,0.123
+			c0.24,0.081,0.496,0.128,0.764,0.128c0.237,0,0.466-0.036,0.683-0.101C39.849,79.041,39.839,78.993,39.839,78.942z"/>
+	</g>
+	<path fill="none" stroke="#999999" stroke-width="1.5025" d="M47.159,72.621c0,0-16.152,0-18.406,2.003v25.042"/>
+	<path fill="none" stroke="#999999" stroke-width="2.5042" stroke-linecap="round" d="M28.753,84.891v4.508"/>
+	<path fill="#C1272D" d="M28.348,85.96c-0.028,0-0.053,0.007-0.081,0.008v-2.185c0-0.356-0.289-0.645-0.645-0.645h-0.484
+		c-0.356,0-0.645,0.289-0.645,0.645v3.225c0,0.241,0.134,0.449,0.33,0.56c0.04,0.81,0.704,1.456,1.524,1.456
+		c0.846,0,1.532-0.686,1.532-1.532C29.88,86.646,29.194,85.96,28.348,85.96z"/>
+</g>
+</svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+<g id="shape">
+	<polyline fill="#C7B299" points="100,25.021 99.135,85.252 33.718,99.373 1.729,87.557 0,26.462 64.265,23.58 	"/>
+</g>
+<g id="light">
+	<polygon fill="#E0C9AD" points="37.102,95.23 65.993,89.394 64.12,89.178 37.03,94.51 	"/>
+	<polygon fill="#E0C9AD" points="68.656,88.314 96.54,82.681 94.732,82.473 68.586,87.618 	"/>
+	<polygon fill="#E0C9AD" points="4.465,26.39 63.975,23.94 96.756,25.129 32.707,28.695 	"/>
+</g>
+<g id="shadow">
+	<polygon fill="#998675" points="64.589,32.874 64.114,89.677 66.138,89.286 66.607,30.857 36.059,32.73 36.09,34.622 	"/>
+	<polygon fill="#998675" points="95.688,30.543 94.832,82.775 96.686,82.417 97.536,28.695 69.561,30.411 69.589,32.143 	"/>
+	<polygon fill="#998675" points="4.755,31.902 29.585,34.872 29.539,32.766 2.738,29.56 4.179,85.54 6.148,86.26 	"/>
+	<g>
+		<polygon fill="#998675" points="32.142,66.458 31.411,65.439 30.845,66.242 		"/>
+	</g>
+</g>
+<g id="hlight">
+	<polygon fill="#F8E5BA" points="53.781,43.465 39.516,44.546 39.48,37.017 53.601,36.116 	"/>
+	<polygon fill="#E0C9AD" points="30.845,66.242 32.142,66.458 31.35,67.467 	"/>
+</g>
+</g>
+</svg>

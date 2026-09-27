@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="132.913" height="94.807" version="1.1" viewBox="0 0 132.913 94.807">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g>
+        <path d="M53.648,71.118v5.318c0,1.277-.736,2.44-1.89,2.987l-18.946,8.978c-1.154.547-1.89,1.71-1.89,2.987v3.418h7.804l8.264-3.719h38.933l8.264,3.719h7.804v-3.418c0-1.277-.736-2.44-1.89-2.987l-18.946-8.978c-1.154-.547-1.89-1.71-1.89-2.987v-5.319"/>
+        <path d="M79.265,73.618h48.342c1.826,0,3.306-1.48,3.306-3.306V5.306c0-1.826-1.48-3.306-3.306-3.306H5.306c-1.826,0-3.306,1.48-3.306,3.306v65.007c0,1.826,1.48,3.306,3.306,3.306h73.959Z" fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="4"/>
+        <g>
+          <path d="M99.046,37.901h12.898c0,7.076-5.822,12.898-12.898,12.898s-12.898-5.822-12.898-12.898c0-3.208,1.197-6.303,3.354-8.676l9.544,8.676Z" fill="#187aa0"/>
+          <path d="M99.046,37.901l1.424-12.819c2.728.303,5.29,1.47,7.31,3.328,2.02,1.859,3.395,4.315,3.923,7.009l-12.657,2.482Z" fill="#666"/>
+          <path d="M99.046,37.244l-9.569-8.649c2.444-2.704,5.924-4.249,9.569-4.249.39,0,.779.018,1.168.053l-1.168,12.845Z" fill="#333" stroke="#333" stroke-miterlimit="10"/>
+          <g>
+            <polygon points="125.302 17.608 73.896 17.608 73.896 59.595 113.515 59.595 125.302 47.808 125.302 17.608" fill="none" stroke="#333" stroke-linejoin="round" stroke-width="3"/>
+            <polygon points="114.079 59.595 125.302 48.371 114.079 48.371 114.079 59.595" fill="#333"/>
+          </g>
+        </g>
+        <g>
+          <g>
+            <rect x="9.699" y="17.618" width="53.729" height="33.501" rx="2.102" ry="2.102" fill="#f8e5ba" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+            <g>
+              <line x1="16.665" y1="24.567" x2="16.665" y2="50.822" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="24.67" y1="24.567" x2="24.67" y2="50.822" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="32.675" y1="24.567" x2="32.675" y2="50.822" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="40.68" y1="24.567" x2="40.68" y2="50.822" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="48.685" y1="24.567" x2="48.685" y2="50.822" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="56.69" y1="24.567" x2="56.69" y2="50.822" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            </g>
+            <g>
+              <line x1="10.783" y1="24.864" x2="63.707" y2="24.864" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="10.783" y1="31.446" x2="63.707" y2="31.446" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="10.783" y1="38.028" x2="63.707" y2="38.028" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              <line x1="10.783" y1="44.611" x2="63.707" y2="44.611" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            </g>
+          </g>
+          <rect x="45.597" y="32.91" width="21.053" height="26.377" fill="#22b573" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+          <text transform="translate(51.216 51.898)" font-family="Rubik-Bold, Rubik" font-size="14.737" font-weight="700"><tspan x="0" y="0">$</tspan></text>
+          <rect x="10.783" y="24.864" width="5.882" height="25.959"/>
+          <rect x="25.213" y="25.424" width="6.891" height="5.644" fill="#146d95"/>
+          <rect x="33.117" y="31.853" width="7.198" height="5.644" fill="#146d95"/>
+          <rect x="17.234" y="45.158" width="6.891" height="4.723" fill="#146d95"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

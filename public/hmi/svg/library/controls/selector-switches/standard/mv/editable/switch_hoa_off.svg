@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+    <g>
+<g id="shape">
+	<path fill="#1A1A1A" d="M81.297,50c0-13.69-8.793-25.318-21.036-29.567c-0.004-0.64-0.007-1.278-0.009-1.909
+		c-0.004-1.336-1.088-2.414-2.425-2.414c-3.944,0-11.713,0-15.657,0c-1.335-0.001-2.419,1.077-2.423,2.414
+		c-0.002,0.631-0.005,1.269-0.009,1.909C27.495,24.682,18.703,36.311,18.703,50c0,12.821,7.713,23.835,18.749,28.672
+		c-0.367,4.494-0.777,8.663-1.232,12.344c-0.298,2.414,1.577,4.546,4.009,4.546H59.77c2.432,0,4.308-2.132,4.009-4.546
+		c-0.455-3.681-0.865-7.849-1.232-12.344C73.584,73.836,81.297,62.821,81.297,50z"/>
+</g>
+<g id="radial">
+	<radialGradient class="radial" id="SVGID_1_switch_hoa_off" cx="37.6605" cy="36.2261" r="28.7583" gradientTransform="matrix(1 0 0 1 0 2)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#AAAAAA"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</radialGradient>
+	<circle class="radial" fill="url(#SVGID_1_switch_hoa_off)" cx="50" cy="50" r="31.297"/>
+</g>
+<g id="linear">
+	
+    <linearGradient class="linear" id="SVGID_2_switch_hoa_off" gradientUnits="userSpaceOnUse" x1="49.9996" y1="14.11" x2="49.9996" y2="93.562" gradientTransform="matrix(1 0 0 1 0 2)">
+		<stop  offset="0" style="stop-color:#AAAAAA"/>
+		<stop  offset="1" style="stop-color:#000000"/>
+	</linearGradient>
+	<path class="linear" fill="url(#SVGID_2_switch_hoa_off)" d="M39.747,18.524c-0.076,23.591-1.251,54.079-3.527,72.492c-0.298,2.414,1.577,4.546,4.009,4.546
+		H59.77c2.432,0,4.308-2.132,4.009-4.546c-2.275-18.413-3.451-48.901-3.527-72.492c-0.004-1.336-1.088-2.414-2.425-2.414
+		c-3.944,0-11.713,0-15.657,0C40.835,16.109,39.751,17.187,39.747,18.524z"/>
+</g>
+<g id="shadow">
+    <path fill="#000000" d="M64.494,77.737c-1.352-17.003-2.087-38.497-2.205-56.528c-0.663-0.283-1.342-0.536-2.028-0.774
+			c0.104,18.516,0.867,40.844,2.286,58.23C63.207,78.375,63.859,78.07,64.494,77.737z"/>
+</g>
+<g id="hlight">
+	<path fill="#FFFFFF" d="M19.723,45.755l-0.989-0.143c1.685-11.66,9.634-21.375,20.745-25.355l0.337,0.941
+		C29.054,25.054,21.355,34.463,19.723,45.755z"/>
+	<path fill="#FFFFFF" d="M36.716,91.076l-0.992-0.123c2.333-18.876,3.451-49.98,3.523-72.432c0.006-1.606,1.318-2.913,2.925-2.913
+		h15.657v1H42.172c-1.058,0-1.921,0.859-1.925,1.916C40.174,41.006,39.055,72.159,36.716,91.076z"/>
+	<g>
+		<path fill="#FFFFFF" d="M47.423,27.855c-1.1,0-1.584-0.798-1.076-1.774l2.729-5.24c0.508-0.976,1.34-0.976,1.848,0l2.729,5.24
+			c0.508,0.976,0.024,1.774-1.076,1.774H47.423z"/>
+	</g>
+</g>
+<g id="frame">
+	<rect fill="none" width="100" height="100"/>
+</g>
+        </g>
+</svg>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g>
+	<g id="shape">
+		<rect x="20.914" y="0.75" fill="#E6E6E6" width="58.173" height="98"/>
+	</g>
+	<g id="shadow">
+		<rect x="25.142" y="4.842" width="49.716" height="89.816"/>
+		<polygon opacity="0.5" enable-background="new    " points="74.994,94.658 25.278,94.658 21.186,98.75 79.086,98.75 		"/>
+	</g>
+	<g id="dark">
+		<polygon fill="#999999" points="28.62,20.186 78.541,20.186 73.221,50.875 26.574,50.875 		"/>
+		<polygon fill="#999999" points="78.541,20.186 73.221,7.911 26.574,7.911 28.62,20.186 		"/>
+	</g>
+	<g id="light">
+		<rect x="26.574" y="50.875" fill="#F2F2F2" stroke="#000000" stroke-miterlimit="10" width="46.647" height="40.919"/>
+	</g>
+	<g id="hlight">
+		<polygon fill="#FFFFFF" points="78.431,19.868 29.643,19.868 29.643,18.868 76.878,18.868 72.254,8.707 73.164,8.293 		"/>
+		
+			<rect x="23.119" y="14.015" transform="matrix(0.1644 0.9864 -0.9864 0.1644 37.7118 -15.988)" fill="#FFFFFF" width="10.348" height="0.5"/>
+		<rect x="29.848" y="52.876" fill="#FFFFFF" width="39.281" height="0.5"/>
+		<rect x="29.848" y="89.089" fill="#FFFFFF" width="39.281" height="0.5"/>
+		<rect x="70.516" y="55.581" fill="#FFFFFF" width="0.5" height="31.303"/>
+		<rect x="28.779" y="55.581" fill="#FFFFFF" width="0.5" height="31.303"/>
+	</g>
+</g>
+</svg>

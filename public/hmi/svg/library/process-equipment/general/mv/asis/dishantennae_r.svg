@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="100" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 66 100">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1914.638" y1="54.465" x2="1920.692" y2="54.465" gradientTransform="translate(-1906.434)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".124" stop-color="#fafafa"/>
+      <stop offset=".249" stop-color="#eee"/>
+      <stop offset=".375" stop-color="#dadada"/>
+      <stop offset=".502" stop-color="#bdbdbd"/>
+      <stop offset=".629" stop-color="#999"/>
+      <stop offset=".757" stop-color="#6c6c6c"/>
+      <stop offset=".882" stop-color="#383838"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="New_Gradient_Swatch_20" data-name="New Gradient Swatch 20" x1="1938.484" y1="1" x2="1938.484" y2="89.104" gradientTransform="translate(-1906.434)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="New_Gradient_Swatch_20-2" data-name="New Gradient Swatch 20" x1="1956.098" y1="89.104" x2="1956.098" y2="1" xlink:href="#New_Gradient_Swatch_20"/>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="shape">
+      <g>
+        <g>
+          <path d="M26.672,58.378h-12.772v-20.323c0-1.187.962-2.149,2.149-2.149h10.623c1.187,0,2.149.962,2.149,2.149v18.174c0,1.187-.962,2.149-2.149,2.149Z" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+          <rect x="8.203" y="9.93" width="6.055" height="89.07" fill="url(#linear-gradient)"/>
+          <line x1="14.258" y1="99" x2="14.258" y2="9.93" fill="none" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="8.203" y1="9.93" x2="8.203" y2="99" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".5"/>
+          <path d="M49.664,1s-17.22,5.282-19.767,36.159h-13.311c-1.187,0-2.149.962-2.149,2.149v11.488c0,1.187.962,2.149,2.149,2.149h13.311c2.547,30.877,19.767,36.159,19.767,36.159" fill="url(#New_Gradient_Swatch_20)" stroke="#000" stroke-miterlimit="10"/>
+          <path d="M25.955,61.064h-12.772v-20.323c0-1.187.962-2.149,2.149-2.149h10.623c1.187,0,2.149.962,2.149,2.149v18.174c0,1.187-.962,2.149-2.149,2.149Z" fill="#e6e6e6" stroke="#000" stroke-miterlimit="10"/>
+          <ellipse cx="49.664" cy="45.052" rx="5.308" ry="44.052" fill="url(#New_Gradient_Swatch_20-2)" stroke="#000" stroke-miterlimit="10"/>
+          <path d="M61.509,40.422h-3.006c-.451,0-.843.976-1.041,2.408h-12.348c-.306,0-.554.953-.554,2.129s.248,2.129.554,2.129h12.348c.198,1.432.59,2.408,1.041,2.408h3.006c.652,0,1.18-2.031,1.18-4.537s-.528-4.537-1.18-4.537Z" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="58.503" y1="49.496" x2="45.114" y2="47.088" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+          <line x1="58.503" y1="40.422" x2="45.114" y2="42.83" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+          <circle cx="18.563" cy="41.555" r="1.406"/>
+          <circle cx="25.834" cy="50.745" r="1.406"/>
+          <path d="M14.079,42.562c0,.597-1.501,1.081-3.352,1.081s-3.352-.484-3.352-1.081v14.826c0,.597,1.501,1.081,3.352,1.081s3.352-.484,3.352-1.081" fill="#e6e6e6" stroke="#000" stroke-miterlimit="10"/>
+          <polygon points="19.194 65.172 4.923 65.172 3.311 66.605 3.311 80.877 17.583 80.877 19.194 79.444 19.194 65.172" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+        </g>
+        <path d="M17.681,65.605c1.081-1.946-1.297-1.946,0-4.109" fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+        <path d="M14.87,80.032s-.432,9.359.216,12.819c.649,3.46.216,4.852.216,4.852" fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

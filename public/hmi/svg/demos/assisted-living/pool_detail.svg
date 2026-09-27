@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 640" width="1024" height="640">
+  <rect width="1024" height="640" fill="#ecfeff"/>
+  <text x="512" y="36" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" font-weight="600" fill="#0f172a">Therapy Pool  Detail</text>
+  <rect x="80" y="70" width="864" height="280" rx="12" fill="#06b6d4" stroke="#0891b2" stroke-width="3" opacity="0.35"/>
+  <rect x="140" y="120" width="744" height="180" rx="8" fill="#22d3ee" stroke="#0891b2" stroke-width="2"/>
+  <text x="512" y="210" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#0f172a">Indoor therapy pool</text>
+  <g font-family="Segoe UI,sans-serif" font-size="13" fill="#334155">
+    <text x="100" y="400">Water temp:</text><text id="pool_temp" x="220" y="400" font-family="Consolas,monospace" fill="#0f172a"> °F</text>
+    <text x="100" y="430">pH:</text><text id="pool_ph" x="220" y="430" font-family="Consolas,monospace" fill="#0f172a"></text>
+    <text x="100" y="460">ORP:</text><text id="pool_orp" x="220" y="460" font-family="Consolas,monospace" fill="#0f172a"> mV</text>
+    <text x="100" y="490">Flow:</text><text id="pool_flow" x="220" y="490" font-family="Consolas,monospace" fill="#0f172a"> GPM</text>
+    <text x="520" y="400">Pump run:</text><text id="pool_pump" x="640" y="400" font-family="Consolas,monospace" fill="#0f172a"></text>
+    <text x="520" y="430">Heater:</text><text id="pool_heater" x="640" y="430" font-family="Consolas,monospace" fill="#0f172a"></text>
+    <text x="520" y="460">Level OK:</text><text id="pool_level" x="640" y="460" font-family="Consolas,monospace" fill="#0f172a"></text>
+    <text x="520" y="490">Filter ”P:</text><text id="pool_filter" x="640" y="490" font-family="Consolas,monospace" fill="#0f172a"></text>
+  </g>
+</svg>

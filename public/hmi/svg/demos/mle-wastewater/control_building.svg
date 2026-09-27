@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+  <rect width="1024" height="768" fill="#f1f5f9"/>
+  <text x="32" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0f172a">Control Building</text>
+  <text x="32" y="78" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">PLC, HMI, and integrated MLE plant alarm summary</text>
+
+  <g transform="translate(160, 160)">
+    <rect x="0" y="0" width="280" height="180" rx="6" fill="#cbd5e1" stroke="#475569" stroke-width="3"/>
+    <rect x="20" y="24" width="100" height="80" rx="4" fill="#1e293b"/>
+    <text x="140" y="70" font-family="Segoe UI, Arial" font-size="13" fill="#334155">MCC / PLC</text>
+    <rect x="160" y="24" width="100" height="80" rx="4" fill="#6f42c1" opacity="0.25"/>
+    <text x="210" y="70" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" fill="#334155">HMI</text>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#0f172a">
+    <text x="520" y="160">Plant alarm</text>
+    <circle id="lamp_plant_alm" cx="720" cy="152" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="520" y="220">Tank 1 MLE alarm</text>
+    <circle id="lamp_t1_alm" cx="720" cy="212" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="520" y="280">Tank 2 MLE alarm</text>
+    <circle id="lamp_t2_alm" cx="720" cy="272" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="520" y="340">T1 blower alarm</text>
+    <circle id="lamp_t1_blow_alm" cx="720" cy="332" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="520" y="400">T2 blower alarm</text>
+    <circle id="lamp_t2_blow_alm" cx="720" cy="392" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+  </g>
+</svg>
