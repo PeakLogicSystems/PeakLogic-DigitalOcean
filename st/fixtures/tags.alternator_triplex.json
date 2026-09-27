@@ -1,0 +1,39 @@
+[
+  {
+    "id": "ALT1",
+    "label": "3-pump triplex alternator",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT3",
+    "preset": 3,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "onlineIds": ["", "", "", ""],
+      "unitOutIds": ["", "", "", ""],
+      "leadSelIds": ["", "", "", ""],
+      "lagSelIds": ["", "", "", ""],
+      "lag2SelIds": ["", "", "", ""],
+      "levelInputMode": "digital",
+      "levelControlEnabled": false,
+      "leadIndex": 0,
+      "lagIndex": -1,
+      "lag2Index": -1,
+      "activeUnit": 0
+    }
+  },
+  { "id": "SYS_RUN", "label": "System run", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "ALT_OFF", "label": "Alternator off", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LVL_HIGH", "label": "High level (all pumps)", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LVL_LAG", "label": "Lag float (2 pumps)", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LVL_LAG2", "label": "Lag2 float (3 pumps)", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ALT_BUMP", "label": "Rotate lead", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_ONLINE", "label": "Pump 1 online", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR2_ONLINE", "label": "Pump 2 online", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR3_ONLINE", "label": "Pump 3 online", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR1_RUN", "label": "Pump 1 run cmd", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_RUN", "label": "Pump 2 run cmd", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR3_RUN", "label": "Pump 3 run cmd", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LEAD_RUN", "label": "Lead running", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ALT_FAULT", "label": "Alternator fault", "type": "BOOL", "role": "memory", "value": false }
+]

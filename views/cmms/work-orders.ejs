@@ -1,0 +1,44 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Work Orders</h1>
+    <% if (['admin', 'operator'].includes(user.role)) { %>
+      <a href="/cmms/work-orders/new" class="btn btn-purple btn-sm"><i class="bi bi-plus-lg"></i> New</a>
+    <% } %>
+  </div>
+  <% if (message) { %><div class="alert alert-success py-2"><%= message %></div><% } %>
+  <div class="card dashboard-card">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>WO #</th>
+            <th>Title</th>
+            <th>Facility</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!workOrders.length) { %>
+            <tr><td colspan="6" class="text-muted p-4">No work orders yet.</td></tr>
+          <% } else { workOrders.forEach(function(wo) { %>
+            <tr>
+              <td><code><%= wo.woNumber %></code></td>
+              <td><%= wo.title %></td>
+              <td><%= facMap[wo.facilityId] || '—' %></td>
+              <td><span class="badge bg-secondary"><%= wo.priority %></span></td>
+              <td><%= wo.status %></td>
+              <td class="small text-muted"><%= new Date(wo.createdAt).toLocaleDateString() %></td>
+            </tr>
+          <% }); } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/shell-foot') %>

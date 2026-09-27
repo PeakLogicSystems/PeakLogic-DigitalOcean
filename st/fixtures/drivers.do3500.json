@@ -1,0 +1,13 @@
+[
+  {
+    "id": "do3500",
+    "type": "modbus_rtu",
+    "enabled": true,
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1,
+    "timeoutMs": 2000
+  }
+]

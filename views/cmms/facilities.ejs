@@ -1,0 +1,41 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <h1 class="h3 mb-3">Facilities</h1>
+  <% if (message) { %><div class="alert alert-success py-2"><%= message %></div><% } %>
+  <% if (error) { %><div class="alert alert-danger py-2"><%= error %></div><% } %>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card dashboard-card">
+        <ul class="list-group list-group-flush">
+          <% if (!facilities.length) { %>
+            <li class="list-group-item text-muted">No facilities yet.</li>
+          <% } else { facilities.forEach(function(f) { %>
+            <li class="list-group-item">
+              <strong><%= f.name %></strong>
+              <% if (f.address) { %><div class="small text-muted"><%= f.address %></div><% } %>
+            </li>
+          <% }); } %>
+        </ul>
+      </div>
+    </div>
+    <% if (['admin', 'operator'].includes(user.role)) { %>
+    <div class="col-lg-5">
+      <div class="card dashboard-card">
+        <div class="card-header bg-white fw-semibold">Add facility</div>
+        <div class="card-body">
+          <form method="POST" action="/cmms/facilities">
+            <div class="mb-2"><input name="name" class="form-control" placeholder="Name" required></div>
+            <div class="mb-2"><input name="address" class="form-control" placeholder="Address"></div>
+            <div class="mb-2"><textarea name="description" class="form-control" rows="2" placeholder="Description"></textarea></div>
+            <button type="submit" class="btn btn-purple btn-sm">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</main>
+
+<%- include('../partials/shell-foot') %>

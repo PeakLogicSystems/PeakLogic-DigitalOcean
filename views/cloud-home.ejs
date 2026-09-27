@@ -1,0 +1,65 @@
+<%- include('partials/shell-head', { title }) %>
+<%- include('partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <% if (cmmsNotice) { %>
+    <div class="alert alert-warning"><%= cmmsNotice %></div>
+  <% } %>
+
+  <h1 class="h3 mb-2">Welcome, <%= user.profile?.displayName || user.email %></h1>
+  <p class="text-muted mb-4"><%= tenant.name %> · PeakLogic Cloud</p>
+
+  <div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-primary">
+        <div class="card-body">
+          <h2 class="h5">Fleet</h2>
+          <p class="text-muted small mb-3">Map, alarms, and lift station operations — counties, duplex, and ATU types.</p>
+          <a href="/fleet" class="btn btn-purple">Open fleet map</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">Sites</h2>
+          <p class="text-muted small mb-3">Locations, systems, and devices — set up your site hierarchy for telemetry and appliance pairing.</p>
+          <a href="/sites" class="btn btn-outline-purple">Manage sites</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">Studio</h2>
+          <p class="text-muted small mb-3">SCADA runtime — open a project, HMI, tags, programs, and drivers.<% if (user.role === 'admin') { %> Admins: use <strong>Tools → Connectivity</strong> in Studio for Twilio, email, and SIM setup.<% } %></p>
+          <a href="/studio" class="btn btn-purple">Open Studio</a>
+        </div>
+      </div>
+    </div>
+    <% if (user.role === 'admin') { %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Team</h2>
+            <p class="text-muted small mb-3">Invite colleagues to sign in — they set their password from the email link.</p>
+            <a href="/team/users" class="btn btn-outline-purple">Manage team</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+    <% if (cmmsEnabled) { %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">CMMS</h2>
+            <p class="text-muted small mb-3">Work orders, assets, and facilities.</p>
+            <a href="/cmms" class="btn btn-outline-purple">Open CMMS</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</main>
+
+<%- include('partials/shell-foot') %>

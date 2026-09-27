@@ -1,0 +1,52 @@
+[
+
+  { "id": "MOTOR1_HOA", "label": "Motor 1 HOA mode", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+
+  { "id": "MOTOR1_STA", "label": "Motor 1 status", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+
+  { "id": "MOTOR1_START", "label": "Motor 1 start", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_STOP", "label": "Motor 1 stop", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_RESET", "label": "Motor 1 reset", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_OFFLINE", "label": "Motor 1 offline latch", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_RUN", "label": "Motor 1 run", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "R1", "label": "Opta relay 1 (motor)", "type": "BOOL", "role": "output", "value": false },
+
+  { "id": "MOTOR1_HRS", "label": "Motor 1 run hours", "type": "REAL", "role": "memory", "value": 0 },
+
+  { "id": "MOTOR1_STARTS", "label": "Motor 1 start count", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+
+  { "id": "MOTOR1_CNTR", "label": "Motor 1 start counter", "type": "COUNTER", "role": "memory", "value": 0, "preset": 999999, "mode": "CTU" },
+
+  { "id": "TPO1_EN", "label": "TPO-1 enable", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "TPO1_OFFLINE", "label": "TPO-1 offline latch", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "TPO1_24HR", "label": "TPO-1 24 hour schedule", "type": "BOOL", "role": "memory", "value": true },
+
+  { "id": "TPO1_OUT", "label": "TPO-1 output", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "TPO1_GAP", "label": "TPO-1 wait between applications", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "TPO1_STA", "label": "TPO-1 status", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+
+  { "id": "TPO1_TOD", "label": "TPO-1 time of day (min)", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+
+  { "id": "TPO1_TOD_STEP", "label": "TPO-1 clock step (min/scan)", "type": "INT", "role": "memory", "value": 1, "wordWidth": 16 },
+
+  { "id": "TPO1_START", "label": "TPO-1 window start (min)", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+
+  { "id": "TPO1_END", "label": "TPO-1 window end (min)", "type": "INT", "role": "memory", "value": 1440, "wordWidth": 16 },
+
+  { "id": "TPO1_ON_MIN", "label": "TPO-1 application time (min)", "type": "INT", "role": "memory", "value": 30, "wordWidth": 16 },
+
+  { "id": "TPO1_OFF_MIN", "label": "TPO-1 repeat between (min)", "type": "INT", "role": "memory", "value": 120, "wordWidth": 16 },
+
+  { "id": "TPO1_PULSE_REM", "label": "TPO-1 pulse remaining (min)", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 }
+
+]
+

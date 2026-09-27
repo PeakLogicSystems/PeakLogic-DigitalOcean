@@ -18,7 +18,7 @@ Matches the **Opta Modbus RTU slave** sketch (slave ID **2**, **9600 8N1**):
 
 Or use **Drivers → Apply device template → Arduino Opta — Modbus RTU Slave**.
 
-## PC setup (MQTT fleet ST on Opta)
+## PC setup (MQTT Parc ST on Opta)
 
 ST on device; deploy over **MQTT** (no HTTP to Opta required for programming). See **`st/opta-mqtt/README.md`** and firmware `firmware/arduino-opta-mqtt-st/`.
 

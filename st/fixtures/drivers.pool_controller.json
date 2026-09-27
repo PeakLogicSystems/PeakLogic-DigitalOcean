@@ -1,0 +1,13 @@
+[
+  {
+    "id": "badu_pump",
+    "type": "vgreen_epc",
+    "enabled": false,
+    "serialPort": "COM3",
+    "baud": 19200,
+    "slaveId": 21,
+    "parity": "none",
+    "stopBits": 1,
+    "timeoutMs": 2000
+  }
+]

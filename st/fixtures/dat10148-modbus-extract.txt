@@ -1,0 +1,932 @@
+ Via monte Nero, 40/B – 21049 TRADATE (VA) ITALY 
+ Phone: +39 (0)331841070 - e-mail:datexel@datexel.it - www.datexel.it
+  DAT 10148DAT 10148
+(*)Coil (Hex)
+0x0001
+0x0002
+0x0003
+0x0004
+0x0005
+0x0006
+0x0007
+0x0008
+0x0009
+0x000A
+0x000B
+0x000C
+0x000D
+0x000E
+0x000F
+0x0010
+0x0011
+0x0012
+0x0013
+0x0014
+0x0015
+0x0016
+0x0017
+0x0018
+0x0019
+0x001A
+0x001B
+0x001C
+0x001D
+0x001E
+0x001F
+0x0020
+0x0021
+0x0022
+0x0023
+0x0024
+0x0025
+0x0026
+0x0027
+0x0028
+0x0029
+0x002A
+0x002B
+0x002C
+0x002D
+0x002E
+0x002F
+0x0030
+0x0031
+0x0032
+0x0033
+0x0034
+0x0035
+0x0036
+0x0037
+0x0038
+0x0039
+0x003A
+0x003B
+0x003C
+0x003D
+0x003E
+0x003F
+0x0040
+Description
+Watchdog Enable
+Watchdog Event
+PowerUp Event
+Auto Reset Counter #0
+Auto Reset Counter #1
+Auto Reset Counter #2
+Auto Reset Counter #3
+Auto Reset Counter #4
+Enable Counter #0
+Enable Counter #1
+Enable Counter #2
+Enable Counter #3
+Enable Counter #4
+Enable Counter #5
+Enable Counter #6
+Enable Counter #7
+Input #0
+Input #1
+Input #2
+Input #3
+Input #4
+Input #5
+Input #6
+Input #7
+Input #8
+Input #9
+Input #10
+Input #11
+Input #12
+Input #13
+Input #14
+Input #15
+Rise Latch #0
+Rise Latch #1
+Rise Latch #2
+Rise Latch #3
+Rise Latch #4
+Rise Latch #5
+Rise Latch #6
+Rise Latch #7
+Rise Latch #8
+Rise Latch #9
+Rise Latch #10
+Rise Latch #11
+Rise Latch #12
+Rise Latch #13
+Rise Latch #14
+Rise Latch #15
+Fall Latch #0
+Fall Latch #1
+Fall Latch #2
+Fall Latch #3
+Fall Latch #4
+Fall Latch #5
+Fall Latch #6
+Fall Latch #7
+Fall Latch #8
+Fall Latch #9
+Fall Latch #10
+Fall Latch #11
+Fall Latch #12
+Fall Latch #13
+Fall Latch #14
+Fall Latch #15
+Access
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+(*)Coil (Dec)
+00001
+00002
+00003
+00004
+00005
+00006
+00007
+00008
+00009
+00010
+00011
+00012
+00013
+00014
+00015
+00016
+00017
+00018
+00019
+00020
+00021
+00022
+00023
+00024
+00025
+00026
+00027
+00028
+00029
+00030
+00031
+00032
+00033
+00034
+00035
+00036
+00037
+00038
+00039
+00040
+00041
+00042
+00043
+00044
+00045
+00046
+00047
+00048
+00049
+00050
+00051
+00052
+00053
+00054
+00055
+00056
+00057
+00058
+00059
+00060
+00061
+00062
+00063
+00064
+Register
+ Position 
+(*)
+40001
+40002
+40003
+40004
+40005
+40006
+40007
+40008
+40009
+40010
+40011
+40012
+40013
+40014
+40015
+40016
+40017
+40018
+40019
+40020
+40021
+40022
+Description
+Test
+Firmware [0]
+Firmware [1]
+Name [0]
+Name [1]
+Communication
+Address
+Delay RX/TX
+Watchdog Timer
+System Flags
+Digital Inputs  
+Rise Latch 
+Fall Latch
+Sync. Value
+Counter #0
+Counter #1
+Counter #2
+Counter #3
+Counter #4
+Counter #5
+Counter #6
+Counter #7
+Access
+R/W
+RO
+RO
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+RO
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+R/W
+pag 1/4
+User Guides – MODBUS protocolUser Guides – MODBUS protocol
+Firmware Version : 5103Firmware Version : 5103
+Distributed I/O device
+ in 6 DIN module box   
+16 digital input channels
+Communicating over RS-485
+All the data shared by a device communicating by Modbus RTU / Modbus 
+ASCII protocol are mapped in tables wherein to each data is associated a 
+determined address.
+Each data could be of two types:
+- “REGISTER”,   data of 2 bytes size (word of 16 bits) that can be 
+associated to analogue input or output, variables, set-point, etc...
+- “COIL”,   data of 1 single bit that can be associated to digital input or 
+output or to a logic state.
+A register could contain the image (mirror) of more coils; in example the 16 
+digital inputs of a device could be read or written as bit (singularly) 
+addressing the coil related to each input or can be read or written as a 
+single word addressing the associated register wherein each bit 
+corresponds to a coil.
+In the Modbus protocol, registers and coils are divided as per the following 
+groups of addresses:
+0xxxx and 1xxxx = Coils (bit)
+3xxxx and 4xxxx = Registers (word)
+When read and write functions are performed, use the tables indicated 
+below to address the registers and coils. 
+COILS TABLECOILS TABLE
+REGISTER TABLEREGISTER TABLE
+Function
+01(**)
+02(**)
+03
+04
+05
+06
+15 (0F)
+16 (10)
+Description
+Read Coil Status (0xxxx)
+Read Inputs Status (1xxxx)
+Read Holding Registers (4xxxx)
+Read Inputs Registers (3xxxx)
+Force Single Coil
+Preset Single Register
+Force Multiple Coil
+Preset Multiple Registers
+NOTES:
+(*) Subtract 1 to the address position number of the register and/or coil. 
+Registers and coils marked as RO in the column 'Access' are Read Only 
+registers.
+Registers and coils marked as R/W in the column 'Access' are Read and Write 
+registers.
+For the devices of DAT10000 series, the group of data 0xxxx is the mirror of the 
+group 1xxxx, the group of data 3xxxx is the mirror of the group 4xxxx, therefore 
+the first register could be addressed either as 30001 (with function 04) or 40001 
+( with function 03).
+(**) The functions 01, 02 and 15 support a maximum number of 32 
+consecutive coils for reading and writing .
+SUPPORTED MODBUS FUNCTIONS CODESSUPPORTED MODBUS FUNCTIONS CODES
+
+--- PAGE ---
+
+pag 2/4
+Bit
+Set
+15
+-
+14
+-
+13
+-
+12
+-
+11
+-
+10
+3
+09
+2
+08
+1
+07
+-
+06
+-
+05
+-
+04
+-
+03
+-
+02
+-
+01
+-
+00
+-
+            Watchdog Event Enable
+Watchdog Event
+Power-up Event
+40001 : TEST
+This register is used for the function of Synchronized Sampling (refer to description register 40014)
+DESCRIPTION MODBUS REGISTERSDESCRIPTION MODBUS REGISTERS
+40002 / 40003 : FIRMWARE
+Field of 2 read only registers ; contains the firmware identifier provided by the manufactured.
+- Default value: 5103 (hex)
+40004 / 40005 : NAME
+Field of 2 read/write registers (4 bytes or 4 ASCII characters) available for the user, it can contain the name of the device or an abbreviation that 
+identifies its function inside the plant. Each one of the 4 bytes could be written by values from 0 to 255, ASCII characters included.
+The default value of this field contains the identifier of the device expressed in ASCII characters.
+- Default value:  “A148” (ASCII).
+40006 : COMMUNICATION
+If the user wants to set the communication parameters by PC, it is necessary to set the bits of this register referring to the table below in order to 
+configure baud-rate, parity and mode. The configuration of the parameters via software is not necessary if it is done by dip switches.
+- Default of manufacturer: 38400 bps, mode RTU, parity NONE, stop bit 1
+40007 : ADDRESS
+Contains the MODBUS address of the device; the values allowed are from 1 to 247 decimal.
+Each node connected to the same line has a unique address.
+The address 255 is used for broadcast function.
+- Default value: 01
+40008 : DELAY RX/TX
+Indicates the value of the delay time between the reception of a query and the transmission of the response, expressed as milliseconds.
+- Default value: 01(1 ms.)
+40009 : WATCHDOG TIMER
+Contains the value of WatchDog timer , expressed of intervals of 0.5 seconds. If the WatchDog is enabled and the device doesn't receive command 
+for the time set in this register , the WatchDog Alarm will be activated (refer to section “Procedures”).
+- Default value: 10 (5 sec.)
+40010 : SYSTEM FLAGS
+Contains the enable bits and system events of the device. The following parameters are configurable:
+WATCHDOG ENABLE
+Enables the WatchDog alarm. If the alarm is enabled and the device doesn't receive commands for a time higher than the one specified in register 
+40009, the WatchDog Alarm will be activated (refer to section “Procedures”).
+0 = Watchdog disabled.
+1 = Watchdog enabled.
+WATCHDOG EVENT
+Indicates the state of the WatchDog Alarm. If the alarm is enabled and the device doesn't receive commands for a time higher than the one specified 
+in register 40009, this bit is forced to 1. To erase the alarm set this bit to 0. If the bit is forced to 1 by a command of the Master unit, a Watchdog 
+event will be simulated and consequently an alarm condition will be created.
+0 = Normal condition
+1 = Alarm condition
+POWER-UP EVENT
+This bit is forced to 1 each time the device is powered-on in order to indicated that the device has been switched-off or a reset is occurred. By the set 
+of this bit to 0 and check its state it is possible to monitor if a reset of the device is occurred.
+0 = reset not occurred
+1 = reset not occurred
+It is possible to use this register to read and write at the same time all the bits without to implement the specific functions of read and write of coils 
+(01-02-05-15).
+BaudRate
+2400
+4800
+9600
+19200
+38400
+57600
+115200
+B2
+0
+0
+0
+1
+1
+1
+1
+B1
+0
+1
+1
+0
+0
+1
+1
+B0
+1
+0
+1
+0
+1
+0
+1
+P1
+0
+0
+1
+1
+P0
+0
+1
+0
+1
+Bit
+Desc.
+15
+-
+14
+-
+13
+-
+12
+-
+11
+-
+10
+-
+09
+-
+08
+-
+07
+-
+06
+M
+05
+P1
+04
+P0
+03
+N
+02
+B2
+01
+B1
+00
+B0
+Mode
+MODBUS ASCII
+MODBUS RTU
+M
+0
+1
+N°bit
+7 bit
+8 bit
+N
+0
+1
+Parity
+None
+Even
+Odd
+None
+Stop bit
+1
+1
+1
+2
+MODBUS RTU
+P1
+0
+0
+1
+1
+P0
+0
+1
+0
+1
+Stop bit
+1
+1
+1
+1
+Parity
+Mark (*)
+Even
+Odd
+Space
+MODBUS ASCII
+NOTE:
+- the number of bits is 
+ignored, in ASCII mode is 
+fixed to 7; in RTU mode is 
+fixed to 8.
+- RTU mode and ASCII 
+mode, the "Stop bit" 
+number is fixed in relation 
+to the parity selected.
+- (*) In ASCII mode, the 
+"Mark" parity configuration 
+with 1 stop bit is equivalent 
+to the "No Parity" 
+configuration with 2 stop 
+bit
+
+--- PAGE ---
+
+pag 3/4
+Bit
+Descr.
+Channel
+Coil
+15
+#7
+24
+14
+#6
+23
+13
+#5
+22
+12
+#4
+21
+11
+#3
+20
+10
+#2
+19
+09
+#1
+18
+08
+#0
+17
+07
+#15
+32
+06
+#14
+31
+05
+#13
+30
+04
+#12
+29
+03
+#11
+28
+02
+#10
+27
+01
+#9
+26
+00
+#8
+25
+Input
+40014 : SYNC VALUE
+When the device receives the command of Synchronism, the value of the register 40011 are saved into this register.
+Bit
+Input
+15
+#7
+14
+#6
+13
+#5
+12
+#4
+11
+#3
+10
+#2
+09
+#1
+08
+#0
+07
+#15
+06
+#14
+05
+#13
+04
+#12
+03
+#11
+02
+#10
+01
+#9
+00
+#8
+40015 : COUNTER #0
+40016 : COUNTER #1
+40017 : COUNTER #2
+40018 : COUNTER #3
+40019 : COUNTER #4
+40020 : COUNTER #5
+40021 : COUNTER #6
+40022 : COUNTER #7
+Contains the counting of pulses detected on the associated digital input starting from the last reset of the counter . The format of the number is 
+unsigned integer 16 bit ( 0 ÷ 65535 ).
+When a pulse on input happens ( rising edge followed by a falling edge ), the value of the register associated to the digital input is increased of 1.
+If the “Automatic Reset ” is enabled, at each reading of these registers, the value contained is automatically forced to 0.
+If the “Automatic Reset ” is not enabled, the value of these registers can be reset only by writing of the value 0 into it.
+NOTE: when the device is powered-on the value of these register is set to 0.
+COILS DEDICATED TO DIGITAL COUNTERS COILS DEDICATED TO DIGITAL COUNTERS 
+00004 ÷ 00008 : ENABLE OF THE AUTOMATIC RESET FOR COUNTER  #0 ÷ #4
+Enables the automatic reset (Auto reset) of a counter: if this parameter is enabled, each time that the register associated to the counter is read, its 
+value is reset  immediately after the data has been transmitted; if this parameter is not enabled the counter can be reset only by writing of the value 0 
+into the associated register.
+0 = Manual Reset 
+1 = Automatic Reset (default)
+00009 ÷ 00016 : COUNTER ENABLED #0 ÷ #7
+Write this coil to 1 to activate the digital counter associated to the input channel.
+Write this coil to 0 to stop the operation of counting.
+The function of Synchronism is a broad-cast command sent to all the device of the net RS-485. When the devices receive this command, all the input 
+values measured at the reception of it are saved into the proper registers.
+To send the command, write the value 10 into the register “Test” (40001), to the address '255'.
+NOTE: the values of synchronism are not saved in eeprom; this involves that at each power-on the values in the registers are reset.
+0 3 1Counter ( data in
+ register 40015 )
+IN #4
+Working whit Automatic Reset enabled
+0 1 2 3 0 1Counter ( data in
+ register 40015 )
+Reset
+(write coil  00005 = 1 )
+IN #4
+Reset ( coil 00005 )
+Working whit Automatic Reset NOT enabled
+Bit
+Descr.
+Channel
+Coil
+15
+#7
+40
+14
+#6
+39
+13
+#5
+38
+12
+#4
+37
+11
+#3
+36
+10
+#2
+35
+09
+#1
+34
+08
+#0
+33
+07
+#15
+48
+06
+#14
+47
+05
+#13
+46
+04
+#12
+45
+03
+#11
+44
+02
+#10
+43
+01
+#9
+42
+00
+#8
+41
+Input
+Bit
+Descr.
+Channel
+Coil
+15
+#7
+56
+14
+#6
+55
+13
+#5
+54
+12
+#4
+53
+11
+#3
+52
+10
+#2
+51
+09
+#1
+50
+08
+#0
+49
+07
+#15
+64
+06
+#14
+63
+05
+#13
+62
+04
+#12
+61
+03
+#11
+60
+02
+#10
+59
+01
+#9
+58
+00
+#8
+57
+Input
+40011 : DIGITAL INPUTS
+This register shows the state of the digital inputs (0 = OFF , 1 = ON).
+It is possible to use this register to read and write at the same time all the bits without to implement the specific functions of read of coils (01-02).
+40012 :  RISE LATCH
+Contains the value of the rise latch (event of change from logic state 0 to logic state 1) of the digital inputs .
+The event latch signals the single change of state and is not updated by the system; in the case of it is necessary to monitor this parameter for more 
+that one variation, it is necessary to reset the bit writing its value to 0. Each bit corresponds to a digital input, in function of the table below:
+- Default value: 0
+40013 :  FALL LATCH
+Contains the value of the fall latch (event of change from logic state 1 to logic state 0) of the digital inputs .
+The event latch signals the single change of state and is not updated by the system; in the case of it is necessary to monitor this parameter for more 
+that one variation, it is necessary to reset the bit writing its value to 0. Each bit corresponds to a digital input, in function of the table below:
+- Default value: 0
+
+--- PAGE ---
+
+Datexel s.r.l. reserves its right to modify totally or in part the characteristics of its products without warning at any time. ..
+SW1
+SW2
+pag 4/4
+ED.06.21 REV.02
+RIF. FW : 5103
+ Address setting 1÷247
+ (Pos.1 LSB; Pos.8 MSB)
+- Mode setting
+ (Pos.1)
+- Parity setting
+ (Pos.2 LSB; Pos.3 MSB)
+- Baud rate setting
+ (Pos.4 LSB; Pos.6 MSB)
+Notes (*):
+- in Modbus RTU mode the setting is NONE; number of bit = 8
+- in Modbus ASCII mode the setting is MARK; number of bit = 7
+For the tables of configuration refer to the technical data-sheet of the device. 
+ON
+DIP-SWITCHES SETTING
+OFF
+Notice: set all the dip-switche in OFF position to access to the device in EEPROM mode ( the device will follow the configuration parameters set by software) and 
+INIT mode.
+Switch-off the device before to program it by dip-switches.
+CONFIGURATION BY DIP SWITCHES
+PROCEDURES
+USE OF “INIT” FUNCTION
+The “INIT” function allows to set the device in the default configuration, independently of the software configuration made.
+To use this function the dip-switches must be all in OFF position. 
+The INIT forces: mode RTU, parity NONE, baud rate 9600, number of bit = 8, stop bit = 1, address 1
+- Connect to the line RS485 only the device to configure.
+- Switch-off the device.
+- Connect the terminal INIT to the terminal REF.
+- Power-on the device.
+- Check that the green led “PWR” on the front of the device is on.
+If not, check the connection of power supply (terminals V+ and V-).
+- Set the communication port with the following values:
+Mode = Modbus RTU
+baud-rate = 9600 bps
+parity = None
+n° bit = 8 
+bit di stop = 1
+- the device will respond to the address 01 .
+- Read or write the desired settings into the registers:
+40006 : “Communication” to set the baud-rate.
+40007 : “Address” to set the address of the device.
+- Switch-off the device.
+- Disconnect the terminal INIT from the terminal REF.
+- Power-on the device with all the dip-switches in OFF position.
+- Set the communication port with the baud-rate configured in the register 40006.
+- the device will respond to the address configured in the register 40007.
+NOTE: the default configuration values are the following:
+- Address : 01
+- Baud-rate : 38400 bps
+- Protocol : RTU
+- Parity : None
+- Stop bit : 1
+WATCHDOG
+The devices of the DAT10000 series have the Watchdog timer that, if enabled, activates an alarm each time that the communication between the 
+device and the Master unit is not performed for a time higher that the one configured. 
+The light signalling the green led PWR on the front starts to blink one time per second and is forced to 1 the coil “Watchdog Event”.
+To exit from the alarm condition, send a command to the device, reset the coil “Watchdog Event”: the led will stop to blink.

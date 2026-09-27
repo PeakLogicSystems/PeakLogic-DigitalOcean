@@ -1,0 +1,119 @@
+
+--- PAGE 1 ---
+126-1040   © Icon Process Controls Ltd.
+ProCon® — R7C Series
+ORP Sensor Transmitter
+MODBUS Communication Protocol
+Read the user's manual carefully before starting to use the unit.
+Producer reserves the right to implement changes without prior notice.
+--- PAGE 2 ---
+226-1040   © Icon Process Controls Ltd.
+ProCon® — R7C Series
+ORP Sensor Transmitter
+Communication Protocol
+Communication Configuration: 9600 N 8 1
+Address: 1 can be modified by broadcast address 255
+Communication Protocol: MODBUS RTU | 03 read 06 Write
+Definition Address Items Default Decimal Range Limitation Explanation
+Measured 
+Value
+0 ORP Value - 1 -20000 ~ 20000 OR
+1 pH Value - 2 0 ~ 1400 OR
+2 Temp. Value - 1 0 ~ 1400 OR
+3 Current Output - 0 OR
+Calibration
+4 ORP 
+Field Calibration 2560 - Communication Sends 
+Field Values OW
+5 pH Field Calibration 700 2 Communication Sends 
+Fied Values OW
+ 
+When Cal Status is 0, start the 
+calibration. After calibrating 
+Solution 1, the Cal Status 
+changes to 1, and once it’s 
+completed, it changes to 2. Then 
+start calibrating Solution 2, and 
+the Cal Status becomes 3. After 
+calibration is finished, it returns 
+to 0. If the calibration is incorrect, 
+re-calibrate after 1 minute.
+6 Calibration Status 0 0
+0: Re Calibrate
+1: Point 1 Calibrating
+2: Calibrate Point 2
+3: Point 2 Calibrating
+4: Solution 1 Error
+5: Solution 2 Error
+R/W
+7 Solution 1 0 2 Place the sensor in 686 or 
+700 buffer for calibration R/W
+8 Solution 2 0 2
+Place the sensor in 
+400/401 or 918/1001 buffer 
+for calibration
+R/W
+9 pH Slope 5916 2 R/W
+10 pH Zero 0 2 R/W
+11 Temperature 250 1 R/W
+12 - - - -
+13 ORP Linear 1000 3
+14 ORP Dynamic Fix 0 1 R/W
+--- PAGE 3 ---
+326-1040   © Icon Process Controls Ltd.
+ProCon® — R7C Series
+ORP Sensor Transmitter
+Definition Address Items Default Decimal Range Limitation Explanation
+Calibration
+15 Buffer Factor 5 0 0 ~ 20 R/W
+16 Address 1 0 1 ~ 254 R/W
+17 Temp. State 0 0 0: Auto | 1: Manual R/W
+18 Manual Temp. 250 1
+19 Temp. Fix 0 1
+20 PH Linear 1000 3
+21 PH Dynamic Fix 0 2
+Current
+112 Cal 4mA R/W 
+113 Cal 20mA R/W
+114 Output Type 0 0: 4-20 | 1: 0-20 | 2: 20-4 R/W
+115 Current Lower Limit 0 0~1400 R/W
+116 Current Upper 
+Limit 1400 0~1400 R/W
+Recovery 200 Restore Factory 0 0 1: Factory Recovery OR
+Sensor Address Modification
+After connecting the digital pH sensor and 
+MODBUS software, go to function code 
+“06” and enter “16” in the Address field. 
+Then enter either the new sensor address 
+or the value “2” in the Value field. Click 
+Send to confirm. 
+A confirmation popup with “Response 
+OK” will appear, indicating that the sensor 
+address has been successfully updated.
+
+--- PAGE 4 ---
+426-1040   © Icon Process Controls Ltd.
+ProCon® — R7C Series
+ORP Sensor Transmitter
+Communication Example
+This device uses the MODBUS RTU communication protocol. The communication parameters and register addresses 
+can be customized based on customer requirements.
+The default settings are: Device Address = 01, Baud Rate = 9600, No Parity, 1 Stop Bit. These parameters can be modified 
+by the user.
+Example using Function Code 03:
+pH = 6.70, Temperature = 23.1°C
+Host sends: 01 03 00 00 00 03 05 CB 
+Sensor replies: 01 03 06 FF EF 02 9E 00 E7 C0 B1
+Explanation: 
+ 
+01 → Represents Sensor Address 
+ 
+03 → Represents Function Code 03 
+ 
+06 → Represents number of data bytes returned 
+ 
+02 9E → 670 | pH = 6.70 (2 decimals) 
+ 
+00 E7 → 231 | Temperature = 23.1°C (1 decimal) 
+ 
+C0 B1 → Represents the CRC-16 check code

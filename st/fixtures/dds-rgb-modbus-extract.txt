@@ -1,0 +1,40 @@
+EZ Meter DDS-RGB 2.025.docx ENGINEERING DDS  11/18/2025 Page 56 of 115 
+9.2 Metered Values Registers (RGB v1.600 DB as of 11/18/2025 adding reg address) 
+ 
+ 
+ 
+  
+REGISTER  OFFSET  SIZE  TYPES DESCRIPTION RANGE UNITS
+Base 1  DEC  HEX  REG
+40001  0  0  2  Acc. Wh ‐ A  (Import/Delivered) 0 ‐ 99,999,999 10 Wh
+40003  2  2  2  Acc. Wh ‐ B  (Import/Delivered) 0 ‐ 99,999,999 10 Wh
+40005  4  4  2  Acc. Wh ‐ C  (Import/Delivered) 0 ‐ 99,999,999 10 Wh
+40007  6  6  2  N/A 0 ‐ 99,999,999 ‐
+40009  8  8  2  Acc. Wh ‐ A  (Export/Received) 0 ‐ 99,999,999 10 Wh
+40011  10  A  2  Acc. Wh ‐ B  (Export/Received) 0 ‐ 99,999,999 10 Wh
+40013  12  C  2  Acc. Wh ‐ C  (Export/Received) 0 ‐ 99,999,999 10 Wh
+40015  14  E  2  N/A 0 ‐ 99,999,999 ‐
+40017  16  10  2  Summed Acc. Wh Counter 1 (Imp.) 0 ‐ 99,999,999 10 Wh
+40019  18  12  2  Summed Acc. Wh Counter 2 (Exp.) 0 ‐ 99,999,999 10 Wh
+40021  20  14  2  Summed Acc. VAhCounter 3 (Imp.) 0 ‐ 99,999,999 10 VAh
+40023  22  16  2  Summed Acc. VAhCounter 4 (Exp.) 0 ‐ 99,999,999 10 VAh
+40025  24  18  1  Phase A Voltage ‐ Neutral 0 ‐ 6553.5 0.1 Volt
+40026  25  19  1  Phase A Current  0 ‐ 6553.5 0.1 Amp
+40027  26  1A  2  signed Phase A Real Power 0 ‐ 0.1 W
+40029  28  1C  1  Phase A Frequency 0 ‐ 60.0 0.1 Hz.
+40030  29  1D  1  signed Phase A Power Factor  0 ‐ 100.00 0.01 %
+40031  30  1E  1  Phase B Voltage ‐ Neutral 0 ‐ 6553.5 0.1 Volt
+40032  31  1F  1  Phase B Current  0 ‐ 6553.5 0.1 Amp
+40033  32  20  2  signed Phase B Real Power 0 ‐ 0.1 W
+40035  34  22  1  Phase B Frequency 0 ‐ 60.0 0.1 Hz.
+40036  35  23  1  signed Phase B Power Factor  0 ‐ 100.00 0.01 %
+40037  36  24  1  Phase C Voltage ‐ Neutral 0 ‐ 6553.5 0.1 Volt
+40038  37  25  1  Phase C Current  0 ‐ 6553.5 0.1 Amp
+40039  38  26  2  signed Phase C Real Power 0 ‐ 0.1 W
+40041  40  28  1  Phase C Frequency 0 ‐ 60.0 0.1 Hz.
+40042  41  29  1  signed Phase C Power Factor  0 ‐ 100.00 0.01 %
+40043  42  2A  2  signed Phase A Apparent Power (Optional)  0 ‐ 0.1 VA
+40045  44  2C  2  signed Phase B Apparent Power (Optional)  0 ‐ 0.1 VA
+40047  46  2E  2  signed Phase C Apparent Power (Optional)  0 ‐ 0.1 VA
+      
+      

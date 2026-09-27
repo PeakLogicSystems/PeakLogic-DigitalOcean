@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PeakLogic Platform — <%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/peaklogic.css">
+</head>
+<body class="bg-light">
+
+<%- include('_nav') %>
+
+<main class="container pb-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 mb-0">Tenants</h2>
+    <a href="/admin/tenants/new" class="btn btn-purple btn-sm">Create tenant</a>
+  </div>
+
+  <div class="card dashboard-card">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>PeakLogic tier</th>
+            <th>CMMS</th>
+            <th>Users</th>
+            <th>Created</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!tenants.length) { %>
+            <tr><td colspan="7" class="text-muted p-4">No tenants yet.</td></tr>
+          <% } else { %>
+            <% tenants.forEach(function(t) { %>
+              <tr>
+                <td><%= t.name %></td>
+                <td><code><%= t.slug %></code></td>
+                <td><%= t.plan %></td>
+                <td>
+                  <% if (t.cmmsEnabled) { %>
+                    <span class="badge bg-success"><%= t.cmms.plan %></span>
+                  <% } else { %>
+                    <span class="badge bg-secondary">off</span>
+                  <% } %>
+                </td>
+                <td><%= t.userCount %></td>
+                <td class="small text-muted"><%= new Date(t.createdAt).toLocaleDateString() %></td>
+                <td><a href="/admin/tenants/<%= t.id %>" class="btn btn-sm btn-outline-purple">Manage</a></td>
+              </tr>
+            <% }); %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

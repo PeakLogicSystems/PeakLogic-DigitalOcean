@@ -1,0 +1,47 @@
+<%- include('../partials/shell-head', { title: 'Fleet report' }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <div class="mb-3">
+    <a href="/fleet" class="text-decoration-none small">&larr; Fleet map</a>
+  </div>
+  <h1 class="h4 mb-3">Daily operations summary</h1>
+  <p class="text-muted small">Generated <%= new Date(report.generatedAt).toLocaleString() %></p>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="card shadow-sm"><div class="card-body text-center"><div class="h3 mb-0"><%= report.totalStations %></div><div class="small text-muted">Stations</div></div></div></div>
+    <div class="col-md-3"><div class="card shadow-sm"><div class="card-body text-center"><div class="h3 mb-0 text-success"><%= report.online %></div><div class="small text-muted">Online</div></div></div></div>
+    <div class="col-md-3"><div class="card shadow-sm"><div class="card-body text-center"><div class="h3 mb-0 text-secondary"><%= report.offline %></div><div class="small text-muted">Offline</div></div></div></div>
+    <div class="col-md-3"><div class="card shadow-sm"><div class="card-body text-center"><div class="h3 mb-0 text-danger"><%= report.inAlarm %></div><div class="small text-muted">In alarm</div></div></div></div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-white fw-semibold">By county</div>
+        <table class="table table-sm mb-0">
+          <thead><tr><th>County</th><th>Total</th><th>Alarm</th><th>Offline</th></tr></thead>
+          <tbody>
+            <% Object.keys(report.byCounty).sort().forEach(function(c) { const row = report.byCounty[c]; %>
+              <tr><td><%= c %></td><td><%= row.total %></td><td><%= row.alarm %></td><td><%= row.offline %></td></tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-white fw-semibold">By station type</div>
+        <table class="table table-sm mb-0">
+          <thead><tr><th>Type</th><th>Count</th></tr></thead>
+          <tbody>
+            <% Object.keys(report.byType).sort().forEach(function(t) { %>
+              <tr><td><code><%= t %></code></td><td><%= report.byType[t] %></td></tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('../partials/shell-foot') %>

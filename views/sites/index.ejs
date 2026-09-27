@@ -1,0 +1,90 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h1 class="h3 mb-0">Sites</h1>
+  </div>
+  <p class="text-muted small mb-4">
+    Locations, systems, and devices for <%= tenant.name %>.
+    Each location is a site or facility; systems group controllers and edge gateways for appliance pairing.
+  </p>
+
+  <% if (error) { %>
+    <div class="alert alert-danger py-2 small"><%= error %></div>
+  <% } %>
+  <% if (message) { %>
+    <div class="alert alert-success py-2 small"><%= message %></div>
+  <% } %>
+
+  <% if (canManage) { %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Add location</h2>
+        <form action="/sites" method="POST" class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label class="form-label small" for="loc-name">Name</label>
+            <input type="text" class="form-control" id="loc-name" name="name" required
+                   placeholder="Plant A" value="<%= (form && form.name) || '' %>">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small" for="loc-slug">Slug</label>
+            <input type="text" class="form-control" id="loc-slug" name="slug" required
+                   placeholder="plant-a" pattern="[a-z0-9][a-z0-9-]*" title="Lowercase letters, numbers, hyphens"
+                   value="<%= (form && form.slug) || '' %>">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small" for="loc-desc">Description</label>
+            <input type="text" class="form-control" id="loc-desc" name="description"
+                   placeholder="Optional" value="<%= (form && form.description) || '' %>">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-purple w-100">Add location</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="card shadow-sm">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Location</th>
+            <th>Slug</th>
+            <th>Systems</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!locations.length) { %>
+            <tr>
+              <td colspan="4" class="text-muted p-4">
+                No locations yet.<% if (canManage) { %> Add your first site above.<% } %>
+              </td>
+            </tr>
+          <% } else { %>
+            <% locations.forEach(function(loc) { %>
+              <tr>
+                <td>
+                  <strong><%= loc.name %></strong>
+                  <% if (loc.description) { %>
+                    <br><span class="text-muted small"><%= loc.description %></span>
+                  <% } %>
+                </td>
+                <td><code><%= loc.slug %></code></td>
+                <td><%= loc.systemCount %></td>
+                <td class="text-end">
+                  <a href="/sites/<%= loc.id %>" class="btn btn-sm btn-outline-purple">Manage</a>
+                </td>
+              </tr>
+            <% }); %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/shell-foot') %>

@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PeakLogic</title>
+  <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
+</head>
+<body class="dashboard-body">
+  <header class="topbar">
+    <div class="topbar-brand">Peak<span>Logic</span></div>
+    <div class="topbar-project-bar">
+      <details class="topbar-project-details" id="project-menu-details">
+        <summary class="topbar-project-trigger">Project <span class="topbar-project-caret" aria-hidden="true">▾</span></summary>
+        <div id="project-menu" class="topbar-project-dropdown" role="menu" aria-label="Project">
+          <button type="button" class="topbar-menu-item" id="btn-project-status" role="menuitem">Status…</button>
+          <button type="button" class="topbar-menu-item" id="btn-project-about" role="menuitem">About…</button>
+          <button type="button" class="topbar-menu-item" id="btn-project-setup" role="menuitem">System setup…</button>
+          <button type="button" class="topbar-menu-item" id="btn-proj-new-menu" role="menuitem">New project…</button>
+          <div class="topbar-menu-sep" role="separator"></div>
+          <button type="button" class="topbar-menu-item" id="btn-open-est" role="menuitem">Open project…</button>
+          <button type="button" class="topbar-menu-item" id="btn-export-est" role="menuitem">Export project file…</button>
+          <button type="button" class="topbar-menu-item" id="btn-save-est" role="menuitem">Save project</button>
+          <button type="button" class="topbar-menu-item" id="btn-save-est-as" role="menuitem">Save project as…</button>
+          <button type="button" class="topbar-menu-item" id="btn-save-ws" role="menuitem">Save workspace</button>
+          <div class="topbar-menu-sep" role="separator"></div>
+          <div class="topbar-menu-field">
+            <label for="proj-hmi-composer-mode">HMI composer mode</label>
+            <select id="proj-hmi-composer-mode" class="topbar-menu-select" title="Grid tile editor for 2D HMI, or 3D facility spatial preview">
+              <option value="grid">Grid — 2D tile editing</option>
+              <option value="3d">3D — facility spatial view</option>
+            </select>
+          </div>
+          <div class="topbar-menu-sep" role="separator"></div>
+          <button type="button" class="topbar-menu-item" id="btn-delete-est" role="menuitem">Delete project…</button>
+        </div>
+        <input type="file" id="file-open-est" accept=".est,.json,application/json" hidden>
+      </details>
+      <span class="topbar-project-status" id="project-name" aria-live="polite" title="Current project">untitled</span>
+    </div>
+    <details class="topbar-tools-details topbar-project-details" id="tools-menu-details">
+      <summary class="topbar-project-trigger topbar-tools-trigger">Tools <span class="topbar-project-caret" aria-hidden="true">▾</span></summary>
+      <nav class="topbar-tools-dropdown topbar-project-dropdown" id="view-nav" aria-label="Tools" role="menu">
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="program" role="menuitem">Program</button>
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="tags" role="menuitem">Tags</button>
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="alarms" role="menuitem">Alarms <span id="alarms-tab-badge" class="alarms-tab-badge view-hidden" aria-hidden="true"></span></button>
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="drivers" role="menuitem">Drivers</button>
+        <a href="/io-map" class="topbar-menu-item topbar-menu-link" role="menuitem" data-io-map-link>I/O Map</a>
+        <a href="/mv-draw" class="topbar-menu-item topbar-menu-link" role="menuitem">MV Draw</a>
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="historian" role="menuitem">Historian</button>
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="report" role="menuitem">Report</button>
+        <button type="button" class="topbar-menu-item view-tab" id="btn-help" data-popup-open="help" title="Help (F1)" role="menuitem">Help</button>
+      </nav>
+    </details>
+    <div class="topbar-about-meta">
+      <button type="button" class="topbar-text-btn" id="btn-topbar-about" title="About PeakLogic">About</button>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+    </div>
+  </header>
+
+  <main class="hmi-workspace">
+    <section class="panel panel-hmi-main" id="sec-hmi-main">
+      <div class="hmi-main-header">
+        <h2>HMI</h2>
+        <div class="hmi-main-actions">
+          <label id="hmi-test-mode-wrap" class="hmi-test-mode-label view-hidden" title="Technician test mode — live refresh every 10s (normal view is 1 min)">
+            <input type="checkbox" id="hmi-test-mode"> Test mode
+          </label>
+          <span id="hmi-poll-hint" class="muted cell-mono hmi-poll-hint"></span>
+          <button type="button" class="btn btn-sm btn-help-context" data-help-section="hmi-overview" title="Help: HMI — overview">Help</button>
+          <button type="button" id="btn-hmi-setup" class="btn">Setup…</button>
+          <button type="button" id="btn-hmi-reload" class="btn">Reload screen</button>
+        </div>
+      </div>
+      <div class="hmi-main-body">
+        <nav id="hmi-nav-bar" class="hmi-nav-bar view-hidden" aria-label="HMI screen navigation"></nav>
+        <div id="hmi-live-status" class="hmi-live-status">
+          <div class="hmi-live-status-text">
+            <div id="hmi-screen-title" class="muted cell-mono"></div>
+            <p class="panel-hint hmi-display-hint">Live display — composed screen without grid lines. Open <strong>Setup…</strong> to edit on the tile grid.</p>
+          </div>
+          <button type="button" id="btn-hmi-hide-status" class="btn btn-sm hmi-live-status-toggle" title="Hide status message">Hide</button>
+        </div>
+        <button type="button" id="btn-hmi-show-status" class="btn btn-sm hmi-live-status-restore view-hidden" title="Show status message below screen tabs">Show status</button>
+        <div class="hmi-live-stage-wrap">
+          <aside id="hmi-alarm-sidebar" class="hmi-alarm-sidebar view-hidden" aria-label="Active alarms">
+            <div class="hmi-alarm-sidebar-head">
+              <div class="hmi-alarm-sidebar-head-main">
+                <h3 class="hmi-alarm-sidebar-title">Active alarms</h3>
+                <button type="button" id="btn-hmi-alarms-ack-all" class="btn btn-sm" disabled>Ack all</button>
+              </div>
+              <span id="hmi-alarm-sidebar-count" class="hmi-alarm-sidebar-count cell-mono"></span>
+            </div>
+            <div id="hmi-alarm-sidebar-body" class="hmi-alarm-sidebar-body"></div>
+          </aside>
+          <div id="hmi-viewport" class="hmi-viewport hmi-viewport-live hmi-display-viewport"></div>
+        </div>
+        <div id="hmi-room-popup" class="hmi-room-popup view-hidden" role="dialog" aria-modal="true" aria-labelledby="hmi-room-popup-title" aria-hidden="true">
+          <div class="hmi-room-popup-backdrop" data-hmi-room-close></div>
+          <div class="hmi-room-popup-panel">
+            <header class="hmi-room-popup-header">
+              <h2 id="hmi-room-popup-title" class="hmi-room-popup-title">Room</h2>
+              <button type="button" class="btn btn-sm hmi-room-popup-close" data-hmi-room-close title="Close room detail">Close</button>
+            </header>
+            <div class="hmi-room-popup-body">
+              <div id="hmi-room-popup-main" class="hmi-room-popup-main" aria-label="Room layout"></div>
+              <aside id="hmi-room-popup-condenser" class="hmi-room-popup-condenser" aria-label="Roof condenser"></aside>
+            </div>
+            <div id="hmi-room-popup-flash" class="hmi-room-popup-flash view-hidden" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ST Program floating panel -->
+  <div class="app-popup view-hidden program-shell-stub" data-popup="program" role="dialog" aria-labelledby="popup-program-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-program popup-chrome-floater view-hidden" id="program-chrome" role="dialog" aria-labelledby="popup-program-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-program-title">ST Program <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
+      <div class="popup-header-actions program-runtime-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="st-editor" title="Help: ST program editor">Help</button>
+        <label class="prog-remote-label" title="On: deploy and run ST on Opta. Off: ST runs on this PC (Opta can still serve I/O).">
+          <input type="checkbox" id="prog-remote-exec"> Remote
+        </label>
+        <button type="button" id="btn-remote-connect" class="btn btn-sm" disabled title="Link HTTP driver to Opta">Connect</button>
+        <button type="button" id="btn-remote-disconnect" class="btn btn-sm" disabled title="Unlink Opta HTTP driver">Disconnect</button>
+        <span id="prog-remote-status" class="prog-remote-status muted cell-mono"></span>
+        <button type="button" id="btn-start" class="btn ok" title="Validate and run ST">Start</button>
+        <button type="button" id="btn-pause" class="btn warn" disabled>Pause</button>
+        <button type="button" id="btn-stop" class="btn danger" disabled>Stop</button>
+        <button type="button" class="btn popup-close" data-popup-close="program" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body popup-body-program popup-scroll program-floater-body">
+      <p class="panel-hint">Edit ST below (Tab = indent, Ctrl+S = save). Live overlay: <strong>true</strong> conditions green (<code>✓</code>), output tags like <code>R1</code> in <code>TurnON(R1)</code> red when ON, numeric ops show <code>= value</code>. Override I/O from <strong>Tags</strong> (<strong>Force</strong> / <strong>Force val</strong> columns). Poll will not overwrite <em>unsaved</em> program edits.</p>
+      <p class="panel-hint cell-mono" id="program-folder"></p>
+      <div class="toolbar wrap">
+        <button type="button" id="btn-prog-new" class="btn">New</button>
+        <button type="button" id="btn-prog-open" class="btn">Open from st/…</button>
+        <button type="button" id="btn-prog-import" class="btn">Import .st from disk…</button>
+        <button type="button" id="btn-prog-save" class="btn primary">Save program</button>
+        <button type="button" id="btn-prog-save-as" class="btn">Save as…</button>
+        <input type="file" id="file-open-st" accept=".st,text/plain" hidden>
+        <span class="sep"></span>
+        <label>Library
+          <select id="program-library"></select>
+        </label>
+        <button type="button" id="btn-prog-load" class="btn">Load selected</button>
+        <button type="button" id="btn-prog-load-fixtures" class="btn" title="Replace all tags and drivers with st/fixtures/ for the selected program (demo/test)">Load fixtures</button>
+        <button type="button" id="btn-prog-create-tags" class="btn" title="Add missing tags referenced by the active program (no overwrite)">Create tags from program</button>
+        <button type="button" id="btn-prog-reload" class="btn" title="Re-read active .st file from disk">Reload from disk</button>
+        <button type="button" id="btn-prog-clear" class="btn" title="Unload active program and clear editor">Clear active</button>
+        <button type="button" id="btn-prog-revert" class="btn" title="Discard unsaved edits">Revert</button>
+        <label class="tag-display-pick" title="How tag names appear in Live I/O and program tag list">Show
+          <select id="program-tag-display" data-tag-display-mode></select>
+        </label>
+        <span id="program-active" class="muted"></span>
+        <span id="program-edit-status" class="inline-msg muted"></span>
+        <span id="prog-line-status" class="prog-line-status muted cell-mono" title="ST source line count vs PC and Parc limits"></span>
+      </div>
+      <div id="program-tag-legend" class="program-tag-legend view-hidden" aria-live="polite"></div>
+      <div class="st-editor-wrap" id="st-editor-wrap">
+        <pre class="st-editor-gutter" data-st-gutter aria-hidden="true">1</pre>
+        <div class="st-editor-main">
+          <pre class="st-editor-highlight" data-st-highlight aria-hidden="true"></pre>
+          <textarea id="program-src" class="editor program-editor st-editor-input" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" wrap="off" aria-label="ST program source"></textarea>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button type="button" id="btn-prog-pid" class="btn">PID loop…</button>
+        <button type="button" id="btn-prog-validate" class="btn">Validate</button>
+        <button type="button" id="btn-prog-debug-trace" class="btn" title="Show IF/THEN conditions and output tags using current tag values (no runtime start). Click again to clear.">Debug trace</button>
+        <button type="button" id="btn-prog-apply" class="btn primary" title="Validate ST and load into PeakLogic runtime (does not save to disk). Deploy to Opta on Start when Remote is on.">Load for runtime</button>
+        <span id="prog-deploy-estimate" class="prog-deploy-estimate muted cell-mono" hidden title="Estimated Opta HTTP deploy size when Remote is on"></span>
+        <span id="program-errors" class="inline-msg"></span>
+      </div>
+    </div>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Tags floating panel -->
+  <div class="app-popup view-hidden tags-shell-stub" data-popup="tags" role="dialog" aria-labelledby="popup-tags-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-tags popup-chrome-floater view-hidden" id="tags-chrome" role="dialog" aria-labelledby="popup-tags-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-tags-title">Tags <span id="tag-count" class="muted"></span> <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
+      <div class="popup-header-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="tags" title="Help: Tags">Help</button>
+        <button type="button" class="btn popup-close" data-popup-close="tags" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body popup-body-tags tags-floater-body popup-scroll">
+      <p class="panel-hint"><strong>Tag</strong> column: <strong>Tag id</strong> (used in ST programs) plus optional <strong>Label</strong> (HMI display only — not an ST alias). <strong>Hist</strong> column: check tags for live buffer and MongoDB archive logging (header checkbox selects all plottable tags); trend chart pens are configured separately under <strong>Historian → Pen config…</strong>; MongoDB logging under <strong>Logger config…</strong>. <strong>PID</strong>: wire <strong>PV / SP / CV</strong> in <strong>Addr</strong> to INT/REAL tags; gains in the SP column. <strong>Force</strong> columns: check <strong>On</strong>, edit value, <strong>Apply</strong>. Click a <strong>column header</strong> to sort.</p>
+      <div class="toolbar">
+        <button type="button" id="btn-tag-add" class="btn">Add BOOL</button>
+        <button type="button" id="btn-tag-add-int" class="btn">Add INT</button>
+        <button type="button" id="btn-tag-add-real" class="btn">Add REAL</button>
+        <button type="button" id="btn-tag-add-counter" class="btn">Add counter</button>
+        <button type="button" id="btn-tag-add-timer" class="btn">Add timer</button>
+        <button type="button" id="btn-tag-add-pid" class="btn">Add PID</button>
+        <button type="button" id="btn-tag-add-avg" class="btn">Add averager</button>
+        <button type="button" id="btn-tag-save" class="btn primary">Save tags</button>
+        <button type="button" id="btn-clear-tags" class="btn" title="Remove all tags from the project">Clear tags</button>
+        <button type="button" id="btn-clear-forces" class="btn" title="Release all forced tags">Clear forces</button>
+        <button type="button" id="btn-tags-live-io" class="btn" title="Floating live I/O for program tags">Live I/O…</button>
+        <span id="tags-dirty-hint" class="inline-msg muted"></span>
+      </div>
+      <div id="tags-table" class="table-wrap scroll tags-table tags-table-scroll"></div>
+    </div>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Alarms floating panel -->
+  <div class="app-popup view-hidden alarms-shell-stub" data-popup="alarms" role="dialog" aria-labelledby="popup-alarms-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-alarms popup-chrome-floater view-hidden" id="alarms-chrome" role="dialog" aria-labelledby="popup-alarms-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-alarms-title">Alarms <span id="alarms-summary" class="muted"></span> <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
+      <div class="popup-header-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="alarms" title="Help: Alarms">Help</button>
+        <button type="button" class="btn popup-close" data-popup-close="alarms" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body popup-body-alarms alarms-floater-body">
+      <p class="panel-hint">Active alarms from the <strong>Tags</strong> database — limits for INT/REAL, on/off condition for BOOL. Configure alarms in the Tags table (<strong>Alarm</strong> columns). Acknowledged alarms stay listed until the condition clears.</p>
+      <div class="toolbar wrap">
+        <button type="button" id="btn-alarms-ack-all" class="btn">Ack all</button>
+        <button type="button" id="btn-alarms-notify-setup" class="btn">Notification users…</button>
+        <label class="alarms-filter">
+          <input type="checkbox" id="alarms-show-acked"> Show acknowledged
+        </label>
+        <span id="alarms-meta" class="muted cell-mono"></span>
+      </div>
+      <div id="alarms-list" class="table-wrap alarms-list-scroll"></div>
+    </div>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Alarm notification users (opened from Alarms panel) -->
+  <div class="app-popup view-hidden" data-popup="alarm-notify" role="dialog" aria-labelledby="popup-alarm-notify-title">
+    <div class="popup-chrome popup-chrome-wide">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-alarm-notify-title">Alarm notification users</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn btn-sm btn-help-context" data-help-section="alarms" title="Help: Alarms">Help</button>
+          <button type="button" class="btn popup-close" data-popup-close="alarm-notify" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="popup-body popup-scroll">
+        <p class="panel-hint">Who receives email/SMS when tags enter alarm states. Delivery integration is pending — notifications are queued locally for now.</p>
+        <div class="toolbar wrap">
+          <button type="button" id="btn-user-add" class="btn primary">Add user</button>
+          <span id="users-msg" class="muted"></span>
+        </div>
+        <div id="users-table-host" class="users-table-host"></div>
+        <details id="user-editor" class="user-editor" open>
+          <summary>Edit profile</summary>
+          <div class="form-grid compact">
+            <label>Email <input id="user-email" type="email"></label>
+            <label>Role
+              <select id="user-role">
+                <option value="admin">Admin</option>
+                <option value="operator">Operator</option>
+                <option value="viewer">Viewer</option>
+              </select>
+            </label>
+            <label>Display name <input id="user-display-name"></label>
+            <label>First name <input id="user-first-name"></label>
+            <label>Last name <input id="user-last-name"></label>
+            <label>Title <input id="user-title"></label>
+            <label>Department <input id="user-department"></label>
+            <label>Phone <input id="user-phone"></label>
+            <label>Mobile <input id="user-mobile"></label>
+            <label>Timezone <input id="user-timezone" placeholder="America/New_York"></label>
+          </div>
+          <h4 class="setup-subhead">Alarm notifications</h4>
+          <div class="form-grid compact">
+            <label class="historian-ctl"><input type="checkbox" id="user-alarm-enabled" checked> Notifications enabled</label>
+            <label class="historian-ctl"><input type="checkbox" id="user-alarm-email" checked> Email</label>
+            <label class="historian-ctl"><input type="checkbox" id="user-alarm-sms"> SMS</label>
+            <label class="historian-ctl"><input type="checkbox" id="user-alarm-push"> Push (future)</label>
+            <label>Min level
+              <select id="user-alarm-min-level">
+                <option value="all">All alarms</option>
+                <option value="inner">Inner + outer</option>
+                <option value="outer">Outer only</option>
+                <option value="alarm">Alarm only</option>
+                <option value="none">None</option>
+              </select>
+            </label>
+            <label>Notify email (override) <input id="user-alarm-email-addr" type="email" placeholder="blank = profile email"></label>
+            <label>Notify phone <input id="user-alarm-phone" placeholder="SMS destination"></label>
+            <label class="historian-ctl"><input type="checkbox" id="user-quiet-enabled"> Quiet hours</label>
+            <label>Quiet start <input id="user-quiet-start" type="time" value="22:00"></label>
+            <label>Quiet end <input id="user-quiet-end" type="time" value="07:00"></label>
+          </div>
+          <div class="toolbar wrap">
+            <button type="button" id="btn-user-save" class="btn primary">Save user</button>
+            <button type="button" id="btn-user-delete" class="btn danger">Delete user</button>
+          </div>
+        </details>
+        <details id="cmms-integration" class="user-editor" open>
+          <summary>CMMS / MQTT integration (PeakLogic v1)</summary>
+          <p class="panel-hint">Publishes alarm events to MQTT for TPS CMMS or other subscribers. Topics: <code>peaklogic/v1/{siteId}/alarms</code> and <code>…/alarm-notify</code>. See <code>docs/CMMS_INTEGRATION.md</code>.</p>
+          <div class="form-grid compact">
+            <label class="historian-ctl"><input type="checkbox" id="cmms-enabled"> Enable CMMS MQTT publish</label>
+            <label>Broker URL <input id="cmms-broker-url" placeholder="mqtt://127.0.0.1:1883"></label>
+            <label>Site ID <input id="cmms-site-id" placeholder="local"></label>
+            <label>Tenant ID <input id="cmms-tenant-id" placeholder="local"></label>
+            <label>Topic prefix <input id="cmms-topic-prefix" placeholder="peaklogic/v1"></label>
+            <label>MQTT client ID <input id="cmms-client-id" placeholder="peaklogic-cmms"></label>
+            <label class="historian-ctl"><input type="checkbox" id="cmms-publish-alarms" checked> Publish <code>…/alarms</code> topic</label>
+            <label class="historian-ctl"><input type="checkbox" id="cmms-publish-notify" checked> Publish <code>…/alarm-notify</code> (with recipients)</label>
+          </div>
+          <div class="toolbar wrap">
+            <button type="button" id="btn-cmms-save" class="btn primary">Save CMMS settings</button>
+            <span id="cmms-msg" class="muted"></span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live I/O floating panel (opened from Tags toolbar) -->
+  <div class="app-popup view-hidden live-io-shell-stub" data-popup="live-io" role="dialog" aria-labelledby="popup-live-io-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-live-io view-hidden" id="live-io-chrome" role="dialog" aria-labelledby="popup-live-io-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-live-io-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-live-io-title">Live I/O <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span> <span id="program-io-hint" class="muted"></span></h2>
+      <div class="popup-header-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="tags" title="Help: Tags">Help</button>
+        <button type="button" class="btn popup-close" data-popup-close="live-io" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body popup-scroll live-io-popup-body">
+      <p class="panel-hint">While running: digital tags highlight when <strong>ON</strong>; INT/REAL show live or forced values. Tag names follow the <strong>Show</strong> setting (program editor or HMI setup).</p>
+      <div id="program-io-panel" class="program-io-panel io-stopped"></div>
+    </div>
+    <footer class="popup-footer">
+      <label class="checkbox-inline"><input type="checkbox" id="live-io-update"> Enable I/O update</label>
+    </footer>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Drivers popup -->
+  <div class="app-popup view-hidden" data-popup="drivers" role="dialog" aria-labelledby="popup-drivers-title">
+    <div class="popup-chrome popup-chrome-wide popup-chrome-drivers">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-drivers-title">Drivers</h2>
+        <div class="popup-header-actions">
+          <button type="button" id="btn-drivers-context-help" class="btn btn-sm btn-help-context" data-help-section="drivers" title="Help: Drivers">Help</button>
+          <button type="button" class="btn popup-close" data-popup-close="drivers" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="drivers-shell">
+        <nav class="drivers-nav setup-nav" aria-label="Drivers sections">
+          <button type="button" class="setup-tab active" data-drivers-tab-btn="list">Driver list</button>
+          <button type="button" class="setup-tab" data-drivers-tab-btn="modbus">Modbus RTU ↔ TCP</button>
+          <button type="button" class="setup-tab" data-drivers-tab-btn="nextcentury">NextCentury API</button>
+        </nav>
+        <div class="drivers-panels setup-panels popup-scroll">
+          <section class="drivers-panel setup-panel" data-drivers-tab="list">
+            <p class="panel-hint" id="drivers-list-hint">Each driver card shows its connection summary. Edit a driver for type-specific settings. Device templates add tags onto a driver below.</p>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-hw-wizard" class="btn primary">Hardware wizard…</button>
+              <span class="muted">Guided setup — same as <strong>Apply device template</strong> below</span>
+            </div>
+            <details class="device-template-bar">
+              <summary>Apply device template (optional)</summary>
+              <p class="panel-hint">Adds I/O tags from a template onto a driver (no server restart). <strong>Modbus:</strong> edit a driver for COM port; each apply uses the <strong>next slave address</strong>. <strong>HAL</strong> (e.g. Sequent SM-I-001): applies <code>hal</code> driver + plugin path + <code>stack</code> / I2C bus — edit those in the driver row after apply.</p>
+              <div class="toolbar wrap">
+                <label>Template
+                  <select id="device-preset"></select>
+                </label>
+                <label id="device-concube-groups-wrap" class="device-concube-opt view-hidden">Parameter groups (×4)
+                  <input type="number" id="device-concube-groups" min="1" max="16" value="1" title="Each group adds 4 parameters (PARMn_STS + PARMn_VAL). Apply again to append the next group.">
+                </label>
+                <button type="button" id="btn-device-apply" class="btn primary">Apply template</button>
+                <label class="device-template-replace">
+                  <input type="checkbox" id="device-template-replace"> Replace tags on this driver
+                </label>
+                <span id="device-apply-msg" class="muted"></span>
+              </div>
+            </details>
+            <details class="device-template-bar">
+              <summary>Add Opta Parc devices (bulk)</summary>
+              <p class="panel-hint">Each driver has a permanent <strong>position ID</strong> (plant name) and a physical <strong>device ID</strong> (<code>opta_</code> + serial). Tags and ST bind to position — use <strong>Replace hardware</strong> when an Opta is swapped.</p>
+              <div class="form-grid compact">
+                <label class="span-all">Position ID (permanent)
+                  <input id="parc-opta-position-id" placeholder="motor_skid_main" title="Optional when adding one device — auto-suggested from registry if blank">
+                </label>
+                <label class="span-all">Physical device ID
+                  <input id="parc-opta-single-id" placeholder="opta_012355b52d66a109ee" title="One Opta — ATECC SN-based id from firmware, or legacy opta_st_01">
+                </label>
+                <label class="span-all">Or multiple IDs (one per line)
+                  <textarea id="parc-opta-bulk-ids" rows="3" placeholder="opta_st_02&#10;opta_st_03"></textarea>
+                </label>
+                <label class="checkbox-inline span-all">
+                  <input type="checkbox" id="parc-opta-bulk-use-range"> Use numeric range (bulk)
+                </label>
+                <label id="parc-opta-range-prefix-wrap">Prefix <input id="parc-opta-bulk-prefix" value="opta_st_"></label>
+                <label id="parc-opta-range-start-wrap">Start <input id="parc-opta-bulk-start" type="number" value="1" min="0"></label>
+                <label id="parc-opta-range-count-wrap">Count <input id="parc-opta-bulk-count" type="number" value="1" min="1"></label>
+                <label id="parc-opta-range-pad-wrap">Pad <input id="parc-opta-bulk-pad" type="number" value="2" min="0" title="Zero-pad numeric suffix"></label>
+              </div>
+              <div class="toolbar wrap">
+                <label class="checkbox-inline"><input type="checkbox" id="parc-opta-bulk-from-registry" checked> Add from Parc registry (MQTT devices — ATECC serial ids)</label>
+                <label class="checkbox-inline view-hidden" id="parc-opta-noise-wrap"><input type="checkbox" id="parc-opta-bulk-include-noise"> Include test/debug IDs (test-*, dbg-*, …)</label>
+                <label class="checkbox-inline"><input type="checkbox" id="parc-opta-bulk-sync" checked> Sync tags after add</label>
+                <button type="button" id="btn-parc-opta-bulk" class="btn primary">Add Opta Parc drivers</button>
+                <span id="parc-opta-bulk-msg" class="muted"></span>
+              </div>
+              <div id="parc-registry-device-list" class="parc-registry-list panel-hint"></div>
+            </details>
+            <div class="toolbar">
+              <button type="button" id="btn-drv-add" class="btn">Add driver</button>
+              <button type="button" id="btn-drv-refresh-ports" class="btn">Refresh ports</button>
+              <button type="button" id="btn-drv-save" class="btn primary">Save drivers</button>
+            </div>
+            <p id="drivers-test-status" class="muted cell-mono" aria-live="polite"></p>
+            <div id="drivers-panel" class="popup-scroll"></div>
+          </section>
+          <section class="drivers-panel setup-panel view-hidden" data-drivers-tab="modbus">
+            <p class="panel-hint">One-shot register block copy between Modbus RTU (USB/serial) and Modbus TCP — useful for commissioning and migration.</p>
+            <div class="form-grid compact">
+              <label>RTU port
+                <select id="mv-rtu-port"></select>
+              </label>
+              <label>Baud <input id="mv-rtu-baud" type="number" value="9600"></label>
+              <label>RTU slave <input id="mv-rtu-slave" type="number" value="1"></label>
+              <label>TCP host <input id="mv-tcp-host" value="127.0.0.1"></label>
+              <label>TCP port <input id="mv-tcp-port" type="number" value="502"></label>
+              <label>RTU addr <input id="mv-rtu-addr" type="number" value="0"></label>
+              <label>TCP addr <input id="mv-tcp-addr" type="number" value="0"></label>
+              <label>Count <input id="mv-count" type="number" value="10"></label>
+            </div>
+            <div class="toolbar">
+              <button type="button" id="mv-rtu-tcp" class="btn primary">Move RTU → TCP</button>
+              <button type="button" id="mv-tcp-rtu" class="btn">Move TCP → RTU</button>
+            </div>
+            <pre id="mv-result" class="log"></pre>
+          </section>
+          <section class="drivers-panel setup-panel view-hidden" data-drivers-tab="nextcentury">
+            <p class="panel-hint">Cloud API polling for NextCentury Meters — <strong>not</strong> Modbus or a COM port. On each poll the driver can <strong>auto-create tags</strong> from report rows (deviceId + usage/temp/leak). Use <strong>Fill from example</strong> for credentials; <strong>Load example tags</strong> is optional when auto-sync is off.</p>
+            <div class="form-grid compact">
+              <label>Driver ID <input id="nc-driver-id" value="nextcentury1" autocomplete="off"></label>
+              <label>Email <input id="nc-email" type="email" autocomplete="username" placeholder="user@example.com"></label>
+              <label>Password <input id="nc-password" type="password" autocomplete="current-password"></label>
+              <label>Report ID <input id="nc-report-id" value="rt_4510"></label>
+              <label>Poll interval ms <input id="nc-poll-ms" type="number" min="60000" step="1000" value="900000" title="Default 900000 = 15 minutes"></label>
+              <label>Devices per site (plan) <input id="nc-devices-per-site" type="number" min="1" step="1" value="1500" title="Planning estimate — devices per NextCentury property/site"></label>
+              <label>Property IDs <input id="nc-property-ids" placeholder="39990, 40074 (blank = all)"></label>
+              <label class="checkbox-inline"><input type="checkbox" id="nc-auto-sync-tags" checked> Auto-sync tags on each poll</label>
+            </div>
+            <div class="toolbar wrap">
+              <button type="button" id="nc-fill-example" class="btn">Fill from example</button>
+              <button type="button" id="nc-test" class="btn">Test connection</button>
+              <button type="button" id="nc-open-portal" class="btn" title="Sign in to app.nextcenturymeters.com with the credentials above">Open portal</button>
+              <button type="button" id="nc-save-connect" class="btn primary">Save &amp; connect</button>
+              <button type="button" id="nc-load-example-tags" class="btn" title="Merge tags from st/fixtures/tags.nextcentury.json">Load example tags</button>
+            </div>
+            <p id="nc-deploy-estimate" class="prog-deploy-estimate muted cell-mono" aria-live="polite" title="Estimated tag count and scan load per poll"></p>
+            <p id="nc-status" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-popup view-hidden" data-popup="hw-wizard" role="dialog" aria-labelledby="popup-hw-wizard-title">
+    <div class="popup-chrome popup-chrome-wide popup-chrome-hw-wizard">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-hw-wizard-title">Hardware connection wizard</h2>
+        <div class="popup-header-actions">
+          <button type="button" id="btn-hw-wizard-help" class="btn btn-sm btn-help-context" data-help-section="tutorial" title="Help: Commissioning tutorial">Help</button>
+          <button type="button" class="btn popup-close" data-popup-close="hw-wizard" title="Close">Close</button>
+        </div>
+      </header>
+      <nav id="hw-wizard-step-nav" class="hw-wizard-step-nav setup-nav" aria-label="Wizard steps"></nav>
+      <div id="hw-wizard-body" class="hw-wizard-body popup-scroll"></div>
+      <footer class="popup-footer hw-wizard-footer">
+        <button type="button" id="hw-wizard-back" class="btn">Back</button>
+        <button type="button" id="hw-wizard-next" class="btn primary">Next</button>
+        <button type="button" id="hw-wizard-apply" class="btn primary view-hidden">Apply template</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Status popup -->
+  <div class="app-popup view-hidden" data-popup="status" role="dialog" aria-labelledby="popup-status-title">
+    <div class="popup-chrome popup-chrome-status">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-status-title">Status</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn btn-sm btn-help-context" data-help-section="runtime" title="Help: Runtime">Help</button>
+          <button type="button" class="btn popup-close" data-popup-close="status" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="popup-body">
+        <p class="panel-hint">Runtime health, tag count, and program validity.</p>
+        <div class="cards status-popup-cards" id="status-cards"></div>
+        <div class="toolbar compact-runtime">
+          <label>Scan ms <input id="set-scan" type="number" value="100" class="input-sm"></label>
+          <button type="button" id="btn-save-settings" class="btn btn-sm">Save scan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NextCentury portal popup -->
+  <div class="app-popup view-hidden" data-popup="nextcentury-portal" role="dialog" aria-labelledby="popup-nc-portal-title">
+    <div class="popup-chrome popup-chrome-wide popup-chrome-nc-portal">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-nc-portal-title">NextCentury portal</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn btn-sm" id="nc-portal-open-tab" title="Open portal in a new browser tab">Open in tab</button>
+          <button type="button" class="btn btn-sm btn-help-context" data-help-section="nextcentury" title="Help: NextCentury API">Help</button>
+          <button type="button" class="btn popup-close" data-popup-close="nextcentury-portal" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="popup-body popup-body-nc-portal">
+        <p id="nc-portal-status" class="panel-hint muted" aria-live="polite">Click a driver’s <strong>Open portal</strong> to sign in with saved API credentials.</p>
+        <iframe
+          id="nc-portal-iframe"
+          class="nc-portal-iframe view-hidden"
+          title="NextCentury web portal"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+          referrerpolicy="no-referrer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- About popup -->
+  <div class="app-popup view-hidden" data-popup="about" role="dialog" aria-labelledby="popup-about-title">
+    <div class="popup-chrome popup-chrome-about">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-about-title">About PeakLogic</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn popup-close" data-popup-close="about" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="popup-body popup-scroll about-panel-body" id="about-panel-body">
+        <p class="about-lead">Industrial SCADA studio — ST programs, HMI, drivers, historian, and MQTT Parc edge runtime.</p>
+        <dl class="about-meta-grid">
+          <dt>Product</dt><dd>Peak<span class="about-view-accent">Logic</span></dd>
+          <dt>Version</dt><dd class="cell-mono"><%= appVersion %></dd>
+          <dt>Company</dt><dd><%= companyName %></dd>
+          <dt>Edition</dt><dd class="cell-mono"><%= product %></dd>
+          <dt>Deployment</dt><dd class="cell-mono"><%= deployment %></dd>
+          <dt>Project format</dt><dd class="cell-mono">peaklogic-est v<%= estVersion %></dd>
+          <dt>HMI Composer</dt><dd class="cell-mono">v1.2</dd>
+        </dl>
+        <p class="about-powered muted">Design system and visual identity by <strong><%= companyName %></strong>.</p>
+        <p class="about-runtime muted cell-mono" id="about-runtime-line" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Historian floating panel -->
+  <div class="app-popup view-hidden historian-shell-stub" data-popup="historian" role="dialog" aria-labelledby="popup-historian-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-graph popup-chrome-historian popup-chrome-floater view-hidden" id="historian-chrome" role="dialog" aria-labelledby="popup-historian-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-historian-title">Historian <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
+      <div class="popup-header-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="historian" title="Help: Historian">Help</button>
+        <button type="button" id="btn-historian-logger" class="btn">Logger config…</button>
+        <button type="button" id="btn-historian-setup" class="btn">Pen config…</button>
+        <button type="button" id="btn-historian-report" class="btn">Report…</button>
+        <button type="button" class="btn popup-close" data-popup-close="historian" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body popup-body-graph historian-floater-body">
+      <p class="panel-hint historian-hint">Live trend while the runtime runs, or load archived samples from MongoDB (1 hour – 30 day windows). Use <strong>Report</strong> for CSV export or print/PDF.</p>
+      <div class="toolbar graph-actions historian-toolbar wrap">
+        <label class="historian-ctl">Source
+          <select id="historian-source">
+            <option value="live">Live buffer</option>
+            <option value="mongo">MongoDB archive</option>
+            <option value="pdm">PdM (SCADA + Edge)</option>
+          </select>
+        </label>
+        <label class="historian-ctl">Range
+          <select id="historian-range">
+            <option value="1h">Last 1 hour</option>
+            <option value="6h">Last 6 hours</option>
+            <option value="12h">Last 12 hours</option>
+            <option value="24h" selected>Last 24 hours</option>
+            <option value="7d">Last 7 days</option>
+            <option value="30d">Last 30 days</option>
+          </select>
+        </label>
+        <label class="historian-ctl historian-custom-dates">
+          <input type="checkbox" id="historian-use-custom"> Custom
+        </label>
+        <label class="historian-ctl historian-date-ctl">From
+          <input type="datetime-local" id="historian-from" class="historian-datetime">
+        </label>
+        <label class="historian-ctl historian-date-ctl">To
+          <input type="datetime-local" id="historian-to" class="historian-datetime">
+        </label>
+        <label class="historian-ctl historian-pdm-only view-hidden">Asset
+          <select id="historian-pdm-asset"></select>
+        </label>
+        <button type="button" id="btn-historian-load-mongo" class="btn">Load archive</button>
+        <button type="button" id="btn-historian-load-pdm" class="btn historian-pdm-only view-hidden">Load PdM</button>
+        <span id="historian-load-msg" class="muted"></span>
+        <span id="historian-pdm-summary" class="muted historian-pdm-only view-hidden"></span>
+        <button type="button" id="btn-graph-clear" class="btn">Clear buffer</button>
+      </div>
+      <div id="historian-pdm-forecast" class="pdm-forecast-banner historian-pdm-only view-hidden" role="status" aria-live="polite"></div>
+      <div class="historian-floater-chart">
+        <canvas id="graph-canvas" width="1100" height="320" aria-label="Historian trend chart"></canvas>
+      </div>
+      <div id="graph-pen-legend" class="graph-pen-legend" aria-live="polite">
+        <p class="graph-legend-hint muted">Hover the chart to read pen values at a point in time.</p>
+      </div>
+      <p id="historian-meta" class="muted cell-mono historian-meta"></p>
+    </div>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Historian pen config (floating) -->
+  <div class="app-popup view-hidden historian-config-shell-stub" data-popup="historian-setup" role="dialog" aria-labelledby="popup-historian-setup-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-historian-config popup-chrome-floater view-hidden" id="historian-config-chrome" role="dialog" aria-labelledby="popup-historian-setup-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-historian-setup-title">Pen config <span class="popup-drag-hint muted">— trend chart pens only</span></h2>
+      <div class="popup-header-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="historian-config" title="Help: Pen config">Help</button>
+        <button type="button" class="btn popup-close" data-popup-close="historian-setup" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body historian-config-body">
+      <p class="panel-hint">Configure up to <strong>32</strong> trend pens (BOOL→0/1, INT, REAL) for chart display and reports. Logging to MongoDB and <strong>Hist</strong> tags are under <strong>Historian → Logger config…</strong>.</p>
+      <div class="toolbar wrap">
+        <button type="button" id="btn-graph-pen-add" class="btn">Add pen</button>
+        <span id="graph-pen-count" class="muted"></span>
+      </div>
+      <div class="graph-pens-scroll table-wrap">
+        <div id="graph-pens-table"></div>
+      </div>
+      <div id="graph-pen-detail" class="graph-pen-detail-panel"></div>
+      <div class="form-grid compact graph-setup-meta">
+        <label>Buffer size (samples)
+          <input id="set-graph-pts" type="number" value="600" min="50" max="5000">
+        </label>
+        <label>Pens configured
+          <span id="historian-setup-pen-count" class="cell-mono">0</span>
+        </label>
+      </div>
+      <p id="historian-setup-msg" class="muted"></p>
+    </div>
+    <footer class="popup-footer">
+      <button type="button" id="btn-save-graph-settings" class="btn primary">Save pens</button>
+    </footer>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Historian logger config (floating) -->
+  <div class="app-popup view-hidden historian-logger-shell-stub" data-popup="historian-logger" role="dialog" aria-labelledby="popup-historian-logger-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-historian-logger popup-chrome-floater view-hidden" id="historian-logger-chrome" role="dialog" aria-labelledby="popup-historian-logger-title">
+    <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
+    <header class="popup-header popup-header-split popup-header-draggable">
+      <h2 id="popup-historian-logger-title">Logger config</h2>
+      <div class="popup-header-actions">
+        <button type="button" class="btn btn-sm btn-help-context" data-help-section="historian-logger" title="Help: Logger config">Help</button>
+        <button type="button" class="btn popup-close" data-popup-close="historian-logger" title="Close">Close</button>
+      </div>
+    </header>
+    <div class="popup-body historian-logger-body popup-scroll">
+      <p class="panel-hint">MongoDB archive, which tags are logged (<strong>Hist</strong>), runtime auto-start, and PdM asset maps. Trend chart pens are under <strong>Pen config…</strong>.</p>
+
+      <h3 class="setup-subhead">MongoDB connection</h3>
+      <p id="hist-log-mongo-status" class="logging-status cell-mono muted">MongoDB logger: checking…</p>
+      <div class="form-grid compact">
+        <label>MongoDB URI
+          <input id="hist-log-uri" value="mongodb://127.0.0.1:27017" placeholder="mongodb://127.0.0.1:27017" autocomplete="off">
+        </label>
+        <label>Database
+          <input id="hist-log-db" value="peaklogic" placeholder="peaklogic">
+        </label>
+        <label>SCADA collection
+          <input id="hist-log-collection" value="tag_logs" placeholder="tag_logs">
+        </label>
+        <label>Edge AI collection
+          <input id="hist-log-edge-collection" value="edge_inference" placeholder="edge_inference">
+        </label>
+        <label>Sample interval (ms)
+          <input id="hist-log-sample-ms" type="number" min="1000" value="5000">
+        </label>
+        <label class="historian-ctl">
+          <input type="checkbox" id="hist-log-auto-start" checked> Auto-start runtime on boot (driver polling + logging)
+        </label>
+      </div>
+
+      <h3 class="setup-subhead">Tags logged to MongoDB (Hist)</h3>
+      <p class="panel-hint">Checked tags are written to <code>pen_sample</code> while the runtime runs. Same as the <strong>Hist</strong> column in <strong>Tags</strong>.</p>
+      <div id="hist-log-tags-wrap" class="hist-log-tags-wrap table-wrap"></div>
+
+      <h3 class="setup-subhead">PdM assets</h3>
+      <p class="panel-hint">Asset → SCADA tag maps for <strong>Historian → PdM (SCADA + Edge)</strong> source. Also editable as JSON under <strong>System setup → PdM</strong>.</p>
+      <div class="pdm-asset-editor form-grid compact">
+        <label>Asset ID
+          <input type="text" id="historian-pdm-asset-id" placeholder="pump-101" autocomplete="off">
+        </label>
+        <label>SCADA tags <span class="muted">(Ctrl+click multi-select)</span>
+          <select id="historian-pdm-asset-tag-pick" multiple size="6"></select>
+        </label>
+        <div class="toolbar wrap pdm-asset-actions">
+          <button type="button" id="btn-historian-pdm-asset-save" class="btn">Save asset</button>
+          <button type="button" id="btn-historian-pdm-asset-new" class="btn">New</button>
+          <button type="button" id="btn-historian-pdm-asset-delete" class="btn">Delete</button>
+        </div>
+      </div>
+      <div class="pdm-asset-table-wrap">
+        <table class="data-table compact" id="historian-pdm-asset-table">
+          <thead>
+            <tr><th>Asset</th><th>SCADA tags</th><th></th></tr>
+          </thead>
+          <tbody id="historian-pdm-asset-tbody"></tbody>
+        </table>
+      </div>
+      <p id="historian-pdm-asset-msg" class="muted cell-mono"></p>
+      <p id="hist-log-save-msg" class="muted cell-mono"></p>
+    </div>
+    <footer class="popup-footer">
+      <button type="button" id="btn-hist-log-save" class="btn primary">Save logger settings</button>
+    </footer>
+    <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"></div>
+    <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"></div>
+  </div>
+
+  <!-- Historian report popup -->
+  <div class="app-popup view-hidden" data-popup="report" role="dialog" aria-labelledby="popup-report-title">
+    <div class="popup-chrome popup-chrome-report">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-report-title">Historian report</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn popup-close" data-popup-close="report" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="popup-body popup-scroll">
+        <p class="panel-hint">Export or print historian data from the live buffer or MongoDB archive. Configure pens via <strong>Historian → Pen config…</strong>; MongoDB and Hist tags via <strong>Logger config…</strong>.</p>
+        <div class="toolbar wrap historian-toolbar">
+          <label class="historian-ctl">Source
+            <select id="report-source">
+              <option value="live">Live buffer</option>
+              <option value="mongo">MongoDB archive</option>
+              <option value="pdm">PdM (SCADA + Edge)</option>
+            </select>
+          </label>
+          <label class="historian-ctl">Range
+            <select id="report-range">
+              <option value="1h">Last 1 hour</option>
+              <option value="6h">Last 6 hours</option>
+              <option value="12h">Last 12 hours</option>
+              <option value="24h" selected>Last 24 hours</option>
+              <option value="7d">Last 7 days</option>
+              <option value="30d">Last 30 days</option>
+            </select>
+          </label>
+          <label class="historian-ctl historian-custom-dates">
+            <input type="checkbox" id="report-use-custom"> Custom
+          </label>
+          <label class="historian-ctl historian-date-ctl">From
+            <input type="datetime-local" id="report-from" class="historian-datetime">
+          </label>
+          <label class="historian-ctl historian-date-ctl">To
+            <input type="datetime-local" id="report-to" class="historian-datetime">
+          </label>
+          <label class="historian-ctl report-pdm-only view-hidden">Asset
+            <select id="report-pdm-asset"></select>
+          </label>
+          <button type="button" id="btn-report-load-mongo" class="btn">Load archive</button>
+          <button type="button" id="btn-report-load-pdm" class="btn report-pdm-only view-hidden">Load PdM</button>
+          <span id="report-load-msg" class="muted"></span>
+          <span id="report-pdm-summary" class="muted report-pdm-only view-hidden"></span>
+        </div>
+        <div id="report-pdm-forecast" class="pdm-forecast-banner report-pdm-only view-hidden" role="status" aria-live="polite"></div>
+        <p id="report-meta" class="muted cell-mono"></p>
+        <canvas id="report-chart-canvas" class="report-chart-preview" width="1100" height="280"></canvas>
+        <div id="report-pen-table" class="table-wrap report-pen-table"></div>
+        <details class="report-config-panel" id="report-config-panel">
+          <summary>PDF layout &amp; sections</summary>
+          <div class="form-grid compact report-config-grid">
+            <label>Title <input type="text" id="report-cfg-title" maxlength="120"></label>
+            <label>Subtitle <input type="text" id="report-cfg-subtitle" maxlength="200"></label>
+            <label>Company <input type="text" id="report-cfg-company" maxlength="120"></label>
+            <label>Footer <input type="text" id="report-cfg-footer" maxlength="200"></label>
+            <label>Page
+              <select id="report-cfg-page-size">
+                <option value="A4">A4</option>
+                <option value="LETTER">Letter</option>
+              </select>
+            </label>
+            <label>Orientation
+              <select id="report-cfg-orientation">
+                <option value="landscape">Landscape</option>
+                <option value="portrait">Portrait</option>
+              </select>
+            </label>
+            <label>Chart height (pt) <input type="number" id="report-cfg-chart-h" min="80" max="400" value="220"></label>
+          </div>
+          <div class="report-config-sections">
+            <label><input type="checkbox" id="report-sec-cover" checked> Cover / header</label>
+            <label><input type="checkbox" id="report-sec-chart" checked> Trend chart</label>
+            <label><input type="checkbox" id="report-sec-pen-table" checked> Pen summary table</label>
+            <label><input type="checkbox" id="report-sec-statistics" checked> Statistics</label>
+            <label><input type="checkbox" id="report-sec-forecast" checked> Failure forecast</label>
+            <label><input type="checkbox" id="report-sec-notes" checked> Notes</label>
+          </div>
+          <label class="report-config-notes">Notes
+            <textarea id="report-cfg-notes" rows="3" maxlength="4000" placeholder="Optional remarks for the PDF report"></textarea>
+          </label>
+          <div class="toolbar wrap">
+            <button type="button" id="btn-report-save-config" class="btn">Save layout</button>
+            <span id="report-config-msg" class="muted"></span>
+          </div>
+        </details>
+        <div class="toolbar wrap">
+          <button type="button" id="btn-report-download-pdf" class="btn primary">Download PDF</button>
+          <button type="button" id="btn-report-export-csv" class="btn">Export CSV</button>
+          <button type="button" id="btn-report-export-pdm-csv" class="btn report-pdm-only view-hidden">Export PdM CSV</button>
+          <button type="button" id="btn-report-print-pdf" class="btn">Print preview</button>
+          <button type="button" id="btn-report-open-setup" class="btn">Pen config…</button>
+          <span id="report-export-msg" class="muted"></span>
+        </div>
+        <details class="report-mongo-logs-panel" id="report-mongo-logs-panel">
+          <summary>MongoDB logs (system, hardware, historian)</summary>
+          <p class="panel-hint">Operational logs stored in MongoDB or local fallback files — hardware change-outs, system errors, and tag historian status.</p>
+          <div class="report-mongo-tabs toolbar wrap" role="tablist" aria-label="Mongo log sections">
+            <button type="button" class="btn btn-sm report-mongo-tab active" data-report-mongo-tab="syslog" role="tab" aria-selected="true">System log</button>
+            <button type="button" class="btn btn-sm report-mongo-tab" data-report-mongo-tab="hardware" role="tab" aria-selected="false">Hardware history</button>
+            <button type="button" class="btn btn-sm report-mongo-tab" data-report-mongo-tab="historian" role="tab" aria-selected="false">Historian / tags</button>
+          </div>
+          <div class="toolbar wrap report-mongo-toolbar">
+            <label class="report-mongo-filter report-mongo-syslog-only">Level
+              <select id="report-mongo-syslog-level">
+                <option value="">All</option>
+                <option value="error">Error</option>
+                <option value="warn">Warn</option>
+                <option value="info">Info</option>
+                <option value="maintenance">Maintenance</option>
+              </select>
+            </label>
+            <label class="report-mongo-filter report-mongo-syslog-only">Category
+              <input type="text" id="report-mongo-syslog-category" placeholder="e.g. hardware" maxlength="64">
+            </label>
+            <label>Limit
+              <input type="number" id="report-mongo-limit" min="10" max="500" value="100" class="report-mongo-limit-input">
+            </label>
+            <button type="button" id="btn-report-mongo-refresh" class="btn btn-sm">Refresh</button>
+            <button type="button" id="btn-report-mongo-open-historian" class="btn btn-sm report-mongo-historian-only view-hidden">Open Historian</button>
+            <span id="report-mongo-msg" class="muted"></span>
+          </div>
+          <p id="report-mongo-status" class="muted cell-mono report-mongo-status-line"></p>
+          <div id="report-mongo-syslog" class="table-wrap report-mongo-table report-mongo-pane" data-report-mongo-pane="syslog" role="tabpanel">
+            <p class="muted">Open this panel or click Refresh to load system log entries.</p>
+          </div>
+          <div id="report-mongo-hardware" class="table-wrap report-mongo-table report-mongo-pane view-hidden" data-report-mongo-pane="hardware" role="tabpanel">
+            <p class="muted">Click Refresh to load hardware change-out history.</p>
+          </div>
+          <div id="report-mongo-historian" class="report-mongo-pane view-hidden" data-report-mongo-pane="historian" role="tabpanel">
+            <p class="muted">Click Refresh to load tag historian status.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unified Setup popup -->
+  <div class="app-popup view-hidden" data-popup="project" role="dialog" aria-labelledby="popup-project-title">
+    <div class="popup-chrome popup-chrome-wide popup-chrome-setup">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-project-title">System setup</h2>
+        <div class="popup-header-actions">
+          <button type="button" id="btn-setup-context-help" class="btn btn-sm btn-help-context" data-help-section="system-setup" title="Help: System setup">Help</button>
+          <button type="button" id="btn-proj-apply-header" class="btn primary">Apply all</button>
+          <button type="button" class="btn popup-close" data-popup-close="project" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="setup-shell">
+        <nav class="setup-nav" aria-label="Setup sections">
+          <button type="button" class="setup-tab active" data-setup-tab-btn="general">General</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="features">Features</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="hardware">Hardware</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="logging">Logging</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="pdm">PdM</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="roi">ROI</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="hmi">HMI</button>
+          <button type="button" class="setup-tab" data-setup-tab-btn="projects">Projects</button>
+        </nav>
+        <div class="setup-panels popup-scroll">
+
+          <section class="setup-panel" data-setup-tab="general">
+            <p class="panel-hint">Project identity and scan rate. Map tags to drivers in <strong>Tags</strong> / <strong>Drivers</strong>.</p>
+            <div class="form-grid compact">
+              <label>Project name
+                <input id="proj-name" placeholder="e.g. line_a" value="">
+              </label>
+              <label>Active ST program
+                <select id="proj-active-program"></select>
+              </label>
+              <label>Scan interval (ms)
+                <input id="proj-scan-ms" type="number" min="10" max="10000" value="100">
+              </label>
+              <label>Starting HMI screen
+                <select id="proj-hmi-home-screen"></select>
+              </label>
+            </div>
+            <p class="panel-hint">The selected screen loads first on the main HMI page. Use the navigation bar to switch screens after load. Configure screens, layout, and bindings in the <strong>HMI</strong> tab or via <strong>Setup…</strong> on the HMI panel.</p>
+            <h3 class="setup-subhead">On startup</h3>
+            <p class="panel-hint">Applied when PeakLogic boots (before drivers connect). Alarm notification users are under <strong>Alarms → Notification users…</strong>.</p>
+            <div class="form-grid compact">
+              <label>Load on boot
+                <select id="proj-startup-mode">
+                  <option value="workspace">Last workspace (<code>workspace.est.json</code>)</option>
+                  <option value="last_project">Last opened saved project</option>
+                  <option value="saved_project">Specific saved project</option>
+                  <option value="blank">Current data folder only (no .est load)</option>
+                </select>
+              </label>
+              <label id="proj-startup-project-wrap">Startup project
+                <select id="proj-startup-project"></select>
+              </label>
+              <label class="historian-ctl">
+                <input type="checkbox" id="proj-startup-prompt"> Show reminder if startup load fails
+              </label>
+              <label class="historian-ctl">
+                <input type="checkbox" id="proj-auto-start-runtime"> Auto-start runtime on boot (Program → Start)
+              </label>
+            </div>
+            <h3 class="setup-subhead">MQTT Parc (Opta)</h3>
+            <p class="panel-hint">Central MQTT hub for all Opta Parc devices. Enable before bulk-adding drivers or when Optas report to the broker. Broker URL is shared by every <code>mqtt_parc</code> driver.</p>
+            <div class="form-grid compact">
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-mqtt-parc-enabled"> Enable MQTT Parc hub
+              </label>
+              <label>Broker URL
+                <input id="proj-mqtt-parc-broker" placeholder="mqtt://192.168.1.233:1883" title="Mosquitto or LAN MQTT broker">
+              </label>
+              <label class="span-all">Global site key (hex, e.g. 0x0001)
+                <input id="proj-mqtt-parc-global-site-key" placeholder="0x0001" spellcheck="false">
+                <span class="muted">Must match Opta /setup Global site key; topics <code>peaklogic/v1/g/{key}/{tag}</code>.</span>
+              </label>
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-remote-execution"> Remote ST execution (run logic on Opta via MQTT)
+              </label>
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-opta-autorun"> Auto-run ST on Opta after power-up (requires NV program + deploy once)
+              </label>
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-mqtt-parc-auto-discover"> Auto-discover Opta drivers from MQTT reports
+              </label>
+            </div>
+            <h3 class="setup-subhead">Cloud remote (appliance uplink)</h3>
+            <p class="panel-hint">When this PeakLogic runs as a site appliance, relay Parc telemetry to a cloud VM tenant topic <code>peaklogic/v1/{tenantId}/{deviceId}/telemetry</code>. Set the same <code>tenantId</code> on the cloud VM and use the appliance <code>gatewayId</code> from pairing.</p>
+            <div class="form-grid compact">
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-cloud-remote-enabled"> Enable cloud remote uplink
+              </label>
+              <label>Tenant ID
+                <input id="proj-cloud-tenant-id" placeholder="acme-corp" spellcheck="false">
+              </label>
+              <label>Gateway ID (appliance UUID)
+                <input id="proj-cloud-gateway-id" placeholder="uuid-from-pairing" spellcheck="false">
+              </label>
+              <label class="span-all">Cloud broker URL
+                <input id="proj-cloud-broker-url" placeholder="mqtt://&lt;droplet-ip&gt;:1883">
+              </label>
+            </div>
+            <p class="panel-hint">Optional cloud tools (virtual devices, cellular SIM inventory): open the <button type="button" class="btn-link setup-tab-jump" data-setup-tab-btn="features">Features</button> tab.</p>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="features">
+            <p class="panel-hint">Enable optional cloud tools on this PC appliance. Check a box, click <strong>Apply all settings</strong>, then reload the page so <strong>Open</strong> links appear below. No <code>.env</code> changes required.</p>
+            <h3 class="setup-subhead">Cloud Sim management</h3>
+            <p class="panel-hint">Create virtual Opta / Modbus devices that publish tenant-scoped MQTT telemetry.</p>
+            <div class="form-grid compact">
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-cloud-sims-enabled"> Enable Cloud Sim management
+              </label>
+            </div>
+            <% if (cloudSimsEnabled) { %>
+            <div class="toolbar wrap">
+              <a href="/cloud/sims" class="btn primary" data-cloud-sims-open>Open Cloud Sims</a>
+            </div>
+            <% } %>
+            <h3 class="setup-subhead">Cellular SIM management</h3>
+            <p class="panel-hint">Track IoT SIM/eSIM inventory from Hologram, Twilio, and other vendors.</p>
+            <div class="form-grid compact">
+              <label class="historian-ctl span-all">
+                <input type="checkbox" id="proj-cellular-sims-enabled"> Enable Cellular SIM management
+              </label>
+            </div>
+            <% if (cellularSimsEnabled) { %>
+            <div class="toolbar wrap">
+              <a href="/cellular/sims" class="btn primary" data-cellular-sims-open>Open Cellular SIMs</a>
+            </div>
+            <% } %>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="hardware">
+            <p class="panel-hint">Defaults for new RTU drivers and the default device template.</p>
+            <div class="form-grid compact">
+              <label>Default serial port
+                <select id="proj-default-port"></select>
+              </label>
+              <label>Default baud
+                <input id="proj-default-baud" type="number" value="9600">
+              </label>
+              <label>Default slave ID
+                <input id="proj-default-slave" type="number" min="1" max="255" value="1">
+              </label>
+              <label>Default device template
+                <select id="proj-default-preset"></select>
+              </label>
+            </div>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-proj-apply-template" class="btn">Apply default device template</button>
+            </div>
+            <div class="logging-block" id="proj-alf-mech-wrap">
+              <h3 class="setup-subhead">Assisted living — mechanical room</h3>
+              <p class="panel-hint">Domestic hot water: one flow meter feeds three 120 gal heaters. Choose electric (kW meters) or gas (gas flow meter).</p>
+              <label class="checkbox-inline span-all">
+                <input type="checkbox" id="proj-alf-mech-wh-gas"> Gas-fired water heaters (show gas flow meter). Unchecked = electric (power meters).
+              </label>
+            </div>
+            <div class="logging-block" id="proj-alf-pools-wrap">
+              <h3 class="setup-subhead">Site — bodies of water &amp; sanitation</h3>
+              <p class="panel-hint">Up to <strong>4 bodies of water</strong> (pools, spas, water features) and <strong>8 filter pumps</strong> site-wide (max 2 per body). Set body type (main pool, spa, or water feature), which main pool shared plumbing connects to, filter pump count, and daily circulation targets here. Spas and water features share water with a main pool but keep their own flow rates (e.g. pool 6–8 h/day, spa 0.5 h/day). Edit weekly run schedules on the pool HMI → <strong>Schedules</strong> screen.</p>
+              <div id="proj-alf-pools-list" class="proj-alf-pools-list"></div>
+              <p id="proj-alf-site-pump-total" class="panel-hint muted">Site filter pumps: 1 / 8</p>
+              <div class="toolbar wrap">
+                <button type="button" id="btn-proj-alf-pool-add" class="btn btn-sm">Add body of water</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="logging">
+            <p class="panel-hint">MongoDB connection, <strong>Hist</strong> tags, runtime auto-start, and PdM assets: <strong>Historian → Logger config…</strong>. Use this tab for archive maintenance.</p>
+
+            <div class="logging-block logging-tools">
+              <h3 class="setup-subhead">Archive tools</h3>
+              <div class="logging-tool-grid">
+                <div class="logging-tool-card">
+                  <h4>Demo seed</h4>
+                  <p class="panel-hint">Insert <strong>90 days</strong> of random samples: <strong>4 digital</strong> (<code>SEED_DI1</code>–4) and <strong>6 analog</strong> (<code>SEED_AI1</code>–6) at 15 min intervals. Adds tags and historian pens.</p>
+                  <div class="toolbar wrap">
+                    <button type="button" id="btn-mongo-seed" class="btn">Seed 90-day demo data</button>
+                    <span id="mongo-seed-msg" class="muted"></span>
+                  </div>
+                </div>
+                <div class="logging-tool-card logging-tool-card-danger">
+                  <h4>Purge archive</h4>
+                  <p class="panel-hint">Delete <code>pen_sample</code> and <code>pen_selection</code> documents. Does not clear the in-memory historian buffer.</p>
+                  <div class="toolbar wrap historian-toolbar">
+                    <label class="historian-ctl">From
+                      <input type="datetime-local" id="purge-from" class="historian-datetime">
+                    </label>
+                    <label class="historian-ctl">To
+                      <input type="datetime-local" id="purge-to" class="historian-datetime">
+                    </label>
+                    <button type="button" id="btn-mongo-purge" class="btn">Purge range</button>
+                    <button type="button" id="btn-mongo-purge-all" class="btn btn-danger">Purge all</button>
+                    <span id="mongo-purge-msg" class="muted"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="pdm">
+            <p class="panel-hint">Predictive maintenance: map SCADA historian tags to assets, align with edge AI inference, and build feature windows in MongoDB. View combined trends under <strong>Historian → PdM (SCADA + Edge)</strong>.</p>
+            <p id="pdm-batch-status" class="logging-status cell-mono muted">PdM batch: checking…</p>
+            <div class="form-grid compact">
+              <label>Window size (minutes)
+                <input id="proj-pdm-window-min" type="number" min="1" max="60" value="5">
+              </label>
+              <label>Health failure threshold (0–1)
+                <input id="proj-pdm-failure-threshold" type="number" min="0.05" max="0.95" step="0.05" value="0.3">
+              </label>
+              <label>Features collection
+                <input id="proj-pdm-features-collection" value="pdm_features" placeholder="pdm_features">
+              </label>
+              <label class="historian-ctl">
+                <input type="checkbox" id="proj-pdm-build-enabled"> Nightly feature batch
+              </label>
+              <label>Batch interval (hours)
+                <input id="proj-pdm-build-interval" type="number" min="1" max="168" value="24">
+              </label>
+            </div>
+            <label>Asset → SCADA tag map (JSON)
+              <textarea id="proj-pdm-asset-tags" rows="8" class="cell-mono" placeholder='{"pump-101":["SEED_AI1","SEED_AI2"]}'></textarea>
+            </label>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-pdm-save" class="btn primary">Save PdM settings</button>
+              <button type="button" id="btn-pdm-build-now" class="btn">Build features now</button>
+              <button type="button" id="btn-pdm-sim-motor" class="btn">Simulate motor start / cap failure</button>
+              <span id="pdm-save-msg" class="muted"></span>
+            </div>
+            <p class="panel-hint">Nightly batch aligns the last 7 days for every asset in the map and stores rows in the features collection. Edge AI data is logged automatically from Parc MQTT/HTTP reports when payloads include <code>edgeAi</code>. Motor simulation seeds 90 days of start events for <code>motor-202</code> with degrading start capacitor (<code>single-phase-start-v1</code>).</p>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="roi">
+            <p class="panel-hint">Estimate return on investment for monitored assets. Values are saved with the project and update live as you edit. Use <strong>Apply all settings</strong> to persist.</p>
+            <div class="logging-tool-grid">
+              <div class="logging-tool-card roi-tool-card">
+                <h4>Leak detection system</h4>
+                <p class="panel-hint">Compare installed system cost (amortized) against repair costs avoided when leak alerts catch events early. Default repair cost per event is <strong>$90</strong>.</p>
+                <div class="form-grid compact">
+                  <label>System cost ($)
+                    <input id="roi-leak-system-cost" type="number" min="0" step="100" value="0">
+                  </label>
+                  <label>Amortization (years)
+                    <input id="roi-leak-amort-years" type="number" min="1" max="30" value="5">
+                  </label>
+                  <label>Repair cost per leak event ($)
+                    <input id="roi-leak-repair-cost" type="number" min="0" step="1" value="90">
+                  </label>
+                  <label>Leak events per year (expected)
+                    <input id="roi-leak-events-year" type="number" min="0" step="1" value="4">
+                  </label>
+                </div>
+                <dl class="roi-results" id="roi-leak-results">
+                  <div><dt>Annual savings from alerts</dt><dd id="roi-leak-annual-savings">—</dd></div>
+                  <div><dt>Amortized annual cost</dt><dd id="roi-leak-amort-cost">—</dd></div>
+                  <div><dt>Net annual benefit</dt><dd id="roi-leak-net-annual">—</dd></div>
+                  <div><dt>Simple payback</dt><dd id="roi-leak-payback">—</dd></div>
+                  <div><dt>ROI over amortization</dt><dd id="roi-leak-roi-pct">—</dd></div>
+                </dl>
+              </div>
+              <div class="logging-tool-card roi-tool-card">
+                <h4>Pool — pump &amp; chemistry</h4>
+                <p class="panel-hint">Pump upgrades for energy savings and tighter chemical control (ORP/pH automation) for monthly treatment savings.</p>
+                <div class="form-grid compact">
+                  <label>Pump upgrade cost ($)
+                    <input id="roi-pool-pump-cost" type="number" min="0" step="100" value="0">
+                  </label>
+                  <label>Chemistry / control cost ($)
+                    <input id="roi-pool-chem-cost" type="number" min="0" step="100" value="0">
+                  </label>
+                  <label>Amortization (years)
+                    <input id="roi-pool-amort-years" type="number" min="1" max="30" value="7">
+                  </label>
+                  <label>Monthly energy savings ($)
+                    <input id="roi-pool-energy-monthly" type="number" min="0" step="1" value="0">
+                  </label>
+                  <label>Monthly chemical savings ($)
+                    <input id="roi-pool-chem-monthly" type="number" min="0" step="1" value="0">
+                  </label>
+                </div>
+                <dl class="roi-results" id="roi-pool-results">
+                  <div><dt>Combined monthly savings</dt><dd id="roi-pool-monthly-total">—</dd></div>
+                  <div><dt>Annual gross savings</dt><dd id="roi-pool-annual-savings">—</dd></div>
+                  <div><dt>Net annual benefit</dt><dd id="roi-pool-net-annual">—</dd></div>
+                  <div><dt>Simple payback</dt><dd id="roi-pool-payback">—</dd></div>
+                  <div><dt>ROI over amortization</dt><dd id="roi-pool-roi-pct">—</dd></div>
+                </dl>
+              </div>
+            </div>
+            <div class="roi-combined-summary" id="roi-combined-summary">
+              <h3 class="setup-subhead">Combined assets</h3>
+              <p class="panel-hint" id="roi-combined-hint">Enter costs and savings above to see a portfolio summary.</p>
+              <dl class="roi-results roi-results-inline">
+                <div><dt>Total upfront</dt><dd id="roi-combined-upfront">—</dd></div>
+                <div><dt>Combined annual savings</dt><dd id="roi-combined-annual">—</dd></div>
+                <div><dt>Combined net annual</dt><dd id="roi-combined-net">—</dd></div>
+              </dl>
+            </div>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="hmi">
+            <p class="panel-hint">Edit tile grids, symbols, and tag bindings in the HMI composer. Changes are saved with <strong>Apply HMI settings</strong> in the composer, or included when you <strong>Apply all settings</strong> here if the composer is open.</p>
+            <div class="form-grid compact">
+              <label>Screens configured
+                <span id="setup-hmi-screen-count" class="cell-mono">0</span>
+              </label>
+              <label>Bindings
+                <span id="setup-hmi-binding-count" class="cell-mono">0</span>
+              </label>
+              <label>Starting screen
+                <span id="setup-hmi-home-label" class="cell-mono">Screen 1 — Home</span>
+              </label>
+            </div>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-setup-open-hmi" class="btn primary">Open HMI composer</button>
+            </div>
+          </section>
+
+          <section class="setup-panel view-hidden" data-setup-tab="projects">
+            <p class="panel-hint">Start a blank project, save snapshots to MongoDB, or <strong>export/import .est.json files</strong> to move projects between PeakLogic versions and PCs.</p>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-proj-new" class="btn primary">New project</button>
+            </div>
+            <div class="form-grid compact">
+              <label>Saved project
+                <select id="proj-list"></select>
+              </label>
+            </div>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-proj-save" class="btn">Save project</button>
+              <button type="button" id="btn-proj-save-as" class="btn primary">Save as…</button>
+              <button type="button" id="btn-proj-export" class="btn">Export file…</button>
+              <button type="button" id="btn-proj-import" class="btn">Import file…</button>
+              <button type="button" id="btn-proj-open" class="btn">Open selected</button>
+              <button type="button" id="btn-proj-delete" class="btn danger">Delete selected</button>
+            </div>
+          </section>
+
+        </div>
+      </div>
+      <footer class="popup-footer setup-footer">
+        <div class="popup-footer-leading">
+          <button type="button" id="btn-proj-apply" class="btn primary">Apply all settings</button>
+          <span id="proj-msg" class="muted"></span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- HMI setup popup -->
+  <div class="app-popup view-hidden hmi-setup-shell-stub" data-popup="hmi-setup" role="dialog" aria-labelledby="popup-hmi-setup-title" aria-hidden="true"></div>
+  <div class="popup-chrome popup-chrome-hmi-setup view-hidden" id="hmi-setup-chrome" role="dialog" aria-labelledby="popup-hmi-setup-title">
+      <div class="hmi-setup-drag-bar popup-header-draggable" data-hmi-drag-handle title="Drag to move"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)">⠿ Move</div>
+      <header class="popup-header popup-header-split popup-header-draggable"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)">
+        <h2 id="popup-hmi-setup-title">HMI setup <span class="hmi-composer-version muted">· Composer v1.2</span> <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn btn-sm btn-help-context" data-help-section="hmi-composer" title="Help: HMI — composer &amp; grid">Help</button>
+          <button type="button" id="btn-hmi-save-header" class="btn primary">Apply HMI settings</button>
+          <button type="button" class="btn popup-close" data-popup-close="hmi-setup" title="Close">Close</button>
+        </div>
+      </header>
+      <p id="hmi-setup-msg" class="hmi-setup-msg-bar muted" role="status" aria-live="polite"></p>
+      <div class="popup-body popup-scroll hmi-setup-popup-body">
+        <div class="hmi-setup-grid">
+          <div class="hmi-setup-editor">
+            <p class="panel-hint hmi-composer-intro">Build each screen on the <strong>tile grid</strong> (right on wide windows) or use <strong>3D facility view</strong> when enabled under <strong>Project ▾ → HMI composer mode</strong>. Use the <strong>vertical section menu</strong> for settings. Click <strong>Apply HMI settings</strong> to save.</p>
+            <div class="hmi-composer-shell">
+              <nav class="hmi-composer-nav" id="hmi-composer-nav" aria-label="Composer sections">
+                <button type="button" class="hmi-composer-nav-item active" data-hmi-section="layout">Project layout</button>
+                <button type="button" class="hmi-composer-nav-item" data-hmi-section="screen">Screen</button>
+                <button type="button" class="hmi-composer-nav-item" data-hmi-section="symbols">Symbols</button>
+                <button type="button" class="hmi-composer-nav-item" data-hmi-section="object-type">Object type</button>
+                <button type="button" class="hmi-composer-nav-item" data-hmi-section="recent">Recently used</button>
+                <button type="button" class="hmi-composer-nav-item" data-hmi-section="display">Display size</button>
+                <button type="button" class="hmi-composer-nav-item" data-hmi-section="bindings">Bindings</button>
+              </nav>
+              <div class="hmi-composer-panels">
+                <section class="hmi-composer-section" data-hmi-section="screen" id="hmi-section-screen" aria-labelledby="hmi-composer-nav">
+                  <h4 class="hmi-block-title">Screen</h4>
+                  <div class="form-grid compact">
+                    <label>Screen to edit
+                      <select id="hmi-screen-select"></select>
+                    </label>
+                    <p id="hmi-screen-list-hint" class="panel-hint muted"></p>
+                    <label>Screen number
+                      <input id="hmi-screen-number" readonly tabindex="-1" value="1">
+                    </label>
+                    <label>Alias
+                      <input id="hmi-screen-name" placeholder="Display name">
+                    </label>
+                  </div>
+                  <div class="toolbar wrap">
+                    <button type="button" id="btn-hmi-add-screen" class="btn">Add screen</button>
+                    <button type="button" id="btn-hmi-duplicate-screen" class="btn">Duplicate</button>
+                    <button type="button" id="btn-hmi-remove-screen" class="btn danger">Remove</button>
+                    <button type="button" id="btn-hmi-load-demo" class="btn">Load demo</button>
+                  </div>
+                </section>
+
+                <section class="hmi-composer-section" data-hmi-section="symbols" id="hmi-section-symbols">
+                  <h4 class="hmi-block-title">Symbols — drag onto grid</h4>
+                  <h4 class="hmi-block-title">Import external graphic</h4>
+            <div class="toolbar wrap">
+              <input type="file" id="hmi-import-file" accept=".svg,.png,.gif,.jpg,.jpeg,.webp,image/svg+xml,image/png,image/gif,image/jpeg,image/webp" hidden>
+              <button type="button" id="btn-hmi-import-graphic" class="btn primary">Import graphic…</button>
+            </div>
+            <p class="panel-hint">Upload a building plan or overlay (SVG/PNG/GIF). Appears under <strong>User imports</strong>. Place as <strong>Static image</strong> at <strong>Z0</strong>, set <strong>Col/Row span</strong> for full-screen, click the top-left grid cell.</p>
+            <div class="form-grid compact">
+              <label>Quick filter
+                <select id="hmi-asset-quick-filter" title="Shortcut filters for common symbol types">
+                  <option value="all" selected>All symbols</option>
+                  <option value="dial-backgrounds">Dial backgrounds</option>
+                  <option value="dial-pointers">Dial pointers</option>
+                  <option value="composites">Composites</option>
+                  <option value="strip-charts">Strip charts</option>
+                  <option value="gauge-columns">Gauge columns</option>
+                  <option value="push-buttons-momentary">Push buttons — momentary</option>
+                  <option value="push-buttons-latched">Push buttons — latched</option>
+                  <option value="pilot-lights-simple">Pilot lights — simple (BOOL)</option>
+                  <option value="pilot-lights-complex">Pilot lights — complex (5-state)</option>
+                  <option value="recent">Recently used</option>
+                </select>
+              </label>
+              <label>Group
+                <select id="hmi-asset-group">
+                  <option value="all">All groups</option>
+                </select>
+              </label>
+              <label>Subgroup
+                <select id="hmi-asset-subgroup">
+                  <option value="all">All subgroups</option>
+                </select>
+              </label>
+              <label>Asset type
+                <select id="hmi-asset-type">
+                  <option value="all" selected>All types</option>
+                  <option value="svg">SVG only</option>
+                  <option value="composite">Composites only</option>
+                  <option value="gif">GIF only</option>
+                  <option value="png">PNG only</option>
+                </select>
+              </label>
+              <label>Search
+                <input id="hmi-asset-search" type="search" placeholder="Filter name, group, path…">
+              </label>
+            </div>
+            <select id="hmi-svg-select" class="hmi-asset-list-hidden" tabindex="-1" aria-hidden="true"></select>
+            <div id="hmi-asset-grid" class="hmi-asset-grid" role="listbox" aria-label="HMI symbols" tabindex="0"></div>
+            <div id="hmi-asset-hint" class="muted cell-mono"></div>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-hmi-load-more-assets" class="btn">Next page</button>
+              <button type="button" id="btn-hmi-refresh-assets" class="btn">Refresh assets</button>
+            </div>
+                </section>
+
+                <section class="hmi-composer-section" data-hmi-section="object-type" id="hmi-section-object-type">
+                  <h4 class="hmi-block-title">Object type</h4>
+                  <p id="hmi-selected-asset-label" class="muted cell-mono hmi-selected-label">Symbol: — (pick a symbol on Symbols or Recently used)</p>
+                  <p id="hmi-selected-tile-label" class="muted cell-mono hmi-selected-label">Cell: — (click a placed symbol to move or delete)</p>
+            <div class="form-grid compact hmi-place-options">
+              <label>Object type
+                <select id="hmi-place-kind" title="How this symbol is used on the grid">
+                  <option value="staticImage">Static image</option>
+                  <option value="staticText">Static text</option>
+                  <option value="dynamicText">Dynamic text (tag value)</option>
+                  <option value="dynamicImage">Dynamic image (tag-driven)</option>
+                  <option value="navButton">Navigation button</option>
+                  <option value="pageHotspot">Page hotspot (transparent)</option>
+                  <option value="roomHotspot">Room hotspot (popup)</option>
+                  <option value="flashOverlay">Flash overlay (alarm highlight)</option>
+                </select>
+              </label>
+              <label id="hmi-flash-overlay-color-wrap" class="view-hidden">Overlay color
+                <select id="hmi-flash-overlay-color" class="input-sm" title="Red or bright amber flashing fill">
+                  <option value="red">Red</option>
+                  <option value="amber">Bright amber</option>
+                </select>
+              </label>
+              <label>Z layer
+                <select id="hmi-place-z" class="input-sm" title="0 = back … 4 = front (stack up to 5)"></select>
+              </label>
+              <label>Col span
+                <select id="hmi-tile-col-span" class="input-sm" title="Cells wide (oversized graphics)"></select>
+              </label>
+              <label>Row span
+                <select id="hmi-tile-row-span" class="input-sm" title="Cells tall (oversized graphics)"></select>
+              </label>
+              <label id="hmi-region-cell-fraction-wrap" class="view-hidden">Size in cell
+                <select id="hmi-region-cell-fraction" class="input-sm" title="Fraction of the spanned region, centered">
+                  <option value="1">100% (full)</option>
+                  <option value="0.75">75%</option>
+                  <option value="0.5">50%</option>
+                  <option value="0.25">25%</option>
+                </select>
+              </label>
+            </div>
+            <div id="hmi-object-bindings-panel" class="hmi-object-bindings-panel view-hidden">
+              <h5 class="hmi-block-title hmi-sub-block-title">Object bindings</h5>
+              <p id="hmi-object-bindings-hint" class="panel-hint">Select a placed symbol to edit bindings for that cell inline. Changes sync with the Bindings tab.</p>
+              <div class="toolbar wrap hmi-object-bindings-toolbar">
+                <button type="button" id="btn-hmi-object-add-binding" class="btn btn-sm">Add binding</button>
+                <button type="button" id="btn-hmi-object-apply-bindings" class="btn btn-sm primary">Test bindings</button>
+              </div>
+              <div id="hmi-object-bindings-list" class="hmi-object-bindings-list" aria-label="Bindings for selected cell"></div>
+              <div id="hmi-object-bindings-suggestions" class="hmi-object-bindings-suggestions"></div>
+            </div>
+            <h4 class="hmi-block-title">Page navigation</h4>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-hmi-add-page-nav" class="btn primary">Add page buttons (bottom row)</button>
+            </div>
+            <p class="panel-hint">Adds one button per screen on the <strong>bottom row</strong> of the grid (Z4). In Setup: <strong>click</strong> a nav button to select and edit it; <strong>Alt+click</strong> to preview that page. On the live HMI, click navigates.</p>
+            <label id="hmi-nav-target-wrap" class="view-hidden">Navigate to screen
+              <select id="hmi-nav-target" title="Target screen when button is pressed on the live HMI"></select>
+            </label>
+            <label id="hmi-room-num-wrap" class="view-hidden">Room number
+              <input id="hmi-room-num" type="number" class="input-sm" min="1" max="500" step="1" placeholder="1–500" title="Resident room number for room popup hotspot">
+            </label>
+            <p class="panel-hint hmi-layer-hint">Stack layers Z0–Z4. For oversized graphics set <strong>Z layer = 0</strong> and <strong>Col/Row span</strong>, then click the top-left cell. To resize after placement, select the symbol and change <strong>Col span</strong> / <strong>Row span</strong> (press Enter or tab out).</p>
+            <label id="hmi-tile-label-wrap" class="hmi-tile-label-wrap view-hidden">Label text
+              <input id="hmi-tile-label-input" type="text" class="input-sm" placeholder="Static / caption text for text layers">
+            </label>
+            <div id="hmi-strip-chart-panel" class="hmi-strip-chart-panel hmi-symbol-setup-panel view-hidden">
+              <h4 class="hmi-block-title">Strip chart</h4>
+              <div class="form-grid compact">
+                <label>Pens
+                  <select id="hmi-strip-pen-count" class="input-sm" title="Number of trend pens (1–8)">
+                    <option value="1">1 pen</option>
+                    <option value="2">2 pens</option>
+                    <option value="3">3 pens</option>
+                    <option value="4">4 pens</option>
+                    <option value="5">5 pens</option>
+                    <option value="6">6 pens</option>
+                    <option value="7">7 pens</option>
+                    <option value="8">8 pens</option>
+                  </select>
+                </label>
+              </div>
+              <div id="hmi-strip-pen-tags" class="hmi-strip-pen-tags"></div>
+              <div class="toolbar wrap hmi-strip-pen-tag-actions">
+                <button type="button" id="btn-hmi-strip-auto-vpr" class="btn btn-sm" title="Wire pen 1→VPR1, pen 2→VPR2, … for active pens">Assign VPR1–N</button>
+              </div>
+              <div id="hmi-strip-pen-palette" class="hmi-strip-pen-palette"></div>
+              <h5 class="hmi-block-title hmi-sub-block-title">Y-axis scale (left)</h5>
+              <div class="form-grid compact hmi-chart-scale-grid">
+                <label class="hmi-chart-scale-show-label">
+                  <input id="hmi-strip-scale-show" type="checkbox" data-hmi-strip-scale checked>
+                  Show scale
+                </label>
+                <label>Min
+                  <input id="hmi-strip-scale-min" type="number" class="input-sm" data-hmi-strip-scale value="0" step="any">
+                </label>
+                <label>Max
+                  <input id="hmi-strip-scale-max" type="number" class="input-sm" data-hmi-strip-scale value="100" step="any">
+                </label>
+                <label>Divisions
+                  <input id="hmi-strip-scale-divisions" type="number" class="input-sm" data-hmi-strip-scale value="5" min="2" max="20" step="1">
+                </label>
+                <label>Label color
+                  <input id="hmi-strip-scale-label-color" type="color" class="input-sm hmi-color-input" data-hmi-strip-scale value="#64748b">
+                </label>
+                <label>Tick color
+                  <input id="hmi-strip-scale-tick-color" type="color" class="input-sm hmi-color-input" data-hmi-strip-scale value="#94a3b8">
+                </label>
+              </div>
+              <p class="panel-hint">Pick a tag per pen. Check <strong>Tag scale</strong> to use that tag’s alarm <strong>OL/OH</strong> limits (set on the Tags page). The left <strong>Y-axis scale</strong> uses the min/max above. Sample count stays in the bindings table.</p>
+            </div>
+            <div id="hmi-gauge-column-panel" class="hmi-strip-chart-panel hmi-symbol-setup-panel view-hidden">
+              <h4 class="hmi-block-title">Gauge column</h4>
+              <div class="form-grid compact">
+                <label>Columns
+                  <select id="hmi-gauge-col-count" class="input-sm" title="Number of gauge columns (1–8)">
+                    <option value="1">1 column</option>
+                    <option value="2">2 columns</option>
+                    <option value="3">3 columns</option>
+                    <option value="4">4 columns</option>
+                    <option value="5">5 columns</option>
+                    <option value="6">6 columns</option>
+                    <option value="7">7 columns</option>
+                    <option value="8">8 columns</option>
+                  </select>
+                </label>
+              </div>
+              <div id="hmi-gauge-col-tags" class="hmi-strip-pen-tags"></div>
+              <div class="toolbar wrap hmi-strip-pen-tag-actions">
+                <button type="button" id="btn-hmi-gauge-auto-vpr" class="btn btn-sm" title="Wire column 1→VPR1, column 2→VPR2, … for active columns">Assign VPR1–N</button>
+              </div>
+              <div id="hmi-gauge-col-palette" class="hmi-strip-pen-palette"></div>
+              <h5 class="hmi-block-title hmi-sub-block-title">Y-axis scale (left)</h5>
+              <div class="form-grid compact hmi-chart-scale-grid">
+                <label class="hmi-chart-scale-show-label">
+                  <input id="hmi-gauge-scale-show" type="checkbox" data-hmi-gauge-scale checked>
+                  Show scale
+                </label>
+                <label>Min
+                  <input id="hmi-gauge-scale-min" type="number" class="input-sm" data-hmi-gauge-scale value="0" step="any">
+                </label>
+                <label>Max
+                  <input id="hmi-gauge-scale-max" type="number" class="input-sm" data-hmi-gauge-scale value="100" step="any">
+                </label>
+                <label>Divisions
+                  <input id="hmi-gauge-scale-divisions" type="number" class="input-sm" data-hmi-gauge-scale value="5" min="2" max="20" step="1">
+                </label>
+                <label>Label color
+                  <input id="hmi-gauge-scale-label-color" type="color" class="input-sm hmi-color-input" data-hmi-gauge-scale value="#64748b">
+                </label>
+                <label>Tick color
+                  <input id="hmi-gauge-scale-tick-color" type="color" class="input-sm hmi-color-input" data-hmi-gauge-scale value="#94a3b8">
+                </label>
+              </div>
+              <p class="panel-hint">Pick a tag per column. Bind <strong>fill</strong> to <code>gauge_colN</code>. Check <strong>Tag scale</strong> to use tag <strong>OL/OH</strong> for column height. The left <strong>Y-axis scale</strong> uses the min/max above.</p>
+            </div>
+            <div id="hmi-push-button-panel" class="hmi-strip-chart-panel hmi-symbol-setup-panel view-hidden">
+              <h4 class="hmi-block-title">Push button</h4>
+              <div class="form-grid compact">
+                <label>Interaction
+                  <select id="hmi-push-button-mode" class="input-sm" title="Momentary: active while pressed. Latched: click toggles BOOL tag.">
+                    <option value="momentary">Momentary</option>
+                    <option value="latched">Latched</option>
+                  </select>
+                </label>
+                <label>Shape
+                  <select id="hmi-push-button-shape" class="input-sm" title="Button outline shape">
+                    <option value="square">Square</option>
+                    <option value="rectangle">Rectangle</option>
+                    <option value="oblong">Oblong</option>
+                    <option value="round">Round</option>
+                  </select>
+                </label>
+              </div>
+              <div id="hmi-push-button-palette" class="hmi-strip-pen-palette"></div>
+              <p class="panel-hint">Set <strong>Background</strong>, <strong>Text</strong>, and <strong>Bezel</strong> (shadow) colors. Bind BOOL <strong>fill</strong> to the <code>button</code> element for on/off state.</p>
+            </div>
+            <div id="hmi-pilot-light-panel" class="hmi-strip-chart-panel hmi-symbol-setup-panel view-hidden">
+              <h4 class="hmi-block-title">Pilot light</h4>
+              <div class="form-grid compact">
+                <label>Type
+                  <select id="hmi-pilot-light-kind" class="input-sm" title="Simple BOOL on/off or complex 5-state INT">
+                    <option value="simple">Simple (BOOL off/on)</option>
+                    <option value="complex">Complex (5-state)</option>
+                  </select>
+                </label>
+                <label>Shape
+                  <select id="hmi-pilot-light-shape" class="input-sm" title="Pilot light outline shape">
+                    <option value="round">Round</option>
+                    <option value="square">Square</option>
+                    <option value="octagonal">Octagonal</option>
+                  </select>
+                </label>
+              </div>
+              <div id="hmi-pilot-light-palette" class="hmi-strip-pen-palette"></div>
+              <p class="panel-hint">Simple: bind BOOL <strong>fill</strong> to <code>lamp</code>. Complex: bind INT <strong>fill5</strong> (0=Off … 4=Offline); states 2–3 flash.</p>
+            </div>
+                </section>
+
+                <section class="hmi-composer-section" data-hmi-section="recent" id="hmi-section-recent">
+                  <h4 class="hmi-block-title">Recently used</h4>
+                  <p class="panel-hint">Symbols you placed recently — click or drag onto the grid. Use <strong>Symbols</strong> for the full library and filters.</p>
+                  <div id="hmi-recent-asset-grid" class="hmi-asset-grid" role="listbox" aria-label="Recently used HMI symbols" tabindex="0"></div>
+                  <p id="hmi-recent-asset-hint" class="muted cell-mono"></p>
+                </section>
+
+                <section class="hmi-composer-section active" data-hmi-section="layout" id="hmi-section-layout">
+            <h4 class="hmi-block-title">Project layout</h4>
+            <div class="form-grid compact">
+              <label class="hmi-composer-mode-grid-only">Layout preset
+                <select id="hmi-layout-preset" title="Common grid + cell + display sizes">
+                  <option value="default">Default 8×8 · 1024×800</option>
+                  <option value="wide">Wide 12×8 · 1536×800</option>
+                  <option value="fhd">Full HD 1920×1080</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </label>
+              <label class="hmi-composer-mode-grid-only">Columns
+                <select id="hmi-grid-cols" title="Number of grid columns"></select>
+              </label>
+              <label class="hmi-composer-mode-grid-only">Rows
+                <select id="hmi-grid-rows" title="Number of grid rows"></select>
+              </label>
+              <label class="hmi-composer-mode-grid-only">Cell width (px)
+                <select id="hmi-cell-width" title="Logical width per column"></select>
+              </label>
+              <label id="hmi-cell-width-custom-wrap" class="view-hidden hmi-composer-mode-grid-only">Custom cell width
+                <input id="hmi-cell-width-custom" type="number" min="8" max="512" value="128" class="input-sm" title="Custom cell width (8–512 px)">
+              </label>
+              <label class="hmi-composer-mode-grid-only">Cell height (px)
+                <select id="hmi-cell-height" title="Logical height per row"></select>
+              </label>
+              <label id="hmi-cell-height-custom-wrap" class="view-hidden hmi-composer-mode-grid-only">Custom cell height
+                <input id="hmi-cell-height-custom" type="number" min="8" max="512" value="100" class="input-sm" title="Custom cell height (8–512 px)">
+              </label>
+              <label class="hmi-composer-mode-grid-only">Grid lines
+                <select id="hmi-show-grid" title="Show or hide grid lines in the composer preview">
+                  <option value="show" selected>Show grid lines</option>
+                  <option value="hide">Hide grid lines</option>
+                </select>
+              </label>
+              <label>Live status
+                <select id="hmi-show-live-status" title="Screen title and hint below screen tabs on the live HMI">
+                  <option value="show" selected>Show status message</option>
+                  <option value="hide">Hide status message</option>
+                </select>
+              </label>
+              <label>Composer mode
+                <select id="hmi-composer-mode" title="Grid tile editor or 3D facility spatial preview">
+                  <option value="grid">Grid — 2D tile editing</option>
+                  <option value="3d">3D — facility spatial view</option>
+                </select>
+              </label>
+            </div>
+            <p class="panel-hint">Default 8×8 at 128×100 px per cell → 1024×800 display. Grid layout applies to <strong>all screens</strong>. Composer mode is also in <strong>Project ▾</strong> menu.</p>
+                </section>
+
+                <section class="hmi-composer-section" data-hmi-section="display" id="hmi-section-display">
+            <h4 class="hmi-block-title">Display size</h4>
+            <div class="form-grid compact">
+              <label>Background
+                <select id="hmi-screen-bg" class="hmi-color-select"></select>
+              </label>
+              <label>Logical size
+                <select id="hmi-logical-preset" title="Design resolution — match grid or pick a preset">
+                  <option value="match-grid" selected>Match grid (cols × cell)</option>
+                  <option value="800x600">800 × 600</option>
+                  <option value="1024x800">1024 × 800</option>
+                  <option value="1280x720">1280 × 720</option>
+                  <option value="1366x768">1366 × 768</option>
+                  <option value="1920x1080">1920 × 1080</option>
+                  <option value="1920x1200">1920 × 1200</option>
+                  <option value="custom">Custom…</option>
+                </select>
+              </label>
+              <label id="hmi-logical-custom-wrap" class="view-hidden">Logical X (px)
+                <input id="hmi-screen-width" type="number" min="200" max="4096" value="1024" class="input-sm" title="Design width (columns × cell width)">
+              </label>
+              <label id="hmi-logical-custom-wrap-y" class="view-hidden">Logical Y (px)
+                <input id="hmi-screen-height" type="number" min="150" max="4096" value="800" class="input-sm" title="Design height (rows × cell height)">
+              </label>
+              <label>Display limit
+                <select id="hmi-display-preset" title="Max size on live HMI and composer preview">
+                  <option value="match-logical" selected>Match logical size</option>
+                  <option value="800x600">800 × 600</option>
+                  <option value="1024x800">1024 × 800</option>
+                  <option value="1280x720">1280 × 720</option>
+                  <option value="1366x768">1366 × 768</option>
+                  <option value="1920x1080">1920 × 1080</option>
+                  <option value="1920x1200">1920 × 1200</option>
+                  <option value="custom">Custom…</option>
+                </select>
+              </label>
+              <label id="hmi-display-custom-wrap" class="view-hidden">Display limit X (px)
+                <input id="hmi-display-max-width" type="number" min="100" max="4096" value="1024" class="input-sm" title="Max width on live HMI and preview">
+              </label>
+              <label id="hmi-display-custom-wrap-y" class="view-hidden">Display limit Y (px)
+                <input id="hmi-display-max-height" type="number" min="100" max="4096" value="800" class="input-sm" title="Max height on live HMI and preview">
+              </label>
+              <label>Fit in viewport
+                <select id="hmi-screen-fit" title="How the grid fills the display limit box">
+                  <option value="contain">Contain (keep aspect)</option>
+                  <option value="stretch">Stretch (fill limit X and Y)</option>
+                  <option value="cover">Cover (crop to fill)</option>
+                  <option value="native">Native (1:1 px)</option>
+                </select>
+              </label>
+            </div>
+            <p class="panel-hint">Use <strong>Stretch</strong> to fill the display limit horizontally and vertically. <strong>Contain</strong> letterboxes inside the limit. Set limit X/Y to your panel or monitor size (e.g. 1920×1080).</p>
+            <input type="hidden" id="hmi-screen-scale" value="100">
+            <input type="hidden" id="hmi-screen-offset-x" value="0">
+            <input type="hidden" id="hmi-screen-offset-y" value="0">
+                </section>
+
+                <section class="hmi-composer-section" data-hmi-section="bindings" id="hmi-section-bindings">
+            <h4 class="hmi-block-title">Bindings <span id="hmi-binding-count" class="muted"></span>
+              <label class="tag-display-pick hmi-tag-display-pick" title="Tag column shows id, label, or both">Show
+                <select id="hmi-tag-display" data-tag-display-mode></select>
+              </label>
+            </h4>
+            <datalist id="hmi-element-ids"></datalist>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-hmi-add-binding" class="btn">Add binding</button>
+              <button type="button" id="btn-hmi-test-screen" class="btn primary">Test screen</button>
+              <button type="button" id="btn-hmi-clear-binding-test" class="btn">Clear test values</button>
+            </div>
+            <p class="panel-hint"><strong>Composites</strong> (recommended): use the <strong>Composites</strong> filter — one click places dial + needle and adds bindings. Test: enter a value in the row <strong>Test</strong> column, then <strong>Test screen</strong>.</p>
+            <div id="hmi-bindings-table" class="table-wrap"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="hmi-composer-col-splitter" id="hmi-composer-col-splitter" role="separator" aria-orientation="vertical" aria-label="Resize composer settings column" title="Drag to widen settings column"></div>
+          <div class="hmi-setup-preview-wrap">
+            <div class="hmi-composer-header">
+              <h4 class="hmi-block-title">Screen grid</h4>
+              <div class="hmi-grid-toolbar">
+                <button type="button" id="btn-hmi-delete-tile" class="btn danger" title="Remove selected cell">Remove cell</button>
+                <button type="button" id="btn-hmi-clear-grid" class="btn danger" title="Clear all symbols on this screen">Clear grid</button>
+              </div>
+            </div>
+            <p class="panel-hint">Grid with row/column labels — for editing only. The live HMI hides grid lines.</p>
+            <div id="hmi-setup-preview" class="hmi-viewport hmi-setup-preview hmi-tile-composer"></div>
+            <p id="hmi-preview-meta" class="muted cell-mono"></p>
+            <div id="hmi-setup-3d-preview" class="hmi-viewport hmi-setup-3d-preview view-hidden" aria-label="3D facility composer preview">
+              <iframe id="hmi-setup-3d-frame" title="3D facility composer" src="/samples/assisted-living-ortho-3d.html"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+      <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+      <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+      <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+      <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"
+        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+  </div>
+
+  <div class="app-popup view-hidden" data-popup="help" role="dialog" aria-labelledby="popup-help-title">
+    <div class="popup-chrome popup-chrome-help">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-help-title">PeakLogic Help</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn popup-close" data-popup-close="help" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="help-panel" id="help-panel">
+        <nav class="help-nav" data-help-nav aria-label="Help topics"></nav>
+        <div class="help-body popup-scroll" data-help-body></div>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="st-pid-dialog" class="program-picker-dialog st-pid-dialog">
+    <form method="dialog" class="program-picker-form">
+      <header class="popup-header popup-header-split">
+        <h2>PID loop (ST)</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn popup-close" id="st-pid-cancel" title="Cancel">Cancel</button>
+        </div>
+      </header>
+      <div class="program-picker-form-body">
+        <p class="panel-hint">Pick PV and CV from VPI, VPR, or other INT/REAL tags. Inserts <span class="cell-mono">PidPv</span> / <span class="cell-mono">PidOut</span> ST.</p>
+        <label class="fb-field-lbl">PID block
+          <select id="st-pid-block" class="st-pid-tag-select"></select>
+        </label>
+        <label class="fb-field-lbl">PV (process variable)
+          <select id="st-pid-pv" class="st-pid-tag-select"></select>
+        </label>
+        <label class="fb-field-lbl">CV (control output)
+          <select id="st-pid-cv" class="st-pid-tag-select"></select>
+        </label>
+        <label class="fb-field-lbl">SP tag <span class="muted">(optional)</span>
+          <select id="st-pid-sp" class="st-pid-tag-select"></select>
+        </label>
+        <label class="st-pid-auto-lbl"><input type="checkbox" id="st-pid-auto" checked> Auto mode (<span class="cell-mono">PidAuto</span>)</label>
+      </div>
+      <footer class="popup-footer">
+        <button type="submit" class="btn primary" value="apply">Insert ST</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="project-picker-dialog" class="program-picker-dialog">
+    <form method="dialog" class="program-picker-form">
+      <header class="popup-header popup-header-split">
+        <h2>Open project from data/projects/</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn popup-close" id="project-picker-cancel" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="program-picker-form-body">
+        <p class="panel-hint cell-mono" id="project-picker-dir"></p>
+        <select id="project-picker-list" class="program-picker-list" size="14" required></select>
+      </div>
+      <footer class="popup-footer">
+        <button type="submit" class="btn primary" value="open">Open</button>
+        <button type="button" class="btn" id="project-picker-import">Import file…</button>
+        <button type="button" class="btn" id="project-picker-export">Export file…</button>
+        <button type="button" class="btn" id="project-picker-folder">Open folder…</button>
+        <button type="button" class="btn danger" id="project-picker-delete">Delete…</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="program-picker-dialog" class="program-picker-dialog">
+    <form method="dialog" class="program-picker-form">
+      <header class="popup-header popup-header-split">
+        <h2>Open program from st/</h2>
+        <div class="popup-header-actions">
+          <button type="button" class="btn popup-close" id="program-picker-cancel" title="Close">Close</button>
+        </div>
+      </header>
+      <div class="program-picker-form-body">
+        <p class="panel-hint cell-mono" id="program-picker-dir"></p>
+        <select id="program-picker-list" class="program-picker-list" size="14" required></select>
+      </div>
+      <footer class="popup-footer">
+        <button type="submit" class="btn primary" value="open">Open</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <script src="/js/api.js"></script>
+  <script>
+    window.PEAKLOGIC_BUILD = {
+      version: '<%= appVersion %>',
+      company: '<%= companyName %>',
+      product: '<%= product %>',
+      deployment: '<%= deployment %>',
+      estVersion: <%= estVersion %>,
+      hmiComposerVersion: '1.2',
+    };
+  </script>
+  <script src="/js/peaklogicCore.js"></script>
+  <script src="/js/graph.js"></script>
+  <script src="/js/hmiAssetPaths.js?v=<%= assetV %>"></script>
+  <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>
+  <script src="/js/hmi.js?v=<%= assetV %>"></script>
+  <script src="/js/hmiViewMode.js?v=<%= assetV %>"></script>
+  <script src="/js/hmiSetupUi.js?v=<%= assetV %>"></script>
+  <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>
+  <script src="/js/stEditor.js"></script>
+  <script src="/js/stPidEditor.js?v=<%= assetV %>"></script>
+  <script src="/js/windowStack.js?v=<%= assetV %>"></script>
+  <script src="/js/floatingPanel.js?v=<%= assetV %>"></script>
+  <script src="/js/expansionIo.js?v=<%= assetV %>"></script>
+  <script src="/js/programIoTags.js?v=<%= assetV %>"></script>
+  <script src="/js/liveIoUpdate.js?v=<%= assetV %>"></script>
+  <script src="/js/ioTimestamp.js?v=<%= assetV %>"></script>
+  <script src="/js/programUi.js?v=<%= assetV %>"></script>
+  <script src="/js/help.js"></script>
+  <script src="/js/roiCalculator.js?v=<%= assetV %>"></script>
+  <script src="/js/hardwareWizardUi.js?v=<%= assetV %>"></script>
+  <script src="/js/app.js?v=<%= assetV %>"></script>
+</body>
+</html>

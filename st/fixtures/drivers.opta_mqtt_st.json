@@ -1,7 +1,7 @@
 [
   {
     "id": "opta_mqtt_st",
-    "type": "mqtt_fleet",
+    "type": "mqtt_parc",
     "enabled": true,
     "deviceId": "opta_st_01",
     "remoteExecution": true,

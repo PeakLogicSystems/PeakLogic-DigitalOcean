@@ -1,5 +1,7 @@
 'use strict';
 
+process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'appliance';
+
 const path = require('path');
 const express = require('express');
 const { DEFAULT_PORT, DATA_DIR, ST_DIR } = require('./src/config');

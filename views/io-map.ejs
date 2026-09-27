@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I/O Map — PeakLogic</title>
+  <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
+</head>
+<body class="io-map-body">
+  <header class="topbar standalone-topbar">
+    <div class="topbar-brand"><a href="/" class="standalone-home-link">Peak<span>Logic</span></a></div>
+    <h1 class="standalone-title">I/O Map</h1>
+    <div class="standalone-meta popup-header-actions">
+      <label class="checkbox-inline"><input type="checkbox" id="io-map-live-update"> Enable I/O update</label>
+      <span id="io-map-status" class="muted cell-mono" aria-live="polite">Loading…</span>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+      <a href="/" class="btn popup-close page-close" title="Return to dashboard">Close</a>
+    </div>
+  </header>
+
+  <main class="io-map-main">
+    <p class="panel-hint io-map-hint">Input and output tags (Opta on-board, expansion modules, Modbus/RS-485 fieldbus). Values refresh automatically while runtime is running; when stopped, enable <strong>Enable I/O update</strong> to keep polling.</p>
+    <div id="io-map-runtime" class="io-map-runtime muted cell-mono"></div>
+    <div id="io-map-panel" class="io-map-panel program-io-panel">
+      <p class="program-io-empty">Loading I/O…</p>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/peaklogicCore.js"></script>
+  <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>
+  <script src="/js/expansionIo.js?v=<%= assetV %>"></script>
+  <script src="/js/liveIoUpdate.js?v=<%= assetV %>"></script>
+  <script src="/js/ioTimestamp.js?v=<%= assetV %>"></script>
+  <script src="/js/ioMapPage.js?v=<%= assetV %>"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark nav-mv px-3 mb-0">
+  <a href="/admin/tenants" class="navbar-brand brand-mark mb-0 h1 text-white text-decoration-none">
+    Peak<span>Logic</span> Platform
+  </a>
+  <div class="d-flex align-items-center gap-2">
+    <a href="/" class="btn btn-outline-light btn-sm">Tenant app</a>
+    <a href="/admin/logout" class="btn btn-outline-light btn-sm">Log out</a>
+  </div>
+</nav>
+<div class="bg-white border-bottom mb-4">
+  <div class="container py-2">
+    <ul class="nav nav-pills small">
+      <li class="nav-item">
+        <a class="nav-link <%= activeNav === 'tenants' ? 'active' : '' %>" href="/admin/tenants">Tenants</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= activeNav === 'new' ? 'active' : '' %>" href="/admin/tenants/new">Create tenant</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ALT1",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT2",
+    "preset": 2,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "leadIndex": 0,
+      "lagIndex": -1,
+      "activeUnit": 0,
+      "ready": false,
+      "fault": false,
+      "onlineIds": ["MOTOR1_ONLINE", "MOTOR2_ONLINE", "", ""],
+      "unitOutIds": ["MOTOR1_RUN", "MOTOR2_RUN", "", ""],
+      "leadOutId": "LEAD_RUN"
+    }
+  },
+  {
+    "id": "ALT2",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT4",
+    "preset": 4,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "leadIndex": 0,
+      "onlineIds": ["MOTOR1_ONLINE", "MOTOR2_ONLINE", "MOTOR3_ONLINE", "MOTOR4_ONLINE"],
+      "unitOutIds": ["MOTOR1_RUN", "MOTOR2_RUN", "MOTOR3_RUN", "MOTOR4_RUN"],
+      "leadOutId": "LEAD_RUN"
+    }
+  },
+  { "id": "SYS_RUN", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "ALT_BUMP", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "VPB1", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "VPB2", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "VPB3", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "LEAD_RUN", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ALT_FAULT", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_ONLINE", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR2_ONLINE", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR3_ONLINE", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR4_ONLINE", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_OFFLINE", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_OFFLINE", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR3_OFFLINE", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR4_OFFLINE", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR1_RUN", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_RUN", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR3_RUN", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR4_RUN", "type": "BOOL", "role": "memory", "value": false }
+]

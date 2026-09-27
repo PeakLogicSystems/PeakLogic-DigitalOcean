@@ -1,0 +1,532 @@
+--- Page 1 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+1 Confidential and Proprietary 
+EdgePoint Industrial Communications 
+Protocol 
+ 
+1 Introduction 
+ 
+The EdgePoint Industrial creates a data string using the JavaScript Object Notation (JSON) format. This 
+is a data interchange format that is easy for humans to understand and for machines to parse and 
+generate. This format has become extremely popular for Internet of Things (IoT) applications with many 
+software packages including support for the format. More information can be found at 
+https://www.json.org/json-en.html. 
+ 
+The EdgePoint Industrial uses the MQTT messaging protocol for communications between the client and 
+server. This is a publish – subscribe network protocol for logically connecting remote devices to a server. 
+Data from devices is published to a specific Topic managed by an MQTT Broker on a cloud server. MQTT 
+Clients can subscribe to the Topic to receive the data when it is published. Login to the broker and 
+permissions settings for the Topics ensure that specific Clients can only access specific Topics. 
+ 
+ 
+2 MQTT Topics 
+ 
+The messages from the remote device to the MQTT broker are sent to the following topic: 
+ 
+ /devices/<serialnum>/messages/events/ 
+ 
+Messages from the MQTT broker to the remote device are posted to the following topic: 
+ 
+ /devices/<serialnum>/messages/devicebound/ 
+ 
+Messages from an external controller that is connected to the Nexus Industrial are posted to the following 
+topic: 
+ 
+ /devices/<serialnum>/messages/events/module 
+ 
+For each of the topics, the <serialnum> field is the serial number of the Nexus Industrial. The serial 
+number of an external controller or device is contained within the posted message, but not in the topic. 
+ 
+ 
+3 Broker / Server to Device Data Structures 
+ 
+The following objects can be sent from the broker to the Nexus Industrial, primarily for configuration. 
+ 
+3.1 Device Reset 
+ 
+
+--- Page 2 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+2 Confidential and Proprietary 
+To force a device reset, post the following command to the “devicebound” topic. 
+ 
+{"reset": 1} 
+ 
+ 
+3.2 Update the Device Configuration File 
+ 
+The following command is used to update the device configurations remotely. This is posted to the 
+“devicebound” topic. 
+ 
+{"file": { <new settings> }} 
+ 
+The configuration settings include the following 
+ 
+throttle – The interval in seconds for the transmission of the device data to the broker 
+addr – The MQTT broker address 
+port – The MQTT broker port number 
+user – The MQTT broker user name 
+password – The MQTT broker password 
+ 
+ 
+3.3 Update the Modbus Configuration 
+ 
+The following command is used to update the Modbus configuration in the device. It is posted to the 
+“devicebound” topic. 
+ 
+ {"modbus": [ 
+   { 
+    "name": "<logical name>", 
+    "client": { 
+     "protocol": "rtu", 
+     "address": <controller address>, 
+     "baud": <baudrate>, 
+     "sn": "<serial number>" 
+    }, 
+    "registers": [ <register list> ] 
+   } 
+  ] 
+ } 
+ 
+ 
+modbus – Defines an external Modbus device interface 
+ 
+name – A logical name for the external controller 
+poll – The interval in seconds to interrogate the external controller 
+throttle – The interval in seconds for transmission of the external Modbus data to the broker 
+client – A structure containing the Modbus communications configuration 
+client.protocol – The Modbus protocol to be used – RTU or TCP 
+client.address – The address of the external controller 
+
+--- Page 3 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+3 Confidential and Proprietary 
+client.baud – The Modbus RTU baud rate  
+client.sn – The serial number of the external controller 
+registers – The array of Modbus registers to query and return in the data structure 
+ 
+The “poll” value sets the interval for the device to read the registers from the external controller. The 
+“throttle” value sets the interval for the device to send the data to the server. These are independent 
+values, so the device can read the registers on a quick interval then report the aggregated values to 
+the server on a longer interval. 
+ 
+ 
+3.4 Set Outputs 
+ 
+The following command is used to set the states of the outputs. 
+ 
+{"outputs": [ 
+  { 
+   "reg": <output register>, 
+   "state": <level (0/1)> 
+  }, 
+  { ... } 
+  ] 
+} 
+ 
+Output Board Label Output Register 
+Number 
+Output State 
+1 Relay 1 9410 0 – C  NC 
+1 – C  NO 2 Relay 2 9420 
+3 Relay 3 9430 
+4 Current Sink 1 9440 
+0 – Float 
+1 – Pull to Ground 
+5 Current Sink 2 9450 
+6 Current Sink 3 9460 
+7 Current Sink 4 9470 
+8 Current Sink 5 9480 
+9 Current Sink 6 9490 
+10 Current Sink 7 9500 
+11 Current Sink 8 9510 
+12 Current Sink 9 9520 
+13 Current Sink 10 9530 
+ 
+ 
+3.5 Set Timers 
+ 
+Each of the outputs can be configured to turn on and off automatically on a timer. The following 
+command sets the timers. 
+ 
+{"timers": [ 
+  { 
+   "reg": <Output Register Number>, 
+
+--- Page 4 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+4 Confidential and Proprietary 
+   "on": <start time of day in minutes>, 
+   "off": <end time of day in minutes> 
+  }, 
+  { ... } 
+  ] 
+ } 
+ 
+ 
+4 Device to Broker / Server Data Structures 
+ 
+The JSON messages sent by the EdgePoint RTU to the broker begin with a left brace ({) and end with a 
+right brace (}). Within the braces are a series of Names followed by a colon (:) and then a Value. Each 
+name / value pair are separated by a comma (,). A value can also be an array of Name / Value pairs. An 
+array 
+ 
+The Names supported by the EdgePoint RTU are all strings in double quotes (“ “). Values can be a string 
+in double quotes, or a number, or true or false or null.  
+ 
+The following table outlines the Names and Values sent by the EdgePoint RTU to the broker. 
+ 
+Name Value Description Data Type 
+“10” <serialnum>, Serial Number int 
+“12” <application version>, Software Application Version string 
+“appname” <application Name>, Software Application Name string 
+“variant” <variant>, Hardware Variant int 
+“mac” <MAC Address>, Device MAC Address string 
+“inputs” <input object>, Device Input Control and Monitoring array 
+"outputs" <output object>, Device Output Control and Monitoring array 
+“tz” <time zone>, Time Zone Offset int 
+“dst” <daylight savings time> Daylight Savings Time Indicator Int 
+ 
+4.1 I nputs Objects (9010 to 9200) 
+ 
+These objects report the input types and the measured values for each input. It consists of an array of 
+Name / Value pairs. 
+ 
+Each input has a series of Names that are used for configuration. This allows each input to be 
+individually configured by commands from the server. 
+ 
+Input Board Label Name Input Type 
+1 AC_IN1 “9010“ “9011“ 
+2 AC_IN2 “9020“ “9021“ 
+3 AC_IN3 “9030“ “9031“ 
+4 AC_IN4 “9040“ “9041“ 
+5 AC_IN5 “9050“ “9051“ 
+6 AC_IN6 “9060“ “9061“ 
+7 AC_IN7 “9070“ “9071“ 
+8 AC_IN8 “9080“ “9081“ 
+
+--- Page 5 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+5 Confidential and Proprietary 
+9 AC_IN9 “9090“ “9091“ 
+10 AC_IN10 “9100“ “9101“ 
+11 AC_IN11 “9110“ “9111“ 
+12 AC_IN12 “9120“ “9121“ 
+13 AC_IN13 “9130“ “9131“ 
+14 AC_IN14 “9140“ “9141“ 
+15 AC_IN15 “9150“ “9151“ 
+16 AC_IN16 “9160“ “9161“ 
+17 AN1 “9170“ “9171“ 
+18 AN2 “9180“ “9181“ 
+19 AN3 “9190“ “9191“ 
+20 AN4 “9200“ “9201“ 
+ 
+The table below shows the definition of each of these names 
+ 
+Name Value Description 
+“90n0” <input value> Measured ADC value 
+“90n1” <input type> 
+Type of input 
+    0 – Discrete (ON / OFF) 
+    1 – Pulse 
+    2 – Frequency 
+    3 – Analog 
+ 
+The AC Inputs on the EdgePoint Industrial can only be discrete ON / OFF based on hardware 
+limitations. 
+ 
+The Value for the analog inputs is the voltage measured on the line. Conversion to a measured 
+parameter is done on the server. 
+ 
+ 
+4.2 Outputs Objects (9410 to 9500) 
+ 
+These objects report the state and values of the outputs on the EdgePoint Industrial. 
+ 
+Each output has a series of Names that are used for configuration. This allows each output to be 
+individually configured by commands from the server. 
+ 
+Output Board Label Output Register 
+Number 
+1 Relay 1 9410 
+2 Relay 2 9420 
+3 Relay 3 9430 
+4 Current Sink 1 9440 
+5 Current Sink 2 9450 
+6 Current Sink 3 9460 
+7 Current Sink 4 9470 
+8 Current Sink 5 9480 
+9 Current Sink 6 9490 
+
+--- Page 6 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+6 Confidential and Proprietary 
+10 Current Sink 7 9500 
+11 Current Sink 8 9510 
+12 Current Sink 9 9520 
+13 Current Sink 10 9530 
+ 
+ 
+The table below shows the definition of the names for the outputs. 
+ 
+Name Value Description 
+“94n0” <output state> Current state of the output 
+“94n1” <set state> Set the state of the output 
+ 
+ 
+5 Configuration Example 
+ 
+The following is an example of a configuration command sent from the broker to the device. 
+{ 
+ "addr": "mqtt.broker.example", 
+ "port": 1883, 
+ "user": "demo", 
+ "password": "mypass", 
+  
+ "throttle": 30, 
+  
+ "modbus": [ 
+  { 
+   "name": "Desktup Test", 
+   "client": { 
+    "protocol": "rtu", 
+    "address": 1, 
+    "baud": 38400, 
+    "sn": "DT-BEP" 
+   }, 
+   "registers": [ 
+    40001, 40002, 40003, 40004, 40005, 40006, 40007, 40008, 40009, 40010 
+    ], 
+   "poll": 30, 
+   "throttle": 300 
+  } 
+ ] 
+} 
+ 
+ 
+6 Example Data from the Device 
+ 
+6.1 Example Gateway Data Structure 
+ 
+
+--- Page 7 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+7 Confidential and Proprietary 
+This data structure includes information about the gateway itself, excluding any external peripherals, 
+controllers or other devices. 
+ 
+{ 
+"10":"40a36bcd7113", 
+"12":"2023.09.21", 
+"appname":"epi-base", 
+"variant":2, 
+"mac":"40a36bcd7113", 
+"inputs":[ 
+{"9010":0,"9011":0}, 
+{"9020":0,"9021":0}, 
+{"9030":0,"9031":0}, 
+{"9040":0,"9041":0}, 
+{"9050":0,"9051":0}, 
+{"9060":0,"9061":0}, 
+{"9070":0,"9071":0}, 
+{"9080":0,"9081":0}, 
+{"9090":0,"9091":0}, 
+{"9100":0,"9101":0}, 
+{"9110":0,"9111":0}, 
+{"9120":0,"9121":0}, 
+{"9130":0,"9131":0}, 
+{"9140":0,"9141":0}, 
+{"9150":0,"9151":0}, 
+{"9160":0,"9161":0}, 
+{"9170":0.0007,"9171":3}, 
+{"9180":0.0007,"9181":3}, 
+{"9190":0.0015,"9191":3}, 
+{"9200":0.0007,"9201":3} 
+], 
+"outputs":[ 
+{"9410":0,"9411":0}, 
+{"9420":0,"9421":0}, 
+{"9430":0,"9431":0}, 
+{"9440":1,"9441":1}, 
+{"9450":1,"9451":1}, 
+{"9460":1,"9461":1}, 
+{"9470":1,"9471":1}, 
+{"9480":1,"9481":1}, 
+{"9490":1,"9491":1}, 
+{"9500":1,"9501":1}, 
+{"9510":1,"9511":1}, 
+{"9520":1,"9521":1}, 
+{"9530":1,"9531":1} 
+], 
+"tz":0, 
+"dst":0 
+} 
+ 
+
+--- Page 8 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+8 Confidential and Proprietary 
+ 
+6.2 Example Controller Data Structure 
+ 
+This data structure includes the Modbus values from an external controller. 
+ 
+{ 
+"10":"DT-BEP", 
+"11":"modbus-client", 
+"modbus":{ 
+"client":{ 
+"ca":1, 
+"protocol":"rtu", 
+"rate":300}, 
+"registers":[ 
+{"40001":0}, 
+{"40002":200}, 
+{"40003":700}, 
+{"40004":650}, 
+{"40005":1004}, 
+{"40006":1005}, 
+{"40007":850}, 
+{"40008":1007}, 
+{"40009":1008}, 
+{"40010":15}], 
+"poll":30, 
+"throttle":300 
+} 
+} 
+ 
+ 
+7 Update MQTT Broker on the EdgePoint Industrial 
+ 
+This section describes how to change the MQTT broker on the EdgePoint Industrial directly, without 
+having to go through the default broker. 
+ 
+ 
+7.1 Wi-Fi Login 
+ 
+The gateway automatically starts broadcasting Wi-Fi once it boots up. To connect to it, look for the 
+following Wi-Fi network: 
+ 
+SSID: NS-nnnn 
+Password: iotpoint 
+ 
+The "nnnn" part of the SSID are the last few characters in the device's MAC address. The SSID and 
+password can be changed by logging into the LUCI interface on the gateway. 
+ 
+ 
+
+--- Page 9 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+9 Confidential and Proprietary 
+7.2 LUCI Login 
+ 
+To log into LUCI, connect to the Wi-Fi on the gateway and open a web browser. Type: 
+ 
+192.168.3.1 
+ 
+into the address bar to connect to the interface. The login credentials are: 
+ 
+User: root 
+Password: iotpoint 
+ 
+Click “login” to proceed. 
+ 
+ 
+ 
+This will bring up the Status page. 
+ 
+
+
+--- Page 10 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+10 Confidential and Proprietary 
+ 
+ 
+ 
+7.3 Establish an SSH Connection 
+ 
+The following examples use the Tera Term program (https://ttssh2.osdn.jp/index.html.en) to establish 
+an SSH connection to the device. 
+ 
+
+
+--- Page 11 ---
+ 
+ 
+  
+501 Hobbs Street 
+Tampa, FL 33619 
+(813) 302-7131 
+11 Confidential and Proprietary 
+ 
+ 
+The login credentials are: 
+ 
+User: root 
+Password: iotpoint 
+ 
+The application file is at /etc/config/epi-app. To edit the file, you will use a file editor “vi”. 
+(https://www.cs.colostate.edu/helpdocs/vi.html
+) for some help. 
+ 
+ 
+ 
+Modify the file for need changes from the defaults. 
+ 
+ 
+ 
+At a minimum, you will need to redirect to your MQTT broker. 
+ 
+Save the file and reboot. 
+ 
+ 

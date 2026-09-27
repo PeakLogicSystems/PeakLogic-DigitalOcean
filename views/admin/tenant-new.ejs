@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PeakLogic Platform — <%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/peaklogic.css">
+</head>
+<body class="bg-light">
+
+<%- include('_nav') %>
+
+<main class="container pb-5">
+  <h2 class="h4 mb-3">Create tenant</h2>
+  <% if (error) { %><div class="alert alert-danger"><%= error %></div><% } %>
+
+  <div class="card dashboard-card">
+    <div class="card-body p-4">
+      <form method="POST" action="/admin/tenants">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Organization name</label>
+            <input type="text" name="tenantName" class="form-control" required
+                   value="<%= (form && form.tenantName) || '' %>">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Slug</label>
+            <input type="text" name="tenantSlug" class="form-control" required
+                   value="<%= (form && form.tenantSlug) || '' %>">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Admin email</label>
+            <input type="email" name="email" class="form-control" required
+                   value="<%= (form && form.email) || '' %>">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Admin password</label>
+            <input type="password" name="password" class="form-control" required minlength="8">
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="cmmsEnabled" id="cmmsEnabled">
+              <label class="form-check-label" for="cmmsEnabled">Enable CMMS for this tenant</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">CMMS plan</label>
+            <select name="cmmsPlan" class="form-select">
+              <% cmmsPlans.forEach(function(p) { %>
+                <option value="<%= p %>"><%= p %></option>
+              <% }); %>
+            </select>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-purple">Create tenant</button>
+          <a href="/admin/tenants" class="btn btn-outline-secondary ms-2">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

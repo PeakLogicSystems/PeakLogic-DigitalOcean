@@ -1,0 +1,29 @@
+[
+  { "id": "MOTOR1_HOA", "label": "Filter pump HOA", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_STA", "label": "Filter pump status", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_START", "label": "Filter pump start", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_STOP", "label": "Filter pump stop", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_RESET", "label": "Filter pump reset", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_OFFLINE", "label": "Filter pump offline", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_RUN", "label": "Filter pump run cmd", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_HRS", "label": "Filter pump run hours", "type": "REAL", "role": "memory", "value": 0 },
+  { "id": "MOTOR1_STARTS", "label": "Filter pump starts", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_CNTR", "label": "Filter pump start counter", "type": "COUNTER", "role": "memory", "value": 0, "preset": 999999, "mode": "CTU" },
+
+  { "id": "PUMP_SPEED", "label": "Filter RPM setpoint", "type": "INT", "role": "memory", "value": 1800, "wordWidth": 16 },
+  { "id": "FILTER_EN", "label": "Filter schedule enable", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "FILTER_24HR", "label": "Filter 24h run", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "FILTER_TOD", "label": "Filter clock (min)", "type": "INT", "role": "memory", "value": 480, "wordWidth": 16 },
+  { "id": "FILTER_TOD_STEP", "label": "Filter clock step", "type": "INT", "role": "memory", "value": 1, "wordWidth": 16 },
+  { "id": "FILTER_START", "label": "Filter window start", "type": "INT", "role": "memory", "value": 480, "wordWidth": 16 },
+  { "id": "FILTER_END", "label": "Filter window end", "type": "INT", "role": "memory", "value": 1200, "wordWidth": 16 },
+  { "id": "VPB1", "label": "Filter window permissive", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "PUMP_STA_RAW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "driverId": "badu_pump", "driverAddress": { "vgreen": "status" } },
+  { "id": "PUMP_RPM", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "driverId": "badu_pump", "driverAddress": { "vgreen": "rpm" } },
+  { "id": "PUMP_RPM_DEM", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "driverId": "badu_pump", "driverAddress": { "vgreen": "demand_rpm" } },
+  { "id": "PUMP_PWR_W", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "driverId": "badu_pump", "driverAddress": { "vgreen": "power_w" } },
+  { "id": "PUMP_TEMP_C", "type": "REAL", "role": "input", "value": 0, "driverId": "badu_pump", "driverAddress": { "vgreen": "temp_c" } },
+  { "id": "PUMP_RUN_CMD", "type": "BOOL", "role": "output", "value": false, "driverId": "badu_pump", "driverAddress": { "vgreen": "run" } },
+  { "id": "PUMP_RPM_CMD", "type": "INT", "role": "output", "value": 1800, "wordWidth": 16, "driverId": "badu_pump", "driverAddress": { "vgreen": "rpm_cmd" } }
+]

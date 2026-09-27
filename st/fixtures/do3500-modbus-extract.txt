@@ -1,0 +1,65 @@
+126-1039   © Icon Process Controls Ltd.
+ProCon® — DO3000 Series
+Dissolved Oxygen Sensor
+MODBUS Communication Protocol
+Read the user's manual carefully before starting to use the unit.
+Producer reserves the right to implement changes without prior notice.
+226-1039   © Icon Process Controls Ltd.
+ProCon® — DO3000 Series
+Dissolved Oxygen Sensor
+Communication Protocol
+Sensor Read Address
+Function Code: 04
+Communication Configuration: 9600 N 8 1
+Definition Address Items Default Decimal Range Limitation Explanation
+Readings
+0 DO Value - 2 0 – 2000 OR
+1 Temperature - 1 0 – 600 OR
+2 % - 1 0 – 2000 OR
+3 Blu-ray Voltage - 0 OR
+4 Temp. Resistance - 0 OR
+5 Red-ray Voltage - 0 OR
+Settings
+6 - - 3 RW
+7 Temperature 
+Correction 0 1 RW
+8 Dynamic 
+Correction 0 2 RW
+9 Linear 
+Compensation 100 2 RW
+10 Temp. Type 0 0 0: Automatic
+1: Manual RW
+11 Manual 
+Temperature 250 1 0 – 600 RW
+12 Address 1 0 1 - 247 RW
+13 Calibration Status - - - OR
+0: Calibration completed
+1: On-site calibration
+2: Anaerobic calibration
+3: Air calibration
+14 Field Calibration 100 2 RW
+326-1039   © Icon Process Controls Ltd.
+ProCon® — DO3000 Series
+Dissolved Oxygen Sensor
+Definition Address Items Default Decimal Range Limitation Explanation
+Settings
+15 Anaerobic 
+Calibration 600 0 0 – 4096 RW
+Remove the black rubber sleeve 
+and place the sensor in an 
+anaerobic (oxygen-free) water 
+solution. If you are using a freshly 
+prepared anhydrous sodium 
+sulfite solution, allow time for the 
+oxygen-consumption reaction 
+to occur. It is recommended to 
+immerse the electrode and wait 
+about 3 minutes before setting 
+the zero point and starting the 
+calibration.
+16 Air Calibration 360 0 0 – 4096 RW Enter 1 to start the calibration
+17 Calibrated Temp. 250 1 0 – 600 RW
+18 Red Light Phase 180 - - - Red light voltage recorded 
+during zero oxygen calibration
+19 Buffer Factor 40 0 0 – 64 RW
+Factory 20 Factory Set 1 RW

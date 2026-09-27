@@ -1,0 +1,51 @@
+[
+  {
+    "id": "HP_MODE",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "pentair_hp",
+    "driverAddress": { "pentair": "mode", "deviceAddr": 112 },
+    "comment": "0=off 1=heat 2=cool"
+  },
+  {
+    "id": "HP_RUNNING",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "pentair_hp",
+    "driverAddress": { "pentair": "running", "deviceAddr": 112 }
+  },
+  {
+    "id": "HP_COOLING",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "pentair_hp",
+    "driverAddress": { "pentair": "cooling", "deviceAddr": 112 }
+  },
+  {
+    "id": "HP_OFFSET_F",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "driverId": "pentair_hp",
+    "driverAddress": { "pentair": "offset_temp", "deviceAddr": 112 }
+  },
+  {
+    "id": "HP_MODE_CMD",
+    "type": "INT",
+    "role": "output",
+    "value": 0,
+    "driverId": "pentair_hp",
+    "driverAddress": { "pentair": "mode_cmd", "deviceAddr": 112 }
+  },
+  {
+    "id": "HP_RUN_CMD",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "pentair_hp",
+    "driverAddress": { "pentair": "run_cmd", "deviceAddr": 112 }
+  }
+]

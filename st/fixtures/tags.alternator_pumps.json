@@ -1,0 +1,76 @@
+[
+
+  {
+
+    "id": "ALT1",
+
+    "label": "Pump alternator",
+
+    "type": "ALT",
+
+    "role": "fb",
+
+    "mode": "ALT2",
+
+    "preset": 2,
+
+    "value": 0,
+
+    "fb": {
+
+      "enabled": false,
+
+      "onlineIds": ["", "", "", ""],
+
+      "unitOutIds": ["", "", "", ""],
+
+      "leadSelIds": ["", "", "", ""],
+
+      "lagSelIds": ["", "", "", ""],
+
+      "lag2SelIds": ["", "", "", ""],
+
+      "levelInputMode": "both",
+
+      "levelControlEnabled": false,
+
+      "leadIndex": 0,
+
+      "lagIndex": -1,
+
+      "activeUnit": 0
+
+    }
+
+  },
+
+  { "id": "SYS_RUN", "label": "System run", "type": "BOOL", "role": "memory", "value": true },
+
+  { "id": "ALT_OFF", "label": "Alternator off", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "ALT_BUMP", "label": "Rotate lead", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "LVL_HIGH", "label": "High level (both pumps)", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "LVL_LOW", "label": "Lag request (lead + lag)", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "TANK_LVL", "label": "Wet well level", "type": "REAL", "role": "memory", "value": 50 },
+
+  { "id": "MOTOR1_ONLINE", "label": "Pump 1 online", "type": "BOOL", "role": "memory", "value": true },
+
+  { "id": "MOTOR2_ONLINE", "label": "Pump 2 online", "type": "BOOL", "role": "memory", "value": true },
+
+  { "id": "MOTOR1_RUN", "label": "Pump 1 run cmd", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR2_RUN", "label": "Pump 2 run cmd", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "LEAD_RUN", "label": "Lead run summary", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "ALT_FAULT", "label": "Alternator fault", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_OFFLINE", "label": "Pump 1 offline latch", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR2_OFFLINE", "label": "Pump 2 offline latch", "type": "BOOL", "role": "memory", "value": false }
+
+]
+

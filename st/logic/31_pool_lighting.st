@@ -1,0 +1,481 @@
+(*
+  Pool lighting — 6 relay zones, color-wheel pulse trains, operation drum
+
+  HMI: @composite/pool_lighting (mobile tile) + pool_overview lighting strip
+  Fixtures: st/fixtures/tags.pool_lighting.json (merged with pool controller tags)
+
+  Color-wheel fixtures: power on holds color; brief off (<~2 s) advances one step.
+  To set color N: pulse off (target - actual) mod 8 times.
+
+  LIGHT_OP operation drum:
+    0 = Off
+    1 = All on
+    2 = Zone select (per-zone LIGHT_Zn_EN)
+    3 = Color program (hold + apply pulses)
+    4 = Schedule (VPB1 filter window + LIGHT_SCHED_EN)
+
+  Interlocks: LIGHT_EN, not offline, not backwash; pulses require MOTOR1_RUN.
+*)
+
+(* ========== RESET / OFFLINE ========== *)
+
+IF IsON(LIGHT_RESET) THEN
+  SetInt(LIGHT_OP, 0);
+  SetInt(LIGHT_SEL_Z, 1);
+  TurnOFF(LIGHT_OFFLINE);
+  TurnOFF(LIGHT_SCHED_EN);
+  TurnOFF(LIGHT_Z1_EN);
+  TurnOFF(LIGHT_Z2_EN);
+  TurnOFF(LIGHT_Z3_EN);
+  TurnOFF(LIGHT_Z4_EN);
+  TurnOFF(LIGHT_Z5_EN);
+  TurnOFF(LIGHT_Z6_EN);
+  TurnOFF(LIGHT_PULSE_BUSY_Z1);
+  TurnOFF(LIGHT_PULSE_BUSY_Z2);
+  TurnOFF(LIGHT_PULSE_BUSY_Z3);
+  TurnOFF(LIGHT_PULSE_BUSY_Z4);
+  TurnOFF(LIGHT_PULSE_BUSY_Z5);
+  TurnOFF(LIGHT_PULSE_BUSY_Z6);
+  SetInt(LIGHT_PULSE_STA_Z1, 0);
+  SetInt(LIGHT_PULSE_STA_Z2, 0);
+  SetInt(LIGHT_PULSE_STA_Z3, 0);
+  SetInt(LIGHT_PULSE_STA_Z4, 0);
+  SetInt(LIGHT_PULSE_STA_Z5, 0);
+  SetInt(LIGHT_PULSE_STA_Z6, 0);
+  TurnOFF(LIGHT_RESET);
+END_IF;
+
+IF IsON(LIGHT_OFFLINE) OR IsOFF(LIGHT_EN) OR IsOFF(POOL_EN) OR IsON(POOL_OFFLINE) THEN
+  TurnOFF(LIGHT_Z1);
+  TurnOFF(LIGHT_Z2);
+  TurnOFF(LIGHT_Z3);
+  TurnOFF(LIGHT_Z4);
+  TurnOFF(LIGHT_Z5);
+  TurnOFF(LIGHT_Z6);
+  TurnOFF(LIGHT_PULSE_BUSY_Z1);
+  TurnOFF(LIGHT_PULSE_BUSY_Z2);
+  TurnOFF(LIGHT_PULSE_BUSY_Z3);
+  TurnOFF(LIGHT_PULSE_BUSY_Z4);
+  TurnOFF(LIGHT_PULSE_BUSY_Z5);
+  TurnOFF(LIGHT_PULSE_BUSY_Z6);
+  SetInt(LIGHT_PULSE_STA_Z1, 0);
+  SetInt(LIGHT_PULSE_STA_Z2, 0);
+  SetInt(LIGHT_PULSE_STA_Z3, 0);
+  SetInt(LIGHT_PULSE_STA_Z4, 0);
+  SetInt(LIGHT_PULSE_STA_Z5, 0);
+  SetInt(LIGHT_PULSE_STA_Z6, 0);
+  SetInt(LIGHT_STA, 0);
+END_IF;
+
+(* ========== PERMISSIVES ========== *)
+
+IF IsON(LIGHT_EN) AND IsOFF(LIGHT_OFFLINE) AND IsON(POOL_EN) AND IsOFF(POOL_OFFLINE) AND IsOFF(POOL_BW_BUSY) THEN
+  TurnON(LIGHT_PERM);
+ELSE
+  TurnOFF(LIGHT_PERM);
+END_IF;
+
+IF IsON(LIGHT_PERM) AND IsON(MOTOR1_RUN) THEN
+  TurnON(LIGHT_PULSE_PERM);
+ELSE
+  TurnOFF(LIGHT_PULSE_PERM);
+END_IF;
+
+(* ========== ZONE 1 COLOR PULSE TRAIN ========== *)
+
+IF IsON(LIGHT_APPLY_Z1) AND IsOFF(LIGHT_PULSE_BUSY_Z1) AND IsON(LIGHT_PULSE_PERM) THEN
+  IF LIGHT_COLOR_Z1 <> LIGHT_STA_Z1 THEN
+    SetInt(LIGHT_PULSE_REM_Z1, (LIGHT_COLOR_Z1 - LIGHT_STA_Z1 + 8) % 8);
+    IF LIGHT_PULSE_REM_Z1 <= 0 THEN SetInt(LIGHT_PULSE_REM_Z1, 8); END_IF;
+    TurnON(LIGHT_PULSE_BUSY_Z1);
+    SetInt(LIGHT_PULSE_STA_Z1, 1);
+    TurnON(VPB_LZ1_RUN);
+  END_IF;
+END_IF;
+TurnOFF(LIGHT_APPLY_Z1);
+
+IF IsON(LIGHT_PULSE_BUSY_Z1) THEN
+  IF LIGHT_PULSE_STA_Z1 = 1 THEN
+    TurnOFF(LIGHT_Z1);
+    TimerInput(TMR_LZ1_OFF, VPB_LZ1_RUN);
+    IF TimerDone(TMR_LZ1_OFF) THEN
+      TurnOFF(VPB_LZ1_RUN);
+      SetInt(LIGHT_PULSE_STA_Z1, 2);
+      TurnON(VPB_LZ1_RUN);
+    END_IF;
+  ELSE
+    IF LIGHT_PULSE_STA_Z1 = 2 THEN
+      TurnON(LIGHT_Z1);
+      TimerInput(TMR_LZ1_OFF, VPB_LZ1_RUN);
+      IF TimerDone(TMR_LZ1_OFF) THEN
+        TurnOFF(VPB_LZ1_RUN);
+        SetInt(LIGHT_PULSE_REM_Z1, LIGHT_PULSE_REM_Z1 - 1);
+        IF LIGHT_PULSE_REM_Z1 <= 0 THEN
+          SetInt(LIGHT_STA_Z1, LIGHT_COLOR_Z1);
+          TurnOFF(LIGHT_PULSE_BUSY_Z1);
+          SetInt(LIGHT_PULSE_STA_Z1, 0);
+        ELSE
+          SetInt(LIGHT_PULSE_STA_Z1, 3);
+          TurnON(VPB_LZ1_RUN);
+        END_IF;
+      END_IF;
+    ELSE
+      IF LIGHT_PULSE_STA_Z1 = 3 THEN
+        TurnON(LIGHT_Z1);
+        TimerInput(TMR_LZ1_GAP, VPB_LZ1_RUN);
+        IF TimerDone(TMR_LZ1_GAP) THEN
+          TurnOFF(VPB_LZ1_RUN);
+          SetInt(LIGHT_PULSE_STA_Z1, 1);
+          TurnON(VPB_LZ1_RUN);
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* ========== ZONE 2 COLOR PULSE TRAIN ========== *)
+
+IF IsON(LIGHT_APPLY_Z2) AND IsOFF(LIGHT_PULSE_BUSY_Z2) AND IsON(LIGHT_PULSE_PERM) THEN
+  IF LIGHT_COLOR_Z2 <> LIGHT_STA_Z2 THEN
+    SetInt(LIGHT_PULSE_REM_Z2, (LIGHT_COLOR_Z2 - LIGHT_STA_Z2 + 8) % 8);
+    IF LIGHT_PULSE_REM_Z2 <= 0 THEN SetInt(LIGHT_PULSE_REM_Z2, 8); END_IF;
+    TurnON(LIGHT_PULSE_BUSY_Z2);
+    SetInt(LIGHT_PULSE_STA_Z2, 1);
+    TurnON(VPB_LZ2_RUN);
+  END_IF;
+END_IF;
+TurnOFF(LIGHT_APPLY_Z2);
+
+IF IsON(LIGHT_PULSE_BUSY_Z2) THEN
+  IF LIGHT_PULSE_STA_Z2 = 1 THEN
+    TurnOFF(LIGHT_Z2);
+    TimerInput(TMR_LZ2_OFF, VPB_LZ2_RUN);
+    IF TimerDone(TMR_LZ2_OFF) THEN
+      TurnOFF(VPB_LZ2_RUN);
+      SetInt(LIGHT_PULSE_STA_Z2, 2);
+      TurnON(VPB_LZ2_RUN);
+    END_IF;
+  ELSE
+    IF LIGHT_PULSE_STA_Z2 = 2 THEN
+      TurnON(LIGHT_Z2);
+      TimerInput(TMR_LZ2_OFF, VPB_LZ2_RUN);
+      IF TimerDone(TMR_LZ2_OFF) THEN
+        TurnOFF(VPB_LZ2_RUN);
+        SetInt(LIGHT_PULSE_REM_Z2, LIGHT_PULSE_REM_Z2 - 1);
+        IF LIGHT_PULSE_REM_Z2 <= 0 THEN
+          SetInt(LIGHT_STA_Z2, LIGHT_COLOR_Z2);
+          TurnOFF(LIGHT_PULSE_BUSY_Z2);
+          SetInt(LIGHT_PULSE_STA_Z2, 0);
+        ELSE
+          SetInt(LIGHT_PULSE_STA_Z2, 3);
+          TurnON(VPB_LZ2_RUN);
+        END_IF;
+      END_IF;
+    ELSE
+      IF LIGHT_PULSE_STA_Z2 = 3 THEN
+        TurnON(LIGHT_Z2);
+        TimerInput(TMR_LZ2_GAP, VPB_LZ2_RUN);
+        IF TimerDone(TMR_LZ2_GAP) THEN
+          TurnOFF(VPB_LZ2_RUN);
+          SetInt(LIGHT_PULSE_STA_Z2, 1);
+          TurnON(VPB_LZ2_RUN);
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* ========== ZONE 3 COLOR PULSE TRAIN ========== *)
+
+IF IsON(LIGHT_APPLY_Z3) AND IsOFF(LIGHT_PULSE_BUSY_Z3) AND IsON(LIGHT_PULSE_PERM) THEN
+  IF LIGHT_COLOR_Z3 <> LIGHT_STA_Z3 THEN
+    SetInt(LIGHT_PULSE_REM_Z3, (LIGHT_COLOR_Z3 - LIGHT_STA_Z3 + 8) % 8);
+    IF LIGHT_PULSE_REM_Z3 <= 0 THEN SetInt(LIGHT_PULSE_REM_Z3, 8); END_IF;
+    TurnON(LIGHT_PULSE_BUSY_Z3);
+    SetInt(LIGHT_PULSE_STA_Z3, 1);
+    TurnON(VPB_LZ3_RUN);
+  END_IF;
+END_IF;
+TurnOFF(LIGHT_APPLY_Z3);
+
+IF IsON(LIGHT_PULSE_BUSY_Z3) THEN
+  IF LIGHT_PULSE_STA_Z3 = 1 THEN
+    TurnOFF(LIGHT_Z3);
+    TimerInput(TMR_LZ3_OFF, VPB_LZ3_RUN);
+    IF TimerDone(TMR_LZ3_OFF) THEN
+      TurnOFF(VPB_LZ3_RUN);
+      SetInt(LIGHT_PULSE_STA_Z3, 2);
+      TurnON(VPB_LZ3_RUN);
+    END_IF;
+  ELSE
+    IF LIGHT_PULSE_STA_Z3 = 2 THEN
+      TurnON(LIGHT_Z3);
+      TimerInput(TMR_LZ3_OFF, VPB_LZ3_RUN);
+      IF TimerDone(TMR_LZ3_OFF) THEN
+        TurnOFF(VPB_LZ3_RUN);
+        SetInt(LIGHT_PULSE_REM_Z3, LIGHT_PULSE_REM_Z3 - 1);
+        IF LIGHT_PULSE_REM_Z3 <= 0 THEN
+          SetInt(LIGHT_STA_Z3, LIGHT_COLOR_Z3);
+          TurnOFF(LIGHT_PULSE_BUSY_Z3);
+          SetInt(LIGHT_PULSE_STA_Z3, 0);
+        ELSE
+          SetInt(LIGHT_PULSE_STA_Z3, 3);
+          TurnON(VPB_LZ3_RUN);
+        END_IF;
+      END_IF;
+    ELSE
+      IF LIGHT_PULSE_STA_Z3 = 3 THEN
+        TurnON(LIGHT_Z3);
+        TimerInput(TMR_LZ3_GAP, VPB_LZ3_RUN);
+        IF TimerDone(TMR_LZ3_GAP) THEN
+          TurnOFF(VPB_LZ3_RUN);
+          SetInt(LIGHT_PULSE_STA_Z3, 1);
+          TurnON(VPB_LZ3_RUN);
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* ========== ZONE 4 COLOR PULSE TRAIN ========== *)
+
+IF IsON(LIGHT_APPLY_Z4) AND IsOFF(LIGHT_PULSE_BUSY_Z4) AND IsON(LIGHT_PULSE_PERM) THEN
+  IF LIGHT_COLOR_Z4 <> LIGHT_STA_Z4 THEN
+    SetInt(LIGHT_PULSE_REM_Z4, (LIGHT_COLOR_Z4 - LIGHT_STA_Z4 + 8) % 8);
+    IF LIGHT_PULSE_REM_Z4 <= 0 THEN SetInt(LIGHT_PULSE_REM_Z4, 8); END_IF;
+    TurnON(LIGHT_PULSE_BUSY_Z4);
+    SetInt(LIGHT_PULSE_STA_Z4, 1);
+    TurnON(VPB_LZ4_RUN);
+  END_IF;
+END_IF;
+TurnOFF(LIGHT_APPLY_Z4);
+
+IF IsON(LIGHT_PULSE_BUSY_Z4) THEN
+  IF LIGHT_PULSE_STA_Z4 = 1 THEN
+    TurnOFF(LIGHT_Z4);
+    TimerInput(TMR_LZ4_OFF, VPB_LZ4_RUN);
+    IF TimerDone(TMR_LZ4_OFF) THEN
+      TurnOFF(VPB_LZ4_RUN);
+      SetInt(LIGHT_PULSE_STA_Z4, 2);
+      TurnON(VPB_LZ4_RUN);
+    END_IF;
+  ELSE
+    IF LIGHT_PULSE_STA_Z4 = 2 THEN
+      TurnON(LIGHT_Z4);
+      TimerInput(TMR_LZ4_OFF, VPB_LZ4_RUN);
+      IF TimerDone(TMR_LZ4_OFF) THEN
+        TurnOFF(VPB_LZ4_RUN);
+        SetInt(LIGHT_PULSE_REM_Z4, LIGHT_PULSE_REM_Z4 - 1);
+        IF LIGHT_PULSE_REM_Z4 <= 0 THEN
+          SetInt(LIGHT_STA_Z4, LIGHT_COLOR_Z4);
+          TurnOFF(LIGHT_PULSE_BUSY_Z4);
+          SetInt(LIGHT_PULSE_STA_Z4, 0);
+        ELSE
+          SetInt(LIGHT_PULSE_STA_Z4, 3);
+          TurnON(VPB_LZ4_RUN);
+        END_IF;
+      END_IF;
+    ELSE
+      IF LIGHT_PULSE_STA_Z4 = 3 THEN
+        TurnON(LIGHT_Z4);
+        TimerInput(TMR_LZ4_GAP, VPB_LZ4_RUN);
+        IF TimerDone(TMR_LZ4_GAP) THEN
+          TurnOFF(VPB_LZ4_RUN);
+          SetInt(LIGHT_PULSE_STA_Z4, 1);
+          TurnON(VPB_LZ4_RUN);
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* ========== ZONE 5 COLOR PULSE TRAIN ========== *)
+
+IF IsON(LIGHT_APPLY_Z5) AND IsOFF(LIGHT_PULSE_BUSY_Z5) AND IsON(LIGHT_PULSE_PERM) THEN
+  IF LIGHT_COLOR_Z5 <> LIGHT_STA_Z5 THEN
+    SetInt(LIGHT_PULSE_REM_Z5, (LIGHT_COLOR_Z5 - LIGHT_STA_Z5 + 8) % 8);
+    IF LIGHT_PULSE_REM_Z5 <= 0 THEN SetInt(LIGHT_PULSE_REM_Z5, 8); END_IF;
+    TurnON(LIGHT_PULSE_BUSY_Z5);
+    SetInt(LIGHT_PULSE_STA_Z5, 1);
+    TurnON(VPB_LZ5_RUN);
+  END_IF;
+END_IF;
+TurnOFF(LIGHT_APPLY_Z5);
+
+IF IsON(LIGHT_PULSE_BUSY_Z5) THEN
+  IF LIGHT_PULSE_STA_Z5 = 1 THEN
+    TurnOFF(LIGHT_Z5);
+    TimerInput(TMR_LZ5_OFF, VPB_LZ5_RUN);
+    IF TimerDone(TMR_LZ5_OFF) THEN
+      TurnOFF(VPB_LZ5_RUN);
+      SetInt(LIGHT_PULSE_STA_Z5, 2);
+      TurnON(VPB_LZ5_RUN);
+    END_IF;
+  ELSE
+    IF LIGHT_PULSE_STA_Z5 = 2 THEN
+      TurnON(LIGHT_Z5);
+      TimerInput(TMR_LZ5_OFF, VPB_LZ5_RUN);
+      IF TimerDone(TMR_LZ5_OFF) THEN
+        TurnOFF(VPB_LZ5_RUN);
+        SetInt(LIGHT_PULSE_REM_Z5, LIGHT_PULSE_REM_Z5 - 1);
+        IF LIGHT_PULSE_REM_Z5 <= 0 THEN
+          SetInt(LIGHT_STA_Z5, LIGHT_COLOR_Z5);
+          TurnOFF(LIGHT_PULSE_BUSY_Z5);
+          SetInt(LIGHT_PULSE_STA_Z5, 0);
+        ELSE
+          SetInt(LIGHT_PULSE_STA_Z5, 3);
+          TurnON(VPB_LZ5_RUN);
+        END_IF;
+      END_IF;
+    ELSE
+      IF LIGHT_PULSE_STA_Z5 = 3 THEN
+        TurnON(LIGHT_Z5);
+        TimerInput(TMR_LZ5_GAP, VPB_LZ5_RUN);
+        IF TimerDone(TMR_LZ5_GAP) THEN
+          TurnOFF(VPB_LZ5_RUN);
+          SetInt(LIGHT_PULSE_STA_Z5, 1);
+          TurnON(VPB_LZ5_RUN);
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* ========== ZONE 6 COLOR PULSE TRAIN ========== *)
+
+IF IsON(LIGHT_APPLY_Z6) AND IsOFF(LIGHT_PULSE_BUSY_Z6) AND IsON(LIGHT_PULSE_PERM) THEN
+  IF LIGHT_COLOR_Z6 <> LIGHT_STA_Z6 THEN
+    SetInt(LIGHT_PULSE_REM_Z6, (LIGHT_COLOR_Z6 - LIGHT_STA_Z6 + 8) % 8);
+    IF LIGHT_PULSE_REM_Z6 <= 0 THEN SetInt(LIGHT_PULSE_REM_Z6, 8); END_IF;
+    TurnON(LIGHT_PULSE_BUSY_Z6);
+    SetInt(LIGHT_PULSE_STA_Z6, 1);
+    TurnON(VPB_LZ6_RUN);
+  END_IF;
+END_IF;
+TurnOFF(LIGHT_APPLY_Z6);
+
+IF IsON(LIGHT_PULSE_BUSY_Z6) THEN
+  IF LIGHT_PULSE_STA_Z6 = 1 THEN
+    TurnOFF(LIGHT_Z6);
+    TimerInput(TMR_LZ6_OFF, VPB_LZ6_RUN);
+    IF TimerDone(TMR_LZ6_OFF) THEN
+      TurnOFF(VPB_LZ6_RUN);
+      SetInt(LIGHT_PULSE_STA_Z6, 2);
+      TurnON(VPB_LZ6_RUN);
+    END_IF;
+  ELSE
+    IF LIGHT_PULSE_STA_Z6 = 2 THEN
+      TurnON(LIGHT_Z6);
+      TimerInput(TMR_LZ6_OFF, VPB_LZ6_RUN);
+      IF TimerDone(TMR_LZ6_OFF) THEN
+        TurnOFF(VPB_LZ6_RUN);
+        SetInt(LIGHT_PULSE_REM_Z6, LIGHT_PULSE_REM_Z6 - 1);
+        IF LIGHT_PULSE_REM_Z6 <= 0 THEN
+          SetInt(LIGHT_STA_Z6, LIGHT_COLOR_Z6);
+          TurnOFF(LIGHT_PULSE_BUSY_Z6);
+          SetInt(LIGHT_PULSE_STA_Z6, 0);
+        ELSE
+          SetInt(LIGHT_PULSE_STA_Z6, 3);
+          TurnON(VPB_LZ6_RUN);
+        END_IF;
+      END_IF;
+    ELSE
+      IF LIGHT_PULSE_STA_Z6 = 3 THEN
+        TurnON(LIGHT_Z6);
+        TimerInput(TMR_LZ6_GAP, VPB_LZ6_RUN);
+        IF TimerDone(TMR_LZ6_GAP) THEN
+          TurnOFF(VPB_LZ6_RUN);
+          SetInt(LIGHT_PULSE_STA_Z6, 1);
+          TurnON(VPB_LZ6_RUN);
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* ========== RELAY OUTPUTS (operation drum) ========== *)
+
+IF IsOFF(LIGHT_PERM) THEN
+  TurnOFF(LIGHT_Z1);
+  TurnOFF(LIGHT_Z2);
+  TurnOFF(LIGHT_Z3);
+  TurnOFF(LIGHT_Z4);
+  TurnOFF(LIGHT_Z5);
+  TurnOFF(LIGHT_Z6);
+  SetInt(LIGHT_STA, 0);
+ELSE
+  IF LIGHT_OP = 0 THEN
+    IF IsOFF(LIGHT_PULSE_BUSY_Z1) THEN TurnOFF(LIGHT_Z1); END_IF;
+    IF IsOFF(LIGHT_PULSE_BUSY_Z2) THEN TurnOFF(LIGHT_Z2); END_IF;
+    IF IsOFF(LIGHT_PULSE_BUSY_Z3) THEN TurnOFF(LIGHT_Z3); END_IF;
+    IF IsOFF(LIGHT_PULSE_BUSY_Z4) THEN TurnOFF(LIGHT_Z4); END_IF;
+    IF IsOFF(LIGHT_PULSE_BUSY_Z5) THEN TurnOFF(LIGHT_Z5); END_IF;
+    IF IsOFF(LIGHT_PULSE_BUSY_Z6) THEN TurnOFF(LIGHT_Z6); END_IF;
+    SetInt(LIGHT_STA, 0);
+  ELSE
+    IF LIGHT_OP = 1 THEN
+      IF IsOFF(LIGHT_PULSE_BUSY_Z1) THEN TurnON(LIGHT_Z1); END_IF;
+      IF IsOFF(LIGHT_PULSE_BUSY_Z2) THEN TurnON(LIGHT_Z2); END_IF;
+      IF IsOFF(LIGHT_PULSE_BUSY_Z3) THEN TurnON(LIGHT_Z3); END_IF;
+      IF IsOFF(LIGHT_PULSE_BUSY_Z4) THEN TurnON(LIGHT_Z4); END_IF;
+      IF IsOFF(LIGHT_PULSE_BUSY_Z5) THEN TurnON(LIGHT_Z5); END_IF;
+      IF IsOFF(LIGHT_PULSE_BUSY_Z6) THEN TurnON(LIGHT_Z6); END_IF;
+      SetInt(LIGHT_STA, 1);
+    ELSE
+      IF LIGHT_OP = 2 THEN
+        IF IsOFF(LIGHT_PULSE_BUSY_Z1) THEN
+          IF IsON(LIGHT_Z1_EN) THEN TurnON(LIGHT_Z1); ELSE TurnOFF(LIGHT_Z1); END_IF;
+        END_IF;
+        IF IsOFF(LIGHT_PULSE_BUSY_Z2) THEN
+          IF IsON(LIGHT_Z2_EN) THEN TurnON(LIGHT_Z2); ELSE TurnOFF(LIGHT_Z2); END_IF;
+        END_IF;
+        IF IsOFF(LIGHT_PULSE_BUSY_Z3) THEN
+          IF IsON(LIGHT_Z3_EN) THEN TurnON(LIGHT_Z3); ELSE TurnOFF(LIGHT_Z3); END_IF;
+        END_IF;
+        IF IsOFF(LIGHT_PULSE_BUSY_Z4) THEN
+          IF IsON(LIGHT_Z4_EN) THEN TurnON(LIGHT_Z4); ELSE TurnOFF(LIGHT_Z4); END_IF;
+        END_IF;
+        IF IsOFF(LIGHT_PULSE_BUSY_Z5) THEN
+          IF IsON(LIGHT_Z5_EN) THEN TurnON(LIGHT_Z5); ELSE TurnOFF(LIGHT_Z5); END_IF;
+        END_IF;
+        IF IsOFF(LIGHT_PULSE_BUSY_Z6) THEN
+          IF IsON(LIGHT_Z6_EN) THEN TurnON(LIGHT_Z6); ELSE TurnOFF(LIGHT_Z6); END_IF;
+        END_IF;
+        SetInt(LIGHT_STA, 2);
+      ELSE
+        IF LIGHT_OP = 3 THEN
+          IF IsOFF(LIGHT_PULSE_BUSY_Z1) THEN TurnON(LIGHT_Z1); END_IF;
+          IF IsOFF(LIGHT_PULSE_BUSY_Z2) THEN TurnON(LIGHT_Z2); END_IF;
+          IF IsOFF(LIGHT_PULSE_BUSY_Z3) THEN TurnON(LIGHT_Z3); END_IF;
+          IF IsOFF(LIGHT_PULSE_BUSY_Z4) THEN TurnON(LIGHT_Z4); END_IF;
+          IF IsOFF(LIGHT_PULSE_BUSY_Z5) THEN TurnON(LIGHT_Z5); END_IF;
+          IF IsOFF(LIGHT_PULSE_BUSY_Z6) THEN TurnON(LIGHT_Z6); END_IF;
+          SetInt(LIGHT_STA, 3);
+        ELSE
+          IF LIGHT_OP = 4 AND IsON(LIGHT_SCHED_EN) AND IsON(VPB1) THEN
+            IF IsOFF(LIGHT_PULSE_BUSY_Z1) THEN TurnON(LIGHT_Z1); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z2) THEN TurnON(LIGHT_Z2); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z3) THEN TurnON(LIGHT_Z3); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z4) THEN TurnON(LIGHT_Z4); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z5) THEN TurnON(LIGHT_Z5); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z6) THEN TurnON(LIGHT_Z6); END_IF;
+            SetInt(LIGHT_STA, 4);
+          ELSE
+            IF IsOFF(LIGHT_PULSE_BUSY_Z1) THEN TurnOFF(LIGHT_Z1); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z2) THEN TurnOFF(LIGHT_Z2); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z3) THEN TurnOFF(LIGHT_Z3); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z4) THEN TurnOFF(LIGHT_Z4); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z5) THEN TurnOFF(LIGHT_Z5); END_IF;
+            IF IsOFF(LIGHT_PULSE_BUSY_Z6) THEN TurnOFF(LIGHT_Z6); END_IF;
+            IF LIGHT_OP = 4 THEN SetInt(LIGHT_STA, 4); ELSE SetInt(LIGHT_STA, 0); END_IF;
+          END_IF;
+        END_IF;
+      END_IF;
+    END_IF;
+  END_IF;
+END_IF;
+
+(* Run hours — any zone energized *)
+IF IsON(LIGHT_Z1) OR IsON(LIGHT_Z2) OR IsON(LIGHT_Z3) OR IsON(LIGHT_Z4) OR IsON(LIGHT_Z5) OR IsON(LIGHT_Z6) THEN
+  SetInt(LIGHT_HRS, LIGHT_HRS + 0.0000277778);
+END_IF;
