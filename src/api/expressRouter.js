@@ -13,6 +13,8 @@ const { createMiscRoutes } = require('./routes/misc');
 const { createFleetRoutes } = require('./routes/fleet');
 const { createAlarmRoutes } = require('./routes/alarms');
 const { createFacilityRoutes } = require('../facilityBuilder/facilityRoutes');
+const { createCellularSimRoutes } = require('./routes/cellularSims');
+const { createCloudSimRoutes } = require('./routes/cloudSims');
 
 function createExpressApi(deps) {
   const router = express.Router();
@@ -28,6 +30,8 @@ function createExpressApi(deps) {
   router.use(createFleetRoutes(deps));
   router.use(createAlarmRoutes(deps));
   router.use(createFacilityRoutes());
+  router.use(createCellularSimRoutes());
+  router.use(createCloudSimRoutes());
   return router;
 }
 
