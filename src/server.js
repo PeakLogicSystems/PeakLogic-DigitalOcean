@@ -11,7 +11,7 @@ async function main() {
 
   const app = createCloudApp();
   const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`MooreVIEW Cloud API listening on :${PORT}`);
+    console.log(`PeakLogic Cloud API listening on :${PORT}`);
   });
 
   const shutdown = async (signal) => {

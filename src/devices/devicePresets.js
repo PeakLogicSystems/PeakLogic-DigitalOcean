@@ -23,7 +23,7 @@ const BUILTIN_PRESETS = [
   {
     id: 'hal_builtin_sim',
     label: 'Built-in HAL (sim) — 8 DI, 8 DO, 4 AI, 2 AO, 2 HW counters',
-    vendor: 'MooreVIEW',
+    vendor: 'PeakLogic',
     model: 'HAL simulation',
     transport: 'hal',
     defaults: { backend: 'sim' },
@@ -58,7 +58,7 @@ const BUILTIN_PRESETS = [
     transport: 'hal',
     defaults: {
       backend: 'native',
-      pluginPath: '/usr/lib/libmooreview_hal_sm_i001.so',
+      pluginPath: '/usr/lib/libpeaklogic_hal_sm_i001.so',
       stack: 0,
       i2cBus: 1,
     },
@@ -67,7 +67,7 @@ const BUILTIN_PRESETS = [
       type: 'hal',
       enabled: true,
       backend: 'native',
-      pluginPath: opts.pluginPath || '/usr/lib/libmooreview_hal_sm_i001.so',
+      pluginPath: opts.pluginPath || '/usr/lib/libpeaklogic_hal_sm_i001.so',
       limits: { di: 4, do: 4, ai: 8, ao: 8, cnt: 4 },
       halConfig: {
         stack: opts.stack ?? 0,
@@ -90,16 +90,16 @@ const BUILTIN_PRESETS = [
   {
     id: 'hal_linux_plugin',
     label: 'Built-in HAL (Linux plugin) — board .so',
-    vendor: 'MooreVIEW',
+    vendor: 'PeakLogic',
     model: 'HAL native plugin',
     transport: 'hal',
-    defaults: { backend: 'native', pluginPath: '/usr/lib/libmooreview_hal.so' },
+    defaults: { backend: 'native', pluginPath: '/usr/lib/libpeaklogic_hal.so' },
     driver: (opts) => ({
       id: opts.driverId || 'hal0',
       type: 'hal',
       enabled: true,
       backend: 'native',
-      pluginPath: opts.pluginPath || '/usr/lib/libmooreview_hal.so',
+      pluginPath: opts.pluginPath || '/usr/lib/libpeaklogic_hal.so',
       limits: { di: 32, do: 32, ai: 16, ao: 8, cnt: 8 },
     }),
     tags: (opts) => {

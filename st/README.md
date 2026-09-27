@@ -1,6 +1,6 @@
 # ST test programs
 
-Default program folder for MooreVIEW. Active file is set in `data/settings.json` as `activeProgram` (default: `program.st`).
+Default program folder for PeakLogic. Active file is set in `data/settings.json` as `activeProgram` (default: `program.st`).
 
 ## Layout
 

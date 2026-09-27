@@ -163,7 +163,7 @@ function classifyAsset(relPath) {
   const name = parts[parts.length - 1] || '';
 
   if (parts[0] === 'demos' || /^demo_/.test(name)) {
-    return { group: GROUP.DEMOS, subgroup: 'screens', vendor: 'mooreview', variant: 'demo' };
+    return { group: GROUP.DEMOS, subgroup: 'screens', vendor: 'peaklogic', variant: 'demo' };
   }
   if (parts[0] === 'library') {
     const top = parts[1] || '';
@@ -182,7 +182,7 @@ function classifyAsset(relPath) {
     return classifyOpto(parts[1], name);
   }
   if (/^demo_/.test(name)) {
-    return { group: GROUP.DEMOS, subgroup: 'screens', vendor: 'mooreview', variant: 'demo' };
+    return { group: GROUP.DEMOS, subgroup: 'screens', vendor: 'peaklogic', variant: 'demo' };
   }
   return { group: GROUP.MISC, subgroup: 'general', vendor: 'unknown', variant: '' };
 }

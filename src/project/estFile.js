@@ -6,10 +6,10 @@ const { DEFAULT_SCAN_MS, MAX_TAGS } = require('../config');
 const { defaultBlankHmi } = require('../hmi/hmiConfig');
 const { defaultMongoLogger } = require('../settings/mongoLoggerSettings');
 const { buildDefaultMemoryTags } = require('../tags/defaultMemoryTags');
-const EST_FORMAT = 'mooreview-est';
+const EST_FORMAT = 'peaklogic-est';
 const EST_VERSION = 1;
 
-const BLANK_PROGRAM = '(* New MooreVIEW project *)\n';
+const BLANK_PROGRAM = '(* New PeakLogic project *)\n';
 const BLANK_ACTIVE_PROGRAM = 'logic/program.st';
 
 function pack(deps, meta = {}) {
@@ -49,7 +49,7 @@ function normalizeTagImport(tag) {
 }
 
 /**
- * Accept mooreview-est, est config bundles ({ tags, drivers, program }), or a bare tags array.
+ * Accept peaklogic-est, est config bundles ({ tags, drivers, program }), or a bare tags array.
  * @returns {object} normalized import document; null fields mean "do not replace this section"
  */
 function coerceImportDoc(raw) {

@@ -2,7 +2,7 @@
 
 const DEFAULT_MONGO_LOGGER = {
   uri: 'mongodb://127.0.0.1:27017',
-  db: 'mooreview',
+  db: 'peaklogic',
   collection: 'tag_logs',
   sampleIntervalMs: 5000,
 };

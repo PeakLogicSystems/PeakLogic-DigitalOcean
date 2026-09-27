@@ -108,7 +108,7 @@ class MqttFleetOptaDriver {
   async startRuntime() {
     const scanMs = Number(this.cfg.scanMs) || 100;
     const deviceId = this._deviceId();
-    registry.attach(deviceId, { sessionId: 'mooreview-pc' });
+    registry.attach(deviceId, { sessionId: 'peaklogic-pc' });
     this._hub().publishDeviceConfig(deviceId, { pauseTelemetry: false, debugAttached: true });
     await this._hub().sendCommand(deviceId, 'runtime_start', { scanMs });
   }

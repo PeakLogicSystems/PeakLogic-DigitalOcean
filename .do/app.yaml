@@ -1,10 +1,10 @@
-name: mooreview-cloud
+name: peaklogic-cloud
 region: nyc
 
 services:
   - name: api
     github:
-      repo: RoyMooreACE/mooreview-cloud
+      repo: PeakLogicSystems/PeakLogic-DigitalOcean
       branch: main
       deploy_on_push: true
     source_dir: /
@@ -27,4 +27,4 @@ services:
         scope: RUN_TIME
         type: SECRET
       - key: MONGODB_DB
-        value: mooreview_cloud
+        value: peaklogic_cloud

@@ -27,7 +27,7 @@ class MqttDriver {
     this._subscribed.clear();
     return new Promise((resolve, reject) => {
       this.client = mqtt.connect(this._brokerUrl(), {
-        clientId: this.cfg.clientId || 'mooreview',
+        clientId: this.cfg.clientId || 'peaklogic',
         username: this.cfg.username,
         password: this.cfg.password,
         keepalive: this.cfg.keepalive || 60,

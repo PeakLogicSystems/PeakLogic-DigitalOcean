@@ -1,7 +1,7 @@
-# MooreVIEW Cloud Server
+# PeakLogic Cloud Server
 
 Multi-tenant **Linux cloud API** (account → location → system → device) with MongoDB on Digital Ocean.  
-Headless runtime: ST engine, REST API, tag historian, MQTT fleet hub. Pair with **mooreview-client** for HMI.
+Headless runtime: ST engine, REST API, tag historian, MQTT fleet hub. The frontend (a consolidated React/Vite/Tailwind SPA — see `docs/architecture/feature-gap-analysis.md`) is not yet built; today's UI is server-rendered EJS (auth pages only).
 
 ## Start (local)
 
@@ -17,15 +17,6 @@ npm start
 
 ## Deploy (production)
 
-See **[DEPLOY.md](./DEPLOY.md)** for Digital Ocean + **mooreview.io** (`api.mooreview.io`, `app.mooreview.io`) and Managed MongoDB setup.
-
-**GitLab:** **[GITLAB.md](./GITLAB.md)** — create projects, change `origin`, push, connect DO App Platform.
+See **[DEPLOY.md](./DEPLOY.md)** for Digital Ocean + production domain (**TBD** — not yet decided) and Managed MongoDB setup.
 
 Environment template: **[.env.example](./.env.example)** (placeholders only — set real values in DO dashboard).
-
-## Regenerate from est-pc fork
-
-```powershell
-cd ..\est-pc
-powershell -File scripts\create-product-forks.ps1 -Products cloud
-```

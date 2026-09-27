@@ -230,7 +230,7 @@ describe('hmiConfig', () => {
     const assets = listSvgAssets(publicRoot);
     assert.ok(assets.some((a) => a.path.includes('demos/demo_process.svg')));
     assert.ok(assets.some((a) => a.path.includes('library/controls/pilot-lights')));
-    assert.ok(assets.some((a) => a.path.includes('library/pid-faceplates/mooreview/pid_loop_standard.svg')));
+    assert.ok(assets.some((a) => a.path.includes('library/pid-faceplates/peaklogic/pid_loop_standard.svg')));
   });
 
   it('listSvgAssets exposes only six pilot lights (simple + multistate)', () => {

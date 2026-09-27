@@ -1,6 +1,6 @@
 # Device templates (JSON)
 
-Add a new Modbus device template by creating a `.json` file in this folder. MooreVIEW picks up `*.json` files automatically (no server restart) and lists them under **Drivers → Device template** on the next dashboard poll.
+Add a new Modbus device template by creating a `.json` file in this folder. PeakLogic picks up `*.json` files automatically (no server restart) and lists them under **Drivers → Device template** on the next dashboard poll.
 
 ## Example
 

@@ -30,7 +30,7 @@ function buildAlarmEmail({ tenantName, alarm, user }) {
   const level = formatAlarmLevel(alarm.level);
   const tagId = alarm.tagId || 'unknown';
   const value = alarm.value != null ? String(alarm.value) : '—';
-  const org = tenantName || 'MooreVIEW';
+  const org = tenantName || 'PeakLogic';
   const subject = `[${org}] ${level}: ${tagId}`;
   const studioUrl = appBaseUrl() ? `${appBaseUrl()}/studio` : '/studio';
   const text = [
@@ -44,7 +44,7 @@ function buildAlarmEmail({ tenantName, alarm, user }) {
     <p><strong>${escapeHtml(level)}</strong> on tag <code>${escapeHtml(tagId)}</code></p>
     <p>Value: <strong>${escapeHtml(value)}</strong></p>
     <p>Organization: ${escapeHtml(org)}</p>
-    <p><a href="${escapeHtml(studioUrl)}">Open MooreVIEW Studio</a></p>
+    <p><a href="${escapeHtml(studioUrl)}">Open PeakLogic Studio</a></p>
   `.trim();
   return { subject, text, html, toName: user?.profile?.displayName || user?.email };
 }
@@ -55,7 +55,7 @@ function buildPasswordResetEmail({ tenant, token }) {
   const resetUrl = base
     ? `${base}/reset-password?token=${encodeURIComponent(token)}`
     : `/reset-password?token=${encodeURIComponent(token)}`;
-  const subject = `Reset your MooreVIEW password`;
+  const subject = `Reset your PeakLogic password`;
   const text = [
     `You requested a password reset for ${org}.`,
     '',
@@ -74,7 +74,7 @@ function buildPasswordResetEmail({ tenant, token }) {
 
 function buildPasswordChangedEmail({ tenant, user }) {
   const org = tenant?.name || tenant?.slug || 'your organization';
-  const subject = `Your MooreVIEW password was changed`;
+  const subject = `Your PeakLogic password was changed`;
   const text = [
     `The password for ${user?.email || 'your account'} at ${org} was changed.`,
     '',
@@ -90,7 +90,7 @@ function buildPasswordChangedEmail({ tenant, user }) {
 function buildWelcomeEmail({ tenant, user, temporaryPassword }) {
   const org = tenant?.name || tenant?.slug || 'your organization';
   const loginUrl = appBaseUrl() ? `${appBaseUrl()}/login` : '/login';
-  const subject = `Welcome to MooreVIEW — ${org}`;
+  const subject = `Welcome to PeakLogic — ${org}`;
   const lines = [
     `An account was created for you at ${org}.`,
     `Email: ${user?.email || ''}`,
@@ -108,7 +108,7 @@ function buildWelcomeEmail({ tenant, user, temporaryPassword }) {
       <li>Organization slug: <code>${escapeHtml(tenant?.slug || '')}</code></li>
       ${temporaryPassword ? `<li>Temporary password: <code>${escapeHtml(temporaryPassword)}</code></li>` : ''}
     </ul>
-    <p><a href="${escapeHtml(loginUrl)}">Sign in to MooreVIEW</a></p>
+    <p><a href="${escapeHtml(loginUrl)}">Sign in to PeakLogic</a></p>
   `.trim();
   return { subject, text, html };
 }
@@ -119,9 +119,9 @@ function buildInviteEmail({ tenant, user, token }) {
   const inviteUrl = base
     ? `${base}/accept-invite?token=${encodeURIComponent(token)}`
     : `/accept-invite?token=${encodeURIComponent(token)}`;
-  const subject = `You're invited to MooreVIEW — ${org}`;
+  const subject = `You're invited to PeakLogic — ${org}`;
   const text = [
-    `You've been invited to join ${org} on MooreVIEW.`,
+    `You've been invited to join ${org} on PeakLogic.`,
     `Email: ${user?.email || ''}`,
     `Organization slug: ${tenant?.slug || ''}`,
     '',
@@ -129,7 +129,7 @@ function buildInviteEmail({ tenant, user, token }) {
     inviteUrl,
   ].join('\n');
   const html = `
-    <p>You've been invited to join <strong>${escapeHtml(org)}</strong> on MooreVIEW.</p>
+    <p>You've been invited to join <strong>${escapeHtml(org)}</strong> on PeakLogic.</p>
     <ul>
       <li>Email: ${escapeHtml(user?.email || '')}</li>
       <li>Organization slug: <code>${escapeHtml(tenant?.slug || '')}</code></li>

@@ -2,7 +2,7 @@
   "id": "arduino_opta_eth",
   "label": "Arduino Opta — Ethernet ST runtime",
   "vendor": "Arduino",
-  "model": "Opta — MooreVIEW remote ST",
+  "model": "Opta — PeakLogic remote ST",
   "transport": "opta_remote",
   "driverId": "opta_eth",
   "diCount": 8,

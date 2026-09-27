@@ -1,7 +1,7 @@
-﻿{
-  "name": "mooreview-cloud",
+{
+  "name": "peaklogic-cloud",
   "version": "0.1.0",
-  "description": "MooreVIEW multi-tenant cloud API — tenant → location → system → device",
+  "description": "PeakLogic multi-tenant cloud API — tenant → location → system → device",
   "main": "src/server.js",
   "engines": {
     "node": ">=18"

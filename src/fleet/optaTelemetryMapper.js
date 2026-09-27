@@ -1,6 +1,6 @@
 'use strict';
 
-/** Map Arduino Opta status JSON (di_builtIn, analog, alarms) to MooreVIEW fleet tags. */
+/** Map Arduino Opta status JSON (di_builtIn, analog, alarms) to PeakLogic fleet tags. */
 function optaStatusToFleetReport(deviceId, raw, meta = {}) {
   const tags = [];
   const pushBool = (id, val, role = 'input') => {

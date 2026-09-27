@@ -2,7 +2,7 @@
   "id": "arduino_opta_mqtt_st",
   "label": "Arduino Opta — MQTT fleet ST runtime",
   "vendor": "Arduino",
-  "model": "Opta — MooreVIEW ST over MQTT",
+  "model": "Opta — PeakLogic ST over MQTT",
   "transport": "mqtt_fleet",
   "driverId": "opta_mqtt_st",
   "diCount": 8,

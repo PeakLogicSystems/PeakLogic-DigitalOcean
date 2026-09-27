@@ -23,7 +23,7 @@ const { createHmiAssetRedirect } = require('../routes/staticAssets');
 const { authenticate } = require('../auth/middleware');
 const authService = require('../services/authService');
 const { asyncHandler } = require('../util/http');
-const { CORS_ORIGINS, EDITION, MOOREVIEW_PLATFORM, DOCUMENTDB_ENABLED } = require('../config');
+const { CORS_ORIGINS, EDITION, PEAKLOGIC_PLATFORM, DOCUMENTDB_ENABLED } = require('../config');
 const { isServiceBusConfigured } = require('../messaging/serviceBus');
 const { isEventHubConfigured } = require('../messaging/eventHub');
 const { isMailConfigured } = require('../mail/mailConfig');
@@ -70,7 +70,7 @@ function createCloudApp() {
       ok: true,
       service: EDITION.product,
       edition: EDITION.label,
-      platform: MOOREVIEW_PLATFORM,
+      platform: PEAKLOGIC_PLATFORM,
       version: APP_VERSION,
       documentDb: DOCUMENTDB_ENABLED,
       serviceBus: isServiceBusConfigured(),
