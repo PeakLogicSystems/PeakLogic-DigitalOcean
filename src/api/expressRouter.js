@@ -12,6 +12,7 @@ const { createHmiRoutes } = require('./routes/hmi');
 const { createMiscRoutes } = require('./routes/misc');
 const { createFleetRoutes } = require('./routes/fleet');
 const { createAlarmRoutes } = require('./routes/alarms');
+const { createFacilityRoutes } = require('../facilityBuilder/facilityRoutes');
 
 function createExpressApi(deps) {
   const router = express.Router();
@@ -26,6 +27,7 @@ function createExpressApi(deps) {
   router.use(createMiscRoutes(deps));
   router.use(createFleetRoutes(deps));
   router.use(createAlarmRoutes(deps));
+  router.use(createFacilityRoutes());
   return router;
 }
 

@@ -27,6 +27,20 @@
   margin: 0 0.25rem;
 }
 
+.peaklogic-tool {
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.peaklogic-tool:hover {
+  border-color: #475569;
+}
+
 .peaklogic-tool.active {
   background: var(--ps-purple, #6f42c1);
   color: #fff;

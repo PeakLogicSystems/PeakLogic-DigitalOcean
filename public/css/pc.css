@@ -3,6 +3,8 @@
   --ps-purple-dark: #5a32a3;
   --ps-purple-deep: #4e2a84;
   --ps-purple-light: #e9d5ff;
+  --peaklogic-green: #22c55e;
+  --peaklogic-green-dark: #15803d;
   --bg: #f1f5f9;
   --sidebar: #1e293b;
   --accent: #6f42c1;
@@ -1161,14 +1163,14 @@ body.hmi-composer-col-split-active {
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0.75rem 1.25rem;
-  background: var(--ps-purple);
+  background: linear-gradient(90deg, var(--ps-purple-deep), var(--ps-purple) 55%, var(--peaklogic-green-dark));
   color: #e2e8f0;
   position: sticky;
   top: 0;
   z-index: 10;
 }
-.topbar-brand { flex: 0 0 auto; font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em; }
-.topbar-brand span { color: var(--ps-purple-light); font-weight: 600; font-size: 1.25rem; }
+.topbar-brand { flex: 0 0 auto; display: flex; align-items: center; }
+.topbar-logo { height: 28px; width: auto; display: block; }
 .topbar-project-bar {
   display: inline-flex;
   align-items: center;
