@@ -43,6 +43,7 @@ data/go2rtc.pid
 data/appliance_auth.json
 data/sys_log.json
 data/peaklogic.pid
+data/cmms.json
 data/tenants/
 
 # OS / editor
