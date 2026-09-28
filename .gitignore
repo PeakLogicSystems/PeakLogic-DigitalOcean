@@ -67,3 +67,7 @@ halow-xiao-sta/build/
 # go2rtc binary (install with npm run go2rtc:download)
 vendor/go2rtc/go2rtc*
 !vendor/go2rtc/.gitkeep
+
+# secrets excluded from history (present in upstream saas branch)
+mongocloud-cred.txt
+sms-keys
