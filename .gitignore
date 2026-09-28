@@ -40,6 +40,10 @@ data/*.log
 data/#Untitled-1#
 data/go2rtc.yaml
 data/go2rtc.pid
+data/appliance_auth.json
+data/sys_log.json
+data/peaklogic.pid
+data/tenants/
 
 # OS / editor
 .DS_Store
