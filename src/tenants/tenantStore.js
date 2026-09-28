@@ -188,6 +188,16 @@ class TenantStore {
     return Object.values(this._store.users).find((u) => u.email === e) || null;
   }
 
+  getUser(userId) {
+    return this._store.users[String(userId || '')] || null;
+  }
+
+  userCanAccessTenant(user, tenantId) {
+    if (!user) return false;
+    if (user.role === 'platform_admin') return true;
+    return String(user.tenantId || '') === String(tenantId || '');
+  }
+
   publicUser(u, tenant) {
     if (!u) return null;
     const t = tenant || (u.tenantId ? this.getTenant(u.tenantId) : null);

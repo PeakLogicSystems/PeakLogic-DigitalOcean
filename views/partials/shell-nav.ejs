@@ -35,34 +35,16 @@
         <a class="nav-link <%= activeNav === 'sites' ? 'active' : '' %>" href="/sites"><i class="bi bi-geo-alt"></i> Sites</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'remote-sites' ? 'active' : '' %>" href="/remote-sites"><i class="bi bi-camera-video"></i> Camera sites</a>
+        <a class="nav-link <%= activeNav === 'connectivity' ? 'active' : '' %>" href="/cellular/sims"><i class="bi bi-broadcast"></i> Connectivity</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'studio' ? 'active' : '' %>" href="/studio"><i class="bi bi-tools"></i> Studio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <%= activeNav === 'connectivity' ? 'active' : '' %>" href="/studio/connectivity"><i class="bi bi-broadcast"></i> Connectivity</a>
-      </li>
-      <% if (user.role === 'admin') { %>
+      <% if (user.role === 'tenant_admin' || user.role === 'platform_admin') { %>
         <li class="nav-item">
-          <a class="nav-link <%= activeNav === 'team' ? 'active' : '' %>" href="/team/users"><i class="bi bi-people"></i> Team</a>
+          <a class="nav-link <%= activeNav === 'team' ? 'active' : '' %>" href="/people"><i class="bi bi-people"></i> Team</a>
         </li>
       <% } %>
       <% if (cmmsEnabled) { %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <%= activeNav === 'cmms' ? 'active' : '' %>"
-             href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-clipboard-check"></i> CMMS</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/cmms">Dashboard</a></li>
-            <li><a class="dropdown-item" href="/cmms/work-orders">Work Orders</a></li>
-            <li><a class="dropdown-item" href="/cmms/assets">Assets</a></li>
-            <li><a class="dropdown-item" href="/cmms/facilities">Facilities</a></li>
-            <% if (user.role === 'admin') { %>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/team/users">Team invites</a></li>
-              <li><a class="dropdown-item" href="/cmms/users">Users (read-only)</a></li>
-            <% } %>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link <%= activeNav === 'cmms' ? 'active' : '' %>" href="/cmms"><i class="bi bi-clipboard-check"></i> CMMS</a>
         </li>
       <% } %>
     </ul>
