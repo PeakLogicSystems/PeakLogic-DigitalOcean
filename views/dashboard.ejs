@@ -66,7 +66,7 @@
     <button type="button" class="topbar-action-btn" id="btn-topbar-pdm" data-historian-logger-open="pdm" title="PdM asset setup and simulation">PdM</button>
     <button type="button" class="topbar-action-btn view-tab" id="btn-topbar-alarms" data-popup-open="alarms" title="Active alarms">Alarms <span id="alarms-tab-badge" class="alarms-tab-badge view-hidden" aria-hidden="true"></span></button>
     <a href="/cmms" class="topbar-action-btn topbar-action-link" id="btn-topbar-cmms" title="Work orders and preventive maintenance">CMMS</a>
-    <a href="/mv-draw" class="topbar-action-btn topbar-action-link" id="btn-topbar-mv-draw" title="Site plan editor">MV Draw</a>
+    <a href="/facility-draw" class="topbar-action-btn topbar-action-link" id="btn-topbar-facility-draw" title="Site plan editor">Facility Draw</a>
     <details class="topbar-tools-details topbar-project-details" id="tools-menu-details">
       <summary class="topbar-project-trigger topbar-tools-trigger">Tools <span class="topbar-project-caret" aria-hidden="true">&#x25BE;</span></summary>
       <nav class="topbar-tools-dropdown topbar-project-dropdown" id="view-nav" aria-label="Tools" role="menu">
@@ -795,7 +795,7 @@
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-go2rtc-enabled" checked> Enable go2rtc (auto-start on server boot)</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-add" checked> Auto-add discovered cameras to inventory</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-probe" checked> Auto-probe after discover</label>
-              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/MV Draw uploads to GridFS</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/Facility Draw uploads to GridFS</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-snapshot-archive" checked> Archive camera snapshots to GridFS</label>
               <label>Snapshot interval (ms) <input id="cam-set-snapshot-ms" type="number" min="15000" max="3600000" step="1000" value="60000"></label>
               <label>Snapshot retention (days) <input id="cam-set-snapshot-days" type="number" min="1" max="365" value="30"></label>
@@ -1822,7 +1822,7 @@
       <div class="popup-body popup-scroll hmi-setup-popup-body">
         <div class="hmi-setup-grid">
           <div class="hmi-setup-editor">
-            <p class="panel-hint hmi-composer-intro">Build each screen on the <strong>tile grid</strong> (right on wide windows) or use <strong>3D facility view</strong> / <strong>MV Draw site plan</strong> via <strong>Composer mode</strong> below. Use the <strong>vertical section menu</strong> for settings. Click <strong>Apply HMI settings</strong> to save.</p>
+            <p class="panel-hint hmi-composer-intro">Build each screen on the <strong>tile grid</strong> (right on wide windows) or use <strong>3D facility view</strong> / <strong>Facility Draw site plan</strong> via <strong>Composer mode</strong> below. Use the <strong>vertical section menu</strong> for settings. Click <strong>Apply HMI settings</strong> to save.</p>
             <div class="hmi-composer-shell">
               <nav class="hmi-composer-nav" id="hmi-composer-nav" aria-label="Composer sections">
                 <button type="button" class="hmi-composer-nav-item active" data-hmi-section="layout">Project layout</button>
@@ -1895,7 +1895,7 @@
                   <option value="all" selected>All types</option>
                   <option value="svg">SVG only</option>
                   <option value="composite">Composites only</option>
-                  <option value="mvdraw">Site plan (MV Draw)</option>
+                  <option value="facilitydraw">Site plan (Facility Draw)</option>
                   <option value="gif">GIF only</option>
                   <option value="png">PNG only</option>
                 </select>
@@ -2175,10 +2175,10 @@
                 </select>
               </label>
               <label>Composer mode
-                <select id="hmi-composer-mode" title="Grid tile editor, 3D facility spatial preview, or MV Draw site plan">
+                <select id="hmi-composer-mode" title="Grid tile editor, 3D facility spatial preview, or Facility Draw site plan">
                   <option value="grid">Grid — 2D tile editing</option>
                   <option value="3d">3D — facility spatial view</option>
-                  <option value="plan">Plan — MV Draw site plan</option>
+                  <option value="plan">Plan — Facility Draw site plan</option>
                 </select>
               </label>
             </div>
@@ -2267,7 +2267,7 @@
               <div class="hmi-composer-preview-modes" role="group" aria-label="Composer preview mode">
                 <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="grid" title="2D tile grid — place and edit symbols, composites, and bindings">2D grid</button>
                 <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="3d" title="3D facility spatial preview on home screen">3D</button>
-                <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="plan" title="MV Draw site plan preview on home screen">Plan</button>
+                <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="plan" title="Facility Draw site plan preview on home screen">Plan</button>
               </div>
               <div class="hmi-grid-toolbar">
                 <button type="button" id="btn-hmi-delete-tile" class="btn danger" title="Remove selected cell">Remove cell</button>
@@ -2280,8 +2280,8 @@
             <div id="hmi-setup-3d-preview" class="hmi-viewport hmi-setup-3d-preview view-hidden" aria-label="3D facility composer preview">
               <iframe id="hmi-setup-3d-frame" title="3D facility composer"></iframe>
             </div>
-            <div id="hmi-setup-plan-preview" class="hmi-viewport hmi-setup-plan-preview view-hidden" aria-label="MV Draw site plan composer preview">
-              <iframe id="hmi-setup-plan-frame" title="MV Draw site plan composer"></iframe>
+            <div id="hmi-setup-plan-preview" class="hmi-viewport hmi-setup-plan-preview view-hidden" aria-label="Facility Draw site plan composer preview">
+              <iframe id="hmi-setup-plan-frame" title="Facility Draw site plan composer"></iframe>
             </div>
           </div>
         </div>

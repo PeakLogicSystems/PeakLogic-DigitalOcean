@@ -113,12 +113,12 @@ if (Test-Path $estProjects) {
   Write-Host "  sync: data/projects/ ($n snapshots)" -ForegroundColor Green
 }
 
-$estMvDraw = Join-Path $EstRoot 'mv-draw'
-$cloudMvDraw = Join-Path $CloudRoot 'mv-draw'
-if (Test-Path $estMvDraw) {
-  if (Test-Path $cloudMvDraw) { Remove-Item $cloudMvDraw -Recurse -Force }
-  Copy-Item $estMvDraw $cloudMvDraw -Recurse -Force
-  Write-Host '  sync: mv-draw/' -ForegroundColor Green
+$estFacilityDraw = Join-Path $EstRoot 'facility-draw'
+$cloudFacilityDraw = Join-Path $CloudRoot 'facility-draw'
+if (Test-Path $estFacilityDraw) {
+  if (Test-Path $cloudFacilityDraw) { Remove-Item $cloudFacilityDraw -Recurse -Force }
+  Copy-Item $estFacilityDraw $cloudFacilityDraw -Recurse -Force
+  Write-Host '  sync: facility-draw/' -ForegroundColor Green
 }
 
 # Root appliance server for npm run start:runtime — never replace SaaS src/server.js or lock file
@@ -159,11 +159,11 @@ if (Test-Path $estScripts) {
     if ($_.Name -eq 'seed.js') { return }
     Copy-Item $_.FullName (Join-Path $cloudScripts $_.Name) -Force
   }
-  $estMvDrawScripts = Join-Path $estScripts 'mv-draw'
-  if (Test-Path $estMvDrawScripts) {
-    $dest = Join-Path $cloudScripts 'mv-draw'
+  $estFacilityDrawScripts = Join-Path $estScripts 'facility-draw'
+  if (Test-Path $estFacilityDrawScripts) {
+    $dest = Join-Path $cloudScripts 'facility-draw'
     if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
-    Copy-Item $estMvDrawScripts $dest -Recurse -Force
+    Copy-Item $estFacilityDrawScripts $dest -Recurse -Force
   }
   Write-Host '  sync: scripts/' -ForegroundColor Green
 }

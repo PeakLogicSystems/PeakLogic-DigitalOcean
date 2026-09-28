@@ -7,13 +7,13 @@ const os = require('os');
 const path = require('path');
 
 const {
-  packMvDraw,
+  packFacilityDraw,
   packEst,
   resolveImportPayload,
   isBundle,
   bundleFilename,
 } = require('../src/project/projectBundle');
-const { MV_DRAW_FORMAT } = require('../mv-draw/src/mvDrawFormat');
+const { FACILITY_DRAW_FORMAT } = require('../facility-draw/src/facilityDrawFormat');
 const { EST_FORMAT } = require('../src/project/estFile');
 
 describe('projectBundle', () => {
@@ -21,7 +21,7 @@ describe('projectBundle', () => {
     assert.equal(bundleFilename('DWTS Site'), 'DWTS_Site.mvbundle');
   });
 
-  it('packMvDraw embeds background assets', () => {
+  it('packFacilityDraw embeds background assets', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-bundle-'));
     const uploads = path.join(tmp, 'uploads');
     fs.mkdirSync(uploads, { recursive: true });
@@ -40,7 +40,7 @@ describe('projectBundle', () => {
     };
 
     const doc = {
-      format: MV_DRAW_FORMAT,
+      format: FACILITY_DRAW_FORMAT,
       version: 1,
       name: 'site',
       units: 'ft',
@@ -49,19 +49,19 @@ describe('projectBundle', () => {
       edges: [],
     };
 
-    const bundle = packMvDraw(doc, {}, { readAsset });
+    const bundle = packFacilityDraw(doc, {}, { readAsset });
     assert.equal(bundle.format, 'peaklogic-bundle');
-    assert.equal(bundle.kind, 'mvdraw');
+    assert.equal(bundle.kind, 'facilitydraw');
     assert.equal(bundle.assets.length, 1);
     assert.equal(bundle.assets[0].ref, 'uploads/plot.png');
 
     const restored = resolveImportPayload(bundle, { writeAsset });
-    assert.equal(restored.type, 'mvdraw');
+    assert.equal(restored.type, 'facilitydraw');
     assert.equal(restored.doc.background.path, 'uploads/plot.png');
     assert.ok(fs.existsSync(path.join(uploads, 'plot.png')));
   });
 
-  it('packEst embeds mvDraw assets from est doc', () => {
+  it('packEst embeds facilityDraw assets from est doc', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-bundle-est-'));
     const uploads = path.join(tmp, 'uploads');
     fs.mkdirSync(uploads, { recursive: true });
@@ -80,8 +80,8 @@ describe('projectBundle', () => {
       tags: [],
       drivers: [],
       program: '(* *)',
-      mvDraw: {
-        format: MV_DRAW_FORMAT,
+      facilityDraw: {
+        format: FACILITY_DRAW_FORMAT,
         version: 1,
         name: 'demo',
         units: 'ft',
@@ -99,13 +99,13 @@ describe('projectBundle', () => {
     const restored = resolveImportPayload(bundle, { writeAsset });
     assert.equal(restored.type, 'est');
     assert.equal(restored.doc.project.name, 'demo');
-    assert.equal(restored.doc.mvDraw.background.path, 'uploads/bg.jpg');
+    assert.equal(restored.doc.facilityDraw.background.path, 'uploads/bg.jpg');
   });
 
-  it('resolveImportPayload accepts legacy est and mvdraw json', () => {
+  it('resolveImportPayload accepts legacy est and facilitydraw json', () => {
     const est = { format: EST_FORMAT, version: 1, tags: [] };
-    const mv = { format: MV_DRAW_FORMAT, version: 1, nodes: [], edges: [] };
+    const mv = { format: FACILITY_DRAW_FORMAT, version: 1, nodes: [], edges: [] };
     assert.equal(resolveImportPayload(est).type, 'est');
-    assert.equal(resolveImportPayload(mv).type, 'mvdraw');
+    assert.equal(resolveImportPayload(mv).type, 'facilitydraw');
   });
 });

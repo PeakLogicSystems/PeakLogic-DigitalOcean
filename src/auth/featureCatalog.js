@@ -16,7 +16,7 @@ const FEATURE_CATALOG = [
   { key: 'project', label: 'Projects (open/save/deploy)' },
   { key: 'setup', label: 'System setup' },
   { key: 'users', label: 'User accounts & access' },
-  { key: 'mvDraw', label: 'MV Draw' },
+  { key: 'facilityDraw', label: 'Facility Draw' },
   { key: 'connectivity', label: 'Connectivity tools' },
 ];
 
@@ -37,7 +37,7 @@ const OPERATOR_DEFAULT_FEATURES = {
   project: false,
   setup: false,
   users: false,
-  mvDraw: false,
+  facilityDraw: false,
   connectivity: false,
 };
 
@@ -56,7 +56,7 @@ const VIEWER_DEFAULT_FEATURES = {
   project: false,
   setup: false,
   users: false,
-  mvDraw: false,
+  facilityDraw: false,
   connectivity: false,
 };
 
@@ -76,7 +76,7 @@ const HOMEOWNER_DEFAULT_FEATURES = {
   project: false,
   setup: false,
   users: false,
-  mvDraw: false,
+  facilityDraw: false,
   connectivity: false,
 };
 
@@ -96,7 +96,7 @@ const TECHNICIAN_DEFAULT_FEATURES = {
   project: true,
   setup: true,
   users: false,
-  mvDraw: false,
+  facilityDraw: false,
   connectivity: true,
 };
 

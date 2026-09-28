@@ -80,7 +80,7 @@
 | SHELL-14 | Topbar — PdM shortcut | Click **PdM** | PdM asset setup popup opens | ☐ | |
 | SHELL-15 | Topbar — Alarms shortcut | Click **Alarms** | Alarms popup opens; badge shows count if active | ☐ | |
 | SHELL-16 | Topbar — CMMS shortcut | Click **CMMS** in topbar | Navigate to `/cmms` | ☐ | |
-| SHELL-17 | Topbar — MV Draw | Click **MV Draw** | Navigate to `/mv-draw` in same or new tab | ☐ | |
+| SHELL-17 | Topbar — Facility Draw | Click **Facility Draw** | Navigate to `/facility-draw` in same or new tab | ☐ | |
 | SHELL-18 | Topbar — Tools menu | Open **Tools ▾** | Program, Tags, Drivers, Connectivity (`/cellular/sims`) | ☐ | |
 | SHELL-19 | Topbar — Camera menu | Open **Camera ▾** | Camera admin popup + live camera shortcuts | ☐ | |
 | SHELL-20 | Topbar — Help menu | Open **Help ▾** | Training (F2), Help (F1), Sign out | ☐ | |
@@ -368,11 +368,11 @@
 | IOMAP-02 | Enable I/O update | Toggle checkbox | Live I/O updates when enabled | ☐ | |
 | IOMAP-03 | Driver bindings | View bindings sidebar | Driver wiring and HMI screen bindings listed | ☐ | |
 
-### 16b. MV Draw (`/mv-draw`)
+### 16b. Facility Draw (`/facility-draw`)
 
 | ID | Test case | Steps | Expected result | Result | Notes |
 |----|-----------|-------|-----------------|--------|-------|
-| MV-01 | Page loads | Navigate to `/mv-draw` | 2D grid canvas + toolbar | ☐ | |
+| MV-01 | Page loads | Navigate to `/facility-draw` | 2D grid canvas + toolbar | ☐ | |
 | MV-02 | New / Open / Save | File menu actions | Document lifecycle works | ☐ | |
 | MV-03 | Composer modes | Switch 2D / 3D / Plan | Mode changes; canvas updates | ☐ | |
 | MV-04 | Tools — Place / Connect | Place symbol; connect edges | Objects appear on canvas | ☐ | |

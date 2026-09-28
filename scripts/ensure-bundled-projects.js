@@ -173,7 +173,7 @@ function packProject(root, id) {
     project: raw,
     programs,
     activeProgram: activeProgram || undefined,
-    mvDraw: raw.mvDraw || null,
+    facilityDraw: raw.facilityDraw || null,
     meta: { name: raw.project?.name || id, exportedBy: 'ensure-bundled-projects' },
   });
 

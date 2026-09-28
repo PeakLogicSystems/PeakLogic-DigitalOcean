@@ -62,11 +62,11 @@ for dir in st firmware config deploy; do
   fi
 done
 
-# mv-draw
-if [[ -d "$EST_ROOT/mv-draw" ]]; then
-  rm -rf "$CLOUD_ROOT/mv-draw"
-  cp -a "$EST_ROOT/mv-draw" "$CLOUD_ROOT/mv-draw"
-  log "  sync: mv-draw/"
+# facility-draw
+if [[ -d "$EST_ROOT/facility-draw" ]]; then
+  rm -rf "$CLOUD_ROOT/facility-draw"
+  cp -a "$EST_ROOT/facility-draw" "$CLOUD_ROOT/facility-draw"
+  log "  sync: facility-draw/"
 fi
 
 # scripts (except seed.js)
@@ -114,7 +114,7 @@ cp -f "$EST_ROOT/server.js" "$CLOUD_ROOT/server.js"
 log "  wrote: server.js"
 
 # views (appliance only)
-for v in dashboard.ejs layout.ejs io-map.ejs cellular-sims.ejs cloud-sims.ejs mv-draw.ejs; do
+for v in dashboard.ejs layout.ejs io-map.ejs cellular-sims.ejs cloud-sims.ejs facility-draw.ejs; do
   [[ -f "$EST_ROOT/views/$v" ]] && cp -f "$EST_ROOT/views/$v" "$CLOUD_ROOT/views/$v" && log "  sync: views/$v"
 done
 if [[ -d "$EST_ROOT/views/pages" ]]; then

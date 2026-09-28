@@ -72,14 +72,14 @@ describe('tenant workspace isolation', () => {
   });
 
   it('creates isolated on-disk workspace folders per tenant', () => {
-    const { ensureTenantWorkspaceDirs, resolveStDir, resolveMvDrawDir } = require('../src/tenants/tenantPaths');
+    const { ensureTenantWorkspaceDirs, resolveStDir, resolveFacilityDrawDir } = require('../src/tenants/tenantPaths');
     ensureTenantWorkspaceDirs('tenant-a');
     ensureTenantWorkspaceDirs('tenant-b');
 
     runWithProjectTenant('tenant-a', () => {
       fs.writeFileSync(path.join(resolveStDir(), 'logic-a.st'), 'PROGRAM A');
-      fs.mkdirSync(resolveMvDrawDir(), { recursive: true });
-      fs.writeFileSync(path.join(resolveMvDrawDir(), 'active.json'), '{"name":"draw-a"}');
+      fs.mkdirSync(resolveFacilityDrawDir(), { recursive: true });
+      fs.writeFileSync(path.join(resolveFacilityDrawDir(), 'active.json'), '{"name":"draw-a"}');
     });
     runWithProjectTenant('tenant-b', () => {
       fs.writeFileSync(path.join(resolveStDir(), 'logic-b.st'), 'PROGRAM B');
@@ -89,7 +89,7 @@ describe('tenant workspace isolation', () => {
     const stB = fs.readFileSync(path.join(dataDir, 'tenants', 'tenant-b', 'st', 'logic-b.st'), 'utf8');
     assert.equal(stA, 'PROGRAM A');
     assert.equal(stB, 'PROGRAM B');
-    assert.ok(fs.existsSync(path.join(dataDir, 'tenants', 'tenant-a', 'mv-draw', 'active.json')));
-    assert.ok(!fs.existsSync(path.join(dataDir, 'tenants', 'tenant-b', 'mv-draw', 'active.json')));
+    assert.ok(fs.existsSync(path.join(dataDir, 'tenants', 'tenant-a', 'facility-draw', 'active.json')));
+    assert.ok(!fs.existsSync(path.join(dataDir, 'tenants', 'tenant-b', 'facility-draw', 'active.json')));
   });
 });

@@ -17,8 +17,8 @@ const {
 const path = require('path');
 const PACKAGE_VERSION = require('../../package.json').version;
 const PUBLIC_ROOT = path.join(__dirname, '../../public');
-const { readActiveProject, writeActiveProject } = require('../../mv-draw/src/mvDrawStore');
-const { normalizeMvDraw } = require('../../mv-draw/src/mvDrawFormat');
+const { readActiveProject, writeActiveProject } = require('../../facility-draw/src/facilityDrawStore');
+const { normalizeFacilityDraw } = require('../../facility-draw/src/facilityDrawFormat');
 const EST_FORMAT = 'peaklogic-est';
 const EST_VERSION = 1;
 const ARCHIVE_FORMAT = 'peaklogic-est-archive';
@@ -73,7 +73,7 @@ function pack(deps, meta = {}) {
   const projectName = String(meta.name || meta.project?.name || settings.project?.name || 'untitled').trim()
     || 'untitled';
   const { startup: _omitStartup, ...settingsForSnapshot } = settings;
-  const mvDraw = readActiveProject();
+  const facilityDraw = readActiveProject();
   return {
     format: EST_FORMAT,
     version: EST_VERSION,
@@ -85,7 +85,7 @@ function pack(deps, meta = {}) {
     drivers: driverManager.list(),
     program: programStore.readActive(),
     activeProgram: programStore.activeRel(),
-    mvDraw,
+    facilityDraw,
     settings: {
       ...settingsForSnapshot,
       project: { ...(settings.project || {}), name: projectName },
@@ -408,8 +408,8 @@ async function apply(doc, deps, opts = {}) {
     if (cfg && typeof cfg === 'object' && cfg.uri) await mongoTagLogger.setConfig(cfg);
     else await mongoTagLogger.clearConfig();
   }
-  if (normalized.mvDraw) {
-    writeActiveProject(normalizeMvDraw(normalized.mvDraw, {
+  if (normalized.facilityDraw) {
+    writeActiveProject(normalizeFacilityDraw(normalized.facilityDraw, {
       name: normalized.project?.name || normalized.settings?.project?.name,
     }));
   }

@@ -184,7 +184,7 @@
       { feature: 'reports', sel: '[data-popup-open="report"]' },
       { feature: 'alarms', sel: '#btn-topbar-alarms' },
       { feature: 'cmms', sel: '#btn-topbar-cmms' },
-      { feature: 'mvDraw', sel: '#btn-topbar-mv-draw' },
+      { feature: 'facilityDraw', sel: '#btn-topbar-facility-draw' },
     ];
     cloudMap.forEach(({ feature, sel }) => {
       const allowed = authUserHasFeature(feature);
@@ -296,7 +296,7 @@
     }
     const map = [
       { feature: 'alarms', sel: '#btn-topbar-alarms' },
-      { feature: 'mvDraw', sel: '#btn-topbar-mv-draw' },
+      { feature: 'facilityDraw', sel: '#btn-topbar-facility-draw' },
       { feature: 'cameras', sel: '#camera-menu-details' },
       { feature: 'historian', sel: '#historian-menu-details, #btn-topbar-pdm, [data-popup-open="historian"], [data-historian-logger-open], [data-popup-open="historian-logger"], #btn-historian-logger' },
       { feature: 'reports', sel: '[data-popup-open="report"]' },
@@ -3869,7 +3869,7 @@
         closeProjectMenu();
       });
     });
-    document.getElementById('btn-topbar-mv-draw')?.addEventListener('click', () => {
+    document.getElementById('btn-topbar-facility-draw')?.addEventListener('click', () => {
       closeTopbarViewMenus();
       closeProjectMenu();
     });
@@ -10178,7 +10178,7 @@
     const name = String(nameOverride ?? (formName || projectName || 'untitled')).trim() || 'untitled';
     const blob = await api.saveEstBlob(name);
     downloadBlob(blob, safeEstFilename(name));
-    const note = `Exported "${safeEstFilename(name)}" — portable project archive (ST, JSON, HMI, MV Draw)`;
+    const note = `Exported "${safeEstFilename(name)}" — portable project archive (ST, JSON, HMI, Facility Draw)`;
     if ($('proj-msg')) $('proj-msg').textContent = note;
     else alert(note);
   }

@@ -8,8 +8,8 @@ const programStore = require('../programs/programStore');
 const persistence = require('../persistence');
 const { DATA_DIR } = require('../config');
 const { userImportsDir, saveUserHmiAsset } = require('../hmi/hmiUserAssets');
-const { mvDrawAssetRefs, defaultReadAsset, defaultWriteAsset } = require('./projectBundle');
-const { normalizeMvDraw } = require('../../mv-draw/src/mvDrawFormat');
+const { facilityDrawAssetRefs, defaultReadAsset, defaultWriteAsset } = require('./projectBundle');
+const { normalizeFacilityDraw } = require('../../facility-draw/src/facilityDrawFormat');
 const { packProjectDoc, applyProjectDoc, exportFilename, EST_FORMAT, EST_VERSION, ARCHIVE_FORMAT, ARCHIVE_VERSION } = require('./estFile');
 const { stripLegacyProjectHwDefaults } = require('../settings/portableSettings');
 
@@ -75,28 +75,28 @@ function collectUserHmiAssets(settings, dataDir = DATA_DIR) {
   return assets;
 }
 
-function attachMvDraw(deps) {
+function attachFacilityDraw(deps) {
   try {
-    const { readActiveProject } = require('../../mv-draw/src/mvDrawStore');
+    const { readActiveProject } = require('../../facility-draw/src/facilityDrawStore');
     const active = readActiveProject();
     if (active && (active.nodes?.length || active.background || active.scale)) {
-      return normalizeMvDraw(active);
+      return normalizeFacilityDraw(active);
     }
     const ws = persistence.readJson('workspace.est.json', null);
     const pe = persistence.readJson('project.est.json', null);
-    return normalizeMvDraw(ws?.mvDraw || pe?.mvDraw || null);
+    return normalizeFacilityDraw(ws?.facilityDraw || pe?.facilityDraw || null);
   } catch {
     return null;
   }
 }
 
-function collectMvDrawAssets(doc, readAsset = defaultReadAsset) {
+function collectFacilityDrawAssets(doc, readAsset = defaultReadAsset) {
   const assets = [];
   if (!doc) return assets;
-  for (const ref of mvDrawAssetRefs(doc)) {
+  for (const ref of facilityDrawAssetRefs(doc)) {
     const buf = readAsset(ref);
     if (!buf || !buf.length) continue;
-    assets.push({ ref: normalizeZipPath(`mv-draw/${ref}`), data: buf });
+    assets.push({ ref: normalizeZipPath(`facility-draw/${ref}`), data: buf });
   }
   return assets;
 }
@@ -205,14 +205,14 @@ function collectProgramSources() {
 function packArchive(deps, meta = {}, io = {}) {
   const readAsset = io.readAsset || defaultReadAsset;
   const projectDoc = packProjectDoc(deps, meta);
-  const mvDraw = attachMvDraw(deps) || projectDoc.mvDraw || null;
-  if (mvDraw) projectDoc.mvDraw = mvDraw;
+  const facilityDraw = attachFacilityDraw(deps) || projectDoc.facilityDraw || null;
+  if (facilityDraw) projectDoc.facilityDraw = facilityDraw;
   const parc = persistence.readJson('parc.json', null);
   const programSources = collectProgramSources();
   const programsManifest = buildProgramsManifest(programSources, projectDoc.activeProgram);
   const { project, hostHints } = extractHostHints(projectDoc);
   const hmiAssets = collectUserHmiAssets(project.settings);
-  const mvDrawAssets = collectMvDrawAssets(mvDraw, readAsset);
+  const facilityDrawAssets = collectFacilityDrawAssets(facilityDraw, readAsset);
 
   const manifest = {
     format: ARCHIVE_FORMAT,
@@ -245,10 +245,10 @@ function packArchive(deps, meta = {}, io = {}) {
     }
   }
 
-  if (mvDraw) {
-    manifest.members.push('mv-draw/doc.json');
-    zipEntries['mv-draw/doc.json'] = strToU8(JSON.stringify(mvDraw, null, 2));
-    for (const asset of mvDrawAssets) {
+  if (facilityDraw) {
+    manifest.members.push('facility-draw/doc.json');
+    zipEntries['facility-draw/doc.json'] = strToU8(JSON.stringify(facilityDraw, null, 2));
+    for (const asset of facilityDrawAssets) {
       zipEntries[asset.ref] = new Uint8Array(asset.data);
       manifest.members.push(asset.ref);
     }
@@ -297,7 +297,7 @@ function unpackArchive(buf) {
   const programsManifest = parseJsonMember(files, 'programs/manifest.json', { active: '', files: [] });
   const hostHints = parseJsonMember(files, 'meta/host-hints.json', null);
   const parc = parseJsonMember(files, 'parc.json', null);
-  const mvDraw = parseJsonMember(files, 'mv-draw/doc.json', null);
+  const facilityDraw = parseJsonMember(files, 'facility-draw/doc.json', null);
 
   const programs = {};
   for (const entry of programsManifest.files || []) {
@@ -316,11 +316,11 @@ function unpackArchive(buf) {
     hmiAssets.push({ name, data: Buffer.from(files[key]) });
   }
 
-  const mvDrawAssets = [];
+  const facilityDrawAssets = [];
   for (const key of Object.keys(files)) {
     const norm = normalizeZipPath(key);
-    if (!norm.startsWith('mv-draw/uploads/')) continue;
-    mvDrawAssets.push({ ref: norm.replace(/^mv-draw\//, ''), data: Buffer.from(files[key]) });
+    if (!norm.startsWith('facility-draw/uploads/')) continue;
+    facilityDrawAssets.push({ ref: norm.replace(/^facility-draw\//, ''), data: Buffer.from(files[key]) });
   }
 
   return {
@@ -330,9 +330,9 @@ function unpackArchive(buf) {
     programs,
     hostHints,
     parc,
-    mvDraw,
+    facilityDraw,
     hmiAssets,
-    mvDrawAssets,
+    facilityDrawAssets,
   };
 }
 
@@ -345,20 +345,20 @@ async function restoreArchiveMembers(unpacked, io = {}) {
     if (!saved.ok) warnings.push(`Could not restore HMI asset ${asset.name}: ${saved.error}`);
   }
 
-  for (const asset of unpacked.mvDrawAssets || []) {
+  for (const asset of unpacked.facilityDrawAssets || []) {
     try {
       writeAsset(asset.ref, asset.data);
     } catch (e) {
-      warnings.push(`Could not restore MV Draw asset ${asset.ref}: ${e.message || e}`);
+      warnings.push(`Could not restore Facility Draw asset ${asset.ref}: ${e.message || e}`);
     }
   }
 
-  if (unpacked.mvDraw) {
+  if (unpacked.facilityDraw) {
     try {
-      const { writeActiveProject } = require('../../mv-draw/src/mvDrawStore');
-      writeActiveProject(normalizeMvDraw(unpacked.mvDraw));
+      const { writeActiveProject } = require('../../facility-draw/src/facilityDrawStore');
+      writeActiveProject(normalizeFacilityDraw(unpacked.facilityDraw));
     } catch (e) {
-      warnings.push(`Could not restore MV Draw document: ${e.message || e}`);
+      warnings.push(`Could not restore Facility Draw document: ${e.message || e}`);
     }
   }
 
@@ -454,9 +454,9 @@ function packArchiveFromParts({
   programs = {},
   activeProgram = '',
   parc = null,
-  mvDraw = null,
+  facilityDraw = null,
   hmiAssets = [],
-  mvDrawAssets = [],
+  facilityDrawAssets = [],
   meta = {},
 }) {
   const { project: sanitized, hostHints } = extractHostHints(project);
@@ -484,12 +484,12 @@ function packArchiveFromParts({
     zipEntries[member] = new Uint8Array(asset.data);
     manifest.members.push(member);
   }
-  if (mvDraw) {
-    zipEntries['mv-draw/doc.json'] = strToU8(JSON.stringify(mvDraw, null, 2));
-    manifest.members.push('mv-draw/doc.json');
+  if (facilityDraw) {
+    zipEntries['facility-draw/doc.json'] = strToU8(JSON.stringify(facilityDraw, null, 2));
+    manifest.members.push('facility-draw/doc.json');
   }
-  for (const asset of mvDrawAssets) {
-    const member = normalizeZipPath(asset.ref.startsWith('mv-draw/') ? asset.ref : `mv-draw/${asset.ref}`);
+  for (const asset of facilityDrawAssets) {
+    const member = normalizeZipPath(asset.ref.startsWith('facility-draw/') ? asset.ref : `facility-draw/${asset.ref}`);
     zipEntries[member] = new Uint8Array(asset.data);
     manifest.members.push(member);
   }

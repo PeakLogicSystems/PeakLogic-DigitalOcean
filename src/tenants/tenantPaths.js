@@ -77,8 +77,8 @@ function resolveStDir() {
   return ST_DIR;
 }
 
-function resolveMvDrawDir() {
-  return path.join(resolveTenantDataRoot(), 'mv-draw');
+function resolveFacilityDrawDir() {
+  return path.join(resolveTenantDataRoot(), 'facility-draw');
 }
 
 function resolveHmiImportsDir() {
@@ -89,7 +89,7 @@ function resolveHmiImportsDir() {
 
 function ensureTenantWorkspaceDirs(tenantId) {
   const root = tenantRootDir(tenantId);
-  for (const sub of ['st', 'mv-draw', 'mv-draw/projects', 'mv-draw/uploads', 'hmi-imports']) {
+  for (const sub of ['st', 'facility-draw', 'facility-draw/projects', 'facility-draw/uploads', 'hmi-imports']) {
     const dir = path.join(root, sub);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   }
@@ -106,7 +106,7 @@ module.exports = {
   resolveTenantDataRoot,
   resolveTenantRelativePath,
   resolveStDir,
-  resolveMvDrawDir,
+  resolveFacilityDrawDir,
   resolveHmiImportsDir,
   GLOBAL_DATA_FILES,
   isCloudMultiTenant: () => DEPLOYMENT_MODE === 'cloud',

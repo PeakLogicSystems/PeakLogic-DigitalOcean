@@ -15,10 +15,10 @@ function createPageRoutes({ appVersion, product, deployment }) {
   router.get('/io-map', (req, res) => {
     res.render('io-map', dashboardViewLocals({ appVersion, product, deployment }));
   });
-  router.get('/mv-draw', (req, res) => {
+  router.get('/facility-draw', (req, res) => {
     const embedded = String(req.query.embedded || '').trim() === '1'
       || String(req.query.embedded || '').toLowerCase() === 'true';
-    res.render('mv-draw', dashboardViewLocals({ appVersion, product, deployment, embedded }));
+    res.render('facility-draw', dashboardViewLocals({ appVersion, product, deployment, embedded }));
   });
   router.get('/cloud/sims', (req, res) => {
     res.render('cloud-sims', dashboardViewLocals({ appVersion, product, deployment }));

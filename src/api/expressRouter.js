@@ -30,7 +30,7 @@ try {
   console.warn('[api] messaging routes unavailable:', err.message);
   createMessagingRoutes = () => express.Router();
 }
-const { createMvDrawRoutes } = require('../../mv-draw/src/api/mvDrawRoutes');
+const { createFacilityDrawRoutes } = require('../../facility-draw/src/api/facilityDrawRoutes');
 const { createTenantAuthRoutes } = require('./routes/tenantAuth');
 const { createTenantFleetRoutes } = require('./routes/tenantFleet');
 const { createMqttConsoleRoutes } = require('./routes/mqttConsole');
@@ -57,7 +57,7 @@ function createExpressApi(deps) {
   studio.use(createAlarmRoutes(deps));
   studio.use(createHardwareHistoryRoutes(deps));
   studio.use(createIoMapRoutes(deps));
-  studio.use(createMvDrawRoutes());
+  studio.use(createFacilityDrawRoutes());
 
   router.use(sysLogRequestContext);
   router.use(createTenantAuthRoutes());

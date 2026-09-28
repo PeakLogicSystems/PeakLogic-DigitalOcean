@@ -141,7 +141,7 @@ Tools
 ├── [ ] Tag editor…
 ├── [ ] Driver setup…
 ├── [ ] Camera admin…
-├── [ ] MV Draw (opens /mv-draw or embedded)
+├── [ ] Facility Draw (opens /facility-draw or embedded)
 ├── [ ] IO map (when project provides map)
 ├── [ ] Connectivity
 │   ├── [ ] Cellular SIMs (/cellular/sims) — if entitled
@@ -372,10 +372,10 @@ Standalone routes
 │   ├── [ ] Work orders — create, assign, complete
 │   ├── [ ] Preventive maintenance — schedules list
 │   └── [ ] Alarm-created WO appears after runtime alarm (integrated mode)
-├── /mv-draw
+├── /facility-draw
 │   ├── [ ] Canvas editor loads
 │   ├── [ ] Save / open drawing
-│   └── [ ] Help panel in MV Draw
+│   └── [ ] Help panel in Facility Draw
 ├── /io-map (project-specific)
 │   ├── [ ] PDF or SVG map displays
 │   └── [ ] Point labels match tag names

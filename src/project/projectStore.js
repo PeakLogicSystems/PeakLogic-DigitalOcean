@@ -204,7 +204,7 @@ function saveProjectDoc(nameOrId, doc, deps) {
       programs,
       activeProgram: doc?.activeProgram || '',
       parc,
-      mvDraw: doc?.mvDraw || null,
+      facilityDraw: doc?.facilityDraw || null,
       meta: { name },
     });
   }
@@ -261,7 +261,7 @@ function readProjectArchiveBuffer(id) {
       ? { [doc.activeProgram]: doc.program }
       : {},
     activeProgram: doc.activeProgram || '',
-    mvDraw: doc.mvDraw || null,
+    facilityDraw: doc.facilityDraw || null,
     meta: { name: doc?.project?.name || id },
   });
 }

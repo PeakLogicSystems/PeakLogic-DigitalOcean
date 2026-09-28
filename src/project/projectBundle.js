@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { EST_FORMAT } = require('./estFile');
-const { MV_DRAW_FORMAT, normalizeMvDraw } = require('../../mv-draw/src/mvDrawFormat');
-const { resolveUpload, uploadsDir, relativeUploadPath } = require('../../mv-draw/src/mvDrawStore');
+const { FACILITY_DRAW_FORMAT, normalizeFacilityDraw } = require('../../facility-draw/src/facilityDrawFormat');
+const { resolveUpload, uploadsDir, relativeUploadPath } = require('../../facility-draw/src/facilityDrawStore');
 
 const BUNDLE_FORMAT = 'peaklogic-bundle';
 const BUNDLE_VERSION = 1;
@@ -32,7 +32,7 @@ function normalizeAssetRef(ref) {
   return `uploads/${base}`;
 }
 
-function mvDrawAssetRefs(doc) {
+function facilityDrawAssetRefs(doc) {
   const refs = [];
   const bgPath = doc?.background?.path;
   if (!bgPath) return refs;
@@ -68,7 +68,7 @@ function defaultWriteAsset(ref, buf) {
 function collectAssets(doc, readAsset = defaultReadAsset) {
   const assets = [];
   const seen = new Set();
-  for (const ref of mvDrawAssetRefs(doc)) {
+  for (const ref of facilityDrawAssetRefs(doc)) {
     if (seen.has(ref)) continue;
     seen.add(ref);
     const buf = readAsset(ref);
@@ -82,13 +82,13 @@ function collectAssets(doc, readAsset = defaultReadAsset) {
   return assets;
 }
 
-function packMvDraw(doc, meta = {}, io = {}) {
+function packFacilityDraw(doc, meta = {}, io = {}) {
   const readAsset = io.readAsset || defaultReadAsset;
-  const normalized = normalizeMvDraw(doc, meta);
+  const normalized = normalizeFacilityDraw(doc, meta);
   return {
     format: BUNDLE_FORMAT,
     version: BUNDLE_VERSION,
-    kind: 'mvdraw',
+    kind: 'facilitydraw',
     name: normalized.name,
     savedAt: new Date().toISOString(),
     exportedBy: meta.exportedBy || null,
@@ -101,7 +101,7 @@ function packEst(estDoc, meta = {}, io = {}) {
   const readAsset = io.readAsset || defaultReadAsset;
   const doc = estDoc && typeof estDoc === 'object' ? { ...estDoc } : {};
   const name = String(doc.project?.name || doc.settings?.project?.name || meta.name || 'project').trim() || 'project';
-  const assets = doc.mvDraw ? collectAssets(doc.mvDraw, readAsset) : [];
+  const assets = doc.facilityDraw ? collectAssets(doc.facilityDraw, readAsset) : [];
   let cameras = doc.cameras;
   if (!cameras) {
     try {
@@ -161,28 +161,28 @@ function unpackBundle(bundle, io = {}) {
   };
 }
 
-/** Accept bundle, est, or mvdraw JSON and return the inner document for import. */
+/** Accept bundle, est, or facilitydraw JSON and return the inner document for import. */
 function resolveImportPayload(raw, io = {}) {
   if (!raw || typeof raw !== 'object') {
     throw Object.assign(new Error('Invalid JSON object'), { status: 400 });
   }
   if (isBundle(raw)) {
     const { kind, doc, warnings } = unpackBundle(raw, io);
-    if (kind === 'mvdraw' || doc?.format === MV_DRAW_FORMAT) {
-      return { type: 'mvdraw', doc: normalizeMvDraw(doc), warnings };
+    if (kind === 'facilitydraw' || doc?.format === FACILITY_DRAW_FORMAT) {
+      return { type: 'facilitydraw', doc: normalizeFacilityDraw(doc), warnings };
     }
     if (kind === 'est' || doc?.format === EST_FORMAT) {
       return { type: 'est', doc, warnings };
     }
-    throw Object.assign(new Error('Bundle doc is not a PeakLogic or MV Draw project'), { status: 400 });
+    throw Object.assign(new Error('Bundle doc is not a PeakLogic or Facility Draw project'), { status: 400 });
   }
-  if (raw.format === MV_DRAW_FORMAT) {
-    return { type: 'mvdraw', doc: normalizeMvDraw(raw), warnings: [] };
+  if (raw.format === FACILITY_DRAW_FORMAT) {
+    return { type: 'facilitydraw', doc: normalizeFacilityDraw(raw), warnings: [] };
   }
   if (raw.format === EST_FORMAT || Array.isArray(raw.tags)) {
     return { type: 'est', doc: raw, warnings: [] };
   }
-  throw Object.assign(new Error('Unrecognized project file (expected .mvbundle, .est.json, or .mvdraw.json)'), { status: 400 });
+  throw Object.assign(new Error('Unrecognized project file (expected .mvbundle, .est.json, or .facilitydraw.json)'), { status: 400 });
 }
 
 module.exports = {
@@ -190,11 +190,11 @@ module.exports = {
   BUNDLE_VERSION,
   isBundle,
   bundleFilename,
-  packMvDraw,
+  packFacilityDraw,
   packEst,
   unpackBundle,
   resolveImportPayload,
-  mvDrawAssetRefs,
+  facilityDrawAssetRefs,
   defaultReadAsset,
   defaultWriteAsset,
 };

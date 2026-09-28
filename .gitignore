@@ -45,6 +45,7 @@ data/sys_log.json
 data/peaklogic.pid
 data/cmms.json
 data/tenants/
+data/boilerplate/
 
 # OS / editor
 .DS_Store

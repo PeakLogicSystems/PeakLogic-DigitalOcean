@@ -39,7 +39,7 @@ function main() {
     project: raw,
     programs,
     activeProgram: raw.activeProgram,
-    mvDraw: raw.mvDraw || null,
+    facilityDraw: raw.facilityDraw || null,
     meta: { name: raw.project?.name, exportedBy: 'pack-est-json-to-archive' },
   });
   fs.writeFileSync(outPath, buf);
