@@ -40,6 +40,14 @@ const TENANT_ID = process.env.PEAKLOGIC_TENANT_ID
 
 const TELEMETRY_INGEST_MODE = String(process.env.TELEMETRY_INGEST_MODE || 'local').trim().toLowerCase();
 
+const CONFIG_URI = process.env.PEAKLOGIC_CONFIG_URI
+  || process.env.MONGODB_URI
+  || process.env.MONGO_URL
+  || '';
+const CONFIG_DB = process.env.PEAKLOGIC_CONFIG_DB || 'peaklogic';
+const CONFIG_COLLECTION = process.env.PEAKLOGIC_CONFIG_COLLECTION || 'configDocuments';
+const CONFIG_PROJECTS_COLLECTION = process.env.PEAKLOGIC_CONFIG_PROJECTS_COLLECTION || 'configProjects';
+
 module.exports = {
   ROOT,
   DATA_DIR,
@@ -56,6 +64,10 @@ module.exports = {
   DEPLOYMENT_MODE,
   TENANT_ID,
   TELEMETRY_INGEST_MODE,
+  CONFIG_URI,
+  CONFIG_DB,
+  CONFIG_COLLECTION,
+  CONFIG_PROJECTS_COLLECTION,
   SERVICE_BUS_CONNECTION_STRING: process.env.SERVICE_BUS_CONNECTION_STRING || '',
   SERVICE_BUS_NAMESPACE: process.env.SERVICE_BUS_NAMESPACE || '',
   EVENT_HUB_CONNECTION_STRING: process.env.EVENT_HUB_CONNECTION_STRING || '',

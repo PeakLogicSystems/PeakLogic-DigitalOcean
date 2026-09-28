@@ -1,0 +1,64 @@
+{
+  "tenantId": "local",
+  "tenantName": "Local Site",
+  "users": {
+    "user_322f464ee30f": {
+      "userId": "user_322f464ee30f",
+      "email": "admin@local",
+      "name": "Administrator",
+      "role": "admin",
+      "passwordHash": "scrypt$FnVfIEzpmcmX/E9pPdUIFw==$rgmAzuazgVl0i8RXBj1GHKZyOJ0ftBR3fpIlGDywxmg=",
+      "features": {
+        "hmi": true,
+        "hmiControl": true,
+        "program": true,
+        "tags": true,
+        "drivers": true,
+        "runtime": true,
+        "alarms": true,
+        "cameras": true,
+        "historian": true,
+        "reports": true,
+        "cmms": true,
+        "project": true,
+        "setup": true,
+        "users": true,
+        "mvDraw": true,
+        "connectivity": true
+      },
+      "active": true,
+      "createdAt": "2026-09-28T12:24:46.103Z",
+      "updatedAt": "2026-09-28T12:24:46.103Z"
+    },
+    "user_34fae786a691": {
+      "userId": "user_34fae786a691",
+      "email": "operator@local",
+      "name": "Operator",
+      "role": "operator",
+      "passwordHash": "scrypt$8MhDtsRRLvtUGOBPz2gXKw==$Eb6Q05/p4r9tOQBfnpVD1vmiQSk18kBtkLlFKS3RHlo=",
+      "features": {
+        "hmi": true,
+        "hmiControl": true,
+        "program": false,
+        "tags": false,
+        "drivers": false,
+        "runtime": false,
+        "alarms": true,
+        "cameras": true,
+        "historian": true,
+        "reports": true,
+        "cmms": true,
+        "project": false,
+        "setup": false,
+        "users": false,
+        "mvDraw": false,
+        "connectivity": false
+      },
+      "active": true,
+      "createdAt": "2026-09-28T12:24:46.146Z",
+      "updatedAt": "2026-09-28T12:24:46.146Z"
+    }
+  },
+  "sessions": {},
+  "seededAt": "2026-09-28T12:24:46.188Z"
+}
