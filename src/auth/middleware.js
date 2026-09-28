@@ -84,7 +84,7 @@ function attachPlatformAdmin(req, res, next) {
 
 function requirePlatformAdmin(req, res, next) {
   if (!isPlatformAdminConfigured()) {
-    return res.status(503).json({ error: 'Platform admin API is not configured' });
+    return res.status(503).json({ error: 'Control Center API is not configured' });
   }
   if (!isPlatformAdminAuthorized(req)) {
     return res.status(403).json({ error: 'Forbidden' });
@@ -95,7 +95,7 @@ function requirePlatformAdmin(req, res, next) {
 
 function requirePlatformAdminWeb(req, res, next) {
   if (!isPlatformAdminConfigured()) {
-    return res.status(503).send('Platform admin is not configured (set PLATFORM_ADMIN_KEY in /etc/peaklogic/saas.env).');
+    return res.status(503).send('Control Center is not configured (set PLATFORM_ADMIN_KEY in /etc/peaklogic/saas.env).');
   }
   if (!isPlatformAdminAuthorized(req)) {
     return res.redirect('/admin/login');

@@ -23,6 +23,8 @@ const { GraphHistory } = require('./src/runtime/graphHistory');
 const { createExpressApi } = require('./src/api/expressRouter');
 const { createPageRoutes } = require('./src/routes/pages');
 const { createCloudStudioPages } = require('./src/routes/cloudStudioPages');
+const adminWebRouter = require('./src/routes/adminWeb');
+const adminApiRouter = require('./src/routes/admin');
 const { attachSession } = require('./src/tenants/authMiddleware');
 const { createHmiAssetRedirect } = require('./src/routes/staticAssets');
 const programStore = require('./src/programs/programStore');
@@ -89,6 +91,8 @@ const publicRoot = path.join(__dirname, 'public');
 
 const app = express();
 app.use(express.json({ limit: REQUEST_JSON_LIMIT }));
+app.use(express.urlencoded({ extended: true, limit: REQUEST_JSON_LIMIT }));
+app.use(require('cookie-parser')());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -117,7 +121,12 @@ if (DEPLOYMENT_MODE === 'cloud') {
 }
 app.use(createPageRoutes({ appVersion: APP_VERSION, product: PRODUCT, deployment: DEPLOYMENT_MODE }));
 app.use('/api', createExpressApi({ tagStore, driverManager, scanEngine, graphHistory }));
+app.use('/api/admin', adminApiRouter);
 if (DEPLOYMENT_MODE === 'cloud') {
+  // Mounted before createCloudStudioPages so /admin/* (platform Control Center)
+  // is handled here rather than falling through to that router's blanket
+  // requireAuth gate, which also defines a conflicting /admin/tenants route.
+  app.use('/admin', adminWebRouter);
   app.use(createCloudStudioPages({ appVersion: APP_VERSION, product: PRODUCT }));
 }
 

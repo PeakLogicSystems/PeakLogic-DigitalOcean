@@ -15,18 +15,13 @@ const {
   getPlatformAdminCookie,
 } = require('../auth/platformAdminSession');
 const tenantService = require('../services/tenantService');
-const fleetOnboardingService = require('../services/fleetOnboardingService');
-const { listStationTypes } = require('../fleet/stationTypes');
-const { listFloridaCounties } = require('../fleet/floridaCounties');
-const { CMMS_PLANS } = require('../tenants/cmmsEntitlement');
-const { TENANT_PLANS } = require('../tenants/tenantPlan');
 
 const router = express.Router();
 router.use(attachPlatformAdmin);
 
 function adminLocals(req, extra = {}) {
   return {
-    title: extra.title || 'Platform Admin',
+    title: extra.title || 'Admin',
     version: APP_VERSION,
     activeNav: extra.activeNav || '',
     error: extra.error || null,
@@ -47,12 +42,12 @@ router.get('/login', (req, res) => {
   if (req.platformAdmin) return res.redirect('/admin/tenants');
   if (!isPlatformAdminConfigured()) {
     return res.status(503).render('admin/login', adminLocals(req, {
-      title: 'Platform Admin',
+      title: 'Admin',
       error: 'PLATFORM_ADMIN_KEY is not set on this server. Edit /etc/peaklogic/saas.env, set a real key (openssl rand -hex 24), then: sudo systemctl restart peaklogic-saas',
     }));
   }
   res.render('admin/login', adminLocals(req, {
-    title: 'Platform Admin Login',
+    title: 'Login',
     message: req.query.message || null,
   }));
 });
@@ -84,70 +79,36 @@ router.get('/tenants', requirePlatformAdminWeb, asyncHandler(async (req, res) =>
     title: 'Tenants',
     activeNav: 'tenants',
     tenants,
-    deleted: req.query.deleted === '1',
   }));
 }));
 
-function newTenantLocals(req, extra = {}) {
-  return adminLocals(req, {
+router.get('/tenants/new', requirePlatformAdminWeb, (req, res) => {
+  res.render('admin/tenant-new', adminLocals(req, {
     title: 'New customer',
     activeNav: 'new',
-    cmmsPlans: CMMS_PLANS.filter((p) => p !== 'none'),
-    stationTypes: listStationTypes(),
-    counties: listFloridaCounties(),
-    ...extra,
-  });
-}
-
-router.get('/tenants/new', requirePlatformAdminWeb, (req, res) => {
-  res.render('admin/tenant-new', newTenantLocals(req));
+  }));
 });
 
 router.post('/tenants', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
   const b = req.body || {};
   const cmmsEnabled = b.cmmsEnabled === 'on' || b.cmmsEnabled === 'true';
-  const wantsStation = (b.addStation === 'on' || b.addStation === 'true') && String(b.stationType || '').trim();
 
-  let result;
-  try {
-    result = await fleetOnboardingService.onboardCustomer({
-      tenantName: b.tenantName,
-      tenantSlug: b.tenantSlug,
-      email: b.email,
-      password: b.password,
-      cmms: cmmsEnabled ? { enabled: true, plan: b.cmmsPlan || 'standard' } : undefined,
-      station: wantsStation
-        ? {
-          stationType: b.stationType,
-          stationName: b.stationName,
-          stationSlug: b.stationSlug,
-          county: b.county,
-          address: b.address,
-          lat: b.lat,
-          lng: b.lng,
-          deviceId: b.deviceId,
-          deviceSlug: b.deviceSlug,
-          scanMs: b.scanMs,
-        }
-        : null,
-    });
-  } catch (err) {
-    console.error('[admin] onboard customer failed:', err.stack || err.message);
-    return res.status(500).render('admin/tenant-new', newTenantLocals(req, {
-      error: err.message || 'Could not create customer. Check server logs (journalctl -u peaklogic-saas).',
-      form: b,
-    }));
-  }
+  const result = await tenantService.createTenantAsPlatform({
+    tenantName: b.tenantName,
+    tenantSlug: b.tenantSlug,
+    email: b.email,
+    password: b.password,
+    cmmsEnabled,
+  });
   if (!result.ok) {
-    return res.status(result.status || 400).render('admin/tenant-new', newTenantLocals(req, {
+    return res.status(result.status || 400).render('admin/tenant-new', adminLocals(req, {
+      title: 'New customer',
+      activeNav: 'new',
       error: result.error,
       form: b,
     }));
   }
-  const params = new URLSearchParams({ created: '1' });
-  if (result.stationError) params.set('error', `Customer created. Station skipped: ${result.stationError}`);
-  else if (result.station) params.set('station', '1');
-  res.redirect(`/admin/tenants/${result.tenant.id}?${params.toString()}`);
+  res.redirect(`/admin/tenants/${result.tenant.id}?created=1`);
 }));
 
 router.get('/tenants/:id', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
@@ -159,71 +120,17 @@ router.get('/tenants/:id', requirePlatformAdminWeb, asyncHandler(async (req, res
     tenant: result.tenant,
     users: result.users,
     userCount: result.userCount,
-    cmmsPlans: CMMS_PLANS.filter((p) => p !== 'none'),
-    tenantPlans: TENANT_PLANS,
     created: req.query.created === '1',
-    stationProvisioned: req.query.station === '1',
-    settingsUpdated: req.query.settings === 'updated' || req.query.cmms === 'updated',
-    profileUpdated: req.query.profile === 'updated',
-    error: req.query.error || null,
+    settingsUpdated: req.query.cmms === 'updated',
   }));
-}));
-
-router.post('/tenants/:id/profile', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
-  let result;
-  try {
-    result = await tenantService.updateTenantProfile(req.params.id, {
-      tenantName: req.body.tenantName,
-      tenantSlug: req.body.tenantSlug,
-    });
-  } catch (err) {
-    console.error('[admin] update tenant profile failed:', err.stack || err.message);
-    const params = new URLSearchParams({
-      error: err.message || 'Could not update tenant. Redeploy latest code and try again.',
-    });
-    return res.redirect(`/admin/tenants/${req.params.id}?${params.toString()}`);
-  }
-  if (!result.ok) {
-    const params = new URLSearchParams({ error: result.error || 'Update failed' });
-    return res.redirect(`/admin/tenants/${req.params.id}?${params.toString()}`);
-  }
-  res.redirect(`/admin/tenants/${req.params.id}?profile=updated`);
-}));
-
-router.post('/tenants/:id/delete', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
-  let result;
-  try {
-    result = await tenantService.deleteTenant(req.params.id, {
-      confirmSlug: req.body.confirmSlug,
-    });
-  } catch (err) {
-    console.error('[admin] delete tenant failed:', err.stack || err.message);
-    const params = new URLSearchParams({
-      error: err.message || 'Could not delete tenant. Redeploy latest code and try again.',
-    });
-    return res.redirect(`/admin/tenants/${req.params.id}?${params.toString()}`);
-  }
-  if (!result.ok) {
-    const params = new URLSearchParams({ error: result.error || 'Delete failed' });
-    return res.redirect(`/admin/tenants/${req.params.id}?${params.toString()}`);
-  }
-  res.redirect('/admin/tenants?deleted=1');
 }));
 
 router.post('/tenants/:id/cmms', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
   const enabled = req.body.enabled === 'on' || req.body.enabled === 'true';
-  const cmmsPlan = req.body.cmmsPlan || req.body.plan || 'standard';
-  const peaklogicPlan = req.body.peaklogicPlan || req.body.tenantPlan || 'standard';
-  const result = await tenantService.updateTenantSettings(
-    req.params.id,
-    {
-      plan: peaklogicPlan,
-      cmms: { enabled, plan: cmmsPlan },
-    },
-    { enabledBy: 'platform-admin' },
-  );
+  const externalUrl = req.body.externalUrl || '';
+  const result = await tenantService.updateTenantCmms(req.params.id, { enabled, externalUrl });
   if (!result.ok) return res.status(result.status).send(result.error);
-  res.redirect(`/admin/tenants/${req.params.id}?settings=updated`);
+  res.redirect(`/admin/tenants/${req.params.id}?cmms=updated`);
 }));
 
 module.exports = router;

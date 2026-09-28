@@ -1,0 +1,170 @@
+/* PeakLogic Cloud design system — shared shell chrome (nav, footer, cards, buttons).
+   Brand tokens verified against the PeakLogic-Azure-V2 repo (tailwind.config.ts /
+   BrandMark.tsx): purple #7C3AED (Tailwind violet-600), green #22C55E, ink #0F172A.
+   NOTE: this intentionally overrides the older internal "Purple Standard" doc
+   (docs/PURPLE_STANDARD.md, #6f42c1) — that was MooreVIEW's approximation before
+   the final PeakLogic brand kit; this file matches the real one. */
+:root {
+  --ps-purple: #7c3aed;
+  --ps-purple-dark: #6d28d9;
+  --ps-purple-deep: #5b21b6;
+  --ps-purple-light: #ede9fe;
+  --ps-purple-muted: rgba(124, 58, 237, 0.12);
+  --ps-gradient-start: rgba(124, 58, 237, 0.9);
+  --ps-gradient-end: rgba(91, 33, 182, 0.95);
+  --ps-shadow: rgba(124, 58, 237, 0.3);
+
+  --peaklogic-green: #22c55e;
+  --peaklogic-green-dark: #15803d;
+  --peaklogic-navy: #0f172a;
+  --peaklogic-navy-soft: #1e293b;
+  --peaklogic-navy-border: #334155;
+
+  --peaklogic-primary: var(--ps-purple);
+  --peaklogic-primary-dark: var(--ps-purple-dark);
+  --muted: #64748b;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body.bg-light {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.top-accent-bar {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ps-purple-deep), var(--ps-purple) 55%, var(--peaklogic-green-dark));
+}
+
+/* Wordmark: "Peak" flips with background, "Logic" is always brand purple */
+.brand-logotype {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.brand-logotype-peak { color: #ffffff; }
+.brand-logotype-logic { color: var(--ps-purple); }
+.footer-peaklogic .brand-logotype-peak { color: var(--peaklogic-navy); }
+
+.brand-logo-icon {
+  width: 22px;
+  height: 22px;
+  vertical-align: -5px;
+  margin-right: 2px;
+}
+
+/* Top nav */
+.nav-peaklogic {
+  background: var(--peaklogic-navy);
+}
+.nav-peaklogic .nav-link {
+  color: rgba(255, 255, 255, 0.75);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nav-peaklogic .nav-link:hover,
+.nav-peaklogic .nav-link.active {
+  color: #ffffff;
+}
+.nav-peaklogic .nav-link.active {
+  font-weight: 600;
+}
+
+.tenant-badge-slot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.75rem;
+  margin-left: 0.5rem;
+  border-left: 1px solid var(--peaklogic-navy-border);
+}
+.tenant-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #ffffff;
+}
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ps-purple);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.user-menu-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Buttons */
+.btn-purple, .btn-mv {
+  background: var(--ps-purple);
+  border-color: var(--ps-purple);
+  color: #ffffff;
+}
+.btn-purple:hover, .btn-mv:hover {
+  background: var(--ps-purple-dark);
+  border-color: var(--ps-purple-dark);
+  color: #ffffff;
+}
+.btn-outline-purple {
+  border-color: var(--ps-purple);
+  color: var(--ps-purple);
+}
+.btn-outline-purple:hover {
+  background: var(--ps-purple);
+  color: #ffffff;
+}
+.text-purple { color: var(--ps-purple); }
+.bg-purple { background: var(--ps-purple); }
+.transition-btn { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.transition-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px var(--ps-shadow); }
+
+.dashboard-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+}
+
+.splash-gradient {
+  background: linear-gradient(135deg, var(--ps-gradient-start), var(--ps-gradient-end));
+}
+
+/* Footer */
+.footer-peaklogic {
+  margin-top: auto;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.footer-powered-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
