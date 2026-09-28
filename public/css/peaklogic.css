@@ -1,14 +1,18 @@
 /* PeakLogic — shared theme for the cloud/admin portal (login, team, CMMS, fleet, sites) */
 
 :root {
-  --ps-purple: #6f42c1;
-  --ps-purple-dark: #5a32a3;
-  --ps-purple-deep: #4e2a84;
-  --ps-purple-light: #e9d5ff;
-  --ps-purple-muted: rgba(111, 66, 193, 0.12);
-  --ps-gradient-start: rgba(111, 66, 193, 0.9);
-  --ps-gradient-end: rgba(78, 42, 132, 0.95);
-  --ps-shadow: rgba(111, 66, 193, 0.3);
+  /* Correct PeakLogic brand purple — verified against PeakLogic-Azure-V2's
+     own tailwind config (brand.purple) and marketing/favicon.svg. #7C3AED
+     is Tailwind's violet-600; -dark/-deep follow the same violet scale
+     (700/800) rather than being guessed. */
+  --ps-purple: #7c3aed;
+  --ps-purple-dark: #6d28d9;
+  --ps-purple-deep: #5b21b6;
+  --ps-purple-light: #ede9fe;
+  --ps-purple-muted: rgba(124, 58, 237, 0.12);
+  --ps-gradient-start: rgba(124, 58, 237, 0.9);
+  --ps-gradient-end: rgba(91, 33, 182, 0.95);
+  --ps-shadow: rgba(124, 58, 237, 0.3);
   --peaklogic-green: #22c55e;
   --peaklogic-green-dark: #15803d;
   --peaklogic-navy: #0f172a;
@@ -127,6 +131,7 @@
 }
 
 .brand-logotype {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   font-weight: 800;
   font-size: 1.15rem;
   letter-spacing: -0.01em;
@@ -136,8 +141,10 @@
   color: #fff;
 }
 
+/* "Logic" is always the brand purple — this is the one rule that never
+   flips between light/dark contexts (see the brand mark reference). */
 .brand-logotype-logic {
-  color: #a78bfa;
+  color: var(--ps-purple);
 }
 
 .footer-peaklogic .brand-logotype-peak {
@@ -165,7 +172,19 @@
   flex-shrink: 0;
 }
 
+/* Sticky footer: the body becomes a full-height flex column, and the
+   footer's margin-top:auto pushes it to the bottom of the viewport on
+   short pages while still flowing naturally below content taller than
+   the viewport. Works regardless of what markup sits between the nav and
+   the footer across the different view templates that include this. */
+body.bg-light {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .footer-peaklogic {
+  margin-top: auto;
   border-top: 1px solid #e2e8f0;
   background: #f8fafc;
   padding: 1rem 1.5rem;

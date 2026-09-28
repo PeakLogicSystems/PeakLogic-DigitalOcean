@@ -584,7 +584,7 @@ describe('cloud API (MongoDB)', () => {
   it('platform admin web login and tenants page', async () => {
     const loginPage = await request('GET', '/admin/login');
     assert.equal(loginPage.status, 200);
-    assert.match(loginPage.text, /Platform admin/i);
+    assert.match(loginPage.text, /Control Center admin/i);
 
     const badLogin = await request('POST', '/admin/login', {
       form: { platformAdminKey: 'wrong-key' },

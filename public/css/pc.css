@@ -1,13 +1,14 @@
 :root {
-  --ps-purple: #6f42c1;
-  --ps-purple-dark: #5a32a3;
-  --ps-purple-deep: #4e2a84;
-  --ps-purple-light: #e9d5ff;
+  /* Correct PeakLogic brand purple — see peaklogic.css for the source note. */
+  --ps-purple: #7c3aed;
+  --ps-purple-dark: #6d28d9;
+  --ps-purple-deep: #5b21b6;
+  --ps-purple-light: #ede9fe;
   --peaklogic-green: #22c55e;
   --peaklogic-green-dark: #15803d;
   --bg: #f1f5f9;
   --sidebar: #1e293b;
-  --accent: #6f42c1;
+  --accent: #7c3aed;
   --text: #0f172a;
   --muted: #64748b;
   --border: #cbd5e1;

@@ -23,7 +23,7 @@ router.use(attachPlatformAdmin);
 
 function adminLocals(req, extra = {}) {
   return {
-    title: extra.title || 'Platform Admin',
+    title: extra.title || 'Admin',
     version: APP_VERSION,
     activeNav: extra.activeNav || '',
     error: extra.error || null,
@@ -43,11 +43,11 @@ router.get('/login', (req, res) => {
   if (req.platformAdmin) return res.redirect('/admin/tenants');
   if (!PLATFORM_ADMIN_KEY) {
     return res.status(503).render('admin/login', adminLocals(req, {
-      title: 'Platform Admin',
+      title: 'Admin',
       error: 'PLATFORM_ADMIN_KEY is not configured on this server.',
     }));
   }
-  res.render('admin/login', adminLocals(req, { title: 'Platform Admin Login' }));
+  res.render('admin/login', adminLocals(req, { title: 'Login' }));
 });
 
 router.post('/login', (req, res) => {

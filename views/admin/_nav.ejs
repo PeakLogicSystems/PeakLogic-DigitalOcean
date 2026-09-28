@@ -1,12 +1,12 @@
 <%
-  const staffLabel = typeof staffUser !== 'undefined' && staffUser ? staffUser : 'Platform Admin';
+  const staffLabel = typeof staffUser !== 'undefined' && staffUser ? staffUser : 'Control Center Admin';
   const staffInitial = String(staffLabel).trim()[0]?.toUpperCase() || '?';
 %>
 <nav class="navbar navbar-expand-lg navbar-dark nav-peaklogic px-3 mb-4">
   <a href="/admin/tenants" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none mb-0">
     <img src="/branding/peaklogic-icon.svg" alt="" class="brand-logo-icon">
     <span class="brand-logotype"><span class="brand-logotype-peak">Peak</span><span class="brand-logotype-logic">Logic</span></span>
-    <span class="text-white-50 small ms-1">Platform</span>
+    <span class="text-white-50 small ms-1">Control Center</span>
   </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
     <span class="navbar-toggler-icon"></span>
