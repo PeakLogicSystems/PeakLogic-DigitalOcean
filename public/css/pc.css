@@ -1,15 +1,16 @@
 :root {
-  --ps-purple: #49104F;
-  --ps-purple-dark: #3a0d3f;
-  --ps-purple-deep: #2c0930;
-  --ps-purple-light: #efd9f2;
-  --ps-purple-mid: #6b3480;
+  /* PeakLogic brand — matches public/css/peaklogic.css (verified #7C3AED) */
+  --ps-purple: #7c3aed;
+  --ps-purple-dark: #6d28d9;
+  --ps-purple-deep: #5b21b6;
+  --ps-purple-light: #ede9fe;
+  --ps-purple-mid: #8b5cf6;
   --bg: #f1f5f9;
   --sidebar: #1e293b;
-  --accent: #49104F;
-  --accent-soft: #faf5fb;
-  --link: #49104F;
-  --link-hover: #3a0d3f;
+  --accent: #7c3aed;
+  --accent-soft: #f3eefd;
+  --link: #7c3aed;
+  --link-hover: #6d28d9;
   --text: #0f172a;
   --muted: #64748b;
   --border: #cbd5e1;

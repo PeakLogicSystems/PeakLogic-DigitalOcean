@@ -459,4 +459,31 @@ window.api = {
   partnerBilling: () => request('GET', '/partner/billing'),
   listAccessibleTenants: () => request('GET', '/partner/accessible-tenants'),
   switchPartnerTenant: (body) => request('POST', '/partner/switch-tenant', body),
+  cmmsDashboard: () => request('GET', '/cmms/dashboard'),
+  listCmmsAssignees: () => request('GET', '/cmms/assignees'),
+  listCmmsWorkOrders: (query) => {
+    const qs = new URLSearchParams();
+    Object.entries(query || {}).forEach(([key, value]) => {
+      if (value != null && value !== '') qs.set(key, String(value));
+    });
+    const suffix = qs.toString() ? `?${qs.toString()}` : '';
+    return request('GET', `/cmms/work-orders${suffix}`);
+  },
+  createCmmsWorkOrder: (body) => request('POST', '/cmms/work-orders', body),
+  updateCmmsWorkOrder: (id, body) => request('PUT', `/cmms/work-orders/${encodeURIComponent(id)}`, body),
+  deleteCmmsWorkOrder: (id) => request('DELETE', `/cmms/work-orders/${encodeURIComponent(id)}`),
+  completeCmmsWorkOrder: (id) => request('POST', `/cmms/work-orders/${encodeURIComponent(id)}/complete`, {}),
+  listCmmsPmSchedules: (query) => {
+    const qs = new URLSearchParams();
+    Object.entries(query || {}).forEach(([key, value]) => {
+      if (value != null && value !== '') qs.set(key, String(value));
+    });
+    const suffix = qs.toString() ? `?${qs.toString()}` : '';
+    return request('GET', `/cmms/pm-schedules${suffix}`);
+  },
+  createCmmsPmSchedule: (body) => request('POST', '/cmms/pm-schedules', body),
+  updateCmmsPmSchedule: (id, body) => request('PUT', `/cmms/pm-schedules/${encodeURIComponent(id)}`, body),
+  deleteCmmsPmSchedule: (id) => request('DELETE', `/cmms/pm-schedules/${encodeURIComponent(id)}`),
+  completeCmmsPmSchedule: (id) => request('POST', `/cmms/pm-schedules/${encodeURIComponent(id)}/complete`, {}),
+  generateCmmsDuePmWorkOrders: () => request('POST', '/cmms/pm/generate-due', {}),
 };

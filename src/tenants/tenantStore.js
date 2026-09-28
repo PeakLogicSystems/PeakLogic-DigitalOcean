@@ -198,6 +198,14 @@ class TenantStore {
     return String(user.tenantId || '') === String(tenantId || '');
   }
 
+  /** Tenants a user can switch into — just their own tenant in this single-tenant-per-user model. */
+  listAccessibleTenantsForUser(user) {
+    if (!user) return [];
+    if (user.role === 'platform_admin') return this.listTenants();
+    const t = user.tenantId ? this.getTenant(user.tenantId) : null;
+    return t ? [this.publicTenant(t)] : [];
+  }
+
   publicUser(u, tenant) {
     if (!u) return null;
     const t = tenant || (u.tenantId ? this.getTenant(u.tenantId) : null);

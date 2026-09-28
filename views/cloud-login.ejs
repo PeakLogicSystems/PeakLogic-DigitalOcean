@@ -4,20 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sign in · PeakLogic Cloud Studio</title>
+  <link rel="icon" href="/branding/peaklogic-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Purple Standard — matches public/css/pc.css topbar + docs/PURPLE_STANDARD.md */
+    /* PeakLogic brand — matches public/css/peaklogic.css (verified #7C3AED, see that file's header comment) */
     :root {
-      --ps-purple: #49104F;
-      --ps-purple-dark: #3a0d3f;
-      --ps-purple-deep: #2c0930;
-      --ps-purple-light: #efd9f2;
-      --ps-gradient-start: rgba(73, 16, 79, 0.92);
-      --ps-gradient-end: rgba(44, 9, 48, 0.96);
+      --ps-purple: #7c3aed;
+      --ps-purple-dark: #6d28d9;
+      --ps-purple-deep: #5b21b6;
+      --ps-purple-light: #ede9fe;
+      --ps-gradient-start: rgba(124, 58, 237, 0.9);
+      --ps-gradient-end: rgba(91, 33, 182, 0.95);
       --bg: #f8f9fa;
       --text: #212529;
       --muted: #6c757d;
       --border: #dee2e6;
     }
+    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
@@ -47,12 +52,16 @@
       padding: 2.5rem 2rem;
     }
     .login-hero .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-weight: 800;
+      letter-spacing: -0.01em;
       margin-bottom: 0.75rem;
     }
-    .login-hero .brand span { color: var(--ps-purple-light); font-weight: 600; }
+    .login-hero .brand img { width: 34px; height: 34px; }
+    .login-hero .brand .logic { color: var(--ps-purple-light); font-weight: 800; }
     .login-hero .tagline {
       max-width: 22rem;
       font-size: 1.05rem;
@@ -155,7 +164,7 @@
 <body>
   <div class="login-shell">
     <aside class="login-hero" aria-hidden="true">
-      <div class="brand">Moore<span>View</span></div>
+      <div class="brand"><img src="/branding/peaklogic-icon.svg" alt=""><span>Peak<span class="logic">Logic</span></span></div>
       <p class="tagline">Cloud Studio — multi-tenant SCADA, historian, CMMS, and site fleet management.</p>
     </aside>
     <main class="login-panel">

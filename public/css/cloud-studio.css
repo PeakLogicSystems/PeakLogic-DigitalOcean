@@ -1,12 +1,12 @@
-/* Matches PeakLogic Studio (pc.css) Purple Standard theme */
+/* Matches PeakLogic Studio (pc.css) brand theme — see peaklogic.css header comment */
 :root {
-  --ps-purple: #49104F;
-  --ps-purple-dark: #3a0d3f;
-  --ps-purple-deep: #2c0930;
-  --ps-purple-light: #efd9f2;
+  --ps-purple: #7c3aed;
+  --ps-purple-dark: #6d28d9;
+  --ps-purple-deep: #5b21b6;
+  --ps-purple-light: #ede9fe;
   --bg: #f1f5f9;
   --sidebar: #1e293b;
-  --accent: #49104F;
+  --accent: #7c3aed;
   --text: #0f172a;
   --muted: #64748b;
   --border: #cbd5e1;
@@ -14,9 +14,9 @@
   --ok: #16a34a;
   --warn: #ea580c;
   --danger: #dc2626;
-  --accent-soft: #faf5fb;
-  --link: #49104F;
-  --link-hover: #3a0d3f;
+  --accent-soft: #f3eefd;
+  --link: #7c3aed;
+  --link-hover: #6d28d9;
   --radius: 6px;
 }
 
@@ -245,7 +245,7 @@ table.cs-table tr:hover td { background: #f8fafc; }
 .cs-edit-panel {
   margin-bottom: 1rem;
   padding: 1rem 1.1rem;
-  border: 2px solid var(--purple, #49104F);
+  border: 2px solid var(--ps-purple, #7c3aed);
   border-radius: var(--radius);
   background: #faf5fb;
 }

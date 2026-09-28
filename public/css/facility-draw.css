@@ -217,8 +217,8 @@ body.facility-draw-body:has(#mv-open-overlay:not(.view-hidden)) .mv-file-menu-pa
   margin-right: 0.15rem;
 }
 .mv-project-list-sort .project-sort-btn.active {
-  border-color: var(--ps-purple-light, #efd9f2);
-  color: var(--ps-purple-light, #efd9f2);
+  border-color: var(--ps-purple-light, #ede9fe);
+  color: var(--ps-purple-light, #ede9fe);
   font-weight: 600;
 }
 .mv-project-list {
@@ -248,7 +248,7 @@ body.facility-draw-body:has(#mv-open-overlay:not(.view-hidden)) .mv-file-menu-pa
 
 .mv-project-item:hover,
 .mv-project-item:focus-visible {
-  border-color: var(--ps-purple-light, #efd9f2);
+  border-color: var(--ps-purple-light, #ede9fe);
   background: #334155;
   outline: none;
 }
@@ -390,7 +390,7 @@ body.facility-draw-body:has(#mv-open-overlay:not(.view-hidden)) .mv-file-menu-pa
 }
 
 .mv-snap-toggle input {
-  accent-color: var(--ps-purple, #49104F);
+  accent-color: var(--ps-purple, #7c3aed);
 }
 
 .mv-snap-grid {
@@ -741,7 +741,7 @@ body.facility-draw-body button.facility-draw-btn--danger:hover:not(:disabled) {
 
 .mv-symbol-btn:hover,
 .mv-symbol-btn.selected {
-  border-color: var(--ps-purple-light, #efd9f2);
+  border-color: var(--ps-purple-light, #ede9fe);
   background: #334155;
 }
 
