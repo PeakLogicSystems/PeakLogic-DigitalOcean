@@ -8,7 +8,7 @@ const path = require('path');
 
 describe('programFixtures', () => {
   it('loads only tags referenced by opta/01_i1_to_r1.st', () => {
-    const mqttDrivers = [{ id: 'opta_mqtt_st', type: 'mqtt_fleet', enabled: true }];
+    const mqttDrivers = [{ id: 'opta_mqtt_st', type: 'mqtt_parc', enabled: true }];
     const bundle = loadFixtureBundle('opta/01_i1_to_r1.st', mqttDrivers);
     assert.ok(bundle);
     assert.deepEqual(bundle.tags.map((t) => t.id).sort(), ['I1', 'R1']);
@@ -16,7 +16,7 @@ describe('programFixtures', () => {
   });
 
   it('loads all memory tags for opta/03_pid_avg.st', () => {
-    const mqttDrivers = [{ id: 'opta_mqtt_st', type: 'mqtt_fleet', enabled: true }];
+    const mqttDrivers = [{ id: 'opta_mqtt_st', type: 'mqtt_parc', enabled: true }];
     const bundle = loadFixtureBundle('opta/03_pid_avg.st', mqttDrivers);
     assert.ok(bundle);
     const ids = bundle.tags.map((t) => t.id).sort();
@@ -38,7 +38,7 @@ describe('programFixtures', () => {
   it('infers missing tags from program refs', () => {
     const base = [{ id: 'I1', type: 'BOOL', role: 'input', value: false, driverId: 'opta_mqtt_st' }];
     const tags = resolveProgramTags('opta/01_i1_to_r1.st', base, [
-      { id: 'opta_mqtt_st', type: 'mqtt_fleet', enabled: true },
+      { id: 'opta_mqtt_st', type: 'mqtt_parc', enabled: true },
     ]);
     assert.deepEqual(tags.map((t) => t.id).sort(), ['I1', 'R1']);
     const r1 = tags.find((t) => t.id === 'R1');

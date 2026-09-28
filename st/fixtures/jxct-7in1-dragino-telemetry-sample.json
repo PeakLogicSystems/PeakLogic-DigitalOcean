@@ -1,0 +1,25 @@
+{
+  "deviceId": "dragino_jxct_01",
+  "name": "JXCT JXBS-3001-NPK-RS",
+  "platform": "dragino-rs485-nb",
+  "reportIntervalSec": 300,
+  "modbusPreset": "jxct_npk_jxbs3001_dragino",
+  "dragino": {
+    "imei": "863663062798815",
+    "imsi": "460083513507309",
+    "model": "RS485-NB",
+    "payloadHex": "010336000000000000000000000000000000000000000001c700df000000000352000000000000000000000000000000000078002d00b4",
+    "time": "2026/07/29 09:08:00"
+  },
+  "tags": [
+    { "id": "CELL_SIGNAL", "type": "INT", "role": "input", "value": 22, "quality": "GOOD" },
+    { "id": "CELL_BATTERY_V", "type": "REAL", "role": "input", "value": 3.62, "quality": "GOOD" },
+    { "id": "SOIL_PH", "type": "REAL", "role": "input", "value": 6.82, "quality": "GOOD" },
+    { "id": "SOIL_MOIST_PCT", "type": "REAL", "role": "input", "value": 45.5, "quality": "GOOD" },
+    { "id": "SOIL_TEMP_C", "type": "REAL", "role": "input", "value": 22.3, "quality": "GOOD" },
+    { "id": "SOIL_EC_US_CM", "type": "INT", "role": "input", "value": 850, "quality": "GOOD" },
+    { "id": "N_MG_KG", "type": "INT", "role": "input", "value": 120, "quality": "GOOD" },
+    { "id": "P_MG_KG", "type": "INT", "role": "input", "value": 45, "quality": "GOOD" },
+    { "id": "K_MG_KG", "type": "INT", "role": "input", "value": 180, "quality": "GOOD" }
+  ]
+}

@@ -19,6 +19,32 @@ describe('executor', () => {
     assert.equal(store.get('Q').value, true);
   });
 
+  it('ELSIF selects the first matching branch', () => {
+    const store = new TagStore();
+    store.replaceAll([
+      { id: 'A', type: 'BOOL', role: 'input', value: false },
+      { id: 'B', type: 'BOOL', role: 'input', value: true },
+      { id: 'C', type: 'BOOL', role: 'input', value: true },
+      { id: 'X', type: 'BOOL', role: 'output', value: false },
+      { id: 'Y', type: 'BOOL', role: 'output', value: false },
+      { id: 'Z', type: 'BOOL', role: 'output', value: false },
+      { id: 'W', type: 'BOOL', role: 'output', value: false },
+    ]);
+    const src = [
+      'IF IsON(A) THEN TurnON(X);',
+      'ELSIF IsON(B) THEN TurnON(Y);',
+      'ELSIF IsON(C) THEN TurnON(Z);',
+      'ELSE TurnON(W);',
+      'END_IF;',
+    ].join(' ');
+    const { ast } = parseProgram(src);
+    execute(ast, createContext(store));
+    assert.equal(store.get('X').value, false);
+    assert.equal(store.get('Y').value, true);
+    assert.equal(store.get('Z').value, false);
+    assert.equal(store.get('W').value, false);
+  });
+
   it('runs all-st-features memory program without error', () => {
     const fs = require('fs');
     const path = require('path');

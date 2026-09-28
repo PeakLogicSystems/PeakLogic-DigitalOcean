@@ -1,0 +1,60 @@
+[
+  { "id": "I1", "label": "Rain tip pulse", "type": "BOOL", "role": "input", "value": false, "driverId": "rs485_bus", "driverAddress": { "table": "discrete", "address": 0, "slaveId": 2 } },
+
+  { "id": "OS1", "label": "First-scan oneshot", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "RAIN_EN", "label": "Rain measure enable", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "RAIN_K", "label": "Rain K (tips/inch)", "type": "REAL", "role": "memory", "value": 100 },
+  { "id": "RAIN_TIPS", "label": "Lifetime tip count", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "RAIN_TOTAL_IN", "label": "Lifetime rainfall in", "type": "REAL", "role": "memory", "value": 0 },
+  { "id": "RAIN_RESET", "label": "Rain totalizer reset", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "RAIN_TOT_CTR", "label": "Lifetime tip CTU", "type": "COUNTER", "role": "memory", "value": 0, "preset": 999999, "mode": "CTU" },
+
+  { "id": "RAIN_HR_CTR", "label": "Hourly tip CTU", "type": "COUNTER", "role": "memory", "value": 0, "preset": 999999, "mode": "CTU" },
+  { "id": "RAIN_HR_TMR", "label": "Hourly window TON", "type": "TIMER", "role": "memory", "value": false, "preset": 3600000, "mode": "TON" },
+  { "id": "RAIN_HR_FLOW", "label": "Hourly rain FLOW", "type": "FLOW", "role": "memory", "value": 0, "preset": 100, "mode": "GPM" },
+  { "id": "RAIN_HR_IN", "label": "Hourly rainfall in", "type": "REAL", "role": "memory", "value": 0 },
+  { "id": "RAIN_HR_NEW", "label": "New hourly sample", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "RAIN_RATE_CTR", "label": "Rate tip CTU", "type": "COUNTER", "role": "memory", "value": 0, "preset": 999999, "mode": "CTU" },
+  { "id": "RAIN_RATE_TMR", "label": "Rate window TON 1min", "type": "TIMER", "role": "memory", "value": false, "preset": 60000, "mode": "TON" },
+  { "id": "RAIN_RATE_FLOW", "label": "Rate rain FLOW", "type": "FLOW", "role": "memory", "value": 0, "preset": 100, "mode": "GPM" },
+  { "id": "RAIN_IN_MIN", "label": "Inches last minute", "type": "REAL", "role": "memory", "value": 0 },
+  { "id": "RAIN_RATE", "label": "Rain rate in/hr", "type": "REAL", "role": "memory", "value": 0 },
+  { "id": "RAIN_RATE_NEW", "label": "New rate sample", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "VPB1", "label": "VFD1 auto permissive", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "VPB2", "label": "VFD2 auto permissive", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_HOA", "label": "VFD1 HOA", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_STA", "label": "VFD1 status", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_START", "label": "VFD1 start", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_STOP", "label": "VFD1 stop", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_RESET", "label": "VFD1 fault reset", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_OFFLINE", "label": "VFD1 offline", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_RUN", "label": "VFD1 run", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ACS1_SPEED_PCT", "label": "VFD1 speed %", "type": "INT", "role": "memory", "value": 50, "wordWidth": 16 },
+
+  { "id": "MOTOR2_HOA", "label": "VFD2 HOA", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR2_STA", "label": "VFD2 status", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR2_START", "label": "VFD2 start", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_STOP", "label": "VFD2 stop", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_RESET", "label": "VFD2 fault reset", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_OFFLINE", "label": "VFD2 offline", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR2_RUN", "label": "VFD2 run", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ACS2_SPEED_PCT", "label": "VFD2 speed %", "type": "INT", "role": "memory", "value": 50, "wordWidth": 16 },
+
+  { "id": "ACS1_CW", "type": "INT", "role": "output", "value": 1150, "wordWidth": 16, "signed": false, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 0, "slaveId": 1 } },
+  { "id": "ACS1_REF1", "type": "INT", "role": "output", "value": 10000, "wordWidth": 16, "signed": true, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 1, "slaveId": 1 } },
+  { "id": "ACS1_SW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 3, "slaveId": 1 } },
+  { "id": "ACS1_FREQ_HZ", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 4, "slaveId": 1 } },
+  { "id": "ACS1_CURR_A", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 5, "slaveId": 1 } },
+  { "id": "ACS1_FAULT", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 400, "slaveId": 1 } },
+
+  { "id": "ACS2_CW", "type": "INT", "role": "output", "value": 1150, "wordWidth": 16, "signed": false, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 0, "slaveId": 3 } },
+  { "id": "ACS2_REF1", "type": "INT", "role": "output", "value": 10000, "wordWidth": 16, "signed": true, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 1, "slaveId": 3 } },
+  { "id": "ACS2_SW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 3, "slaveId": 3 } },
+  { "id": "ACS2_FREQ_HZ", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 4, "slaveId": 3 } },
+  { "id": "ACS2_CURR_A", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 5, "slaveId": 3 } },
+  { "id": "ACS2_FAULT", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "rs485_bus", "driverAddress": { "table": "holding", "address": 400, "slaveId": 3 } }
+]

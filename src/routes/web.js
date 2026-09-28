@@ -43,7 +43,7 @@ router.get('/login', (req, res) => {
     title: 'Sign in',
     error: req.query.error || null,
     message: req.query.message || null,
-    tenantSlug: req.query.tenantSlug || 'demo',
+    tenantSlug: req.query.tenantSlug || req.query.tenant || 'demo',
     email: req.query.email || '',
     next: safeNextPath(req.query.next) || '',
   });
@@ -76,7 +76,7 @@ router.post('/login', asyncHandler(async (req, res) => {
 
 router.get('/logout', (req, res) => {
   clearAuthCookie(res, req);
-  res.redirect('/login');
+  res.redirect('/login?message=Signed%20out');
 });
 
 router.get('/forgot-password', (req, res) => {
@@ -183,7 +183,7 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(servicePayload());
   }
   if (!req.auth) {
-    return res.redirect('/login');
+    return res.render('public-home', { title: 'PeakLogic Cloud' });
   }
   const ctx = await loadShellContext(req);
   if (!ctx) {

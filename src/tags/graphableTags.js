@@ -4,7 +4,7 @@
 function isGraphableTag(tag) {
   if (!tag?.id) return false;
   return tag.type === 'INT' || tag.type === 'REAL' || tag.type === 'BOOL'
-    || tag.type === 'PID' || tag.type === 'AVG' || tag.type === 'FLOW';
+    || tag.type === 'PID' || tag.type === 'AVG' || tag.type === 'FLOW' || tag.type === 'ALT';
 }
 
 function graphableTags(tags) {
@@ -17,6 +17,7 @@ function numericTagValue(tag) {
   if (tag.type === 'PID') return Number(tag.fb?.out ?? tag.value);
   if (tag.type === 'AVG') return Number(tag.fb?.avg ?? tag.value);
   if (tag.type === 'FLOW') return Number(tag.fb?.gpm ?? tag.value);
+  if (tag.type === 'ALT') return Number(tag.fb?.activeUnit ?? tag.value);
   return Number(tag.value);
 }
 

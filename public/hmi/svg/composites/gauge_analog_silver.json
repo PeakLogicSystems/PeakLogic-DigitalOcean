@@ -3,7 +3,7 @@
   "label": "Analog dial — silver (PV)",
   "group": "Gauges & meters",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/gauges-meters/dial-backgrounds/peaklogic/gauge-dial-bg/gauge_dialbg_silver.svg",
+  "preview": "/hmi/svg/library/gauges-meters/dial-backgrounds/mv/gauge-dial-bg/gauge_dialbg_silver.svg",
   "tagRoles": {
     "pv": { "pick": "firstNumeric", "types": ["REAL", "INT"] }
   },
@@ -12,13 +12,13 @@
       "role": "dial_face",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/gauges-meters/dial-backgrounds/peaklogic/gauge-dial-bg/gauge_dialbg_silver.svg"
+      "svg": "/hmi/svg/library/gauges-meters/dial-backgrounds/mv/gauge-dial-bg/gauge_dialbg_silver.svg"
     },
     {
       "role": "dial_pointer",
       "z": 1,
       "kind": "dynamicImage",
-      "svg": "/hmi/svg/library/gauges-meters/dial-pointers/peaklogic/gauge-dial-pointer/gauge_dialpointer_silver.svg"
+      "svg": "/hmi/svg/library/gauges-meters/dial-pointers/mv/gauge-dial-pointer/gauge_dialpointer_silver.svg"
     }
   ],
   "defaultBindings": [

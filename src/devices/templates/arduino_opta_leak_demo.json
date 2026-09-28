@@ -1,0 +1,182 @@
+{
+  "id": "arduino_opta_leak_demo",
+  "label": "Arduino Opta — Leak + moisture + CT + Thermistor demo",
+  "vendor": "Arduino",
+  "model": "Opta — leak, moisture I1, 4× CT, 3× NTC",
+  "transport": "mqtt_parc",
+  "driverId": "opta_mqtt_st",
+  "tagsFromDevice": false,
+  "diCount": 1,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "opta_st_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "opta_st_01",
+    "remoteExecution": true
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "I1",
+        "type": "BOOL",
+        "role": "input",
+        "driverAddress": { "channel": "I1" },
+        "comment": "Leak detector (digital)"
+      },
+      {
+        "id": "I1_RAW",
+        "type": "INT",
+        "role": "input",
+        "driverAddress": { "channel": "I1_RAW" },
+        "comment": "Moisture probe — 700K wet / 1.5M dry, 24V pull-down"
+      },
+      {
+        "id": "I2_RAW",
+        "type": "INT",
+        "role": "input",
+        "scale": 0.4887,
+        "driverAddress": { "channel": "I2_RAW" },
+        "comment": "Current 1 — 0–1 V CT (1 V = 50 A)"
+      },
+      {
+        "id": "I3_RAW",
+        "type": "INT",
+        "role": "input",
+        "scale": 0.4887,
+        "driverAddress": { "channel": "I3_RAW" },
+        "comment": "Current 2 — 0–1 V CT"
+      },
+      {
+        "id": "I4_RAW",
+        "type": "INT",
+        "role": "input",
+        "scale": 0.4887,
+        "driverAddress": { "channel": "I4_RAW" },
+        "comment": "Current 3 — 0–1 V CT"
+      },
+      {
+        "id": "I5_RAW",
+        "type": "INT",
+        "role": "input",
+        "scale": 0.4887,
+        "driverAddress": { "channel": "I5_RAW" },
+        "comment": "Current 4 — 0–1 V CT"
+      },
+      {
+        "id": "I6_RAW",
+        "type": "INT",
+        "role": "input",
+        "driverAddress": { "channel": "I6_RAW" },
+        "comment": "Temperature 1 — 10K NTC divider"
+      },
+      {
+        "id": "I7_RAW",
+        "type": "INT",
+        "role": "input",
+        "driverAddress": { "channel": "I7_RAW" },
+        "comment": "Temperature 2 — 10K NTC divider"
+      },
+      {
+        "id": "I8_RAW",
+        "type": "INT",
+        "role": "input",
+        "driverAddress": { "channel": "I8_RAW" },
+        "comment": "Temperature 3 — 10K NTC divider"
+      },
+      {
+        "id": "R1",
+        "type": "BOOL",
+        "role": "output",
+        "driverAddress": { "channel": "R1" }
+      },
+      {
+        "id": "R2",
+        "type": "BOOL",
+        "role": "output",
+        "driverAddress": { "channel": "R2" }
+      },
+      {
+        "id": "R3",
+        "type": "BOOL",
+        "role": "output",
+        "driverAddress": { "channel": "R3" }
+      },
+      {
+        "id": "R4",
+        "type": "BOOL",
+        "role": "output",
+        "driverAddress": { "channel": "R4" }
+      },
+      {
+        "id": "H1",
+        "type": "INT",
+        "role": "memory",
+        "value": 82,
+        "comment": "Current overload raw threshold"
+      },
+      {
+        "id": "H2",
+        "type": "INT",
+        "role": "memory",
+        "value": 280,
+        "comment": "High-temperature raw threshold (NTC)"
+      },
+      {
+        "id": "MOIST_PCT",
+        "type": "INT",
+        "role": "memory",
+        "value": 0,
+        "comment": "Moisture 0..100 %"
+      },
+      {
+        "id": "H_WET_RAW",
+        "type": "INT",
+        "role": "memory",
+        "value": 700,
+        "comment": "Moisture wet cal raw (submerged = 100%)"
+      },
+      {
+        "id": "H_DRY_RAW",
+        "type": "INT",
+        "role": "memory",
+        "value": 0,
+        "comment": "Moisture dry cal raw (dry = 0%)"
+      },
+      {
+        "id": "H_MOIST_RAW",
+        "type": "INT",
+        "role": "memory",
+        "value": 70,
+        "comment": "Moist threshold — MOIST_ALM when I1_RAW >= this"
+      },
+      {
+        "id": "H_SUB_RAW",
+        "type": "INT",
+        "role": "memory",
+        "value": 700,
+        "comment": "Submerged threshold — SUBMERGED_ALM when I1_RAW >= this"
+      },
+      {
+        "id": "MOIST_ALM",
+        "type": "BOOL",
+        "role": "memory",
+        "value": false,
+        "comment": "Level 1 moist alarm"
+      },
+      {
+        "id": "SUBMERGED_ALM",
+        "type": "BOOL",
+        "role": "memory",
+        "value": false,
+        "comment": "Level 2 submerged alarm"
+      }
+    ]
+  },
+  "notes": "Load st/opta/07_leak_ct_thermistor.st with matching fixtures (leak I1, moisture I1_RAW, 4× CT, 3× NTC). Flash firmware/arduino-opta-mqtt-st/ and set deviceId opta_st_01 on Opta /setup."
+}

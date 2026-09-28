@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · PeakLogic</title>
+  <style>
+    :root {
+      --ps-purple: #7c3aed;
+      --ps-purple-dark: #6d28d9;
+      --ps-purple-light: #ede9fe;
+      --bg: #f1f5f9;
+      --sidebar: #1e293b;
+      --accent: #7c3aed;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .login-top {
+      background: var(--sidebar);
+      color: #e2e8f0;
+      padding: 0.75rem 1.25rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .login-top span { color: var(--ps-purple-light); font-weight: 600; }
+    .login-wrap {
+      min-height: calc(100vh - 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+    .login-card h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.35rem;
+      color: var(--text);
+    }
+    .login-card .lead {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .login-card label {
+      display: block;
+      margin: 0.85rem 0 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .login-card input {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .login-card input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+      border-color: var(--accent);
+    }
+    .login-card button {
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .login-card button:hover { background: var(--ps-purple-dark); border-color: var(--ps-purple-dark); }
+    .login-err {
+      color: #dc2626;
+      font-size: 0.9rem;
+      min-height: 1.25em;
+      margin-top: 0.75rem;
+    }
+    .login-hint {
+      margin-top: 1.1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .login-hint code {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.05rem 0.3rem;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <header class="login-top">Peak<span>Logic</span></header>
+  <div class="login-wrap">
+    <form class="login-card" id="login-form" autocomplete="on">
+      <h1>Site sign in</h1>
+      <p class="lead">Single-tenant appliance — sign in with your PeakLogic account.</p>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="username" required placeholder="admin@local">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Sign in</button>
+      <div class="login-err" id="login-err" role="alert"></div>
+      <p class="login-hint">
+        Default admin: <code>admin@local</code> / <code>ChangeMeAdmin!</code><br>
+        Default operator: <code>operator@local</code> / <code>operator</code>
+      </p>
+    </form>
+  </div>
+  <script>
+    const next = new URLSearchParams(location.search).get('next') || '/';
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('login-err');
+      err.textContent = '';
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            email: document.getElementById('email').value.trim(),
+            password: document.getElementById('password').value,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || res.statusText || 'Sign in failed');
+        location.href = next.startsWith('/') ? next : '/';
+      } catch (ex) {
+        err.textContent = ex.message || String(ex);
+      }
+    });
+  </script>
+</body>
+</html>

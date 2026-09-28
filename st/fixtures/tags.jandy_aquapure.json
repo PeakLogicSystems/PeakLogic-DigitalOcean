@@ -1,0 +1,7 @@
+[
+  { "id": "JAP_SALT_PPM", "label": "AquaPure salt ppm", "type": "INT", "role": "input", "value": 0, "driverId": "jandy_bus", "driverAddress": { "jandy": "salt_ppm", "deviceClass": "aquapure", "deviceAddr": 80 } },
+  { "id": "JAP_STATUS", "label": "AquaPure status", "type": "INT", "role": "input", "value": 0, "driverId": "jandy_bus", "driverAddress": { "jandy": "swg_status", "deviceClass": "aquapure", "deviceAddr": 80 } },
+  { "id": "JAP_NO_FLOW", "label": "AquaPure no flow", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "swg_no_flow", "deviceClass": "aquapure", "deviceAddr": 80 } },
+  { "id": "JAP_LOW_SALT", "label": "AquaPure low salt", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "swg_low_salt", "deviceClass": "aquapure", "deviceAddr": 80 } },
+  { "id": "JAP_PERCENT_CMD", "label": "AquaPure percent cmd", "type": "INT", "role": "output", "value": 50, "driverId": "jandy_bus", "driverAddress": { "jandy": "percent_cmd", "deviceClass": "aquapure", "deviceAddr": 80 } }
+]

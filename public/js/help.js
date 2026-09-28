@@ -1,9 +1,9 @@
-﻿'use strict';
+'use strict';
 
 /**
  * PeakLogic in-app help â€” rendered into #help-content on first open.
  */
-window.PeakLogicHelp = (function () {
+window.PeaklogicHelp = (function () {
   /** Sidebar groups â€” defines nav order and section grouping. */
   const NAV_GROUPS = [
     { label: 'Overview', ids: ['start', 'tutorial', 'cloud-studio', 'layout', 'projects', 'faq'] },
@@ -80,8 +80,8 @@ window.PeakLogicHelp = (function () {
         <ol>
           <li><strong>Project ▾ → New project…</strong> — starts a blank tag database (confirm when prompted).</li>
           <li><strong>Project ▾ → Open project…</strong> — pick a saved project from <code>data/projects/</code>.</li>
-          <li><strong>Project ▾ → Save project</strong> / <strong>Save project as…</strong> — writes the full <code>.est.json</code> snapshot (tags, drivers, HMI, settings).</li>
-          <li><strong>Project ▾ → Save workspace</strong> — working copy to <code>data/workspace.est.json</code> without a library entry.</li>
+          <li><strong>Project ▾ → Save project</strong> / <strong>Save project as…</strong> — writes <code>data/projects/*.est.zip</code> (tags, drivers, HMI, programs, settings).</li>
+          <li><strong>Project ▾ → Save workspace</strong> — working copy to <code>data/workspace.est.zip</code> without a library entry.</li>
         </ol>
         <p><em>UI path:</em> top bar <strong>Project ▾</strong> menu. Project name appears to the right of the menu when a project is loaded.</p>
         <h4>Step 2 — Pick hardware (drivers &amp; templates)</h4>
@@ -154,15 +154,16 @@ window.PeakLogicHelp = (function () {
         <h4>Top bar</h4>
         <table class="help-table">
           <tr><th>Control</th><th>Purpose</th></tr>
-          <tr><td><strong>Project â–¾</strong></td><td>Status, system setup, new/open/save project, save project as, save workspace</td></tr>
+          <tr><td><strong>Project &#9662;</strong></td><td>Status, system setup, new/open/save project, save project as, save workspace</td></tr>
           <tr><td>Project name</td><td>Current project indicator (right of Project menu)</td></tr>
-          <tr><td><strong>Tools â–¾</strong></td><td>Vertical menu â€” Program, Tags, Alarms, Drivers, Historian, Report, Help</td></tr>
-          <tr><td><strong>Tags</strong></td><td>Floating tag database â€” edit tags, scale/alarms, <strong>Force</strong> I/O, <strong>Live I/Oâ€¦</strong></td></tr>
-          <tr><td><strong>Alarms</strong></td><td>Active alarm list from tag limits/conditions â€” scroll, per-row <strong>Ack</strong>, badge on tab</td></tr>
-          <tr><td><strong>Drivers</strong></td><td>Driver list, device templates, Modbus RTUâ†”TCP tool (modal popup)</td></tr>
-          <tr><td><strong>Historian</strong></td><td>Floating trend chart â€” live buffer, MongoDB archive, or PdM (SCADA + Edge); presets/custom date range</td></tr>
-          <tr><td><strong>Report</strong></td><td>Export CSV or print/PDF from live buffer, MongoDB archive, or loaded PdM view</td></tr>
-          <tr><td><strong>Help</strong></td><td>This panel (<kbd>F1</kbd>)</td></tr>
+          <tr><td><strong>Historian &#9662;</strong></td><td>Historian trend chart, logger config, pen config</td></tr>
+          <tr><td><strong>Reporting &#9662;</strong></td><td>Historian reports — CSV export and print/PDF</td></tr>
+          <tr><td><strong>Tools &#9662;</strong></td><td>Program, Tags, Drivers, Connectivity</td></tr>
+          <tr><td><strong>Help &#9662;</strong></td><td>This panel (<kbd>F1</kbd>)</td></tr>
+          <tr><td><strong>Facility Draw</strong></td><td>Site-plan layout editor (<code>/facility-draw</code>)</td></tr>
+          <tr><td><strong>Alarms</strong></td><td>Active alarm list — scroll, per-row <strong>Ack</strong>, badge on button</td></tr>
+          <tr><td><strong>Tags</strong></td><td>Floating tag database — edit tags, scale/alarms, <strong>Force</strong> I/O, <strong>Live I/O…</strong></td></tr>
+          <tr><td><strong>Drivers</strong></td><td>Driver list, device templates, Modbus RTU tool (modal popup)</td></tr>
         </table>
         <h4>Main workspace (HMI)</h4>
         <p>Live operator display â€” composed tiles, tag-driven graphics, multi-screen navigation. Startup page: <strong>System setup â†’ General â†’ Starting HMI screen</strong>. Use <strong>Setupâ€¦</strong> on the HMI panel to open the composer. Screen tabs and <strong>Hide</strong> / <strong>Show status</strong> stack vertically on narrow screens.</p>
@@ -181,7 +182,7 @@ window.PeakLogicHelp = (function () {
         <p>Every window has <strong>Front</strong> and <strong>Back</strong> in the header (first buttons in the action row). Click a window or drag it to raise it; use <strong>Front</strong> / <strong>Back</strong> to reorder overlapping panels.</p>
         <p>Keep <strong>Program</strong> and <strong>Tags</strong> open together while commissioning â€” trace logic in Program and force values in Tags.</p>
         <p>Modal popups (Drivers, Report, System setup, Help) also have <strong>Front</strong> / <strong>Back</strong> and can overlap floating panels.</p>
-        <p>Click <strong>Project â–¾</strong> or <strong>Tools â–¾</strong> to open a vertical menu; click outside or pick an item to close. On narrow screens the top bar stacks vertically.</p>
+        <p>Click any top-bar menu (<strong>Project ▾</strong>, <strong>Historian ▾</strong>, <strong>Reporting ▾</strong>, <strong>Tools ▾</strong>, <strong>Help ▾</strong>) to open a vertical menu; click outside, press Escape, or pick an item to close. On narrow screens the top bar stacks vertically.</p>
         <p>Live data uses <strong>HTTP polling</strong> (60&nbsp;s in normal view, 10&nbsp;s with <strong>Test mode</strong> for technicians or demo projects), not WebSocket. Values refresh while the runtime is running.</p>
       `,
     },
@@ -190,10 +191,10 @@ window.PeakLogicHelp = (function () {
       title: 'Projects',
       html: `
         <p>Click <strong>Project â–¾</strong> (next to the PeakLogic brand) to expand or collapse the project menu â€” <strong>Statusâ€¦</strong>, <strong>System setupâ€¦</strong>, <strong>New projectâ€¦</strong>, <strong>Open projectâ€¦</strong>, <strong>Export project fileâ€¦</strong>, <strong>Save projectâ€¦</strong>, <strong>Save project asâ€¦</strong>, and <strong>Save workspace</strong>. Click again, press Escape, or click outside to collapse. The active project name is shown to the right as a status indicator.</p>
-        <p><strong>System setup</strong> covers project identity, scan rate, <strong>starting HMI screen</strong>, hardware defaults, archive maintenance, <strong>PdM</strong> batch settings, HMI composer access, and saved projects in MongoDB. Trend pens and MongoDB logging are under <strong>Historian â†’ Pen configâ€¦</strong> and <strong>Logger configâ€¦</strong>. See <strong>Help â†’ System setup</strong> for each tab.</p>
-        <p><strong>Open projectâ€¦</strong> shows a picker of saved snapshots in MongoDB. Use <strong>Import fileâ€¦</strong> to load a portable <code>.est.json</code> from another PC or PeakLogic version, or <strong>Export fileâ€¦</strong> to download the selected library project.</p>
+        <p><strong>System setup</strong> covers project identity, scan rate, <strong>starting HMI screen</strong>, hardware defaults, archive maintenance, <strong>PdM</strong> batch settings, HMI composer access, and saved projects under <code>data/projects/</code>. Trend pens and MongoDB logging are under <strong>Historian â†’ Pen configâ€¦</strong> and <strong>Logger configâ€¦</strong>. See <strong>Help â†’ System setup</strong> for each tab.</p>
+        <p><strong>Open projectâ€¦</strong> shows a picker of saved <code>.est.zip</code> projects in <code>data/projects/</code>. Use <strong>Import fileâ€¦</strong> to load a portable <code>.est.zip</code> / <code>.est.json</code> from another PC or PeakLogic version, or <strong>Export fileâ€¦</strong> to download the selected library project.</p>
         <p><strong>Export project fileâ€¦</strong> downloads the current open project as <code>&lt;name&gt;.est.json</code> (tags, drivers, program, HMI, settings) for use on another machine or PeakLogic version.</p>
-        <p><strong>Save projectâ€¦</strong> writes the full snapshot to the MongoDB project library. <strong>Save project asâ€¦</strong> prompts for a new name. <strong>Save workspace</strong> writes a working copy to <code>data/workspace.est.json</code> without adding a library entry â€” used when startup mode is <strong>Last workspace</strong>.</p>
+        <p><strong>Save projectâ€¦</strong> writes the full snapshot to <code>data/projects/*.est.zip</code>. <strong>Save project asâ€¦</strong> prompts for a new name. <strong>Save workspace</strong> writes a working copy to <code>data/workspace.est.zip</code> without adding a library entry â€” used when startup mode is <strong>Last workspace</strong>.</p>
         <p><strong>Workspace &amp; Opta drivers:</strong> Adding or bulk-adding <code>mqtt_parc</code> drivers updates <code>workspace.est.json</code>. On restart, remote drivers in <code>drivers.json</code> are merged into the workspace snapshot so Opta drivers are not dropped.</p>
         <p>The <strong>Projects</strong> tab in System setup offers the same library plus <strong>Export fileâ€¦</strong> and <strong>Import fileâ€¦</strong>.</p>
         <p>Accepted formats (older and newer format versions are upgraded automatically on import):</p>
@@ -440,13 +441,13 @@ window.PeakLogicHelp = (function () {
       id: 'mqtt-parc',
       title: 'MQTT Parc hub & Opta',
       html: `
-        <p>PeakLogic PC is the <strong>central MQTT Parc hub</strong>. Opta firmware (<strong>PeakLogicOptaMqttSt</strong>, currently <strong>v2.3.47</strong>) publishes <code>peaklogic/v1/{deviceId}/telemetry</code>; the hub stores reports in <code>data/parc.json</code> for tag sync and remote ST. Integrator reference: <code>firmware/arduino-opta-mqtt-st/OPTa_FEATURES.md</code>.</p>
+        <p>PeakLogic PC is the <strong>central MQTT Parc hub</strong>. Opta firmware (<strong>PeaklogicOptaMqttSt</strong>, currently <strong>v2.3.47</strong>) publishes <code>peaklogic/v1/{deviceId}/telemetry</code>; the hub stores reports in <code>data/parc.json</code> for tag sync and remote ST. Integrator reference: <code>firmware/arduino-opta-mqtt-st/OPTa_FEATURES.md</code>.</p>
         <h4>Firmware vs Parc deploy</h4>
-        <p><strong>Parc deploy</strong> (<code>put_program</code> over MQTT) updates the ST program and NV storage only â€” it does <strong>not</strong> flash the Arduino sketch. After pulling firmware changes from git, open Arduino IDE and <strong>Upload</strong> <code>PeakLogicOptaMqttSt.ino</code> again. Verify with GET <code>http://&lt;opta-ip&gt;/api/status</code>: <code>firmwareVersion</code> should match <code>pl_version.h</code> (e.g. <strong>2.3.45</strong>).</p>
+        <p><strong>Parc deploy</strong> (<code>put_program</code> over MQTT) updates the ST program and NV storage only â€” it does <strong>not</strong> flash the Arduino sketch. After pulling firmware changes from git, open Arduino IDE and <strong>Upload</strong> <code>PeaklogicOptaMqttSt.ino</code> again. Verify with GET <code>http://&lt;opta-ip&gt;/api/status</code>: <code>firmwareVersion</code> should match <code>mv_version.h</code> (e.g. <strong>2.3.8</strong>).</p>
         <h4>ATECC608 device identity</h4>
         <p>On boot, Opta firmware reads the on-board <strong>ATECC608B</strong> serial (via <strong>ArduinoECCX08</strong>) and sets <strong>deviceId</strong> to <code>opta_</code> + 18 hex digits (e.g. <code>opta_012355b52d66a109ee</code>). The serial is shown on <strong>/setup</strong> and <code>/api/status</code> but is <strong>not</strong> included in MQTT telemetry. PeakLogic stores the serial in the Parc registry and on <code>mqtt_parc</code> drivers from first-seen telemetry, bulk-add from registry, or driver config <code>ateccSerial</code>.</p>
         <h4>Global site key (P2P globals)</h4>
-        <p>Commissioning assigns a shared 16-bit <strong>global site key</strong> (default <code>0x0001</code>) for cross-device tag topics <code>peaklogic/v1/g/{key}/{tagName}</code>. Set on the PC in <strong>System setup → MQTT Parc</strong> (<code>globalSiteKey</code>) and on each Opta at <strong>/setup → Global site key</strong>.</p>
+        <p>Commissioning: on Opta <strong>/setup</strong>, check <strong>Cloud MQTT (TLS)</strong> and Save — the device connects to <code>mqtt.peaklogic.io:8883</code>. Set the Opta <strong>global site key</strong> to this organization’s key so only that Cloud tenant can see the Opta. The same key is used for program tag topics <code>peaklogic/v1/g/{key}/{tagName}</code>.</p>
         <p>Open the Opta setup page (<code>/setup</code>) to confirm <strong>Device ID</strong> and <strong>ATECC serial</strong>. Use <strong>Drivers â†’ Add from Parc registry</strong> to register units without hand-typing ids.</p>
         <h4>Opta web UI (Ethernet)</h4>
         <p>Native HTTP on the Opta (port 80). Top nav links <strong>Setup</strong> and <strong>I/O Map</strong>.</p>
@@ -498,12 +499,12 @@ window.PeakLogicHelp = (function () {
         <h4>Force &amp; I/O</h4>
         <p>Opta uses a PLC-style mux: <strong>logic</strong> fields hold hardware reads; <strong>effective</strong> values reflect forces. PC <strong>Tags â†’ Force</strong> sends <code>set_force</code> over MQTT when Remote is on. Relay outputs R1â€“R4 mirror to on-board relay LEDs (D0â€“D3). Expansion modules <strong>AFX00005 (D1608E)</strong> and <strong>AFX00007 (A0602)</strong> appear on <strong>/io-map</strong> and in telemetry after <strong>Scan expansions</strong>.</p>
         <h4>Time sync (RTC)</h4>
-        <p>PeakLogic sends <code>sync_time</code> on <strong>Connect</strong> and daily for linked Opta drivers. Firmware uses a <strong>software wall clock</strong> (immediate) and queues HAL RTC when safe â€” <code>put_program</code> does not sync time. Serial <code>[PL …]</code> timestamps show wall clock after sync; before sync, uptime format (<code>00:04:14</code> = 4 min since boot).</p>
+        <p>PeakLogic sends <code>sync_time</code> on <strong>Connect</strong> and daily for linked Opta drivers. Firmware uses a <strong>software wall clock</strong> (immediate) and queues HAL RTC when safe â€” <code>put_program</code> does not sync time. Serial <code>[MV â€¦]</code> timestamps show wall clock after sync; before sync, uptime format (<code>00:04:14</code> = 4 min since boot).</p>
         <h4>Serial debug</h4>
-        <p>USB serial <strong>115200</strong>. Always-on milestones use <code>[PL*]</code> (boot, MQTT subscribe, cmd rx) even when verbose debug is off. Look for <code>MQTT subscribed cmd+config</code> after boot.</p>
+        <p>USB serial <strong>115200</strong>. Always-on milestones use <code>[MV*]</code> (boot, MQTT subscribe, cmd rx) even when verbose debug is off. Look for <code>MQTT subscribed cmd+config</code> after boot.</p>
         <h4>Quick start (PC)</h4>
         <ol>
-          <li>Flash <strong>PeakLogicOptaMqttSt</strong> v2.3.41+ via Arduino IDE; set broker on <code>/setup</code>.</li>
+          <li>Flash <strong>PeaklogicOptaMqttSt</strong> v2.3.41+ via Arduino IDE; set broker on <code>/setup</code>.</li>
           <li>Start Mosquitto on the PC (<code>npm run mqtt:start</code>) â€” broker must listen on your <strong>LAN IP</strong>, not only localhost.</li>
           <li><strong>System setup â†’ General</strong> â€” enable <strong>MQTT Parc hub</strong>, set <strong>broker URL</strong>, enable <strong>Remote ST execution</strong> â†’ <strong>Apply all settings</strong>.</li>
           <li><strong>Drivers</strong> â€” template <strong>Arduino Opta â€” MQTT Parc ST runtime</strong> or <strong>Add Opta Parc devices (bulk)</strong>. <strong>deviceId</strong> must match firmware.</li>
@@ -540,6 +541,10 @@ window.PeakLogicHelp = (function () {
           <tr><td>Driver gone after restart</td><td>Re-add or bulk-add; workspace merge keeps Opta drivers â€” save workspace after changes</td></tr>
           <tr><td>No telemetry</td><td>Broker URL on PC vs Opta <code>/setup</code>; firewall; Mosquitto running on LAN IP</td></tr>
           <tr><td>Telemetry OK, commands timeout</td><td>Reflash firmware <strong>v2.3.41+</strong>; Serial must show <code>MQTT subscribed cmd+config</code>; broker IP match; avoid old 2.3.8 (stack overflow)</td></tr>
+          <tr><td>Opta /setup “Test request failed”</td><td>HTTP dropped during TLS test on older builds — reflash <strong>v2.4.4+</strong>; or Save settings and confirm Serial <code>MQTT subscribed cmd+config</code></td></tr>
+          <tr><td>Opta TLS/auth failed :8883</td><td>Reflash <strong>v2.4.6+</strong> (ISRG Root X2); host <code>mqtt.peaklogic.io</code>, TLS on, user/pass = Mosquitto credentials</td></tr>
+          <tr><td>USB shows IP, Ethernet dead</td><td>TLS test / reconnect wedged Ethernet — <strong>power-cycle</strong>; reflash <strong>v2.4.7+</strong></td></tr>
+          <tr><td>Opta “Status unavailable: Failed to fetch”</td><td>HTTP not reachable — power-cycle; ping Opta IP; reflash <strong>v2.4.7+</strong> (TLS reconnect backoff)</td></tr>
           <tr><td>Broker mismatch</td><td>PC <code>mqtt://192.168.x.x:1883</code> and Opta <code>/setup</code> broker IP must be the same host â€” not <code>127.0.0.1</code> on device</td></tr>
           <tr><td>HTTP dead during deploy</td><td>Normal on older firmware during large <code>put_program</code>; use MQTT deploy; upgrade to 2.3.41+</td></tr>
           <tr><td>Sync tags fails</td><td>Wait for first telemetry; matching <code>deviceId</code></td></tr>
@@ -579,12 +584,12 @@ window.PeakLogicHelp = (function () {
         <ol>
           <li>Open <strong>Drivers</strong></li>
           <li>Device template: <strong>Waveshare Modbus RTU IO 8CH</strong></li>
-          <li>Set <strong>Serial port</strong> (e.g. COM11), baud <strong>9600</strong>, slave ID <strong>1</strong></li>
+          <li>Set <strong>Serial port</strong> — on Compulab IOT-LINK use <code>/dev/ttyLP6</code> (<strong>PORT A</strong>); on PC use COM port (e.g. COM11). Baud <strong>9600</strong>, slave ID <strong>1</strong></li>
           <li><strong>Apply device template</strong> â€” creates <code>ws_rtu_8</code> and tags DI1â€“DI8, Q1â€“Q8</li>
           <li>Load program <code>logic/17_waveshare_di1_q1.st</code> (or write your own using DI1/Q1)</li>
           <li><strong>Start</strong></li>
         </ol>
-        <p>Modbus mapping: discrete inputs 0â€“7 (DI), coils 0â€“7 (Q). See Waveshare wiki for hardware details.</p>
+        <p>Modbus mapping: discrete inputs 0–7 (DI), coils 0–7 (Q). IOT-LINK: wire RS-485 to terminal <strong>PORT A</strong> (pins 5–6); do not use <code>/dev/ttyLP0</code> (system console). See Waveshare wiki for hardware details.</p>
       `,
     },
     {
@@ -770,7 +775,7 @@ window.PeakLogicHelp = (function () {
           <li>Default <strong>9600 8N1</strong>, slave <strong>1</strong> â€” confirm baud and address on the meter display or full manual</li>
           <li>Set COM port â†’ <strong>Apply device template</strong> â†’ <strong>Start</strong> runtime</li>
         </ol>
-        <p>Driver id <code>dds_rgb</code>. One dedicated driver per meter (not a shared multi-slave bus template).</p>
+        <p>Driver id <code>dds_rgb</code>. One dedicated driver per meter (not a shared multi-slave bus template). Poll from the PC USB–RS485 adapter — Opta Parc firmware does not master EZ Meter on RS-485.</p>
       `,
     },
     {
@@ -1178,7 +1183,7 @@ HTTPS full:    { "url": "https://other.host/status", "payloadTemplate": "bool" }
         </ol>
         <p>On the live HMI page, use <strong>Hide</strong> / <strong>Show status</strong> to collapse the screen title and hint below the navigation bar. Configure default visibility under <strong>Project layout â†’ Live status</strong> in the composer.</p>
         <p>With two or more screens configured, a navigation bar appears above the live HMI. The starting screen is independent of <strong>Screen 1</strong> â€” Screen 1 is the first page in the composer and cannot be removed, but any screen can be chosen as the startup page.</p>
-        <p>Symbol library: SVG, PNG, GIF, and <strong>composites</strong> (multi-layer gauges, HOA switch) under <code>public/hmi/svg/library/</code> (vendor folder <code>peaklogic</code>). Refresh imports with <code>npm run download-opto-svgs</code> and <code>npm run download-mblogic-svgs</code>, then <code>npm run organize-hmi-graphics</code>.</p>
+        <p>Symbol library: SVG, PNG, GIF, and <strong>composites</strong> (multi-layer gauges, HOA switch) under <code>public/hmi/svg/library/</code> (vendor folder <code>mv</code>). Refresh imports with <code>npm run download-opto-svgs</code> and <code>npm run download-mblogic-svgs</code>, then <code>npm run organize-hmi-graphics</code>.</p>
         <p>Unsaved composer edits show a confirm dialog when closing. The live view reads saved settings, not unsaved dirty config.</p>
       `,
     },
@@ -1468,7 +1473,7 @@ HTTPS full:    { "url": "https://other.host/status", "payloadTemplate": "bool" }
           <tr><td>Composer settings hard to read</td><td>On narrow screens sections stack vertically â€” use <strong>Bindings</strong> horizontal scroll; widen the composer window so the grid pane expands</td></tr>
           <tr><td>Tag value stuck on display</td><td><strong>Tags â†’ Clear forces</strong> or uncheck <strong>Enabled</strong> on the row; confirm <strong>Start</strong> runtime; check binding tag id spelling</td></tr>
           <tr><td>Wrong screen on load</td><td><strong>System setup â†’ General â†’ Starting HMI screen</strong> â†’ <strong>Apply all settings</strong>; or <strong>Reload screen</strong> on the HMI panel after saving</td></tr>
-          <tr><td>Project not in Open list</td><td>Files must be <code>*.est.json</code> under <code>data/projects/</code>; use <strong>Save projectâ€¦</strong> or copy files there, then <strong>Open projectâ€¦</strong> again</td></tr>
+          <tr><td>Project not in Open list</td><td>Files must be <code>*.est.zip</code> (or legacy <code>*.est.json</code>) under <code>data/projects/</code>; use <strong>Save projectâ€¦</strong> or copy files there, then <strong>Open projectâ€¦</strong> again</td></tr>
           <tr><td>TPO OUTPUT wrong color (orange) or TIME NOW flickers</td><td>Remove legacy <code>tmr_on_lamp</code> / <code>tmr_off_lamp</code> binding rows if present; re-place <strong>TPO daily</strong> composite or <strong>Apply HMI settings</strong>; hard refresh (<kbd>Ctrl+F5</kbd>). Only <code>status_lamp</code> should bind <code>TPO1_OUT</code> fill.</td></tr>
           <tr><td>TPO minute values wonâ€™t edit or ST SetInt fails</td><td><code>TPO1_ON_MIN</code>, <code>TPO1_OFF_MIN</code>, <code>TPO1_PULSE_REM</code> must be INT â€” use <strong>Load fixtures</strong> for <code>23_tpo_irrigation.st</code> or restart server to repair tag types</td></tr>
           <tr><td>TPO click-to-edit does nothing</td><td>Runtime must be <strong>Start</strong>ed; binding must have <strong>interaction: edit</strong>; click the underlined value text or field background</td></tr>
@@ -1679,7 +1684,7 @@ AvgReset(AVG1);</pre>
           <tr><td>Opta driver <strong>Not linked</strong>?</td><td>Enable MQTT Parc hub in System setup; check broker LAN IP; <code>deviceId</code> must match firmware. Drivers auto-link on boot when hub is up.</td></tr>
           <tr><td>Hub OK but no ST on Opta?</td><td><strong>Download &amp; Start</strong> with Remote on â€” linking is not deploy/run.</td></tr>
           <tr><td>Opta driver missing after restart?</td><td>Use bulk-add or template again; workspace merge preserves <code>mqtt_parc</code> drivers â€” bulk-add updates workspace.</td></tr>
-          <tr><td>Opta MQTT cmd timeout?</td><td>Reflash <strong>PeakLogicOptaMqttSt v2.3.41+</strong>; match broker on PC and Opta <code>/setup</code>; Serial: <code>MQTT subscribed cmd+config</code>. Parc deploy does not update firmware.</td></tr>
+          <tr><td>Opta MQTT cmd timeout?</td><td>Reflash <strong>PeaklogicOptaMqttSt v2.3.41+</strong>; match broker on PC and Opta <code>/setup</code>; Serial: <code>MQTT subscribed cmd+config</code>. Parc deploy does not update firmware.</td></tr>
           <tr><td>Opta broker mismatch?</td><td>Use PC LAN IP (e.g. <code>192.168.1.233</code>) in both System setup and Opta <code>/setup</code> â€” not <code>127.0.0.1</code> on the device.</td></tr>
           <tr><td>HTTPS returns no data?</td><td>Verify base URL, path, bearer token, and payload template (<code>json:field</code>). Use driver <strong>Test</strong> and <strong>Status</strong>.</td></tr>
           <tr><td>Alarm state incomplete?</td><td>INT/REAL: enable <strong>Alm</strong> and set OL â‰¤ IL â‰¤ IH â‰¤ OH. BOOL: set <strong>Condition</strong> (When ON/OFF).</td></tr>

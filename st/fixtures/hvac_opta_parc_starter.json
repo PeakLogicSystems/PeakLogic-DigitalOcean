@@ -1,0 +1,137 @@
+{
+  "mode": "incremental",
+  "starterProject": "hvac-opta-parc",
+  "onboardingDoc": "docs/OPTA_PARC_CLOUD.md",
+  "bridgeMode": "opta_parc_direct",
+  "mqttParcBroker": "mqtt://192.168.1.233:1883",
+  "product": "arduino opta mqtt parc hvac",
+  "templateId": "arduino_opta_parc",
+  "templateIdMcsa": "arduino_opta_mcsa_monitor",
+  "defaultProgram": "logic/hvac_opta_parc.st",
+  "commissioning": {
+    "doc": "docs/OPTA_PARC_CLOUD.md",
+    "firmware": "firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt v2.3.63+",
+    "wifiSetup": {
+      "apSsid": "PeakLogic-Opta",
+      "apPassMinLen": 8,
+      "apUrl": "http://192.168.4.1:8080/setup",
+      "setupPages": [
+        "/setup",
+        "/mcsa",
+        "/api/status"
+      ],
+      "enableApField": "wifiApEnable",
+      "note": "Connect phone to PeakLogic-Opta AP → open /setup for broker, device ID, expansions, WiFi AP password"
+    },
+    "mqttParc": {
+      "topicPattern": "peaklogic/v1/{deviceId}/telemetry",
+      "cmdPattern": "peaklogic/v1/{deviceId}/cmd",
+      "globalSiteKey": 1,
+      "testTopic": "peaklogic/v1/{deviceId}/setup-test"
+    },
+    "configs": [
+      {
+        "hvacCfg": 0,
+        "id": "A",
+        "label": "Single air handler",
+        "hardware": "Base Opta only",
+        "io": "I1 leak · I2/I3 CT run/start (1P+cap blower) · I4 safety · I6/I7 NTC",
+        "mcsaLayout": false,
+        "mcsaWiring": "1P + start cap (blower)",
+        "expansion": null,
+        "remoteExecution": true
+      },
+      {
+        "hvacCfg": 1,
+        "id": "B",
+        "label": "Single condenser",
+        "hardware": "Base Opta only",
+        "io": "MCSA HVAC: comp+fan 1P+cap run CT I1/I2 · hi/lo NTC I3/I4",
+        "mcsaLayout": "HVAC",
+        "mcsaWiring": "1P + start cap (compressor + fan)",
+        "expansion": null,
+        "remoteExecution": false
+      },
+      {
+        "hvacCfg": 2,
+        "id": "C",
+        "label": "Dual air handler",
+        "hardware": "Opta + D1608E (digital expansion)",
+        "io": "I1 + X1_I1 leaks · X1_I2/I3 safety · I2/I3 blower run CT (1P+cap) · 4 NTC",
+        "mcsaLayout": false,
+        "mcsaWiring": "1P + start cap (each blower)",
+        "expansion": "D1608E",
+        "remoteExecution": true
+      },
+      {
+        "hvacCfg": 3,
+        "id": "D",
+        "label": "Dual condenser",
+        "hardware": "2× Opta MCSA + D1608E on primary",
+        "io": "Each Opta: comp+fan 1P+cap I1/I2 · NTC I3/I4 · X1 lockout DI",
+        "mcsaLayout": "HVAC",
+        "mcsaWiring": "1P + start cap (compressor + fan per unit)",
+        "expansion": "D1608E",
+        "remoteExecution": false
+      }
+    ],
+    "steps": [
+      "Flash PeaklogicOptaMqttSt; enable WiFi AP on /setup",
+      "Set device ID, broker, MQTT user/pass (≤47 chars), global site key",
+      "Scan expansions on /setup when config C or D (D1608E slot 1)",
+      "Set HVAC_CFG tag (0–3) to match installed hardware",
+      "Configs B/D: /mcsa → I/O layout HVAC; motor wiring 1P + start cap; deviceType 5 (all loads)",
+      "Configs B/D: compressor run CT I1, fan run CT I2; edge AI model single-phase-start-v1",
+      "Config A: blower 1P+cap — run CT I2, start-winding CT I3",
+      "Config A/C: deploy hvac_opta_parc.st to primary Opta (optional remote execution)",
+      "Drivers → Add Opta Parc from registry; enable opta_hvac_02 for config D",
+      "Calibrate NTC tags (Tags → Scale → Opta NTC 24 VDC divider)"
+    ]
+  },
+  "configs": [
+    {
+      "hvacCfg": 0,
+      "id": "A",
+      "label": "Single air handler",
+      "hardware": "Base Opta only",
+      "io": "I1 leak · I2/I3 CT run/start (1P+cap blower) · I4 safety · I6/I7 NTC",
+      "mcsaLayout": false,
+      "mcsaWiring": "1P + start cap (blower)",
+      "expansion": null,
+      "remoteExecution": true
+    },
+    {
+      "hvacCfg": 1,
+      "id": "B",
+      "label": "Single condenser",
+      "hardware": "Base Opta only",
+      "io": "MCSA HVAC: comp+fan 1P+cap run CT I1/I2 · hi/lo NTC I3/I4",
+      "mcsaLayout": "HVAC",
+      "mcsaWiring": "1P + start cap (compressor + fan)",
+      "expansion": null,
+      "remoteExecution": false
+    },
+    {
+      "hvacCfg": 2,
+      "id": "C",
+      "label": "Dual air handler",
+      "hardware": "Opta + D1608E (digital expansion)",
+      "io": "I1 + X1_I1 leaks · X1_I2/I3 safety · I2/I3 blower run CT (1P+cap) · 4 NTC",
+      "mcsaLayout": false,
+      "mcsaWiring": "1P + start cap (each blower)",
+      "expansion": "D1608E",
+      "remoteExecution": true
+    },
+    {
+      "hvacCfg": 3,
+      "id": "D",
+      "label": "Dual condenser",
+      "hardware": "2× Opta MCSA + D1608E on primary",
+      "io": "Each Opta: comp+fan 1P+cap I1/I2 · NTC I3/I4 · X1 lockout DI",
+      "mcsaLayout": "HVAC",
+      "mcsaWiring": "1P + start cap (compressor + fan per unit)",
+      "expansion": "D1608E",
+      "remoteExecution": false
+    }
+  ]
+}

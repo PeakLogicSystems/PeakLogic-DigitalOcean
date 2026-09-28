@@ -1,0 +1,23 @@
+{
+  "name": "peaklogic-cloud",
+  "version": "2.3.7",
+  "description": "PeakLogic Cloud Studio — full Studio + sites/cameras SaaS (port 3100)",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "modbus-serial": "^8.0.17",
+    "mongodb": "^6.12.0",
+    "mqtt": "^5.10.4",
+    "pdfkit": "^0.17.2",
+    "ws": "^8.18.0"
+  }
+}

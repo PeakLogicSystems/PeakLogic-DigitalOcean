@@ -17,16 +17,140 @@
     <div class="alert alert-success py-2 small"><%= message %></div>
   <% } %>
 
+  <%
+    function modeBadge(s) {
+      switch (s) {
+        case 'online-running': return '<span class="badge bg-success">online · running</span>';
+        case 'online-warning': return '<span class="badge bg-warning text-dark">online · warning</span>';
+        case 'online-faulted': return '<span class="badge bg-danger">online · faulted</span>';
+        default: return '<span class="badge bg-secondary">offline</span>';
+      }
+    }
+    var st = (typeof status !== 'undefined' && status) ? status : { status: 'offline' };
+    var prof = (typeof stationProfile !== 'undefined') ? stationProfile : null;
+    var boundId = (typeof primaryDeviceId !== 'undefined' && primaryDeviceId)
+      ? primaryDeviceId
+      : ((typeof installPrefill !== 'undefined' && installPrefill) ? installPrefill.deviceId : null);
+    var fw = (typeof firmwareVersion !== 'undefined' && firmwareVersion) ? firmwareVersion : null;
+    var fwState = (typeof firmwareState !== 'undefined') ? firmwareState : 'unknown';
+    var recFw = (typeof recommendedFirmware !== 'undefined') ? recommendedFirmware : null;
+    function fwBadge(v, state) {
+      if (!v) return '<span class="badge bg-light text-muted border" title="No firmware reported yet">fw —</span>';
+      if (state === 'outdated') {
+        return '<span class="badge bg-warning-subtle text-warning-emphasis border border-warning" '
+          + 'title="Firmware v' + v + ' is older than the recommended v' + (recFw || '') + ' — consider reflashing">'
+          + 'fw v' + v + ' <i class="bi bi-exclamation-triangle"></i></span>';
+      }
+      return '<span class="badge bg-light text-dark border" title="Reported device firmware">fw v' + v + '</span>';
+    }
+  %>
+
+  <% if (typeof installPrefill !== 'undefined' && installPrefill) { %>
+    <div class="alert alert-info py-2 small mb-4">
+      QR install sticker detected — device <code><%= installPrefill.deviceId %></code>,
+      <%= installPrefill.stationType %> · program <code><%= installPrefill.program %></code>.
+      Confirm binding below.
+    </div>
+  <% } %>
+
   <div class="card shadow-sm mb-4">
     <div class="card-body">
-      <h1 class="h4 mb-1"><%= system.name %></h1>
-      <p class="text-muted small mb-0">
-        Location <code><%= location.slug %></code> · System <code><%= system.slug %></code> · Scan <%= system.scanMs %> ms
-      </p>
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <h1 class="h4 mb-1"><%= system.name %></h1>
+          <p class="text-muted small mb-0">
+            Location <code><%= location.slug %></code> · System <code><%= system.slug %></code> · Scan <%= system.scanMs %> ms
+            <% if (prof) { %> · <%= prof.label %><% } %>
+          </p>
+        </div>
+        <div class="text-end"><%- modeBadge(st.status) %></div>
+      </div>
     </div>
   </div>
 
+  <% var bill = (typeof connectivityBilling !== 'undefined') ? connectivityBilling : null; %>
+  <% if (bill) { %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-white fw-semibold d-flex justify-content-between align-items-center">
+        <span>Connectivity &amp; billing</span>
+        <% if (bill.status === 'active') { %>
+          <span class="badge bg-success">active</span>
+        <% } else if (bill.status === 'pending') { %>
+          <span class="badge bg-warning text-dark">pending commission</span>
+        <% } else if (bill.status === 'expired') { %>
+          <span class="badge bg-danger">expired</span>
+        <% } else { %>
+          <span class="badge bg-secondary"><%= bill.status %></span>
+        <% } %>
+      </div>
+      <div class="card-body small">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="text-muted">Connectivity</div>
+            <div><%= bill.connectivityType %><% if (bill.iccid) { %> · ICCID <code><%= bill.iccid %></code><% } %></div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-muted">Plan / term</div>
+            <div><%= bill.plan %> · <%= bill.termMonths %> mo<% if (bill.autoRenew) { %> · auto-renew<% } %></div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-muted">Renewal</div>
+            <div>
+              <% if (bill.renewalAt) { %>
+                <%= new Date(bill.renewalAt).toLocaleDateString() %>
+                <% if (bill.lastRenewedAt) { %><span class="text-muted">(last renewed <%= new Date(bill.lastRenewedAt).toLocaleDateString() %>)</span><% } %>
+              <% } else { %>
+                <span class="text-muted">— starts at commission —</span>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% if (bill.commissionedAt) { %>
+          <p class="text-muted mb-0 mt-2">Commissioned <%= new Date(bill.commissionedAt).toLocaleString() %> · renewals: <%= bill.renewalCount || 0 %></p>
+        <% } else { %>
+          <p class="text-muted mb-0 mt-2">Billing record created — completes when you deploy the station program.</p>
+        <% } %>
+        <p class="mb-0 mt-2"><a href="/studio/connectivity?systemId=<%= system.id %>" class="small">Open Connectivity</a> for commissioning, renewals, SIMs, and alarm channels.</p>
+      </div>
+    </div>
+  <% } %>
+
   <% if (canManage) { %>
+    <div class="card shadow-sm mb-4 border-purple">
+      <div class="card-body">
+        <h2 class="h5 mb-1">Bind edge device</h2>
+        <p class="text-muted small mb-3">
+          Enter the <strong>Device ID</strong> shown on the Opta's own web page (<code>http://&lt;opta-ip&gt;/setup</code>).
+          Name, slug<% if (prof) { %>, the <strong><%= prof.templateId %></strong> template and program <code><%= (system.metadata && system.metadata.program) || prof.program %></code><% } %>
+          are set automatically. Once bound, use <strong>Deploy program + auto-run</strong> below to download the ST program to flash and start it.
+        </p>
+        <form action="/sites/<%= location.id %>/systems/<%= system.id %>/bind-device" method="POST" class="row g-2 align-items-end">
+          <% if (typeof installToken !== 'undefined' && installToken) { %>
+          <input type="hidden" name="installToken" value="<%= installToken %>">
+          <% } %>
+          <div class="col-md-8">
+            <label class="form-label small" for="bind-device-id">Device ID</label>
+            <input type="text" class="form-control form-control-lg" id="bind-device-id" name="deviceId"
+                   placeholder="mv_f2e689fd60d96bab" value="<%= boundId || '' %>">
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-purple btn-lg w-100"><%= boundId ? 'Update device ID' : 'Bind device' %></button>
+          </div>
+        </form>
+        <% if (boundId) { %>
+          <p class="small mt-2 mb-0">Currently bound to <code><%= boundId %></code>
+            <%- fwBadge(fw, fwState) %> ·
+            status <%- modeBadge(st.status) %>
+            <% if (st.status === 'offline') { %><span class="text-muted"> — waiting for the Opta to connect to the broker.</span><% } %>
+          </p>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (canManage) { %>
+    <details class="mb-4">
+      <summary class="text-muted small mb-2" style="cursor:pointer">Advanced: add another device manually</summary>
     <div class="card shadow-sm mb-4">
       <div class="card-body">
         <h2 class="h5 mb-3">Add device</h2>
@@ -63,7 +187,176 @@
         </form>
       </div>
     </div>
+    </details>
   <% } %>
+
+  <%
+    var rt = (typeof runtime !== 'undefined') ? runtime : null;
+    var expectedProgram = (system.metadata && system.metadata.program)
+      ? system.metadata.program
+      : (prof && prof.program ? prof.program : null);
+    var reportedProgram = rt && rt.programName ? rt.programName : null;
+    var seenAt = (typeof lastSeenAt !== 'undefined' && lastSeenAt) ? new Date(lastSeenAt) : null;
+    function progMatch() {
+      if (!expectedProgram || !reportedProgram) return null;
+      var norm = function (s) { return String(s).replace(/^.*[\\/]/, '').replace(/\.st$/i, '').toLowerCase(); };
+      return norm(expectedProgram) === norm(reportedProgram);
+    }
+    var match = progMatch();
+  %>
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white fw-semibold d-flex justify-content-between align-items-center">
+      <span>Program running on device</span>
+      <span class="d-flex align-items-center gap-2">
+        <% if (boundId) { %><%- fwBadge(fw, fwState) %><% } %>
+        <% if (rt) { %>
+          <% if (rt.running) { %><span class="badge bg-success">running</span>
+          <% } else { %><span class="badge bg-secondary">stopped</span><% } %>
+        <% } %>
+      </span>
+    </div>
+    <div class="card-body">
+      <% if (!boundId) { %>
+        <p class="text-muted small mb-0">Bind an edge device above to see the program it is running.</p>
+      <% } else if (!rt) { %>
+        <p class="text-muted small mb-0">
+          No runtime report yet from <code><%= boundId %></code>.
+          After the Opta connects and downloads the program, its running program appears here.
+          <% if (expectedProgram) { %><br>Expected after download: <code><%= expectedProgram %></code>.<% } %>
+        </p>
+      <% } else { %>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="small text-muted">Running program (reported by device)</div>
+            <div class="fs-5">
+              <% if (reportedProgram) { %><code><%= reportedProgram %></code>
+              <% } else { %><span class="text-muted">— none loaded —</span><% } %>
+            </div>
+            <div class="small mt-1">
+              Program valid:
+              <% if (rt.programOk) { %><span class="text-success">yes</span>
+              <% } else { %><span class="text-danger">no</span><% } %>
+              <% if (rt.autoRunOnBoot != null) { %> · auto-run on boot: <%= rt.autoRunOnBoot ? 'on' : 'off' %><% } %>
+              <% if (rt.programNvCrc) { %> · CRC <code><%= rt.programNvCrc %></code><% } %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <% if (expectedProgram) { %>
+              <div class="small text-muted">Expected program (assigned to station)</div>
+              <div class="fs-6"><code><%= expectedProgram %></code></div>
+              <div class="mt-1">
+                <% if (match === true) { %>
+                  <span class="badge bg-success">in sync</span>
+                <% } else if (match === false) { %>
+                  <span class="badge bg-warning text-dark">mismatch — device is running a different program</span>
+                <% } %>
+              </div>
+            <% } %>
+            <% if (rt.scanMs != null) { %>
+              <div class="small text-muted mt-2">Scan <%= rt.scanMs %> ms<% if (seenAt) { %> · last report <%= seenAt.toLocaleString() %><% } %></div>
+            <% } %>
+          </div>
+        </div>
+      <% } %>
+      <% if (canManage && boundId && expectedProgram) { %>
+        <% var deployFailed = (typeof deployFailed !== 'undefined') && deployFailed; %>
+        <% var deployJustSucceeded = (typeof deployJustSucceeded !== 'undefined') && deployJustSucceeded; %>
+        <hr class="my-3">
+        <% if (deployFailed) { %>
+          <div class="alert alert-warning py-2 small mb-3" id="deploy-fail-note">
+            Last deploy did not complete. If you just reflashed the Opta, it takes ~15&ndash;30 s to reboot and
+            reconnect to the broker — then retry. Enable <strong>Keep retrying</strong> below to auto-retry until it succeeds.
+          </div>
+        <% } %>
+        <form action="/sites/<%= location.id %>/systems/<%= system.id %>/deploy" method="POST" id="deploy-form">
+          <input type="hidden" name="autoRunOnBoot" value="true">
+          <div class="d-flex flex-wrap gap-2 align-items-center">
+            <button type="submit" class="btn btn-purple btn-lg" id="deploy-btn">
+              <%= deployFailed ? 'Retry deploy + auto-run' : 'Deploy program + auto-run' %>
+            </button>
+            <label class="form-check-label small d-flex align-items-center gap-1 mb-0">
+              <input type="checkbox" class="form-check-input mt-0" id="deploy-autoretry">
+              Keep retrying until it succeeds (e.g. after reflashing the Opta)
+            </label>
+          </div>
+          <div class="small mt-2" id="deploy-status" aria-live="polite">
+            <span class="text-muted">
+              Downloads <code><%= expectedProgram %></code> to <code><%= boundId %></code>,
+              stores bytecode in Opta flash (survives power loss), sets auto-run on boot, and starts the runtime now.
+            </span>
+          </div>
+        </form>
+        <script>
+          (function () {
+            var systemKey = 'mvDeployRetry:<%= system.id %>';
+            var MAX_ATTEMPTS = 40;
+            var RETRY_DELAY_MS = 6000;
+            var form = document.getElementById('deploy-form');
+            var btn = document.getElementById('deploy-btn');
+            var autoCb = document.getElementById('deploy-autoretry');
+            var statusEl = document.getElementById('deploy-status');
+            if (!form || !btn || !autoCb) return;
+
+            var deployFailed = <%= deployFailed ? 'true' : 'false' %>;
+            var deploySucceeded = <%= deployJustSucceeded ? 'true' : 'false' %>;
+
+            function readState() {
+              try { return JSON.parse(sessionStorage.getItem(systemKey) || 'null'); } catch (e) { return null; }
+            }
+            function writeState(s) { sessionStorage.setItem(systemKey, JSON.stringify(s)); }
+            function clearState() { sessionStorage.removeItem(systemKey); }
+
+            var state = readState();
+
+            // Success ends any active retry loop.
+            if (deploySucceeded) { clearState(); state = null; }
+
+            // Restore the checkbox if a retry loop is in progress across reloads.
+            if (state && state.active) { autoCb.checked = true; }
+
+            form.addEventListener('submit', function () {
+              btn.disabled = true;
+              btn.textContent = 'Deploying…';
+              if (statusEl) statusEl.innerHTML = '<span class="text-muted">Deploying to the Opta…</span>';
+              if (autoCb.checked) {
+                var s = readState() || { active: true, attempts: 0 };
+                s.active = true;
+                writeState(s);
+              } else {
+                clearState();
+              }
+            });
+
+            // After a failure, if auto-retry is active, count down and resubmit.
+            if (deployFailed && state && state.active) {
+              state.attempts = (state.attempts || 0) + 1;
+              if (state.attempts <= MAX_ATTEMPTS) {
+                writeState(state);
+                btn.disabled = true;
+                var secs = Math.round(RETRY_DELAY_MS / 1000);
+                (function tick() {
+                  if (secs <= 0) { form.submit(); return; }
+                  if (statusEl) {
+                    statusEl.innerHTML = '<span class="text-warning">Auto-retry in ' + secs
+                      + 's (attempt ' + state.attempts + ' of ' + MAX_ATTEMPTS
+                      + ' — the Opta may still be rebooting after reflash)…</span>';
+                  }
+                  secs -= 1;
+                  setTimeout(tick, 1000);
+                })();
+              } else {
+                clearState();
+                if (statusEl) {
+                  statusEl.innerHTML = '<span class="text-danger">Auto-retry stopped after '
+                    + MAX_ATTEMPTS + ' attempts. Check the Opta and try again.</span>';
+                }
+              }
+            }
+          })();
+        </script>
+      <% } %>
+    </div>
+  </div>
 
   <div class="card shadow-sm mb-4">
     <div class="card-header bg-white fw-semibold">Devices</div>
@@ -92,7 +385,12 @@
                 <td><strong><%= dev.name %></strong></td>
                 <td><code><%= dev.slug %></code></td>
                 <td><%= dev.driverType %></td>
-                <td><code><%= dev.driverConfig?.deviceId || '—' %></code></td>
+                <td>
+                  <code><%= dev.driverConfig?.deviceId || '—' %></code>
+                  <% if (dev.driverConfig?.deviceId && dev.driverConfig.deviceId === boundId) { %>
+                    <%- fwBadge(fw, fwState) %>
+                  <% } %>
+                </td>
                 <td>
                   <% if (dev.enabled) { %>
                     <span class="badge bg-success">enabled</span>

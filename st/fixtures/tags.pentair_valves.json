@@ -1,0 +1,6 @@
+[
+  { "id": "VLV1_POS", "label": "Valve 1 position", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "valve1_pos", "deviceClass": "valve", "deviceAddr": 16 } },
+  { "id": "VLV2_POS", "label": "Valve 2 position", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "valve2_pos", "deviceClass": "valve", "deviceAddr": 16 } },
+  { "id": "VLV3_POS", "label": "Valve 3 position", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "valve3_pos", "deviceClass": "valve", "deviceAddr": 16 } },
+  { "id": "VLV4_POS", "label": "Valve 4 position", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "valve4_pos", "deviceClass": "valve", "deviceAddr": 16 } }
+]

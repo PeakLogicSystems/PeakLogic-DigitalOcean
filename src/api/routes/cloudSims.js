@@ -14,9 +14,7 @@ function requireCloudSims(req, res, next) {
 
 function createCloudSimRoutes() {
   const router = require('express').Router();
-  // Scoped to /cloud only — see cellularSims.js for why this must not be a
-  // blanket router.use(requireCloudSims) with no path.
-  router.use('/cloud', requireCloudSims);
+  router.use(requireCloudSims);
 
   router.get('/cloud/sims/status', (req, res) => {
     res.json({ ok: true, ...simManager.managerStatus() });

@@ -1,7 +1,7 @@
 'use strict';
 
 /** Shared tag id / label display preference (program Live I/O, HMI bindings, tag legend). */
-window.PeakLogicTagDisplay = (function () {
+window.PeaklogicTagDisplay = (function () {
   const KEY = 'peaklogic-tag-display';
   const MODES = ['id', 'label', 'both'];
 

@@ -1,0 +1,68 @@
+{
+  "id": "dfrobot_sen0706_ec",
+  "label": "DFRobot SEN0706 — RS485 conductivity (EC) probe",
+  "vendor": "DFRobot",
+  "model": "SEN0706 EC K=1",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "df_sen0706",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "EC_US_CM",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Conductivity µS/cm (IR 0x0000, register ×10)"
+      },
+      {
+        "id": "EC_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 1,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Temperature °C (IR 0x0001, register ×10)"
+      },
+      {
+        "id": "EC_SAL_PPM",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "signed": false,
+        "scale": 1,
+        "comment": "Salinity ppm (IR 0x0002)"
+      },
+      {
+        "id": "EC_TDS_PPM",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 3,
+        "signed": false,
+        "scale": 1,
+        "comment": "TDS ppm (IR 0x0003)"
+      }
+    ]
+  }
+}

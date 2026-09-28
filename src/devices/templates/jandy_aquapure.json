@@ -1,0 +1,39 @@
+{
+  "id": "jandy_aquapure",
+  "label": "Jandy AquaPure SWG — RS-485",
+  "vendor": "Jandy",
+  "model": "AquaPure salt chlorinator",
+  "transport": "jandy_rs485",
+  "sharedBus": true,
+  "driverId": "jandy_bus",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 2,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceAddr": 80,
+    "deviceClass": "aquapure",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 60000,
+    "busGapMs": 150
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "jandy": [
+      { "id": "JAP_SALT_PPM", "type": "INT", "role": "input", "point": "salt_ppm", "deviceClass": "aquapure", "comment": "Salt level (ppm)" },
+      { "id": "JAP_STATUS", "type": "INT", "role": "input", "point": "swg_status", "deviceClass": "aquapure", "comment": "Status byte" },
+      { "id": "JAP_NO_FLOW", "type": "BOOL", "role": "input", "point": "swg_no_flow", "deviceClass": "aquapure" },
+      { "id": "JAP_LOW_SALT", "type": "BOOL", "role": "input", "point": "swg_low_salt", "deviceClass": "aquapure" },
+      { "id": "JAP_HIGH_SALT", "type": "BOOL", "role": "input", "point": "swg_high_salt", "deviceClass": "aquapure" },
+      { "id": "JAP_CLEAN", "type": "BOOL", "role": "input", "point": "swg_clean", "deviceClass": "aquapure" },
+      { "id": "JAP_PERCENT_CMD", "type": "INT", "role": "output", "point": "percent_cmd", "deviceClass": "aquapure", "comment": "Chlorination % 0-100" }
+    ]
+  }
+}

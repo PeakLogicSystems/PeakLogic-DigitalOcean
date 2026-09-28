@@ -3,9 +3,9 @@
 /**
  * Hardware connection wizard — guided device template apply for new users.
  */
-window.PeakLogicHwWizard = (function () {
-  const { esc } = window.PeakLogicCore || { esc: (s) => String(s ?? '') };
-  const domGet = window.PeakLogicCore?.$ || ((id) => document.getElementById(id));
+window.PeaklogicHwWizard = (function () {
+  const { esc } = window.PeaklogicCore || { esc: (s) => String(s ?? '') };
+  const domGet = window.PeaklogicCore?.$ || ((id) => document.getElementById(id));
 
   const STEPS = ['transport', 'template', 'connection', 'apply', 'done'];
   let transportGroups = [];
@@ -45,6 +45,8 @@ window.PeakLogicHwWizard = (function () {
       modbus_rtu: 'modbus_rtu',
       vgreen_epc: 'modbus_rtu',
       pentair_rs485: 'modbus_rtu',
+      jandy_rs485: 'modbus_rtu',
+      hayward_rs485: 'modbus_rtu',
       modbus_tcp: 'modbus_tcp',
       mqtt_parc: 'mqtt_parc',
       mqtt_parc_telemetry: 'mqtt_parc',

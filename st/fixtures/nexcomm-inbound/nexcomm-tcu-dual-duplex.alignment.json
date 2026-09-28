@@ -1,0 +1,449 @@
+{
+  "product": "nexcomm-tcu-dual-duplex",
+  "templateId": "nexcomm_tcu_dual_duplex",
+  "sourceCsv": "st/fixtures/nexcomm-csv/nexcomm-tcu-dual-duplex.csv",
+  "rowCount": 98,
+  "fieldCount": 44,
+  "fields": [
+    {
+      "id": "PRODUCT_ID",
+      "label": "Product Id",
+      "csvColumn": "Product Id",
+      "nexus": "Product Id",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:product_id",
+      "sample": "FFFF"
+    },
+    {
+      "id": "HARDWARE_REV",
+      "label": "Hardware Rev.",
+      "csvColumn": "Hardware Rev.",
+      "nexus": "Hardware Rev.",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:hardware_rev",
+      "sample": "FFFF"
+    },
+    {
+      "id": "SOFTWARE_ID",
+      "label": "Software Id",
+      "csvColumn": "Software Id",
+      "nexus": "Software Id",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:software_id",
+      "sample": "0009"
+    },
+    {
+      "id": "SOFTWARE_REV",
+      "label": "Software Rev",
+      "csvColumn": "Software Rev",
+      "nexus": "Software Rev",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:software_rev",
+      "sample": "0001"
+    },
+    {
+      "id": "SECONDS_ON_SINCE_RESET",
+      "label": "Seconds on since reset",
+      "csvColumn": "Seconds on since reset",
+      "nexus": "Seconds on since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:seconds_on_since_reset",
+      "sample": "4440142"
+    },
+    {
+      "id": "S1_FLOAT_STATUS",
+      "label": "S1 Float Status",
+      "csvColumn": "S1 Float Status",
+      "nexus": "S1 Float Status",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_float_status",
+      "sample": "0001"
+    },
+    {
+      "id": "S1_FLOAT_OUT_OF_SEQUENCE",
+      "label": "S1 Float Out of Sequence",
+      "csvColumn": "S1 Float Out of Sequence",
+      "nexus": "S1 Float Out of Sequence",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s1_float_out_of_sequence",
+      "sample": "0"
+    },
+    {
+      "id": "S1_HIGH_FLOAT_ON",
+      "label": "S1 High float on",
+      "csvColumn": "S1 High float on",
+      "nexus": "S1 High float on",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_high_float_on",
+      "sample": "0000"
+    },
+    {
+      "id": "S1_PUMP1_MOTOR_AND_RUN_FAULT",
+      "label": "S1 Pump1 Motor and Run Fault",
+      "csvColumn": "S1 Pump1 Motor and Run Fault",
+      "nexus": "S1 Pump1 Motor and Run Fault",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump1_motor_and_run_fault",
+      "sample": "0000"
+    },
+    {
+      "id": "S1_PUMP2_MOTOR_AND_RUN_FAULT",
+      "label": "S1 Pump2 Motor and Run Fault",
+      "csvColumn": "S1 Pump2 Motor and Run Fault",
+      "nexus": "S1 Pump2 Motor and Run Fault",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump2_motor_and_run_fault",
+      "sample": "0000"
+    },
+    {
+      "id": "S1_HOA1_SWITCH_POSITION",
+      "label": "S1 HOA1 Switch Position",
+      "csvColumn": "S1 HOA1 Switch Position",
+      "nexus": "S1 HOA1 Switch Position",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s1_hoa1_switch_position",
+      "sample": "1"
+    },
+    {
+      "id": "S1_HOA2_SWITCH_POSITION",
+      "label": "S1 HOA2 Switch Position",
+      "csvColumn": "S1 HOA2 Switch Position",
+      "nexus": "S1 HOA2 Switch Position",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s1_hoa2_switch_position",
+      "sample": "1"
+    },
+    {
+      "id": "S1_PUMP1_SECONDS_ON_LAST_HOUR",
+      "label": "S1 Pump1 seconds on last hour",
+      "csvColumn": "S1 Pump1 seconds on last hour",
+      "nexus": "S1 Pump1 seconds on last hour",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s1_pump1_seconds_on_last_hour",
+      "sample": "0"
+    },
+    {
+      "id": "S1_PUMP1_STARTS_LAST_HOUR",
+      "label": "S1 Pump1 starts last hour",
+      "csvColumn": "S1 Pump1 starts last hour",
+      "nexus": "S1 Pump1 starts last hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump1_starts_last_hour",
+      "sample": "19"
+    },
+    {
+      "id": "S1_PUMP2_SECONDS_ON_LAST_HOUR",
+      "label": "S1 Pump2 seconds on last hour",
+      "csvColumn": "S1 Pump2 seconds on last hour",
+      "nexus": "S1 Pump2 seconds on last hour",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s1_pump2_seconds_on_last_hour",
+      "sample": "0"
+    },
+    {
+      "id": "S1_PUMP2_STARTS_LAST_HOUR",
+      "label": "S1 Pump2 starts last hour",
+      "csvColumn": "S1 Pump2 starts last hour",
+      "nexus": "S1 Pump2 starts last hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump2_starts_last_hour",
+      "sample": "16"
+    },
+    {
+      "id": "S1_PUMP1_STARTS_SINCE_RESET",
+      "label": "S1 Pump1 starts since reset",
+      "csvColumn": "S1 Pump1 starts since reset",
+      "nexus": "S1 Pump1 starts since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump1_starts_since_reset",
+      "sample": "19"
+    },
+    {
+      "id": "S1_PUMP1_RUN_TIME_SINCE_RESET",
+      "label": "S1 Pump1 run time since reset",
+      "csvColumn": "S1 Pump1 run time since reset",
+      "nexus": "S1 Pump1 run time since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump1_run_time_since_reset",
+      "sample": "62240"
+    },
+    {
+      "id": "S1_PUMP2_STARTS_SINCE_RESET",
+      "label": "S1 Pump2 starts since reset",
+      "csvColumn": "S1 Pump2 starts since reset",
+      "nexus": "S1 Pump2 starts since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump2_starts_since_reset",
+      "sample": "17"
+    },
+    {
+      "id": "S1_PUMP2_RUN_TIME_SINCE_RESET",
+      "label": "S1 Pump2 run time since reset",
+      "csvColumn": "S1 Pump2 run time since reset",
+      "nexus": "S1 Pump2 run time since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s1_pump2_run_time_since_reset",
+      "sample": "62520"
+    },
+    {
+      "id": "S2_FLOAT_STATUS",
+      "label": "S2 Float status",
+      "csvColumn": "S2 Float status",
+      "nexus": "S2 Float status",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_float_status",
+      "sample": "0011"
+    },
+    {
+      "id": "S2_FLOAT_OUT_OF_SEQUENCE",
+      "label": "S2 Float out of sequence",
+      "csvColumn": "S2 Float out of sequence",
+      "nexus": "S2 Float out of sequence",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s2_float_out_of_sequence",
+      "sample": "0"
+    },
+    {
+      "id": "S2_HIGH_FLOAT_ON",
+      "label": "S2 High float on",
+      "csvColumn": "S2 High float on",
+      "nexus": "S2 High float on",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_high_float_on",
+      "sample": "0000"
+    },
+    {
+      "id": "S2_PUMP1_MOTOR_AND_RUN_FAULT",
+      "label": "S2 Pump1 motor and run fault",
+      "csvColumn": "S2 Pump1 motor and run fault",
+      "nexus": "S2 Pump1 motor and run fault",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump1_motor_and_run_fault",
+      "sample": "0000"
+    },
+    {
+      "id": "S2_PUMP2_MOTOR_AND_RUN_FAULT",
+      "label": "S2 Pump2 motor and run fault",
+      "csvColumn": "S2 Pump2 motor and run fault",
+      "nexus": "S2 Pump2 motor and run fault",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump2_motor_and_run_fault",
+      "sample": "0000"
+    },
+    {
+      "id": "S2_HOA1_SWITCH_POSITION",
+      "label": "S2 HOA1 switch position",
+      "csvColumn": "S2 HOA1 switch position",
+      "nexus": "S2 HOA1 switch position",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s2_hoa1_switch_position",
+      "sample": "1"
+    },
+    {
+      "id": "S2_HOA2_SWITCH_POSITION",
+      "label": "S2 HOA2 switch position",
+      "csvColumn": "S2 HOA2 switch position",
+      "nexus": "S2 HOA2 switch position",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s2_hoa2_switch_position",
+      "sample": "1"
+    },
+    {
+      "id": "S2_PUMP1_SECONDS_ON_LAST_HOUR",
+      "label": "S2 Pump1 seconds on last hour",
+      "csvColumn": "S2 Pump1 seconds on last hour",
+      "nexus": "S2 Pump1 seconds on last hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump1_seconds_on_last_hour",
+      "sample": "3600"
+    },
+    {
+      "id": "S2_PUMP1_STARTS_LAST_HOUR",
+      "label": "S2 Pump1 starts last hour",
+      "csvColumn": "S2 Pump1 starts last hour",
+      "nexus": "S2 Pump1 starts last hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump1_starts_last_hour",
+      "sample": "6020"
+    },
+    {
+      "id": "S2_PUMP2_SECONDS_ON_LAST_HOUR",
+      "label": "S2 Pump2 seconds on last hour",
+      "csvColumn": "S2 Pump2 seconds on last hour",
+      "nexus": "S2 Pump2 seconds on last hour",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:s2_pump2_seconds_on_last_hour",
+      "sample": "0"
+    },
+    {
+      "id": "S2_PUMP2_STARTS_LAST_HOUR",
+      "label": "S2 Pump2 starts last hour",
+      "csvColumn": "S2 Pump2 starts last hour",
+      "nexus": "S2 Pump2 starts last hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump2_starts_last_hour",
+      "sample": "18"
+    },
+    {
+      "id": "S2_PUMP1_STARTS_SINCE_RESET",
+      "label": "S2 Pump1 starts since reset",
+      "csvColumn": "S2 Pump1 starts since reset",
+      "nexus": "S2 Pump1 starts since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump1_starts_since_reset",
+      "sample": "20"
+    },
+    {
+      "id": "S2_PUMP1_RUN_TIME_SINCE_RESET",
+      "label": "S2 Pump1 run time since reset",
+      "csvColumn": "S2 Pump1 run time since reset",
+      "nexus": "S2 Pump1 run time since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump1_run_time_since_reset",
+      "sample": "2246497"
+    },
+    {
+      "id": "S2_PUMP2_STARTS_SINCE_RESET",
+      "label": "S2 Pump2 starts since reset",
+      "csvColumn": "S2 Pump2 starts since reset",
+      "nexus": "S2 Pump2 starts since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump2_starts_since_reset",
+      "sample": "19"
+    },
+    {
+      "id": "S2_PUMP2_RUN_TIME_SINCE_RESET",
+      "label": "S2 Pump2 run time since reset",
+      "csvColumn": "S2 Pump2 run time since reset",
+      "nexus": "S2 Pump2 run time since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:s2_pump2_run_time_since_reset",
+      "sample": "924900"
+    },
+    {
+      "id": "CT1_TRUE_RMS",
+      "label": "CT1 - True RMS",
+      "csvColumn": "CT1 - True RMS",
+      "nexus": "CT1 - True RMS",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:ct1_true_rms",
+      "sample": "0.010088752955198288"
+    },
+    {
+      "id": "CT2_TRUE_RMS",
+      "label": "CT2 - True RMS",
+      "csvColumn": "CT2 - True RMS",
+      "nexus": "CT2 - True RMS",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:ct2_true_rms",
+      "sample": "0.01010593120008707"
+    },
+    {
+      "id": "POWER_SOURCE",
+      "label": "Power Source",
+      "csvColumn": "Power Source",
+      "nexus": "Power Source",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:power_source",
+      "sample": "0"
+    },
+    {
+      "id": "BATTERY_VOLTAGE",
+      "label": "Battery Voltage",
+      "csvColumn": "Battery Voltage",
+      "nexus": "Battery Voltage",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:battery_voltage",
+      "sample": "4.148528575897217"
+    },
+    {
+      "id": "INPUT_VOLTAGE",
+      "label": "Input Voltage",
+      "csvColumn": "Input Voltage",
+      "nexus": "Input Voltage",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:input_voltage",
+      "sample": "14.783285140991211"
+    },
+    {
+      "id": "OUTPUT_VOLTAGE",
+      "label": "Output Voltage",
+      "csvColumn": "Output Voltage",
+      "nexus": "Output Voltage",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:output_voltage",
+      "sample": "14.87038803100586"
+    },
+    {
+      "id": "BATTERY_CURRENT",
+      "label": "Battery Current",
+      "csvColumn": "Battery Current",
+      "nexus": "Battery Current",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:battery_current",
+      "sample": "-0.00003371799903106876"
+    },
+    {
+      "id": "INPUT_CURRENT",
+      "label": "Input Current",
+      "csvColumn": "Input Current",
+      "nexus": "Input Current",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:input_current",
+      "sample": "0.02844039909541607"
+    },
+    {
+      "id": "DIE_TEMPERATURE",
+      "label": "Die Temperature",
+      "csvColumn": "Die Temperature",
+      "nexus": "Die Temperature",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:die_temperature",
+      "sample": "47.37151336669922"
+    }
+  ]
+}

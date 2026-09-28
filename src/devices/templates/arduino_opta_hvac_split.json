@@ -1,0 +1,30 @@
+{
+  "id": "arduino_opta_hvac_split",
+  "label": "Arduino Opta — Split HVAC (AHU + condenser)",
+  "vendor": "Arduino",
+  "model": "Opta + D1608E — split system MCSA + AHU env",
+  "transport": "mqtt_parc",
+  "defaultProgram": "logic/opta_split_hvac.st",
+  "driverId": "opta_hvac_split_01",
+  "tagsFromDevice": true,
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "opta_hvac_split_01",
+    "reportIntervalMs": 1000,
+    "scanMs": 100
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "opta_hvac_split_01",
+    "remoteExecution": true
+  },
+  "telemetrySchema": {
+    "mcsa": "Compressor + fan CT MCSA on I1–I4 (HVAC layout)",
+    "env": "T1_C..T4_C refrigerant NTC, COMP_FLT, FAN_FLT, COMP_AMPS, FAN_AMPS",
+    "ahuEnv": "AHU1_SUPPLY_TEMP_F, AHU1_RETURN_TEMP_F, AHU1_PAN_LEAK"
+  },
+  "notes": "Flash firmware/arduino-opta-mqtt-st v2.3.81+. On Opta: /mcsa → HVAC RTU preset, /ahu-env → enable dual-AHU (use AHU1 only for single split). Deploy st/logic/opta_split_hvac.st. Wiring: OPTA-CT-AC-MCSA-WIRING.pdf"
+}

@@ -1,0 +1,1387 @@
+{
+  "format": "peaklogic-est",
+  "version": 1,
+  "savedAt": "2026-07-26T09:32:16.673Z",
+  "project": {
+    "name": "ezmeter-facility-pq"
+  },
+  "tags": [
+    {
+      "id": "DDS_WH_A_IMP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 0,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_B_IMP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 2,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_C_IMP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 4,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_A_EXP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 8,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_B_EXP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 10,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_C_EXP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 12,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_SUM_IMP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 16,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_WH_SUM_EXP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 18,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_VAH_SUM_IMP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 20,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_VAH_SUM_EXP",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 10,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 22,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_V_A",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 24,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_I_A",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 25,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_W_A",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 26,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_HZ_A",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 28,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_PF_A",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.01,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 29,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_V_B",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 30,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_I_B",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 31,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_W_B",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 32,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_HZ_B",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 34,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_PF_B",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.01,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 35,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_V_C",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 36,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_I_C",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 37,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_W_C",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 38,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_HZ_C",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 40,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_PF_C",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.01,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 41,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_VA_A",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 42,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_VA_B",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 44,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_VA_C",
+      "type": "REAL",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": true,
+      "scale": 0.1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 46,
+        "wordWidth": 32
+      },
+      "graphEnabled": true
+    },
+    {
+      "id": "DDS_CTL_PROT_LVL",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1010
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_SER_NO",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 32,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1011,
+        "wordWidth": 32
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_DATA_BASE",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1013
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CTL_BASE",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1014
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_COMM",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1015
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_RESP_MS",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1016
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_MODEL_W1",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1017
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_MODEL_W2",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1018
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_MODEL_W3",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1019
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_MODEL_W4",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1020
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_MODEL_W5",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1021
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W1",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1023
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W2",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1024
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W3",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1025
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W4",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1026
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W5",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1027
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W6",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1028
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W7",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1029
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W8",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1030
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W9",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1031
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_CUST_W10",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1032
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "DDS_CTL_SIGNED_FMT",
+      "type": "INT",
+      "role": "input",
+      "value": 0,
+      "wordWidth": 16,
+      "signed": false,
+      "scale": 1,
+      "offset": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 1033
+      },
+      "graphEnabled": false
+    },
+    {
+      "id": "MECH_METER_INTERVAL_KWH",
+      "label": "Site electric meter interval kWh",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_KW_SUM",
+      "label": "Site total real power kW",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_KVA_SUM",
+      "label": "Site total apparent power kVA",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_PF_SYS",
+      "label": "Site system power factor",
+      "type": "REAL",
+      "role": "memory",
+      "value": 1,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_V_AVG",
+      "label": "Average phase voltage V",
+      "type": "REAL",
+      "role": "memory",
+      "value": 120,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_V_IMBAL_PCT",
+      "label": "Voltage imbalance %",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_I_SUM",
+      "label": "Total phase current A",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0,
+      "graphEnabled": true,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_UNDERVOLT",
+      "label": "PQ undervoltage alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_OVERVOLT",
+      "label": "PQ overvoltage alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_PHASE_LOSS",
+      "label": "PQ phase loss alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_V_IMBAL",
+      "label": "PQ voltage imbalance alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_LOW_PF",
+      "label": "PQ low power factor alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_FREQ_FAULT",
+      "label": "PQ frequency alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_ALM",
+      "label": "Site power quality alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "graphEnabled": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on",
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "DDS_METER_KWH_PREV",
+      "label": "Previous summed kWh (interval calc)",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_NOM_V",
+      "label": "PQ nominal voltage setpoint",
+      "type": "REAL",
+      "role": "memory",
+      "value": 120,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_UV_V",
+      "label": "PQ undervoltage threshold V",
+      "type": "REAL",
+      "role": "memory",
+      "value": 108,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_OV_V",
+      "label": "PQ overvoltage threshold V",
+      "type": "REAL",
+      "role": "memory",
+      "value": 132,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_LOW_PF",
+      "label": "PQ low PF threshold",
+      "type": "REAL",
+      "role": "memory",
+      "value": 0.85,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_FREQ_MIN",
+      "label": "PQ min frequency Hz",
+      "type": "REAL",
+      "role": "memory",
+      "value": 59.5,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_FREQ_MAX",
+      "label": "PQ max frequency Hz",
+      "type": "REAL",
+      "role": "memory",
+      "value": 60.5,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_IMBAL_PCT",
+      "label": "PQ max voltage imbalance %",
+      "type": "REAL",
+      "role": "memory",
+      "value": 5,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_PQ_CFG_LOAD_I",
+      "label": "PQ loaded current threshold A",
+      "type": "REAL",
+      "role": "memory",
+      "value": 1,
+      "graphEnabled": false,
+      "alarmsEnabled": false,
+      "alarmCondition": null,
+      "alarmInnerLow": null,
+      "alarmInnerHigh": null,
+      "alarmOuterLow": null,
+      "alarmOuterHigh": null,
+      "driverId": null,
+      "driverAddress": null,
+      "scale": 1,
+      "offset": 0
+    },
+    {
+      "id": "MECH_METER_KWH",
+      "label": "Site electric meter kWh total (EZ Meter)",
+      "type": "REAL",
+      "role": "input",
+      "graphEnabled": true,
+      "value": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 16,
+        "wordWidth": 32
+      },
+      "scale": 0.001
+    },
+    {
+      "id": "MECH_METER_KWH_EXP",
+      "label": "Site electric meter kWh export (EZ Meter)",
+      "type": "REAL",
+      "role": "input",
+      "graphEnabled": true,
+      "value": 0,
+      "driverId": "dds_rgb",
+      "driverAddress": {
+        "table": "holding",
+        "address": 18,
+        "wordWidth": 32
+      },
+      "scale": 0.001
+    },
+    {
+      "id": "ALF_MECH_ALM",
+      "label": "Mechanical area alarm",
+      "type": "BOOL",
+      "role": "memory",
+      "value": false,
+      "alarmsEnabled": true,
+      "alarmCondition": "on"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "dds_rgb",
+      "type": "modbus_rtu",
+      "enabled": true,
+      "serialPort": "COM3",
+      "baud": 9600,
+      "slaveId": 1,
+      "parity": "none",
+      "stopBits": 1,
+      "timeoutMs": 3000
+    }
+  ],
+  "program": "logic/ezmeter_facility_pq.st",
+  "activeProgram": "logic/ezmeter_facility_pq.st",
+  "settings": {
+    "project": {
+      "name": "ezmeter-facility-pq"
+    },
+    "scanMs": 1000,
+    "activeProgram": "logic/ezmeter_facility_pq.st",
+    "remoteExecution": false,
+    "autoStartRuntime": false,
+    "assistedLiving": {
+      "facility": {
+        "driver": "ezmeter"
+      },
+      "ezMeter": {
+        "enabled": true,
+        "driverId": "dds_rgb",
+        "semanticMap": [
+          {
+            "tagId": "MECH_METER_KWH",
+            "sourceTagId": "DDS_WH_SUM_IMP",
+            "scale": 0.001,
+            "comment": "Summed import Wh → kWh (raw×10 Wh, scale 0.001)"
+          },
+          {
+            "tagId": "MECH_METER_KWH_EXP",
+            "sourceTagId": "DDS_WH_SUM_EXP",
+            "scale": 0.001,
+            "comment": "Summed export Wh → kWh"
+          },
+          {
+            "tagId": "MECH_PQ_VA",
+            "sourceTagId": "DDS_V_A"
+          },
+          {
+            "tagId": "MECH_PQ_VB",
+            "sourceTagId": "DDS_V_B"
+          },
+          {
+            "tagId": "MECH_PQ_VC",
+            "sourceTagId": "DDS_V_C"
+          },
+          {
+            "tagId": "MECH_PQ_IA",
+            "sourceTagId": "DDS_I_A"
+          },
+          {
+            "tagId": "MECH_PQ_IB",
+            "sourceTagId": "DDS_I_B"
+          },
+          {
+            "tagId": "MECH_PQ_IC",
+            "sourceTagId": "DDS_I_C"
+          },
+          {
+            "tagId": "MECH_PQ_HZ",
+            "sourceTagId": "DDS_HZ_A"
+          },
+          {
+            "tagId": "MECH_PQ_PF_A",
+            "sourceTagId": "DDS_PF_A"
+          },
+          {
+            "tagId": "MECH_PQ_PF_B",
+            "sourceTagId": "DDS_PF_B"
+          },
+          {
+            "tagId": "MECH_PQ_PF_C",
+            "sourceTagId": "DDS_PF_C"
+          }
+        ],
+        "nominalVoltage": 120,
+        "undervoltV": 108,
+        "overvoltV": 132,
+        "lowPf": 0.85,
+        "freqMinHz": 59.5,
+        "freqMaxHz": 60.5,
+        "vImbalancePct": 5,
+        "loadedCurrentA": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "FUEL_LEVEL_MM",
+    "label": "Fuel height (mm)",
+    "type": "REAL",
+    "role": "input",
+    "value": 103.2,
+    "wordWidth": 16,
+    "signed": false,
+    "scale": 0.1,
+    "driverId": "ul212nt",
+    "driverAddress": {
+      "table": "holding",
+      "address": 256
+    },
+    "graphEnabled": true,
+    "comment": "HR 0x0100 — Protocol 17 FC03 qty 1, raw ×10 (manual example 0x0408)"
+  },
+  {
+    "id": "FUEL_TILT",
+    "label": "Fuel probe tilt (raw)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "signed": false,
+    "scale": 1,
+    "driverId": "ul212nt",
+    "driverAddress": {
+      "table": "holding",
+      "address": 258
+    },
+    "graphEnabled": false,
+    "comment": "HR 0x0102 — Protocol 17 FC03 qty 1 (manual example 0x9006)"
+  },
+  {
+    "id": "TANK_FULL_MM",
+    "label": "Calibrated full height (mm)",
+    "type": "REAL",
+    "role": "memory",
+    "value": 1000,
+    "wordWidth": 32,
+    "graphEnabled": false
+  },
+  {
+    "id": "FUEL_PCT",
+    "label": "Fuel level %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 10.3,
+    "wordWidth": 32,
+    "graphEnabled": true
+  },
+  {
+    "id": "FUEL_SIGNAL_OK",
+    "label": "Fuel echo OK",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "FUEL_LOW",
+    "label": "Fuel low",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  }
+]

@@ -4,7 +4,7 @@ region: nyc
 services:
   - name: api
     github:
-      repo: PeakLogicSystems/PeakLogic-DigitalOcean
+      repo: RoyMooreACE/peaklogic-cloud
       branch: main
       deploy_on_push: true
     source_dir: /

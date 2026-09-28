@@ -1,0 +1,33 @@
+{
+  "mode": "facility",
+  "starterProject": "facility-hvac-iot-link",
+  "onboardingDoc": "scripts/facility-hvac-iot-link/README.md",
+  "devices": [
+    {
+      "role": "ahu",
+      "deviceId": "hvac_ahu_01",
+      "driverId": "opta_ahu",
+      "expansion": "D1608E",
+      "calibrate": {
+        "ct": "/ct-cal",
+        "env": "/ahu-env"
+      },
+      "deployProgram": "logic/facility_hvac_iot_link.st"
+    },
+    {
+      "role": "condenser",
+      "deviceId": "hvac_cond_01",
+      "driverId": "opta_cond",
+      "mcsa": "/mcsa",
+      "expansion": "D1608E",
+      "mcsaPreset": "facility-condenser",
+      "units": 2
+    }
+  ],
+  "ezMeter": {
+    "driverId": "dds_rgb",
+    "baud": 19200,
+    "slaveId": 1,
+    "serial": "/dev/ttyLP6"
+  }
+}

@@ -2,11 +2,11 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
-const { optaStatusToFleetReport } = require('../src/fleet/optaTelemetryMapper');
+const { optaStatusToParcReport } = require('../src/parc/optaTelemetryMapper');
 
-describe('optaStatusToFleetReport', () => {
+describe('optaStatusToParcReport', () => {
   it('maps built-in DI and mA to tags', () => {
-    const report = optaStatusToFleetReport('opta_full_io_01', {
+    const report = optaStatusToParcReport('opta_full_io_01', {
       di_builtIn: [true, false],
       analog: { mA: [12.5, 4.0], scaled_mA: [50, 0] },
     });

@@ -1,0 +1,69 @@
+{
+  "deviceId": "duplexls_01",
+  "name": "Duplex lift station — Opta MCSA-lite",
+  "platform": "arduino-opta-mqtt-st",
+  "reportIntervalSec": 3,
+  "runtime": {
+    "running": true,
+    "firmware": "mcsa-lite",
+    "mcsaLite": true,
+    "sampleRateHz": 10,
+    "fftSize": 0,
+    "mcsaChannels": 6
+  },
+  "mcsa": [
+    {
+      "ch": 0,
+      "fund": [60.0, 0.164],
+      "rotor": [[56.4, 0.0082], [63.6, 0.0078]],
+      "pump": [[120.0, 0.0098], [180.0, 0.0061]]
+    },
+    {
+      "ch": 1,
+      "fund": [60.0, 0.158],
+      "rotor": [[56.4, 0.0079], [63.6, 0.0075]],
+      "pump": [[120.0, 0.0094], [180.0, 0.0059]]
+    },
+    {
+      "ch": 2,
+      "fund": [60.0, 0.161],
+      "rotor": [[56.4, 0.0080], [63.6, 0.0076]],
+      "pump": [[120.0, 0.0096], [180.0, 0.0060]]
+    },
+    {
+      "ch": 3,
+      "fund": [60.0, 0.0],
+      "rotor": [[56.4, 0.0], [63.6, 0.0]],
+      "pump": [[120.0, 0.0], [180.0, 0.0]]
+    },
+    {
+      "ch": 4,
+      "fund": [60.0, 0.0],
+      "rotor": [[56.4, 0.0], [63.6, 0.0]],
+      "pump": [[120.0, 0.0], [180.0, 0.0]]
+    },
+    {
+      "ch": 5,
+      "fund": [60.0, 0.0],
+      "rotor": [[56.4, 0.0], [63.6, 0.0]],
+      "pump": [[120.0, 0.0], [180.0, 0.0]]
+    }
+  ],
+  "edgeAi": [{
+    "modelId": "lift-submersible-v2",
+    "assetId": "pump-1",
+    "pumpIndex": 1,
+    "label": "healthy",
+    "score": 0.15,
+    "confidence": 0.88,
+    "features": { "startMs": 2100, "peakA": 24.5, "runA": 8.2 }
+  }],
+  "tags": [
+    { "id": "AI1", "type": "REAL", "role": "input", "value": 8.2, "quality": "GOOD" },
+    { "id": "AI2", "type": "REAL", "role": "input", "value": 7.9, "quality": "GOOD" },
+    { "id": "AI3", "type": "REAL", "role": "input", "value": 8.1, "quality": "GOOD" },
+    { "id": "MOTOR1_START_MS", "type": "REAL", "role": "memory", "value": 2100, "quality": "GOOD" },
+    { "id": "P1_RUN_FB", "type": "BOOL", "role": "memory", "value": true, "quality": "GOOD" },
+    { "id": "P2_RUN_FB", "type": "BOOL", "role": "memory", "value": false, "quality": "GOOD" }
+  ]
+}

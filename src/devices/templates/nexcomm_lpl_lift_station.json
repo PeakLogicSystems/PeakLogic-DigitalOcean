@@ -1,0 +1,35 @@
+{
+  "id": "nexcomm_lpl_lift_station",
+  "label": "Nexcomm LiftPoint Light — lift station (CSV-matched)",
+  "vendor": "Nexcomm",
+  "model": "LiftPoint Light lift station",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "nx_lpl_lift",
+  "stationType": "dual_duplex",
+  "defaultProgram": "logic/36_duplex_lift_station.st",
+  "diCount": 7,
+  "doCount": 0,
+  "aiCount": 2,
+  "defaults": {
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
+    "serialNum": "862406071948166",
+    "liftProfile": "liftpoint_light",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "edgepointLift": {
+      "profile": "liftpoint_light",
+      "includeSemantic": true,
+      "includeExtras": true
+    },
+    "logicFixture": "tags.duplex_lift_station.json"
+  },
+  "notes": "Matched to st/fixtures/nexcomm-csv/nexcomm-lpl-lift-station.csv + liftpoint_light MQTT map (edgepoint-liftpoint-light-sample.json). CSV columns → X1_I*/AI*/P*_STARTS/FLOW. Set serialNum (normalized). Broker mqtts://mqtt.peaklogic.io:8883. Same profile as lift_station_epi with liftProfile=liftpoint_light."
+}

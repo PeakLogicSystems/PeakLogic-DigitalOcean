@@ -1,36 +1,77 @@
 {
-  "name": "peaklogic-cloud",
-  "version": "0.1.0",
-  "description": "PeakLogic multi-tenant cloud API — tenant → location → system → device",
-  "main": "src/server.js",
-  "engines": {
-    "node": ">=18"
+  "name": "peaklogic-digitalocean",
+  "version": "2.3.7",
+  "description": "PeakLogic Cloud Control Center — multi-tenant SaaS platform for ST programming, HMI, runtime, historian, and Parc.",
+  "homepage": "https://github.com/PeakLogicSystems/PeakLogic-DigitalOcean#readme",
+  "bugs": {
+    "url": "https://github.com/PeakLogicSystems/PeakLogic-DigitalOcean/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeakLogicSystems/PeakLogic-DigitalOcean.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "start:runtime": "node server.js",
-    "dev": "node --watch src/server.js",
-    "indexes": "node src/db/indexes.js",
-    "migrate": "node src/db/indexes.js",
-    "seed": "node scripts/seed.js",
-    "test": "node --test test/limits.test.js test/cloudApi.test.js test/userProfile.test.js",
-    "test:all": "node --test test/*.test.js"
+    "start": "node server.js",
+    "start:cloud": "node scripts/start-cloud.js",
+    "start:saas": "node scripts/start-saas.js",
+    "seed": "node scripts/seed-saas.js",
+    "seed:saas": "node scripts/seed-saas.js",
+    "go2rtc:download": "node scripts/download-go2rtc.js",
+    "three:download": "node scripts/download-three.js",
+    "go2rtc:start": "node scripts/start-go2rtc.js",
+    "go2rtc:stop": "node scripts/stop-go2rtc.js",
+    "dev": "node --watch server.js",
+    "test": "node --test test/*.test.js",
+    "download-opto-svgs": "node scripts/download-opto-svg-library.js",
+    "download-mblogic-svgs": "node scripts/download-mblogic-svgs.js",
+    "organize-hmi-graphics": "node scripts/organize-hmi-graphics.js",
+    "replay:host-inference": "node scripts/replay-host-inference.js",
+    "pdm:production-profile": "node scripts/apply-pdm-production-profile.js",
+    "build:cloud-hub-bundle": "powershell -ExecutionPolicy Bypass -File scripts/create-cloud-hub-bundle.ps1",
+    "ensure:bundled-projects": "node scripts/ensure-bundled-projects.js",
+    "build:appliance:saas": "powershell -ExecutionPolicy Bypass -File scripts/create-saas-bundle.ps1",
+    "build:cloud-bundle": "powershell -ExecutionPolicy Bypass -File scripts/create-saas-bundle.ps1",
+    "build:phase1-bundles": "powershell -ExecutionPolicy Bypass -File scripts/create-phase1-bundles.ps1",
+    "deploy:phase1-prod": "powershell -ExecutionPolicy Bypass -File scripts/deploy-phase1-atl-mqtt.ps1",
+    "deploy:phase1-atl": "powershell -ExecutionPolicy Bypass -File scripts/deploy-phase1-atl-mqtt.ps1",
+    "deploy:phase1-atl:dry-run": "powershell -ExecutionPolicy Bypass -File scripts/deploy-phase1-atl-mqtt.ps1 -DryRun",
+    "deploy:phase1-atl:upload-only": "powershell -ExecutionPolicy Bypass -File scripts/deploy-phase1-atl-mqtt.ps1 -UploadOnly",
+    "mqtt:start": "node scripts/start-mqtt-broker.js",
+    "mqtt:stop": "node scripts/stop-mqtt-broker.js",
+    "opta-test": "node scripts/opta-connect-test.js",
+    "test:baseline": "node --require ./test/preload-config-memory.js --test test/mqttParc.test.js test/mqttParcBootstrap.test.js test/mqttParcOptaDriver.test.js test/mqttOptaProgram.test.js test/parc.test.js test/parcTagSync.test.js test/optaTelemetryMapper.test.js test/optaRemoteDriver.test.js test/optaProtocol.test.js test/stBytecode.test.js test/scanEngineRemote.test.js",
+    "green": "node --require ./test/preload-config-memory.js --test test/*.test.js",
+    "restart": "node scripts/stop-server.js && node server.js",
+    "stop": "node scripts/stop-server.js",
+    "seed:bundled-projects": "node scripts/seed-bundled-projects.js"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "modbus-serial": "^8.0.25",
+    "fflate": "^0.8.3",
+    "jsonwebtoken": "^9.0.3",
+    "modbus-serial": "^8.0.17",
     "mongodb": "^6.12.0",
-    "mqtt": "^5.16.0",
+    "mqtt": "^5.10.4",
+    "node-bacnet": "^0.2.4",
     "nodemailer": "^6.10.1",
-    "pdfkit": "^0.20.2",
-    "serialport": "^13.0.0"
+    "onnxruntime-node": "^1.21.0",
+    "pdfkit": "^0.17.2",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
-    "mongodb-memory-server": "^10.1.4"
+    "md-to-pdf": "^5.2.5"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

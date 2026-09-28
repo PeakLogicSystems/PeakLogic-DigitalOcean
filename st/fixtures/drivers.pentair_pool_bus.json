@@ -1,0 +1,18 @@
+[
+  {
+    "id": "pentair_bus",
+    "type": "pentair_rs485",
+    "enabled": true,
+    "serialPort": "/dev/ttyLP4",
+    "baud": 9600,
+    "deviceClass": "intelliflo",
+    "deviceAddr": 96,
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 60000,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30,
+    "busGapMs": 120,
+    "comment": "Shared Pentair RS-485 bus — tags use per-point deviceClass/deviceAddr"
+  }
+]

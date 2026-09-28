@@ -1,0 +1,54 @@
+{
+  "id": "mcxn947_pool_sensor",
+  "label": "MCXN947 Pool Sensor — chemistry (PeakLogic Parc MQTT)",
+  "vendor": "NXP / Nexcomm",
+  "model": "MCXN947 Pool Chemistry Sensor",
+  "transport": "mqtt_parc_telemetry",
+  "sharedBus": false,
+  "driverId": "pool_sensor_01",
+  "diCount": 0,
+  "aiCount": 4,
+  "defaults": {
+    "brokerUrl": "mqtt://192.168.1.50:1883",
+    "deviceId": "pool_sensor_01",
+    "topicPrefix": "peaklogic/v1"
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 5000,
+    "telemetryOnly": true
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "PH_AI",
+        "type": "REAL",
+        "role": "input",
+        "comment": "pH (glass electrode vs KCl reference ADC)"
+      },
+      {
+        "id": "ORP_AI",
+        "type": "REAL",
+        "role": "input",
+        "comment": "ORP mV (vs KCl reference ADC)"
+      },
+      {
+        "id": "COND_AI",
+        "type": "REAL",
+        "role": "input",
+        "comment": "Conductivity as TDS ppm (4-point AC cell, 400 Hz DAC excitation)"
+      },
+      {
+        "id": "WATER_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "comment": "Water temperature °C (10 kΩ NTC thermistor)"
+      }
+    ]
+  },
+  "telemetrySchema": {
+    "tags": "Parc tag rows: PH_AI, ORP_AI, COND_AI, WATER_TEMP_C",
+    "pool": "ref_kcl_mV, temp_C, ph, orp_mV, cond_uS_cm, cond_ppm, excitation_Hz"
+  },
+  "notes": "Standalone MCXN947 pool chemistry firmware in C:/Users/Public/data/mcxn947-pool-sensor (not related to HVAC MCSA except MCU + PeakLogic Parc MQTT). Publishes peaklogic/v1/pool_sensor_01/telemetry (~1 Hz). CL/DO microlines planned via oversampled LPADC (not yet in firmware). Set MV_DEVICE_ID and MV_BROKER_ADDR in src/parc_mqtt.h. Sample: st/fixtures/pool-sensor-telemetry-sample.json."
+}

@@ -1,0 +1,114 @@
+{
+  "id": "icon_do3500",
+  "label": "Icon ProCon DO3500 — dissolved oxygen sensor (Modbus RTU)",
+  "vendor": "Icon Process Controls",
+  "model": "ProCon DO3500 / DO3000 Series",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "do3500",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 8,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "DO3500_DO",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "IR 0 — DO value (0…2000 raw, ÷100; typically mg/L)"
+      },
+      {
+        "id": "DO3500_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 1,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "IR 1 — Temperature °C (0…600 raw, ÷10)"
+      },
+      {
+        "id": "DO3500_SAT_PCT",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "IR 2 — DO saturation % (0…2000 raw, ÷10)"
+      },
+      {
+        "id": "DO3500_BLU_V",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 3,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "IR 3 — Blu-ray voltage (diagnostic)"
+      },
+      {
+        "id": "DO3500_TEMP_R",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 4,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "IR 4 — Temperature resistance (diagnostic)"
+      },
+      {
+        "id": "DO3500_RED_V",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 5,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "IR 5 — Red-ray voltage (diagnostic)"
+      },
+      {
+        "id": "DO3500_CAL_STATUS",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 13,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "IR 13 — Calibration status (0=done, 1=on-site, 2=anaerobic, 3=air)"
+      },
+      {
+        "id": "DO3500_RED_LIGHT_PHASE",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 18,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "IR 18 — Red light phase from zero-O₂ calibration"
+      }
+    ]
+  },
+  "notes": "Measurement block §26-1039 (IR 0–5, 13, 18; FC04 read-only). Default 9600 8N1 slave 1 — re-address via IR 12. RW calibration/settings IR 6–11, 14–17, 19–20 not mapped. Source: 26-1039 DO3500 Modbus Protocol.pdf (header: DO3000 Series)"
+}

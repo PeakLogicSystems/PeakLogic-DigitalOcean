@@ -1,0 +1,22 @@
+{
+  "deviceId": "unoq_mcsa_01",
+  "name": "UNO Q edge motor fault",
+  "broker": "mqtt://192.168.1.50:1883",
+  "topicPrefix": "peaklogic/v1",
+  "username": "",
+  "password": "",
+  "fundHz": 60,
+  "sampleRateHz": 2048,
+  "fftSize": 2048,
+  "channels": 6,
+  "ctVoltsPerAmp": 0.033,
+  "adcVref": 3.3,
+  "adcMax": 4095,
+  "idleAmps": 1.0,
+  "startDetectAmps": 2.0,
+  "reportIntervalSec": 1,
+  "statusPort": 8088,
+  "modelId": "lift-submersible-v3",
+  "optaSiteKey": "0001",
+  "optaPush": true
+}

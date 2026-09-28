@@ -1,0 +1,16 @@
+[Unit]
+Description=PeakLogic MVP Suite
+After=network.target mongod.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/peaklogic-mvp-suite
+Environment=NODE_ENV=production
+Environment=PEAKLOGIC_PRODUCT=mvp-suite
+Environment=PEAKLOGIC_DATA=/var/lib/peaklogic
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

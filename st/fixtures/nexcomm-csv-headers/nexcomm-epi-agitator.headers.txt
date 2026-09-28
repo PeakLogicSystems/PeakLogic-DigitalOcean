@@ -1,0 +1,20 @@
+﻿datelogged
+Motor 1
+Motor 2
+Motor 3
+Motor 4
+Motor 5
+Motor 6
+Motor 7
+Motor 8
+Motor 9
+Motor 10
+Motor 11
+Motor 12
+Motor 13
+Motor 14
+Motor 15
+Motor 16
+CT1
+CT2
+OUTPUT1

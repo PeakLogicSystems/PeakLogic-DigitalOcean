@@ -115,11 +115,13 @@ function deleteUser(id) {
   return { ok: true };
 }
 
-function listNotificationRecipients(alarmLevel) {
-  const { shouldNotifyForLevel, isWithinQuietHours } = require('./userProfileSchema');
+function listNotificationRecipients(alarmLevel, alarmContext = null) {
+  const { shouldNotifyForLevel, isWithinQuietHours, matchesNotificationScope } = require('./userProfileSchema');
+  const ctx = alarmContext && typeof alarmContext === 'object' ? alarmContext : {};
   return loadRows()
     .filter((u) => u.active !== false)
     .filter((u) => shouldNotifyForLevel(u.profile?.alarmNotifications, alarmLevel))
+    .filter((u) => matchesNotificationScope(u.profile?.alarmNotifications, ctx))
     .filter((u) => !isWithinQuietHours(u.profile?.alarmNotifications))
     .map(publicUser);
 }

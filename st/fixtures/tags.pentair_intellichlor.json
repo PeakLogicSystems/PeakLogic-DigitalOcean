@@ -1,0 +1,8 @@
+[
+  { "id": "IC_SALT_PPM", "label": "IntelliChlor salt ppm", "type": "INT", "role": "input", "value": 3200, "driverId": "pentair_bus", "driverAddress": { "pentair": "salt_ppm", "deviceClass": "intellichlor" } },
+  { "id": "IC_WATER_TEMP_F", "label": "IntelliChlor water °F", "type": "INT", "role": "input", "value": 80, "driverId": "pentair_bus", "driverAddress": { "pentair": "water_temp_f", "deviceClass": "intellichlor" } },
+  { "id": "IC_ERROR", "label": "IntelliChlor error byte", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "ic_error", "deviceClass": "intellichlor" } },
+  { "id": "IC_LOW_SALT", "label": "IntelliChlor low salt", "type": "BOOL", "role": "input", "value": false, "driverId": "pentair_bus", "driverAddress": { "pentair": "ic_low_salt", "deviceClass": "intellichlor" } },
+  { "id": "IC_TAKEOVER_CMD", "label": "IntelliChlor takeover", "type": "BOOL", "role": "output", "value": true, "driverId": "pentair_bus", "driverAddress": { "pentair": "ic_takeover_cmd", "deviceClass": "intellichlor" } },
+  { "id": "IC_PERCENT_CMD", "label": "IntelliChlor output %", "type": "INT", "role": "output", "value": 50, "wordWidth": 16, "driverId": "pentair_bus", "driverAddress": { "pentair": "ic_percent_cmd", "deviceClass": "intellichlor" } }
+]

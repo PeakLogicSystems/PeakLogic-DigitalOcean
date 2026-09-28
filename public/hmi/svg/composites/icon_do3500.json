@@ -1,0 +1,26 @@
+{
+  "id": "icon_do3500",
+  "instanceTagPrefix": "DO3500",
+  "label": "Icon DO3500 — dissolved oxygen probe",
+  "group": "Process equipment",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/sensor-faceplates/peaklogic/icon_do3500.svg",
+  "tagRoles": {
+    "doPv": { "pick": "tagId", "tagId": "DO3500_DO", "types": ["REAL"] },
+    "tempPv": { "pick": "tagId", "tagId": "DO3500_TEMP_C", "types": ["REAL"] },
+    "mainV": { "pick": "tagId", "tagId": "DO3500_MAIN_V", "types": ["REAL"] }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/sensor-faceplates/peaklogic/icon_do3500.svg"
+    }
+  ],
+  "defaultBindings": [
+    { "elementId": "do_pv", "property": "text", "tagRole": "doPv", "format": "fixed2", "min": 0, "max": 20 },
+    { "elementId": "temp_pv", "property": "text", "tagRole": "tempPv", "format": "fixed1", "min": -10, "max": 150 },
+    { "elementId": "main_v", "property": "text", "tagRole": "mainV", "format": "fixed1", "min": 0, "max": 500 }
+  ]
+}

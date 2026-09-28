@@ -1,0 +1,42 @@
+{
+  "id": "lilygo_t_eth_parc_st",
+  "label": "LilyGO T-ETH + SM-I-010 — MQTT Parc ST",
+  "vendor": "LilyGO / Sequent Microsystems",
+  "model": "T-ETH-ELITE-A7670X + SM-I-010 (4relind) — PeakLogic ST over MQTT Parc",
+  "transport": "mqtt_parc",
+  "driverId": "eth_parc_st_01",
+  "tagsFromDevice": true,
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "eth_parc_st_01",
+    "reportIntervalMs": 180000,
+    "scanMs": 100,
+    "ioHat": "SM-I-010",
+    "i2c": { "sda": 17, "scl": 18, "stack": 0 }
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "eth_parc_st_01"
+  },
+  "tags": {
+    "discrete": [{ "prefix": "I", "count": 8, "start": 0 }],
+    "coil": [{ "prefix": "R", "count": 4, "start": 0 }],
+    "input": [{ "prefix": "I", "suffix": "_RAW", "count": 8, "start": 0 }],
+    "holding": [{ "prefix": "H", "count": 8, "start": 0 }]
+  },
+  "notes": "ESP32 runs MVBC on-device. SM-I-010: I1=OFF float, I2=LEAD, I3=LAG, I4=HIGH alarm; R1/R2 pumps, R3 alarm. CT 0–1 V on GPIO 32–38 → I1_RAW..I7_RAW (AI1..AI7). Program: logic/37_duplex_lift_station_parc_st.st. Flash cellular-parc-st; /setup for deviceId + cloud MQTT.",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
+  }
+}

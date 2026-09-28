@@ -1,0 +1,3 @@
+python/config.json
+python/__pycache__/
+*.pyc

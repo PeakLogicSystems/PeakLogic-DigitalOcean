@@ -1,0 +1,23 @@
+[Unit]
+Description=PeakLogic archive blob server (cloud 2)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_ARCHIVE_DIR@
+EnvironmentFile=/etc/peaklogic/archive.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=false
+ReadWritePaths=@ARCHIVE_ROOT@ @PEAKLOGIC_ARCHIVE_DIR@
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

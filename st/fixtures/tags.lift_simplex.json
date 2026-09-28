@@ -1,0 +1,13 @@
+[
+  { "id": "LVL_START", "label": "Start float", "type": "BOOL", "role": "input", "value": false },
+  { "id": "LVL_STOP", "label": "Stop float", "type": "BOOL", "role": "input", "value": false },
+  { "id": "LVL_HIGH", "label": "High level float", "type": "BOOL", "role": "input", "value": false },
+  { "id": "LVL_LO", "label": "Low level float", "type": "BOOL", "role": "input", "value": false },
+  { "id": "PUMP_AUTO", "label": "Pump HOA auto", "type": "BOOL", "role": "input", "value": true },
+  { "id": "PUMP_FAIL", "label": "Pump fault", "type": "BOOL", "role": "input", "value": false },
+  { "id": "MOTOR1_RUN", "label": "Pump run cmd", "type": "BOOL", "role": "output", "value": false },
+  { "id": "PUMP_CALL", "label": "Pump call latch", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LVL_HIGH_ALM", "label": "High level alarm", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LVL_LO_ALM", "label": "Low level alarm", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ALT_FAULT", "label": "Station fault", "type": "BOOL", "role": "memory", "value": false }
+]

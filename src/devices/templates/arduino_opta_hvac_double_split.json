@@ -1,0 +1,30 @@
+{
+  "id": "arduino_opta_hvac_double_split",
+  "label": "Arduino Opta — Double Split HVAC (2× AHU + 2× condenser)",
+  "vendor": "Arduino",
+  "model": "Opta + D1608E — dual-cond facility MCSA + dual AHU env",
+  "transport": "mqtt_parc",
+  "defaultProgram": "logic/opta_double_split_hvac.st",
+  "driverId": "opta_hvac_double_01",
+  "tagsFromDevice": true,
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "opta_hvac_double_01",
+    "reportIntervalMs": 1000,
+    "scanMs": 100
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "opta_hvac_double_01",
+    "remoteExecution": true
+  },
+  "telemetrySchema": {
+    "mcsa": "Dual-cond facility — I1–I8 fan/comp start+run CTs",
+    "env": "T1_C..T4_C (U1/U2 hi/lo), COND1/2_FAN_FLT, COND1/2_COMP_FLT, amps",
+    "ahuEnv": "AHU1/2 supply+return °F, AHU1/2_PAN_LEAK"
+  },
+  "notes": "Flash firmware/arduino-opta-mqtt-st v2.3.81+. On Opta: /mcsa → dual-cond facility preset (4 motors), /ahu-env → enable. Deploy st/logic/opta_double_split_hvac.st."
+}

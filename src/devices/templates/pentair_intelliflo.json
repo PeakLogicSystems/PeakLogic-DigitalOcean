@@ -1,0 +1,41 @@
+{
+  "id": "pentair_intelliflo",
+  "label": "Pentair IntelliFlo VS/VSF — RS-485",
+  "vendor": "Pentair",
+  "model": "IntelliFlo variable-speed pump",
+  "transport": "pentair_rs485",
+  "sharedBus": true,
+  "driverId": "pentair_pump",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceAddr": 96,
+    "deviceClass": "intelliflo",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 60000,
+    "busGapMs": 120
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "pentair": [
+      { "id": "IFLO_RPM", "type": "INT", "role": "input", "point": "rpm", "deviceClass": "intelliflo", "comment": "Actual RPM" },
+      { "id": "IFLO_WATTS", "type": "INT", "role": "input", "point": "watts", "deviceClass": "intelliflo", "comment": "Power draw (W)" },
+      { "id": "IFLO_FLOW", "type": "INT", "role": "input", "point": "flow", "deviceClass": "intelliflo", "comment": "Flow (VF/VSF)" },
+      { "id": "IFLO_RUNNING", "type": "BOOL", "role": "input", "point": "running", "deviceClass": "intelliflo" },
+      { "id": "IFLO_MODE", "type": "INT", "role": "input", "point": "mode", "deviceClass": "intelliflo", "comment": "Pump program/mode byte" },
+      { "id": "IFLO_DRIVE", "type": "INT", "role": "input", "point": "drive_state", "deviceClass": "intelliflo", "comment": "0=fault 1=prime 2=run" },
+      { "id": "IFLO_REMOTE_CMD", "type": "BOOL", "role": "output", "point": "remote_cmd", "deviceClass": "intelliflo", "comment": "Assert remote control" },
+      { "id": "IFLO_RUN_CMD", "type": "BOOL", "role": "output", "point": "run_cmd", "deviceClass": "intelliflo", "comment": "Start/stop pump" },
+      { "id": "IFLO_RPM_CMD", "type": "INT", "role": "output", "point": "rpm_cmd", "deviceClass": "intelliflo", "comment": "Speed setpoint RPM" }
+    ]
+  }
+}

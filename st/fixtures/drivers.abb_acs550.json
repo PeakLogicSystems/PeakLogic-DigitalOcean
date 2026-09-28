@@ -1,0 +1,13 @@
+[
+  {
+    "id": "acs550",
+    "type": "modbus_rtu",
+    "enabled": false,
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 2,
+    "timeoutMs": 2000
+  }
+]

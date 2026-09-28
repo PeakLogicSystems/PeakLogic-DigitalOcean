@@ -12,9 +12,10 @@ const {
 function isParcRegistryNoiseId(deviceId) {
   const id = String(deviceId || '').trim();
   if (!id) return true;
-  return /^(test|dbg)[-_]/i.test(id)
-    || /^opta_(bulk|sync)_/i.test(id)
-    || /^opta_st_\d+$/i.test(id);
+  return /^(test|dbg|rec|off)[-_]/i.test(id)
+    || /^opta_(bulk|sync|wait|remote|force|ut|field)_/i.test(id)
+    || /^opta_st_\d+$/i.test(id)
+    || /^mv_test_/i.test(id);
 }
 
 /** Remove mqtt_parc/opta_remote drivers whose deviceId is registry noise (test/debug/template IDs). */
@@ -50,6 +51,10 @@ function listRegistryDeviceIds(body, registry) {
   let ids = registry.listDevices().map((d) => d.deviceId);
   if (body?.includeRegistryNoise !== true) {
     ids = ids.filter((id) => !isParcRegistryNoiseId(id));
+    if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
+      const { isFieldParcDeviceId } = require('../parc/optaSerial');
+      ids = ids.filter((id) => isFieldParcDeviceId(id));
+    }
   }
   const prefix = String(body?.registryPrefix || '').trim();
   if (prefix) {
@@ -96,12 +101,15 @@ function shouldUsePositionIds(body, deviceId) {
   return isAteccDeviceId(deviceId);
 }
 
-function resolvePositionId(deviceId, body, registryDev, index, existingPositionIds) {
+function resolvePositionId(deviceId, body, registryDev, index, existingPositionIds, deviceCount) {
   const positions = body?.positions;
   if (positions && typeof positions === 'object' && positions[deviceId]) {
     return normalizePositionId(positions[deviceId]);
   }
-  if (body?.positionId && Array.isArray(body.deviceIds) && body.deviceIds.length === 1) {
+  const count = Number.isFinite(deviceCount) ? deviceCount : (
+    Array.isArray(body?.deviceIds) ? body.deviceIds.length : 0
+  );
+  if (body?.positionId && count === 1) {
     return normalizePositionId(body.positionId);
   }
   if (!shouldUsePositionIds(body, deviceId)) {
@@ -207,7 +215,14 @@ function bulkAddParcOptaDrivers({ driverList, body, registry }) {
   deviceIds.forEach((deviceId, index) => {
     let positionId;
     try {
-      positionId = resolvePositionId(deviceId, body || {}, devById.get(deviceId), index, existingPositionIds);
+      positionId = resolvePositionId(
+        deviceId,
+        body || {},
+        devById.get(deviceId),
+        index,
+        existingPositionIds,
+        deviceIds.length,
+      );
     } catch (e) {
       errors.push(`${deviceId}: ${e.message || e}`);
       return;

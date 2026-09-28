@@ -1,0 +1,78 @@
+{
+  "id": "speck_badu_pro_vi_uvs",
+  "label": "SPECK BADU Pro-VI UVS — VGreen RS-485",
+  "vendor": "SPECK",
+  "model": "BADU Pro-VI UVS (3.45 THP Century VGreen)",
+  "transport": "vgreen_epc",
+  "sharedBus": false,
+  "driverId": "badu_pump",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 5,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 19200,
+    "slaveId": 21,
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 120000
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "vgreen": [
+      {
+        "id": "PUMP_STA_RAW",
+        "type": "INT",
+        "role": "input",
+        "point": "status",
+        "comment": "0=STOP 9=BOOT 11=RUN 32=FAULT"
+      },
+      {
+        "id": "PUMP_RPM",
+        "type": "INT",
+        "role": "input",
+        "point": "rpm",
+        "comment": "Actual motor RPM"
+      },
+      {
+        "id": "PUMP_RPM_DEM",
+        "type": "INT",
+        "role": "input",
+        "point": "demand_rpm",
+        "comment": "Commanded RPM demand"
+      },
+      {
+        "id": "PUMP_PWR_W",
+        "type": "INT",
+        "role": "input",
+        "point": "power_w",
+        "comment": "Shaft output power (W)"
+      },
+      {
+        "id": "PUMP_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "point": "temp_c",
+        "comment": "Ambient temperature °C"
+      },
+      {
+        "id": "PUMP_RUN_CMD",
+        "type": "BOOL",
+        "role": "output",
+        "point": "run",
+        "comment": "Network run/stop — driver sends go/stop"
+      },
+      {
+        "id": "PUMP_RPM_CMD",
+        "type": "INT",
+        "role": "output",
+        "point": "rpm_cmd",
+        "comment": "RPM setpoint 600–3450 (driver sends set_demand)"
+      }
+    ]
+  }
+}

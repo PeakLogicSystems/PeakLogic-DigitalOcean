@@ -2,27 +2,74 @@ node_modules/
 .env
 .env.*
 !.env.example
+!.env.*.example
+deploy/cloud/phase1/phase1-atl.local.env
+deploy/cloud/phase1/phase1-prod.local.env
+deploy/cloud/phase1/phase1-nyc1.local.env
 
-# Nested empty GitHub Desktop repos — do not commit
+# Live SaaS credentials (template: deploy/cloud/debian/saas.env.example)
+saas.env
+**/saas.env
+!**/saas.env.example
+mongocloud-cred.txt
+
+# Nested local copies / bundles — do not commit
 mvcloud/
 mn-cloud/
-mooreview/
+peaklogic/
+peaklogic-cloud/
 
-# Local runtime fork data
+# Local portable deploy overrides (copy from deploy/portable-saas.config.example.ps1)
+deploy/portable-saas.config.ps1
+
+# Local runtime data (may contain credentials, COM ports, Mongo URIs)
 data/drivers.json
 data/settings.json
 data/tags.json
+data/users.json
+data/alarm_notify_queue.json
+data/project.est.json
+data/workspace.est.json
+data/cloud_tenants.json
+data/cloud_sites.json
+data/parc.json
+data/cameras.json
 data/projects/
 data/.cache/
 data/*.log
 data/#Untitled-1#
+data/go2rtc.yaml
+data/go2rtc.pid
+data/appliance_auth.json
+data/sys_log.json
+data/peaklogic.pid
+data/cmms.json
+data/tenants/
+data/boilerplate/
 
+# OS / editor
 .DS_Store
 Thumbs.db
 *.swp
 .idea/
 .vscode/
+*.log
+
+# Build / temp
 dist/
 coverage/
 *.tmp
 *~
+.tmp-ul212-pdf/
+
+# ESP-IDF (local build trees; lockfiles stay tracked)
+**/managed_components/
+**/sdkconfig
+**/sdkconfig.old
+cellular-parc-st/build/
+cellular-opta-gateway/build/
+halow-xiao-sta/build/
+
+# go2rtc binary (install with npm run go2rtc:download)
+vendor/go2rtc/go2rtc*
+!vendor/go2rtc/.gitkeep

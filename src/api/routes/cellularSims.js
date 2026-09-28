@@ -16,11 +16,7 @@ function requireCellularSims(req, res, next) {
 
 function createCellularSimRoutes() {
   const router = require('express').Router();
-  // Scoped to /cellular only — an un-scoped router.use() here would also
-  // gate every other router mounted after this one (e.g. cloud sims) when
-  // cellular sims are disabled, since Express keeps running middleware down
-  // the stack until one returns a response.
-  router.use('/cellular', requireCellularSims);
+  router.use(requireCellularSims);
 
   router.get('/cellular/sims/status', (req, res) => {
     res.json({ ok: true, ...simManager.managerStatus() });
@@ -153,6 +149,75 @@ function createCellularSimRoutes() {
       res.json({ ok: true, usage });
     } catch (e) {
       res.status(e.status || 502).json({ error: e.message || String(e) });
+    }
+  });
+
+  router.post('/cellular/billing/sync', async (req, res) => {
+    try {
+      const body = req.body || {};
+      const result = await simManager.syncSimetryBilling({
+        vendorConfigId: body.vendorConfigId || req.query.vendorConfigId,
+        tenantId: body.tenantId || req.query.tenantId,
+        periodStart: body.periodStart || req.query.periodStart,
+        periodEnd: body.periodEnd || req.query.periodEnd,
+      });
+      res.json({ ok: true, ...result });
+    } catch (e) {
+      res.status(e.status || 502).json({ error: e.message || String(e) });
+    }
+  });
+
+  router.get('/cellular/billing/report', async (req, res) => {
+    try {
+      const report = await simManager.getBillingReport({
+        vendor: req.query.vendor || 'simetry',
+        vendorConfigId: req.query.vendorConfigId,
+        tenantId: req.query.tenantId,
+        periodStart: req.query.periodStart,
+        periodEnd: req.query.periodEnd,
+        live: req.query.live,
+      });
+      res.json({ ok: true, report });
+    } catch (e) {
+      res.status(e.status || 502).json({ error: e.message || String(e) });
+    }
+  });
+
+  router.get('/cellular/billing/export', async (req, res) => {
+    try {
+      const csv = await simManager.exportBillingCsv({
+        vendor: req.query.vendor || 'simetry',
+        vendorConfigId: req.query.vendorConfigId,
+        tenantId: req.query.tenantId,
+        periodStart: req.query.periodStart,
+        periodEnd: req.query.periodEnd,
+        live: req.query.live,
+      });
+      const period = req.query.periodStart || 'billing';
+      res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+      res.setHeader('Content-Disposition', `attachment; filename="simetry-billing-${period}.csv"`);
+      res.send(csv);
+    } catch (e) {
+      res.status(e.status || 502).json({ error: e.message || String(e) });
+    }
+  });
+
+  router.get('/cellular/gateway/reports', (req, res) => {
+    try {
+      const reports = simManager.listGatewayCellularReports();
+      res.json({ ok: true, reports, count: reports.length });
+    } catch (e) {
+      res.status(e.status || 500).json({ error: e.message || String(e) });
+    }
+  });
+
+  router.post('/cellular/gateway/auto-link', async (req, res) => {
+    try {
+      const body = req.body || {};
+      const result = await simManager.autoLinkFromGateway(body);
+      res.json({ ok: true, ...result });
+    } catch (e) {
+      res.status(e.status || 500).json({ error: e.message || String(e) });
     }
   });
 

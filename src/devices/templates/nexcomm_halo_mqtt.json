@@ -1,0 +1,33 @@
+{
+  "id": "nexcomm_halo_mqtt",
+  "label": "Nexcomm Halo — temp/RH MQTT (base + X10)",
+  "vendor": "Nexcomm",
+  "model": "Halo environmental monitor",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "halo_01",
+  "aiCount": 22,
+  "defaults": {
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+    "deviceId": "halo_01",
+    "topicPrefix": "nexcomm/halo",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "halo": {
+      "deviceId": "halo_01",
+      "topicPrefix": "nexcomm/halo",
+      "expansionCount": 10,
+      "baseKey": "base",
+      "tempField": "temp_C",
+      "rhField": "rh_pct"
+    }
+  },
+  "notes": "MQTT driver (read-only). Halo gateway publishes JSON to nexcomm/halo/<deviceId>/telemetry. Base unit: base.temp_C, base.rh_pct. Expansions X1–X10: Xn.temp_C, Xn.rh_pct. Set broker URL and deviceId when applying. Example payload in st/fixtures/halo-telemetry-sample.json."
+}

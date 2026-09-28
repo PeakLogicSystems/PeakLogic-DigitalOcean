@@ -1,0 +1,35 @@
+{
+  "id": "pentair_intellivalve",
+  "label": "Pentair IntelliValve (backwash actuator)",
+  "vendor": "Pentair",
+  "model": "IntelliValve",
+  "transport": "pentair_rs485",
+  "sharedBus": true,
+  "driverId": "pentair_intellivalve",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 2,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceAddr": 12,
+    "deviceClass": "intellivalve",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 120000,
+    "busGapMs": 120
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "pentair": [
+      { "id": "BW_VLV1_CMD", "type": "INT", "role": "output", "point": "pos_cmd", "deviceClass": "intellivalve", "deviceAddr": 12, "comment": "0=filter 1=backwash 2=rinse" },
+      { "id": "VLV1_AT_POS", "type": "BOOL", "role": "input", "point": "at_pos", "deviceClass": "intellivalve", "deviceAddr": 12, "comment": "Valve stopped at destination" },
+      { "id": "VLV1_IV_POS", "type": "INT", "role": "input", "point": "pos_pv", "deviceClass": "intellivalve", "deviceAddr": 12, "comment": "IntelliValve position byte" }
+    ]
+  }
+}

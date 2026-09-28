@@ -1,0 +1,81 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+
+<main class="container py-4" style="max-width:720px">
+  <h1 class="h4 mb-1">Device install</h1>
+  <p class="text-muted small mb-3">Scan the QR sticker on the controller to pre-fill commissioning.</p>
+
+  <% if (error) { %>
+    <div class="alert alert-danger py-2 small"><%= error %></div>
+  <% } %>
+
+  <% if (manifest) { %>
+    <div class="card shadow-sm mb-3">
+      <div class="card-header bg-white fw-semibold d-flex justify-content-between align-items-center">
+        <span>Sticker details</span>
+        <span class="badge <%= manifest.status === 'claimed' ? 'bg-success' : 'bg-secondary' %>"><%= manifest.status %></span>
+      </div>
+      <div class="card-body small">
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Device ID</dt>
+          <dd class="col-sm-8"><code><%= manifest.deviceId %></code></dd>
+          <dt class="col-sm-4">Station type</dt>
+          <dd class="col-sm-8"><%= profile?.label || manifest.stationType %></dd>
+          <dt class="col-sm-4">Program</dt>
+          <dd class="col-sm-8"><code><%= manifest.program %></code></dd>
+          <dt class="col-sm-4">Template</dt>
+          <dd class="col-sm-8"><code><%= manifest.templateId %></code></dd>
+          <% if (manifest.serialNumber) { %>
+          <dt class="col-sm-4">Serial</dt>
+          <dd class="col-sm-8"><%= manifest.serialNumber %></dd>
+          <% } %>
+          <% if (manifest.iccid) { %>
+          <dt class="col-sm-4">ICCID</dt>
+          <dd class="col-sm-8"><code><%= manifest.iccid %></code></dd>
+          <% } %>
+        </dl>
+      </div>
+    </div>
+
+    <% if (typeof claimed !== 'undefined' && claimed && siteUrl) { %>
+      <div class="alert alert-success py-2 small">
+        This sticker is already linked. <a href="<%= siteUrl %>">Open site</a> to deploy or manage connectivity.
+      </div>
+    <% } else { %>
+      <div class="card shadow-sm mb-3">
+        <div class="card-header bg-white fw-semibold">Install at site</div>
+        <div class="card-body">
+          <p class="small text-muted mb-3">Choose a new lift station or bind to an existing system. Device ID and program are filled from the sticker.</p>
+          <div class="d-grid gap-2 mb-3">
+            <a class="btn btn-purple" href="<%= wizardUrl %>">Add new lift station (wizard)</a>
+            <a class="btn btn-outline-secondary" href="/sites">Browse sites</a>
+          </div>
+          <% if (systems.length) { %>
+            <h2 class="h6">Bind to existing system</h2>
+            <ul class="list-group list-group-flush small">
+              <% systems.forEach(function(s) { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <div>
+                    <strong><%= s.systemName %></strong>
+                    <% if (s.boundId) { %>
+                      <span class="text-muted"> · bound <code><%= s.boundId %></code></span>
+                    <% } else { %>
+                      <span class="text-muted"> · unbound</span>
+                    <% } %>
+                  </div>
+                  <a class="btn btn-sm <%= s.needsBind ? 'btn-purple' : 'btn-outline-secondary' %>" href="<%= s.bindUrl %>">
+                    <%= s.needsBind ? 'Bind here' : 'Open' %>
+                  </a>
+                </li>
+              <% }); %>
+            </ul>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+  <% } %>
+
+  <p class="text-muted small mb-0">Sticker URL: <code><%= installUrl %></code></p>
+</main>
+
+<%- include('../partials/shell-foot') %>

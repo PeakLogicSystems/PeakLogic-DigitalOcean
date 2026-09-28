@@ -1,0 +1,2425 @@
+{
+  "id": "pool_filter_schedule",
+  "label": "Filter pump weekly schedule",
+  "group": "Schedules",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/schedules/peaklogic/pool_filter_schedule.svg",
+  "tagRoles": {
+    "filterTod": {
+      "pick": "tagId",
+      "tagId": "FILTER_TOD",
+      "types": [
+        "INT"
+      ]
+    },
+    "filterDow": {
+      "pick": "tagId",
+      "tagId": "FILTER_DOW",
+      "types": [
+        "INT"
+      ]
+    },
+    "filterSchPct": {
+      "pick": "tagId",
+      "tagId": "FILTER_SCH_PCT",
+      "types": [
+        "INT"
+      ]
+    },
+    "filterSch2Pct": {
+      "pick": "tagId",
+      "tagId": "FILTER_SCH2_PCT",
+      "types": [
+        "INT"
+      ]
+    },
+    "filter24hr": {
+      "pick": "tagId",
+      "tagId": "FILTER_24HR",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "filterEn": {
+      "pick": "tagId",
+      "tagId": "FILTER_EN",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "cfgFp2": {
+      "pick": "tagId",
+      "tagId": "CFG_FP2",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "schAutoTurnover": {
+      "pick": "tagId",
+      "tagId": "SCH_AUTO_TURNOVER",
+      "types": [
+        "BOOL"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/schedules/peaklogic/pool_filter_schedule.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "filter_tod",
+      "property": "text",
+      "tagId": "FILTER_TOD",
+      "format": "hhmm"
+    },
+    {
+      "elementId": "filter_dow",
+      "property": "text",
+      "tagId": "FILTER_DOW",
+      "format": "dow",
+      "min": 0,
+      "max": 6
+    },
+    {
+      "elementId": "filter_sch_pct",
+      "property": "text",
+      "tagId": "FILTER_SCH_PCT",
+      "format": "int",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "filter_sch2_pct",
+      "property": "text",
+      "tagId": "FILTER_SCH2_PCT",
+      "format": "int",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "fp1_active_pct",
+      "property": "text",
+      "tagId": "FP1_ACTIVE_PCT",
+      "format": "int",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "fp2_active_pct",
+      "property": "text",
+      "tagId": "FP2_ACTIVE_PCT",
+      "format": "int",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "pool_vol_gal",
+      "property": "text",
+      "tagId": "POOL_VOL_GAL",
+      "format": "int",
+      "interaction": "edit",
+      "min": 100,
+      "max": 999999
+    },
+    {
+      "elementId": "spa_vol_gal",
+      "property": "text",
+      "tagId": "SPA_VOL_GAL",
+      "format": "int",
+      "interaction": "edit",
+      "min": 50,
+      "max": 5000
+    },
+    {
+      "elementId": "pump1_flow_gpm",
+      "property": "text",
+      "tagId": "PUMP1_FLOW_GPM",
+      "format": "int",
+      "interaction": "edit",
+      "min": 10,
+      "max": 500
+    },
+    {
+      "elementId": "pump2_flow_gpm",
+      "property": "text",
+      "tagId": "PUMP2_FLOW_GPM",
+      "format": "int",
+      "interaction": "edit",
+      "min": 10,
+      "max": 500
+    },
+    {
+      "elementId": "pool_turnover_day_h",
+      "property": "text",
+      "tagId": "POOL_TURNOVER_DAY_MIN",
+      "format": "hoursFromMin",
+      "interaction": "edit",
+      "min": 240,
+      "max": 480
+    },
+    {
+      "elementId": "pool_turnover_night_h",
+      "property": "text",
+      "tagId": "POOL_TURNOVER_NIGHT_MIN",
+      "format": "hoursFromMin",
+      "interaction": "edit",
+      "min": 480,
+      "max": 720
+    },
+    {
+      "elementId": "spa_turnover_min",
+      "property": "text",
+      "tagId": "SPA_TURNOVER_MIN",
+      "format": "int",
+      "interaction": "edit",
+      "min": 15,
+      "max": 120
+    },
+    {
+      "elementId": "pool_day_start",
+      "property": "text",
+      "tagId": "POOL_DAY_START",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "pool_day_end",
+      "property": "text",
+      "tagId": "POOL_DAY_END",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "chk_24hr",
+      "property": "fill",
+      "tagId": "FILTER_24HR",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "btn_filter_enable",
+      "property": "fill",
+      "tagId": "FILTER_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "chk_auto_turnover",
+      "property": "fill",
+      "tagId": "SCH_AUTO_TURNOVER",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "chk_cfg_fp2",
+      "property": "fill",
+      "tagId": "CFG_FP2",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#94a3b8"
+    },
+    {
+      "elementId": "grp_spa_pump",
+      "property": "visibility",
+      "tagId": "CFG_FP2",
+      "onValue": true,
+      "offValue": false
+    },
+    {
+      "elementId": "sch_fp1_d0_s1_t",
+      "property": "text",
+      "tagId": "FP1_D0_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d0_s1_p",
+      "property": "text",
+      "tagId": "FP1_D0_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d0_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D0_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d0_s2_t",
+      "property": "text",
+      "tagId": "FP1_D0_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d0_s2_p",
+      "property": "text",
+      "tagId": "FP1_D0_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d0_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D0_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d0_s3_t",
+      "property": "text",
+      "tagId": "FP1_D0_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d0_s3_p",
+      "property": "text",
+      "tagId": "FP1_D0_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d0_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D0_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d0_s4_t",
+      "property": "text",
+      "tagId": "FP1_D0_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d0_s4_p",
+      "property": "text",
+      "tagId": "FP1_D0_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d0_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D0_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d0_s5_t",
+      "property": "text",
+      "tagId": "FP1_D0_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d0_s5_p",
+      "property": "text",
+      "tagId": "FP1_D0_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d0_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D0_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d0_s6_t",
+      "property": "text",
+      "tagId": "FP1_D0_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d0_s6_p",
+      "property": "text",
+      "tagId": "FP1_D0_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d0_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D0_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d1_s1_t",
+      "property": "text",
+      "tagId": "FP1_D1_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d1_s1_p",
+      "property": "text",
+      "tagId": "FP1_D1_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d1_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D1_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d1_s2_t",
+      "property": "text",
+      "tagId": "FP1_D1_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d1_s2_p",
+      "property": "text",
+      "tagId": "FP1_D1_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d1_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D1_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d1_s3_t",
+      "property": "text",
+      "tagId": "FP1_D1_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d1_s3_p",
+      "property": "text",
+      "tagId": "FP1_D1_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d1_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D1_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d1_s4_t",
+      "property": "text",
+      "tagId": "FP1_D1_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d1_s4_p",
+      "property": "text",
+      "tagId": "FP1_D1_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d1_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D1_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d1_s5_t",
+      "property": "text",
+      "tagId": "FP1_D1_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d1_s5_p",
+      "property": "text",
+      "tagId": "FP1_D1_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d1_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D1_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d1_s6_t",
+      "property": "text",
+      "tagId": "FP1_D1_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d1_s6_p",
+      "property": "text",
+      "tagId": "FP1_D1_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d1_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D1_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d2_s1_t",
+      "property": "text",
+      "tagId": "FP1_D2_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d2_s1_p",
+      "property": "text",
+      "tagId": "FP1_D2_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d2_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D2_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d2_s2_t",
+      "property": "text",
+      "tagId": "FP1_D2_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d2_s2_p",
+      "property": "text",
+      "tagId": "FP1_D2_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d2_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D2_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d2_s3_t",
+      "property": "text",
+      "tagId": "FP1_D2_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d2_s3_p",
+      "property": "text",
+      "tagId": "FP1_D2_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d2_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D2_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d2_s4_t",
+      "property": "text",
+      "tagId": "FP1_D2_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d2_s4_p",
+      "property": "text",
+      "tagId": "FP1_D2_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d2_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D2_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d2_s5_t",
+      "property": "text",
+      "tagId": "FP1_D2_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d2_s5_p",
+      "property": "text",
+      "tagId": "FP1_D2_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d2_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D2_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d2_s6_t",
+      "property": "text",
+      "tagId": "FP1_D2_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d2_s6_p",
+      "property": "text",
+      "tagId": "FP1_D2_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d2_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D2_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d3_s1_t",
+      "property": "text",
+      "tagId": "FP1_D3_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d3_s1_p",
+      "property": "text",
+      "tagId": "FP1_D3_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d3_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D3_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d3_s2_t",
+      "property": "text",
+      "tagId": "FP1_D3_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d3_s2_p",
+      "property": "text",
+      "tagId": "FP1_D3_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d3_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D3_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d3_s3_t",
+      "property": "text",
+      "tagId": "FP1_D3_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d3_s3_p",
+      "property": "text",
+      "tagId": "FP1_D3_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d3_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D3_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d3_s4_t",
+      "property": "text",
+      "tagId": "FP1_D3_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d3_s4_p",
+      "property": "text",
+      "tagId": "FP1_D3_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d3_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D3_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d3_s5_t",
+      "property": "text",
+      "tagId": "FP1_D3_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d3_s5_p",
+      "property": "text",
+      "tagId": "FP1_D3_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d3_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D3_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d3_s6_t",
+      "property": "text",
+      "tagId": "FP1_D3_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d3_s6_p",
+      "property": "text",
+      "tagId": "FP1_D3_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d3_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D3_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d4_s1_t",
+      "property": "text",
+      "tagId": "FP1_D4_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d4_s1_p",
+      "property": "text",
+      "tagId": "FP1_D4_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d4_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D4_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d4_s2_t",
+      "property": "text",
+      "tagId": "FP1_D4_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d4_s2_p",
+      "property": "text",
+      "tagId": "FP1_D4_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d4_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D4_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d4_s3_t",
+      "property": "text",
+      "tagId": "FP1_D4_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d4_s3_p",
+      "property": "text",
+      "tagId": "FP1_D4_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d4_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D4_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d4_s4_t",
+      "property": "text",
+      "tagId": "FP1_D4_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d4_s4_p",
+      "property": "text",
+      "tagId": "FP1_D4_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d4_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D4_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d4_s5_t",
+      "property": "text",
+      "tagId": "FP1_D4_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d4_s5_p",
+      "property": "text",
+      "tagId": "FP1_D4_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d4_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D4_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d4_s6_t",
+      "property": "text",
+      "tagId": "FP1_D4_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d4_s6_p",
+      "property": "text",
+      "tagId": "FP1_D4_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d4_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D4_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d5_s1_t",
+      "property": "text",
+      "tagId": "FP1_D5_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d5_s1_p",
+      "property": "text",
+      "tagId": "FP1_D5_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d5_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D5_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d5_s2_t",
+      "property": "text",
+      "tagId": "FP1_D5_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d5_s2_p",
+      "property": "text",
+      "tagId": "FP1_D5_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d5_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D5_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d5_s3_t",
+      "property": "text",
+      "tagId": "FP1_D5_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d5_s3_p",
+      "property": "text",
+      "tagId": "FP1_D5_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d5_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D5_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d5_s4_t",
+      "property": "text",
+      "tagId": "FP1_D5_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d5_s4_p",
+      "property": "text",
+      "tagId": "FP1_D5_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d5_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D5_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d5_s5_t",
+      "property": "text",
+      "tagId": "FP1_D5_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d5_s5_p",
+      "property": "text",
+      "tagId": "FP1_D5_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d5_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D5_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d5_s6_t",
+      "property": "text",
+      "tagId": "FP1_D5_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d5_s6_p",
+      "property": "text",
+      "tagId": "FP1_D5_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d5_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D5_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d6_s1_t",
+      "property": "text",
+      "tagId": "FP1_D6_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d6_s1_p",
+      "property": "text",
+      "tagId": "FP1_D6_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d6_s1_en",
+      "property": "fill",
+      "tagId": "FP1_D6_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d6_s2_t",
+      "property": "text",
+      "tagId": "FP1_D6_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d6_s2_p",
+      "property": "text",
+      "tagId": "FP1_D6_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d6_s2_en",
+      "property": "fill",
+      "tagId": "FP1_D6_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d6_s3_t",
+      "property": "text",
+      "tagId": "FP1_D6_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d6_s3_p",
+      "property": "text",
+      "tagId": "FP1_D6_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d6_s3_en",
+      "property": "fill",
+      "tagId": "FP1_D6_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d6_s4_t",
+      "property": "text",
+      "tagId": "FP1_D6_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d6_s4_p",
+      "property": "text",
+      "tagId": "FP1_D6_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d6_s4_en",
+      "property": "fill",
+      "tagId": "FP1_D6_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d6_s5_t",
+      "property": "text",
+      "tagId": "FP1_D6_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d6_s5_p",
+      "property": "text",
+      "tagId": "FP1_D6_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d6_s5_en",
+      "property": "fill",
+      "tagId": "FP1_D6_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp1_d6_s6_t",
+      "property": "text",
+      "tagId": "FP1_D6_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp1_d6_s6_p",
+      "property": "text",
+      "tagId": "FP1_D6_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp1_d6_s6_en",
+      "property": "fill",
+      "tagId": "FP1_D6_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d0_s1_t",
+      "property": "text",
+      "tagId": "FP2_D0_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d0_s1_p",
+      "property": "text",
+      "tagId": "FP2_D0_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d0_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D0_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d0_s2_t",
+      "property": "text",
+      "tagId": "FP2_D0_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d0_s2_p",
+      "property": "text",
+      "tagId": "FP2_D0_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d0_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D0_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d0_s3_t",
+      "property": "text",
+      "tagId": "FP2_D0_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d0_s3_p",
+      "property": "text",
+      "tagId": "FP2_D0_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d0_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D0_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d0_s4_t",
+      "property": "text",
+      "tagId": "FP2_D0_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d0_s4_p",
+      "property": "text",
+      "tagId": "FP2_D0_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d0_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D0_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d0_s5_t",
+      "property": "text",
+      "tagId": "FP2_D0_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d0_s5_p",
+      "property": "text",
+      "tagId": "FP2_D0_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d0_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D0_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d0_s6_t",
+      "property": "text",
+      "tagId": "FP2_D0_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d0_s6_p",
+      "property": "text",
+      "tagId": "FP2_D0_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d0_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D0_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d1_s1_t",
+      "property": "text",
+      "tagId": "FP2_D1_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d1_s1_p",
+      "property": "text",
+      "tagId": "FP2_D1_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d1_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D1_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d1_s2_t",
+      "property": "text",
+      "tagId": "FP2_D1_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d1_s2_p",
+      "property": "text",
+      "tagId": "FP2_D1_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d1_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D1_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d1_s3_t",
+      "property": "text",
+      "tagId": "FP2_D1_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d1_s3_p",
+      "property": "text",
+      "tagId": "FP2_D1_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d1_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D1_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d1_s4_t",
+      "property": "text",
+      "tagId": "FP2_D1_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d1_s4_p",
+      "property": "text",
+      "tagId": "FP2_D1_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d1_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D1_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d1_s5_t",
+      "property": "text",
+      "tagId": "FP2_D1_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d1_s5_p",
+      "property": "text",
+      "tagId": "FP2_D1_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d1_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D1_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d1_s6_t",
+      "property": "text",
+      "tagId": "FP2_D1_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d1_s6_p",
+      "property": "text",
+      "tagId": "FP2_D1_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d1_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D1_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d2_s1_t",
+      "property": "text",
+      "tagId": "FP2_D2_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d2_s1_p",
+      "property": "text",
+      "tagId": "FP2_D2_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d2_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D2_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d2_s2_t",
+      "property": "text",
+      "tagId": "FP2_D2_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d2_s2_p",
+      "property": "text",
+      "tagId": "FP2_D2_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d2_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D2_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d2_s3_t",
+      "property": "text",
+      "tagId": "FP2_D2_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d2_s3_p",
+      "property": "text",
+      "tagId": "FP2_D2_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d2_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D2_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d2_s4_t",
+      "property": "text",
+      "tagId": "FP2_D2_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d2_s4_p",
+      "property": "text",
+      "tagId": "FP2_D2_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d2_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D2_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d2_s5_t",
+      "property": "text",
+      "tagId": "FP2_D2_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d2_s5_p",
+      "property": "text",
+      "tagId": "FP2_D2_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d2_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D2_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d2_s6_t",
+      "property": "text",
+      "tagId": "FP2_D2_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d2_s6_p",
+      "property": "text",
+      "tagId": "FP2_D2_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d2_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D2_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d3_s1_t",
+      "property": "text",
+      "tagId": "FP2_D3_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d3_s1_p",
+      "property": "text",
+      "tagId": "FP2_D3_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d3_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D3_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d3_s2_t",
+      "property": "text",
+      "tagId": "FP2_D3_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d3_s2_p",
+      "property": "text",
+      "tagId": "FP2_D3_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d3_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D3_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d3_s3_t",
+      "property": "text",
+      "tagId": "FP2_D3_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d3_s3_p",
+      "property": "text",
+      "tagId": "FP2_D3_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d3_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D3_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d3_s4_t",
+      "property": "text",
+      "tagId": "FP2_D3_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d3_s4_p",
+      "property": "text",
+      "tagId": "FP2_D3_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d3_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D3_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d3_s5_t",
+      "property": "text",
+      "tagId": "FP2_D3_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d3_s5_p",
+      "property": "text",
+      "tagId": "FP2_D3_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d3_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D3_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d3_s6_t",
+      "property": "text",
+      "tagId": "FP2_D3_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d3_s6_p",
+      "property": "text",
+      "tagId": "FP2_D3_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d3_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D3_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d4_s1_t",
+      "property": "text",
+      "tagId": "FP2_D4_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d4_s1_p",
+      "property": "text",
+      "tagId": "FP2_D4_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d4_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D4_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d4_s2_t",
+      "property": "text",
+      "tagId": "FP2_D4_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d4_s2_p",
+      "property": "text",
+      "tagId": "FP2_D4_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d4_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D4_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d4_s3_t",
+      "property": "text",
+      "tagId": "FP2_D4_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d4_s3_p",
+      "property": "text",
+      "tagId": "FP2_D4_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d4_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D4_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d4_s4_t",
+      "property": "text",
+      "tagId": "FP2_D4_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d4_s4_p",
+      "property": "text",
+      "tagId": "FP2_D4_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d4_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D4_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d4_s5_t",
+      "property": "text",
+      "tagId": "FP2_D4_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d4_s5_p",
+      "property": "text",
+      "tagId": "FP2_D4_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d4_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D4_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d4_s6_t",
+      "property": "text",
+      "tagId": "FP2_D4_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d4_s6_p",
+      "property": "text",
+      "tagId": "FP2_D4_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d4_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D4_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d5_s1_t",
+      "property": "text",
+      "tagId": "FP2_D5_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d5_s1_p",
+      "property": "text",
+      "tagId": "FP2_D5_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d5_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D5_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d5_s2_t",
+      "property": "text",
+      "tagId": "FP2_D5_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d5_s2_p",
+      "property": "text",
+      "tagId": "FP2_D5_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d5_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D5_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d5_s3_t",
+      "property": "text",
+      "tagId": "FP2_D5_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d5_s3_p",
+      "property": "text",
+      "tagId": "FP2_D5_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d5_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D5_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d5_s4_t",
+      "property": "text",
+      "tagId": "FP2_D5_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d5_s4_p",
+      "property": "text",
+      "tagId": "FP2_D5_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d5_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D5_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d5_s5_t",
+      "property": "text",
+      "tagId": "FP2_D5_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d5_s5_p",
+      "property": "text",
+      "tagId": "FP2_D5_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d5_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D5_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d5_s6_t",
+      "property": "text",
+      "tagId": "FP2_D5_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d5_s6_p",
+      "property": "text",
+      "tagId": "FP2_D5_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d5_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D5_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d6_s1_t",
+      "property": "text",
+      "tagId": "FP2_D6_S1_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d6_s1_p",
+      "property": "text",
+      "tagId": "FP2_D6_S1_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d6_s1_en",
+      "property": "fill",
+      "tagId": "FP2_D6_S1_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d6_s2_t",
+      "property": "text",
+      "tagId": "FP2_D6_S2_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d6_s2_p",
+      "property": "text",
+      "tagId": "FP2_D6_S2_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d6_s2_en",
+      "property": "fill",
+      "tagId": "FP2_D6_S2_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d6_s3_t",
+      "property": "text",
+      "tagId": "FP2_D6_S3_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d6_s3_p",
+      "property": "text",
+      "tagId": "FP2_D6_S3_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d6_s3_en",
+      "property": "fill",
+      "tagId": "FP2_D6_S3_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d6_s4_t",
+      "property": "text",
+      "tagId": "FP2_D6_S4_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d6_s4_p",
+      "property": "text",
+      "tagId": "FP2_D6_S4_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d6_s4_en",
+      "property": "fill",
+      "tagId": "FP2_D6_S4_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d6_s5_t",
+      "property": "text",
+      "tagId": "FP2_D6_S5_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d6_s5_p",
+      "property": "text",
+      "tagId": "FP2_D6_S5_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d6_s5_en",
+      "property": "fill",
+      "tagId": "FP2_D6_S5_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "sch_fp2_d6_s6_t",
+      "property": "text",
+      "tagId": "FP2_D6_S6_T",
+      "format": "hhmm",
+      "interaction": "edit",
+      "min": 0,
+      "max": 1439
+    },
+    {
+      "elementId": "sch_fp2_d6_s6_p",
+      "property": "text",
+      "tagId": "FP2_D6_S6_P",
+      "format": "int",
+      "interaction": "edit",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "chk_fp2_d6_s6_en",
+      "property": "fill",
+      "tagId": "FP2_D6_S6_EN",
+      "interaction": "toggle",
+      "onValue": "#22c55e",
+      "offValue": "#ffffff"
+    }
+  ]
+}

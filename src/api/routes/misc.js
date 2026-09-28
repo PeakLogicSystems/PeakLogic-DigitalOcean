@@ -4,7 +4,9 @@ const { listSerialPorts } = require('../../system/serialPorts');
 const mongoTagLogger = require('../../logger/mongoTagLogger');
 const persistence = require('../../persistence');
 const { normalizePens } = require('../../graph/graphPens');
-const { moveOnce, moveReverse } = require('../../drivers/modbusMove');
+const { moveOnce, moveReverse, connectSide, readWords } = require('../../drivers/modbusMove');
+const { defaultModbusRtuSerialPort } = require('../../appliance/defaultRs485Port');
+const { pushRemoteTagForce } = require('../pushRemoteTagForce');
 
 function mergeSeedPens(existingPens, seedPens, tagList) {
   const byTag = new Map((existingPens || []).map((p) => [p.tagId, p]));
@@ -107,7 +109,7 @@ function createMiscRoutes(deps) {
     res.json(driverManager.halStatus());
   });
 
-  router.post('/debug/force', (req, res) => {
+  router.post('/debug/force', async (req, res) => {
     const { tagStore } = deps;
     try {
       const t = tagStore.setForce(req.body.tagId, {
@@ -116,15 +118,26 @@ function createMiscRoutes(deps) {
         forceValue: req.body.forceValue,
       });
       if (!t) return res.status(404).json({ error: 'Tag not found' });
+      try {
+        await pushRemoteTagForce(driverManager, scanEngine, t, tagStore);
+      } catch (e) {
+        return res.status(502).json({ error: e.message || 'Remote force failed', tag: t });
+      }
       res.json({ tag: t });
     } catch (e) {
       res.status(e.status || 400).json({ error: e.message || String(e) });
     }
   });
 
-  router.delete('/debug/force', (req, res) => {
+  router.delete('/debug/force', async (req, res) => {
     const { tagStore } = deps;
-    res.json({ tag: tagStore.clearForce(req.query.tagId, req.query.which || null) });
+    const t = tagStore.clearForce(req.query.tagId, req.query.which || null);
+    try {
+          if (t) await pushRemoteTagForce(driverManager, scanEngine, t, tagStore);
+    } catch (e) {
+      return res.status(502).json({ error: e.message || 'Remote force clear failed', tag: t });
+    }
+    res.json({ tag: t });
   });
 
   router.post('/graph/clear', (req, res) => {
@@ -135,6 +148,57 @@ function createMiscRoutes(deps) {
   router.post('/modbus/move', async (req, res) => {
     const fn = req.body.direction === 'tcp_to_rtu' ? moveReverse : moveOnce;
     res.json({ ok: true, results: await fn(req.body) });
+  });
+
+  router.post('/modbus/probe', async (req, res) => {
+    const body = req.body || {};
+    const side = {
+      serialPort: body.serialPort || defaultModbusRtuSerialPort(),
+      baud: body.baud ?? 9600,
+      slaveId: body.slaveId ?? 1,
+      parity: body.parity || 'none',
+      stopBits: body.stopBits ?? 1,
+      timeoutMs: body.timeoutMs ?? 3000,
+    };
+    const probes = [
+      { label: 'FC01 readCoils @0 x8', table: 'coil', address: 0, count: 8 },
+      { label: 'FC02 readDiscreteInputs @0 x8', table: 'discrete', address: 0, count: 8 },
+      { label: 'FC03 readHoldingRegisters @0x4000 x1 (device addr)', table: 'holding', address: 0x4000, count: 1 },
+      { label: 'FC03 readHoldingRegisters @0x8000 x1 (fw version)', table: 'holding', address: 0x8000, count: 1 },
+    ];
+    let client;
+    const reads = [];
+    try {
+      client = await connectSide(side, 'rtu');
+      for (const p of probes) {
+        try {
+          const result = await readWords(client, p.table, p.address, p.count);
+          reads.push({ ...p, ok: true, data: result.data });
+        } catch (e) {
+          reads.push({ ...p, ok: false, error: e.message || String(e) });
+        }
+      }
+      const okCount = reads.filter((r) => r.ok).length;
+      res.json({
+        ok: okCount > 0,
+        serialPort: side.serialPort,
+        baud: side.baud,
+        slaveId: side.slaveId,
+        summary: `${okCount}/${reads.length} reads succeeded`,
+        reads,
+      });
+    } catch (e) {
+      res.status(400).json({
+        ok: false,
+        error: e.message || String(e),
+        serialPort: side.serialPort,
+        slaveId: side.slaveId,
+      });
+    } finally {
+      if (client) {
+        try { await client.close(); } catch { /* ignore */ }
+      }
+    }
   });
 
   return router;

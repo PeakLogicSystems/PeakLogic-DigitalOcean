@@ -1,0 +1,50 @@
+cd C:\Users\public\data\est-pc
+npm run build:installer
+
+& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" `
+  /DStagingDir="C:\Users\public\data\est-pc\dist\windows-installer\staging" `
+  /DMyAppVersion="2.3.9" `
+  "C:\Users\public\data\est-pc\deploy\windows\peaklogic-setup.iss"
+  
+  uild the installer (on your dev PC)
+Install Inno Setup 6 (free).
+Run:
+cd C:\Users\public\data\est-pc
+npm run build:installer
+Output: est-pc\dist\windows-installer\PeakLogic-MVP-Suite-2.3.9-setup.exe
+
+Staging is already built at est-pc\dist\windows-installer\staging\. If Inno Setup is installed, re-run the same command to compile the .exe. Without Inno, compile manually:
+
+& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" `
+  /DStagingDir="C:\Users\public\data\est-pc\dist\windows-installer\staging" `
+  /DMyAppVersion="2.3.9" `
+  "C:\Users\public\data\est-pc\deploy\windows\peaklogic-setup.iss"
+What the installer includes
+Included	Notes
+Full MVP Suite (ST, HMI, runtime, Parc, etc.)
+From peaklogic-mvp-suite fork
+node_modules (production deps)
+Bundled in the installer
+Start Menu shortcuts
+Launch + Stop
+Optional desktop icon
+During setup
+Not bundled	User installs separately
+Node.js 18+
+Required — launcher checks and links to nodejs.org
+MongoDB
+Optional — tag historian
+MQTT broker
+Optional — npm run mqtt:start from install folder
+End-user experience
+Run PeakLogic-MVP-Suite-*-setup.exe
+Install Node.js if needed
+Start PeakLogic MVP Suite from the Start Menu
+Browser opens http://127.0.0.1:3090
+Data stored in %LOCALAPPDATA%\PeakLogic\data (writable without admin)
+Files added
+scripts/build-windows-installer.ps1 — stage + compile
+deploy/windows/peaklogic-setup.iss — Inno Setup script
+deploy/windows/PeakLogic.cmd / PeakLogic-Stop.cmd — launchers
+deploy/windows/README-windows-installer.md — full docs
+USB stick (no setup.exe): still use scripts\create-usb-install.ps1.

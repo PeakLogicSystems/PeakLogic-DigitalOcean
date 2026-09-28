@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-512.png">
+  <script src="/js/pwa.js" defer></script>
   <title>I/O Map — PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 </head>
 <body class="io-map-body">
   <header class="topbar standalone-topbar">
-    <div class="topbar-brand"><a href="/" class="standalone-home-link"><img src="/branding/peaklogic-icon.svg" alt="Logo" class="topbar-logo"></a></div>
+    <div class="topbar-brand"><a href="/" class="standalone-home-link">Peak<span>Logic</span></a></div>
     <h1 class="standalone-title">I/O Map</h1>
     <div class="standalone-meta popup-header-actions">
       <label class="checkbox-inline"><input type="checkbox" id="io-map-live-update"> Enable I/O update</label>
@@ -19,10 +24,21 @@
   </header>
 
   <main class="io-map-main">
-    <p class="panel-hint io-map-hint">Input and output tags (Opta on-board, expansion modules, Modbus/RS-485 fieldbus). Values refresh automatically while runtime is running; when stopped, enable <strong>Enable I/O update</strong> to keep polling.</p>
+    <p class="panel-hint io-map-hint">Input and output tags (Opta on-board, expansion modules, Modbus/RS-485 fieldbus). Click a point to wire driver I/O and assign HMI screen bindings. Values refresh automatically while runtime is running; when stopped, enable <strong>Enable I/O update</strong> to keep polling.</p>
     <div id="io-map-runtime" class="io-map-runtime muted cell-mono"></div>
-    <div id="io-map-panel" class="io-map-panel program-io-panel">
-      <p class="program-io-empty">Loading I/O…</p>
+    <div class="io-map-layout">
+      <div id="io-map-panel" class="io-map-panel program-io-panel">
+        <p class="program-io-empty">Loading I/O…</p>
+      </div>
+      <aside id="io-map-bindings-panel" class="io-map-bindings-panel" aria-label="Tag wiring and screen bindings">
+        <div class="io-map-bindings-head">
+          <h2>Bindings</h2>
+          <span id="io-map-bindings-status" class="io-map-bindings-status muted" aria-live="polite"></span>
+        </div>
+        <div id="io-map-bindings-body" class="io-map-bindings-body">
+          <p class="muted">Select an I/O point to wire driver I/O and edit HMI screen bindings.</p>
+        </div>
+      </aside>
     </div>
   </main>
 
@@ -31,7 +47,9 @@
   <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>
   <script src="/js/expansionIo.js?v=<%= assetV %>"></script>
   <script src="/js/liveIoUpdate.js?v=<%= assetV %>"></script>
+  <script src="/js/timeFormat.js?v=<%= assetV %>"></script>
   <script src="/js/ioTimestamp.js?v=<%= assetV %>"></script>
   <script src="/js/ioMapPage.js?v=<%= assetV %>"></script>
+  <script src="/js/ioMapBindings.js?v=<%= assetV %>"></script>
 </body>
 </html>

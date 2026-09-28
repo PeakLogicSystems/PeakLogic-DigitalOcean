@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7C3AED">
+  <title>CMMS — PeakLogic</title>
+  <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
+</head>
+<body class="cmms-page-body">
+  <header class="topbar standalone-topbar">
+    <div class="topbar-brand"><a href="/" class="standalone-home-link">Peak<span>Logic</span></a></div>
+    <h1 class="standalone-title">CMMS</h1>
+    <div class="standalone-meta popup-header-actions">
+      <span id="cmms-page-status" class="muted cell-mono" aria-live="polite">Loading…</span>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+      <button type="button" class="btn" id="btn-standalone-sign-out" title="Sign out">Sign out</button>
+      <a href="/" class="btn popup-close page-close" title="Return to Studio">Studio</a>
+    </div>
+  </header>
+  <main class="cmms-page-main" id="cmms-app-root"></main>
+  <script src="/js/api.js?v=<%= assetV %>"></script>
+  <script src="/js/timeFormat.js?v=<%= assetV %>"></script>
+  <script src="/js/signOut.js?v=<%= assetV %>"></script>
+  <script src="/js/cmmsApp.js?v=<%= assetV %>"></script>
+  <script>
+    PeaklogicSignOut.bind('btn-standalone-sign-out');
+    PeaklogicCmms.mount(document.getElementById('cmms-app-root')).then(function () {
+      var el = document.getElementById('cmms-page-status');
+      if (el) el.textContent = 'Ready';
+    }).catch(function (e) {
+      var el = document.getElementById('cmms-page-status');
+      if (el) el.textContent = e.message || 'Load failed';
+    });
+  </script>
+</body>
+</html>

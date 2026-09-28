@@ -1,8 +1,8 @@
 'use strict';
 
 /** ST program editor, library, and scan runtime controls */
-window.PeakLogicProgram = (function () {
-  const { $, esc, on, onChange } = window.PeakLogicCore;
+window.PeaklogicProgram = (function () {
+  const { $, esc, on, onChange } = window.PeaklogicCore;
 
   let deps = null;
   let programActivePath = '';
@@ -19,7 +19,7 @@ window.PeakLogicProgram = (function () {
 
   const ST_NEW_TEMPLATE = '(* New ST program — edit and Save program *)\nIF IsON(DI) THEN TurnON(Q); END_IF;\n';
   let stParcMaxLines = 500;
-  const liveIoPref = () => window.PeakLogicLiveIoUpdate || {};
+  const liveIoPref = () => window.PeaklogicLiveIoUpdate || {};
 
   function programMetaKey(meta, activeProgram) {
     const m = meta && typeof meta === 'object' ? meta : {};
@@ -121,11 +121,11 @@ window.PeakLogicProgram = (function () {
   }
 
   function expIo() {
-    return window.PeakLogicExpansionIo || {};
+    return window.PeaklogicExpansionIo || {};
   }
 
   function programIoTags() {
-    return window.PeakLogicProgramIoTags || {};
+    return window.PeaklogicProgramIoTags || {};
   }
 
   function programIoTagList() {
@@ -149,12 +149,12 @@ window.PeakLogicProgram = (function () {
   }
 
   function formatIoTagName(tag) {
-    const fmt = window.PeakLogicTagDisplay?.formatTag;
+    const fmt = window.PeaklogicTagDisplay?.formatTag;
     return fmt ? fmt(tag, d().getTags()) : tag.id;
   }
 
   function formatIoTagSub(tag) {
-    const fmt = window.PeakLogicTagDisplay?.formatTagSub;
+    const fmt = window.PeaklogicTagDisplay?.formatTagSub;
     return fmt ? fmt(tag, d().getTags()) : '';
   }
 
@@ -169,7 +169,7 @@ window.PeakLogicProgram = (function () {
       return;
     }
     host.classList.remove('view-hidden');
-    const fmt = window.PeakLogicTagDisplay?.formatTag || ((t) => t.id || t);
+    const fmt = window.PeaklogicTagDisplay?.formatTag || ((t) => t.id || t);
     const rows = refs.map((id) => {
       const tag = tags.find((t) => t.id === id) || { id, label: '' };
       const main = esc(fmt(tag, tags));
@@ -184,6 +184,13 @@ window.PeakLogicProgram = (function () {
     return chrome && !chrome.classList.contains('view-hidden');
   }
 
+  function liveIoHintText(runtime) {
+    const opta = d().getLastOptaRuntime?.();
+    if (!runtime?.running && opta?.running) return '(Opta ST running — live from device)';
+    if (!runtime?.running) return '(stopped — last values shown)';
+    return runtime.paused ? '(paused — values frozen)' : '(runtime active)';
+  }
+
   function renderProgramIoPanel(live, runtime) {
     const host = $('program-io-panel');
     const hint = $('program-io-hint');
@@ -191,11 +198,7 @@ window.PeakLogicProgram = (function () {
     if (!isLiveIoPanelOpen()) return;
     const scanActive = d().runtimeScanActive(runtime);
     host.classList.toggle('io-stopped', !scanActive);
-    if (hint) {
-      hint.textContent = !runtime?.running
-        ? '(stopped — last values shown)'
-        : (runtime.paused ? '(paused — values frozen)' : '(runtime active)');
-    }
+    if (hint) hint.textContent = liveIoHintText(runtime);
     const list = programIoTagList();
     if (!list.length) {
       host.innerHTML = '<p class="program-io-empty">No tags in program. Apply a valid ST file that references DI, Q, AI, etc.</p>';
@@ -207,7 +210,7 @@ window.PeakLogicProgram = (function () {
       const highlight = scanActive && on;
       const forced = entry && (entry.forceInput || entry.forceOutput);
       const stopped = !scanActive;
-      const ts = window.PeakLogicIoTimestamp;
+      const ts = window.PeaklogicIoTimestamp;
       return `<div class="io-point digital ${highlight ? 'on' : 'off'}${forced ? ' forced' : ''}" data-io="${esc(tag.id)}" data-io-type="BOOL">
         <span class="io-name">${esc(formatIoTagName(tag))}</span>
         ${formatIoTagSub(tag) ? `<span class="io-tag-id muted">${esc(formatIoTagSub(tag))}</span>` : ''}
@@ -221,7 +224,7 @@ window.PeakLogicProgram = (function () {
       const entry = d().liveEntryFor(tag.id, live);
       const forced = entry && (entry.forceInput || entry.forceOutput);
       const stopped = !scanActive;
-      const ts = window.PeakLogicIoTimestamp;
+      const ts = window.PeaklogicIoTimestamp;
       return `<div class="io-point analog${forced ? ' forced' : ''}" data-io="${esc(tag.id)}" data-io-type="${esc(tag.type)}">
         <span class="io-name">${esc(formatIoTagName(tag))}</span>
         ${formatIoTagSub(tag) ? `<span class="io-tag-id muted">${esc(formatIoTagSub(tag))}</span>` : ''}
@@ -376,7 +379,7 @@ window.PeakLogicProgram = (function () {
       }
       const valEl = el.querySelector('[data-io-val]');
       if (valEl) valEl.textContent = d().formatIoValue(entry);
-      const tsApi = window.PeakLogicIoTimestamp;
+      const tsApi = window.PeaklogicIoTimestamp;
       let tsEl = el.querySelector('.io-ts');
       if (!tsEl && tsApi?.ioTsSpan) {
         tsEl = document.createElement('span');
@@ -394,11 +397,7 @@ window.PeakLogicProgram = (function () {
       }
     });
     const hint = $('program-io-hint');
-    if (hint) {
-      hint.textContent = !runtime?.running
-        ? '(stopped — last values shown)'
-        : (runtime.paused ? '(paused — values frozen)' : '(runtime active)');
-    }
+    if (hint) hint.textContent = liveIoHintText(runtime);
   }
 
   async function syncProgramTagRefs() {
@@ -886,7 +885,6 @@ window.PeakLogicProgram = (function () {
     const remoteCb = $('prog-remote-exec');
     const connectBtn = $('btn-remote-connect');
     const disconnectBtn = $('btn-remote-disconnect');
-    const statusEl = $('prog-remote-status');
     if (!remoteCb) return;
 
     const settings = data?.settings || d().getLastSettings?.() || {};
@@ -902,6 +900,7 @@ window.PeakLogicProgram = (function () {
     const health = opta ? healthMap[opta.id] : null;
     const connected = !!health?.connected;
     const running = !!runtime.running;
+    const paused = !!runtime.paused;
 
     // Connect/Disconnect always visible when an Opta remote driver exists (not only when Remote is on).
     const showOptaLink = !!opta;
@@ -914,48 +913,78 @@ window.PeakLogicProgram = (function () {
       disconnectBtn.disabled = !showOptaLink || !connected || running;
     }
 
-    if (statusEl) {
+    const badgeEl = $('prog-runtime-badge');
+    const detailEl = $('prog-runtime-detail');
+    const statusBar = $('prog-remote-status');
+    if (badgeEl) {
+      let badgeText = 'Stopped';
+      let badgeMod = 'stopped';
+      if (running) {
+        badgeText = paused ? 'Paused' : 'Running';
+        badgeMod = paused ? 'paused' : 'running';
+      }
+      badgeEl.textContent = badgeText;
+      badgeEl.className = `prog-runtime-badge prog-runtime-badge--${badgeMod}`;
+    }
+    if (detailEl || statusBar) {
       const link = opta
         ? (opta.type === 'mqtt_parc' ? (opta.deviceId || 'MQTT') : (opta.host || '—'))
         : '';
       const hubLine = remoteOn && opta?.type === 'mqtt_parc'
         ? (hubMqtt.connected
           ? `Hub OK (${hubMqtt.brokerUrl || settings.mqttParc?.brokerUrl || 'MQTT'})`
-          : `Hub offline${hubMqtt.brokerUrl ? ` → ${hubMqtt.brokerUrl}` : ''} — enable in System setup, start Mosquitto`)
+          : `Hub offline${hubMqtt.brokerUrl ? ` → ${hubMqtt.brokerUrl}` : ''} — enable MQTT Parc in System setup`)
         : '';
-      if (!opta) {
-        statusEl.textContent = remoteOn ? 'Add mqtt_parc driver in Drivers' : '';
-      } else if (!remoteOn) {
-        statusEl.textContent = connected
-          ? `Linked ${link} · check Remote to run ST on device${hubLine ? ` · ${hubLine}` : ''}`
-          : `Not linked (${link}) · Connect, then Remote for ST on Opta${hubLine ? ` · ${hubLine}` : ''}`;
-      } else if (connected && remoteOn && running && runtime.remoteScanOnDevice) {
-        const traceWait = runtime.remoteTracePending
-          ? ' · waiting for trace telemetry (check report interval)'
-          : '';
-        statusEl.textContent = `ST running on ${link}${traceWait}${hubLine ? ` · ${hubLine}` : ''}`;
-      } else if (remoteOn && running && runtime.localStExecution) {
-        statusEl.textContent = `ST running on PC · remote deploy unavailable — uncheck Remote for PC-only or Connect Opta${hubLine ? ` · ${hubLine}` : ''}`;
-      } else if (connected && remoteOn) {
-        statusEl.textContent = `Linked ${link} · press Download & Start to deploy ST${hubLine ? ` · ${hubLine}` : ''}`;
-      } else if (connected) {
-        statusEl.textContent = `Linked ${link}${hubLine ? ` · ${hubLine}` : ''}`;
-      } else {
-        const err = (health?.message || '').trim();
-        statusEl.textContent = err
-          ? `Not linked (${link}): ${err}${hubLine ? ` · ${hubLine}` : ''}`
-          : `Not linked (${link})${hubLine ? ` · ${hubLine}` : ''}`;
+      const detailParts = [];
+      if (running) {
+        const where = runtime.remoteScanOnDevice && opta
+          ? `ST on ${link}`
+          : 'ST on this PC';
+        detailParts.push(where);
+        if (paused) detailParts.push('scan paused');
+        if (runtime.remoteTracePending) {
+          detailParts.push('waiting for trace telemetry');
+        }
+      } else if (remoteOn && !opta) {
+        detailParts.push('Add mqtt_parc driver in Drivers');
+      } else if (opta) {
+        if (!remoteOn) {
+          detailParts.push(connected
+            ? `Linked ${link} · enable Remote to run ST on device`
+            : `Not linked (${link}) · Connect, then Remote for ST on Opta`);
+        } else if (connected) {
+          detailParts.push(`Linked ${link} · press Download & Start to deploy ST`);
+        } else {
+          const err = (health?.message || '').trim();
+          detailParts.push(err
+            ? `Not linked (${link}): ${err}`
+            : `Not linked (${link})`);
+        }
       }
+      if (hubLine) detailParts.push(hubLine);
+      const detailText = detailParts.join(' · ');
+      if (detailEl) {
+        detailEl.textContent = detailText;
+        detailEl.title = detailText;
+      }
+      if (statusBar) statusBar.title = detailText;
     }
     scheduleDeployEstimate();
     renderProgramLineStatus();
 
     const startBtn = $('btn-start');
     if (startBtn) {
-      startBtn.textContent = remoteOn ? 'Download & Start' : 'Start';
-      startBtn.title = remoteOn
-        ? 'Compile ST to bytecode, deploy to Opta via MQTT, then start scan on device'
-        : 'Validate and run ST on this PC';
+      if (paused) {
+        startBtn.textContent = 'Resume';
+        startBtn.title = remoteOn
+          ? 'Resume ST scan on Opta'
+          : 'Resume ST scan on this PC';
+      } else {
+        startBtn.textContent = remoteOn ? 'Download & Start' : 'Start';
+        startBtn.title = remoteOn
+          ? 'Compile ST to bytecode, deploy to Opta via MQTT, then start scan on device'
+          : 'Validate and run ST on this PC';
+      }
     }
   }
 
@@ -1309,7 +1338,7 @@ window.PeakLogicProgram = (function () {
       $('program-errors').className = r.programOk ? 'inline-msg ok' : 'inline-msg err';
       return syncProgramTagRefs().then(() => d().refreshAll());
     }).catch((e) => showProgramError(e.message)));
-    window.PeakLogicTagDisplay?.bindAll(document);
+    window.PeaklogicTagDisplay?.bindAll(document);
     window.addEventListener('peaklogic-tag-display', () => {
       renderProgramTagLegend();
       renderProgramIoPanel(d().getLastLive(), d().getLastRuntime());

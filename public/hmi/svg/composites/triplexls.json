@@ -1,0 +1,633 @@
+{
+  "id": "triplexls",
+  "label": "TRIPLEXLS (triplex lift station overview)",
+  "group": "Process equipment",
+  "subgroup": "composites",
+  "preview": "/hmi/svg/library/lift-station-faceplates/peaklogic/triplexls.svg",
+  "tagRoles": {
+    "tankLevel": {
+      "pick": "tagId",
+      "tagId": "TANK_LVL",
+      "types": [
+        "REAL"
+      ]
+    },
+    "lvlOff": {
+      "pick": "tagId",
+      "tagId": "LVL_OFF",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "lvlLead": {
+      "pick": "tagId",
+      "tagId": "LVL_LEAD",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "lvlLag": {
+      "pick": "tagId",
+      "tagId": "LVL_LAG",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "lvlHigh": {
+      "pick": "tagId",
+      "tagId": "LVL_HIGH",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "alt": {
+      "pick": "tagId",
+      "tagId": "ALT1",
+      "types": [
+        "ALT"
+      ]
+    },
+    "stationSta": {
+      "pick": "tagId",
+      "tagId": "STATION_STA",
+      "types": [
+        "INT"
+      ]
+    },
+    "phaseFault": {
+      "pick": "tagId",
+      "tagId": "PHASE_FAULT",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "genRun": {
+      "pick": "tagId",
+      "tagId": "GEN_RUN",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "genFuelFault": {
+      "pick": "tagId",
+      "tagId": "GEN_FUEL_FAULT",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "genFault": {
+      "pick": "tagId",
+      "tagId": "GEN_FAULT",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor1Run": {
+      "pick": "tagId",
+      "tagId": "MOTOR1_RUN",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor2Run": {
+      "pick": "tagId",
+      "tagId": "MOTOR2_RUN",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor1Hoa": {
+      "pick": "tagId",
+      "tagId": "MOTOR1_HOA",
+      "types": [
+        "INT"
+      ]
+    },
+    "motor2Hoa": {
+      "pick": "tagId",
+      "tagId": "MOTOR2_HOA",
+      "types": [
+        "INT"
+      ]
+    },
+    "motor1Starts": {
+      "pick": "tagId",
+      "tagId": "MOTOR1_STARTS",
+      "types": [
+        "INT"
+      ]
+    },
+    "motor2Starts": {
+      "pick": "tagId",
+      "tagId": "MOTOR2_STARTS",
+      "types": [
+        "INT"
+      ]
+    },
+    "motor1Hrs": {
+      "pick": "tagId",
+      "tagId": "MOTOR1_HRS",
+      "types": [
+        "REAL"
+      ]
+    },
+    "motor2Hrs": {
+      "pick": "tagId",
+      "tagId": "MOTOR2_HRS",
+      "types": [
+        "REAL"
+      ]
+    },
+    "motor1Start": {
+      "pick": "tagId",
+      "tagId": "MOTOR1_START",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor1Stop": {
+      "pick": "tagId",
+      "tagId": "MOTOR1_STOP",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor2Start": {
+      "pick": "tagId",
+      "tagId": "MOTOR2_START",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor2Stop": {
+      "pick": "tagId",
+      "tagId": "MOTOR2_STOP",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "lvlLag2": {
+      "pick": "tagId",
+      "tagId": "LVL_LAG2",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor3Run": {
+      "pick": "tagId",
+      "tagId": "MOTOR3_RUN",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor3Hoa": {
+      "pick": "tagId",
+      "tagId": "MOTOR3_HOA",
+      "types": [
+        "INT"
+      ]
+    },
+    "motor3Starts": {
+      "pick": "tagId",
+      "tagId": "MOTOR3_STARTS",
+      "types": [
+        "INT"
+      ]
+    },
+    "motor3Hrs": {
+      "pick": "tagId",
+      "tagId": "MOTOR3_HRS",
+      "types": [
+        "REAL"
+      ]
+    },
+    "motor3Start": {
+      "pick": "tagId",
+      "tagId": "MOTOR3_START",
+      "types": [
+        "BOOL"
+      ]
+    },
+    "motor3Stop": {
+      "pick": "tagId",
+      "tagId": "MOTOR3_STOP",
+      "types": [
+        "BOOL"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "role": "faceplate",
+      "z": 0,
+      "kind": "staticImage",
+      "svg": "/hmi/svg/library/lift-station-faceplates/peaklogic/triplexls.svg"
+    }
+  ],
+  "defaultBindings": [
+    {
+      "elementId": "val_tank_level",
+      "property": "text",
+      "tagRole": "tankLevel",
+      "format": "fixed1",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "elementId": "lamp_float_high",
+      "property": "fill",
+      "tagRole": "lvlHigh",
+      "onValue": "#ff3333",
+      "offValue": "#333333"
+    },
+    {
+      "elementId": "lamp_float_lag",
+      "property": "fill",
+      "tagRole": "lvlLag",
+      "onValue": "#ffaa00",
+      "offValue": "#333333"
+    },
+    {
+      "elementId": "lamp_float_lead",
+      "property": "fill",
+      "tagRole": "lvlLead",
+      "onValue": "#00ff00",
+      "offValue": "#333333"
+    },
+    {
+      "elementId": "lamp_float_off",
+      "property": "fill",
+      "tagRole": "lvlOff",
+      "onValue": "#00ff00",
+      "offValue": "#333333"
+    },
+    {
+      "elementId": "lamp_status",
+      "property": "fill5",
+      "tagRole": "stationSta",
+      "min": 0,
+      "max": 3,
+      "colors": [
+        "#22c55e",
+        "#ef4444",
+        "#fbed20",
+        "#64748b"
+      ]
+    },
+    {
+      "elementId": "txt_station_status",
+      "property": "text",
+      "tagRole": "stationSta",
+      "format": "stationSta",
+      "min": 0,
+      "max": 3,
+      "colors": [
+        "#22c55e",
+        "#ef4444",
+        "#fbed20",
+        "#64748b"
+      ]
+    },
+    {
+      "elementId": "lamp_phase_fault",
+      "property": "fill",
+      "tagRole": "phaseFault",
+      "onValue": "#ef4444",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "lamp_gen_run",
+      "property": "fill",
+      "tagRole": "genRun",
+      "onValue": "#22c55e",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "lamp_gen_fuel",
+      "property": "fill",
+      "tagRole": "genFuelFault",
+      "onValue": "#fbed20",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "lamp_gen_fault",
+      "property": "fill",
+      "tagRole": "genFault",
+      "onValue": "#ef4444",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "ind_p1_running",
+      "property": "fill",
+      "tagRole": "motor1Run",
+      "onValue": "#006600",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "ind_p1_stopped",
+      "property": "fill",
+      "tagRole": "motor1Run",
+      "onValue": "#222222",
+      "offValue": "#cc0000"
+    },
+    {
+      "elementId": "txt_p1_running",
+      "property": "fill",
+      "tagRole": "motor1Run",
+      "onValue": "#ffffff",
+      "offValue": "#555555"
+    },
+    {
+      "elementId": "txt_p1_stopped",
+      "property": "fill",
+      "tagRole": "motor1Run",
+      "onValue": "#555555",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "ind_p2_running",
+      "property": "fill",
+      "tagRole": "motor2Run",
+      "onValue": "#006600",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "ind_p2_stopped",
+      "property": "fill",
+      "tagRole": "motor2Run",
+      "onValue": "#222222",
+      "offValue": "#cc0000"
+    },
+    {
+      "elementId": "txt_p2_running",
+      "property": "fill",
+      "tagRole": "motor2Run",
+      "onValue": "#ffffff",
+      "offValue": "#555555"
+    },
+    {
+      "elementId": "txt_p2_stopped",
+      "property": "fill",
+      "tagRole": "motor2Run",
+      "onValue": "#555555",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "btn_p1_auto",
+      "property": "fill5",
+      "tagRole": "motor1Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 0,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#0044aa",
+        "#333333",
+        "#333333"
+      ]
+    },
+    {
+      "elementId": "btn_p1_off",
+      "property": "fill5",
+      "tagRole": "motor1Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 1,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#333333",
+        "#0044aa",
+        "#333333"
+      ]
+    },
+    {
+      "elementId": "btn_p1_hand",
+      "property": "fill5",
+      "tagRole": "motor1Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 2,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#333333",
+        "#333333",
+        "#0044aa"
+      ]
+    },
+    {
+      "elementId": "btn_p2_auto",
+      "property": "fill5",
+      "tagRole": "motor2Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 0,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#0044aa",
+        "#333333",
+        "#333333"
+      ]
+    },
+    {
+      "elementId": "btn_p2_off",
+      "property": "fill5",
+      "tagRole": "motor2Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 1,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#333333",
+        "#0044aa",
+        "#333333"
+      ]
+    },
+    {
+      "elementId": "btn_p2_hand",
+      "property": "fill5",
+      "tagRole": "motor2Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 2,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#333333",
+        "#333333",
+        "#0044aa"
+      ]
+    },
+    {
+      "elementId": "val_p1_starts",
+      "property": "text",
+      "tagRole": "motor1Starts",
+      "format": "int",
+      "min": 0,
+      "max": 999999
+    },
+    {
+      "elementId": "val_p2_starts",
+      "property": "text",
+      "tagRole": "motor2Starts",
+      "format": "int",
+      "min": 0,
+      "max": 999999
+    },
+    {
+      "elementId": "val_p1_hrs",
+      "property": "text",
+      "tagRole": "motor1Hrs",
+      "format": "fixed1",
+      "min": 0,
+      "max": 99999
+    },
+    {
+      "elementId": "val_p2_hrs",
+      "property": "text",
+      "tagRole": "motor2Hrs",
+      "format": "fixed1",
+      "min": 0,
+      "max": 99999
+    },
+    {
+      "elementId": "btn_p1_start",
+      "property": "fill",
+      "tagRole": "motor1Start",
+      "interaction": "pulse",
+      "onValue": "#00ff00",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "btn_p1_stop",
+      "property": "fill",
+      "tagRole": "motor1Stop",
+      "interaction": "pulse",
+      "onValue": "#ff3333",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "btn_p2_start",
+      "property": "fill",
+      "tagRole": "motor2Start",
+      "interaction": "pulse",
+      "onValue": "#00ff00",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "btn_p2_stop",
+      "property": "fill",
+      "tagRole": "motor2Stop",
+      "interaction": "pulse",
+      "onValue": "#ff3333",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "lamp_float_lag2",
+      "property": "fill",
+      "tagRole": "lvlLag2",
+      "onValue": "#ff8800",
+      "offValue": "#333333"
+    },
+    {
+      "elementId": "ind_p3_running",
+      "property": "fill",
+      "tagRole": "motor3Run",
+      "onValue": "#006600",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "ind_p3_stopped",
+      "property": "fill",
+      "tagRole": "motor3Run",
+      "onValue": "#222222",
+      "offValue": "#cc0000"
+    },
+    {
+      "elementId": "txt_p3_running",
+      "property": "fill",
+      "tagRole": "motor3Run",
+      "onValue": "#ffffff",
+      "offValue": "#555555"
+    },
+    {
+      "elementId": "txt_p3_stopped",
+      "property": "fill",
+      "tagRole": "motor3Run",
+      "onValue": "#555555",
+      "offValue": "#ffffff"
+    },
+    {
+      "elementId": "btn_p3_auto",
+      "property": "fill5",
+      "tagRole": "motor3Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 0,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#0044aa",
+        "#333333",
+        "#333333"
+      ]
+    },
+    {
+      "elementId": "btn_p3_off",
+      "property": "fill5",
+      "tagRole": "motor3Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 1,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#333333",
+        "#0044aa",
+        "#333333"
+      ]
+    },
+    {
+      "elementId": "btn_p3_hand",
+      "property": "fill5",
+      "tagRole": "motor3Hoa",
+      "interaction": "hoaMode",
+      "hoaValue": 2,
+      "min": 0,
+      "max": 2,
+      "colors": [
+        "#333333",
+        "#333333",
+        "#0044aa"
+      ]
+    },
+    {
+      "elementId": "val_p3_starts",
+      "property": "text",
+      "tagRole": "motor3Starts",
+      "format": "int",
+      "min": 0,
+      "max": 999999
+    },
+    {
+      "elementId": "val_p3_hrs",
+      "property": "text",
+      "tagRole": "motor3Hrs",
+      "format": "fixed1",
+      "min": 0,
+      "max": 99999
+    },
+    {
+      "elementId": "btn_p3_start",
+      "property": "fill",
+      "tagRole": "motor3Start",
+      "interaction": "pulse",
+      "onValue": "#00ff00",
+      "offValue": "#222222"
+    },
+    {
+      "elementId": "btn_p3_stop",
+      "property": "fill",
+      "tagRole": "motor3Stop",
+      "interaction": "pulse",
+      "onValue": "#ff3333",
+      "offValue": "#222222"
+    }
+  ]
+}

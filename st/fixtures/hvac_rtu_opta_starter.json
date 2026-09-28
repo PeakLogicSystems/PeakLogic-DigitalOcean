@@ -1,0 +1,16 @@
+{
+  "mode": "rtu",
+  "starterProject": "hvac-rtu-opta",
+  "onboardingDoc": "scripts/hvac-rtu-opta/README.md",
+  "devices": [
+    {
+      "role": "rtu",
+      "deviceId": "hvac_rtu_01",
+      "driverId": "opta_rtu",
+      "expansion": "D1608E",
+      "mcsa": "/mcsa",
+      "mcsaPreset": "hvac-rtu",
+      "env": "/ahu-env"
+    }
+  ]
+}

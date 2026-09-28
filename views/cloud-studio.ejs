@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7C3AED">
+  <title><%= title %> · <%= appVersion %></title>
+  <link rel="stylesheet" href="/css/cloud-studio.css?v=<%= assetV %>">
+</head>
+<body>
+  <div class="cs-shell" id="cs-app"
+       data-page="<%= page %>"
+       data-site-id="<%= siteId || '' %>"
+       data-version="<%= appVersion %>"
+       data-role="<%= user && user.role || '' %>"
+       data-tenant="<%= tenant && tenant.tenantSlug || '' %>">
+    <header class="cs-top">
+      <a class="cs-brand" href="/">Peak<span>Logic</span></a>
+      <span class="cs-cloud-badge" title="Cloud Studio">Cloud</span>
+      <nav class="cs-nav" aria-label="Cloud Studio">
+        <a href="/">Studio</a>
+        <a href="/sites" data-nav="sites">Sites</a>
+        <a href="/sites/devices" data-nav="devices">Devices</a>
+        <a href="/fleet" data-nav="fleet">Assets</a>
+        <a href="/people" data-nav="people">People</a>
+        <a href="/cmms" data-nav="cmms">CMMS</a>
+        <a href="/partner" data-nav="partner" id="nav-partner" class="view-hidden">Customers</a>
+        <a href="/admin/mqtt" data-nav="mqtt" id="nav-mqtt" class="view-hidden">MQTT</a>
+        <a href="/admin/tenants" data-nav="admin" id="nav-admin" class="view-hidden">Admin</a>
+      </nav>
+      <div class="cs-meta">
+        <label class="cs-org-switch-label view-hidden" id="cs-org-wrap">
+          Org
+          <select id="cs-org-switch" class="cs-org-switch" aria-label="Switch organization"></select>
+        </label>
+        <span id="cs-user-label"><%= tenant && tenant.tenantSlug ? tenant.tenantSlug : '' %></span>
+        <button type="button" class="btn" id="cs-logout" style="margin-left:0.5rem">Sign out</button>
+      </div>
+    </header>
+    <main class="cs-main" id="cs-main">
+      <p class="cs-msg">Loading…</p>
+    </main>
+  </div>
+  <script src="/js/api.js?v=<%= assetV %>"></script>
+  <script src="/js/cloudStudioUi.js?v=<%= assetV %>"></script>
+</body>
+</html>

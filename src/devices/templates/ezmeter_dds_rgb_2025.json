@@ -1,0 +1,338 @@
+{
+  "id": "ezmeter_dds_rgb_2025",
+  "label": "EZ Meter DDS-RGB 2.025 — polyphase meter (Modbus RTU)",
+  "vendor": "EZ Meter",
+  "model": "DDS-RGB 2.025 (RGB v1.600)",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "dds_rgb",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 28,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 3000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "DDS_WH_A_IMP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 0,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40001 — Acc. Wh phase A import (×10 Wh)"
+      },
+      {
+        "id": "DDS_WH_B_IMP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 2,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40003 — Acc. Wh phase B import"
+      },
+      {
+        "id": "DDS_WH_C_IMP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 4,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40005 — Acc. Wh phase C import"
+      },
+      {
+        "id": "DDS_WH_A_EXP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 8,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40009 — Acc. Wh phase A export"
+      },
+      {
+        "id": "DDS_WH_B_EXP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 10,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40011 — Acc. Wh phase B export"
+      },
+      {
+        "id": "DDS_WH_C_EXP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 12,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40013 — Acc. Wh phase C export"
+      },
+      {
+        "id": "DDS_WH_SUM_IMP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 16,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40017 — Summed acc. Wh import"
+      },
+      {
+        "id": "DDS_WH_SUM_EXP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 18,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40019 — Summed acc. Wh export"
+      },
+      {
+        "id": "DDS_VAH_SUM_IMP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 20,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40021 — Summed acc. VAh import"
+      },
+      {
+        "id": "DDS_VAH_SUM_EXP",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 22,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 10,
+        "graphEnabled": false,
+        "comment": "HR 40023 — Summed acc. VAh export"
+      },
+      {
+        "id": "DDS_V_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 24,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40025 — Phase A voltage (V)"
+      },
+      {
+        "id": "DDS_I_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 25,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40026 — Phase A current (A)"
+      },
+      {
+        "id": "DDS_W_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 26,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "HR 40027 — Phase A real power (W)"
+      },
+      {
+        "id": "DDS_HZ_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 28,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40029 — Phase A frequency (Hz)"
+      },
+      {
+        "id": "DDS_PF_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 29,
+        "signed": true,
+        "scale": 0.01,
+        "comment": "HR 40030 — Phase A power factor"
+      },
+      {
+        "id": "DDS_V_B",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 30,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40031 — Phase B voltage (V)"
+      },
+      {
+        "id": "DDS_I_B",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 31,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40032 — Phase B current (A)"
+      },
+      {
+        "id": "DDS_W_B",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 32,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "HR 40033 — Phase B real power (W)"
+      },
+      {
+        "id": "DDS_HZ_B",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 34,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40035 — Phase B frequency (Hz)"
+      },
+      {
+        "id": "DDS_PF_B",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 35,
+        "signed": true,
+        "scale": 0.01,
+        "comment": "HR 40036 — Phase B power factor"
+      },
+      {
+        "id": "DDS_V_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 36,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40037 — Phase C voltage (V)"
+      },
+      {
+        "id": "DDS_I_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 37,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40038 — Phase C current (A)"
+      },
+      {
+        "id": "DDS_W_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 38,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "HR 40039 — Phase C real power (W)"
+      },
+      {
+        "id": "DDS_HZ_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 40,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 40041 — Phase C frequency (Hz)"
+      },
+      {
+        "id": "DDS_PF_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 41,
+        "signed": true,
+        "scale": 0.01,
+        "comment": "HR 40042 — Phase C power factor"
+      },
+      {
+        "id": "DDS_VA_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 42,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "graphEnabled": false,
+        "comment": "HR 40043 — Phase A apparent power (VA, optional)"
+      },
+      {
+        "id": "DDS_VA_B",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 44,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "graphEnabled": false,
+        "comment": "HR 40045 — Phase B apparent power (VA, optional)"
+      },
+      {
+        "id": "DDS_VA_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 46,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "graphEnabled": false,
+        "comment": "HR 40047 — Phase C apparent power (VA, optional)"
+      }
+    ]
+  },
+  "notes": "Metered values map §9.2 RGB v1.600 (HR 40001+). Holding register address = OFFSET from PDF. Default 9600 8N1 slave 1 — confirm on meter. Source: DDS-RGB 2.025 Modbus Address Data.pdf"
+}

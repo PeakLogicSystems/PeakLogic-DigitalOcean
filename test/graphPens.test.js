@@ -2,7 +2,7 @@
 
 const { describe, it } = require('node:test');
 const assert = require('node:assert');
-const { normalizePens, penTagIds, MAX_GRAPH_PENS } = require('../src/graph/graphPens');
+const { normalizePens, penTagIds, pensFromEnabledTags, MAX_GRAPH_PENS } = require('../src/graph/graphPens');
 
 describe('graphPens', () => {
   const tags = [
@@ -33,5 +33,18 @@ describe('graphPens', () => {
     assert.equal(p.scale, 1);
     assert.match(p.color, /^#[0-9a-f]{6}$/i);
     assert.equal(MAX_GRAPH_PENS, 32);
+  });
+
+  it('pensFromEnabledTags uses graphEnabled and keeps configured pens', () => {
+    const tagList = [
+      { id: 'AI1', type: 'INT', graphEnabled: true },
+      { id: 'AI2', type: 'REAL', graphEnabled: false },
+      { id: 'DI1', type: 'BOOL', graphEnabled: true },
+    ];
+    const configured = [{ tagId: 'DI1', color: '#abcdef', scale: 2, offset: 0, ymin: 0, ymax: 1, autoScale: false }];
+    const pens = pensFromEnabledTags(tagList, configured);
+    assert.deepEqual(penTagIds(pens), ['AI1', 'DI1']);
+    assert.equal(pens[1].color, '#abcdef');
+    assert.equal(pens[1].scale, 2);
   });
 });

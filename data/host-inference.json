@@ -1,0 +1,23 @@
+{
+  "models": {
+    "lift-submersible-v3": {
+      "profile": "lift-pump",
+      "labels": ["healthy", "seal_leak", "clog_ragging", "impeller_worn"],
+      "file": "lift-submersible-v3.onnx"
+    },
+    "hvac-comp-v1": {
+      "profile": "hvac-compressor",
+      "labels": ["healthy", "bearing_wear", "compressor_stress", "electrical_fault"],
+      "file": "hvac-comp-v1.onnx"
+    },
+    "hvac-fan-v1": {
+      "profile": "hvac-fan",
+      "labels": ["healthy", "bearing_wear", "imbalance", "electrical_fault"],
+      "file": "hvac-fan-v1.onnx"
+    }
+  },
+  "platformDefaults": {
+    "arduino-opta-mqtt-st": "lift-submersible-v3",
+    "mcxn947-hvac": "hvac-comp-v1"
+  }
+}

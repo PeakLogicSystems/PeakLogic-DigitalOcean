@@ -1,6 +1,14 @@
 'use strict';
 
-const { describe, it } = require('node:test');
+const path = require('path');
+const os = require('os');
+const fs = require('fs');
+process.env.PEAKLOGIC_CONFIG_URI = 'memory';
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-apply-'));
+const configStore = require('../src/configStore');
+configStore.initMemorySync();
+
+const { describe, it, after } = require('node:test');
 const assert = require('node:assert');
 const express = require('express');
 const { createDriverRoutes } = require('../src/api/routes/drivers');
@@ -16,6 +24,7 @@ function mockDeps() {
         drivers.push(...list);
       },
       rebuild: async () => {},
+      linkMqttParcDriversIfHubLive: async () => [],
     },
     tagStore: {
       list: () => tags.slice(),
@@ -50,6 +59,12 @@ async function postApply(deps, body) {
 }
 
 describe('POST /devices/apply', () => {
+  after(async () => {
+    const { getMqttCentralHub } = require('../src/parc/mqttCentralHub');
+    const { registry } = require('../src/parc/deviceRegistry');
+    await getMqttCentralHub(registry).stop().catch(() => {});
+  });
+
   it('first module uses DI1–DI16 on slave 1', async () => {
     const deps = mockDeps();
     const r = await postApply(deps, {
@@ -152,6 +167,32 @@ describe('POST /devices/apply', () => {
     assert.ok(deps._drivers.some((d) => d.id === 'scan_spec'));
   });
 
+  it('con::cube template adds parameter groups of 4 and appends next block', async () => {
+    const deps = mockDeps();
+    const first = await postApply(deps, {
+      presetId: 'scan_concube_tcp',
+      host: '192.168.1.10',
+      paramGroups: 1,
+      replaceTags: false,
+    });
+    assert.equal(first.status, 200);
+    assert.equal(first.data.tagsAdded, 10);
+    assert.ok(deps._tags.some((t) => t.id === 'CUBE_DEV_STATUS' && t.driverId === 'scan_cube_tcp'));
+    assert.ok(deps._tags.some((t) => t.id === 'PARM4_VAL'));
+    assert.ok(!deps._tags.some((t) => t.id === 'PARM5_VAL'));
+
+    const second = await postApply(deps, {
+      presetId: 'scan_concube_tcp',
+      paramGroups: 1,
+      replaceTags: false,
+    });
+    assert.equal(second.status, 200);
+    assert.equal(second.data.tagsAdded, 8);
+    assert.ok(deps._tags.some((t) => t.id === 'PARM5_VAL'));
+    assert.ok(deps._tags.some((t) => t.id === 'PARM8_VAL'));
+    assert.equal(deps._tags.filter((t) => t.driverId === 'scan_cube_tcp').length, 18);
+  });
+
   it('replaceTags clears prior tags on the driver', async () => {
     const deps = mockDeps();
     await postApply(deps, {
@@ -168,5 +209,63 @@ describe('POST /devices/apply', () => {
     assert.equal(deps._tags.length, 16);
     assert.ok(deps._tags.some((t) => t.id === 'DI1'));
     assert.equal(deps._tags.find((t) => t.id === 'DI17'), undefined);
+  });
+
+  it('returns 409 when merged tags conflict with existing ids', async () => {
+    const deps = mockDeps();
+    deps._tags.push({ id: 'DI1', driverId: 'other', type: 'BOOL', role: 'input' });
+    deps._drivers.push({
+      id: 'mbus1',
+      type: 'modbus_rtu',
+      enabled: true,
+      serialPort: 'COM3',
+      baud: 9600,
+      slaveId: 1,
+    });
+    const r = await postApply(deps, {
+      presetId: 'datexel_dat10148',
+      driverId: 'mbus1',
+      serialPort: 'COM3',
+      replaceTags: false,
+    });
+    assert.equal(r.status, 409);
+    assert.match(r.data.error, /Tag id already in use: DI1/);
+  });
+
+  it('apply mqtt_parc preset adds driver (tags sync separately)', async () => {
+    const deps = mockDeps();
+    const r = await postApply(deps, {
+      presetId: 'arduino_opta_parc',
+      deviceId: 'opta_0123abcdef',
+      driverId: 'motor_skid',
+      replaceTags: false,
+    });
+    assert.equal(r.status, 200);
+    assert.equal(r.data.driver.type, 'mqtt_parc');
+    assert.equal(r.data.driver.id, 'motor_skid');
+    assert.equal(r.data.tagsAdded, 0);
+    assert.ok(r.data.tagsFromDevice);
+    assert.ok(deps._drivers.some((d) => d.id === 'motor_skid' && d.type === 'mqtt_parc'));
+  });
+
+  it('returns before slow driver rebuild completes', async () => {
+    const deps = mockDeps();
+    let rebuildDone;
+    deps.driverManager.rebuild = () => new Promise((resolve) => {
+      rebuildDone = resolve;
+    });
+    const started = Date.now();
+    const r = await Promise.race([
+      postApply(deps, {
+        presetId: 'datexel_dat10148',
+        driverId: 'modbus_rtu',
+        serialPort: 'COM3',
+        replaceTags: false,
+      }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('apply hung')), 500)),
+    ]);
+    assert.equal(r.status, 200);
+    assert.ok(Date.now() - started < 500, 'apply should not wait for rebuild');
+    rebuildDone?.();
   });
 });

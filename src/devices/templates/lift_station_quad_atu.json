@@ -1,0 +1,23 @@
+{
+  "id": "lift_station_quad_atu",
+  "label": "Lift station — quad ATU",
+  "vendor": "PeakLogic",
+  "model": "Quad ATU (4 duplex + 4 TPO)",
+  "transport": "mqtt_parc",
+  "stationType": "quad_atu",
+  "defaultProgram": "logic/34_quad_atu.st",
+  "tagsFromDevice": true,
+  "diCount": 32,
+  "doCount": 16,
+  "aiCount": 32,
+  "defaults": {
+    "deviceId": "lift_qatu_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true
+  },
+  "driver": {
+    "enabled": true
+  },
+  "notes": "Four independent duplex alternators, each driven by its own TPO. Deploy logic/34_quad_atu.st on device."
+}

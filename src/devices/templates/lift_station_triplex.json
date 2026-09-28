@@ -1,0 +1,23 @@
+{
+  "id": "lift_station_triplex",
+  "label": "Lift station — triplex (3 pump)",
+  "vendor": "PeakLogic",
+  "model": "Triplex alternator (ALT3)",
+  "transport": "mqtt_parc",
+  "stationType": "triplex",
+  "defaultProgram": "logic/28_alternator_triplex.st",
+  "tagsFromDevice": true,
+  "diCount": 8,
+  "doCount": 3,
+  "aiCount": 1,
+  "defaults": {
+    "deviceId": "lift_tpx_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true
+  },
+  "driver": {
+    "enabled": true
+  },
+  "notes": "3-pump triplex alternator. Deploy logic/28_alternator_triplex.st on device."
+}

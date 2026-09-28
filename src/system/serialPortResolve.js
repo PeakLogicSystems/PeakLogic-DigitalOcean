@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const { listSerialPorts } = require('./serialPorts');
 
 function normPort(p) {
@@ -34,12 +35,22 @@ function pickFallback(ports, excludeSet, wanted) {
   return null;
 }
 
+function findConfiguredPort(wanted, ports) {
+  const key = normPort(wanted);
+  if (!key) return null;
+  const hit = ports.find((p) => normPort(p.path) === key);
+  return hit?.path || null;
+}
+
 function resolveFromPortList(configured, ports, exclude = []) {
   const wanted = String(configured || '').trim();
   const excludeSet = new Set(exclude.map(normPort).filter(Boolean));
-  const paths = ports.map((p) => p.path);
-  if (wanted && paths.includes(wanted)) {
+  if (wanted && fs.existsSync(wanted) && !isExcluded(wanted, excludeSet)) {
     return { path: wanted, fallback: false };
+  }
+  const exact = findConfiguredPort(wanted, ports);
+  if (exact && !isExcluded(exact, excludeSet)) {
+    return { path: exact, fallback: false };
   }
   const fb = pickFallback(ports, excludeSet, wanted);
   if (fb) return fb;
@@ -65,4 +76,4 @@ async function resolveSerialPort(configured, opts = {}) {
   return resolveFromPortList(configured, ports, opts.exclude);
 }
 
-module.exports = { resolveSerialPort, resolveFromPortList, normPort };
+module.exports = { resolveSerialPort, resolveFromPortList, findConfiguredPort, normPort };

@@ -1,0 +1,17 @@
+﻿datelogged
+High Level Float Alarm
+Motor Fault
+Pump 1 Run
+Pump 2 Run
+Input 5
+Input 6
+Pump 1 Motor Amps
+Pump 2 Motor Amps
+Pump 1 Motor Starts
+Pump 1 Motor Run Time
+Pump 2 Motor Starts
+Pump 2 Motor Run Time
+External Power
+Battery
+Flow Rate Pump1 (1 hr)
+Flow Rate Pump2 (1 hr)

@@ -5,7 +5,7 @@ function busKey(driver) {
   if (driver.type === 'modbus_tcp') {
     return `tcp:${driver.host || '127.0.0.1'}:${driver.port ?? 502}`;
   }
-  if (driver.type === 'modbus_rtu') {
+  if (driver.type === 'modbus_rtu' || driver.type === 'vgreen_epc') {
     return `rtu:${String(driver.serialPort || '').toUpperCase()}`;
   }
   return '';
@@ -97,6 +97,53 @@ function offsetTagsForDriver(tags, driverId, tagList, slaveId) {
   });
 }
 
+/** Highest PARMn index already mapped on a driver (0 if none). */
+function maxConcubeParamIndex(tagList, driverId) {
+  let max = 0;
+  for (const t of tagList) {
+    if (t.driverId !== driverId) continue;
+    const m = /^PARM(\d+)_(?:STS|VAL)$/.exec(String(t.id || ''));
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+  }
+  return max;
+}
+
+function hasConcubeSystemTags(tagList, driverId) {
+  return tagList.some((t) => t.driverId === driverId && t.id === 'CUBE_DEV_STATUS');
+}
+
+/**
+ * Build apply options for con::cube templates (groups of 4 parameters).
+ * @returns {{ paramGroups?: number, paramStart: number, paramCount: number, includeSystemTags: boolean }}
+ */
+function concubeApplyOptions(preset, tagList, driverId, replaceTags, paramGroupsReq) {
+  const perGroup = preset?.concube?.paramsPerGroup ?? 4;
+  const groups = Math.max(1, Math.min(16, Number(paramGroupsReq) || preset?.concube?.defaultGroups || 1));
+  let paramCount = groups * perGroup;
+  if (replaceTags) {
+    return {
+      paramGroups: groups,
+      paramStart: 1,
+      paramCount,
+      includeSystemTags: true,
+    };
+  }
+  const maxParm = maxConcubeParamIndex(tagList, driverId);
+  const paramStart = maxParm + 1;
+  if (paramStart > 64) {
+    return { error: 'All 64 con::cube parameter slots are already mapped on this driver' };
+  }
+  if (paramStart + paramCount - 1 > 64) {
+    paramCount = 64 - paramStart + 1;
+  }
+  return {
+    paramGroups: groups,
+    paramStart,
+    paramCount,
+    includeSystemTags: maxParm === 0 && !hasConcubeSystemTags(tagList, driverId),
+  };
+}
+
 module.exports = {
   busKey,
   driversOnBus,
@@ -105,4 +152,7 @@ module.exports = {
   parseChannelTag,
   maxChannelForFamily,
   offsetTagsForDriver,
+  maxConcubeParamIndex,
+  hasConcubeSystemTags,
+  concubeApplyOptions,
 };

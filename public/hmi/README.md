@@ -7,17 +7,17 @@ Graphics are organized under `svg/library/` by function, with demo screens in `s
 | Group | Path | Contents |
 |-------|------|----------|
 | **Demos** | `demos/` | Built-in PeakLogic demo screens |
-| **Controls — Pilot lights** | `library/controls/pilot-lights/` | PeakLogic `light_symbol*`, `pl_*` |
-| **Controls — Push buttons** | `library/controls/push-buttons/` | PeakLogic `roundsymbol_*`, `pb_*` |
-| **Controls — Switches** | `library/controls/selector-switches/` | PeakLogic selector switches |
+| **Controls — Pilot lights** | `library/controls/pilot-lights/` | MV `light_symbol*`, `pl_*` |
+| **Controls — Push buttons** | `library/controls/push-buttons/` | MV `roundsymbol_*`, `pb_*` |
+| **Controls — Switches** | `library/controls/selector-switches/` | MV selector switches |
 | **Gauges & meters** | `library/gauges-meters/` | Dials, bar graphs, columns, needles |
 | **Charts & trends** | `library/charts-trends/` | Strip charts, trend areas |
 | **Numeric displays** | `library/numeric-displays/` | Bezels, display panels, numeric entry |
 | **PID faceplates** | `library/pid-faceplates/` | Ready-made PID loop faceplate |
 | **Process equipment** | `library/process-equipment/` | Tanks, motors, conveyors, etc. |
 | **Pumps / Valves / Tanks / Piping** | `library/pumps/`, `valves/`, … | Equipment by type |
-| **Animations** | `library/animations/` | PeakLogic GIF/PNG gauge animations |
-| **Text & labels** | `library/text-labels/` | PeakLogic text widgets |
+| **Animations** | `library/animations/` | MV GIF/PNG gauge animations |
+| **Text & labels** | `library/text-labels/` | MV text widgets |
 
 Full index: `svg/graphics-catalog.json` · Legacy path redirects: `svg/path-aliases.json`
 
@@ -33,24 +33,24 @@ Bind element ids: `pv_dial`, `pv_value`, `sp_value`, `out_bar_fill`, `out_value`
 
 | Part | Path |
 |------|------|
-| Dial + needle | `library/gauges-meters/standard/peaklogic/editable/gaugedial_3d_h1.svg` + `gaugeneedle.svg` |
-| Bar graph (OUT) | `library/gauges-meters/standard/peaklogic/editable/bargraph.svg` |
-| Numeric bezel (SP/PV) | `library/numeric-displays/bezels/peaklogic/bezel_digit_*.svg` |
-| Trend strip | `library/charts-trends/strip-charts/peaklogic/` |
-| Control valve + gauge | `library/gauges-meters/standard/peaklogic/editable/controlvalvewgauge.svg` |
+| Dial + needle | `library/gauges-meters/standard/mv/editable/gaugedial_3d_h1.svg` + `gaugeneedle.svg` |
+| Bar graph (OUT) | `library/gauges-meters/standard/mv/editable/bargraph.svg` |
+| Numeric bezel (SP/PV) | `library/numeric-displays/bezels/mv/bezel_digit_*.svg` |
+| Trend strip | `library/charts-trends/strip-charts/mv/` |
+| Control valve + gauge | `library/gauges-meters/standard/mv/editable/controlvalvewgauge.svg` |
 
 ## Refresh / reorganize
 
 ```bash
-npm run download-opto-svgs        # import staging → peaklogic-import/
-npm run download-mblogic-svgs      # import staging → library/.../peaklogic/
+npm run download-opto-svgs        # import staging → mv-import/
+npm run download-mblogic-svgs      # import staging → library/.../mv/
 npm run organize-hmi-graphics      # Classify + move new assets
 node scripts/organize-hmi-graphics.js --catalog-only   # Rebuild index only
 ```
 
 ## Demo screens
 
-- `demos/demo_controls.svg` — PeakLogic pilot + start/stop samples (DI1 / Q1)
+- `demos/demo_controls.svg` — MV pilot + start/stop samples (DI1 / Q1)
 - `demos/demo_process.svg` — Tank / pump / valve process demo
 
 ## Grid composer (configurable layout)

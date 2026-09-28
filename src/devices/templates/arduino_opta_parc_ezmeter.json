@@ -1,0 +1,57 @@
+{
+  "id": "arduino_opta_parc_ezmeter",
+  "label": "Arduino Opta — MQTT Parc + EZ Meter PQ (RS485)",
+  "vendor": "Arduino",
+  "model": "Opta — lift I/O over MQTT + EZ Meter DDS-RGB on onboard RS485",
+  "transport": "mqtt_parc",
+  "driverId": "opta_st_01",
+  "tagsFromDevice": false,
+  "defaultProgram": "logic/38_duplex_lift_station_ezmeter.st",
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "opta_st_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "opta_st_01",
+    "remoteExecution": true
+  },
+  "tags": {
+    "discrete": [{ "prefix": "I", "count": 8, "start": 0 }],
+    "coil": [{ "prefix": "R", "count": 4, "start": 0 }],
+    "input": [{ "prefix": "I", "suffix": "_RAW", "count": 8, "start": 0 }],
+    "holding": [{ "prefix": "H", "count": 8, "start": 0 }],
+    "optaParcEzmeter": {}
+  },
+  "fieldbus": {
+    "compileFlags": ["MV_FIELDBUS=1", "MV_EZMETER=1"],
+    "ezmeter": {
+      "slaveId": 1,
+      "baud": 9600,
+      "parity": "none",
+      "stopBits": 1,
+      "livePollMs": 30000,
+      "energyPollMs": 300000
+    }
+  },
+  "facility": {
+    "driver": "ezmeter"
+  },
+  "notes": "Hybrid site: MQTT Parc for Opta I/O + ST; EZ Meter DDS-RGB on Opta RS485 A/B (9600 8N1, slave ID 1). Flash PeaklogicOptaMqttSt with -DMV_FIELDBUS=1 -DMV_EZMETER=1 (Board → compile flags). Firmware polls DDS_* and publishes estimated MECH_PQ_THD_* (RGB v1.600 has no harmonic registers). Load logic/ezmeter_facility_pq.st for MECH_PQ_* alarms. Wire meter L1/L2/L3 + neutral to EZ Meter; RS485 to Opta terminal block.",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
+  }
+}

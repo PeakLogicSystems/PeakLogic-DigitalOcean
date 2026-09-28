@@ -1,0 +1,21 @@
+{
+  "deviceId": "dragino_pool_chem",
+  "name": "Pool chemistry monitor",
+  "platform": "dragino-rs485-nb",
+  "reportIntervalSec": 300,
+  "modbusPreset": "dfrobot_pool_chemistry_dragino",
+  "dragino": {
+    "imei": "863663062798815",
+    "model": "RS485-NB",
+    "payloadHex": "010406000002e6011d020402007d",
+    "time": "2026/07/29 12:41:00"
+  },
+  "tags": [
+    { "id": "CELL_SIGNAL", "type": "INT", "role": "input", "value": 24, "quality": "GOOD" },
+    { "id": "CELL_BATTERY_V", "type": "REAL", "role": "input", "value": 3.58, "quality": "GOOD" },
+    { "id": "NH3_MG_L", "type": "REAL", "role": "input", "value": 0, "quality": "GOOD" },
+    { "id": "PH_PV", "type": "REAL", "role": "input", "value": 7.42, "quality": "GOOD" },
+    { "id": "WATER_TEMP_C", "type": "REAL", "role": "input", "value": 28.5, "quality": "GOOD" },
+    { "id": "CL_PV", "type": "REAL", "role": "input", "value": 1.25, "quality": "GOOD" }
+  ]
+}

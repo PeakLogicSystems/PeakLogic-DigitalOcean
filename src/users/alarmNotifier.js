@@ -2,12 +2,11 @@
 
 const persistence = require('../persistence');
 const userStore = require('../users/userStore');
+const { resolveAlarmContext } = require('../alarms/alarmContext');
 const {
   effectiveNotificationEmail,
   effectiveNotificationPhone,
 } = require('../users/userProfileSchema');
-const { deliverAlarmNotifications } = require('../notifications/alarmDelivery');
-const { TENANT_ID } = require('../config');
 
 const QUEUE_FILE = 'alarm_notify_queue.json';
 
@@ -20,11 +19,12 @@ function appendQueue(entry) {
 }
 
 /**
- * Queue and deliver alarm notifications for active user profiles.
+ * Queue alarm notifications for active user profiles (email/SMS fields stored; delivery TBD).
  * @param {{ tagId: string, level: string, value?: * }} alarm
  */
 function notifyAlarm(alarm) {
-  const recipients = userStore.listNotificationRecipients(alarm.level);
+  const alarmContext = resolveAlarmContext(alarm);
+  const recipients = userStore.listNotificationRecipients(alarm.level, alarmContext);
   if (!recipients.length) return { queued: 0 };
 
   let queued = 0;
@@ -54,15 +54,6 @@ function notifyAlarm(alarm) {
     queued += 1;
     console.log(`[alarm-notify] ${alarm.tagId} ${alarm.level} → ${user.email} (${channels.map((c) => c.type).join(',')})`);
   }
-
-  deliverAlarmNotifications({
-    tenantName: TENANT_ID,
-    alarm,
-    recipients,
-  }).catch((err) => {
-    console.warn('[alarm-notify] delivery:', err?.message || err);
-  });
-
   return { queued };
 }
 

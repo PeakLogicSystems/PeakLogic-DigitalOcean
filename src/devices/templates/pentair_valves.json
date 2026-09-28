@@ -1,0 +1,36 @@
+{
+  "id": "pentair_valves",
+  "label": "Pentair valve positions (via controller)",
+  "vendor": "Pentair",
+  "model": "IntelliTouch / EasyTouch valve circuits",
+  "transport": "pentair_rs485",
+  "sharedBus": true,
+  "driverId": "pentair_valves",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceAddr": 16,
+    "deviceClass": "valve",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 120000,
+    "busGapMs": 120
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "pentair": [
+      { "id": "VLV1_POS", "type": "INT", "role": "input", "point": "valve1_pos", "deviceClass": "valve", "deviceAddr": 16, "comment": "Valve 1 position byte" },
+      { "id": "VLV2_POS", "type": "INT", "role": "input", "point": "valve2_pos", "deviceClass": "valve", "deviceAddr": 16 },
+      { "id": "VLV3_POS", "type": "INT", "role": "input", "point": "valve3_pos", "deviceClass": "valve", "deviceAddr": 16 },
+      { "id": "VLV4_POS", "type": "INT", "role": "input", "point": "valve4_pos", "deviceClass": "valve", "deviceAddr": 16 }
+    ]
+  }
+}

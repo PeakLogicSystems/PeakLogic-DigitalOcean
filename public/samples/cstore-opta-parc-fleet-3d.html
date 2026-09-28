@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/samples/mv-live-api.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circle K Florida Fleet</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }
+    #canvas-wrap { position: absolute; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel { position: absolute; z-index: 10; background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 10px; backdrop-filter: blur(8px); padding: 14px 16px; font-size: 13px; line-height: 1.45; }
+    #title-panel { top: 14px; left: 14px; max-width: 440px; }
+    #title-panel h1 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    #title-panel p { color: #94a3b8; font-size: 12px; }
+    #mv-status { top: 14px; left: 50%; transform: translateX(-50%); font-size: 12px; padding: 8px 14px; }
+    #mv-status.ok { border-color: rgba(34, 197, 94, 0.45); color: #86efac; }
+    #mv-status.err { border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
+    #empty-hint { top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; max-width: 420px; display: none; }
+    #fleet-list { bottom: 14px; right: 14px; width: 320px; max-height: 40vh; overflow: auto; }
+    #fleet-list ul { list-style: none; margin-top: 8px; }
+    #fleet-list li { font-size: 12px; padding: 4px 0; border-bottom: 1px solid rgba(148,163,184,0.12); display: flex; justify-content: space-between; gap: 8px; cursor: pointer; }
+    #fleet-list .alm { color: #f87171; font-weight: 600; }
+    #fleet-list .ok { color: #86efac; }
+    #fleet-list .off { color: #64748b; }
+  </style>
+</head>
+<body>
+  <div id="canvas-wrap"></div>
+  <div id="mv-status" class="panel err">MV live: connecting…</div>
+  <div id="title-panel" class="panel">
+    <h1 id="fleet-title">Circle K Florida Fleet</h1>
+    <p id="fleet-sub">Opta Parc cloud — phase 1 lift/septic; phase 2 IoT-Link HVAC-R (planned)</p>
+  </div>
+  <div id="empty-hint" class="panel">
+    <strong>No stores on map yet</strong>
+    <p style="margin-top:8px;color:#94a3b8">Commission an Opta at the store, then bulk-add from the Parc registry with a stable position ID (store slug).</p>
+  </div>
+  <div id="fleet-list" class="panel"><strong>Fleet</strong><ul id="fleet-items"></ul></div>
+  <script type="importmap">{ "imports": { "three": "/vendor/three/build/three.module.js", "three/addons/": "/vendor/three/examples/jsm/" } }</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { buildLiftStation, applyLiftStationLevel } from './lift-station-3d.js';
+
+    const FLEET = {"tenant":null,"operator":"C-store fleet","center":{"name":"Circle K Florida — regional view","lat":28.1,"lng":-81.6},"pinOnly":false,"lifts":[]};
+    const wrap = document.getElementById('canvas-wrap');
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    renderer.setClearColor(0x0f172a);
+    wrap.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.1, 4000);
+    camera.position.set(0, 80, 120);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+    sun.position.set(40, 80, 30);
+    scene.add(sun);
+
+    function latLngToScene(lat, lng) {
+      const lat0 = FLEET.center.lat;
+      const lng0 = FLEET.center.lng;
+      return { x: (lng - lng0) * 4200, z: -(lat - lat0) * 4200 };
+    }
+
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(800, 800),
+      new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.95 }),
+    );
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
+
+    const tagCache = {};
+    const liftMeshes = [];
+
+    if (!FLEET.lifts.length) {
+      document.getElementById('empty-hint').style.display = 'block';
+    }
+
+    for (const st of FLEET.lifts) {
+      const pos = latLngToScene(st.lat, st.lng);
+      const group = new THREE.Group();
+      group.position.set(pos.x, 0, pos.z);
+      group.userData = { fleetMeta: st };
+      const pinColor = st.monitored === false ? 0x64748b : (st.type === 'simplex' ? 0x38bdf8 : 0xf97316);
+      const pin = new THREE.Mesh(
+        new THREE.CylinderGeometry(2.2, 2.6, FLEET.pinOnly ? 8 : 10, 10),
+        new THREE.MeshStandardMaterial({ color: pinColor }),
+      );
+      pin.position.y = FLEET.pinOnly ? 4 : 5;
+      group.add(pin);
+      if (!FLEET.pinOnly && st.monitored !== false) {
+        const modelType = st.type === 'simplex' ? 'simplex' : 'duplex';
+        const model = buildLiftStation(modelType, { scale: 1.4 });
+        model.position.y = 0.5;
+        group.add(model);
+        group.userData.liftModel = model;
+      }
+      scene.add(group);
+      liftMeshes.push(group);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function tagVal(tagId) {
+      const t = tagCache[tagId];
+      return t ? (t.value ?? t.v ?? t) : null;
+    }
+
+    function refreshFleetList() {
+      const ul = document.getElementById('fleet-items');
+      ul.innerHTML = '';
+      for (const st of FLEET.lifts) {
+        const li = document.createElement('li');
+        const alm = tagVal(st.alarmTag);
+        const status = alm === true || alm === 1 ? 'alm' : (tagCache[st.alarmTag] ? 'ok' : 'off');
+        li.innerHTML = `<span>${st.storeNumber || st.slug}</span><span class="${status}">${status === 'alm' ? 'ALARM' : status === 'ok' ? 'OK' : '—'}</span>`;
+        ul.appendChild(li);
+      }
+      for (const g of liftMeshes) {
+        const st = g.userData.fleetMeta;
+        const alm = tagVal(st.alarmTag);
+        g.children[0].material.color.setHex((alm === true || alm === 1) ? 0xef4444 : 0xf97316);
+        const lvl = tagVal(st.levelTag);
+        if (g.userData.liftModel && typeof lvl === 'number') applyLiftStationLevel(g.userData.liftModel, lvl);
+      }
+    }
+
+    if (window.MvLiveApi) {
+      const api = new window.MvLiveApi({ pollMs: 2000 });
+      api.onTags((tags) => {
+        Object.assign(tagCache, tags);
+        document.getElementById('mv-status').textContent = 'MV live: connected';
+        document.getElementById('mv-status').className = 'panel ok';
+        refreshFleetList();
+      });
+      api.onError(() => {
+        document.getElementById('mv-status').textContent = 'MV live: offline';
+        document.getElementById('mv-status').className = 'panel err';
+      });
+      api.start();
+    }
+    refreshFleetList();
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "id": "dfrobot_sen0709_orp",
+  "label": "DFRobot SEN0709 — RS485 ORP probe",
+  "vendor": "DFRobot",
+  "model": "SEN0709 ORP",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "df_sen0709",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 2,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "ORP_MV",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": true,
+        "scale": 1,
+        "comment": "ORP mV (IR 0x0000, actual value)"
+      },
+      {
+        "id": "ORP_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 1,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Temperature °C (IR 0x0001, register ×10)"
+      }
+    ]
+  }
+}

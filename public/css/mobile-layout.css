@@ -1,0 +1,91 @@
+/* Applied when html.mv-mobile is set by mobileViewport.js (orientation-safe phone detection) */
+
+html.mv-mobile .topbar-mobile-toggle,
+html.mv-mobile .cloud-studio-nav-toggle,
+html.mv-mobile .cs-nav-toggle {
+  display: block;
+}
+
+html.mv-mobile .topbar-mobile-menu:not([open]) .topbar-mobile-panel,
+html.mv-mobile .cloud-studio-nav-menu:not([open]) .cloud-studio-nav,
+html.mv-mobile .cs-nav-menu:not([open]) .cs-nav {
+  display: none;
+}
+
+html.mv-mobile .dashboard-header-chrome,
+html.mv-mobile .cs-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+html.mv-mobile .topbar {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.65rem;
+  position: static;
+}
+
+html.mv-mobile .topbar-brand {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 1rem;
+}
+
+html.mv-mobile .topbar-mobile-menu[open] .topbar-mobile-panel,
+html.mv-mobile .cloud-studio-nav-menu[open] .cloud-studio-nav,
+html.mv-mobile .cs-nav-menu[open] .cs-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--mv-mobile-chrome-top, 2.75rem);
+  z-index: 120;
+  max-height: min(70dvh, 28rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.35);
+}
+
+html.mv-mobile .topbar-mobile-menu[open] .topbar-mobile-panel {
+  background: var(--ps-purple-deep, #5b21b6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.45rem 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+html.mv-mobile .cloud-studio-nav-menu[open] .cloud-studio-nav,
+html.mv-mobile .cs-nav-menu[open] .cs-nav {
+  background: var(--sidebar, #1e293b);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.75rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+html.mv-mobile .hmi-viewport-live {
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+html.mv-mobile .hmi-workspace {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+html.mv-mobile .panel-hmi-main {
+  min-height: calc(var(--mv-vh, 100dvh) - var(--mv-mobile-chrome-top, 5rem) - 0.5rem);
+}
+
+html.mv-mobile .hmi-live-stage-wrap {
+  min-height: 0;
+  flex: 1;
+}
+
+html:not(.mv-mobile) .topbar-mobile-toggle {
+  display: none;
+}

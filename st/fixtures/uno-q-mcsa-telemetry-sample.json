@@ -1,0 +1,58 @@
+{
+  "deviceId": "unoq_mcsa_01",
+  "name": "UNO Q edge motor fault",
+  "platform": "arduino-uno-q-mcsa",
+  "reportIntervalSec": 1,
+  "runtime": {
+    "running": true,
+    "firmware": "uno-q-mcsa",
+    "trueFft": true,
+    "sampleRateHz": 4096,
+    "fftSize": 2048,
+    "mcsaChannels": 2
+  },
+  "mcsa": [
+    {
+      "ch": 0,
+      "fund": [60.0, 5.82],
+      "rotor": [[56.4, 0.174], [63.6, 0.181]],
+      "bearing": [[108.0, 0.052], [186.0, 0.041], [282.0, 0.028]],
+      "ecc": [[59.0, 0.061], [61.0, 0.058]],
+      "pump": [[120.0, 0.233], [180.0, 0.094]]
+    },
+    {
+      "ch": 1,
+      "fund": [60.0, 0.04],
+      "rotor": [[56.4, 0.001], [63.6, 0.001]],
+      "bearing": [[108.0, 0.0], [186.0, 0.0], [282.0, 0.0]],
+      "ecc": [[59.0, 0.0], [61.0, 0.0]],
+      "pump": [[120.0, 0.002], [180.0, 0.001]]
+    }
+  ],
+  "edgeAi": [{
+    "modelId": "lift-submersible-v3",
+    "assetId": "pump-1",
+    "pumpIndex": 1,
+    "type": "classification",
+    "label": "healthy",
+    "score": 0.14,
+    "confidence": 0.88,
+    "features": {
+      "startMs": 2100,
+      "runA": 8.2,
+      "peakA": 24.0,
+      "ratioSide": 0.09,
+      "ratioBearing": 0.02,
+      "trueFft": true
+    }
+  }],
+  "tags": [
+    { "id": "AI1", "type": "REAL", "role": "input", "value": 8.2, "quality": "GOOD" },
+    { "id": "AI2", "type": "REAL", "role": "input", "value": 0.05, "quality": "GOOD" },
+    { "id": "P1_RUN_FB", "type": "BOOL", "role": "memory", "value": true, "quality": "GOOD" },
+    { "id": "P2_RUN_FB", "type": "BOOL", "role": "memory", "value": false, "quality": "GOOD" },
+    { "id": "MOTOR1_FAULT", "type": "BOOL", "role": "memory", "value": false, "quality": "GOOD" },
+    { "id": "MOTOR2_FAULT", "type": "BOOL", "role": "memory", "value": false, "quality": "GOOD" },
+    { "id": "MOTOR1_START_MS", "type": "REAL", "role": "memory", "value": 2100, "quality": "GOOD" }
+  ]
+}

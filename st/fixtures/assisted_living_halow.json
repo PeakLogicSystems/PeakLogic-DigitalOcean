@@ -1,0 +1,211 @@
+{
+  "description": "Assisted living — T-HaLow building nodes + Nexcomm HVAC MCSA (×3 floors) + IOT-LINK pool subsystem",
+  "site": {
+    "name": "Assisted Living Facility",
+    "slug": "assisted-living"
+  },
+  "phase": {
+    "field": "t-halow",
+    "future": "nexcomm"
+  },
+  "mainAppliance": {
+    "role": "alf-main",
+    "product": "iot-link",
+    "projectId": "assisted-living-halow",
+    "gatewayId": "mv_alf_main_01",
+    "mqttBroker": "mqtt://127.0.0.1:1883",
+    "uplink": "cloudRemote"
+  },
+  "poolSubsystem": {
+    "role": "pool-iot-link",
+    "product": "iot-link-pool",
+    "projectId": "assisted-living-pool-iot-link",
+    "gatewayId": "mv_alf_pool_01",
+    "mqttBroker": "mqtt://127.0.0.1:1883",
+    "uplink": "cloudRemote",
+    "rs485PortA": "/dev/ttyLP6",
+    "rs485PortB": "/dev/ttyLP4",
+    "stProgram": "logic/30_pool_controller.st",
+    "halowMqttAnchor": true
+  },
+  "mqtt": {
+    "buildingBroker": "mqtt://127.0.0.1:1883",
+    "poolBroker": "mqtt://127.0.0.1:1883",
+    "topicPrefix": "peaklogic/v1",
+    "note": "Pool HaLow nodes home to pool IOT-LINK Mosquitto; optional bridge to main ALF broker"
+  },
+  "buildingHalowNodes": [
+    {
+      "name": "Mechanical room",
+      "slug": "mechanical",
+      "deviceId": "thalow_mech_01",
+      "driverId": "thalow_mech",
+      "sensorTemplate": 1,
+      "templateName": "ALF #1 Mechanical room"
+    },
+    {
+      "name": "Kitchen refer/freezer",
+      "slug": "kitchen",
+      "deviceId": "thalow_kitchen_01",
+      "driverId": "thalow_kitchen",
+      "sensorTemplate": 5,
+      "templateName": "ALF #5 Kitchen"
+    },
+    {
+      "name": "Kitchen six sinks",
+      "slug": "kitchen-sinks",
+      "deviceId": "thalow_kitchen_sinks",
+      "driverId": "thalow_kitchen_sinks",
+      "sensorTemplate": 6,
+      "templateName": "ALF #6 Kitchen six sinks"
+    },
+    {
+      "name": "RM101 room",
+      "slug": "rm101-room",
+      "deviceId": "thalow_rm101_room",
+      "driverId": "thalow_rm101_room",
+      "sensorTemplate": 2,
+      "templateName": "ALF #2 Client room"
+    },
+    {
+      "name": "RM101 bath",
+      "slug": "rm101-bath",
+      "deviceId": "thalow_rm101_bath",
+      "driverId": "thalow_rm101_bath",
+      "sensorTemplate": 3,
+      "templateName": "ALF #3 Client bathroom"
+    },
+    {
+      "name": "RM102 room",
+      "slug": "rm102-room",
+      "deviceId": "thalow_rm102_room",
+      "driverId": "thalow_rm102_room",
+      "sensorTemplate": 2
+    },
+    {
+      "name": "RM102 bath",
+      "slug": "rm102-bath",
+      "deviceId": "thalow_rm102_bath",
+      "driverId": "thalow_rm102_bath",
+      "sensorTemplate": 3
+    },
+    {
+      "name": "GF lounge RR1 bath",
+      "slug": "comm-gf-lounge-r1",
+      "deviceId": "thalow_comm_gf_rr1",
+      "driverId": "thalow_comm_gf_rr1",
+      "sensorTemplate": 3
+    }
+  ],
+  "nexcommHvacNodes": [
+    {
+      "name": "Floor 1 rooftop — Nexcomm HVAC MCSA",
+      "slug": "hvac-fl1",
+      "deviceId": "hvac_mcsa_fl1",
+      "driverId": "hvac_mcsa_fl1",
+      "platform": "mcxn947-hvac",
+      "firmware": "mcsa-hvac",
+      "uplink": "halow_parc",
+      "floor": 1,
+      "mcsaChannels": 2,
+      "parcTags": [
+        "T1_C",
+        "T2_C",
+        "T3_C",
+        "T4_C",
+        "WR_DETECT",
+        "COMP_FLT",
+        "FAN_FLT"
+      ],
+      "notes": "Compressor + fan CT MCSA, rooftop thermistors, condenser pan water rope"
+    },
+    {
+      "name": "Floor 2 rooftop — Nexcomm HVAC MCSA",
+      "slug": "hvac-fl2",
+      "deviceId": "hvac_mcsa_fl2",
+      "driverId": "hvac_mcsa_fl2",
+      "platform": "mcxn947-hvac",
+      "firmware": "mcsa-hvac",
+      "uplink": "halow_parc",
+      "floor": 2,
+      "mcsaChannels": 2,
+      "parcTags": [
+        "T1_C",
+        "T2_C",
+        "T3_C",
+        "T4_C",
+        "WR_DETECT",
+        "COMP_FLT",
+        "FAN_FLT"
+      ],
+      "notes": "Compressor + fan CT MCSA, rooftop thermistors, condenser pan water rope"
+    },
+    {
+      "name": "Floor 3 rooftop — Nexcomm HVAC MCSA",
+      "slug": "hvac-fl3",
+      "deviceId": "hvac_mcsa_fl3",
+      "driverId": "hvac_mcsa_fl3",
+      "platform": "mcxn947-hvac",
+      "firmware": "mcsa-hvac",
+      "uplink": "halow_parc",
+      "floor": 3,
+      "mcsaChannels": 2,
+      "parcTags": [
+        "T1_C",
+        "T2_C",
+        "T3_C",
+        "T4_C",
+        "WR_DETECT",
+        "COMP_FLT",
+        "FAN_FLT"
+      ],
+      "notes": "Compressor + fan CT MCSA, rooftop thermistors, condenser pan water rope"
+    }
+  ],
+  "poolHalowNodes": [
+    {
+      "name": "Therapy pool — MCXN947 chemistry",
+      "slug": "pool-chem",
+      "deviceId": "pool_sensor_01",
+      "driverId": "pool_sensor_01",
+      "platform": "mcxn947-pool",
+      "firmware": "mcxn947-pool-sensor",
+      "uplink": "halow_parc",
+      "parcTags": [
+        "PH_AI",
+        "ORP_AI",
+        "COND_AI",
+        "WATER_TEMP_C"
+      ],
+      "notes": "Nexcomm MCXN947 probe head; Parc MQTT over HaLow to pool IOT-LINK broker"
+    },
+    {
+      "name": "Therapy pool — deck I/O",
+      "slug": "pool-deck",
+      "deviceId": "thalow_pool_deck",
+      "driverId": "thalow_pool_deck",
+      "platform": "lilygo-t-halow",
+      "sensorTemplate": "custom",
+      "uplink": "halow_parc",
+      "parcTags": [
+        "FLOW",
+        "FLOW_SW",
+        "LEAK",
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "ioMap": {
+        "FLOW": "POOL_FLOW_PULSE",
+        "FLOW_SW": "POOL_FLOW_SW",
+        "R1": "DOSE_BASE",
+        "R2": "DOSE_ACID",
+        "R3": "DOSE_CL",
+        "R4": "DOSE_SALT"
+      },
+      "notes": "Replaces Opta MQTT for flow, leak rope, and dose relays"
+    }
+  ],
+  "importCsv": "st/fixtures/assisted_living_halow_nodes.csv"
+}

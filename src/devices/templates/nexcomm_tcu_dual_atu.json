@@ -1,0 +1,681 @@
+{
+  "id": "nexcomm_tcu_dual_atu",
+  "label": "Nexcomm TCU — dual ATU (register map)",
+  "vendor": "Nexcomm",
+  "model": "TCU dual ATU",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "nx_tcu_dual_atu",
+  "stationType": "dual_atu",
+  "defaults": {
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
+    "serialNum": "REPLACE_SERIAL",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "mqttJson": {
+      "serialFromDefaults": true,
+      "topicTemplate": "/devices/{serial}/messages/events/",
+      "fields": [
+        {
+          "id": "PRODUCT_ID",
+          "label": "Product Id",
+          "type": "REAL",
+          "payloadTemplate": "json:product_id",
+          "comment": "Nexus CSV: Product Id [40001] (reg 40001)"
+        },
+        {
+          "id": "HARDWARE_REV",
+          "label": "Hardware Rev.",
+          "type": "REAL",
+          "payloadTemplate": "json:hardware_rev",
+          "comment": "Nexus CSV: Hardware Rev. [40002] (reg 40002)"
+        },
+        {
+          "id": "SOFTWARE_ID",
+          "label": "Software Id",
+          "type": "REAL",
+          "payloadTemplate": "json:software_id",
+          "comment": "Nexus CSV: Software Id [40003] (reg 40003)"
+        },
+        {
+          "id": "SOFTWARE_REV",
+          "label": "Software Rev",
+          "type": "REAL",
+          "payloadTemplate": "json:software_rev",
+          "comment": "Nexus CSV: Software Rev [40004] (reg 40004)"
+        },
+        {
+          "id": "NORMAL_OFF_TIME",
+          "label": "Normal OFF Time",
+          "type": "REAL",
+          "payloadTemplate": "json:normal_off_time",
+          "comment": "Nexus CSV: Normal OFF Time [40007] (reg 40007)"
+        },
+        {
+          "id": "NORMAL_ON_TIME",
+          "label": "Normal ON Time",
+          "type": "REAL",
+          "payloadTemplate": "json:normal_on_time",
+          "comment": "Nexus CSV: Normal ON Time [40008] (reg 40008)"
+        },
+        {
+          "id": "OVERRIDE_ON_TIME",
+          "label": "Override ON Time",
+          "type": "REAL",
+          "payloadTemplate": "json:override_on_time",
+          "comment": "Nexus CSV: Override ON Time [40009] (reg 40009)"
+        },
+        {
+          "id": "OVERRIDE_OFF_TIME",
+          "label": "Override OFF Time",
+          "type": "REAL",
+          "payloadTemplate": "json:override_off_time",
+          "comment": "Nexus CSV: Override OFF Time [40010] (reg 40010)"
+        },
+        {
+          "id": "OVERRIDE_MIN_DURATION",
+          "label": "Override MIN Duration",
+          "type": "REAL",
+          "payloadTemplate": "json:override_min_duration",
+          "comment": "Nexus CSV: Override MIN Duration [40011] (reg 40011)"
+        },
+        {
+          "id": "FLUSH_TIME",
+          "label": "Flush Time",
+          "type": "REAL",
+          "payloadTemplate": "json:flush_time",
+          "comment": "Nexus CSV: Flush Time [40012] (reg 40012)"
+        },
+        {
+          "id": "FLUSH_LIMIT",
+          "label": "Flush Limit",
+          "type": "REAL",
+          "payloadTemplate": "json:flush_limit",
+          "comment": "Nexus CSV: Flush Limit [40014] (reg 40014)"
+        },
+        {
+          "id": "TCU_SECONDS_ON_SINCE_RESET",
+          "label": "TCU Seconds On Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:tcu_seconds_on_since_reset",
+          "comment": "Nexus CSV: TCU Seconds On Since Reset [30041] (reg 30041)"
+        },
+        {
+          "id": "S1_CURRENT_FLOAT_STATUS",
+          "label": "S1 Current Float Status",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_current_float_status",
+          "comment": "Nexus CSV: S1 Current Float Status [30043] (reg 30043)"
+        },
+        {
+          "id": "S1_OFF_FLOAT_LOW_LEVEL_ALARM",
+          "label": "S1 OFF Float Low Level Alarm",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_off_float_low_level_alarm",
+          "comment": "Nexus CSV: S1 OFF Float Low Level Alarm [30044] (reg 30044)"
+        },
+        {
+          "id": "S1_FLOAT_OUT_OF_SEQUENCE_WARNING",
+          "label": "S1 Float Out of Sequence Warning",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_float_out_of_sequence_warning",
+          "comment": "Nexus CSV: S1 Float Out of Sequence Warning [30045] (reg 30045)"
+        },
+        {
+          "id": "S1_HIGH_FLOAT_ON_ALARM",
+          "label": "S1 HIGH Float On Alarm",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_high_float_on_alarm",
+          "comment": "Nexus CSV: S1 HIGH Float On Alarm [30047] (reg 30047)"
+        },
+        {
+          "id": "S1_OFF_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S1 OFF Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_off_float_chatter_fault_code",
+          "comment": "Nexus CSV: S1 OFF Float Chatter Fault Code [30048] (reg 30048)"
+        },
+        {
+          "id": "S1_LEAD_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S1 LEAD Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_lead_float_chatter_fault_code",
+          "comment": "Nexus CSV: S1 LEAD Float Chatter Fault Code [30049] (reg 30049)"
+        },
+        {
+          "id": "S1_LAG_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S1 LAG Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_lag_float_chatter_fault_code",
+          "comment": "Nexus CSV: S1 LAG Float Chatter Fault Code [30050] (reg 30050)"
+        },
+        {
+          "id": "S1_HIGH_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S1 HIGH Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_high_float_chatter_fault_code",
+          "comment": "Nexus CSV: S1 HIGH Float Chatter Fault Code [30051] (reg 30051)"
+        },
+        {
+          "id": "S1_PUMP1_MOTOR_AND_RUN_FAULT",
+          "label": "S1 PUMP1 Motor and RUN Fault",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_pump1_motor_and_run_fault",
+          "comment": "Nexus CSV: S1 PUMP1 Motor and RUN Fault [30052] (reg 30052)"
+        },
+        {
+          "id": "S1_PUMP2_MOTOR_AND_RUN_FAULT",
+          "label": "S1 PUMP2 Motor and RUN Fault",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_pump2_motor_and_run_fault",
+          "comment": "Nexus CSV: S1 PUMP2 Motor and RUN Fault [30053] (reg 30053)"
+        },
+        {
+          "id": "S1_BLOWER_MOTOR_FAULT",
+          "label": "S1 Blower Motor Fault",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_blower_motor_fault",
+          "comment": "Nexus CSV: S1 Blower Motor Fault [30054] (reg 30054)"
+        },
+        {
+          "id": "S1_PRESSURE_SWITCH",
+          "label": "S1 Pressure Switch",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_pressure_switch",
+          "comment": "Nexus CSV: S1 Pressure Switch [30055] (reg 30055)"
+        },
+        {
+          "id": "S1_HOA1_SWITCH_STATUS",
+          "label": "S1 HOA1 Switch Status",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_hoa1_switch_status",
+          "comment": "Nexus CSV: S1 HOA1 Switch Status [30057] (reg 30057)"
+        },
+        {
+          "id": "S1_HOA2_SWITCH_STATUS",
+          "label": "S1 HOA2 Switch Status",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_hoa2_switch_status",
+          "comment": "Nexus CSV: S1 HOA2 Switch Status [30058] (reg 30058)"
+        },
+        {
+          "id": "S1_P1_SECONDS_ON_LAST_HOUR",
+          "label": "S1 P1 Seconds On Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p1_seconds_on_last_hour",
+          "comment": "Nexus CSV: S1 P1 Seconds On Last Hour [30059] (reg 30059)"
+        },
+        {
+          "id": "S1_P1_STARTS_LAST_HOUR",
+          "label": "S1 P1 Starts Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p1_starts_last_hour",
+          "comment": "Nexus CSV: S1 P1 Starts Last Hour [30060] (reg 30060)"
+        },
+        {
+          "id": "S1_P2_SECONDS_ON_LAST_HOUR",
+          "label": "S1 P2 Seconds On Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p2_seconds_on_last_hour",
+          "comment": "Nexus CSV: S1 P2 Seconds On Last Hour [30061] (reg 30061)"
+        },
+        {
+          "id": "S1_P2_STARTS_LAST_HOUR",
+          "label": "S1 P2 Starts Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p2_starts_last_hour",
+          "comment": "Nexus CSV: S1 P2 Starts Last Hour [30062] (reg 30062)"
+        },
+        {
+          "id": "S1_P1_STARTS_SINCE_RESET",
+          "label": "S1 P1 Starts since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p1_starts_since_reset",
+          "comment": "Nexus CSV: S1 P1 Starts since Reset [30063] (reg 30063)"
+        },
+        {
+          "id": "S1_P1_RUN_TIME_SINCE_RESET",
+          "label": "S1 P1 Run Time Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p1_run_time_since_reset",
+          "comment": "Nexus CSV: S1 P1 Run Time Since Reset [30065] (reg 30065)"
+        },
+        {
+          "id": "S1_P2_STARTS_SINCE_RESET",
+          "label": "S1 P2 Starts Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p2_starts_since_reset",
+          "comment": "Nexus CSV: S1 P2 Starts Since Reset [30067] (reg 30067)"
+        },
+        {
+          "id": "S1_P2_RUN_TIME_SINCE_RESET",
+          "label": "S1 P2 Run Time Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s1_p2_run_time_since_reset",
+          "comment": "Nexus CSV: S1 P2 Run Time Since Reset [30069] (reg 30069)"
+        },
+        {
+          "id": "S2_CURRENT_FLOAT_STATUS",
+          "label": "S2 Current Float Status",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_current_float_status",
+          "comment": "Nexus CSV: S2 Current Float Status [30071] (reg 30071)"
+        },
+        {
+          "id": "S2_OFF_FLOAT_LOW_LEVEL_ALARM",
+          "label": "S2 OFF Float Low Level Alarm",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_off_float_low_level_alarm",
+          "comment": "Nexus CSV: S2 OFF Float Low Level Alarm [30072] (reg 30072)"
+        },
+        {
+          "id": "S2_FLOAT_OUT_OF_SEQUENCE_WARNING",
+          "label": "S2 Float Out of Sequence Warning",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_float_out_of_sequence_warning",
+          "comment": "Nexus CSV: S2 Float Out of Sequence Warning [30073] (reg 30073)"
+        },
+        {
+          "id": "S2_HIGH_FLOAT_ON_ALARM",
+          "label": "S2 HIGH Float On Alarm",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_high_float_on_alarm",
+          "comment": "Nexus CSV: S2 HIGH Float On Alarm [30075] (reg 30075)"
+        },
+        {
+          "id": "S2_OFF_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S2 OFF Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_off_float_chatter_fault_code",
+          "comment": "Nexus CSV: S2 OFF Float Chatter Fault Code [30076] (reg 30076)"
+        },
+        {
+          "id": "S2_TIMER_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S2 TIMER Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_timer_float_chatter_fault_code",
+          "comment": "Nexus CSV: S2 TIMER Float Chatter Fault Code [30077] (reg 30077)"
+        },
+        {
+          "id": "S2_LAG_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S2 LAG Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_lag_float_chatter_fault_code",
+          "comment": "Nexus CSV: S2 LAG Float Chatter Fault Code [30078] (reg 30078)"
+        },
+        {
+          "id": "S2_HIGH_FLOAT_CHATTER_FAULT_CODE",
+          "label": "S2 HIGH Float Chatter Fault Code",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_high_float_chatter_fault_code",
+          "comment": "Nexus CSV: S2 HIGH Float Chatter Fault Code [30079] (reg 30079)"
+        },
+        {
+          "id": "S2_P1_MOTOR_AND_RUN_FAULT",
+          "label": "S2 P1 Motor and RUN Fault",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p1_motor_and_run_fault",
+          "comment": "Nexus CSV: S2 P1 Motor and RUN Fault [30080] (reg 30080)"
+        },
+        {
+          "id": "S2_P2_MOTOR_AND_RUN_FAULT",
+          "label": "S2 P2 Motor and RUN Fault",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p2_motor_and_run_fault",
+          "comment": "Nexus CSV: S2 P2 Motor and RUN Fault [30081] (reg 30081)"
+        },
+        {
+          "id": "S2_BLOWER_MOTOR_FAULT",
+          "label": "S2 Blower Motor Fault",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_blower_motor_fault",
+          "comment": "Nexus CSV: S2 Blower Motor Fault [30082] (reg 30082)"
+        },
+        {
+          "id": "S2_PRESSURE_SWITCH",
+          "label": "S2 Pressure Switch",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_pressure_switch",
+          "comment": "Nexus CSV: S2 Pressure Switch [30083] (reg 30083)"
+        },
+        {
+          "id": "S2_HOA1_SWITCH_STATUS",
+          "label": "S2 HOA1 Switch Status",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_hoa1_switch_status",
+          "comment": "Nexus CSV: S2 HOA1 Switch Status [30085] (reg 30085)"
+        },
+        {
+          "id": "S2_HOA2_SWITCH_STATUS",
+          "label": "S2 HOA2 Switch Status",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_hoa2_switch_status",
+          "comment": "Nexus CSV: S2 HOA2 Switch Status [30086] (reg 30086)"
+        },
+        {
+          "id": "S2_P1_SECONDS_ON_LAST_HOUR",
+          "label": "S2 P1 Seconds On Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p1_seconds_on_last_hour",
+          "comment": "Nexus CSV: S2 P1 Seconds On Last Hour [30087] (reg 30087)"
+        },
+        {
+          "id": "S2_P1_STARTS_LAST_HOUR",
+          "label": "S2 P1 Starts Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p1_starts_last_hour",
+          "comment": "Nexus CSV: S2 P1 Starts Last Hour [30088] (reg 30088)"
+        },
+        {
+          "id": "S2_P2_SECONDS_ON_LAST_HOUR",
+          "label": "S2 P2 Seconds On Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p2_seconds_on_last_hour",
+          "comment": "Nexus CSV: S2 P2 Seconds On Last Hour [30089] (reg 30089)"
+        },
+        {
+          "id": "S2_P2_STARTS_LAST_HOUR",
+          "label": "S2 P2 Starts Last Hour",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p2_starts_last_hour",
+          "comment": "Nexus CSV: S2 P2 Starts Last Hour [30090] (reg 30090)"
+        },
+        {
+          "id": "S2_P1_STARTS_SINCE_RESET",
+          "label": "S2 P1 Starts Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p1_starts_since_reset",
+          "comment": "Nexus CSV: S2 P1 Starts Since Reset [30091] (reg 30091)"
+        },
+        {
+          "id": "S2_P1_RUN_TIME_SINCE_RESET",
+          "label": "S2 P1 Run Time Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p1_run_time_since_reset",
+          "comment": "Nexus CSV: S2 P1 Run Time Since Reset [30093] (reg 30093)"
+        },
+        {
+          "id": "S2_P2_STARTS_SINCE_RESET",
+          "label": "S2 P2 Starts Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p2_starts_since_reset",
+          "comment": "Nexus CSV: S2 P2 Starts Since Reset [30095] (reg 30095)"
+        },
+        {
+          "id": "S2_P2_RUN_TIME_SINCE_RESET",
+          "label": "S2 P2 Run Time Since Reset",
+          "type": "REAL",
+          "payloadTemplate": "json:s2_p2_run_time_since_reset",
+          "comment": "Nexus CSV: S2 P2 Run Time Since Reset [30097] (reg 30097)"
+        },
+        {
+          "id": "POWER_METER_COMMS_STATE",
+          "label": "Power Meter Comms State",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_comms_state",
+          "comment": "Nexus CSV: Power Meter Comms State [30099] (reg 30099)"
+        },
+        {
+          "id": "POWER_METER_AGGREGATE_PHASE_LOSS",
+          "label": "Power Meter Aggregate Phase Loss",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_aggregate_phase_loss",
+          "comment": "Nexus CSV: Power Meter Aggregate Phase Loss  [30100] (reg 30100)"
+        },
+        {
+          "id": "POWER_METER_PHASE_1_PEAK_CURRENT",
+          "label": "Power Meter Phase 1 Peak Current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_1_peak_current",
+          "comment": "Nexus CSV: Power Meter Phase 1 Peak Current [30101] (reg 30101)"
+        },
+        {
+          "id": "POWER_METER_PHASE_1_AVERAGE_CURRENT",
+          "label": "Power Meter Phase 1 Average Current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_1_average_current",
+          "comment": "Nexus CSV: Power Meter Phase 1 Average Current [30103] (reg 30103)"
+        },
+        {
+          "id": "POWER_METER_PHASE_2_PEAK_CURRENT",
+          "label": "Power Meter Phase 2 Peak Current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_2_peak_current",
+          "comment": "Nexus CSV: Power Meter Phase 2 Peak Current [30105] (reg 30105)"
+        },
+        {
+          "id": "POWER_METER_PHASE_2_AVERAGE_CURRENT",
+          "label": "Power Meter Phase 2 Average Current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_2_average_current",
+          "comment": "Nexus CSV: Power Meter Phase 2 Average Current [30107] (reg 30107)"
+        },
+        {
+          "id": "POWER_METER_PHASE_3_PEAK_CURRENT",
+          "label": "Power Meter Phase 3 Peak Current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_3_peak_current",
+          "comment": "Nexus CSV: Power Meter Phase 3 Peak Current [30109] (reg 30109)"
+        },
+        {
+          "id": "POWER_METER_PHASE_3_AVERAGE_CURRENT",
+          "label": "Power Meter Phase 3 Average Current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_3_average_current",
+          "comment": "Nexus CSV: Power Meter Phase 3 Average Current [30111] (reg 30111)"
+        },
+        {
+          "id": "CT1_TRUE_RMS",
+          "label": "CT1 – True RMS",
+          "type": "REAL",
+          "payloadTemplate": "json:ct1_true_rms",
+          "comment": "Nexus CSV: CT1 – True RMS [30113] (reg 30113)"
+        },
+        {
+          "id": "CT2_TRUE_RMS",
+          "label": "CT2 – True RMS",
+          "type": "REAL",
+          "payloadTemplate": "json:ct2_true_rms",
+          "comment": "Nexus CSV: CT2 – True RMS [30115] (reg 30115)"
+        },
+        {
+          "id": "POWER_SOURCE",
+          "label": "Power Source",
+          "type": "REAL",
+          "payloadTemplate": "json:power_source",
+          "comment": "Nexus CSV: Power Source [30117] (reg 30117)"
+        },
+        {
+          "id": "CHARGER_STATE_REG",
+          "label": "Charger State Reg",
+          "type": "REAL",
+          "payloadTemplate": "json:charger_state_reg",
+          "comment": "Nexus CSV: Charger State Reg [30118] (reg 30118)"
+        },
+        {
+          "id": "CHARGER_STATUS_REG",
+          "label": "Charger Status Reg.",
+          "type": "REAL",
+          "payloadTemplate": "json:charger_status_reg",
+          "comment": "Nexus CSV: Charger Status Reg. [30119] (reg 30119)"
+        },
+        {
+          "id": "SYSTEM_STATUS_REG",
+          "label": "System Status Reg.",
+          "type": "REAL",
+          "payloadTemplate": "json:system_status_reg",
+          "comment": "Nexus CSV: System Status Reg. [30120] (reg 30120)"
+        },
+        {
+          "id": "VBAT",
+          "label": "VBAT",
+          "type": "REAL",
+          "payloadTemplate": "json:vbat",
+          "comment": "Nexus CSV: VBAT [30121] (reg 30121)"
+        },
+        {
+          "id": "VIN",
+          "label": "VIN",
+          "type": "REAL",
+          "payloadTemplate": "json:vin",
+          "comment": "Nexus CSV: VIN [30123] (reg 30123)"
+        },
+        {
+          "id": "VOUT",
+          "label": "VOUT",
+          "type": "REAL",
+          "payloadTemplate": "json:vout",
+          "comment": "Nexus CSV: VOUT [30125] (reg 30125)"
+        },
+        {
+          "id": "IBAT",
+          "label": "IBAT",
+          "type": "REAL",
+          "payloadTemplate": "json:ibat",
+          "comment": "Nexus CSV: IBAT [30127] (reg 30127)"
+        },
+        {
+          "id": "IIN",
+          "label": "IIN",
+          "type": "REAL",
+          "payloadTemplate": "json:iin",
+          "comment": "Nexus CSV: IIN [30129] (reg 30129)"
+        },
+        {
+          "id": "DIE_TEMP",
+          "label": "DIE Temp",
+          "type": "REAL",
+          "payloadTemplate": "json:die_temp",
+          "comment": "Nexus CSV: DIE Temp [30131] (reg 30131)"
+        },
+        {
+          "id": "POWER_METER_PHASE_1_LINE_TO_NEUTRAL_VOLTS",
+          "label": "Power Meter - Phase 1 line to neutral volts",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_1_line_to_neutral_volts",
+          "comment": "Nexus CSV: Power Meter - Phase 1 line to neutral volts [30133] (reg 30133)"
+        },
+        {
+          "id": "POWER_METER_PHASE_2_LINE_TO_NEUTRAL_VOLTS",
+          "label": "Power Meter - Phase 2 line to neutral volts",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_2_line_to_neutral_volts",
+          "comment": "Nexus CSV: Power Meter - Phase 2 line to neutral volts [30135] (reg 30135)"
+        },
+        {
+          "id": "POWER_METER_PHASE_3_LINE_TO_NEUTRAL_VOLTS",
+          "label": "Power Meter - Phase 3 line to neutral volts",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_3_line_to_neutral_volts",
+          "comment": "Nexus CSV: Power Meter - Phase 3 line to neutral volts [30137] (reg 30137)"
+        },
+        {
+          "id": "POWER_METER_PHASE_1_CURRENT",
+          "label": "Power Meter - Phase 1 current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_1_current",
+          "comment": "Nexus CSV: Power Meter - Phase 1 current [30139] (reg 30139)"
+        },
+        {
+          "id": "POWER_METER_PHASE_2_CURRENT",
+          "label": "Power Meter - Phase 2 current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_2_current",
+          "comment": "Nexus CSV: Power Meter - Phase 2 current [30141] (reg 30141)"
+        },
+        {
+          "id": "POWER_METER_PHASE_3_CURRENT",
+          "label": "Power Meter - Phase 3 current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_3_current",
+          "comment": "Nexus CSV: Power Meter - Phase 3 current [30143] (reg 30143)"
+        },
+        {
+          "id": "POWER_METER_PHASE_1_PHASE_ANGLE",
+          "label": "Power Meter - Phase 1 phase angle",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_1_phase_angle",
+          "comment": "Nexus CSV: Power Meter - Phase 1 phase angle [30145] (reg 30145)"
+        },
+        {
+          "id": "POWER_METER_PHASE_2_PHASE_ANGLE",
+          "label": "Power Meter - Phase 2 phase angle",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_2_phase_angle",
+          "comment": "Nexus CSV: Power Meter - Phase 2 phase angle [30147] (reg 30147)"
+        },
+        {
+          "id": "POWER_METER_PHASE_3_PHASE_ANGLE",
+          "label": "Power Meter - Phase 3 phase angle",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_phase_3_phase_angle",
+          "comment": "Nexus CSV: Power Meter - Phase 3 phase angle [30149] (reg 30149)"
+        },
+        {
+          "id": "POWER_METER_AVERAGE_LINE_TO_NEUTRAL_VOLTS",
+          "label": "Power Meter - Average line to neutral volts",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_average_line_to_neutral_volts",
+          "comment": "Nexus CSV: Power Meter - Average line to neutral volts [30151] (reg 30151)"
+        },
+        {
+          "id": "POWER_METER_AVERAGE_LINE_CURRENT",
+          "label": "Power Meter - Average line current",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_average_line_current",
+          "comment": "Nexus CSV: Power Meter - Average line current [30153] (reg 30153)"
+        },
+        {
+          "id": "POWER_METER_SUM_OF_LINE_CURRENTS",
+          "label": "Power Meter - Sum of line currents",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_sum_of_line_currents",
+          "comment": "Nexus CSV: Power Meter - Sum of line currents [30155] (reg 30155)"
+        },
+        {
+          "id": "POWER_METER_TOTAL_KWH",
+          "label": "Power Meter - Total kwh",
+          "type": "REAL",
+          "payloadTemplate": "json:power_meter_total_kwh",
+          "comment": "Nexus CSV: Power Meter - Total kwh [30157] (reg 30157)"
+        },
+        {
+          "id": "LINE_1_TO_LINE_2_VOLTS",
+          "label": "Line 1 to Line 2 volts",
+          "type": "REAL",
+          "payloadTemplate": "json:line_1_to_line_2_volts",
+          "comment": "Nexus CSV: Line 1 to Line 2 volts [30159] (reg 30159)"
+        },
+        {
+          "id": "LINE_2_TO_LINE_3_VOLTS",
+          "label": "Line 2 to Line 3 volts",
+          "type": "REAL",
+          "payloadTemplate": "json:line_2_to_line_3_volts",
+          "comment": "Nexus CSV: Line 2 to Line 3 volts [30161] (reg 30161)"
+        },
+        {
+          "id": "LINE_3_TO_LINE_1_VOLTS",
+          "label": "Line 3 to Line 1 volts",
+          "type": "REAL",
+          "payloadTemplate": "json:line_3_to_line_1_volts",
+          "comment": "Nexus CSV: Line 3 to Line 1 volts [30163] (reg 30163)"
+        },
+        {
+          "id": "AVERAGE_LINE_TO_LINE_VOLTS",
+          "label": "Average line to line volts",
+          "type": "REAL",
+          "payloadTemplate": "json:average_line_to_line_volts",
+          "comment": "Nexus CSV: Average line to line volts [30165] (reg 30165)"
+        }
+      ]
+    }
+  },
+  "notes": "Inbound tag map generated from st/fixtures/nexcomm-csv/nexcomm-tcu-dual-atu.csv (0 sample rows). Set serialNum to normalized Nexcomm serial (no hyphens). Broker defaults to mqtts://mqtt.peaklogic.io:8883. payloadTemplate json: keys are slug placeholders — align to live MQTT JSON or EPI register paths as needed. Alignment table: st/fixtures/nexcomm-inbound/nexcomm-tcu-dual-atu.alignment.json"
+}

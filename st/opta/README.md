@@ -26,7 +26,7 @@ ST on device; deploy over **MQTT** (no HTTP to Opta required for programming). S
 
 ST logic runs **on the Opta**; PeakLogic deploys the program over HTTP.
 
-1. Flash firmware: `firmware/arduino-opta-st/PeakLogicOptaSt/` (see README there).
+1. Flash firmware: `firmware/arduino-opta-st/PeaklogicOptaSt/` (see README there).
 2. **Drivers → Apply device template → Arduino Opta — Ethernet ST runtime** (or `fixtures/drivers.opta_eth.json`).
 3. Set **Host** to the Opta IP, enable driver, **Save drivers**.
 4. Load `opta/01_i1_to_r1.st` with fixtures `tags.opta_eth.json`.
@@ -46,3 +46,5 @@ Each program header lists **required tags**. **Load matching fixtures** loads on
 | `04_timer_counter.st` | TON timer and CTU counter on `I1` | `I1`, `R1`, `R2`, `TMR1`, `CTR1` |
 | `05_oneshot_init.st` | Init pulse on first scan after Start | `OS1`, `R1`, `R2` |
 | `06_flow_gpm.st` | Pulse flow → GPM (1 min window + K factor) | `I1`, `VPB_RUN`, `OS1`, `CTR1`, `TMR1`, `FLOW1`, `H1`, `H2`, `R1` |
+
+Room integration (Shelly Flood WiFi peripherals): see **`st/opta-room/`** and firmware **`firmware/arduino-opta-room/`** (separate product from mqtt-st).

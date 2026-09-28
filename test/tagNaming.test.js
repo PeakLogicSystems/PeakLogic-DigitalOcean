@@ -39,6 +39,12 @@ describe('tagNaming', () => {
     assert.equal(applyMemoryTagNaming('TAG_0', 'REAL', 'memory', tags), 'VPR1');
   });
 
+  it('preserves symbolic memory ids (MOTOR1_*, DI1) for ST programs', () => {
+    assert.equal(applyMemoryTagNaming('MOTOR1_HOA', 'INT', 'memory', tags), 'MOTOR1_HOA');
+    assert.equal(applyMemoryTagNaming('MOTOR1_START', 'BOOL', 'memory', tags), 'MOTOR1_START');
+    assert.equal(applyMemoryTagNaming('DI1', 'BOOL', 'memory', tags), 'DI1');
+  });
+
   it('does not rename input/output tags', () => {
     assert.equal(applyMemoryTagNaming('DI1', 'BOOL', 'input', tags), 'DI1');
   });
@@ -62,6 +68,11 @@ describe('tagNaming', () => {
 
   it('keeps TMR suffix when switching timer to counter', () => {
     assert.equal(applyFbTagNaming('TMR5', 'COUNTER', tags), 'CTR5');
+  });
+
+  it('preserves symbolic counter ids (MOTOR1_CNTR) for ST programs', () => {
+    assert.equal(applyFbTagNaming('MOTOR1_CNTR', 'COUNTER', tags), 'MOTOR1_CNTR');
+    assert.equal(applyTagNaming('MOTOR1_CNTR', 'COUNTER', 'memory', tags), 'MOTOR1_CNTR');
   });
 
   it('does not apply VPB naming to TIMER memory role', () => {

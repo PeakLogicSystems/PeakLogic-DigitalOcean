@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "cloudUrl": "https://peaklogic.io",
+  "siteId": "demo",
+  "pairingCode": "adb369f2613dcbf229485d5d",
+  "agentToken": "",
+  "heartbeatMs": 15000,
+  "inventoryMs": 30000
+}

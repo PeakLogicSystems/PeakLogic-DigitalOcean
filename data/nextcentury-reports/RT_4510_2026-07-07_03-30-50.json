@@ -1,0 +1,25 @@
+{
+  "reportId": "rt_4510",
+  "date": "7-7-2026",
+  "collectedAt": "2026-07-07T07:30:48.094Z",
+  "propertyCount": 4,
+  "deviceCount": 0,
+  "properties": [
+    {
+      "propertyId": 40100,
+      "error": "NextCentury HTTP 403 /Properties/40100/RunReport/rt_4510?start=7-7-2026&end=7-7-2026"
+    },
+    {
+      "propertyId": 40101,
+      "error": "NextCentury HTTP 403 /Properties/40101/RunReport/rt_4510?start=7-7-2026&end=7-7-2026"
+    },
+    {
+      "propertyId": 40102,
+      "error": "NextCentury HTTP 403 /Properties/40102/RunReport/rt_4510?start=7-7-2026&end=7-7-2026"
+    },
+    {
+      "propertyId": 40103,
+      "error": "NextCentury HTTP 403 /Properties/40103/RunReport/rt_4510?start=7-7-2026&end=7-7-2026"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "opta_parc_modbus_dragino",
+  "label": "Arduino Opta — Parc I/O via Modbus (Dragino RS485 gateway)",
+  "vendor": "Arduino",
+  "model": "Opta RS485 slave → Dragino RS485-NB → PeakLogic Cloud",
+  "transport": "modbus_rtu",
+  "driverId": "opta_dragino_01",
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "hrCount": 8,
+  "sharedBus": false,
+  "defaults": {
+    "serialPort": "RS485",
+    "baud": 9600,
+    "slaveId": 2,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 1500
+  },
+  "tags": {
+    "optaParcDragino": {
+      "includePseudoAi": true,
+      "includeHolding": true
+    }
+  },
+  "dragino": {
+    "bindAs": "mqtt_parc",
+    "gatewayPresetId": "dragino_rs485_nb",
+    "optaSlaveId": 2,
+    "reportIntervalSec": 300,
+    "pollBlocks": [
+      { "functionCode": 2, "startRegister": 0, "registerCount": 8, "comment": "I1–I8 discrete inputs" },
+      { "functionCode": 1, "startRegister": 0, "registerCount": 4, "comment": "R1–R4 relay coils" },
+      { "functionCode": 4, "startRegister": 0, "registerCount": 24, "comment": "I1_RAW–I8_RAW, mA/scaled AI, MCSA pseudo-AI" }
+    ]
+  },
+  "notes": "Poll Opta as Modbus RTU slave (ID 2, 9600 8N1) from Dragino RS485-NB every 5 min (AT+TDC=300). Tag names match MQTT Parc (arduino_opta_parc): I1–I8, R1–R4, I1_RAW–I8_RAW, mA_AI3–6, scaled_AI3–6, MCSA_CH1_AMPS–CH6, PDM_P1/P2_HEALTH, H1–H8. Flash firmware/arduino-opta-rtu-slave/PeaklogicOptaRtuSlave on Opta RS485. Cloud: POST /api/parc/dragino-gateway/bind-preset with presetId opta_parc_modbus_dragino, then /plan for AT+COMMAND* blocks.",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
+  }
+}

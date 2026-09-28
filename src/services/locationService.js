@@ -117,6 +117,8 @@ async function deleteLocation(tenantId, id) {
     await db.collection('devices').deleteMany({ tenantId, systemId: { $in: systemIds } });
   }
   await db.collection('systems').deleteMany({ tenantId, locationId: id });
+  const projectRepositoryService = require('./projectRepositoryService');
+  await projectRepositoryService.deleteProjectsForLocation(tenantId, id);
   await db.collection('locations').deleteOne({ _id: id, tenantId });
   return { ok: true };
 }

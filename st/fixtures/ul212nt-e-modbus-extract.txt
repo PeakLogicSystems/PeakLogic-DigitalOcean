@@ -1,0 +1,23 @@
+TENET UL212-E / UL212NT-E — Protocol 17 (Modbus RTU)
+Source: ul212-e-modbus-17-user-manual.pdf (ATO, “Modbus protocol 17 Testing in PC with UL212”)
+
+Configure protocol 17 in the UL212 Fuel APP or PC client.
+Serial: 9600, net address 1.
+
+FC03 Read Holding Registers — one register per command (qty 0001).
+
+Addr    Name           Manual command
+0x0100  fuel height    01 03 01 00 00 01 85 F6
+0x0102  tilt angle     01 03 01 02 00 01 24 36
+
+Manual replies (CRC verified on the six data bytes):
+  height  01 03 01 00 04 08 47 30    value 0x0408 = 1032 raw → 103.2 mm at scale 0.1
+  tilt    01 03 01 02 90 06 09 F4    value 0x9006 (raw; unit not stated)
+
+ATO labels 00 01 as “net address”; on the wire that field is Modbus quantity=1.
+The documented reply echoes the register address (01 00 / 01 02) instead of a
+standard FC03 byte-count (02). If a standard master NACKs, poll with a raw
+serial decoder using those frames.
+
+Do not burst-read 0x0100–0x0102 (0x0101 is not documented).
+Scale 0.1 mm matches Digital Matter UL212 raw = mm × 10.

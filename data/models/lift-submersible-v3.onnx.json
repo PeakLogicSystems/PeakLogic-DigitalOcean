@@ -1,0 +1,9 @@
+{
+  "labels": [
+    "healthy",
+    "seal_leak",
+    "clog_ragging",
+    "impeller_worn"
+  ],
+  "inputDim": 64
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "BAC_1001_ANALOGINPUT1_PV",
+    "label": "Space Temp",
+    "type": "REAL",
+    "role": "input",
+    "driverId": "bacnet1",
+    "driverAddress": {
+      "host": "192.168.10.50",
+      "deviceInstance": 1001,
+      "objectType": "analogInput",
+      "objectInstance": 1,
+      "property": "presentValue"
+    }
+  },
+  {
+    "id": "BAC_1001_BINARYVALUE1_PV",
+    "label": "Occupied",
+    "type": "BOOL",
+    "role": "input",
+    "driverId": "bacnet1",
+    "driverAddress": {
+      "host": "192.168.10.50",
+      "deviceInstance": 1001,
+      "objectType": "binaryValue",
+      "objectInstance": 1,
+      "property": "presentValue"
+    }
+  }
+]

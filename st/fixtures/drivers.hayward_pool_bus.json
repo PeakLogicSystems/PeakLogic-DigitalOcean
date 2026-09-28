@@ -1,0 +1,19 @@
+[
+  {
+    "id": "hayward_bus",
+    "type": "hayward_rs485",
+    "enabled": true,
+    "serialPort": "/dev/ttyLP4",
+    "baud": 19200,
+    "deviceClass": "vs_pump",
+    "deviceAddr": 0,
+    "parity": "none",
+    "stopBits": 2,
+    "pollIntervalMs": 5000,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30,
+    "keepaliveMs": 1000,
+    "maxRpm": 3450,
+    "comment": "Hayward low-speed bus — EcoStar/TriStar/MaxFlo VS pumps (HUA in deviceAddr)"
+  }
+]

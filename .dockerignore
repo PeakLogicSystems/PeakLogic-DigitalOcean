@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log*
+.git
+.github
+.do
+azure
+data
+test
+docs
+firmware
+*.md
+!package.json
+.env
+.env.*
+!.env.example

@@ -20,6 +20,8 @@ const SEED_ALL_TAG_IDS = [...SEED_DIGITAL_IDS, ...SEED_ANALOG_IDS];
 
 let client = null;
 let collection = null;
+let edgeCollection = null;
+let featuresCollectionHandle = null;
 let connecting = null;
 let lastSampleLog = 0;
 
@@ -41,6 +43,10 @@ function dbName() {
 
 function collectionName() {
   return override?.collection || process.env.MONGODB_COLLECTION || DEFAULT_MONGO_LOGGER.collection;
+}
+
+function edgeCollectionName() {
+  return override?.edgeCollection || process.env.MONGODB_EDGE_COLLECTION || DEFAULT_MONGO_LOGGER.edgeCollection || 'edge_inference';
 }
 
 function tagSnapshot(tag) {
@@ -133,7 +139,7 @@ function docsToHistory(docs, tagIds, limitPerTag = DEFAULT_LIMIT_PER_TAG) {
 }
 
 async function connect() {
-  if (collection) return true;
+  if (collection && edgeCollection) return true;
   const u = uri();
   if (!u) return false;
   if (connecting) return connecting;
@@ -142,22 +148,38 @@ async function connect() {
       const { MongoClient } = require('mongodb');
       client = new MongoClient(u);
       await client.connect();
-      collection = client.db(dbName()).collection(collectionName());
+      const db = client.db(dbName());
+      collection = db.collection(collectionName());
+      edgeCollection = db.collection(edgeCollectionName());
       await collection.createIndex({ at: -1 });
       await collection.createIndex({ event: 1, 'tag.id': 1 });
       await collection.createIndex({ event: 1, at: -1, 'pen.tagId': 1 });
-      console.log(`[PeakLogic] MongoDB logger connected: ${dbName()}.${collectionName()}`);
+      await edgeCollection.createIndex({ at: -1 });
+      await edgeCollection.createIndex({ assetId: 1, at: -1 });
+      console.log(`[PeakLogic] MongoDB logger connected: ${dbName()}.${collectionName()} + ${edgeCollectionName()}`);
       return true;
     } catch (e) {
       console.warn('[PeakLogic] MongoDB logger:', e.message);
       client = null;
       collection = null;
+      edgeCollection = null;
+      featuresCollectionHandle = null;
       return false;
     } finally {
       connecting = null;
     }
   })();
   return connecting;
+}
+
+async function featuresCollection(name) {
+  if (!(await connect())) return null;
+  const colName = String(name || 'pdm_features').trim() || 'pdm_features';
+  if (!featuresCollectionHandle || featuresCollectionHandle.collectionName !== colName) {
+    featuresCollectionHandle = client.db(dbName()).collection(colName);
+    await featuresCollectionHandle.createIndex({ assetId: 1, windowStartMs: -1 });
+  }
+  return featuresCollectionHandle;
 }
 
 function enabled() {
@@ -170,6 +192,7 @@ function status() {
     connected: !!collection,
     db: dbName(),
     collection: collectionName(),
+    edgeCollection: edgeCollectionName(),
     sampleIntervalMs: sampleIntervalMs(),
     minChunkMs: HISTORIAN_MIN_CHUNK_MS,
     maxChunkMs: HISTORIAN_MAX_CHUNK_MS,
@@ -468,6 +491,152 @@ async function close() {
   }
   client = null;
   collection = null;
+  edgeCollection = null;
+  featuresCollectionHandle = null;
+}
+
+function normalizeEdgeInference(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const score = raw.score ?? raw.inference?.score;
+  const label = raw.label ?? raw.inference?.label;
+  const modelId = raw.modelId ?? raw.model;
+  const assetId = raw.assetId;
+  if (score == null && !label && !modelId) return null;
+  return {
+    modelId: modelId || 'unknown',
+    assetId: assetId || null,
+    inference: {
+      type: raw.type || raw.inference?.type || 'anomaly',
+      score: score != null ? Number(score) : null,
+      label: label || null,
+      confidence: raw.confidence ?? raw.inference?.confidence ?? null,
+    },
+    features: raw.features && typeof raw.features === 'object' ? raw.features : {},
+  };
+}
+
+function extractEdgePayloads(body) {
+  if (!body || typeof body !== 'object') return [];
+  const deviceId = body.deviceId || body.device || body.id || null;
+  const edgeAi = body.edgeAi ?? body.edge_ai ?? body.inference;
+  if (!edgeAi) {
+    if (Array.isArray(body.tags) && !body.tags.length) return [];
+    return [];
+  }
+  const list = Array.isArray(edgeAi) ? edgeAi : [edgeAi];
+  const docs = [];
+  for (const item of list) {
+    const norm = normalizeEdgeInference(item);
+    if (!norm) continue;
+    docs.push({
+      event: 'edge_inference',
+      deviceId,
+      assetId: norm.assetId || item.assetId || body.assetId || deviceId,
+      modelId: norm.modelId,
+      inference: norm.inference,
+      features: norm.features,
+    });
+  }
+  return docs;
+}
+
+async function logEdgeInferences(docs) {
+  if (!enabled() || !docs?.length) return { ok: false, skipped: true };
+  if (!(await connect())) return { ok: false, error: 'MongoDB not connected' };
+  try {
+    await edgeCollection.insertMany(
+      docs.map((d) => ({ ...d, at: d.at || new Date() })),
+      { ordered: false }
+    );
+    return { ok: true, count: docs.length };
+  } catch (e) {
+    console.warn('[PeakLogic] MongoDB edge insert:', e.message);
+    return { ok: false, error: e.message || String(e) };
+  }
+}
+
+async function logEdgeFromReport(body) {
+  const docs = extractEdgePayloads(body);
+  if (!docs.length) return { ok: false, skipped: true, count: 0 };
+  return logEdgeInferences(docs);
+}
+
+async function insertPenDocs(docs) {
+  if (!enabled() || !docs?.length) return false;
+  return insertMany(docs);
+}
+
+async function queryPenDocs({ from, to, tagIds, projectName }) {
+  if (!enabled()) return [];
+  const fromMs = typeof from === 'number' ? from : Date.parse(from);
+  const toMs = typeof to === 'number' ? to : Date.parse(to);
+  if (!(await connect())) return [];
+  const filter = {
+    event: 'pen_sample',
+    at: { $gte: new Date(fromMs), $lte: new Date(toMs) },
+  };
+  if (tagIds?.length) filter['pen.tagId'] = { $in: tagIds };
+  if (projectName) filter.projectName = projectName;
+  try {
+    return await collection.find(filter).sort({ at: 1 }).toArray();
+  } catch {
+    return [];
+  }
+}
+
+async function queryEdgeDocs({ from, to, assetId, deviceId }) {
+  if (!enabled()) return [];
+  const fromMs = typeof from === 'number' ? from : Date.parse(from);
+  const toMs = typeof to === 'number' ? to : Date.parse(to);
+  if (!(await connect())) return [];
+  const filter = {
+    at: { $gte: new Date(fromMs), $lte: new Date(toMs) },
+  };
+  if (assetId) filter.assetId = assetId;
+  if (deviceId) filter.deviceId = deviceId;
+  try {
+    return await edgeCollection.find(filter).sort({ at: 1 }).toArray();
+  } catch {
+    return [];
+  }
+}
+
+async function storePdmFeatures({ assetId, features, collection: colName, fromMs, toMs }) {
+  const col = await featuresCollection(colName);
+  if (!col) return { ok: false, error: 'MongoDB not connected' };
+  try {
+    await col.deleteMany({
+      assetId,
+      windowStartMs: { $gte: fromMs, $lte: toMs },
+    });
+    if (features?.length) {
+      await col.insertMany(features.map((f) => ({
+        ...f,
+        assetId,
+        event: 'pdm_feature',
+        builtAt: new Date(),
+      })), { ordered: false });
+    }
+    return { ok: true, count: features?.length || 0 };
+  } catch (e) {
+    return { ok: false, error: e.message || String(e) };
+  }
+}
+
+async function loadPdmFeatures({ assetId, from, to, collection: colName }) {
+  const col = await featuresCollection(colName);
+  if (!col) return [];
+  const fromMs = typeof from === 'number' ? from : Date.parse(from);
+  const toMs = typeof to === 'number' ? to : Date.parse(to);
+  try {
+    const docs = await col.find({
+      assetId,
+      windowStartMs: { $gte: fromMs, $lte: toMs },
+    }).sort({ windowStartMs: 1 }).toArray();
+    return docs;
+  } catch {
+    return [];
+  }
 }
 
 module.exports = {
@@ -497,5 +666,14 @@ module.exports = {
   queryPenHistory,
   purgeHistory,
   seedDemoHistory,
+  normalizeEdgeInference,
+  extractEdgePayloads,
+  logEdgeInferences,
+  logEdgeFromReport,
+  insertPenDocs,
+  queryPenDocs,
+  queryEdgeDocs,
+  storePdmFeatures,
+  loadPdmFeatures,
   close,
 };

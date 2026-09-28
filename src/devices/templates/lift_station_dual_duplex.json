@@ -1,0 +1,44 @@
+{
+  "id": "lift_station_dual_duplex",
+  "label": "Lift station — dual duplex",
+  "vendor": "PeakLogic",
+  "model": "Opta + D1608E — dual duplex alternator (ALT2, 2 pumps)",
+  "transport": "mqtt_parc",
+  "stationType": "dual_duplex",
+  "defaultProgram": "logic/36_duplex_lift_station.st",
+  "stProgram": "logic/36_duplex_lift_station.st",
+  "stProgramLabel": "DUPLEXLS",
+  "tagsFromDevice": true,
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "lift_dd_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true,
+    "ioLayout": "LIFT6"
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc"
+  },
+  "tags": {
+    "discrete": [{ "prefix": "I", "count": 8, "start": 0 }],
+    "coil": [{ "prefix": "R", "count": 4, "start": 0 }],
+    "input": [{ "prefix": "I", "suffix": "_RAW", "count": 6, "start": 0 }],
+    "expansions": [{ "slot": 1, "type": "D1608E" }]
+  },
+  "notes": "Standard Duplex LS: D1608E X1_I1=HIGH X1_I2=LEAD X1_I3=LAG X1_I4=OFF. Opta I1–I6 are MCSA LIFT6 CTs (ch0–2 pump-1, ch3–5 pump-2) feeding motor PDM via I1_RAW–I6_RAW / AI1–AI6. HOA INT 0=Auto 1=Off 2=Hand. Sync tags from Parc after apply.",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
+  }
+}

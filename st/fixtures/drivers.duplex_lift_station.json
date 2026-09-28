@@ -1,0 +1,14 @@
+[
+  {
+    "id": "arduino_opta_st",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "mv_f2e689fd60d96bab",
+    "ateccSerial": "0123b636f1c23964ee",
+    "host": "192.168.1.234",
+    "scanMs": 100,
+    "reportIntervalMs": 200,
+    "remoteExecution": true,
+    "ioBaseOnly": true
+  }
+]

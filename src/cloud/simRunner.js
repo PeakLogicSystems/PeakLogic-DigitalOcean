@@ -28,7 +28,7 @@ class SimRunner {
 
   _mqttOptions() {
     const opts = {
-      clientId: `peaklogic-sim-${this.sim.id}`.slice(0, 64),
+      clientId: `mv-sim-${this.sim.id}`.slice(0, 64),
       reconnectPeriod: 0,
       keepalive: 30,
     };

@@ -1,0 +1,44 @@
+{
+  "deviceId": "hvac_mcsa_fl1",
+  "name": "Floor 1 rooftop — Nexcomm HVAC MCSA",
+  "platform": "mcxn947-hvac",
+  "reportIntervalSec": 1,
+  "runtime": {
+    "running": true,
+    "firmware": "mcsa-hvac",
+    "sampleRateHz": 8000,
+    "fftSize": 4096,
+    "mcsaChannels": 2
+  },
+  "mcsa": [
+    {
+      "ch": 0,
+      "fund": [60.0, 1.234567],
+      "rotor": [[56.4, 0.051234], [63.6, 0.048123]],
+      "compressor": [[120.0, 0.023456], [180.0, 0.018901]]
+    },
+    {
+      "ch": 1,
+      "fund": [60.0, 0.456789],
+      "fan": [[58.2, 0.012345], [61.8, 0.011234]]
+    }
+  ],
+  "env": {
+    "T1_C": 48.5,
+    "T2_C": 12.3,
+    "T3_C": 32.1,
+    "T4_C": 28.7,
+    "WATER_ROPE_MV": 1800,
+    "WR_DETECT": false,
+    "WR_INPUT_ON": false
+  },
+  "tags": [
+    { "id": "T1_C", "type": "REAL", "role": "input", "value": 48.5, "quality": "GOOD" },
+    { "id": "T2_C", "type": "REAL", "role": "input", "value": 12.3, "quality": "GOOD" },
+    { "id": "T3_C", "type": "REAL", "role": "input", "value": 32.1, "quality": "GOOD" },
+    { "id": "T4_C", "type": "REAL", "role": "input", "value": 28.7, "quality": "GOOD" },
+    { "id": "WR_DETECT", "type": "BOOL", "role": "input", "value": false, "quality": "GOOD" },
+    { "id": "COMP_FLT", "type": "BOOL", "role": "input", "value": false, "quality": "GOOD" },
+    { "id": "FAN_FLT", "type": "BOOL", "role": "input", "value": false, "quality": "GOOD" }
+  ]
+}

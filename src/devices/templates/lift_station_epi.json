@@ -1,0 +1,45 @@
+{
+  "id": "lift_station_epi",
+  "label": "EPI lift station — EdgePoint Industrial (MQTT)",
+  "vendor": "Nexcomm",
+  "model": "EdgePoint Industrial lift (Nexus Cloud register map)",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "epi_lift1",
+  "stationType": "dual_duplex",
+  "defaultProgram": "logic/36_duplex_lift_station.st",
+  "diCount": 16,
+  "doCount": 2,
+  "aiCount": 4,
+  "defaults": {
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+    "serialNum": "40a36bce47f3",
+    "liftProfile": "epi_master",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "edgepointLift": {
+      "profile": "epi_master",
+      "includeSemantic": true
+    },
+    "logicFixture": "tags.duplex_lift_station.json"
+  },
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
+  },
+  "notes": "Track A — Azure Function (deploy/azure/nexcomm-sb-mqtt-function) or nexcomm-sb-mqtt-bridge publishes to mqtts://mqtt.peaklogic.io:8883 (lab: mqtt://127.0.0.1:1883). Nexcomm serials may arrive as xxxx-xxxxxx; use normalized serialNum without hyphens (e.g. 40a3-6bce47f3 → 40a36bce47f3). Subscribe /devices/<serial>/messages/events/. Default serial 40a36bce47f3 = Nexus Cloud Master Lift Station. Set liftProfile=liftpoint_light and serialNum=862406071948166 for LiftPoint Light. Sample: st/fixtures/edgepoint-lift-station-sample.json."
+}

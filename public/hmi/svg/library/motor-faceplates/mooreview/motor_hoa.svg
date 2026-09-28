@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="480" height="320">
+  <defs>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="lampGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="464" height="304" rx="10" fill="url(#panelGrad)" stroke="#64748b" stroke-width="2" filter="url(#shadow)"/>
+  <text id="motor_label" x="240" y="34" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#0f172a">MOTOR-101</text>
+  <text x="240" y="52" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#64748b">HOA - Commands - Status - Runtime</text>
+
+  <!-- Status lamp (bind fill5: 0=Off 1=Run 2=Fault 3=Warn 4=Offline) -->
+  <text x="88" y="88" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#334155">STATUS</text>
+  <g id="status_lamp" transform="translate(88, 145)">
+    <circle cx="0" cy="0" r="46" fill="#64748b" stroke="#334155" stroke-width="3"/>
+    <circle cx="0" cy="0" r="38" fill="url(#lampGrad)" opacity="0.35"/>
+    <circle cx="-12" cy="-14" r="10" fill="#ffffff" opacity="0.35"/>
+  </g>
+  <text id="run_state" x="88" y="210" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" font-weight="600" fill="#334155">STOP</text>
+
+  <!-- Runtime / starts meter (bind text: MOTOR1_HRS, MOTOR1_STARTS) -->
+  <g id="run_meter" transform="translate(240, 150)">
+    <rect x="-58" y="-54" width="116" height="108" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+    <text id="run_hrs" x="0" y="-20" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">0.0</text>
+    <text x="0" y="-4" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#64748b">HRS</text>
+    <text id="starts_count" x="0" y="26" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">0</text>
+    <text x="0" y="42" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#64748b">STARTS</text>
+  </g>
+
+  <!-- HOA readout -->
+  <text x="392" y="88" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#334155">HOA</text>
+  <g id="hoa_bezel" transform="translate(332, 100)">
+    <rect width="120" height="44" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+    <rect x="4" y="4" width="112" height="36" rx="4" fill="#f8fafc"/>
+  </g>
+  <text id="hoa_state" x="392" y="128" text-anchor="middle" font-family="Segoe UI, Arial" font-size="18" font-weight="700" fill="#0f172a">Auto</text>
+
+  <!-- Online / offline mode (bind fill + text: MOTOR1_OFFLINE, toggle) -->
+  <g id="btn_offline" transform="translate(332, 158)">
+    <rect width="120" height="36" rx="6" fill="#22c55e" stroke="#475569" stroke-width="2"/>
+    <text id="btn_offline_label" x="60" y="24" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">ONLINE</text>
+  </g>
+
+  <!-- Command buttons -->
+  <text x="240" y="248" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" fill="#64748b">COMMANDS (BOOL tags  ST logic)</text>
+  <g id="btn_start" transform="translate(72, 262)">
+    <rect width="96" height="40" rx="8" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+    <text x="48" y="26" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="700" fill="#ffffff">START</text>
+  </g>
+  <g id="btn_stop" transform="translate(192, 262)">
+    <rect width="96" height="40" rx="8" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+    <text x="48" y="26" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="700" fill="#ffffff">STOP</text>
+  </g>
+  <g id="btn_reset" transform="translate(312, 262)">
+    <rect width="96" height="40" rx="8" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+    <text x="48" y="26" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="700" fill="#ffffff">RESET</text>
+  </g>
+</svg>

@@ -1,35 +1,82 @@
 'use strict';
 
-const { createCloudApp } = require('./api/cloudApp');
-const { connectMongo, closeMongo } = require('./db/mongo');
-const { ensureIndexes } = require('./db/indexes');
-const { PORT } = require('./config');
+const http = require('http');
+const { WebSocketServer } = require('ws');
+const { DEFAULT_PORT, LIVE_WS_INTERVAL_MS } = require('./config');
+const { TagStore } = require('./tags/tagStore');
+const { DriverManager } = require('./drivers');
+const { ScanEngine } = require('./runtime/scanEngine');
+const { GraphHistory } = require('./runtime/graphHistory');
+const { createRouter } = require('./http/router');
+const { createApiRoutes } = require('./api/routes');
+const persistence = require('./persistence');
+const { sanitizeLegacyProjectHwDefaultsOnDisk } = require('./settings/portableSettings');
 
-async function main() {
-  await connectMongo();
-  await ensureIndexes();
+const tagStore = new TagStore();
+const driverManager = new DriverManager(tagStore);
+const graphHistory = new GraphHistory();
+const scanEngine = new ScanEngine(tagStore, driverManager, graphHistory);
+const { registerParcRecoveryDeps } = require('./parc/parcDeviceRecovery');
+const { getMqttCentralHub } = require('./parc/mqttCentralHub');
+const { registry } = require('./parc/deviceRegistry');
+registerParcRecoveryDeps({ scanEngine, driverManager });
+getMqttCentralHub(registry).setGlobalMirrorDeps({ tagStore });
 
-  const app = createCloudApp();
-  const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`PeakLogic Cloud API listening on :${PORT}`);
+const apiHandlers = createApiRoutes({
+  tagStore,
+  driverManager,
+  scanEngine,
+  graphHistory,
+  sendJson: (res, status, body) => {
+    const data = JSON.stringify(body);
+    res.writeHead(status, {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(data),
+      'Access-Control-Allow-Origin': '*',
+    });
+    res.end(data);
+  },
+});
+
+const router = createRouter(apiHandlers);
+
+const server = http.createServer((req, res) => router(req, res));
+
+const wss = new WebSocketServer({ server, path: '/api/live' });
+
+wss.on('connection', (ws) => {
+  const iv = setInterval(() => {
+    if (ws.readyState === ws.OPEN) {
+      ws.send(JSON.stringify({
+        tags: tagStore.liveSnapshot(),
+        runtime: scanEngine.status(),
+        graph: graphHistory.getHistory(null, 120),
+      }));
+    }
+  }, LIVE_WS_INTERVAL_MS);
+  ws.on('close', () => clearInterval(iv));
+});
+
+async function boot() {
+  persistence.ensureDataDir();
+  if (await sanitizeLegacyProjectHwDefaultsOnDisk(persistence)) {
+    console.log('[boot] removed legacy project RTU defaults from data files');
+  }
+  const { initMongoServicesFromSettings } = require('./logger/mongoServicesInit');
+  await initMongoServicesFromSettings().catch((e) => {
+    console.warn('[boot] MongoDB services:', e.message || e);
   });
-
-  const shutdown = async (signal) => {
-    console.log(`[cloud] ${signal} — shutting down`);
-    server.close();
-    await closeMongo();
-    process.exit(0);
-  };
-
-  process.on('SIGINT', () => shutdown('SIGINT'));
-  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  const settings = persistence.readJson('settings.json', {});
+  const port = settings.port || DEFAULT_PORT;
+  await driverManager.rebuild();
+  server.listen(port, '0.0.0.0', () => {
+    console.log(`PeakLogic listening on :${port}`);
+  });
 }
 
-if (require.main === module) {
-  main().catch((err) => {
-    console.error('[cloud] boot failed:', err.message);
-    process.exit(1);
-  });
-}
+boot().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
 
-module.exports = { main };
+module.exports = { server, tagStore, driverManager, scanEngine, graphHistory };

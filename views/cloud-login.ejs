@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · PeakLogic Cloud Studio</title>
+  <link rel="icon" href="/branding/peaklogic-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* PeakLogic brand — matches public/css/peaklogic.css (verified #7C3AED, see that file's header comment) */
+    :root {
+      --ps-purple: #7c3aed;
+      --ps-purple-dark: #6d28d9;
+      --ps-purple-deep: #5b21b6;
+      --ps-purple-light: #ede9fe;
+      --ps-gradient-start: rgba(124, 58, 237, 0.9);
+      --ps-gradient-end: rgba(91, 33, 182, 0.95);
+      --bg: #f8f9fa;
+      --text: #212529;
+      --muted: #6c757d;
+      --border: #dee2e6;
+    }
+    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .login-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 860px) {
+      .login-shell { grid-template-columns: 1fr; }
+      .login-hero { min-height: 12rem; }
+    }
+    .login-hero {
+      position: relative;
+      background:
+        linear-gradient(135deg, var(--ps-gradient-start), var(--ps-gradient-end)),
+        radial-gradient(circle at 20% 80%, rgba(239, 217, 242, 0.15), transparent 55%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem 2rem;
+    }
+    .login-hero .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .login-hero .brand img { width: 34px; height: 34px; }
+    .login-hero .brand .logic { color: var(--ps-purple-light); font-weight: 800; }
+    .login-hero .tagline {
+      max-width: 22rem;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .login-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 24px rgba(73, 16, 79, 0.08);
+    }
+    .login-card h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .login-card .lead {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .login-card label {
+      display: block;
+      margin: 0.85rem 0 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .login-optional {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .login-card input {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .login-card input:focus {
+      outline: 2px solid var(--ps-purple);
+      outline-offset: 1px;
+      border-color: var(--ps-purple);
+    }
+    .login-card button {
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 0.6rem 0.9rem;
+      border: 1px solid var(--ps-purple);
+      border-radius: 6px;
+      background: var(--ps-purple);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+    .login-card button:hover {
+      background: var(--ps-purple-dark);
+      border-color: var(--ps-purple-dark);
+      box-shadow: 0 4px 12px rgba(73, 16, 79, 0.25);
+    }
+    .login-card button.secondary {
+      margin-top: 0.65rem;
+      background: #fff;
+      color: var(--ps-purple);
+    }
+    .login-card button.secondary:hover {
+      background: #f8f9fa;
+      box-shadow: none;
+    }
+    .login-err {
+      color: #dc3545;
+      font-size: 0.9rem;
+      min-height: 1.25em;
+      margin-top: 0.75rem;
+    }
+    .login-links {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .login-links a { color: var(--ps-purple); }
+    .step-hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <aside class="login-hero" aria-hidden="true">
+      <div class="brand"><img src="/branding/peaklogic-icon.svg" alt=""><span>Peak<span class="logic">Logic</span></span></div>
+      <p class="tagline">Cloud Studio — multi-tenant SCADA, historian, CMMS, and site fleet management.</p>
+    </aside>
+    <main class="login-panel">
+      <form class="login-card" id="login-form" autocomplete="on">
+        <div id="step-credentials">
+          <h1>Sign in</h1>
+          <p class="lead">Email and password. Organization ID is for tenant users; <strong>system admin leaves it blank</strong>.</p>
+          <label for="organizationId">Organization ID <span class="login-optional">(optional for system admin)</span></label>
+          <input id="organizationId" name="organizationId" autocomplete="organization" placeholder="e.g. ace — leave blank for system admin">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <button type="submit">Sign in</button>
+          <p class="login-links"><a href="/forgot-password">Forgot password?</a></p>
+        </div>
+        <div id="step-mfa" class="step-hidden">
+          <h1>Verification code</h1>
+          <p class="lead" id="mfa-lead">Enter the 6-digit code sent to your email.</p>
+          <label for="mfaCode">Code</label>
+          <input id="mfaCode" name="mfaCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8">
+          <button type="submit">Verify and sign in</button>
+          <button type="button" class="secondary" id="mfa-back">Back</button>
+        </div>
+        <div class="login-err" id="login-err" role="alert"></div>
+      </form>
+    </main>
+  </div>
+  <script>
+    const next = new URLSearchParams(location.search).get('next') || '/';
+    let mfaToken = '';
+    const stepCred = document.getElementById('step-credentials');
+    const stepMfa = document.getElementById('step-mfa');
+    const err = document.getElementById('login-err');
+
+    function showMfa(hint) {
+      stepCred.classList.add('step-hidden');
+      stepMfa.classList.remove('step-hidden');
+      document.getElementById('mfa-lead').textContent =
+        'Enter the 6-digit code sent to ' + (hint || 'your email') + '.';
+      document.getElementById('mfaCode').focus();
+    }
+
+    function showCredentials() {
+      mfaToken = '';
+      stepMfa.classList.add('step-hidden');
+      stepCred.classList.remove('step-hidden');
+      document.getElementById('mfaCode').value = '';
+    }
+
+    document.getElementById('mfa-back').addEventListener('click', showCredentials);
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      err.textContent = '';
+      try {
+        if (mfaToken) {
+          const res = await fetch('/api/auth/mfa/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+              mfaToken,
+              code: document.getElementById('mfaCode').value.trim(),
+            }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error || res.statusText || 'Verification failed');
+          location.href = next.startsWith('/') ? next : '/';
+          return;
+        }
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            organizationId: document.getElementById('organizationId').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            password: document.getElementById('password').value,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || res.statusText || 'Sign in failed');
+        if (data.mfaRequired) {
+          mfaToken = data.mfaToken;
+          showMfa(data.emailHint);
+          return;
+        }
+        location.href = next.startsWith('/') ? next : '/';
+      } catch (ex) {
+        err.textContent = ex.message || String(ex);
+      }
+    });
+  </script>
+</body>
+</html>

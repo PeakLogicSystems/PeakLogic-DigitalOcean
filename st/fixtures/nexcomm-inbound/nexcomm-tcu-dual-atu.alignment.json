@@ -1,0 +1,939 @@
+{
+  "product": "nexcomm-tcu-dual-atu",
+  "templateId": "nexcomm_tcu_dual_atu",
+  "sourceCsv": "st/fixtures/nexcomm-csv/nexcomm-tcu-dual-atu.csv",
+  "rowCount": 0,
+  "fieldCount": 93,
+  "fields": [
+    {
+      "id": "PRODUCT_ID",
+      "label": "Product Id",
+      "csvColumn": "Product Id [40001]",
+      "nexus": "Product Id",
+      "reg": 40001,
+      "type": "REAL",
+      "payloadTemplate": "json:product_id",
+      "sample": null
+    },
+    {
+      "id": "HARDWARE_REV",
+      "label": "Hardware Rev.",
+      "csvColumn": "Hardware Rev. [40002]",
+      "nexus": "Hardware Rev.",
+      "reg": 40002,
+      "type": "REAL",
+      "payloadTemplate": "json:hardware_rev",
+      "sample": null
+    },
+    {
+      "id": "SOFTWARE_ID",
+      "label": "Software Id",
+      "csvColumn": "Software Id [40003]",
+      "nexus": "Software Id",
+      "reg": 40003,
+      "type": "REAL",
+      "payloadTemplate": "json:software_id",
+      "sample": null
+    },
+    {
+      "id": "SOFTWARE_REV",
+      "label": "Software Rev",
+      "csvColumn": "Software Rev [40004]",
+      "nexus": "Software Rev",
+      "reg": 40004,
+      "type": "REAL",
+      "payloadTemplate": "json:software_rev",
+      "sample": null
+    },
+    {
+      "id": "NORMAL_OFF_TIME",
+      "label": "Normal OFF Time",
+      "csvColumn": "Normal OFF Time [40007]",
+      "nexus": "Normal OFF Time",
+      "reg": 40007,
+      "type": "REAL",
+      "payloadTemplate": "json:normal_off_time",
+      "sample": null
+    },
+    {
+      "id": "NORMAL_ON_TIME",
+      "label": "Normal ON Time",
+      "csvColumn": "Normal ON Time [40008]",
+      "nexus": "Normal ON Time",
+      "reg": 40008,
+      "type": "REAL",
+      "payloadTemplate": "json:normal_on_time",
+      "sample": null
+    },
+    {
+      "id": "OVERRIDE_ON_TIME",
+      "label": "Override ON Time",
+      "csvColumn": "Override ON Time [40009]",
+      "nexus": "Override ON Time",
+      "reg": 40009,
+      "type": "REAL",
+      "payloadTemplate": "json:override_on_time",
+      "sample": null
+    },
+    {
+      "id": "OVERRIDE_OFF_TIME",
+      "label": "Override OFF Time",
+      "csvColumn": "Override OFF Time [40010]",
+      "nexus": "Override OFF Time",
+      "reg": 40010,
+      "type": "REAL",
+      "payloadTemplate": "json:override_off_time",
+      "sample": null
+    },
+    {
+      "id": "OVERRIDE_MIN_DURATION",
+      "label": "Override MIN Duration",
+      "csvColumn": "Override MIN Duration [40011]",
+      "nexus": "Override MIN Duration",
+      "reg": 40011,
+      "type": "REAL",
+      "payloadTemplate": "json:override_min_duration",
+      "sample": null
+    },
+    {
+      "id": "FLUSH_TIME",
+      "label": "Flush Time",
+      "csvColumn": "Flush Time [40012]",
+      "nexus": "Flush Time",
+      "reg": 40012,
+      "type": "REAL",
+      "payloadTemplate": "json:flush_time",
+      "sample": null
+    },
+    {
+      "id": "FLUSH_LIMIT",
+      "label": "Flush Limit",
+      "csvColumn": "Flush Limit [40014]",
+      "nexus": "Flush Limit",
+      "reg": 40014,
+      "type": "REAL",
+      "payloadTemplate": "json:flush_limit",
+      "sample": null
+    },
+    {
+      "id": "TCU_SECONDS_ON_SINCE_RESET",
+      "label": "TCU Seconds On Since Reset",
+      "csvColumn": "TCU Seconds On Since Reset [30041]",
+      "nexus": "TCU Seconds On Since Reset",
+      "reg": 30041,
+      "type": "REAL",
+      "payloadTemplate": "json:tcu_seconds_on_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S1_CURRENT_FLOAT_STATUS",
+      "label": "S1 Current Float Status",
+      "csvColumn": "S1 Current Float Status [30043]",
+      "nexus": "S1 Current Float Status",
+      "reg": 30043,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_current_float_status",
+      "sample": null
+    },
+    {
+      "id": "S1_OFF_FLOAT_LOW_LEVEL_ALARM",
+      "label": "S1 OFF Float Low Level Alarm",
+      "csvColumn": "S1 OFF Float Low Level Alarm [30044]",
+      "nexus": "S1 OFF Float Low Level Alarm",
+      "reg": 30044,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_off_float_low_level_alarm",
+      "sample": null
+    },
+    {
+      "id": "S1_FLOAT_OUT_OF_SEQUENCE_WARNING",
+      "label": "S1 Float Out of Sequence Warning",
+      "csvColumn": "S1 Float Out of Sequence Warning [30045]",
+      "nexus": "S1 Float Out of Sequence Warning",
+      "reg": 30045,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_float_out_of_sequence_warning",
+      "sample": null
+    },
+    {
+      "id": "S1_HIGH_FLOAT_ON_ALARM",
+      "label": "S1 HIGH Float On Alarm",
+      "csvColumn": "S1 HIGH Float On Alarm [30047]",
+      "nexus": "S1 HIGH Float On Alarm",
+      "reg": 30047,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_high_float_on_alarm",
+      "sample": null
+    },
+    {
+      "id": "S1_OFF_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S1 OFF Float Chatter Fault Code",
+      "csvColumn": "S1 OFF Float Chatter Fault Code [30048]",
+      "nexus": "S1 OFF Float Chatter Fault Code",
+      "reg": 30048,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_off_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S1_LEAD_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S1 LEAD Float Chatter Fault Code",
+      "csvColumn": "S1 LEAD Float Chatter Fault Code [30049]",
+      "nexus": "S1 LEAD Float Chatter Fault Code",
+      "reg": 30049,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_lead_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S1_LAG_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S1 LAG Float Chatter Fault Code",
+      "csvColumn": "S1 LAG Float Chatter Fault Code [30050]",
+      "nexus": "S1 LAG Float Chatter Fault Code",
+      "reg": 30050,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_lag_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S1_HIGH_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S1 HIGH Float Chatter Fault Code",
+      "csvColumn": "S1 HIGH Float Chatter Fault Code [30051]",
+      "nexus": "S1 HIGH Float Chatter Fault Code",
+      "reg": 30051,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_high_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S1_PUMP1_MOTOR_AND_RUN_FAULT",
+      "label": "S1 PUMP1 Motor and RUN Fault",
+      "csvColumn": "S1 PUMP1 Motor and RUN Fault [30052]",
+      "nexus": "S1 PUMP1 Motor and RUN Fault",
+      "reg": 30052,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_pump1_motor_and_run_fault",
+      "sample": null
+    },
+    {
+      "id": "S1_PUMP2_MOTOR_AND_RUN_FAULT",
+      "label": "S1 PUMP2 Motor and RUN Fault",
+      "csvColumn": "S1 PUMP2 Motor and RUN Fault [30053]",
+      "nexus": "S1 PUMP2 Motor and RUN Fault",
+      "reg": 30053,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_pump2_motor_and_run_fault",
+      "sample": null
+    },
+    {
+      "id": "S1_BLOWER_MOTOR_FAULT",
+      "label": "S1 Blower Motor Fault",
+      "csvColumn": "S1 Blower Motor Fault [30054]",
+      "nexus": "S1 Blower Motor Fault",
+      "reg": 30054,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_blower_motor_fault",
+      "sample": null
+    },
+    {
+      "id": "S1_PRESSURE_SWITCH",
+      "label": "S1 Pressure Switch",
+      "csvColumn": "S1 Pressure Switch [30055]",
+      "nexus": "S1 Pressure Switch",
+      "reg": 30055,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_pressure_switch",
+      "sample": null
+    },
+    {
+      "id": "S1_HOA1_SWITCH_STATUS",
+      "label": "S1 HOA1 Switch Status",
+      "csvColumn": "S1 HOA1 Switch Status [30057]",
+      "nexus": "S1 HOA1 Switch Status",
+      "reg": 30057,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_hoa1_switch_status",
+      "sample": null
+    },
+    {
+      "id": "S1_HOA2_SWITCH_STATUS",
+      "label": "S1 HOA2 Switch Status",
+      "csvColumn": "S1 HOA2 Switch Status [30058]",
+      "nexus": "S1 HOA2 Switch Status",
+      "reg": 30058,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_hoa2_switch_status",
+      "sample": null
+    },
+    {
+      "id": "S1_P1_SECONDS_ON_LAST_HOUR",
+      "label": "S1 P1 Seconds On Last Hour",
+      "csvColumn": "S1 P1 Seconds On Last Hour [30059]",
+      "nexus": "S1 P1 Seconds On Last Hour",
+      "reg": 30059,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p1_seconds_on_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S1_P1_STARTS_LAST_HOUR",
+      "label": "S1 P1 Starts Last Hour",
+      "csvColumn": "S1 P1 Starts Last Hour [30060]",
+      "nexus": "S1 P1 Starts Last Hour",
+      "reg": 30060,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p1_starts_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S1_P2_SECONDS_ON_LAST_HOUR",
+      "label": "S1 P2 Seconds On Last Hour",
+      "csvColumn": "S1 P2 Seconds On Last Hour [30061]",
+      "nexus": "S1 P2 Seconds On Last Hour",
+      "reg": 30061,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p2_seconds_on_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S1_P2_STARTS_LAST_HOUR",
+      "label": "S1 P2 Starts Last Hour",
+      "csvColumn": "S1 P2 Starts Last Hour [30062]",
+      "nexus": "S1 P2 Starts Last Hour",
+      "reg": 30062,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p2_starts_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S1_P1_STARTS_SINCE_RESET",
+      "label": "S1 P1 Starts since Reset",
+      "csvColumn": "S1 P1 Starts since Reset [30063]",
+      "nexus": "S1 P1 Starts since Reset",
+      "reg": 30063,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p1_starts_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S1_P1_RUN_TIME_SINCE_RESET",
+      "label": "S1 P1 Run Time Since Reset",
+      "csvColumn": "S1 P1 Run Time Since Reset [30065]",
+      "nexus": "S1 P1 Run Time Since Reset",
+      "reg": 30065,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p1_run_time_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S1_P2_STARTS_SINCE_RESET",
+      "label": "S1 P2 Starts Since Reset",
+      "csvColumn": "S1 P2 Starts Since Reset [30067]",
+      "nexus": "S1 P2 Starts Since Reset",
+      "reg": 30067,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p2_starts_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S1_P2_RUN_TIME_SINCE_RESET",
+      "label": "S1 P2 Run Time Since Reset",
+      "csvColumn": "S1 P2 Run Time Since Reset [30069]",
+      "nexus": "S1 P2 Run Time Since Reset",
+      "reg": 30069,
+      "type": "REAL",
+      "payloadTemplate": "json:s1_p2_run_time_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S2_CURRENT_FLOAT_STATUS",
+      "label": "S2 Current Float Status",
+      "csvColumn": "S2 Current Float Status [30071]",
+      "nexus": "S2 Current Float Status",
+      "reg": 30071,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_current_float_status",
+      "sample": null
+    },
+    {
+      "id": "S2_OFF_FLOAT_LOW_LEVEL_ALARM",
+      "label": "S2 OFF Float Low Level Alarm",
+      "csvColumn": "S2 OFF Float Low Level Alarm [30072]",
+      "nexus": "S2 OFF Float Low Level Alarm",
+      "reg": 30072,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_off_float_low_level_alarm",
+      "sample": null
+    },
+    {
+      "id": "S2_FLOAT_OUT_OF_SEQUENCE_WARNING",
+      "label": "S2 Float Out of Sequence Warning",
+      "csvColumn": "S2 Float Out of Sequence Warning [30073]",
+      "nexus": "S2 Float Out of Sequence Warning",
+      "reg": 30073,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_float_out_of_sequence_warning",
+      "sample": null
+    },
+    {
+      "id": "S2_HIGH_FLOAT_ON_ALARM",
+      "label": "S2 HIGH Float On Alarm",
+      "csvColumn": "S2 HIGH Float On Alarm [30075]",
+      "nexus": "S2 HIGH Float On Alarm",
+      "reg": 30075,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_high_float_on_alarm",
+      "sample": null
+    },
+    {
+      "id": "S2_OFF_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S2 OFF Float Chatter Fault Code",
+      "csvColumn": "S2 OFF Float Chatter Fault Code [30076]",
+      "nexus": "S2 OFF Float Chatter Fault Code",
+      "reg": 30076,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_off_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S2_TIMER_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S2 TIMER Float Chatter Fault Code",
+      "csvColumn": "S2 TIMER Float Chatter Fault Code [30077]",
+      "nexus": "S2 TIMER Float Chatter Fault Code",
+      "reg": 30077,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_timer_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S2_LAG_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S2 LAG Float Chatter Fault Code",
+      "csvColumn": "S2 LAG Float Chatter Fault Code [30078]",
+      "nexus": "S2 LAG Float Chatter Fault Code",
+      "reg": 30078,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_lag_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S2_HIGH_FLOAT_CHATTER_FAULT_CODE",
+      "label": "S2 HIGH Float Chatter Fault Code",
+      "csvColumn": "S2 HIGH Float Chatter Fault Code [30079]",
+      "nexus": "S2 HIGH Float Chatter Fault Code",
+      "reg": 30079,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_high_float_chatter_fault_code",
+      "sample": null
+    },
+    {
+      "id": "S2_P1_MOTOR_AND_RUN_FAULT",
+      "label": "S2 P1 Motor and RUN Fault",
+      "csvColumn": "S2 P1 Motor and RUN Fault [30080]",
+      "nexus": "S2 P1 Motor and RUN Fault",
+      "reg": 30080,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p1_motor_and_run_fault",
+      "sample": null
+    },
+    {
+      "id": "S2_P2_MOTOR_AND_RUN_FAULT",
+      "label": "S2 P2 Motor and RUN Fault",
+      "csvColumn": "S2 P2 Motor and RUN Fault [30081]",
+      "nexus": "S2 P2 Motor and RUN Fault",
+      "reg": 30081,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p2_motor_and_run_fault",
+      "sample": null
+    },
+    {
+      "id": "S2_BLOWER_MOTOR_FAULT",
+      "label": "S2 Blower Motor Fault",
+      "csvColumn": "S2 Blower Motor Fault [30082]",
+      "nexus": "S2 Blower Motor Fault",
+      "reg": 30082,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_blower_motor_fault",
+      "sample": null
+    },
+    {
+      "id": "S2_PRESSURE_SWITCH",
+      "label": "S2 Pressure Switch",
+      "csvColumn": "S2 Pressure Switch [30083]",
+      "nexus": "S2 Pressure Switch",
+      "reg": 30083,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_pressure_switch",
+      "sample": null
+    },
+    {
+      "id": "S2_HOA1_SWITCH_STATUS",
+      "label": "S2 HOA1 Switch Status",
+      "csvColumn": "S2 HOA1 Switch Status [30085]",
+      "nexus": "S2 HOA1 Switch Status",
+      "reg": 30085,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_hoa1_switch_status",
+      "sample": null
+    },
+    {
+      "id": "S2_HOA2_SWITCH_STATUS",
+      "label": "S2 HOA2 Switch Status",
+      "csvColumn": "S2 HOA2 Switch Status [30086]",
+      "nexus": "S2 HOA2 Switch Status",
+      "reg": 30086,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_hoa2_switch_status",
+      "sample": null
+    },
+    {
+      "id": "S2_P1_SECONDS_ON_LAST_HOUR",
+      "label": "S2 P1 Seconds On Last Hour",
+      "csvColumn": "S2 P1 Seconds On Last Hour [30087]",
+      "nexus": "S2 P1 Seconds On Last Hour",
+      "reg": 30087,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p1_seconds_on_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S2_P1_STARTS_LAST_HOUR",
+      "label": "S2 P1 Starts Last Hour",
+      "csvColumn": "S2 P1 Starts Last Hour [30088]",
+      "nexus": "S2 P1 Starts Last Hour",
+      "reg": 30088,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p1_starts_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S2_P2_SECONDS_ON_LAST_HOUR",
+      "label": "S2 P2 Seconds On Last Hour",
+      "csvColumn": "S2 P2 Seconds On Last Hour [30089]",
+      "nexus": "S2 P2 Seconds On Last Hour",
+      "reg": 30089,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p2_seconds_on_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S2_P2_STARTS_LAST_HOUR",
+      "label": "S2 P2 Starts Last Hour",
+      "csvColumn": "S2 P2 Starts Last Hour [30090]",
+      "nexus": "S2 P2 Starts Last Hour",
+      "reg": 30090,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p2_starts_last_hour",
+      "sample": null
+    },
+    {
+      "id": "S2_P1_STARTS_SINCE_RESET",
+      "label": "S2 P1 Starts Since Reset",
+      "csvColumn": "S2 P1 Starts Since Reset [30091]",
+      "nexus": "S2 P1 Starts Since Reset",
+      "reg": 30091,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p1_starts_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S2_P1_RUN_TIME_SINCE_RESET",
+      "label": "S2 P1 Run Time Since Reset",
+      "csvColumn": "S2 P1 Run Time Since Reset [30093]",
+      "nexus": "S2 P1 Run Time Since Reset",
+      "reg": 30093,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p1_run_time_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S2_P2_STARTS_SINCE_RESET",
+      "label": "S2 P2 Starts Since Reset",
+      "csvColumn": "S2 P2 Starts Since Reset [30095]",
+      "nexus": "S2 P2 Starts Since Reset",
+      "reg": 30095,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p2_starts_since_reset",
+      "sample": null
+    },
+    {
+      "id": "S2_P2_RUN_TIME_SINCE_RESET",
+      "label": "S2 P2 Run Time Since Reset",
+      "csvColumn": "S2 P2 Run Time Since Reset [30097]",
+      "nexus": "S2 P2 Run Time Since Reset",
+      "reg": 30097,
+      "type": "REAL",
+      "payloadTemplate": "json:s2_p2_run_time_since_reset",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_COMMS_STATE",
+      "label": "Power Meter Comms State",
+      "csvColumn": "Power Meter Comms State [30099]",
+      "nexus": "Power Meter Comms State",
+      "reg": 30099,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_comms_state",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_AGGREGATE_PHASE_LOSS",
+      "label": "Power Meter Aggregate Phase Loss",
+      "csvColumn": "Power Meter Aggregate Phase Loss  [30100]",
+      "nexus": "Power Meter Aggregate Phase Loss",
+      "reg": 30100,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_aggregate_phase_loss",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_1_PEAK_CURRENT",
+      "label": "Power Meter Phase 1 Peak Current",
+      "csvColumn": "Power Meter Phase 1 Peak Current [30101]",
+      "nexus": "Power Meter Phase 1 Peak Current",
+      "reg": 30101,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_1_peak_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_1_AVERAGE_CURRENT",
+      "label": "Power Meter Phase 1 Average Current",
+      "csvColumn": "Power Meter Phase 1 Average Current [30103]",
+      "nexus": "Power Meter Phase 1 Average Current",
+      "reg": 30103,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_1_average_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_2_PEAK_CURRENT",
+      "label": "Power Meter Phase 2 Peak Current",
+      "csvColumn": "Power Meter Phase 2 Peak Current [30105]",
+      "nexus": "Power Meter Phase 2 Peak Current",
+      "reg": 30105,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_2_peak_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_2_AVERAGE_CURRENT",
+      "label": "Power Meter Phase 2 Average Current",
+      "csvColumn": "Power Meter Phase 2 Average Current [30107]",
+      "nexus": "Power Meter Phase 2 Average Current",
+      "reg": 30107,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_2_average_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_3_PEAK_CURRENT",
+      "label": "Power Meter Phase 3 Peak Current",
+      "csvColumn": "Power Meter Phase 3 Peak Current [30109]",
+      "nexus": "Power Meter Phase 3 Peak Current",
+      "reg": 30109,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_3_peak_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_3_AVERAGE_CURRENT",
+      "label": "Power Meter Phase 3 Average Current",
+      "csvColumn": "Power Meter Phase 3 Average Current [30111]",
+      "nexus": "Power Meter Phase 3 Average Current",
+      "reg": 30111,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_3_average_current",
+      "sample": null
+    },
+    {
+      "id": "CT1_TRUE_RMS",
+      "label": "CT1 – True RMS",
+      "csvColumn": "CT1 – True RMS [30113]",
+      "nexus": "CT1 – True RMS",
+      "reg": 30113,
+      "type": "REAL",
+      "payloadTemplate": "json:ct1_true_rms",
+      "sample": null
+    },
+    {
+      "id": "CT2_TRUE_RMS",
+      "label": "CT2 – True RMS",
+      "csvColumn": "CT2 – True RMS [30115]",
+      "nexus": "CT2 – True RMS",
+      "reg": 30115,
+      "type": "REAL",
+      "payloadTemplate": "json:ct2_true_rms",
+      "sample": null
+    },
+    {
+      "id": "POWER_SOURCE",
+      "label": "Power Source",
+      "csvColumn": "Power Source [30117]",
+      "nexus": "Power Source",
+      "reg": 30117,
+      "type": "REAL",
+      "payloadTemplate": "json:power_source",
+      "sample": null
+    },
+    {
+      "id": "CHARGER_STATE_REG",
+      "label": "Charger State Reg",
+      "csvColumn": "Charger State Reg [30118]",
+      "nexus": "Charger State Reg",
+      "reg": 30118,
+      "type": "REAL",
+      "payloadTemplate": "json:charger_state_reg",
+      "sample": null
+    },
+    {
+      "id": "CHARGER_STATUS_REG",
+      "label": "Charger Status Reg.",
+      "csvColumn": "Charger Status Reg. [30119]",
+      "nexus": "Charger Status Reg.",
+      "reg": 30119,
+      "type": "REAL",
+      "payloadTemplate": "json:charger_status_reg",
+      "sample": null
+    },
+    {
+      "id": "SYSTEM_STATUS_REG",
+      "label": "System Status Reg.",
+      "csvColumn": "System Status Reg. [30120]",
+      "nexus": "System Status Reg.",
+      "reg": 30120,
+      "type": "REAL",
+      "payloadTemplate": "json:system_status_reg",
+      "sample": null
+    },
+    {
+      "id": "VBAT",
+      "label": "VBAT",
+      "csvColumn": "VBAT [30121]",
+      "nexus": "VBAT",
+      "reg": 30121,
+      "type": "REAL",
+      "payloadTemplate": "json:vbat",
+      "sample": null
+    },
+    {
+      "id": "VIN",
+      "label": "VIN",
+      "csvColumn": "VIN [30123]",
+      "nexus": "VIN",
+      "reg": 30123,
+      "type": "REAL",
+      "payloadTemplate": "json:vin",
+      "sample": null
+    },
+    {
+      "id": "VOUT",
+      "label": "VOUT",
+      "csvColumn": "VOUT [30125]",
+      "nexus": "VOUT",
+      "reg": 30125,
+      "type": "REAL",
+      "payloadTemplate": "json:vout",
+      "sample": null
+    },
+    {
+      "id": "IBAT",
+      "label": "IBAT",
+      "csvColumn": "IBAT [30127]",
+      "nexus": "IBAT",
+      "reg": 30127,
+      "type": "REAL",
+      "payloadTemplate": "json:ibat",
+      "sample": null
+    },
+    {
+      "id": "IIN",
+      "label": "IIN",
+      "csvColumn": "IIN [30129]",
+      "nexus": "IIN",
+      "reg": 30129,
+      "type": "REAL",
+      "payloadTemplate": "json:iin",
+      "sample": null
+    },
+    {
+      "id": "DIE_TEMP",
+      "label": "DIE Temp",
+      "csvColumn": "DIE Temp [30131]",
+      "nexus": "DIE Temp",
+      "reg": 30131,
+      "type": "REAL",
+      "payloadTemplate": "json:die_temp",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_1_LINE_TO_NEUTRAL_VOLTS",
+      "label": "Power Meter - Phase 1 line to neutral volts",
+      "csvColumn": "Power Meter - Phase 1 line to neutral volts [30133]",
+      "nexus": "Power Meter - Phase 1 line to neutral volts",
+      "reg": 30133,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_1_line_to_neutral_volts",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_2_LINE_TO_NEUTRAL_VOLTS",
+      "label": "Power Meter - Phase 2 line to neutral volts",
+      "csvColumn": "Power Meter - Phase 2 line to neutral volts [30135]",
+      "nexus": "Power Meter - Phase 2 line to neutral volts",
+      "reg": 30135,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_2_line_to_neutral_volts",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_3_LINE_TO_NEUTRAL_VOLTS",
+      "label": "Power Meter - Phase 3 line to neutral volts",
+      "csvColumn": "Power Meter - Phase 3 line to neutral volts [30137]",
+      "nexus": "Power Meter - Phase 3 line to neutral volts",
+      "reg": 30137,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_3_line_to_neutral_volts",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_1_CURRENT",
+      "label": "Power Meter - Phase 1 current",
+      "csvColumn": "Power Meter - Phase 1 current [30139]",
+      "nexus": "Power Meter - Phase 1 current",
+      "reg": 30139,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_1_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_2_CURRENT",
+      "label": "Power Meter - Phase 2 current",
+      "csvColumn": "Power Meter - Phase 2 current [30141]",
+      "nexus": "Power Meter - Phase 2 current",
+      "reg": 30141,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_2_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_3_CURRENT",
+      "label": "Power Meter - Phase 3 current",
+      "csvColumn": "Power Meter - Phase 3 current [30143]",
+      "nexus": "Power Meter - Phase 3 current",
+      "reg": 30143,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_3_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_1_PHASE_ANGLE",
+      "label": "Power Meter - Phase 1 phase angle",
+      "csvColumn": "Power Meter - Phase 1 phase angle [30145]",
+      "nexus": "Power Meter - Phase 1 phase angle",
+      "reg": 30145,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_1_phase_angle",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_2_PHASE_ANGLE",
+      "label": "Power Meter - Phase 2 phase angle",
+      "csvColumn": "Power Meter - Phase 2 phase angle [30147]",
+      "nexus": "Power Meter - Phase 2 phase angle",
+      "reg": 30147,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_2_phase_angle",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_PHASE_3_PHASE_ANGLE",
+      "label": "Power Meter - Phase 3 phase angle",
+      "csvColumn": "Power Meter - Phase 3 phase angle [30149]",
+      "nexus": "Power Meter - Phase 3 phase angle",
+      "reg": 30149,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_phase_3_phase_angle",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_AVERAGE_LINE_TO_NEUTRAL_VOLTS",
+      "label": "Power Meter - Average line to neutral volts",
+      "csvColumn": "Power Meter - Average line to neutral volts [30151]",
+      "nexus": "Power Meter - Average line to neutral volts",
+      "reg": 30151,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_average_line_to_neutral_volts",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_AVERAGE_LINE_CURRENT",
+      "label": "Power Meter - Average line current",
+      "csvColumn": "Power Meter - Average line current [30153]",
+      "nexus": "Power Meter - Average line current",
+      "reg": 30153,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_average_line_current",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_SUM_OF_LINE_CURRENTS",
+      "label": "Power Meter - Sum of line currents",
+      "csvColumn": "Power Meter - Sum of line currents [30155]",
+      "nexus": "Power Meter - Sum of line currents",
+      "reg": 30155,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_sum_of_line_currents",
+      "sample": null
+    },
+    {
+      "id": "POWER_METER_TOTAL_KWH",
+      "label": "Power Meter - Total kwh",
+      "csvColumn": "Power Meter - Total kwh [30157]",
+      "nexus": "Power Meter - Total kwh",
+      "reg": 30157,
+      "type": "REAL",
+      "payloadTemplate": "json:power_meter_total_kwh",
+      "sample": null
+    },
+    {
+      "id": "LINE_1_TO_LINE_2_VOLTS",
+      "label": "Line 1 to Line 2 volts",
+      "csvColumn": "Line 1 to Line 2 volts [30159]",
+      "nexus": "Line 1 to Line 2 volts",
+      "reg": 30159,
+      "type": "REAL",
+      "payloadTemplate": "json:line_1_to_line_2_volts",
+      "sample": null
+    },
+    {
+      "id": "LINE_2_TO_LINE_3_VOLTS",
+      "label": "Line 2 to Line 3 volts",
+      "csvColumn": "Line 2 to Line 3 volts [30161]",
+      "nexus": "Line 2 to Line 3 volts",
+      "reg": 30161,
+      "type": "REAL",
+      "payloadTemplate": "json:line_2_to_line_3_volts",
+      "sample": null
+    },
+    {
+      "id": "LINE_3_TO_LINE_1_VOLTS",
+      "label": "Line 3 to Line 1 volts",
+      "csvColumn": "Line 3 to Line 1 volts [30163]",
+      "nexus": "Line 3 to Line 1 volts",
+      "reg": 30163,
+      "type": "REAL",
+      "payloadTemplate": "json:line_3_to_line_1_volts",
+      "sample": null
+    },
+    {
+      "id": "AVERAGE_LINE_TO_LINE_VOLTS",
+      "label": "Average line to line volts",
+      "csvColumn": "Average line to line volts [30165]",
+      "nexus": "Average line to line volts",
+      "reg": 30165,
+      "type": "REAL",
+      "payloadTemplate": "json:average_line_to_line_volts",
+      "sample": null
+    }
+  ]
+}

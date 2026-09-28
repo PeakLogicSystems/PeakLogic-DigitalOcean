@@ -1,0 +1,97 @@
+# PeakLogic Phase 1 — dedicated MQTT (3 droplet)
+# Region: atl1 preferred; nyc1 OK when Atlanta unavailable — see NYC1-PRODUCTION.md
+# Full doc: docs/CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md
+# Automated deploy: deploy/cloud/phase1/DEPLOY-ATL-MQTT-AUTOMATED.md
+# Legacy (MQTT on SaaS): CHECKLIST-ATL.txt
+
+=== NYC1 PRODUCTION (no atl1 in DO account) ===
+[ ] See deploy/cloud/phase1/NYC1-PRODUCTION.md
+[ ] Separate VPC + Mongo from sandbox test.peaklogic.io (same nyc1 region OK)
+[ ] VPC peaklogic-prod-nyc1; Mongo peaklogic-prod-mongo; 3 droplets in that VPC
+[ ] phase1-prod.local.env (from phase1-atl.env.example)
+[ ] npm run deploy:phase1-prod
+
+=== AUTOMATED PATH (recommended after DO setup) ===
+[ ] DO resources created (sections VPC & Mongo + droplets below — manual in console)
+[ ] Copy phase1-atl.env.example → phase1-prod.local.env; fill SSH hosts + secrets + MONGODB_URI
+[ ] DNS A mqtt.peaklogic.io → cloud-mqtt public IP (or RUN_MQTT_CERTBOT=false for IP test)
+[ ] SSH works: archive, mqtt, saas droplets from this PC
+[ ] npm run deploy:phase1-atl
+[ ] Mongo trusted source = cloud-1-saas PUBLIC IP
+[ ] Post-deploy checks (DEPLOY-ATL-MQTT-AUTOMATED.md § Post-deploy checklist)
+[ ] Manual WinSCP path: WINSCP-DEPLOY.md (if automation skipped)
+
+=== PREP (Windows) ===
+[ ] npm run build:phase1-bundles   (also run by deploy:phase1-atl)
+[ ] Prod secrets (separate from sandbox):
+      JWT_SECRET=_________________________
+      PLATFORM_ADMIN_KEY=__________________
+      ARCHIVE_SERVER_TOKEN=________________
+      MOSQUITTO_PASS=______________________  (shared: mqtt + saas + field)
+
+=== ATL1 — VPC & Mongo ===
+[ ] VPC: peaklogic-prod-atl1 (region atl1)
+[ ] Managed Mongo: peaklogic-prod-mongo, atl1, DB peaklogic_cloud
+[ ] Mongo automated backups enabled
+[ ] Connection string saved
+
+=== DNS (early — before field devices) ===
+[ ] A mqtt.peaklogic.io → cloud-mqtt-atl1 PUBLIC IP
+[ ] (Later) A peaklogic.io → cloud-1-saas-atl1 PUBLIC IP
+
+=== ATL1 — cloud-2-archive-atl1 ===
+[ ] Droplet 1–2 GB, VPC peaklogic-prod-atl1
+[ ] Volume archive-prod-atl1 100+ GB → /data/archive
+[ ] Volume snapshot schedule enabled
+[ ] fw-archive-atl1: 8090 from cloud-1 private IP only
+[ ] WinSCP: peaklogic-archive-*.tgz → /tmp/
+[ ] /etc/peaklogic/archive.env configured
+[ ] install-archive.sh OK
+[ ] curl http://127.0.0.1:8090/health
+[ ] Private IP recorded: 10.___________________
+
+=== ATL1 — cloud-mqtt-atl1 (NEW) ===
+[ ] Droplet 4 GB, same VPC
+[ ] fw-mqtt-atl1: 22 (your IP), 8883 (all or site IPs)
+[ ] WinSCP: peaklogic-cloud-*d.tgz → /tmp/ (for deploy/ scripts)
+[ ] /etc/peaklogic/mqtt.env from droplet-mqtt/mqtt.env.template
+[ ] certbot certonly --standalone -d mqtt.peaklogic.io
+[ ] install-mqtt-droplet.sh OK
+[ ] mosquitto_pub local test OK
+[ ] Private IP recorded: 10.___________________
+
+=== ATL1 — cloud-1-saas-atl1 ===
+[ ] Droplet 4 GB, same VPC
+[ ] fw-saas-atl1: 22, 80, 443 ONLY (no 8883)
+[ ] WinSCP: peaklogic-cloud-*d.tgz → /tmp/
+[ ] /etc/peaklogic/saas.env (MONGODB_URI, secrets, PUBLIC_* for IP phase)
+[ ] install-saas.sh OK — do NOT run enable-saas-mqtt.sh
+[ ] Mongo trusted source = cloud-1 PUBLIC IP
+[ ] npm run seed
+[ ] configure-saas-mqtt-remote.sh PEAKLOGIC_MQTT_PRIVATE_IP=10.x.x.x
+[ ] curl http://127.0.0.1:3100/health (mqtt hub connected)
+[ ] certbot --nginx -d peaklogic.io -d www.peaklogic.io (after DNS or temp)
+
+=== ATL1 — archive compact (SaaS) ===
+[ ] /etc/peaklogic/archive-compact.env (archive private IP + token)
+[ ] enable-phase1-archive-compact.sh
+[ ] ARCHIVE_COMPACT_DRY_RUN=1 compact job OK
+
+=== VERIFICATION GATE ===
+[ ] mqtt.peaklogic.io:8883 TLS reachable
+[ ] SaaS login on droplet IP — demo tenant
+[ ] No mosquitto running on SaaS droplet
+[ ] Telemetry test via VPC pub to mqtt private IP
+[ ] Archive reachable from SaaS (private IP)
+
+=== DNS CUTOVER (production) ===
+[ ] A peaklogic.io → cloud-1-saas-atl1 public IP
+[ ] PUBLIC_APP_URL / PUBLIC_API_URL → https://peaklogic.io
+[ ] systemctl restart peaklogic-saas
+[ ] https://peaklogic.io/login verified
+[ ] Field docs: mqtts://mqtt.peaklogic.io:8883
+
+=== SANDBOX (separate — nyc1) ===
+[ ] test.peaklogic.io → NYC droplet (see droplet-sandbox/INSTALL.txt)
+
+Done: ____________  By: ____________

@@ -1,9 +1,10 @@
 'use strict';
 
 /** Shared I/O point timestamp formatting for live panels and tag tables. */
-window.PeakLogicIoTimestamp = (function () {
+window.PeaklogicIoTimestamp = (function () {
   function formatAbsolute(ms) {
     if (ms == null || !Number.isFinite(ms)) return '—';
+    if (window.PeaklogicTime?.formatClockMs) return window.PeaklogicTime.formatClockMs(ms);
     const d = new Date(ms);
     const hh = String(d.getHours()).padStart(2, '0');
     const mm = String(d.getMinutes()).padStart(2, '0');

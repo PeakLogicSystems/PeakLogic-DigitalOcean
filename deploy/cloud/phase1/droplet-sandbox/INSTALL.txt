@@ -1,0 +1,72 @@
+# PeakLogic sandbox — single-server install (test.peaklogic.io)
+# Region: nyc1 recommended (separate from Atlanta production).
+# Docs: docs/CLOUD_DEPLOY_DO_PHASE1_ATL.md#nyc1-sandbox-testpeaklogicio
+
+=== DO resources (nyc1) ===
+  - Droplet: sandbox-peaklogic-nyc1 (2–4 GB Debian 12)
+  - Managed Mongo: peaklogic-sandbox-mongo (separate from prod)
+  - DNS: test.peaklogic.io → droplet public IP
+  - Firewall: 22, 80, 443, 8883
+
+=== Build & upload (Windows) ===
+  npm run build:phase1-bundles
+  # WinSCP both bundles to /tmp/ on sandbox droplet:
+  #   peaklogic-cloud-*d.tgz  (SaaS app)
+  #   peaklogic-archive-*.tgz (archive server binary)
+
+=== 1. SaaS ===
+  mkdir -p /home/peaklogic
+  tar xzf /tmp/peaklogic-cloud-*d.tgz -C /home/peaklogic --strip-components=1
+  sed -i 's/\r$//' /home/peaklogic/deploy/cloud/debian/*.sh
+
+  mkdir -p /etc/peaklogic
+  cp /home/peaklogic/deploy/cloud/phase1/droplet-sandbox/saas.env.template /etc/peaklogic/saas.env
+  nano /etc/peaklogic/saas.env
+
+  export PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic
+  bash /home/peaklogic/deploy/cloud/debian/install-saas.sh
+
+  # Mongo allowlist: sandbox droplet public IP
+  sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'
+
+=== 2. Archive (same box) ===
+  mkdir -p /opt/peaklogic-archive
+  tar xzf /tmp/peaklogic-archive-*.tgz -C /opt/peaklogic-archive --strip-components=1
+
+  cp /home/peaklogic/deploy/cloud/phase1/droplet-sandbox/archive.env.template /etc/peaklogic/archive.env
+  nano /etc/peaklogic/archive.env
+  mkdir -p /var/lib/peaklogic/archive
+
+  PEAKLOGIC_SOURCE=/opt/peaklogic-archive PEAKLOGIC_ARCHIVE_DIR=/opt/peaklogic-archive \
+    bash /opt/peaklogic-archive/deploy/cloud/debian/install-archive.sh
+
+  curl -s http://127.0.0.1:8090/health
+
+=== 3. TLS + nginx ===
+  PEAKLOGIC_DOMAIN=test.peaklogic.io bash /home/peaklogic/deploy/cloud/debian/install-saas.sh
+  # or if already installed:
+  bash /home/peaklogic/deploy/cloud/debian/fix-sandbox-web.sh
+  certbot --nginx -d test.peaklogic.io
+  curl -sI https://test.peaklogic.io/login
+
+=== 4. MQTT ===
+  cp /home/peaklogic/deploy/cloud/phase1/droplet-saas/mqtt.env.template /etc/peaklogic/mqtt.env
+  nano /etc/peaklogic/mqtt.env   # PEAKLOGIC_DOMAIN=test.peaklogic.io
+  bash /home/peaklogic/deploy/cloud/debian/enable-saas-mqtt.sh
+
+=== 5. Archive compact (local) ===
+  cp /home/peaklogic/deploy/cloud/phase1/droplet-sandbox/archive-compact.env.template \
+     /etc/peaklogic/archive-compact.env
+  nano /etc/peaklogic/archive-compact.env   # token matches archive.env
+  bash /home/peaklogic/deploy/cloud/debian/enable-phase1-archive-compact.sh
+
+  sudo -u peaklogic bash -lc 'cd /home/peaklogic && ARCHIVE_COMPACT_DRY_RUN=1 node scripts/run-archive-compact.js'
+
+=== Optional: edge runtime 3090 ===
+  bash /home/peaklogic/deploy/cloud/debian/enable-runtime-3090.sh
+
+=== Verify ===
+  https://test.peaklogic.io/login  (demo / demo)
+  mqtts://test.peaklogic.io:8883
+
+Promote bundles to Atlanta production after sandbox passes.

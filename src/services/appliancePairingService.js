@@ -103,15 +103,18 @@ async function pairAppliance(input) {
     gatewayDeviceId: gatewayDevice.id,
     brokerUrl,
     topicPrefix: 'peaklogic/v1',
-    clientId: `peaklogic-appliance-${applianceId.slice(0, 8)}`,
+    clientId: `mv-appliance-${applianceId.slice(0, 8)}`,
     relayParc: true,
-    relayAlarms: false,
+    relayAlarms: true,
     cloudApiUrl: process.env.PUBLIC_API_URL || '',
     serviceBusIngest: {
       enabled: Boolean(process.env.SERVICE_BUS_CONNECTION_STRING),
       queue: process.env.SERVICE_BUS_QUEUE_PARC_INGEST || 'parc-ingest',
       httpEndpoint: process.env.PUBLIC_API_URL
         ? `${process.env.PUBLIC_API_URL.replace(/\/$/, '')}/api/ingest/parc`
+        : '',
+      alarmHttpEndpoint: process.env.PUBLIC_API_URL
+        ? `${process.env.PUBLIC_API_URL.replace(/\/$/, '')}/api/ingest/alarm`
         : '',
     },
   };

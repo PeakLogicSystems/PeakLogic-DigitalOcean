@@ -20,7 +20,9 @@ function createRuntimeRoutes(deps) {
           + ' Click Load selected (loads matching st/fixtures), Apply Waveshare device template, or Open project.';
       }
       const msg = errs.length
-        ? `Program invalid: ${errs.join('; ')}.${hint}`
+        ? ((/fetch failed|cannot reach|ECONNREFUSED|ENOTFOUND|timeout|aborted/i.test(errs.join(' ')))
+          ? errs.join('; ')
+          : `Program invalid: ${errs.join('; ')}.${hint}`)
         : (e.message || 'Start failed');
       res.status(400).json({
         error: msg,

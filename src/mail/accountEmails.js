@@ -6,6 +6,7 @@ const {
   buildPasswordChangedEmail,
   buildWelcomeEmail,
   buildInviteEmail,
+  buildMfaCodeEmail,
 } = require('./templates');
 
 async function sendPasswordResetEmail({ tenant, user, token }) {
@@ -46,9 +47,21 @@ async function sendInviteEmail({ tenant, user, token }) {
   return { sent: true };
 }
 
+async function sendMfaCodeEmail({ tenant, user, code }) {
+  if (!isMailConfigured()) {
+    console.log('[mail] MFA code skipped — SMTP not configured');
+    return { sent: false, reason: 'mail_not_configured' };
+  }
+  const tpl = buildMfaCodeEmail({ tenant, user, code });
+  await sendMail({ to: user.email, subject: tpl.subject, text: tpl.text, html: tpl.html });
+  console.log(`[mail] MFA code → ${user.email}`);
+  return { sent: true };
+}
+
 module.exports = {
   sendPasswordResetEmail,
   sendPasswordChangedEmail,
   sendWelcomeEmail,
   sendInviteEmail,
+  sendMfaCodeEmail,
 };

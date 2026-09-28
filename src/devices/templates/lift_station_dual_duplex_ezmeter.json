@@ -1,0 +1,56 @@
+{
+  "id": "lift_station_dual_duplex_ezmeter",
+  "label": "DUPLEXLS + EZ Meter — dual duplex lift + facility PQ",
+  "vendor": "PeakLogic",
+  "model": "DUPLEXLS (ALT2) + EZ Meter DDS-RGB on Opta RS485",
+  "transport": "mqtt_parc",
+  "stationType": "dual_duplex",
+  "defaultProgram": "logic/38_duplex_lift_station_ezmeter.st",
+  "tagsFromDevice": false,
+  "ioBaseOnly": false,
+  "diCount": 16,
+  "doCount": 4,
+  "aiCount": 6,
+  "defaults": {
+    "deviceId": "duplexls_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true,
+    "ioBaseOnly": false
+  },
+  "driver": {
+    "enabled": true,
+    "ioBaseOnly": false
+  },
+  "tags": {
+    "logicFixture": "tags.duplex_lift_station_ezmeter.json",
+    "expansions": [
+      { "slot": 1, "type": "d1608e" },
+      { "slot": 2, "type": "a0602", "rtdsEnabled": true }
+    ]
+  },
+  "fieldbus": {
+    "compileFlags": ["MV_FIELDBUS=1", "MV_EZMETER=1"],
+    "ezmeter": {
+      "slaveId": 1,
+      "baud": 9600,
+      "livePollMs": 30000,
+      "energyPollMs": 300000
+    }
+  },
+  "facility": {
+    "driver": "ezmeter"
+  },
+  "notes": "DUPLEXLS + EZ Meter: flash PeaklogicOptaMqttSt with MV_FIELDBUS=1 MV_EZMETER=1; RS485 to DDS-RGB at main service. ST logic/38_duplex_lift_station_ezmeter.st drives R4 (station alarm) on LVL_HIGH, MECH_PQ_ALM, or motor fault DIs X1_I11/X1_I12. Set low-voltage threshold in Cloud System setup → MQTT Parc → EZ Meter undervolt V and Opta /setup → EZ Meter undervolt (MECH_PQ_CFG_UV_V).",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
+  }
+}

@@ -1,0 +1,2 @@
+county,station_name,station_slug,station_type,lat,lng,device_id,device_slug,address,owner
+putnam,125 Yelvington Rd Triplex,yelvington-triplex,triplex,29.6441,-81.5888,mv_pcu_yelvington_01,dev-pcu-yelvington,"125 Yelvington Rd, Palatka, FL 32131",Putnam County Utilities

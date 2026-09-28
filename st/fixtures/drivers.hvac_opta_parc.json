@@ -1,0 +1,25 @@
+[
+  {
+    "id": "opta_hvac_01",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_opta_01",
+    "name": "Opta HVAC primary",
+    "reportIntervalMs": 200,
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "ioBaseOnly": false
+  },
+  {
+    "id": "opta_hvac_02",
+    "type": "mqtt_parc",
+    "enabled": false,
+    "deviceId": "hvac_opta_02",
+    "name": "Opta HVAC secondary (config D)",
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "telemetryOnly": true
+  }
+]

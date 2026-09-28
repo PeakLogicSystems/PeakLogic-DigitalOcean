@@ -1,0 +1,8 @@
+[
+  { "id": "HVS_SPEED_PCT", "label": "Hayward VS speed %", "type": "INT", "role": "input", "value": 0, "driverId": "hayward_bus", "driverAddress": { "hayward": "speed_pct", "deviceClass": "vs_pump", "deviceAddr": 0 } },
+  { "id": "HVS_RPM", "label": "Hayward VS RPM", "type": "INT", "role": "input", "value": 0, "driverId": "hayward_bus", "driverAddress": { "hayward": "rpm", "deviceClass": "vs_pump", "deviceAddr": 0 } },
+  { "id": "HVS_WATTS", "label": "Hayward VS watts", "type": "INT", "role": "input", "value": 0, "driverId": "hayward_bus", "driverAddress": { "hayward": "watts", "deviceClass": "vs_pump", "deviceAddr": 0 } },
+  { "id": "HVS_RUNNING", "label": "Hayward VS running", "type": "BOOL", "role": "input", "value": false, "driverId": "hayward_bus", "driverAddress": { "hayward": "running", "deviceClass": "vs_pump", "deviceAddr": 0 } },
+  { "id": "HVS_SPEED_CMD", "label": "Hayward VS speed cmd", "type": "INT", "role": "output", "value": 45, "driverId": "hayward_bus", "driverAddress": { "hayward": "speed_cmd", "deviceClass": "vs_pump", "deviceAddr": 0 } },
+  { "id": "HVS_RUN_CMD", "label": "Hayward VS run cmd", "type": "BOOL", "role": "output", "value": true, "driverId": "hayward_bus", "driverAddress": { "hayward": "run_cmd", "deviceClass": "vs_pump", "deviceAddr": 0 } }
+]

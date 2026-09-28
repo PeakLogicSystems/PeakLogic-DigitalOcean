@@ -1,0 +1,38 @@
+{
+  "id": "esp32_res_pool_valves",
+  "label": "Res-Pool-Link ESP32 — 4 backwash valves (MQTT Parc)",
+  "vendor": "PeakLogic",
+  "model": "ESP32-S3-Relay-6CH / 4-relay (inlet, outlet, waste, spare)",
+  "transport": "mqtt_parc",
+  "sharedBus": false,
+  "driverId": "res_pool_valves",
+  "diCount": 1,
+  "doCount": 4,
+  "aiCount": 0,
+  "defaults": {
+    "deviceId": "res_pool_valves",
+    "reportIntervalMs": 2000,
+    "scanMs": 100,
+    "remoteExecution": false
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "res_pool_valves",
+    "remoteExecution": false,
+    "platform": "esp32-res-pool-link"
+  },
+  "tags": {
+    "explicit": [
+      { "id": "FILT_INLET", "type": "BOOL", "role": "output", "value": true, "driverAddress": { "channel": "R1" }, "comment": "Filter inlet valve" },
+      { "id": "FILT_OUTLET", "type": "BOOL", "role": "output", "value": true, "driverAddress": { "channel": "R2" }, "comment": "Filter outlet valve" },
+      { "id": "BW_WASTE", "type": "BOOL", "role": "output", "value": false, "driverAddress": { "channel": "R3" }, "comment": "Backwash waste valve" },
+      { "id": "BW_SPARE", "type": "BOOL", "role": "output", "value": false, "driverAddress": { "channel": "R4" }, "comment": "Spare valve" },
+      { "id": "BW_VALVE_FILTER", "type": "BOOL", "role": "output", "value": true, "driverAddress": { "channel": "BW_VALVE_FILTER" }, "comment": "ST filter mode" },
+      { "id": "BW_VALVE_BW", "type": "BOOL", "role": "output", "value": false, "driverAddress": { "channel": "BW_VALVE_BW" }, "comment": "ST backwash mode" },
+      { "id": "BW_VALVE_RINSE", "type": "BOOL", "role": "output", "value": false, "driverAddress": { "channel": "BW_VALVE_RINSE" }, "comment": "ST rinse mode" },
+      { "id": "I1", "type": "BOOL", "role": "input", "value": false, "driverAddress": { "channel": "I1" }, "comment": "Optional flow switch (active low)" }
+    ]
+  },
+  "notes": "Flash firmware/esp32-res-pool-link. AP PeakLogic-ResPool. Fail-safe FILTER (waste closed). See docs/RES_POOL_LINK.md."
+}

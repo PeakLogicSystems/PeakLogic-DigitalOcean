@@ -1,0 +1,28 @@
+﻿datelogged
+Off Float
+Lead Float
+Lag Float
+High Float
+Motor 1 Run Time Fault
+Motor 2 Run Time Fault
+Motor 1 Fault
+Motor 2 Fault
+On Time since reset
+Pump1 Run Time Previous Hour
+Pump1 Starts Previous Hour
+Pump2 Run Time Previous Hour
+Pump2 Starts Previous Hour
+VBAT
+VIN
+VOUT
+IBAT
+IIN
+Main Power Loss
+Phase 1 Voltage (L1 to L2)
+Phase 2 Voltage (L2 to L3)
+Phase 3 Voltage (L3 to L1)
+Phase 1 Current
+Phase 2 Current
+Phase 3 Current
+Pump 1 Water Fault
+Pump 2 Water Fault

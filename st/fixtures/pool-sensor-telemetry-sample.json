@@ -1,0 +1,62 @@
+{
+
+  "deviceId": "pool_sensor_01",
+
+  "name": "Pool chemistry sensor",
+
+  "platform": "mcxn947-pool",
+
+  "reportIntervalSec": 1,
+
+  "runtime": {
+
+    "running": true,
+
+    "firmware": "pool-sensor",
+
+    "excitationHz": 400,
+
+    "conductivity": "4-point-ac"
+
+  },
+
+  "tags": [
+
+    { "id": "PH_AI", "type": "REAL", "role": "input", "value": 7.42, "quality": "GOOD" },
+
+    { "id": "ORP_AI", "type": "REAL", "role": "input", "value": 685.0, "quality": "GOOD" },
+
+    { "id": "COND_AI", "type": "REAL", "role": "input", "value": 3200, "quality": "GOOD" },
+
+    { "id": "WATER_TEMP_C", "type": "REAL", "role": "input", "value": 28.5, "quality": "GOOD" }
+
+  ],
+
+  "pool": {
+
+    "ref_kcl_mV": 842.0,
+
+    "ref_drift_mV": 2.1,
+
+    "ref_alarm": false,
+
+    "temp_C": 28.5,
+
+    "ph": 7.42,
+
+    "orp_mV": 685.0,
+
+    "cond_uS_cm": 5818.2,
+
+    "cond_ppm": 3200,
+
+    "counter_i_A": 0.0005,
+
+    "counter_v_V": 0.421,
+
+    "excitation_Hz": 400
+
+  }
+
+}
+

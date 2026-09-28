@@ -7,6 +7,7 @@ const {
   legacyOptaDeviceIdFromAteccSerial,
   normalizeAteccSerialHex,
 } = require('./optaSerial');
+const { extractGlobalSiteKeyFromReport } = require('./commissionFence');
 
 const PARC_FILE = 'parc.json';
 
@@ -32,7 +33,11 @@ function loadStore() {
 }
 
 function saveStore(store) {
-  persistence.writeJson(PARC_FILE, store);
+  try {
+    persistence.writeJson(PARC_FILE, store);
+  } catch (e) {
+    console.warn('[parc] save:', e.message || e);
+  }
 }
 
 let _saveTimer = null;
@@ -89,6 +94,7 @@ function deviceSummary(rec, settings) {
     attachHost: rec.attach?.host || null,
     pauseReports: !!rec.attach?.active,
     ateccSerial: rec.meta?.ateccSerial || '',
+    globalSiteKey: rec.meta?.globalSiteKey ?? rec.globalSiteKey ?? null,
   };
 }
 
@@ -130,7 +136,29 @@ class DeviceRegistry {
       driverHealth: rec.driverHealth || [],
       meta: rec.meta || {},
       attach: rec.attach || { active: false },
+      cellular: rec.meta?.cellular || null,
+      iccid: rec.meta?.cellular?.iccid || '',
+      eid: rec.meta?.cellular?.eid || '',
+      gatewayId: rec.meta?.cellular?.gatewayId || rec.meta?.gatewayId || '',
     };
+  }
+
+  patchDeviceMeta(deviceId, metaPatch = {}) {
+    const id = normalizeDeviceId(deviceId);
+    const rec = this._store.devices[id];
+    if (!rec) return null;
+    const nextMeta = { ...(rec.meta || {}) };
+    for (const [key, value] of Object.entries(metaPatch)) {
+      if (key === 'cellular' && value && typeof value === 'object') {
+        nextMeta.cellular = { ...(nextMeta.cellular || {}), ...value };
+      } else if (value !== undefined) {
+        nextMeta[key] = value;
+      }
+    }
+    rec.meta = nextMeta;
+    this._store.devices[id] = rec;
+    scheduleSaveStore(this._store);
+    return this.getDevice(id);
   }
 
   ingestReport(body) {
@@ -143,6 +171,7 @@ class DeviceRegistry {
     const attach = existing.attach || { active: false };
     // Serial not in MQTT telemetry (redacted); keep registry/driver copy from first-seen or driver config.
     const ateccSerial = extractAteccSerialFromReport(body) || existing.meta?.ateccSerial || '';
+    const globalSiteKey = extractGlobalSiteKeyFromReport(body);
 
     let legacyRec = null;
     let legacyKey = null;
@@ -201,11 +230,18 @@ class DeviceRegistry {
         ...(body.mqttBroker ? { mqttBroker: String(body.mqttBroker) } : {}),
         ...(body.mqttBrokerPort != null ? { mqttBrokerPort: Number(body.mqttBrokerPort) } : {}),
         ...(body.deviceMode ? { deviceMode: String(body.deviceMode) } : {}),
+        ...(globalSiteKey != null ? { globalSiteKey } : {}),
+        ...(body.meta?.cellular && typeof body.meta.cellular === 'object'
+          ? { cellular: { ...(existing.meta?.cellular || {}), ...body.meta.cellular } }
+          : {}),
       },
       attach,
     };
 
     this._store.devices[deviceId] = rec;
+    if (Array.isArray(rec.tags) && rec.tags.length) {
+      delete rec.meta.pendingTelemetry;
+    }
     if (legacyKey) {
       delete this._store.devices[legacyKey];
     }
@@ -288,4 +324,50 @@ class DeviceRegistry {
 
 const registry = new DeviceRegistry();
 
-module.exports = { DeviceRegistry, registry, defaultParcSettings, normalizeDeviceId, flushSaveStore };
+function resolveRegistry() {
+  // Cloud MQTT ingest writes the fleet registry. Per-tenant DeviceRegistry
+  // copies created after 8/13 isolation stay empty — Live I/O must not use them.
+  if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
+    return registry;
+  }
+  try {
+    const active = require('../tenants/tenantRuntime').getActiveRegistry();
+    if (active) return active;
+  } catch {
+    /* boot / tests */
+  }
+  return registry;
+}
+
+/** Global fleet registry (MQTT ingest on cloud SaaS). */
+function getFleetRegistry() {
+  return registry;
+}
+
+/** Parc list/cmd/sync: cloud uses fleet registry; appliance uses tenant or appliance registry. */
+function resolveParcRegistry() {
+  if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
+    return registry;
+  }
+  return resolveRegistry();
+}
+
+const registryProxy = new Proxy(registry, {
+  get(_target, prop) {
+    const inst = resolveRegistry();
+    const val = inst[prop];
+    if (typeof val === 'function') return val.bind(inst);
+    return val;
+  },
+});
+
+module.exports = {
+  DeviceRegistry,
+  registry: registryProxy,
+  getFleetRegistry,
+  resolveParcRegistry,
+  resolveRegistry,
+  defaultParcSettings,
+  normalizeDeviceId,
+  flushSaveStore,
+};

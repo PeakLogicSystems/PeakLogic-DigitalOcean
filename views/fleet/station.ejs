@@ -4,7 +4,7 @@
 <main class="container py-4">
   <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb small mb-0">
-      <li class="breadcrumb-item"><a href="/fleet">Fleet</a></li>
+      <li class="breadcrumb-item"><a href="/fleet">Assets</a></li>
       <li class="breadcrumb-item active"><%= station.name %></li>
     </ol>
   </nav>
@@ -29,6 +29,14 @@
             </span>
           </div>
           <dl class="row small mt-3 mb-0">
+            <% if (station.metadata.owner) { %>
+            <dt class="col-sm-4">Owner</dt>
+            <dd class="col-sm-8"><%= station.metadata.owner %></dd>
+            <% } %>
+            <% if (station.metadata.address) { %>
+            <dt class="col-sm-4">Address</dt>
+            <dd class="col-sm-8"><%= station.metadata.address %></dd>
+            <% } %>
             <dt class="col-sm-4">Type</dt>
             <dd class="col-sm-8"><%= station.profile?.label || station.metadata.stationType %></dd>
             <dt class="col-sm-4">Program</dt>
@@ -50,10 +58,20 @@
           <% if (!station.devices.length) { %>
             <li class="list-group-item text-muted small">No devices registered.</li>
           <% } else { %>
-            <% station.devices.forEach(function(d) { %>
+            <% station.devices.forEach(function(d, i) { %>
               <li class="list-group-item small">
                 <strong><%= d.name %></strong> <code><%= d.slug %></code><br>
                 <span class="text-muted"><%= d.driverType %> · <%= d.driverConfig?.deviceId || '' %></span>
+                <% if (i === 0) { %>
+                  <% if (!station.firmwareVersion) { %>
+                    <span class="badge bg-light text-muted border" title="No firmware reported yet">fw —</span>
+                  <% } else if (station.firmwareStatus === 'outdated') { %>
+                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning"
+                          title="Firmware v<%= station.firmwareVersion %> is older than the recommended v<%= station.recommendedFirmware %> — consider reflashing">fw v<%= station.firmwareVersion %> <i class="bi bi-exclamation-triangle"></i></span>
+                  <% } else { %>
+                    <span class="badge bg-light text-dark border" title="Reported device firmware">fw v<%= station.firmwareVersion %></span>
+                  <% } %>
+                <% } %>
               </li>
             <% }); %>
           <% } %>

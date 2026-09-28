@@ -1,0 +1,279 @@
+{
+  "product": "nexcomm-tcu-duplex",
+  "templateId": "nexcomm_tcu_duplex",
+  "sourceCsv": "st/fixtures/nexcomm-csv/nexcomm-tcu-duplex.csv",
+  "rowCount": 99,
+  "fieldCount": 27,
+  "fields": [
+    {
+      "id": "OFF_FLOAT",
+      "label": "Off Float",
+      "csvColumn": "Off Float",
+      "nexus": "Off Float",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:off_float",
+      "sample": "1"
+    },
+    {
+      "id": "LEAD_FLOAT",
+      "label": "Lead Float",
+      "csvColumn": "Lead Float",
+      "nexus": "Lead Float",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:lead_float",
+      "sample": "1"
+    },
+    {
+      "id": "LAG_FLOAT",
+      "label": "Lag Float",
+      "csvColumn": "Lag Float",
+      "nexus": "Lag Float",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:lag_float",
+      "sample": "1"
+    },
+    {
+      "id": "HIGH_FLOAT",
+      "label": "High Float",
+      "csvColumn": "High Float",
+      "nexus": "High Float",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:high_float",
+      "sample": "1"
+    },
+    {
+      "id": "MOTOR_1_RUN_TIME_FAULT",
+      "label": "Motor 1 Run Time Fault",
+      "csvColumn": "Motor 1 Run Time Fault",
+      "nexus": "Motor 1 Run Time Fault",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:motor_1_run_time_fault",
+      "sample": "0"
+    },
+    {
+      "id": "MOTOR_2_RUN_TIME_FAULT",
+      "label": "Motor 2 Run Time Fault",
+      "csvColumn": "Motor 2 Run Time Fault",
+      "nexus": "Motor 2 Run Time Fault",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:motor_2_run_time_fault",
+      "sample": "0"
+    },
+    {
+      "id": "MOTOR_1_FAULT",
+      "label": "Motor 1 Fault",
+      "csvColumn": "Motor 1 Fault",
+      "nexus": "Motor 1 Fault",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:motor_1_fault",
+      "sample": "0"
+    },
+    {
+      "id": "MOTOR_2_FAULT",
+      "label": "Motor 2 Fault",
+      "csvColumn": "Motor 2 Fault",
+      "nexus": "Motor 2 Fault",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:motor_2_fault",
+      "sample": "0"
+    },
+    {
+      "id": "ON_TIME_SINCE_RESET",
+      "label": "On Time since reset",
+      "csvColumn": "On Time since reset",
+      "nexus": "On Time since reset",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:on_time_since_reset",
+      "sample": "1316592"
+    },
+    {
+      "id": "PUMP1_RUN_TIME_PREVIOUS_HOUR",
+      "label": "Pump1 Run Time Previous Hour",
+      "csvColumn": "Pump1 Run Time Previous Hour",
+      "nexus": "Pump1 Run Time Previous Hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:pump1_run_time_previous_hour",
+      "sample": "3601"
+    },
+    {
+      "id": "PUMP1_STARTS_PREVIOUS_HOUR",
+      "label": "Pump1 Starts Previous Hour",
+      "csvColumn": "Pump1 Starts Previous Hour",
+      "nexus": "Pump1 Starts Previous Hour",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump1_starts_previous_hour",
+      "sample": "0"
+    },
+    {
+      "id": "PUMP2_RUN_TIME_PREVIOUS_HOUR",
+      "label": "Pump2 Run Time Previous Hour",
+      "csvColumn": "Pump2 Run Time Previous Hour",
+      "nexus": "Pump2 Run Time Previous Hour",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:pump2_run_time_previous_hour",
+      "sample": "3601"
+    },
+    {
+      "id": "PUMP2_STARTS_PREVIOUS_HOUR",
+      "label": "Pump2 Starts Previous Hour",
+      "csvColumn": "Pump2 Starts Previous Hour",
+      "nexus": "Pump2 Starts Previous Hour",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump2_starts_previous_hour",
+      "sample": "0"
+    },
+    {
+      "id": "VBAT",
+      "label": "VBAT",
+      "csvColumn": "VBAT",
+      "nexus": "VBAT",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:vbat",
+      "sample": "4.1215925216674805"
+    },
+    {
+      "id": "VIN",
+      "label": "VIN",
+      "csvColumn": "VIN",
+      "nexus": "VIN",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:vin",
+      "sample": "13.142529487609863"
+    },
+    {
+      "id": "VOUT",
+      "label": "VOUT",
+      "csvColumn": "VOUT",
+      "nexus": "VOUT",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:vout",
+      "sample": "13.119860649108887"
+    },
+    {
+      "id": "IBAT",
+      "label": "IBAT",
+      "csvColumn": "IBAT",
+      "nexus": "IBAT",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:ibat",
+      "sample": "-0.00003518399898894131"
+    },
+    {
+      "id": "IIN",
+      "label": "IIN",
+      "csvColumn": "IIN",
+      "nexus": "IIN",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:iin",
+      "sample": "0.033424798399209976"
+    },
+    {
+      "id": "MAIN_POWER_LOSS",
+      "label": "Main Power Loss",
+      "csvColumn": "Main Power Loss",
+      "nexus": "Main Power Loss",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:main_power_loss",
+      "sample": "0"
+    },
+    {
+      "id": "PHASE_1_VOLTAGE_L1_TO_L2",
+      "label": "Phase 1 Voltage (L1 to L2)",
+      "csvColumn": "Phase 1 Voltage (L1 to L2)",
+      "nexus": "Phase 1 Voltage (L1 to L2)",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:phase_1_voltage_l1_to_l2",
+      "sample": "244.0117645263672"
+    },
+    {
+      "id": "PHASE_2_VOLTAGE_L2_TO_L3",
+      "label": "Phase 2 Voltage (L2 to L3)",
+      "csvColumn": "Phase 2 Voltage (L2 to L3)",
+      "nexus": "Phase 2 Voltage (L2 to L3)",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:phase_2_voltage_l2_to_l3",
+      "sample": "243.7278289794922"
+    },
+    {
+      "id": "PHASE_3_VOLTAGE_L3_TO_L1",
+      "label": "Phase 3 Voltage (L3 to L1)",
+      "csvColumn": "Phase 3 Voltage (L3 to L1)",
+      "nexus": "Phase 3 Voltage (L3 to L1)",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:phase_3_voltage_l3_to_l1",
+      "sample": "245.03713989257812"
+    },
+    {
+      "id": "PHASE_1_CURRENT",
+      "label": "Phase 1 Current",
+      "csvColumn": "Phase 1 Current",
+      "nexus": "Phase 1 Current",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:phase_1_current",
+      "sample": "0"
+    },
+    {
+      "id": "PHASE_2_CURRENT",
+      "label": "Phase 2 Current",
+      "csvColumn": "Phase 2 Current",
+      "nexus": "Phase 2 Current",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:phase_2_current",
+      "sample": "0.025223175063729286"
+    },
+    {
+      "id": "PHASE_3_CURRENT",
+      "label": "Phase 3 Current",
+      "csvColumn": "Phase 3 Current",
+      "nexus": "Phase 3 Current",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:phase_3_current",
+      "sample": "0"
+    },
+    {
+      "id": "PUMP_1_WATER_FAULT",
+      "label": "Pump 1 Water Fault",
+      "csvColumn": "Pump 1 Water Fault",
+      "nexus": "Pump 1 Water Fault",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump_1_water_fault",
+      "sample": "0"
+    },
+    {
+      "id": "PUMP_2_WATER_FAULT",
+      "label": "Pump 2 Water Fault",
+      "csvColumn": "Pump 2 Water Fault",
+      "nexus": "Pump 2 Water Fault",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump_2_water_fault",
+      "sample": "0"
+    }
+  ]
+}

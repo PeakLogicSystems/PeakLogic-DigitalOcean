@@ -1,0 +1,20 @@
+[Unit]
+Description=PeakLogic archive server (zstd blob store)
+After=network.target
+
+[Service]
+Type=simple
+User=peaklogic
+Group=peaklogic
+EnvironmentFile=/etc/peaklogic/archive.env
+WorkingDirectory=/home/peaklogic
+ExecStart=/usr/bin/node /home/peaklogic/deploy/cloud/archive-server/server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/data/archive
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

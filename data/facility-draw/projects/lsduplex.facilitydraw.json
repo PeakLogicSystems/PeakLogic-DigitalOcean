@@ -1,0 +1,29 @@
+{
+  "format": "peaklogic-facilitydraw",
+  "version": 1,
+  "savedAt": "2026-08-02T11:44:21.338Z",
+  "name": "lsduplex",
+  "units": "ft",
+  "scale": null,
+  "extents": {
+    "minX": 17.62305654585066,
+    "minY": -838.0695167981295,
+    "maxX": 377.62305654585066,
+    "maxY": -598.0695167981295,
+    "label": "Arch D workspace",
+    "sheetSize": "D",
+    "worldPerInch": 10
+  },
+  "background": null,
+  "nodes": [],
+  "edges": [],
+  "groups": [],
+  "annotations": [],
+  "libraryFile": "lsduplex.facilitydraw.json",
+  "meta": {
+    "client": "",
+    "site": "",
+    "notes": "",
+    "peaklogicProject": ""
+  }
+}

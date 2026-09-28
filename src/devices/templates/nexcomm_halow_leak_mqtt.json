@@ -1,0 +1,35 @@
+{
+  "id": "nexcomm_halow_leak_mqtt",
+  "label": "Nexcomm HaLoW — leak / flow / total (6 ch)",
+  "vendor": "Nexcomm",
+  "model": "HaLoW leak detector",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "halow_01",
+  "diCount": 6,
+  "aiCount": 12,
+  "defaults": {
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+    "deviceId": "halow_01",
+    "topicPrefix": "nexcomm/halow",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "halow": {
+      "deviceId": "halow_01",
+      "topicPrefix": "nexcomm/halow",
+      "channelCount": 6,
+      "channelPrefix": "CH",
+      "leakField": "leak",
+      "flowField": "flow_gpm",
+      "totalField": "total_gal"
+    }
+  },
+  "notes": "MQTT driver (read-only). HaLoW gateway publishes JSON to nexcomm/halow/<deviceId>/telemetry. Six channels CH1–CH6: leak (BOOL), flow_gpm (REAL), total_gal (REAL). Set broker URL and deviceId when applying. Sample: st/fixtures/halow-telemetry-sample.json."
+}

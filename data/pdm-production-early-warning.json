@@ -1,0 +1,25 @@
+{
+  "description": "Apply for live duplex lift station — earliest proactive warning (host supplement + all forecast methods)",
+  "inference": {
+    "hostEnabled": true,
+    "mode": "host-supplement",
+    "backend": "auto",
+    "modelsDir": "C:\\Users\\public\\data\\est-pc\\data\\models"
+  },
+  "pdm": {
+    "buildEnabled": true,
+    "buildIntervalHours": 24,
+    "failureThreshold": 0.35,
+    "windowMin": 60,
+    "forecastMethods": [
+      "health_index",
+      "run_amps_creep",
+      "start_time_ms"
+    ]
+  },
+  "cmms": {
+    "autoWorkOrdersFromAlarms": false,
+    "autoWorkOrdersFromPdm": true,
+    "appendServiceHistoryOnWoComplete": true
+  }
+}

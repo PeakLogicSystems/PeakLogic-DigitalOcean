@@ -4,6 +4,17 @@
  * PeakLogic HMI — load SVG/GIF/PNG screens, layout, and tag bindings.
  */
 (function (global) {
+  // User zoom for the live display viewport (mobile readability / tap targets).
+  // 1 = fit-to-viewport (default). Higher values enlarge the screen using real
+  // layout (crisp text, accurate hit areas) while the viewport scrolls/pans.
+  let liveDisplayZoom = 1;
+  let liveDisplayCtx = null;
+
+  function isLiveDisplayViewport(container) {
+    return !!(container && container.classList
+      && container.classList.contains('hmi-viewport-live'));
+  }
+
   function isPidFaceplateAssetPath(assetPath) {
     return /pid-faceplates|pid_loop_standard/i.test(String(assetPath || ''));
   }
@@ -960,6 +971,9 @@
 
   const STATE3_TEXT_LABELS = ['Auto', 'Off', 'Hand'];
 
+  const STATION_STA_LABELS = ['ONLINE', 'FAULT', 'WARNING', 'OFFLINE'];
+  const STATION_STA_COLORS = ['#22c55e', '#ef4444', '#fbed20', '#64748b'];
+
   const STATE5_TEXT_LABELS = ['STOP', 'RUN', 'FAULT', 'WARN', 'OFFLINE'];
   const STATE5_TEXT_COLORS = ['#334155', '#334155', '#ef4444', '#ca8a04', '#94a3b8'];
 
@@ -989,6 +1003,24 @@
     const h = Math.floor(n / 60);
     const m = n % 60;
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  }
+
+  const DOW_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  function dowTextLabel(v) {
+    const i = Math.trunc(Number(v) || 0) % 7;
+    return DOW_LABELS[i < 0 ? i + 7 : i] || String(v ?? '');
+  }
+
+  function hoursFromMinutes(v) {
+    const n = Math.max(0, Number(v) || 0);
+    return (n / 60).toFixed(1);
+  }
+
+  function parseHoursToMinutes(raw) {
+    const n = Number(String(raw ?? '').trim());
+    if (!Number.isFinite(n) || n < 0) return null;
+    return Math.round(n * 60);
   }
 
   function parseHhmmToMinutes(raw) {
@@ -1025,6 +1057,19 @@
     return STATE3_TEXT_LABELS[idx] || String(idx);
   }
 
+  function stationStaIndex(v, binding) {
+    const n = scaledNumeric(v, binding) ?? Number(v);
+    const min = Number.isFinite(Number(binding?.min)) ? Number(binding.min) : 0;
+    const max = Number.isFinite(Number(binding?.max)) ? Number(binding.max) : 3;
+    if (!Number.isFinite(n)) return min;
+    return Math.max(min, Math.min(max, Math.trunc(n)));
+  }
+
+  function stationStaTextLabel(v, binding) {
+    const idx = stationStaIndex(v, binding);
+    return STATION_STA_LABELS[idx] || String(idx);
+  }
+
   function state5TextLabel(v, binding) {
     const idx = state5Index(v, binding);
     return STATE5_TEXT_LABELS[idx] || String(idx);
@@ -1034,6 +1079,7 @@
     const n = scaledNumeric(v, binding) ?? Number(v);
     if (!Number.isFinite(n)) return String(v ?? '');
     if (binding.format === 'state3') return state3TextLabel(v, binding);
+    if (binding.format === 'stationSta') return stationStaTextLabel(v, binding);
     if (binding.format === 'state5') return state5TextLabel(v, binding);
     if (binding.format === 'tpoSta') return tpoStaTextLabel(v, binding);
     if (binding.format === 'poolBwSta') return poolBwStaTextLabel(v, binding);
@@ -1041,6 +1087,8 @@
     if (binding.format === 'poolLightColor') return poolLightColorTextLabel(v, binding);
     if (binding.format === 'altStage') return altStageTextLabel(v);
     if (binding.format === 'hhmm') return hhmmFromMinutes(v);
+    if (binding.format === 'dow') return dowTextLabel(v);
+    if (binding.format === 'hoursFromMin') return hoursFromMinutes(v);
     if (binding.format === 'int') return String(Math.round(n));
     if (binding.format === 'fixed1') return n.toFixed(1);
     if (binding.format === 'fixed2') return n.toFixed(2);
@@ -1798,7 +1846,7 @@
   }
 
   function isFaceplateControlSuffix(suffix) {
-    return /^(btn_|chk_|status_lamp|hoa_state|run_state|run_hrs|starts_count|run_meter|btn_offline|btn_enable|tod_value|window_start|window_end|param_app_min|param_repeat_min|param_on_min|param_off_min|tmr_on_lamp|tmr_off_lamp|motor_|tpo_)/i.test(String(suffix || ''));
+    return /^(btn_|chk_|status_lamp|hoa_state|run_state|run_hrs|starts_count|run_meter|btn_offline|btn_enable|tod_value|window_start|window_end|param_app_min|param_repeat_min|param_on_min|param_off_min|tmr_on_lamp|tmr_off_lamp|motor_|tpo_|sch_fp|filter_)/i.test(String(suffix || ''));
   }
 
   function isFaceplateFillControlSuffix(suffix) {
@@ -1840,7 +1888,9 @@
   function applyBinding(el, binding, liveMap) {
     if (!el || !binding?.tagId) return;
     if (isCaptionTextBindingTarget(el, binding)) return;
-    const v = bindingTagValue(binding, liveMap);
+    let v = bindingTagValue(binding, liveMap);
+    const pulseDisplay = resolveHandModePumpDisplayValue(binding, liveMap);
+    if (pulseDisplay != null) v = pulseDisplay;
     const on = isTruthy(v);
     switch (binding.property) {
       case 'visibility':
@@ -1879,6 +1929,11 @@
         if (/btn_offline/i.test(elSuffix)) {
           applyFillOrStroke(el, binding, on);
           paintFaceplateOfflineButton(el, on);
+          break;
+        }
+        if (/lamp/i.test(elSuffix) && color) {
+          setPaintOnTarget(el, 'fill', color);
+          setPaintOnTarget(el, 'stroke', color);
           break;
         }
         if (svg && isPilotLightSvg(svg) && color) {
@@ -1999,6 +2054,19 @@
           }
           break;
         }
+        if (binding.format === 'stationSta') {
+          const idx = stationStaIndex(v, binding);
+          setBoundText(el, STATION_STA_LABELS[idx] || String(idx));
+          const palette = Array.isArray(binding.colors) && binding.colors.length
+            ? binding.colors
+            : STATION_STA_COLORS;
+          const color = palette[idx] || STATION_STA_COLORS[idx];
+          if (color) {
+            el.setAttribute('fill', color);
+            try { el.style.fill = color; } catch { /* ignore */ }
+          }
+          break;
+        }
         if (binding.format === 'state5') {
           const idx = state5Index(v, binding);
           setBoundText(el, STATE5_TEXT_LABELS[idx] || String(idx));
@@ -2116,6 +2184,25 @@
       || !!container?.classList?.contains('hmi-tile-composer');
   }
 
+  function getLiveDisplayZoom() {
+    return liveDisplayZoom;
+  }
+
+  function setLiveDisplayZoom(z) {
+    const next = Math.max(1, Math.min(4, Number(z) || 1));
+    liveDisplayZoom = next;
+    const ctx = liveDisplayCtx;
+    if (ctx && ctx.container && ctx.grid && ctx.container.isConnected) {
+      delete ctx.grid.dataset.hmiSizeSig;
+      try {
+        applyScreenLayout(ctx.container, ctx.screen, ctx.grid);
+      } catch (_) {
+        try { sizeTileGridElement(ctx.container, ctx.grid, ctx.screen); } catch (__) { /* ignore */ }
+      }
+    }
+    return liveDisplayZoom;
+  }
+
   function getDisplayLimits(screen, container) {
     const g = getScreenGrid(screen);
     const logicalW = g.width;
@@ -2126,19 +2213,13 @@
     if (!Number.isFinite(limitH) || limitH < 100) limitH = logicalH;
     limitW = Math.max(100, Math.min(4096, Math.round(limitW)));
     limitH = Math.max(100, Math.min(4096, Math.round(limitH)));
-    if (isTileGridViewport(container)) {
-      return {
-        limitW,
-        limitH,
-        maxW: limitW,
-        maxH: limitH,
-        logicalW,
-        logicalH,
-      };
-    }
-    const pad = 16;
-    const availW = Math.max(100, (container?.clientWidth || limitW) - pad);
-    const availH = Math.max(100, (container?.clientHeight || limitH) - pad);
+    const pad = isTileGridViewport(container) ? 24 : 16;
+    // Live viewport honours the user zoom: inflating the available space makes
+    // the fitted screen physically larger. maxW/maxH stay clamped to the logical
+    // size below, so zoom tops out at native 100% and the viewport scrolls.
+    const zoom = isLiveDisplayViewport(container) ? Math.max(1, liveDisplayZoom) : 1;
+    const availW = Math.max(100, ((container?.clientWidth || limitW) - pad) * zoom);
+    const availH = Math.max(100, ((container?.clientHeight || limitH) - pad) * zoom);
     return {
       limitW,
       limitH,
@@ -2194,6 +2275,9 @@
 
   function sizeTileGridElement(container, grid, screen) {
     if (!container || !grid || !screen) return;
+    if (isLiveDisplayViewport(container)) {
+      liveDisplayCtx = { container, grid, screen };
+    }
     const run = () => {
       const size = measureTileGridSize(container, screen);
       const sig = [
@@ -2206,21 +2290,21 @@
       if (size.fit === 'stretch') {
         grid.style.width = '100%';
         grid.style.height = `${size.height}px`;
-        grid.style.maxWidth = `${size.limitW}px`;
-        grid.style.minWidth = `${Math.min(size.limitW, size.logicalWidth)}px`;
+        grid.style.maxWidth = `${size.maxW}px`;
+        grid.style.minWidth = '0';
         if (frame) {
           frame.style.width = '100%';
-          frame.style.maxWidth = `${size.limitW}px`;
+          frame.style.maxWidth = `${size.maxW}px`;
           frame.style.height = '';
         }
       } else {
         grid.style.width = `${size.width}px`;
         grid.style.height = `${size.height}px`;
-        grid.style.maxWidth = `${size.limitW}px`;
+        grid.style.maxWidth = `${size.width}px`;
         grid.style.minWidth = '';
         if (frame) {
           frame.style.width = 'fit-content';
-          frame.style.maxWidth = `${size.limitW + 32}px`;
+          frame.style.maxWidth = `${size.width + 32}px`;
           frame.style.height = 'fit-content';
         }
       }
@@ -2276,7 +2360,7 @@
       stage.style.justifyContent = '';
       stage.style.width = '100%';
       stage.style.height = 'auto';
-      stage.style.maxWidth = `${limits.limitW}px`;
+      stage.style.maxWidth = `${limits.maxW}px`;
       stage.style.aspectRatio = fit === 'stretch' ? '' : `${limits.logicalW} / ${limits.logicalH}`;
       stage.style.transform = '';
       stage.style.transformOrigin = '';
@@ -2520,7 +2604,10 @@
     const trs = filtered.map(({ tag: t, live, level, acked, since }) => {
       const label = String(t.label || '').trim() || t.id;
       const rowCls = acked ? 'alarm-row-acked' : `alarm-row-active alarm-row-${level}`;
-      const sinceStr = since ? new Date(since).toLocaleString() : '—';
+      const sinceStr = since
+        ? (window.PeaklogicTime?.formatFriendly?.(since)
+          || new Date(since).toLocaleString(undefined, window.PeaklogicTime?.localeOpts?.() || {}))
+        : '—';
       const levelLabel = HMI_ALARM_LABELS[level] || level;
       const ackCell = editable
         ? (acked ? '<span class="muted">Acked</span>' : '<span class="muted">—</span>')
@@ -3038,7 +3125,8 @@
 
   function isBoolToggleBinding(binding, tagType) {
     if (!binding?.tagId || !binding.elementId) return false;
-    if (String(tagType || '').toUpperCase() !== 'BOOL') return false;
+    const ty = String(tagType || '').toUpperCase();
+    if (ty && ty !== 'BOOL') return false;
     if (binding.property !== 'fill' && binding.property !== 'stroke') return false;
     if (binding.interaction === 'toggle') return true;
     if (binding.interaction === 'pulse' || binding.interaction === 'command') return false;
@@ -3047,13 +3135,91 @@
 
   function isBoolCommandBinding(binding, tagType) {
     if (!binding?.tagId || !binding.elementId) return false;
-    if (String(tagType || '').toUpperCase() !== 'BOOL') return false;
+    const ty = String(tagType || '').toUpperCase();
+    if (ty && ty !== 'BOOL') return false;
     if (binding.property !== 'fill' && binding.property !== 'stroke') return false;
     if (isBoolToggleBinding(binding, tagType)) return false;
     if (binding.interaction === 'pulse' || binding.interaction === 'command') return true;
     const suf = bindingElementSuffix(binding.elementId);
     if (/^button$/i.test(suf)) return binding.interaction !== 'toggle';
     return /^btn_/i.test(suf);
+  }
+
+  function resolveBoolCommandFromEvent(e, grid) {
+    if (!e?.target || !grid) return null;
+    const fromBtn = e.target.classList?.contains('hmi-bool-cmd-btn')
+      ? e.target
+      : e.target.closest?.('.hmi-bool-cmd-btn');
+    if (fromBtn && grid.contains(fromBtn) && fromBtn.dataset.boolCmdTagId) {
+      return { tagId: fromBtn.dataset.boolCmdTagId, el: fromBtn };
+    }
+    let node = e.target;
+    for (let i = 0; i < 3 && node; i += 1) {
+      const sib = node.previousElementSibling;
+      if (sib?.classList?.contains('hmi-bool-cmd-btn') && sib.dataset.boolCmdTagId && grid.contains(sib)) {
+        return { tagId: sib.dataset.boolCmdTagId, el: sib };
+      }
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function motorCommandParts(tagId) {
+    const m = /^MOTOR(\d+)_(START|STOP)$/i.exec(String(tagId || ''));
+    if (!m) return null;
+    return { n: m[1], action: m[2].toUpperCase() };
+  }
+
+  function resolveHandModePumpWrite(tagId, pressed, hoaState) {
+    const parts = motorCommandParts(tagId);
+    if (!parts) return null;
+    if (Math.trunc(Number(hoaState)) !== 2) return null;
+    if (!pressed) return { skip: true };
+    return {
+      tagId: `MOTOR${parts.n}_HAND`,
+      value: parts.action === 'START',
+      hoaTag: `MOTOR${parts.n}_HOA`,
+    };
+  }
+
+  /** One Opta write_memory: HOA=Hand + START/STOP pulse + HAND latch. */
+  function resolvePumpCommandWrites(tagId, pressed, hoaState) {
+    const parts = motorCommandParts(tagId);
+    if (!parts) return [{ tagId, value: !!pressed }];
+    if (!pressed) return [{ tagId, value: false }];
+    if (Math.trunc(Number(hoaState)) !== 2) {
+      return [{ tagId, value: true }];
+    }
+    return [
+      { tagId: `MOTOR${parts.n}_HOA`, value: 2 },
+      { tagId, value: true },
+      { tagId: `MOTOR${parts.n}_HAND`, value: parts.action === 'START' },
+    ];
+  }
+
+  function resolveHandModePumpDisplayValue(binding) {
+    if (!binding || String(binding.interaction || '') !== 'pulse') return null;
+    if (!motorCommandParts(binding.tagId)) return null;
+    return false;
+  }
+
+  function hoaValueForBinding(binding) {
+    if (binding?.hoaValue != null && Number.isFinite(Number(binding.hoaValue))) {
+      return Math.max(0, Math.min(2, Math.trunc(Number(binding.hoaValue))));
+    }
+    const suf = bindingElementSuffix(binding?.elementId);
+    if (/_hand$/i.test(suf)) return 2;
+    if (/_off$/i.test(suf)) return 1;
+    return 0;
+  }
+
+  function isHoaModeButtonBinding(binding, tagType) {
+    if (!binding?.tagId || !binding.elementId) return false;
+    const ty = String(tagType || '').toUpperCase();
+    if (ty && ty !== 'INT' && !ty.includes('INT')) return false;
+    if (String(binding.interaction || '') === 'hoaMode') return true;
+    if (binding.property !== 'fill5' && binding.property !== 'fill') return false;
+    return /^btn_p\d+_(auto|off|hand)$/i.test(bindingElementSuffix(binding.elementId));
   }
 
   function isState3ReadoutBinding(binding, tagType) {
@@ -3069,7 +3235,7 @@
     if (!binding?.tagId || !binding.elementId) return false;
     if (binding.property !== 'text') return false;
     const fmt = String(binding.format || '').toLowerCase();
-    if (binding.interaction === 'edit' && (fmt === 'hhmm' || fmt === 'int' || fmt === 'fixed0' || fmt === 'fixed1')) {
+    if (binding.interaction === 'edit' && (fmt === 'hhmm' || fmt === 'dow' || fmt === 'hoursfrommin' || fmt === 'int' || fmt === 'fixed0' || fmt === 'fixed1')) {
       return true;
     }
     const ty = String(tagType || '').toUpperCase();
@@ -3083,7 +3249,7 @@
 
   function clearPushButtonOverlayHits(svg) {
     if (!svg?.querySelectorAll) return;
-    for (const el of svg.querySelectorAll('[id$="__button_text"], #button_text, [id$="__button_bezel"], #button_bezel')) {
+    for (const el of svg.querySelectorAll('text, tspan, [id$="__button_text"], #button_text, [id$="__button_bezel"], #button_bezel, .btn-text')) {
       el.style.pointerEvents = 'none';
     }
   }
@@ -3104,6 +3270,8 @@
         el.style.pointerEvents = 'auto';
         el.dataset.boolCmdTagId = b.tagId;
         const svg = el.ownerSVGElement || el.closest('svg');
+        if (svg?.style) svg.style.pointerEvents = 'auto';
+        svg?.closest?.('.hmi-tile-asset-wrap')?.style.setProperty('pointer-events', 'auto');
         clearPushButtonOverlayHits(svg);
         const cell = el.closest?.('.hmi-tile-cell');
         if (cell) cell.classList.add('hmi-bool-cmd-cell');
@@ -3141,7 +3309,7 @@
       grid.removeEventListener('click', grid._hmiBoolToggleClick, true);
     }
     grid._hmiBoolToggleClick = (e) => {
-      if (e.target.closest('.hmi-nav-cell-btn, .hmi-page-hotspot-btn, .hmi-bool-cmd-btn')) return;
+      if (e.target.closest('.hmi-nav-cell-btn, .hmi-page-hotspot-btn, .hmi-bool-cmd-btn, .hmi-hoa-mode-btn')) return;
       const btn = e.target.closest('.hmi-bool-toggle-btn');
       if (!btn || !grid.contains(btn)) return;
       const tagId = btn.dataset.boolToggleTagId;
@@ -3178,26 +3346,77 @@
     grid._hmiBoolCmdDown = (e) => {
       if (e.button !== 0 && e.pointerType === 'mouse') return;
       if (e.target.closest('.hmi-nav-cell-btn, .hmi-page-hotspot-btn')) return;
-      const btn = e.target.closest('.hmi-bool-cmd-btn');
-      if (!btn || !grid.contains(btn)) return;
-      const tagId = btn.dataset.boolCmdTagId;
-      if (!tagId) return;
+      const hit = resolveBoolCommandFromEvent(e, grid);
+      if (!hit?.tagId) return;
       e.preventDefault();
       e.stopPropagation();
-      grid._hmiBoolActive = { tagId, pointerId: e.pointerId, el: btn };
-      try { btn.setPointerCapture(e.pointerId); } catch { /* ignore */ }
-      onPulse(tagId, true, btn);
+      hit.el.classList?.add?.('hmi-bool-cmd-pressed');
+      grid._hmiBoolActive = { tagId: hit.tagId, pointerId: e.pointerId, el: hit.el };
+      try { hit.el.setPointerCapture?.(e.pointerId); } catch { /* ignore */ }
+      onPulse(hit.tagId, true, hit.el);
     };
     grid._hmiBoolCmdUp = (e) => {
       const active = grid._hmiBoolActive;
       if (!active || e.pointerId !== active.pointerId) return;
       try { active.el?.releasePointerCapture?.(e.pointerId); } catch { /* ignore */ }
+      active.el?.classList?.remove?.('hmi-bool-cmd-pressed');
       grid._hmiBoolActive = null;
       onPulse(active.tagId, false, active.el);
     };
     grid.addEventListener('pointerdown', grid._hmiBoolCmdDown, true);
     grid.addEventListener('pointerup', grid._hmiBoolCmdUp, true);
     grid.addEventListener('pointercancel', grid._hmiBoolCmdUp, true);
+  }
+
+  function markHoaModeElementsInteractive(grid, bindings, tagTypeFor) {
+    if (!grid) return;
+    grid.querySelectorAll('.hmi-hoa-mode-btn').forEach((el) => {
+      el.classList.remove('hmi-hoa-mode-btn');
+      el.style.pointerEvents = '';
+      delete el.dataset.hoaModeTagId;
+      delete el.dataset.hoaModeValue;
+    });
+    grid.querySelectorAll('.hmi-hoa-mode-cell').forEach((el) => el.classList.remove('hmi-hoa-mode-cell'));
+    for (const b of bindings || []) {
+      const tagType = typeof tagTypeFor === 'function' ? tagTypeFor(b.tagId) : '';
+      if (!isHoaModeButtonBinding(b, tagType)) continue;
+      const hoaValue = hoaValueForBinding(b);
+      for (const el of findBindingElements(grid, b.elementId)) {
+        el.classList.add('hmi-hoa-mode-btn');
+        el.style.pointerEvents = 'auto';
+        el.dataset.hoaModeTagId = b.tagId;
+        el.dataset.hoaModeValue = String(hoaValue);
+        const svg = el.ownerSVGElement || el.closest('svg');
+        if (svg?.style) svg.style.pointerEvents = 'auto';
+        svg?.closest?.('.hmi-tile-asset-wrap')?.style.setProperty('pointer-events', 'auto');
+        clearPushButtonOverlayHits(svg);
+        const cell = el.closest?.('.hmi-tile-cell');
+        if (cell) cell.classList.add('hmi-hoa-mode-cell');
+      }
+    }
+  }
+
+  function wireHoaModeButtons(grid, bindings, tagTypeFor, onSelect) {
+    if (!grid || typeof onSelect !== 'function') return;
+    markHoaModeElementsInteractive(grid, bindings, tagTypeFor);
+    if (grid._hmiHoaModeClick) {
+      grid.removeEventListener('click', grid._hmiHoaModeClick, true);
+    }
+    grid._hmiHoaModeClick = (e) => {
+      if (e.target.closest('.hmi-nav-cell-btn, .hmi-page-hotspot-btn, .hmi-bool-cmd-btn')) return;
+      const btn = e.target.closest('.hmi-hoa-mode-btn');
+      if (!btn || !grid.contains(btn)) return;
+      const tagId = btn.dataset.hoaModeTagId;
+      if (!tagId) return;
+      const now = Date.now();
+      if (now - (grid._hmiHoaModeLastFire || 0) < 250) return;
+      grid._hmiHoaModeLastFire = now;
+      e.preventDefault();
+      e.stopPropagation();
+      const next = Math.max(0, Math.min(2, Math.trunc(Number(btn.dataset.hoaModeValue) || 0)));
+      onSelect(tagId, next, btn);
+    };
+    grid.addEventListener('click', grid._hmiHoaModeClick, true);
   }
 
   function markState3ReadoutsInteractive(grid, bindings, tagTypeFor) {
@@ -3229,7 +3448,7 @@
       grid.removeEventListener('pointerup', grid._hmiState3Click, true);
     }
     grid._hmiState3Click = (e) => {
-      if (e.target.closest('.hmi-nav-cell-btn, .hmi-page-hotspot-btn, .hmi-bool-cmd-btn')) return;
+      if (e.target.closest('.hmi-nav-cell-btn, .hmi-page-hotspot-btn, .hmi-bool-cmd-btn, .hmi-hoa-mode-btn')) return;
       if (e.type === 'pointerup' && e.button !== 0 && e.pointerType === 'mouse') return;
       const el = e.target.closest('.hmi-state3-readout-interactive');
       if (!el || !grid.contains(el)) return;
@@ -3280,7 +3499,9 @@
           node.style.cursor = 'pointer';
           node.dataset.paramEditTagId = b.tagId;
           node.dataset.paramEditFormat = b.format || 'int';
-          node.title = b.format === 'hhmm' ? 'Click to set time (HH:MM)' : 'Click to set value (minutes)';
+          node.title = b.format === 'hhmm'
+            ? 'Click to set time (HH:MM)'
+            : (b.format === 'hoursFromMin' ? 'Click to set turnover hours (e.g. 6.0)' : 'Click to set value');
         };
         markHit(el);
         el.querySelectorAll?.('rect, text').forEach(markHit);
@@ -4059,6 +4280,16 @@
 
   async function loadTileGridInto(container, screen, options = {}) {
     if (!container) return { grid: null, roots: [] };
+    if (screenUsesSvgBackground(screen)) {
+      const svgUrl = resolveScreenAssetUrl(screen.svg);
+      const root = await loadScreenInto(container, svgUrl, screen);
+      wireNavButtons(root, options.onNavigate, options.onOpenRoom);
+      wirePageHotspotGridHits(root, screen, options.onPageHotspotNavigate || options.onNavigate);
+      wireRoomHotspotGridHits(root, screen, options.onOpenRoom);
+      wireHoaSwitches(root, options.onHoaCycle);
+      markPageHotspotBackgroundsPassThrough(root);
+      return { grid: root, roots: root ? [root] : [] };
+    }
     const g = getScreenGrid(screen);
     const { cols, rows } = g;
     const showGridChrome = options.showGridChrome ?? !!options.editable;
@@ -4157,6 +4388,19 @@
 
   function screenUsesTiles(screen) {
     return Array.isArray(screen?.tiles) && screen.tiles.length > 0;
+  }
+
+  function screenUsesSvgBackground(screen) {
+    return !!String(screen?.svg || '').trim() && !screenUsesTiles(screen);
+  }
+
+  function resolveScreenAssetUrl(url) {
+    const p = String(url || '').trim();
+    if (!p) return p;
+    if (typeof window !== 'undefined' && window.HmiAssetPaths?.resolveHmiAssetUrl) {
+      return window.HmiAssetPaths.resolveHmiAssetUrl(p);
+    }
+    return p;
   }
 
   function listElementIds(root) {
@@ -4539,6 +4783,8 @@
     MAX_GRID_ROWS,
     getScreenGrid,
     getDisplayLimits,
+    getLiveDisplayZoom,
+    setLiveDisplayZoom,
     buildTileOccupancy,
     tileColSpan,
     tileRowSpan,
@@ -4554,14 +4800,24 @@
     applyPageHotspotLayerBounds,
     buildPageHotspotHitList,
     wireHoaSwitches,
+    wireHoaModeButtons,
     wireBoolCommandButtons,
     wireBoolToggleButtons,
+    resolveBoolCommandFromEvent,
     isBoolToggleBinding,
+    isHoaModeButtonBinding,
+    hoaValueForBinding,
+    resolveHandModePumpWrite,
+    resolvePumpCommandWrites,
+    resolveHandModePumpDisplayValue,
+    motorCommandParts,
     wireState3Readouts,
     isParamEditBinding,
     wireParamEditFields,
     hhmmFromMinutes,
     parseHhmmToMinutes,
+    parseHoursToMinutes,
+    hoursFromMinutes,
     cellHasHoaSwitchLayers,
     isBoolCommandBinding,
     isState3ReadoutBinding,
@@ -4608,6 +4864,7 @@
     fitTileSvg,
     labelTextElement,
     screenUsesTiles,
+    screenUsesSvgBackground,
     applyBindings,
     liveMapFromList,
     applyBinding,

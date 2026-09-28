@@ -1,0 +1,38 @@
+{
+  "id": "nexcomm_bme688_env_mqtt",
+  "label": "Nexcomm env sensor — BME688 (MQTT)",
+  "vendor": "Nexcomm",
+  "model": "BME688 environmental sensor",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "env_01",
+  "aiCount": 8,
+  "defaults": {
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+    "deviceId": "env_01",
+    "topicPrefix": "nexcomm/env",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "bme688": {
+      "deviceId": "env_01",
+      "topicPrefix": "nexcomm/env",
+      "rootKey": "bme688",
+      "tempField": "temp_C",
+      "rhField": "rh_pct",
+      "pressField": "press_hPa",
+      "gasField": "gas_ohm",
+      "iaqField": "iaq",
+      "iaqAccField": "iaq_acc",
+      "vocField": "voc_ppm",
+      "co2Field": "co2_eq_ppm"
+    }
+  },
+  "notes": "MQTT driver (read-only). BME688 node publishes JSON to nexcomm/env/<deviceId>/telemetry under bme688.{temp_C,rh_pct,press_hPa,gas_ohm,iaq,iaq_acc,voc_ppm,co2_eq_ppm}. BSEC fields optional if firmware runs Bosch gas algorithm. Sample: st/fixtures/bme688-telemetry-sample.json."
+}

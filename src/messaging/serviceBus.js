@@ -5,31 +5,38 @@ const {
   SERVICE_BUS_NAMESPACE,
 } = require('../config');
 
+// @azure/service-bus and @azure/identity are OPTIONAL deps: only needed when
+// Azure Service Bus is actually configured. Requiring them at module load would
+// crash the whole app on boot wherever they aren't installed (e.g. cloud/SaaS
+// droplets that use local Mongo and no Azure), even though this file is pulled
+// in unconditionally via ingest.js -> cloudApp.js. Load them lazily instead.
 let client = null;
 
 function isServiceBusConfigured() {
   return Boolean(SERVICE_BUS_CONNECTION_STRING || SERVICE_BUS_NAMESPACE);
 }
 
-// @azure/service-bus and @azure/identity are optional peer packages — this
-// product's default deployment target is DigitalOcean/MongoDB, not Azure, so
-// they aren't installed. Lazy-require them only if someone actually
-// configures Service Bus, matching the pattern in messaging/eventHub.js.
 function getServiceBusClient() {
   if (client) return client;
+  if (!isServiceBusConfigured()) {
+    throw new Error('Service Bus not configured — set SERVICE_BUS_CONNECTION_STRING or SERVICE_BUS_NAMESPACE');
+  }
+
+  let ServiceBusClient;
+  try {
+    ({ ServiceBusClient } = require('@azure/service-bus'));
+  } catch (err) {
+    throw new Error('Service Bus is configured but @azure/service-bus is not installed — run: npm install @azure/service-bus @azure/identity');
+  }
+
   if (SERVICE_BUS_CONNECTION_STRING) {
-    const { ServiceBusClient } = require('@azure/service-bus');
     client = new ServiceBusClient(SERVICE_BUS_CONNECTION_STRING);
     return client;
   }
-  if (SERVICE_BUS_NAMESPACE) {
-    const { ServiceBusClient } = require('@azure/service-bus');
-    const { DefaultAzureCredential } = require('@azure/identity');
-    const fqns = `${SERVICE_BUS_NAMESPACE}.servicebus.windows.net`;
-    client = new ServiceBusClient(fqns, new DefaultAzureCredential());
-    return client;
-  }
-  throw new Error('Service Bus not configured — set SERVICE_BUS_CONNECTION_STRING or SERVICE_BUS_NAMESPACE');
+  const { DefaultAzureCredential } = require('@azure/identity');
+  const fqns = `${SERVICE_BUS_NAMESPACE}.servicebus.windows.net`;
+  client = new ServiceBusClient(fqns, new DefaultAzureCredential());
+  return client;
 }
 
 /**

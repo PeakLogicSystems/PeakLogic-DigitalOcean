@@ -1,0 +1,132 @@
+{
+  "id": "abb_acs550_rtu",
+  "label": "ABB ACS550 — Modbus RTU (EFB)",
+  "vendor": "ABB",
+  "model": "ACS550-01/U1 Embedded Fieldbus (STD MODBUS)",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "acs550",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 8,
+  "hrCount": 3,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 2
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "ACS_CW",
+        "type": "INT",
+        "role": "output",
+        "table": "holding",
+        "address": 0,
+        "signed": false,
+        "value": 1150,
+        "comment": "40001 CONTROL WORD (ABB Drives profile). Run≈1151 (0x047F), Stop≈1150 (0x047E), Fault reset pulse bit7"
+      },
+      {
+        "id": "ACS_REF1",
+        "type": "INT",
+        "role": "output",
+        "table": "holding",
+        "address": 1,
+        "signed": true,
+        "value": 10000,
+        "comment": "40002 REF1 — 0…20000 = 0…100% of 1105 REF1 MAX"
+      },
+      {
+        "id": "ACS_REF2",
+        "type": "INT",
+        "role": "output",
+        "table": "holding",
+        "address": 2,
+        "signed": true,
+        "comment": "40003 REF2 — 0…10000 = 0…100% of 1108 REF2 MAX"
+      },
+      {
+        "id": "ACS_SW",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 3,
+        "signed": false,
+        "comment": "40004 STATUS WORD — bit0 RDY_ON, bit1 RDY_RUN, bit2 RDY_REF, bit3 TRIPPED, bit7 ALARM, bit9 REMOTE"
+      },
+      {
+        "id": "ACS_FREQ_HZ",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 4,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "40005 ACT1 — default 0103 OUTPUT FREQ (Hz ×10); select via 5310"
+      },
+      {
+        "id": "ACS_CURR_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 5,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "40006 ACT2 — default 0104 CURRENT (A ×10); select via 5311"
+      },
+      {
+        "id": "ACS_ACT3",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 6,
+        "signed": true,
+        "comment": "40007 ACT3 — map with 5312"
+      },
+      {
+        "id": "ACS_ACT4",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 7,
+        "signed": true,
+        "comment": "40008 ACT4 — map with 5313"
+      },
+      {
+        "id": "ACS_PWR_KW",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 105,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "40106 = param 0106 POWER (kW ×10)"
+      },
+      {
+        "id": "ACS_DCBUS_V",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 106,
+        "signed": false,
+        "comment": "40107 = param 0107 DC BUS VOLTAGE (V)"
+      },
+      {
+        "id": "ACS_FAULT",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 400,
+        "signed": false,
+        "comment": "40401 = param 0401 LAST FAULT code (0 = none)"
+      }
+    ]
+  }
+}

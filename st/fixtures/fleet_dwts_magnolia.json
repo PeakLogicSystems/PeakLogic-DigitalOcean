@@ -1,0 +1,1318 @@
+{
+  "description": "DWTS cloud fleet — Magnolia Village DWTS (10000 GPD): 2 treatment plants, 20 simplex collection, 2 duplex booster — drip drainfield",
+  "tenant": {
+    "name": "PeakLogic ATU Service",
+    "slug": "atu-cloud",
+    "tenantId": "atu-cloud"
+  },
+  "sizingGuide": {
+    "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
+    "uplink": "cellular_mqtt",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
+    "atuToLiftPairing": [
+      {
+        "atu": "single_atu",
+        "typicalLift": "simplex or dual_duplex",
+        "note": "Residential 500 GPD often uses one single ATU only"
+      },
+      {
+        "atu": "dual_atu",
+        "typicalLift": "dual_duplex",
+        "note": "Two treatment trains; paired duplex lift for equalization"
+      },
+      {
+        "atu": "quad_atu",
+        "typicalLift": "simplex × N or dual_duplex × N",
+        "note": "Commercial sites scale lift count with collection network"
+      }
+    ],
+    "scaleExamples": [
+      {
+        "designGpd": 500,
+        "atu": [
+          {
+            "type": "single_atu",
+            "count": 1
+          }
+        ],
+        "lifts": []
+      },
+      {
+        "designGpd": 2500,
+        "atu": [
+          {
+            "type": "dual_atu",
+            "count": 1
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 4
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "profile": "dwts",
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 2,
+            "gpdEach": 5000,
+            "modules": "4× 1,250 gal parallel + drip"
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20,
+            "role": "collection",
+            "note": "10 simplex lifts per zone → duplex booster"
+          },
+          {
+            "type": "dual_duplex",
+            "count": 2,
+            "role": "booster",
+            "note": "Zone booster → trash tank → parallel ATU"
+          }
+        ]
+      }
+    ]
+  },
+  "tankGuide": {
+    "description": "10,000 GPD — two 5,000 GPD zones. Each: 10 simplex → duplex booster → trash ≥1,000 gal → 4× parallel 1,250 gal ATU → drip drainfield.",
+    "dispersal": "drip_drainfield",
+    "references": [
+      "Florida DEP DWTS — closed-tank advanced treatment with subsurface drip dispersal",
+      "Florida DEP ATU list — ≥1,000 gal pretreatment before parallel ATU modules",
+      "EPA collection systems — duplex booster wet-well on neighborhood force main"
+    ],
+    "system": {
+      "designGpd": 10000,
+      "zones": 2,
+      "gpdPerZone": 5000,
+      "simplexPerZone": 10,
+      "treatmentModulesPerZone": 4,
+      "treatmentModuleGal": 1250,
+      "trashTankMinGal": 1000
+    },
+    "zones": [
+      {
+        "zoneId": 1,
+        "designGpd": 5000,
+        "processChain": [
+          "10 simplex collection lifts",
+          "Booster BS-1",
+          "Trash tank ≥1,000 gal",
+          "4× parallel 1,250 gal treatment",
+          "Drip drainfield"
+        ],
+        "simplexCollection": {
+          "count": 10,
+          "stationType": "simplex",
+          "designGpdEach": 500,
+          "wetWellGal": 500,
+          "note": "Home collection lift — simplex submersible to zone force main"
+        },
+        "boosterDuplex": {
+          "stationType": "dual_duplex",
+          "wetWellGal": 2500,
+          "pumps": 2,
+          "alternation": "duplex_lead_lag"
+        },
+        "plant": {
+          "stationType": "quad_atu",
+          "trashTankGal": 1000,
+          "parallelModules": 4,
+          "moduleGal": 1250,
+          "dispersal": "drip_drainfield",
+          "tanks": [
+            {
+              "id": "trash",
+              "label": "Trash / pretreatment tank",
+              "capacityGal": 1000,
+              "rule": "≥1,000 gal before parallel ATU modules (Florida DEP)"
+            },
+            {
+              "id": "atu_1",
+              "label": "Parallel treatment module 1",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "atu_2",
+              "label": "Parallel treatment module 2",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "atu_3",
+              "label": "Parallel treatment module 3",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "atu_4",
+              "label": "Parallel treatment module 4",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "drip",
+              "label": "Drip drainfield",
+              "dispersal": "pressure_compensated_drip",
+              "note": "Treated effluent to drip tubing in subsurface drainfield"
+            }
+          ]
+        }
+      },
+      {
+        "zoneId": 2,
+        "designGpd": 5000,
+        "processChain": [
+          "10 simplex collection lifts",
+          "Booster BS-2",
+          "Trash tank ≥1,000 gal",
+          "4× parallel 1,250 gal treatment",
+          "Drip drainfield"
+        ],
+        "simplexCollection": {
+          "count": 10,
+          "stationType": "simplex",
+          "designGpdEach": 500,
+          "wetWellGal": 500
+        },
+        "boosterDuplex": {
+          "stationType": "dual_duplex",
+          "wetWellGal": 2500,
+          "pumps": 2,
+          "alternation": "duplex_lead_lag"
+        },
+        "plant": {
+          "stationType": "quad_atu",
+          "trashTankGal": 1000,
+          "parallelModules": 4,
+          "moduleGal": 1250,
+          "dispersal": "drip_drainfield",
+          "tanks": [
+            {
+              "id": "trash",
+              "label": "Trash / pretreatment tank",
+              "capacityGal": 1000,
+              "rule": "≥1,000 gal before parallel ATU modules (Florida DEP)"
+            },
+            {
+              "id": "atu_1",
+              "label": "Parallel treatment module 1",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "atu_2",
+              "label": "Parallel treatment module 2",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "atu_3",
+              "label": "Parallel treatment module 3",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "atu_4",
+              "label": "Parallel treatment module 4",
+              "capacityGal": 1250,
+              "parallel": true,
+              "gpdEach": 1250
+            },
+            {
+              "id": "drip",
+              "label": "Drip drainfield",
+              "dispersal": "pressure_compensated_drip",
+              "note": "Treated effluent to drip tubing in subsurface drainfield"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "profile": {
+    "id": "dwts-10000gpd",
+    "name": "Magnolia Village DWTS",
+    "slug": "magnolia-village-dwts",
+    "designGpd": 10000,
+    "address": "4200 Magnolia Bend Dr, Sanford, FL 32771",
+    "lat": 28.7897,
+    "lng": -81.2751,
+    "systemType": "dwts",
+    "regulatory": "Florida DEP DWTS / SB 796 general permit"
+  },
+  "devices": [
+    {
+      "name": "Collection LS-01",
+      "slug": "magnolia-ls-1",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.7777,
+      "lng": -81.2751,
+      "sceneX": -13.999999999999998,
+      "sceneZ": -34,
+      "address": "101 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_01",
+      "deviceSlug": "dev-magnolia-ls-1",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_1_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-1",
+      "driverId": "drv_magnolia_ls_1"
+    },
+    {
+      "name": "Collection LS-02",
+      "slug": "magnolia-ls-2",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.77828732180446,
+      "lng": -81.27077376207875,
+      "sceneX": -7.201626123751156,
+      "sceneZ": -32.92324335849338,
+      "address": "102 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_02",
+      "deviceSlug": "dev-magnolia-ls-2",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_2_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-2",
+      "driverId": "drv_magnolia_ls_2"
+    },
+    {
+      "name": "Collection LS-03",
+      "slug": "magnolia-ls-3",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.7799917960675,
+      "lng": -81.2668710064679,
+      "sceneX": -1.0687244495655914,
+      "sceneZ": -29.798373876248846,
+      "address": "103 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_03",
+      "deviceSlug": "dev-magnolia-ls-3",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_3_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-3",
+      "driverId": "drv_magnolia_ls_3"
+    },
+    {
+      "name": "Collection LS-04",
+      "slug": "magnolia-ls-4",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.78264657697249,
+      "lng": -81.26377376207874,
+      "sceneX": 3.7983738762488457,
+      "sceneZ": -24.931275550434407,
+      "address": "104 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_04",
+      "deviceSlug": "dev-magnolia-ls-4",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_4_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-4",
+      "driverId": "drv_magnolia_ls_4"
+    },
+    {
+      "name": "Collection LS-05",
+      "slug": "magnolia-ls-5",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.7859917960675,
+      "lng": -81.26178520877187,
+      "sceneX": 6.923243358493377,
+      "sceneZ": -18.798373876248842,
+      "address": "105 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_05",
+      "deviceSlug": "dev-magnolia-ls-5",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_5_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-5",
+      "driverId": "drv_magnolia_ls_5"
+    },
+    {
+      "name": "Collection LS-06",
+      "slug": "magnolia-ls-6",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.7897,
+      "lng": -81.2611,
+      "sceneX": 8,
+      "sceneZ": -12,
+      "address": "106 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_06",
+      "deviceSlug": "dev-magnolia-ls-6",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_6_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-6",
+      "driverId": "drv_magnolia_ls_6"
+    },
+    {
+      "name": "Collection LS-07",
+      "slug": "magnolia-ls-7",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.7934082039325,
+      "lng": -81.26178520877187,
+      "sceneX": 6.923243358493377,
+      "sceneZ": -5.201626123751157,
+      "address": "107 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_07",
+      "deviceSlug": "dev-magnolia-ls-7",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_7_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-7",
+      "driverId": "drv_magnolia_ls_7"
+    },
+    {
+      "name": "Collection LS-08",
+      "slug": "magnolia-ls-8",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.79675342302751,
+      "lng": -81.26377376207874,
+      "sceneX": 3.7983738762488457,
+      "sceneZ": 0.9312755504344086,
+      "address": "108 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_08",
+      "deviceSlug": "dev-magnolia-ls-8",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_8_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-8",
+      "driverId": "drv_magnolia_ls_8"
+    },
+    {
+      "name": "Collection LS-09",
+      "slug": "magnolia-ls-9",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.7994082039325,
+      "lng": -81.2668710064679,
+      "sceneX": -1.0687244495655914,
+      "sceneZ": 5.798373876248846,
+      "address": "109 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_09",
+      "deviceSlug": "dev-magnolia-ls-9",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_9_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-9",
+      "driverId": "drv_magnolia_ls_9"
+    },
+    {
+      "name": "Collection LS-10",
+      "slug": "magnolia-ls-10",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 1,
+      "feedsBooster": "magnolia-bs-1",
+      "designGpd": 500,
+      "lat": 28.80111267819554,
+      "lng": -81.27077376207875,
+      "sceneX": -7.201626123751156,
+      "sceneZ": 8.923243358493377,
+      "address": "110 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_10",
+      "deviceSlug": "dev-magnolia-ls-10",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_10_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-10",
+      "driverId": "drv_magnolia_ls_10"
+    },
+    {
+      "name": "Collection LS-11",
+      "slug": "magnolia-ls-11",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.7777,
+      "lng": -81.2751,
+      "sceneX": 14.000000000000002,
+      "sceneZ": -34,
+      "address": "111 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_11",
+      "deviceSlug": "dev-magnolia-ls-11",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_11_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-11",
+      "driverId": "drv_magnolia_ls_11"
+    },
+    {
+      "name": "Collection LS-12",
+      "slug": "magnolia-ls-12",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.77828732180446,
+      "lng": -81.27077376207875,
+      "sceneX": 20.798373876248846,
+      "sceneZ": -32.92324335849338,
+      "address": "112 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_12",
+      "deviceSlug": "dev-magnolia-ls-12",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_12_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-12",
+      "driverId": "drv_magnolia_ls_12"
+    },
+    {
+      "name": "Collection LS-13",
+      "slug": "magnolia-ls-13",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.7799917960675,
+      "lng": -81.2668710064679,
+      "sceneX": 26.931275550434407,
+      "sceneZ": -29.798373876248846,
+      "address": "113 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_13",
+      "deviceSlug": "dev-magnolia-ls-13",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_13_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-13",
+      "driverId": "drv_magnolia_ls_13"
+    },
+    {
+      "name": "Collection LS-14",
+      "slug": "magnolia-ls-14",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.78264657697249,
+      "lng": -81.26377376207874,
+      "sceneX": 31.798373876248846,
+      "sceneZ": -24.931275550434407,
+      "address": "114 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_14",
+      "deviceSlug": "dev-magnolia-ls-14",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_14_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-14",
+      "driverId": "drv_magnolia_ls_14"
+    },
+    {
+      "name": "Collection LS-15",
+      "slug": "magnolia-ls-15",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.7859917960675,
+      "lng": -81.26178520877187,
+      "sceneX": 34.92324335849338,
+      "sceneZ": -18.798373876248842,
+      "address": "115 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_15",
+      "deviceSlug": "dev-magnolia-ls-15",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_15_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-15",
+      "driverId": "drv_magnolia_ls_15"
+    },
+    {
+      "name": "Collection LS-16",
+      "slug": "magnolia-ls-16",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.7897,
+      "lng": -81.2611,
+      "sceneX": 36,
+      "sceneZ": -12,
+      "address": "116 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_16",
+      "deviceSlug": "dev-magnolia-ls-16",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_16_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-16",
+      "driverId": "drv_magnolia_ls_16"
+    },
+    {
+      "name": "Collection LS-17",
+      "slug": "magnolia-ls-17",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.7934082039325,
+      "lng": -81.26178520877187,
+      "sceneX": 34.92324335849338,
+      "sceneZ": -5.201626123751157,
+      "address": "117 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_17",
+      "deviceSlug": "dev-magnolia-ls-17",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_17_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-17",
+      "driverId": "drv_magnolia_ls_17"
+    },
+    {
+      "name": "Collection LS-18",
+      "slug": "magnolia-ls-18",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.79675342302751,
+      "lng": -81.26377376207874,
+      "sceneX": 31.798373876248846,
+      "sceneZ": 0.9312755504344086,
+      "address": "118 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_18",
+      "deviceSlug": "dev-magnolia-ls-18",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_18_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-18",
+      "driverId": "drv_magnolia_ls_18"
+    },
+    {
+      "name": "Collection LS-19",
+      "slug": "magnolia-ls-19",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.7994082039325,
+      "lng": -81.2668710064679,
+      "sceneX": 26.931275550434407,
+      "sceneZ": 5.798373876248846,
+      "address": "119 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_19",
+      "deviceSlug": "dev-magnolia-ls-19",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_19_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-19",
+      "driverId": "drv_magnolia_ls_19"
+    },
+    {
+      "name": "Collection LS-20",
+      "slug": "magnolia-ls-20",
+      "stationType": "simplex",
+      "role": "collection",
+      "zoneId": 2,
+      "feedsBooster": "magnolia-bs-2",
+      "designGpd": 500,
+      "lat": 28.80111267819554,
+      "lng": -81.27077376207875,
+      "sceneX": 20.798373876248846,
+      "sceneZ": 8.923243358493377,
+      "address": "120 Village Ln, Sanford, FL",
+      "deviceId": "mv_ls_magnolia_20",
+      "deviceSlug": "dev-magnolia-ls-20",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Collection wet well",
+          "capacityGal": 500,
+          "rule": "Simplex lift — pumps to zone duplex booster force main"
+        }
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_LS_20_ALM",
+      "gatewayId": "gw_dev-magnolia-ls-20",
+      "driverId": "drv_magnolia_ls_20"
+    },
+    {
+      "name": "Booster BS-1",
+      "slug": "magnolia-bs-1",
+      "stationType": "dual_duplex",
+      "role": "booster",
+      "zoneId": 1,
+      "designGpd": 5000,
+      "lat": 28.7887,
+      "lng": -81.2751,
+      "sceneX": -14,
+      "sceneZ": 10,
+      "address": "Magnolia Village — zone 1 duplex booster",
+      "deviceId": "mv_ls_magnolia_bs1",
+      "deviceSlug": "dev-magnolia-bs-1",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Duplex booster wet well",
+          "capacityGal": 2500,
+          "rule": "Receives 10 simplex lifts; duplex alternating pumps to plant trash tank"
+        }
+      ],
+      "processChain": [
+        "10 simplex collection lifts",
+        "Booster BS-1",
+        "Trash tank ≥1,000 gal",
+        "4× parallel 1,250 gal treatment",
+        "Drip drainfield"
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_dual_duplex",
+      "defaultProgram": "logic/36_duplex_lift_station.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "TANK_LVL",
+      "category": "lift",
+      "pumps": 2,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_BS_1_ALM",
+      "gatewayId": "gw_dev-magnolia-bs-1",
+      "driverId": "drv_magnolia_bs_1"
+    },
+    {
+      "name": "Booster BS-2",
+      "slug": "magnolia-bs-2",
+      "stationType": "dual_duplex",
+      "role": "booster",
+      "zoneId": 2,
+      "designGpd": 5000,
+      "lat": 28.7907,
+      "lng": -81.2751,
+      "sceneX": 14,
+      "sceneZ": 10,
+      "address": "Magnolia Village — zone 2 duplex booster",
+      "deviceId": "mv_ls_magnolia_bs2",
+      "deviceSlug": "dev-magnolia-bs-2",
+      "tanks": [
+        {
+          "id": "wet_well",
+          "label": "Duplex booster wet well",
+          "capacityGal": 2500,
+          "rule": "Receives 10 simplex lifts; duplex alternating pumps to plant trash tank"
+        }
+      ],
+      "processChain": [
+        "10 simplex collection lifts",
+        "Booster BS-2",
+        "Trash tank ≥1,000 gal",
+        "4× parallel 1,250 gal treatment",
+        "Drip drainfield"
+      ],
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_dual_duplex",
+      "defaultProgram": "logic/36_duplex_lift_station.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "TANK_LVL",
+      "category": "lift",
+      "pumps": 2,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_BS_2_ALM",
+      "gatewayId": "gw_dev-magnolia-bs-2",
+      "driverId": "drv_magnolia_bs_2"
+    },
+    {
+      "name": "Magnolia DWTU-1",
+      "slug": "magnolia-dwtu-1",
+      "stationType": "quad_atu",
+      "designGpd": 5000,
+      "zoneId": 1,
+      "lat": 28.7877,
+      "lng": -81.2721,
+      "sceneX": -14,
+      "sceneZ": 34,
+      "address": "4250 Magnolia Bend Dr — zone 1 treatment plant",
+      "deviceId": "mv_atu_magnolia_z1",
+      "deviceSlug": "dev-magnolia-dwtu-1",
+      "tanks": [
+        {
+          "id": "trash",
+          "label": "Trash / pretreatment tank",
+          "capacityGal": 1000,
+          "rule": "≥1,000 gal before parallel ATU modules (Florida DEP)"
+        },
+        {
+          "id": "atu_1",
+          "label": "Parallel treatment module 1",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "atu_2",
+          "label": "Parallel treatment module 2",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "atu_3",
+          "label": "Parallel treatment module 3",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "atu_4",
+          "label": "Parallel treatment module 4",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "drip",
+          "label": "Drip drainfield",
+          "dispersal": "pressure_compensated_drip",
+          "note": "Treated effluent to drip tubing in subsurface drainfield"
+        }
+      ],
+      "processChain": [
+        "10 simplex collection lifts",
+        "Booster BS-1",
+        "Trash tank ≥1,000 gal",
+        "4× parallel 1,250 gal treatment",
+        "Drip drainfield"
+      ],
+      "plantMeta": {
+        "trashGal": 1000,
+        "moduleGal": 1250,
+        "moduleCount": 4,
+        "dispersal": "drip_drainfield"
+      },
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 4,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_DWTU_1_ALM",
+      "gatewayId": "gw_dev-magnolia-dwtu-1",
+      "driverId": "drv_magnolia_dwtu_1"
+    },
+    {
+      "name": "Magnolia DWTU-2",
+      "slug": "magnolia-dwtu-2",
+      "stationType": "quad_atu",
+      "designGpd": 5000,
+      "zoneId": 2,
+      "lat": 28.7917,
+      "lng": -81.2721,
+      "sceneX": 14,
+      "sceneZ": 34,
+      "address": "4300 Magnolia Bend Dr — zone 2 treatment plant",
+      "deviceId": "mv_atu_magnolia_z2",
+      "deviceSlug": "dev-magnolia-dwtu-2",
+      "tanks": [
+        {
+          "id": "trash",
+          "label": "Trash / pretreatment tank",
+          "capacityGal": 1000,
+          "rule": "≥1,000 gal before parallel ATU modules (Florida DEP)"
+        },
+        {
+          "id": "atu_1",
+          "label": "Parallel treatment module 1",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "atu_2",
+          "label": "Parallel treatment module 2",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "atu_3",
+          "label": "Parallel treatment module 3",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "atu_4",
+          "label": "Parallel treatment module 4",
+          "capacityGal": 1250,
+          "parallel": true,
+          "gpdEach": 1250
+        },
+        {
+          "id": "drip",
+          "label": "Drip drainfield",
+          "dispersal": "pressure_compensated_drip",
+          "note": "Treated effluent to drip tubing in subsurface drainfield"
+        }
+      ],
+      "processChain": [
+        "10 simplex collection lifts",
+        "Booster BS-2",
+        "Trash tank ≥1,000 gal",
+        "4× parallel 1,250 gal treatment",
+        "Drip drainfield"
+      ],
+      "plantMeta": {
+        "trashGal": 1000,
+        "moduleGal": 1250,
+        "moduleCount": 4,
+        "dispersal": "drip_drainfield"
+      },
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 4,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_MAGNOLIA_DWTU_2_ALM",
+      "gatewayId": "gw_dev-magnolia-dwtu-2",
+      "driverId": "drv_magnolia_dwtu_2"
+    }
+  ],
+  "counts": {
+    "atu": 2,
+    "lift": 22,
+    "step": 20,
+    "collection": 20,
+    "booster": 2,
+    "total": 24
+  },
+  "importCsv": "st/fixtures/fleet_import_dwts_magnolia.csv",
+  "cloudProject": "atu-cloud-dwts",
+  "mqtt": {
+    "topicPrefix": "peaklogic/v1",
+    "cloudBrokerPort": 1883,
+    "optaLanBroker": "192.168.1.1:1883"
+  },
+  "cellular": {
+    "vendorHint": "hologram",
+    "apn": "hologram",
+    "linkApi": "/api/cellular/sims/:id/link"
+  }
+}

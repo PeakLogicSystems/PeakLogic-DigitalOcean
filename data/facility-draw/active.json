@@ -1,0 +1,685 @@
+{
+  "format": "peaklogic-facilitydraw",
+  "version": 1,
+  "savedAt": "2026-07-25T10:34:26.378Z",
+  "name": "dwts",
+  "units": "ft",
+  "scale": null,
+  "extents": null,
+  "background": null,
+  "nodes": [
+    {
+      "id": "node_1",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -5,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_2",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -30,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_3",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -55,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_4",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -80,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_5",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -105,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_6",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -130,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_7",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": -155,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_8",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": 20,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_9",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": 45,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_10",
+      "type": "lift_simplex",
+      "x": 5,
+      "y": 70,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_11",
+      "type": "lift_duplex",
+      "x": 80,
+      "y": -55,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_12",
+      "type": "trash_tank_1250_2comp",
+      "x": 135,
+      "y": -55,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_13",
+      "type": "treatment_tank_1250",
+      "x": 175,
+      "y": -30,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_14",
+      "type": "treatment_tank_1250",
+      "x": 175,
+      "y": -73.5,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_15",
+      "type": "treatment_tank_1250",
+      "x": 175,
+      "y": 1.5,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_16",
+      "type": "treatment_tank_1250",
+      "x": 175,
+      "y": -105,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_17",
+      "type": "dosing_tank_1500",
+      "x": 200,
+      "y": -26.5,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_18",
+      "type": "dosing_tank_1500",
+      "x": 200,
+      "y": -80,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_19",
+      "type": "dosing_tank_1500",
+      "x": 200,
+      "y": -101.5,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_20",
+      "type": "drip_irrigation_4leg",
+      "x": 295,
+      "y": -140.5,
+      "rotation": -89.46773587207873,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_21",
+      "type": "drip_irrigation_4leg",
+      "x": 305,
+      "y": -65.5,
+      "rotation": -89.33719116527608,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_23",
+      "type": "drip_irrigation_4leg",
+      "x": 295,
+      "y": -1,
+      "rotation": -89.02845228247156,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_24",
+      "type": "drip_irrigation_4leg",
+      "x": 295,
+      "y": 30.5,
+      "rotation": -90.26537603047939,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_25",
+      "type": "dosing_tank_1500",
+      "x": 200,
+      "y": -5,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_26",
+      "type": "atu_dual",
+      "x": 175,
+      "y": -16,
+      "rotation": -89.85342569931625,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    },
+    {
+      "id": "node_28",
+      "type": "atu_dual",
+      "x": 175,
+      "y": -88,
+      "rotation": -90.14514014348318,
+      "scaleX": 1,
+      "scaleY": 1,
+      "label": "",
+      "meta": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_1",
+      "from": "node_9:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_2",
+      "from": "node_8:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_3",
+      "from": "node_1:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_4",
+      "from": "node_2:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_5",
+      "from": "node_3:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_6",
+      "from": "node_4:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_7",
+      "from": "node_5:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_8",
+      "from": "node_6:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_9",
+      "from": "node_7:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_10",
+      "from": "node_11:outlet",
+      "to": "node_12:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_11",
+      "from": "node_12:outlet",
+      "to": "node_13:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_13",
+      "from": "node_12:outlet",
+      "to": "node_15:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_14",
+      "from": "node_12:outlet",
+      "to": "node_14:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_15",
+      "from": "node_12:outlet",
+      "to": "node_16:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_16",
+      "from": "node_15:outlet",
+      "to": "node_17:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_17",
+      "from": "node_13:outlet",
+      "to": "node_17:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_18",
+      "from": "node_16:outlet",
+      "to": "node_18:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_19",
+      "from": "node_14:outlet",
+      "to": "node_18:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_20",
+      "from": "node_16:outlet",
+      "to": "node_19:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_21",
+      "from": "node_19:dose",
+      "to": "node_20:leg1",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_22",
+      "from": "node_18:dose",
+      "to": "node_21:leg1",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_26",
+      "from": "node_17:dose",
+      "to": "node_23:leg1",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_29",
+      "from": "node_10:outlet",
+      "to": "node_11:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_28",
+      "from": "node_15:outlet",
+      "to": "node_25:inlet",
+      "kind": "pipe",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_30",
+      "from": "node_25:dose",
+      "to": "node_24:leg4",
+      "kind": "pipe",
+      "points": [
+        [
+          225,
+          -5
+        ],
+        [
+          225,
+          20
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_35",
+      "from": "node_26:inlet",
+      "to": "node_25:return",
+      "kind": "electric",
+      "points": [
+        [
+          175,
+          -5
+        ],
+        [
+          185,
+          -5
+        ],
+        [
+          185,
+          -10
+        ],
+        [
+          190,
+          -10
+        ],
+        [
+          195,
+          -10
+        ],
+        [
+          200,
+          -10
+        ],
+        [
+          200,
+          -10
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_34",
+      "from": "node_24:supply",
+      "to": "node_25:electrical",
+      "kind": "return",
+      "points": [
+        [
+          301.87563625803836,
+          48.95828507169481
+        ],
+        [
+          200,
+          48.5
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_36",
+      "from": "node_23:return",
+      "to": "node_17:return",
+      "kind": "return",
+      "points": [],
+      "label": ""
+    },
+    {
+      "id": "edge_37",
+      "from": "node_26:electrical",
+      "to": "node_17:electrical",
+      "kind": "electric",
+      "points": [
+        [
+          200,
+          -20
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_32",
+      "from": "node_28:outlet",
+      "to": "node_19:electrical",
+      "kind": "electric",
+      "points": [
+        [
+          175,
+          -95
+        ],
+        [
+          200,
+          -95
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_33",
+      "from": "node_28:inlet",
+      "to": "node_18:electrical",
+      "kind": "electric",
+      "points": [
+        [
+          175,
+          -80
+        ],
+        [
+          180.5,
+          -80
+        ],
+        [
+          185,
+          -80
+        ],
+        [
+          190,
+          -80
+        ],
+        [
+          190,
+          -75
+        ],
+        [
+          190,
+          -75
+        ],
+        [
+          190,
+          -75
+        ],
+        [
+          200,
+          -75
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_38",
+      "from": "node_21:return",
+      "to": "node_18:return",
+      "kind": "return",
+      "points": [
+        [
+          312.3204465570629,
+          -83.79489369127081
+        ],
+        [
+          200,
+          -82.94
+        ]
+      ],
+      "label": ""
+    },
+    {
+      "id": "edge_39",
+      "from": "node_20:return",
+      "to": "node_19:return",
+      "kind": "return",
+      "points": [
+        [
+          302.23496400956594,
+          -158.96430765813778
+        ],
+        [
+          200,
+          -158.5
+        ]
+      ],
+      "label": ""
+    }
+  ],
+  "groups": [],
+  "annotations": [],
+  "libraryFile": "dwts.facilitydraw.json",
+  "meta": {
+    "client": "",
+    "site": "",
+    "notes": "",
+    "peaklogicProject": "dwts"
+  }
+}

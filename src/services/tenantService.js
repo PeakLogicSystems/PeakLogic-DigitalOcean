@@ -1,130 +1,81 @@
 'use strict';
 
-const { getDb } = require('../db/mongo');
-const authService = require('./authService');
-const { normalizeCmmsEntitlement } = require('../tenants/cmmsEntitlement');
-const { normalizeTenantPlan } = require('../tenants/tenantPlan');
-
-function now() {
-  return new Date();
-}
-
-function unwrapFindOneAndUpdate(result) {
-  if (!result) return null;
-  if (Object.prototype.hasOwnProperty.call(result, 'value')) return result.value;
-  return result;
-}
-
 /**
- * @param {string} tenantId
- * @param {object} patch
- * @param {{ enabledBy?: string|null }} [opts]
+ * Platform-admin tenant management, backed by the real tenantStore
+ * (file-persisted; the same store the live tenant-login/Cloud Studio
+ * flow uses — see src/tenants/tenantStore.js).
  */
-async function updateTenantCmms(tenantId, patch, opts = {}) {
-  const db = getDb();
-  const tenant = await db.collection('tenants').findOne({ _id: tenantId });
-  if (!tenant) return { ok: false, status: 404, error: 'Tenant not found' };
-
-  const cmms = normalizeCmmsEntitlement(
-    { ...tenant.cmms, ...patch },
-    { enabledAt: now(), enabledBy: opts.enabledBy || null },
-  );
-
-  const result = await db.collection('tenants').findOneAndUpdate(
-    { _id: tenantId },
-    { $set: { cmms, updatedAt: now() } },
-    { returnDocument: 'after' },
-  );
-  const doc = unwrapFindOneAndUpdate(result);
-  if (!doc) return { ok: false, status: 404, error: 'Tenant not found' };
-  return { ok: true, tenant: authService.publicTenant(doc) };
-}
-
-/**
- * Update PeakLogic subscription plan and/or CMMS entitlement in one write.
- * @param {string} tenantId
- * @param {{ plan?: string, cmms?: object }} patch
- * @param {{ enabledBy?: string|null }} [opts]
- */
-async function updateTenantSettings(tenantId, patch, opts = {}) {
-  const db = getDb();
-  const tenant = await db.collection('tenants').findOne({ _id: tenantId });
-  if (!tenant) return { ok: false, status: 404, error: 'Tenant not found' };
-
-  const updates = { updatedAt: now() };
-  if (patch.plan != null) {
-    updates.plan = normalizeTenantPlan(patch.plan, tenant.plan || 'standard');
-  }
-  if (patch.cmms != null) {
-    updates.cmms = normalizeCmmsEntitlement(
-      { ...tenant.cmms, ...patch.cmms },
-      { enabledAt: now(), enabledBy: opts.enabledBy || null },
-    );
-  }
-
-  const result = await db.collection('tenants').findOneAndUpdate(
-    { _id: tenantId },
-    { $set: updates },
-    { returnDocument: 'after' },
-  );
-  const doc = unwrapFindOneAndUpdate(result);
-  if (!doc) return { ok: false, status: 404, error: 'Tenant not found' };
-  return { ok: true, tenant: authService.publicTenant(doc) };
-}
-
-/**
- * @param {string} tenantId
- * @param {string} plan
- */
-async function updateTenantPlan(tenantId, plan) {
-  return updateTenantSettings(tenantId, { plan });
-}
-
-async function getTenantCmmsEntitlement(tenantId) {
-  const tenant = await getDb().collection('tenants').findOne({ _id: tenantId });
-  if (!tenant) return null;
-  return normalizeCmmsEntitlement(tenant.cmms);
-}
+const { tenantStore } = require('../tenants/tenantStore');
 
 async function listAllTenants() {
-  const db = getDb();
-  const tenants = await db.collection('tenants').find({}).sort({ name: 1 }).toArray();
-  const counts = await db.collection('users').aggregate([
-    { $group: { _id: '$tenantId', userCount: { $sum: 1 } } },
-  ]).toArray();
-  const countByTenant = Object.fromEntries(counts.map((c) => [c._id, c.userCount]));
-  return tenants.map((doc) => ({
-    ...authService.publicTenant(doc),
-    userCount: countByTenant[doc._id] || 0,
+  return tenantStore.listTenants().map((t) => ({
+    ...t,
+    userCount: tenantStore.listUsers(t.tenantId).length,
   }));
 }
 
 async function getTenantDetail(tenantId) {
-  const db = getDb();
-  const tenant = await db.collection('tenants').findOne({ _id: tenantId });
+  const tenant = tenantStore.getTenant(tenantId);
   if (!tenant) return { ok: false, status: 404, error: 'Tenant not found' };
-  const users = await authService.listTenantUsers(tenantId);
+  const users = tenantStore.listUsers(tenant.tenantId);
   return {
     ok: true,
-    tenant: authService.publicTenant(tenant),
+    tenant: tenantStore.publicTenant(tenant),
     users,
     userCount: users.length,
   };
 }
 
-async function createTenantAsPlatform(input) {
-  return authService.signup(input, {
-    platformAdmin: true,
-    enabledBy: 'platform-admin',
-  });
+async function createTenantAsPlatform({ tenantName, tenantSlug, email, password, cmmsEnabled } = {}) {
+  const name = String(tenantName || '').trim();
+  if (!name) return { ok: false, status: 400, error: 'Organization name is required' };
+  if (!email || !password) return { ok: false, status: 400, error: 'Admin email and password are required' };
+
+  let tenant;
+  try {
+    tenant = tenantStore.createTenant({ tenantSlug: tenantSlug || name, name, cmmsEnabled });
+  } catch (err) {
+    return { ok: false, status: err.status || 400, error: err.message };
+  }
+
+  let user;
+  try {
+    user = tenantStore.createUser({
+      email,
+      password,
+      name: email,
+      role: 'tenant_admin',
+      tenantId: tenant.tenantId,
+    });
+  } catch (err) {
+    return { ok: false, status: err.status || 400, error: err.message };
+  }
+
+  return { ok: true, tenant, user };
+}
+
+async function updateTenantCmms(tenantId, { enabled, externalUrl } = {}) {
+  try {
+    const tenant = tenantStore.patchTenantCmms(tenantId, { enabled, externalUrl });
+    return { ok: true, tenant };
+  } catch (err) {
+    return { ok: false, status: err.status || 400, error: err.message };
+  }
+}
+
+async function getTenantCmmsEntitlement(tenantId) {
+  const tenant = tenantStore.getTenant(tenantId);
+  if (!tenant) return null;
+  return {
+    enabled: !!(tenant.cmms && tenant.cmms.enabled),
+    externalUrl: (tenant.cmms && tenant.cmms.externalUrl) || '',
+  };
 }
 
 module.exports = {
-  updateTenantCmms,
-  updateTenantSettings,
-  updateTenantPlan,
-  getTenantCmmsEntitlement,
   listAllTenants,
   getTenantDetail,
   createTenantAsPlatform,
+  updateTenantCmms,
+  getTenantCmmsEntitlement,
 };

@@ -1,0 +1,39 @@
+{
+  "id": "hayward_vs_pump",
+  "label": "Hayward VS Pump (EcoStar/TriStar/MaxFlo) — RS-485",
+  "vendor": "Hayward",
+  "model": "Variable-speed pump on low-speed bus",
+  "transport": "hayward_rs485",
+  "sharedBus": true,
+  "driverId": "hayward_bus",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 3,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 19200,
+    "deviceAddr": 0,
+    "deviceClass": "vs_pump",
+    "parity": "none",
+    "stopBits": 2,
+    "pollIntervalMs": 5000,
+    "keepaliveMs": 1000,
+    "maxRpm": 3450
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "hayward": [
+      { "id": "HVS_SPEED_PCT", "type": "INT", "role": "input", "point": "speed_pct", "deviceClass": "vs_pump", "comment": "Speed %" },
+      { "id": "HVS_RPM", "type": "INT", "role": "input", "point": "rpm", "deviceClass": "vs_pump", "comment": "Estimated RPM from %" },
+      { "id": "HVS_WATTS", "type": "INT", "role": "input", "point": "watts", "deviceClass": "vs_pump", "comment": "Power draw (W)" },
+      { "id": "HVS_RUNNING", "type": "BOOL", "role": "input", "point": "running", "deviceClass": "vs_pump" },
+      { "id": "HVS_SPEED_CMD", "type": "INT", "role": "output", "point": "speed_cmd", "deviceClass": "vs_pump", "comment": "Speed setpoint 0-100%" },
+      { "id": "HVS_RUN_CMD", "type": "BOOL", "role": "output", "point": "run_cmd", "deviceClass": "vs_pump", "comment": "Run/stop (maps to speed 0)" }
+    ]
+  }
+}

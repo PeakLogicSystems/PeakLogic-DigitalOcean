@@ -2,8 +2,31 @@
 
 const { attachSpan, spanFrom } = require('./sourceSpan');
 
+const { GLOBAL_TYPE_ALIASES } = require('../parc/globalTagMeta');
+
+const GLOBAL_DECL_TYPES = new Set([
+  ...Object.keys(GLOBAL_TYPE_ALIASES),
+  'BOOL', 'INT', 'REAL',
+]);
+
+/** Tag-store type for a global declaration token. */
+const GLOBAL_STORE_TYPE = {
+  GB: 'GB',
+  GI: 'GI',
+  GR: 'GR',
+  GLOBAL_BOOL: 'GLOBAL_BOOL',
+  GLOBAL_INT: 'GLOBAL_INT',
+  GLOBAL_REAL: 'GLOBAL_REAL',
+  BOOL: 'GLOBAL_BOOL',
+  INT: 'GLOBAL_INT',
+  REAL: 'GLOBAL_REAL',
+};
+
 const KEYWORDS = new Set([
-  'IF', 'THEN', 'ELSE', 'END_IF', 'AND', 'OR', 'NOT',
+  'GLOBAL', 'VAR_GLOBAL', 'GB', 'GI', 'GR',
+  'GLOBAL_BOOL', 'GLOBAL_INT', 'GLOBAL_REAL',
+  'BOOL', 'INT', 'REAL',
+  'IF', 'THEN', 'ELSIF', 'ELSE', 'END_IF', 'AND', 'OR', 'NOT',
   'IsON', 'IsOFF', 'TurnON', 'TurnOFF', 'WithInLimits',
   'TimerDone', 'TimerRun', 'TimerInput',
   'CounterDone', 'CounterValue', 'CounterReset', 'CounterCu', 'CounterCd',
@@ -14,7 +37,15 @@ const KEYWORDS = new Set([
   'OneShot',
   'FlowValue', 'FlowReady',
   'FlowCtr', 'FlowTmr', 'FlowK', 'FlowOut',
-  'SetArray', 'ArrayValue',
+  'AltActiveUnit', 'AltReady', 'AltFault', 'AltLag',
+  'AltOffActive', 'AltHighActive', 'AltLowActive', 'AltLow2Active', 'AltPumpUp', 'AltPumpDown',
+  'AltEnable', 'AltAdvance', 'AltAutoFault', 'AltLead', 'AltOnline', 'AltUnitOut',
+  'AltOff', 'AltHigh', 'AltLow', 'AltLag2', 'AltLevel', 'AltLevelBands',
+  'AltLeadSel', 'AltLagSel', 'AltLag2Sel',
+  'RmtFwdRun', 'RmtRevRun', 'RmtFault', 'RmtReversing', 'RmtStatus',
+  'RmtFwdCmd', 'RmtRevCmd', 'RmtFwdAux', 'RmtRevAux', 'RmtOverload', 'RmtHoa',
+  'RmtFwdOut', 'RmtRevOut', 'RmtReset', 'RmtOffline', 'RmtHrs', 'RmtStarts', 'RmtSta',
+  'SetArray', 'SetInt', 'ArrayValue',
 ]);
 
 function skipSpaceAndComments(src, i) {
@@ -114,12 +145,48 @@ class Parser {
   }
 
   parse() {
+    const globals = [];
+    while (this.isGlobalDeclStart()) {
+      globals.push(this.globalDecl());
+      if (this.peek().type === 'semi') this.eat('semi');
+    }
     const stmts = [];
     while (this.peek().type !== 'eof') {
       stmts.push(this.stmt());
       if (this.peek().type === 'semi') this.eat('semi');
     }
-    return { type: 'program', body: stmts };
+    return { type: 'program', globals, body: stmts };
+  }
+
+  isGlobalDeclStart() {
+    const tok = this.peek();
+    return tok.type === 'kw' && (tok.value === 'GLOBAL' || tok.value === 'VAR_GLOBAL');
+  }
+
+  globalDecl() {
+    const startTok = this.peek();
+    const isVarGlobal = startTok.value === 'VAR_GLOBAL';
+    this.eat('kw', startTok.value);
+    const typeTok = this.peek();
+    let typeName;
+    if (typeTok.type === 'kw' && GLOBAL_DECL_TYPES.has(typeTok.value)) {
+      typeName = typeTok.value;
+      this.i++;
+    } else if (typeTok.type === 'id' && GLOBAL_DECL_TYPES.has(typeTok.value.toUpperCase())) {
+      typeName = typeTok.value.toUpperCase();
+      this.i++;
+    } else {
+      throw new Error(`Expected global type (GB|GI|GR|BOOL|INT|REAL), got ${typeTok.type}`);
+    }
+    const nameTok = this.eat('id');
+    const storeType = GLOBAL_STORE_TYPE[typeName.toUpperCase()] || 'GLOBAL_BOOL';
+    return attachSpan({
+      type: 'globalDecl',
+      name: nameTok.value,
+      globalType: storeType,
+      syntax: isVarGlobal ? 'VAR_GLOBAL' : 'GLOBAL',
+      tagSpan: spanFrom(nameTok),
+    }, startTok, typeTok, nameTok);
   }
 
   stmt() {
@@ -128,11 +195,24 @@ class Parser {
     if (tok.type === 'kw' && tok.value === 'SetArray') {
       return this.setArrayStmt();
     }
+    if (tok.type === 'kw' && tok.value === 'SetInt') {
+      return this.setIntStmt();
+    }
+    if (tok.type === 'kw' && tok.value === 'AltLevelBands') {
+      return this.altLevelBandsStmt();
+    }
+    if (tok.type === 'kw' && ['AltOnline', 'AltUnitOut', 'AltLeadSel', 'AltLagSel', 'AltLag2Sel'].includes(tok.value)) {
+      return this.altActionStmt(tok.value);
+    }
     if (tok.type === 'kw' && [
       'TurnON', 'TurnOFF', 'CounterReset', 'CounterCu', 'CounterCd', 'TimerInput',
       'PidPv', 'PidSp', 'PidOut', 'PidAuto', 'PidManual',
       'AvgIn', 'AvgReset', 'AvgOut',
       'FlowCtr', 'FlowTmr', 'FlowK', 'FlowOut',
+      'AltEnable', 'AltAdvance', 'AltAutoFault', 'AltLead',
+      'AltOff', 'AltHigh', 'AltLow', 'AltLag2', 'AltLevel',
+      'RmtFwdCmd', 'RmtRevCmd', 'RmtFwdAux', 'RmtRevAux', 'RmtOverload', 'RmtHoa',
+      'RmtFwdOut', 'RmtRevOut', 'RmtReset', 'RmtOffline', 'RmtHrs', 'RmtStarts', 'RmtSta',
     ].includes(tok.value)) {
       return this.actionStmt(tok.value);
     }
@@ -143,14 +223,24 @@ class Parser {
     this.eat('kw', 'IF');
     const cond = this.expr();
     this.eat('kw', 'THEN');
-    const thenBody = this.blockUntil(['ELSE', 'END_IF']);
+    const thenBody = this.blockUntil(['ELSIF', 'ELSE', 'END_IF']);
+    const elsif = [];
+    while (this.peek().type === 'kw' && this.peek().value === 'ELSIF') {
+      this.eat('kw', 'ELSIF');
+      const econd = this.expr();
+      this.eat('kw', 'THEN');
+      elsif.push({
+        cond: econd,
+        body: this.blockUntil(['ELSIF', 'ELSE', 'END_IF']),
+      });
+    }
     let elseBody = [];
     if (this.peek().type === 'kw' && this.peek().value === 'ELSE') {
       this.eat('kw', 'ELSE');
       elseBody = this.blockUntil(['END_IF']);
     }
     this.eat('kw', 'END_IF');
-    return attachSpan({ type: 'if', cond, thenBody, elseBody }, cond);
+    return attachSpan({ type: 'if', cond, thenBody, elsif, elseBody }, cond);
   }
 
   blockUntil(stopKws) {
@@ -182,6 +272,22 @@ class Parser {
     }, kw, open, tagTok, close);
   }
 
+  setIntStmt() {
+    const kw = this.eat('kw', 'SetInt');
+    const open = this.eat('(');
+    const tagTok = this.eat('id');
+    this.eat(',');
+    const valueExpr = this.addExpr();
+    const close = this.eat(')');
+    return attachSpan({
+      type: 'action',
+      name: 'SetInt',
+      tag: tagTok.value,
+      valueExpr,
+      tagSpan: spanFrom(tagTok),
+    }, kw, open, tagTok, close);
+  }
+
   actionStmt(name) {
     const kw = this.eat('kw', name);
     const open = this.eat('(');
@@ -203,6 +309,51 @@ class Parser {
       inputTag,
       tagSpan: spanFrom(tagTok),
       inputSpan,
+    }, kw, open, tagTok, close);
+  }
+
+  altActionStmt(name) {
+    const kw = this.eat('kw', name);
+    const open = this.eat('(');
+    const tagTok = this.eat('id');
+    this.eat(',');
+    const unitTok = this.eat('num');
+    this.eat(',');
+    const inTok = this.eat('id');
+    const close = this.eat(')');
+    return attachSpan({
+      type: 'action',
+      name,
+      tag: tagTok.value,
+      unitIndex: Math.trunc(unitTok.value),
+      inputTag: inTok.value,
+      tagSpan: spanFrom(tagTok),
+      inputSpan: spanFrom(inTok),
+    }, kw, open, tagTok, close);
+  }
+
+  altLevelBandsStmt() {
+    const kw = this.eat('kw', 'AltLevelBands');
+    const open = this.eat('(');
+    const tagTok = this.eat('id');
+    this.eat(',');
+    const levelLowLo = this.addExpr();
+    this.eat(',');
+    const levelLowHi = this.addExpr();
+    this.eat(',');
+    const levelHighLo = this.addExpr();
+    this.eat(',');
+    const levelHighHi = this.addExpr();
+    const close = this.eat(')');
+    return attachSpan({
+      type: 'action',
+      name: 'AltLevelBands',
+      tag: tagTok.value,
+      levelLowLo,
+      levelLowHi,
+      levelHighLo,
+      levelHighHi,
+      tagSpan: spanFrom(tagTok),
     }, kw, open, tagTok, close);
   }
 
@@ -285,6 +436,9 @@ class Parser {
       'AvgValue', 'AvgReady', 'AvgCount',
       'OneShot',
       'FlowValue', 'FlowReady',
+      'AltActiveUnit', 'AltReady', 'AltFault', 'AltLag',
+      'AltOffActive', 'AltHighActive', 'AltLowActive', 'AltLow2Active', 'AltPumpUp', 'AltPumpDown',
+      'RmtFwdRun', 'RmtRevRun', 'RmtFault', 'RmtReversing', 'RmtStatus',
       'ArrayValue',
     ].includes(tok.value)) {
       return this.call(tok.value);
@@ -347,13 +501,24 @@ function parseProgram(source) {
   }
 }
 
+function collectProgramGlobalDecls(ast) {
+  if (!ast || ast.type !== 'program') return [];
+  return (ast.globals || []).map((g) => ({
+    id: g.name,
+    type: g.globalType,
+    role: 'memory',
+    global: true,
+  }));
+}
+
 function collectProgramTagRefs(ast) {
   const refs = new Set();
+  for (const g of ast?.globals || []) refs.add(g.name);
   function walk(node) {
     if (!node) return;
     if (node.type === 'tag' || node.type === 'tagIndex') refs.add(node.name);
     if (node.type === 'call') {
-      for (const a of node.args) {
+      for (const a of node.args || []) {
         if (typeof a === 'string') refs.add(a);
       }
     }
@@ -362,42 +527,64 @@ function collectProgramTagRefs(ast) {
       if (node.inputTag) refs.add(node.inputTag);
     }
     if (node.type === 'tagIndex') walk(node.index);
-    if (node.type === 'action' && node.name === 'SetArray') {
+    if (node.type === 'action' && node.name === 'AltLevelBands') {
+      walk(node.levelLowLo);
+      walk(node.levelLowHi);
+      walk(node.levelHighLo);
+      walk(node.levelHighHi);
+    }
+    if (node.type === 'action' && (node.name === 'SetArray' || node.name === 'SetInt')) {
       walk(node.index);
       walk(node.valueExpr);
     }
     if (node.type === 'if') {
       walk(node.cond);
-      node.thenBody.forEach((s) => walk(s));
-      node.elseBody.forEach((s) => walk(s));
+      (node.thenBody || []).forEach((s) => walk(s));
+      for (const branch of node.elsif || []) {
+        walk(branch.cond);
+        (branch.body || []).forEach((s) => walk(s));
+      }
+      (node.elseBody || []).forEach((s) => walk(s));
     }
     if (node.type === 'bin' || node.type === 'un') {
       if (node.left) walk(node.left);
       if (node.right) walk(node.right);
       if (node.arg) walk(node.arg);
     }
-    if (node.type === 'program') node.body.forEach((s) => walk(s));
+    if (node.type === 'program') (node.body || []).forEach((s) => walk(s));
   }
   walk(ast);
   return [...refs].sort();
 }
 
-function validateProgram(ast, tagIds) {
+function validateProgram(ast, tagIds, tagMetaById) {
   const errors = [];
   const ids = new Set(tagIds);
+  const meta = tagMetaById instanceof Map ? tagMetaById : new Map();
+  for (const g of ast?.globals || []) {
+    ids.add(g.name);
+    meta.set(g.name, { id: g.name, type: g.globalType, global: true });
+  }
   function walk(node, inAction) {
     if (!node) return;
     if ((node.type === 'tag' || node.type === 'tagIndex') && !ids.has(node.name)) {
       errors.push(`Unknown tag: ${node.name}`);
     }
     if (node.type === 'tagIndex') walk(node.index);
-    if (node.type === 'action' && node.name === 'SetArray') {
+    if (node.type === 'action' && node.name === 'AltLevelBands') {
       if (!ids.has(node.tag)) errors.push(`Unknown tag: ${node.tag}`);
-      walk(node.index);
+      walk(node.levelLowLo);
+      walk(node.levelLowHi);
+      walk(node.levelHighLo);
+      walk(node.levelHighHi);
+    }
+    if (node.type === 'action' && (node.name === 'SetArray' || node.name === 'SetInt')) {
+      if (!ids.has(node.tag)) errors.push(`Unknown tag: ${node.tag}`);
+      if (node.index) walk(node.index);
       walk(node.valueExpr);
     }
     if (node.type === 'call') {
-      for (const a of node.args) {
+      for (const a of node.args || []) {
         if (typeof a === 'string' && !ids.has(a)) errors.push(`Unknown tag: ${a}`);
       }
     }
@@ -407,20 +594,28 @@ function validateProgram(ast, tagIds) {
     }
     if (node.type === 'if') {
       walk(node.cond);
-      node.thenBody.forEach((s) => walk(s));
-      node.elseBody.forEach((s) => walk(s));
+      (node.thenBody || []).forEach((s) => walk(s));
+      for (const branch of node.elsif || []) {
+        walk(branch.cond);
+        (branch.body || []).forEach((s) => walk(s));
+      }
+      (node.elseBody || []).forEach((s) => walk(s));
     }
     if (node.type === 'bin' || node.type === 'un') {
       if (node.left) walk(node.left);
       if (node.right) walk(node.right);
       if (node.arg) walk(node.arg);
     }
-    if (node.type === 'program') node.body.forEach((s) => walk(s));
+    if (node.type === 'program') (node.body || []).forEach((s) => walk(s));
   }
   walk(ast);
   return errors;
 }
 
 module.exports = {
-  tokenize, parseProgram, validateProgram, collectProgramTagRefs,
+  tokenize,
+  parseProgram,
+  validateProgram,
+  collectProgramTagRefs,
+  collectProgramGlobalDecls,
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Appliance → cloud uplink for Parc telemetry (appliance acts as remote edge to peaklogic-cloud).
+ * Appliance → cloud uplink for Parc telemetry (appliance acts as remote edge to mv-cloud).
  */
 
 const mqtt = require('mqtt');
@@ -31,7 +31,7 @@ function reloadConfig(next) {
 
 function mqttOptions(cfg) {
   const opts = {
-    clientId: cfg.clientId || `peaklogic-appliance-${cfg.gatewayId || 'remote'}`,
+    clientId: cfg.clientId || `mv-appliance-${cfg.gatewayId || 'remote'}`,
     reconnectPeriod: 5000,
     keepalive: 60,
   };
@@ -71,6 +71,13 @@ async function ensureConnected(cfg = config) {
 }
 
 function enrichReportForCloud(report, cfg = config) {
+  let cellular = report.meta?.cellular || null;
+  try {
+    const { registry } = require('../parc/deviceRegistry');
+    const dev = report?.deviceId ? registry.getDevice(report.deviceId) : null;
+    if (dev?.meta?.cellular) cellular = dev.meta.cellular;
+  } catch { /* optional */ }
+
   return {
     ...report,
     meta: {
@@ -83,7 +90,15 @@ function enrichReportForCloud(report, cfg = config) {
       systemSlug: cfg.systemSlug,
       relayedAt: new Date().toISOString(),
       source: 'peaklogic-appliance',
+      ...(cellular ? { cellular } : {}),
     },
+    ...(cellular ? {
+      registration: {
+        deviceId: report.deviceId,
+        gatewayId: cellular.gatewayId || cfg.gatewayId || null,
+        cellular,
+      },
+    } : {}),
   };
 }
 

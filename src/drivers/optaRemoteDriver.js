@@ -1,12 +1,24 @@
 'use strict';
 
-const persistence = require('../persistence');
 const { QUALITY } = require('../tags/constants');
-const { parseProgram, validateProgram } = require('../engine/parser');
-const { astToJson } = require('../engine/astJson');
+const { buildOptaProgramBody, slimPutProgramBodyForMqtt } = require('../parc/mqttOptaProgram');
+const { optaHttpRequest } = require('./optaHttpClient');
+const programStore = require('../programs/programStore');
+const {
+  checkOptaDeviceStatus,
+  clientHeaders,
+  clientDeployMeta,
+  OPTA_PROGRAM_MAX_BYTES,
+} = require('./optaProtocol');
+
+const DEFAULT_TIMEOUT_MS = 8000;
+const PROGRAM_TIMEOUT_MS = 30000;
 
 function baseUrl(cfg) {
-  const host = String(cfg.host || cfg.baseUrl || '127.0.0.1').replace(/^https?:\/\//i, '').split('/')[0];
+  const host = String(cfg.host || cfg.baseUrl || '127.0.0.1')
+    .replace(/^https?:\/\//i, '')
+    .split('/')[0]
+    .trim();
   const port = Number(cfg.port) || 80;
   const scheme = cfg.tls ? 'https' : 'http';
   return port === 80 && !cfg.tls ? `http://${host}` : `${scheme}://${host}:${port}`;
@@ -23,39 +35,50 @@ class OptaRemoteDriver {
     this.connected = false;
     this._lastError = '';
     this._base = '';
+    this._versionWarnings = [];
+    this._deviceStatus = null;
   }
 
   health() {
+    if (this.connected && this._versionWarnings.length) {
+      return `OK — ${this._versionWarnings[0]}`;
+    }
     return this.connected ? 'OK' : (this._lastError || 'disconnected');
   }
 
   _headers(extra = {}) {
-    const headers = { Accept: 'application/json', ...extra };
+    const headers = { Accept: 'application/json', ...clientHeaders(), ...extra };
     if (this.cfg.bearerToken) headers.Authorization = `Bearer ${this.cfg.bearerToken}`;
     return headers;
   }
 
+  _timeoutMs(options = {}, fallback = DEFAULT_TIMEOUT_MS) {
+    return options.timeoutMs ?? this.cfg.timeoutMs ?? fallback;
+  }
+
   async _request(path, options = {}) {
+    if (!this._base) this._base = baseUrl(this.cfg);
     const url = `${this._base}${path}`;
-    const res = await fetch(url, {
-      ...options,
-      headers: this._headers(options.headers || {}),
-      signal: AbortSignal.timeout(this.cfg.timeoutMs || 8000),
+    const { timeoutMs, methods, ...rest } = options;
+    return optaHttpRequest(url, {
+      ...rest,
+      timeoutMs: this._timeoutMs({ timeoutMs }, DEFAULT_TIMEOUT_MS),
+      methods: methods || [rest.method || 'GET'],
+      headers: this._headers(rest.headers || {}),
     });
-    const text = await res.text();
-    let body = null;
-    if (text) {
+  }
+
+  async ensureConnected() {
+    this._base = baseUrl(this.cfg);
+    if (this.connected) {
       try {
-        body = JSON.parse(text);
+        await this._request('/api/status', { timeoutMs: DEFAULT_TIMEOUT_MS });
+        return true;
       } catch {
-        body = { raw: text };
+        this.connected = false;
       }
     }
-    if (!res.ok) {
-      const msg = body?.error || body?.message || text || `HTTP ${res.status}`;
-      throw new Error(msg);
-    }
-    return body;
+    return this.connect(this.cfg);
   }
 
   async connect(cfg) {
@@ -63,12 +86,21 @@ class OptaRemoteDriver {
     this._base = baseUrl(this.cfg);
     try {
       const st = await this._request('/api/status');
-      this.connected = !!st;
-      this._lastError = '';
-      return true;
+      const check = checkOptaDeviceStatus(st);
+      this._deviceStatus = st;
+      this._versionWarnings = check.warnings;
+      if (!check.ok) {
+        this.connected = false;
+        this._lastError = check.errors.join('; ');
+        return false;
+      }
+      this.connected = st?.ok !== false;
+      this._lastError = this.connected ? '' : (st?.error || 'Opta status not ok');
+      return this.connected;
     } catch (e) {
       this.connected = false;
       this._lastError = e.message || String(e);
+      this._versionWarnings = [];
       return false;
     }
   }
@@ -155,34 +187,70 @@ class OptaRemoteDriver {
   }
 
   async deployProgram(source, tagStore) {
-    const tagIds = tagStore.list().map((t) => t.id);
-    const { ast, errors: parseErrs } = parseProgram(source);
-    if (parseErrs.length) return { ok: false, errors: parseErrs };
-    const valErrs = validateProgram(ast, tagIds);
-    if (valErrs.length) return { ok: false, errors: valErrs };
-    const tags = tagStore.list()
-      .filter((t) => tagIds.includes(t.id) || t.driverId === this.cfg.id)
-      .map((t) => this._tagMetaForDevice(t));
-    const body = {
-      source,
-      ast: astToJson(ast),
-      tagIds,
-      tags,
-    };
-    await this._request('/api/program', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+    const built = buildOptaProgramBody(source, tagStore, this.cfg.id, { includeSource: false });
+    if (!built.ok) return { ok: false, errors: built.errors || ['Program invalid'] };
+    if (!(await this.ensureConnected())) {
+      return {
+        ok: false,
+        errors: [this._lastError || `Cannot reach Opta at ${baseUrl(this.cfg)} — use Connect or check driver host/port`],
+      };
+    }
+    const limit = Number(this._deviceStatus?.programMaxBytes) || OPTA_PROGRAM_MAX_BYTES;
+    const deployBody = slimPutProgramBodyForMqtt(built.body, built.traceMap);
+    const payload = JSON.stringify({
+      ...deployBody,
+      ...clientDeployMeta({ programName: programStore.activeRel() || '' }),
     });
+    const payloadBytes = Buffer.byteLength(payload);
+    if (payloadBytes >= limit) {
+      return {
+        ok: false,
+        errors: [
+          `Program deploy is ${payloadBytes} bytes (Opta limit ${limit}). `
+          + 'Trim the ST program or re-flash est-pc/firmware/arduino-opta-st (MV_PROGRAM_JSON_MAX).',
+        ],
+      };
+    }
+    try {
+      JSON.parse(payload);
+    } catch (e) {
+      return { ok: false, errors: [`Deploy payload is not valid JSON: ${e.message}`] };
+    }
+    const programTimeout = this.cfg.programTimeoutMs || PROGRAM_TIMEOUT_MS;
+    try {
+      await this._request('/api/program', {
+        methods: ['PUT', 'POST'],
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        timeoutMs: programTimeout,
+      });
+    } catch (e) {
+      const msg = e.message || String(e);
+      let extra = '';
+      if (/ECONNRESET|connection was reset|fetch failed/i.test(msg)) {
+        extra = ' — Opta reset the HTTP connection (power-cycle Opta, re-flash est-pc firmware, allow Node.js through Windows Firewall)';
+      } else if (/program too large|body too large/i.test(msg)) {
+        extra = ` (${payloadBytes} bytes, limit ${limit})`;
+      } else if (/timeout|aborted/i.test(msg)) {
+        extra = ` (${payloadBytes} bytes — check Opta Serial for PUT/POST /api/program)`;
+      } else if (/invalid json|json NoMemory|incomplete body/i.test(msg)) {
+        extra = ` (${payloadBytes} bytes — re-flash est-pc/firmware/arduino-opta-st/PeaklogicOptaSt; old firmware returns "invalid json" for large programs)`;
+      }
+      return { ok: false, errors: [`${msg}${extra}`] };
+    }
     return { ok: true, errors: [] };
   }
 
   async startRuntime() {
+    if (!(await this.ensureConnected())) {
+      throw new Error(this._lastError || `Cannot reach Opta at ${baseUrl(this.cfg)}`);
+    }
     const scanMs = Number(this.cfg.scanMs) || 100;
     await this._request('/api/runtime/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ scanMs }),
+      timeoutMs: this.cfg.programTimeoutMs || PROGRAM_TIMEOUT_MS,
     });
   }
 
@@ -205,6 +273,28 @@ class OptaRemoteDriver {
     }
     this.connected = true;
     return payload;
+  }
+
+  /** Upload compiled .bin firmware over HTTP OTA (device reboots on success). */
+  async uploadFirmware(firmwareBytes, opts = {}) {
+    const url = `${this._base}/api/firmware`;
+    const headers = { 'Content-Type': 'application/octet-stream', Accept: 'application/json' };
+    const pwd = opts.password ?? this.cfg.otaPassword;
+    if (pwd) headers['X-MV-OTA-Password'] = String(pwd);
+    const body = firmwareBytes instanceof Buffer
+      ? firmwareBytes
+      : Buffer.from(firmwareBytes);
+    const { optaHttpRequest: uploadReq } = require('./optaHttpClient');
+    return uploadReq(url, {
+      method: 'POST',
+      headers: this._headers(headers),
+      body,
+      timeoutMs: opts.timeoutMs || this.cfg.otaTimeoutMs || 180000,
+    });
+  }
+
+  async otaInfo() {
+    return this._request('/api/ota');
   }
 }
 

@@ -1,0 +1,229 @@
+[
+  {
+    "id": "I1",
+    "label": "Leak detector",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I1" },
+    "comment": "Dry-contact leak rope or spot sensor (digital I1 — separate from I1_RAW moisture)"
+  },
+  {
+    "id": "I1_RAW",
+    "label": "Moisture sensor raw (I1)",
+    "type": "INT",
+    "role": "input",
+    "value": 65,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I1_RAW" },
+    "graphEnabled": true,
+    "comment": "Resistive moisture ~700K wet / 1.5M dry, 24V pull-down on analog I1"
+  },
+  {
+    "id": "I2_RAW",
+    "label": "Current 1 (A)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "scale": 0.4887,
+    "offset": 0,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I2_RAW" },
+    "graphEnabled": true,
+    "comment": "0–1 V CT output (scale: 1 V = 50 A)"
+  },
+  {
+    "id": "I3_RAW",
+    "label": "Current 2 (A)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "scale": 0.4887,
+    "offset": 0,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I3_RAW" },
+    "graphEnabled": true,
+    "comment": "0–1 V CT output"
+  },
+  {
+    "id": "I4_RAW",
+    "label": "Current 3 (A)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "scale": 0.4887,
+    "offset": 0,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I4_RAW" },
+    "graphEnabled": true,
+    "comment": "0–1 V CT output"
+  },
+  {
+    "id": "I5_RAW",
+    "label": "Current 4 (A)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "scale": 0.4887,
+    "offset": 0,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I5_RAW" },
+    "graphEnabled": true,
+    "comment": "0–1 V CT output"
+  },
+  {
+    "id": "I6_RAW",
+    "label": "Temperature 1",
+    "type": "INT",
+    "role": "input",
+    "value": 512,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I6_RAW" },
+    "graphEnabled": true,
+    "comment": "10K NTC + 10K to GND (~512 raw @ 25°C, lower = hotter)"
+  },
+  {
+    "id": "I7_RAW",
+    "label": "Temperature 2",
+    "type": "INT",
+    "role": "input",
+    "value": 512,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I7_RAW" },
+    "graphEnabled": true,
+    "comment": "10K NTC divider"
+  },
+  {
+    "id": "I8_RAW",
+    "label": "Temperature 3",
+    "type": "INT",
+    "role": "input",
+    "value": 512,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I8_RAW" },
+    "graphEnabled": true,
+    "comment": "10K NTC divider"
+  },
+  {
+    "id": "R1",
+    "label": "Leak alarm relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R1" }
+  },
+  {
+    "id": "R2",
+    "label": "Current overload relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R2" }
+  },
+  {
+    "id": "R3",
+    "label": "High temperature relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R3" }
+  },
+  {
+    "id": "R4",
+    "label": "System OK relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": true,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R4" }
+  },
+  {
+    "id": "H1",
+    "label": "Current overload threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 82,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "comment": "Raw ADC trip (~0.8 V on 0–10 V input ≈ 40 A with 50 A/V scale)"
+  },
+  {
+    "id": "H2",
+    "label": "High temperature threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 280,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "comment": "Trip when NTC divider raw falls below this (hotter than ~55°C)"
+  },
+  {
+    "id": "MOIST_PCT",
+    "label": "Moisture %",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "comment": "0=dry .. 100=wet from I1_RAW"
+  },
+  {
+    "id": "H_WET_RAW",
+    "label": "Moisture wet cal (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 700,
+    "comment": "I1_RAW when submerged = 100% (probe reads 0 dry .. 700 submerged)"
+  },
+  {
+    "id": "H_DRY_RAW",
+    "label": "Moisture dry cal (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "comment": "I1_RAW when dry = 0%"
+  },
+  {
+    "id": "H_MOIST_RAW",
+    "label": "Moist threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 70,
+    "comment": "MOIST_ALM when I1_RAW >= this (moist)"
+  },
+  {
+    "id": "H_SUB_RAW",
+    "label": "Submerged threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 700,
+    "comment": "SUBMERGED_ALM when I1_RAW >= this (fully wet)"
+  },
+  {
+    "id": "MOIST_ALM",
+    "label": "Moist alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "comment": "Level 1 — raw >= H_MOIST_RAW; included in R4 system-OK logic"
+  },
+  {
+    "id": "SUBMERGED_ALM",
+    "label": "Submerged alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "comment": "Level 2 — raw >= H_SUB_RAW; included in R4 system-OK logic"
+  }
+]

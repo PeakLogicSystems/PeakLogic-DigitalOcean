@@ -1,0 +1,24 @@
+(*
+  Simplex lift station — single submersible pump, float control.
+  Fleet alarm tags: ALT_FAULT (summary), LVL_HIGH.
+
+  Tags: st/fixtures/tags.lift_simplex.json
+*)
+
+IF LVL_START THEN TurnON(PUMP_CALL); END_IF;
+IF LVL_STOP THEN TurnOFF(PUMP_CALL); END_IF;
+
+IF PUMP_CALL AND PUMP_AUTO AND NOT PUMP_FAIL THEN
+  TurnON(MOTOR1_RUN);
+ELSE
+  TurnOFF(MOTOR1_RUN);
+END_IF;
+
+IF LVL_HIGH THEN TurnON(LVL_HIGH_ALM); ELSE TurnOFF(LVL_HIGH_ALM); END_IF;
+IF LVL_LO THEN TurnON(LVL_LO_ALM); ELSE TurnOFF(LVL_LO_ALM); END_IF;
+
+IF PUMP_FAIL OR LVL_HIGH_ALM OR LVL_LO_ALM THEN
+  TurnON(ALT_FAULT);
+ELSE
+  TurnOFF(ALT_FAULT);
+END_IF;

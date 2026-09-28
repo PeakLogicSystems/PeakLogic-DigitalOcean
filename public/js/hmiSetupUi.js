@@ -1,9 +1,9 @@
 'use strict';
 
 /** HMI live view + setup composer */
-window.PeakLogicHmi = (function () {
-  const { esc } = window.PeakLogicCore;
-  const domGet = window.PeakLogicCore.$;
+window.PeaklogicHmi = (function () {
+  const { esc } = window.PeaklogicCore;
+  const domGet = window.PeaklogicCore.$;
   const HmiView = window.HmiView;
 
   const HMI_BINDING_PROPS = ['visibility', 'flashState', 'fill', 'fill5', 'fill8', 'state3', 'backgroundFill', 'stroke', 'text', 'rotation', 'trend', 'opacity', 'class'];
@@ -36,9 +36,9 @@ window.PeakLogicHmi = (function () {
   const HMI_TPO_TEXT_COLORS = ['#64748b', '#64748b', '#16a34a', '#f59e0b', '#94a3b8'];
   const HMI_POOL_BW_TEXT_COLORS = ['#64748b', '#2563eb', '#06b6d4', '#f59e0b', '#22c55e'];
   const HMI_TREND_DEFAULT_COLOR = '#2563eb';
-  const HMI_STRIP_CHART = '/hmi/svg/library/charts-trends/strip-charts/peaklogic/chart-strip/strip_chart.svg';
-  const HMI_GAUGE_COLUMN = '/hmi/svg/library/gauges-meters/column/peaklogic/gauge-column/gauge_column.svg';
-  const HMI_PUSH_BUTTON_CANONICAL = '/hmi/svg/library/controls/push-buttons/peaklogic/pb-canonical/push_button_square.svg';
+  const HMI_STRIP_CHART = '/hmi/svg/library/charts-trends/strip-charts/mv/chart-strip/strip_chart.svg';
+  const HMI_GAUGE_COLUMN = '/hmi/svg/library/gauges-meters/column/mv/gauge-column/gauge_column.svg';
+  const HMI_PUSH_BUTTON_CANONICAL = '/hmi/svg/library/controls/push-buttons/mv/pb-canonical/push_button_square.svg';
   const PUSH_BUTTON_SHAPES = ['square', 'rectangle', 'oblong', 'round'];
   const PUSH_BUTTON_DEFAULT_COLORS = { background: '#22c55e', text: '#0f172a', bezel: '#64748b' };
   let hmiStripChartUnifiedFilter = false;
@@ -198,7 +198,7 @@ window.PeakLogicHmi = (function () {
     return el.value === 'show';
   }
 
-  const HmiViewMode = () => window.PeakLogicHmiViewMode || {};
+  const HmiViewMode = () => window.PeaklogicHmiViewMode || {};
 
   function hmiPollMsForSettings(settings) {
     return HmiViewMode().hmiPollMsFromSettings?.(settings) ?? 60_000;
@@ -213,6 +213,41 @@ window.PeakLogicHmi = (function () {
   }
 
   const HMI_LIVE_STATUS_HIDDEN_KEY = 'peaklogic-hmi-hide-live-status';
+  const HMI_ALARM_SIDEBAR_HIDDEN_KEY = 'peaklogic-hmi-hide-alarm-sidebar';
+
+  function isHmiAlarmSidebarUserVisible() {
+    try {
+      const stored = localStorage.getItem(HMI_ALARM_SIDEBAR_HIDDEN_KEY);
+      if (stored === '1') return false;
+      if (stored === '0') return true;
+    } catch { /* ignore */ }
+    return !window.matchMedia('(max-width: 720px)').matches;
+  }
+
+  function syncHmiAlarmSidebarToggleBtn(hasAlarms) {
+    const btn = domGet('btn-hmi-toggle-alarms');
+    if (!btn) return;
+    btn.classList.toggle('view-hidden', !hasAlarms);
+    const visible = isHmiAlarmSidebarUserVisible();
+    btn.textContent = visible ? 'Hide alarms' : 'Show alarms';
+    btn.title = visible ? 'Hide active alarm list beside the HMI' : 'Show active alarm list beside the HMI';
+    btn.setAttribute('aria-expanded', visible ? 'true' : 'false');
+  }
+
+  function hideHmiAlarmSidebar() {
+    try { localStorage.setItem(HMI_ALARM_SIDEBAR_HIDDEN_KEY, '1'); } catch { /* ignore */ }
+    refreshHmiAlarmSidebar();
+  }
+
+  function showHmiAlarmSidebar() {
+    try { localStorage.setItem(HMI_ALARM_SIDEBAR_HIDDEN_KEY, '0'); } catch { /* ignore */ }
+    refreshHmiAlarmSidebar();
+  }
+
+  function toggleHmiAlarmSidebar() {
+    if (isHmiAlarmSidebarUserVisible()) hideHmiAlarmSidebar();
+    else showHmiAlarmSidebar();
+  }
 
   function readShowLiveStatusFromField() {
     const el = domGet('hmi-show-live-status');
@@ -221,7 +256,7 @@ window.PeakLogicHmi = (function () {
     return el.value === 'show';
   }
 
-  function isLiveStatusBarVisible() {
+  function isHmiScreenBarVisible() {
     if (hmiConfig.layout?.showLiveStatus === false) return false;
     try {
       if (localStorage.getItem(HMI_LIVE_STATUS_HIDDEN_KEY) === '1') return false;
@@ -229,25 +264,34 @@ window.PeakLogicHmi = (function () {
     return true;
   }
 
-  function syncLiveStatusBarVisibility() {
-    const bar = domGet('hmi-live-status');
-    const showBtn = domGet('btn-hmi-show-status');
-    const visible = isLiveStatusBarVisible();
+  function syncHmiScreenBarVisibility() {
+    const bar = domGet('hmi-screen-bar');
+    const toggleBtn = domGet('btn-hmi-toggle-screen-bar');
+    const visible = isHmiScreenBarVisible();
     bar?.classList.toggle('view-hidden', !visible);
-    showBtn?.classList.toggle('view-hidden', visible);
+    if (toggleBtn) {
+      toggleBtn.textContent = visible ? 'Hide' : 'Show';
+      toggleBtn.title = visible ? 'Hide screen tabs and status' : 'Show screen tabs and status';
+      toggleBtn.setAttribute('aria-expanded', visible ? 'true' : 'false');
+    }
   }
 
-  function hideLiveStatusBar() {
+  function hideHmiScreenBar() {
     try { localStorage.setItem(HMI_LIVE_STATUS_HIDDEN_KEY, '1'); } catch { /* ignore */ }
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
   }
 
-  function showLiveStatusBar() {
+  function showHmiScreenBar() {
     try { localStorage.removeItem(HMI_LIVE_STATUS_HIDDEN_KEY); } catch { /* ignore */ }
     if (hmiConfig.layout) hmiConfig.layout.showLiveStatus = true;
     const sel = domGet('hmi-show-live-status');
     if (sel && sel.tagName === 'SELECT') sel.value = 'show';
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
+  }
+
+  function toggleHmiScreenBar() {
+    if (isHmiScreenBarVisible()) hideHmiScreenBar();
+    else showHmiScreenBar();
   }
 
   function layoutFieldsMatchPreset(preset) {
@@ -807,8 +851,8 @@ window.PeakLogicHmi = (function () {
         return { group: row.group, subgroup: sub };
       }
     }
-    if (s.includes('/peaklogic/')) {
-      const folder = s.match(/\/peaklogic\/([^/]+)/)?.[1] || '';
+    if (s.includes('/mv/')) {
+      const folder = s.match(/\/mv\/([^/]+)/)?.[1] || '';
       if (/gauge_dialpointer|dial-pointer|dialpointer/i.test(s)) {
         return { group: 'Gauges & meters', subgroup: 'dial-pointers' };
       }
@@ -882,8 +926,8 @@ window.PeakLogicHmi = (function () {
       return hmiCompositeByPath.get(path);
     }
     if (path && isCompositeAssetPath(path)) {
-      const fallback = hmiAssetForRecentPath(path);
-      if (fallback?.composite) return fallback.composite;
+      const hit = hmiAssetByPath(path);
+      if (hit?.composite) return hit.composite;
     }
     return null;
   }
@@ -1092,7 +1136,7 @@ window.PeakLogicHmi = (function () {
     syncComposerModeFromSettings();
     hmiViewScreenId = startingHmiScreenId();
     renderHmiNavBar();
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
     syncHmiLiveDisplayHint();
     syncHmiTestModeUi();
     loadHmiScreen(true).catch(console.error);
@@ -1108,12 +1152,12 @@ window.PeakLogicHmi = (function () {
       if (e.origin !== window.location.origin) return;
       const data = e.data;
       if (!data || typeof data !== 'object') return;
-      if (data.type === 'peaklogic-hmi-open-area' && data.screenId) {
+      if (data.type === 'mv-hmi-open-area' && data.screenId) {
         const key = `area:${data.screenId}`;
         if (hmiPopupMessageIsDuplicate(key)) return;
         ensureHmiConfigLoaded();
         openHmiAreaPopup(data.screenId, { force: true }).catch(console.error);
-      } else if (data.type === 'peaklogic-hmi-open-room' && data.roomNum) {
+      } else if (data.type === 'mv-hmi-open-room' && data.roomNum) {
         const n = Math.trunc(Number(data.roomNum));
         const key = `room:${n}`;
         if (hmiPopupMessageIsDuplicate(key)) return;
@@ -1145,7 +1189,7 @@ window.PeakLogicHmi = (function () {
     const pollMs = hmiPollMsForSettings(lastSettings?.());
     try {
       frame.contentWindow.postMessage({
-        type: 'peaklogic-hmi-poll-config',
+        type: 'mv-hmi-poll-config',
         pollMs,
         apiBase: window.PEAKLOGIC_API_BASE || '/api',
       }, window.location.origin);
@@ -1163,7 +1207,7 @@ window.PeakLogicHmi = (function () {
       name: String(s.name || '').trim(),
     }));
     try {
-      frame.contentWindow.postMessage({ type: 'peaklogic-hmi-screen-catalog', screens }, window.location.origin);
+      frame.contentWindow.postMessage({ type: 'mv-hmi-screen-catalog', screens }, window.location.origin);
     } catch { /* iframe not ready */ }
   }
 
@@ -1801,6 +1845,7 @@ window.PeakLogicHmi = (function () {
     const screen = hmiConfig.screens?.find((s) => s.id === sid);
     const title = domGet('hmi-room-popup-title');
     if (title && screen) title.textContent = screenLabel(screen);
+    wireHmiInteractiveControls(hmiAreaPopupGrid, bindings, sid);
   }
 
   async function openHmiAreaPopup(screenId, opts = {}) {
@@ -1980,35 +2025,23 @@ window.PeakLogicHmi = (function () {
   }
 
   function refreshHmiAlarmSidebar() {
-    const sidebar = domGet('hmi-alarm-sidebar');
-    if (!sidebar || !isHmiViewActive()) return;
+    const statusBtn = domGet('hmi-alarm-status');
+    if (!statusBtn || !isHmiViewActive()) return;
     const rows = HmiView.collectHmiActiveAlarms?.(tagList(), lastLive()) || [];
-    const activeCount = rows.filter((r) => !r.acked).length;
-    const show = activeCount >= 2;
-    sidebar.classList.toggle('view-hidden', !show);
-    const body = domGet('hmi-alarm-sidebar-body');
-    const countEl = domGet('hmi-alarm-sidebar-count');
-    const ackAllBtn = domGet('btn-hmi-alarms-ack-all');
-    if (ackAllBtn) ackAllBtn.disabled = activeCount === 0;
-    if (!show) {
-      if (body) body.innerHTML = '';
+    const activeCount = rows.length;
+    const unackedCount = rows.filter((r) => !r.acked).length;
+    const hasAny = activeCount > 0;
+    statusBtn.classList.toggle('view-hidden', !hasAny);
+    statusBtn.classList.toggle('hmi-alarm-status--unacked', unackedCount > 0);
+    if (!hasAny) {
+      statusBtn.textContent = '';
+      statusBtn.removeAttribute('title');
       return;
     }
-    if (countEl) countEl.textContent = `${activeCount} active`;
-    if (!body || !HmiView.renderHmiAlarmListHtml) return;
-    body.innerHTML = HmiView.renderHmiAlarmListHtml(rows, { showAcked: false });
-    body.querySelectorAll('[data-hmi-alarm-ack]').forEach((btn) => {
-      btn.onclick = () => {
-        const tagId = btn.dataset.hmiAlarmAck;
-        if (!tagId) return;
-        api.ackAlarm(tagId)
-          .then((res) => {
-            applyAckLiveResponse(res);
-            return d().refreshAll?.({ force: true });
-          })
-          .catch((err) => console.error(err));
-      };
-    });
+    statusBtn.textContent = unackedCount > 0
+      ? `\u26A0 ${unackedCount} unacknowledged \u00B7 ${activeCount} active`
+      : `${activeCount} active \u00B7 all acknowledged`;
+    statusBtn.title = 'Open the alarms list';
   }
 
   function hmiOpenRoomHandlerForRoot(root) {
@@ -2056,6 +2089,10 @@ window.PeakLogicHmi = (function () {
       offsetY: s.offsetY,
       naturalWidth: s.naturalWidth,
       naturalHeight: s.naturalHeight,
+      navHidden: s.navHidden === true,
+      inheritProjectLayout: s.inheritProjectLayout === false ? false : true,
+      facility3dUrl: String(s.facility3dUrl || '').trim() || undefined,
+      composerMode: s.composerMode ? normalizeComposerMode(s.composerMode) : undefined,
     };
   }
 
@@ -2775,6 +2812,7 @@ window.PeakLogicHmi = (function () {
       fit: layout.fit,
     };
     for (const s of cfg.screens) {
+      if (s.inheritProjectLayout === false) continue;
       Object.assign(s, patch);
       if (opts.prune) pruneTilesToGrid(s);
     }
@@ -2836,7 +2874,9 @@ window.PeakLogicHmi = (function () {
     return String(raw ?? '').trim().toLowerCase() === '3d' ? '3d' : 'grid';
   }
 
-  function hmi3dFrameUrl() {
+  function hmi3dFrameUrl(screen) {
+    const fromScreen = String(screen?.facility3dUrl || '').trim();
+    if (fromScreen.startsWith('/') || /^https?:\/\//i.test(fromScreen)) return fromScreen;
     const url = String(
       hmiConfig?.layout?.facility3dUrl
       || lastSettings()?.hmi?.layout?.facility3dUrl
@@ -2846,13 +2886,14 @@ window.PeakLogicHmi = (function () {
   }
 
   function hmiLive3dLoadKey() {
-    return `3d|${hmi3dFrameUrl()}|display`;
+    const screen = viewedHmiScreen();
+    return `3d|${screen?.id || ''}|${hmi3dFrameUrl(screen)}|display`;
   }
 
   /** Force iframe load — lazy/hidden iframes stay blank after hard refresh otherwise. */
   function ensureHmi3dFrameLoaded(frameEl) {
     if (!frameEl) return;
-    const url = hmi3dFrameUrl();
+    const url = hmi3dFrameUrl(viewedHmiScreen());
     const resolved = frameEl.dataset.hmi3dSrc;
     if (resolved !== url || !frameEl.getAttribute('src')) {
       frameEl.dataset.hmi3dSrc = url;
@@ -2886,6 +2927,7 @@ window.PeakLogicHmi = (function () {
   }
 
   function composerPreviewUses3d(screen) {
+    if (String(screen?.facility3dUrl || '').trim()) return true;
     if (getComposerMode() !== '3d') return false;
     if (!screen) return true;
     return screen.id === 'screen_1' || screen.isHome === true;
@@ -2972,10 +3014,10 @@ window.PeakLogicHmi = (function () {
     return screenGridSpecFromScreen(screen);
   }
 
-  function ensureScreenGridDefaults(screen) {
+  function ensureScreenGridDefaults(screen, cfg = hmiConfig) {
     if (!screen) return;
-    if (hmiConfig?.layout) {
-      applyProjectLayoutToAllScreens(hmiConfig, hmiConfig.layout);
+    if (cfg?.layout) {
+      applyProjectLayoutToAllScreens(cfg, cfg.layout);
       return;
     }
     const g = screenGridSpecFromScreen(screen);
@@ -3759,7 +3801,9 @@ window.PeakLogicHmi = (function () {
   }
 
   function tileGridRoot(viewport) {
-    return viewport?.querySelector('.hmi-tile-grid') || null;
+    return viewport?.querySelector('.hmi-tile-grid')
+      || viewport?.querySelector('.hmi-screen-stage svg.hmi-screen-root, .hmi-screen-stage > svg')
+      || null;
   }
 
   function setupGridCell(col, row) {
@@ -5030,6 +5074,7 @@ window.PeakLogicHmi = (function () {
               classOff: 'hmi-off',
             };
             if (def.interaction) binding.interaction = def.interaction;
+            if (def.hoaValue != null) binding.hoaValue = def.hoaValue;
             if (def.colors) binding.colors = [...def.colors];
             if (def.flashStates) binding.flashStates = [...def.flashStates];
             cfg.bindings.push(binding);
@@ -5038,6 +5083,7 @@ window.PeakLogicHmi = (function () {
           if (tagId) binding.tagId = tagId;
           if (def.format) binding.format = def.format;
           if (def.interaction) binding.interaction = def.interaction;
+          if (def.hoaValue != null) binding.hoaValue = def.hoaValue;
           if (def.min != null) binding.min = def.min;
           if (def.max != null) binding.max = def.max;
           backfillBindingPaint(binding, def);
@@ -5068,7 +5114,7 @@ window.PeakLogicHmi = (function () {
     for (const s of cfg.screens || []) {
       if (s?.svg) s.svg = resolveHmiAssetUrl(s.svg);
       ensureScreenTiles(s);
-      ensureScreenGridDefaults(s);
+      ensureScreenGridDefaults(s, cfg);
       for (const tile of s.tiles || []) syncTileLegacyFields(tile);
     }
     if (window.HmiAssetPaths) window.HmiAssetPaths.migrateHmiConfigPaths(cfg);
@@ -5379,7 +5425,7 @@ window.PeakLogicHmi = (function () {
     markHmiConfigReady();
     hmiLoadedUrl = '';
     d().patchLastSettings?.({ hmi: JSON.parse(JSON.stringify(hmiConfig)) });
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
     syncComposerModeFields(getComposerMode());
     applyComposerModeUi();
     syncHmiLiveDisplayHint();
@@ -5387,13 +5433,15 @@ window.PeakLogicHmi = (function () {
     return true;
   }
 
-  function applyServerHmiSettingsForced(settingsHmi) {
+  function applyServerHmiSettingsForced(settingsHmi, opts = {}) {
     if (!settingsHmi?.screens?.length) return false;
     const normalized = normalizeServerHmi(settingsHmi);
-    const picked = pickRichestHmiConfig(normalized, hmiConfig);
+    const picked = opts.authoritative
+      ? normalized
+      : pickRichestHmiConfig(normalized, hmiConfig);
     if (!applyPickedHmiConfig(picked || normalized)) return false;
     hmiLoadedUrl = '';
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
     syncComposerModeFields(getComposerMode());
     applyComposerModeUi();
     syncHmiLiveDisplayHint();
@@ -5461,7 +5509,7 @@ window.PeakLogicHmi = (function () {
 
   function hoaCycleContext(cell) {
     if (cell?.closest('#hmi-setup-preview')) return 'setup';
-    if (cell?.closest('#hmi-viewport')) return 'live';
+    if (cell?.closest('#hmi-viewport, #hmi-room-popup, .hmi-room-popup')) return 'live';
     return null;
   }
 
@@ -5490,10 +5538,20 @@ window.PeakLogicHmi = (function () {
     HmiView.wireNavButtons?.(grid, onNavigate, onOpenRoom);
     const tagTypeFor = (tagId) => hmiBindingTagType(tagId);
     HmiView.wireHoaSwitches?.(grid, handleHoaSwitchCycle);
+    HmiView.wireHoaModeButtons?.(grid, bindings, tagTypeFor, handleHoaModeSelect);
     HmiView.wireBoolCommandButtons?.(grid, bindings, tagTypeFor, handleBoolCommandPulse);
     HmiView.wireBoolToggleButtons?.(grid, bindings, tagTypeFor, handleBoolCommandToggle);
     HmiView.wireState3Readouts?.(grid, bindings, tagTypeFor, handleHoaSwitchCycle);
     HmiView.wireParamEditFields?.(grid, bindings, tagTypeFor, handleParamEdit);
+  }
+
+  function writtenTagFromResponse(res, tagId) {
+    if (Array.isArray(res?.tags)) {
+      const hit = res.tags.find((t) => (t.tagId ?? t.id) === tagId);
+      if (hit) return hit;
+    }
+    if (res?.tag && (res.tag.tagId ?? res.tag.id) === tagId) return res.tag;
+    return null;
   }
 
   function patchLiveTagValue(tagId, value, res) {
@@ -5501,7 +5559,8 @@ window.PeakLogicHmi = (function () {
     if (!Array.isArray(live)) return;
     const idx = live.findIndex((t) => (t.tagId ?? t.id) === tagId);
     if (idx < 0) return;
-    if (res?.tag) live[idx] = { ...live[idx], ...res.tag };
+    const written = writtenTagFromResponse(res, tagId);
+    if (written) live[idx] = { ...live[idx], ...written };
     else {
       live[idx] = {
         ...live[idx],
@@ -5519,18 +5578,43 @@ window.PeakLogicHmi = (function () {
     refreshHmiBindings(hmiSvgRoot, screen?.id);
   }
 
-  function applyHmiTagWrite(tagId, value) {
-    const write = () => api.setTagValue({ tagId, value }).then((res) => {
-      patchLiveTagValue(tagId, value, res);
+  function applyHmiTagWrites(rows) {
+    const list = (Array.isArray(rows) ? rows : []).filter((row) => row && row.tagId);
+    if (!list.length) return Promise.resolve(null);
+    const user = window.__mvCloudUser;
+    const live = lastLive();
+    const policy = window.PeaklogicCloudHmiPolicy;
+    if (policy && user && window.PEAKLOGIC_BUILD?.deployment === 'cloud') {
+      const liveForPolicy = Array.isArray(live) ? live.map((t) => ({ ...t })) : [];
+      for (const row of list) {
+        if (!policy.canWriteHmiTag(user, row.tagId, row.value, liveForPolicy)) {
+          const msg = policy.hmiWriteDeniedReason(user, row.tagId, row.value, liveForPolicy);
+          window.alert(msg || 'HMI write not allowed for your role.');
+          return Promise.reject(new Error(msg || 'HMI write denied'));
+        }
+        const idx = liveForPolicy.findIndex((t) => (t.tagId ?? t.id) === row.tagId);
+        if (idx >= 0) liveForPolicy[idx] = { ...liveForPolicy[idx], value: row.value };
+        else liveForPolicy.push({ id: row.tagId, tagId: row.tagId, value: row.value });
+      }
+    }
+    const body = list.length === 1
+      ? { tagId: list[0].tagId, value: list[0].value }
+      : { tags: list };
+    const write = () => api.setTagValue(body).then((res) => {
+      for (const row of list) patchLiveTagValue(row.tagId, row.value, res);
       refreshLiveHmiAfterWrite();
       return res;
     });
-    if (/^TPO1_(ON_MIN|OFF_MIN|PULSE_REM)$/.test(String(tagId || ''))) {
+    if (list.some((row) => /^TPO1_(ON_MIN|OFF_MIN|PULSE_REM)$/.test(String(row.tagId || '')))) {
       return api.ensureTpoTags()
         .catch(() => null)
         .then(() => write());
     }
     return write();
+  }
+
+  function applyHmiTagWrite(tagId, value) {
+    return applyHmiTagWrites([{ tagId, value }]);
   }
 
   function tileGridFromRoot(root) {
@@ -5560,6 +5644,10 @@ window.PeakLogicHmi = (function () {
     }
   }
 
+  function handleHoaModeSelect(tagId, nextValue, el) {
+    handleHoaSwitchCycle(tagId, nextValue, el?.closest?.('.hmi-tile-cell') || el);
+  }
+
   function handleHoaSwitchCycle(tagId, nextValue, cell) {
     if (!tagId) return;
     const idx = Math.max(0, Math.min(2, Math.trunc(Number(nextValue) || 0)));
@@ -5585,39 +5673,61 @@ window.PeakLogicHmi = (function () {
     applyHmiTagWrite(tagId, idx)
       .catch((err) => {
         console.error(err);
+        showHmiLiveNotice(err.message || 'HMI write failed', true);
         if (hmiSvgRoot) refreshHmiBindings(hmiSvgRoot);
       });
   }
 
-  const hmiBoolPulseWriteChains = new Map();
+  let hmiBoolPulseWriteChain = Promise.resolve();
 
-  function queueHmiBoolPulseWrite(tagId, value) {
-    const prev = hmiBoolPulseWriteChains.get(tagId) || Promise.resolve();
-    const next = prev
-      .then(() => applyHmiTagWrite(tagId, value))
+  function queueHmiBoolPulseWrites(rows) {
+    const next = hmiBoolPulseWriteChain
+      .then(() => applyHmiTagWrites(rows))
       .catch((err) => {
         console.error(err);
+        showHmiLiveNotice(err.message || 'HMI write failed', true);
         if (hmiSvgRoot) refreshHmiBindings(hmiSvgRoot);
       });
-    hmiBoolPulseWriteChains.set(tagId, next);
-    next.finally(() => {
-      if (hmiBoolPulseWriteChains.get(tagId) === next) hmiBoolPulseWriteChains.delete(tagId);
-    });
+    hmiBoolPulseWriteChain = next.catch(() => {});
     return next;
   }
+
+  const hmiBoolPulseHoldMs = 400;
+  const hmiBoolPulseArmed = new Map();
 
   function handleBoolCommandPulse(tagId, pressed, el) {
     if (!tagId) return;
     const ctx = hmiInteractionContext(el);
+    const hoaTag = String(tagId).replace(/_(START|STOP)$/i, '_HOA');
+    const hoa = ctx === 'setup'
+      ? Number(hmiBindingTestValues[hoaTag] ?? liveNumericTagValue(hoaTag))
+      : liveNumericTagValue(hoaTag);
+    const remapped = HmiView.resolveHandModePumpWrite?.(tagId, pressed, hoa);
+    const writes = HmiView.resolvePumpCommandWrites?.(tagId, pressed, hoa)
+      || [{ tagId, value: !!pressed }];
     if (ctx === 'setup') {
       if (pressed) hmiBindingTestValues[tagId] = true;
       else delete hmiBindingTestValues[tagId];
+      if (remapped && !remapped.skip) hmiBindingTestValues[remapped.tagId] = remapped.value;
       const previewRoot = hmiSetupBindingRoot();
       if (previewRoot) refreshHmiBindings(previewRoot);
       return;
     }
     if (ctx !== 'live') return;
-    queueHmiBoolPulseWrite(tagId, !!pressed);
+    if (pressed && HmiView.motorCommandParts?.(tagId) && Math.trunc(hoa) !== 2) {
+      showHmiLiveNotice('Switch HOA to HAND before Start/Stop.');
+    }
+    if (pressed) {
+      hmiBoolPulseArmed.set(tagId, Date.now());
+      queueHmiBoolPulseWrites(writes);
+      return;
+    }
+    const armedAt = hmiBoolPulseArmed.get(tagId) || 0;
+    hmiBoolPulseArmed.delete(tagId);
+    const wait = Math.max(0, hmiBoolPulseHoldMs - (Date.now() - armedAt));
+    const release = () => queueHmiBoolPulseWrites(writes);
+    if (wait) setTimeout(release, wait);
+    else release();
   }
 
   function liveBoolTagValue(tagId) {
@@ -5647,8 +5757,12 @@ window.PeakLogicHmi = (function () {
       : liveNumericTagValue(tagId);
     const curStr = format === 'hhmm'
       ? (HmiView.hhmmFromMinutes?.(cur) || '00:00')
-      : String(Math.trunc(cur));
-    const label = format === 'hhmm' ? 'Time (HH:MM, 00:00–23:59)' : 'Minutes';
+      : (format === 'hoursFromMin'
+        ? (HmiView.hoursFromMinutes?.(cur) || '0.0')
+        : String(Math.trunc(cur)));
+    const label = format === 'hhmm'
+      ? 'Time (HH:MM, 00:00–23:59)'
+      : (format === 'hoursFromMin' ? 'Turnover hours (e.g. 4.0–12.0)' : 'Minutes');
     const raw = window.prompt(`${label}:`, curStr);
     if (raw == null) return;
     let next;
@@ -5656,6 +5770,12 @@ window.PeakLogicHmi = (function () {
       next = HmiView.parseHhmmToMinutes?.(raw);
       if (next == null) {
         window.alert('Invalid time. Use HH:MM (00:00–23:59).');
+        return;
+      }
+    } else if (format === 'hoursFromMin') {
+      next = HmiView.parseHoursToMinutes?.(raw);
+      if (next == null) {
+        window.alert('Invalid hours. Enter a number like 6.0 or 10.5');
         return;
       }
     } else {
@@ -5767,6 +5887,17 @@ window.PeakLogicHmi = (function () {
     refreshHmiAlarmSidebar();
     if (hmiAreaPopupScreenId) refreshHmiAreaPopupBindings();
     else if (hmiRoomPopupNum) refreshHmiRoomPopupBindings();
+    if (isHmiViewActive() && !(el?.closest?.('#hmi-setup-preview') && isHmiSetupOpen())) {
+      const opta = d().getLastOptaRuntime?.();
+      if (opta && opta.running === false) {
+        showHmiLiveNotice(
+          opta.programOk === false
+            ? 'Opta ST is not loaded — Download & Start the duplex program.'
+            : 'Opta ST was stopped — restarting scan so Auto follows the floats.',
+          true,
+        );
+      }
+    }
   }
 
   function isHmiEditorFocused() {
@@ -5854,6 +5985,10 @@ window.PeakLogicHmi = (function () {
     wrap.appendChild(iframe);
     viewport.appendChild(wrap);
     ensureHmi3dFrameLoaded(iframe);
+    iframe.addEventListener('error', () => {
+      if (token !== hmiLiveLoadToken) return;
+      wrap.innerHTML = `<p class="panel-hint err">Could not load 3D view (${esc(hmi3dFrameUrl(screen))}). Hard-refresh (Ctrl+Shift+R) or open Setup to switch composer mode.</p>`;
+    }, { once: true });
     iframe.addEventListener('load', () => syncHmiPollConfigTo3dFrame(), { once: false });
     syncHmiPollConfigTo3dFrame();
     if (token !== hmiLiveLoadToken) return;
@@ -6012,7 +6147,7 @@ window.PeakLogicHmi = (function () {
 
   function hmiTagOptions(sel) {
     const list = [...tagList()].sort((a, b) => a.id.localeCompare(b.id));
-    const fmt = window.PeakLogicTagDisplay?.formatTag || ((t) => t.id);
+    const fmt = window.PeaklogicTagDisplay?.formatTag || ((t) => t.id);
     return `<option value="">— tag —</option>${list.map((t) =>
       `<option value="${esc(t.id)}" ${t.id === sel ? 'selected' : ''}>${esc(fmt(t, list))} (${esc(t.type)})</option>`
     ).join('')}`;
@@ -6354,7 +6489,7 @@ window.PeakLogicHmi = (function () {
       }
     }
     syncComposerModeFields(layout.composerMode);
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
     syncLayoutPresetFromFields();
     syncLogicalPresetFromFields();
     syncDisplayPresetFromFields();
@@ -6643,20 +6778,20 @@ window.PeakLogicHmi = (function () {
     showHmiSetupMsg('Composites: one click places dial + needle + default bindings. Pick a REAL/INT tag, Test, then Test row.');
   }
 
-  function isPeakLogicStripChart3Pen(path) {
+  function isPeaklogicStripChart3Pen(path) {
     return /\/peaklogic\/strip_chart_3pen/i.test(String(path || ''));
   }
 
   function isUnifiedStripChartSvg(path) {
     const p = String(path || '');
     if (!/\/charts-trends\/strip-charts\//i.test(p)) return false;
-    if (isPeakLogicStripChart3Pen(p)) return false;
+    if (isPeaklogicStripChart3Pen(p)) return false;
     return /strip_chart/i.test(p);
   }
 
   function normalizeStripChartPlacementPath(path) {
     if (!isUnifiedStripChartSvg(path)) return path;
-    if (isPeakLogicStripChart3Pen(path)) return path;
+    if (isPeaklogicStripChart3Pen(path)) return path;
     return HMI_STRIP_CHART;
   }
 
@@ -6686,7 +6821,7 @@ window.PeakLogicHmi = (function () {
 
   function canonicalPushButtonPath(shape) {
     const s = PUSH_BUTTON_SHAPES.includes(shape) ? shape : 'square';
-    return `/hmi/svg/library/controls/push-buttons/peaklogic/pb-canonical/push_button_${s}.svg`;
+    return `/hmi/svg/library/controls/push-buttons/mv/pb-canonical/push_button_${s}.svg`;
   }
 
   function normalizePushButtonPlacementPath(path) {
@@ -7112,7 +7247,7 @@ window.PeakLogicHmi = (function () {
 
   function canonicalPilotLightPath(shape) {
     const s = PILOT_LIGHT_SHAPES.includes(shape) ? shape : 'round';
-    return `/hmi/svg/library/controls/pilot-lights/peaklogic/pl-canonical/pilot_light_${s}.svg`;
+    return `/hmi/svg/library/controls/pilot-lights/mv/pl-canonical/pilot_light_${s}.svg`;
   }
 
   function inferPilotLightKind(path) {
@@ -7421,7 +7556,7 @@ window.PeakLogicHmi = (function () {
     const list = [...tagList()]
       .filter((t) => isNumericHmiTagType(t.type))
       .sort((a, b) => a.id.localeCompare(b.id));
-    const fmt = window.PeakLogicTagDisplay?.formatTag || ((t) => t.id);
+    const fmt = window.PeaklogicTagDisplay?.formatTag || ((t) => t.id);
     return `<option value="">— tag —</option>${list.map((t) =>
       `<option value="${esc(t.id)}" ${t.id === sel ? 'selected' : ''}>${esc(fmt(t, list))} (${esc(t.type)})</option>`
     ).join('')}`;
@@ -9100,7 +9235,7 @@ window.PeakLogicHmi = (function () {
     } else {
       try { localStorage.removeItem(HMI_LIVE_STATUS_HIDDEN_KEY); } catch { /* ignore */ }
     }
-    syncLiveStatusBarVisibility();
+    syncHmiScreenBarVisibility();
     return layout;
   }
 
@@ -10089,6 +10224,7 @@ window.PeakLogicHmi = (function () {
         })
         .catch((e) => alert(e.message || String(e)));
     });
+    domGet('hmi-alarm-status')?.addEventListener('click', () => d().openAlarmsPopup?.());
     domGet('btn-hmi-reload')?.addEventListener('click', async () => {
       hmiLoadedUrl = '';
       ensureHmiConfigLoaded();
@@ -10109,9 +10245,8 @@ window.PeakLogicHmi = (function () {
       if (!btn) return;
       navigateHmiView(btn.getAttribute('data-hmi-nav'));
     });
-    domGet('btn-hmi-hide-status')?.addEventListener('click', hideLiveStatusBar);
-    domGet('btn-hmi-show-status')?.addEventListener('click', showLiveStatusBar);
-    syncLiveStatusBarVisibility();
+    domGet('btn-hmi-toggle-screen-bar')?.addEventListener('click', toggleHmiScreenBar);
+    syncHmiScreenBarVisibility();
     domGet('hmi-test-mode')?.addEventListener('change', (e) => {
       persistHmiTestMode(e.target.checked).catch(console.error);
     });
@@ -10491,7 +10626,7 @@ window.PeakLogicHmi = (function () {
     domGet('btn-hmi-save-header')?.addEventListener('click', () => {
       applyHmiSettings().catch(() => { /* alert in applyHmiSettings */ });
     });
-    window.PeakLogicTagDisplay?.bindAll(document);
+    window.PeaklogicTagDisplay?.bindAll(document);
     window.addEventListener('peaklogic-tag-display', () => {
       if (domGet('hmi-bindings-table')) renderHmiBindingsTable();
       updateHmiStripChartPanel();
@@ -10587,11 +10722,10 @@ window.PeakLogicHmi = (function () {
     hmiDirty = false;
     invalidateHmiConfigReady();
     const settingsHmi = data?.settings?.hmi;
-    const picked = pickRichestHmiConfig(settingsHmi, hmiConfig);
-    if (picked && applyPickedHmiConfig(picked)) {
-      /* applied richest snapshot */
-    } else if (settingsHmi?.screens?.length) {
-      applyServerHmiSettingsForced(settingsHmi);
+    if (settingsHmi?.screens?.length) {
+      // Project open/load must use the server snapshot — not a stale in-memory HMI
+      // with more screens from the previous project (pickRichest would keep that).
+      applyServerHmiSettingsForced(settingsHmi, { authoritative: true });
     } else {
       hmiConfig = demoHmiConfig();
       markHmiConfigReady();
@@ -10611,7 +10745,7 @@ window.PeakLogicHmi = (function () {
     if (isHmiViewActive()) {
       hmiViewScreenId = hmiConfig.activeScreen || startingHmiScreenId();
       renderHmiNavBar();
-      syncLiveStatusBarVisibility();
+      syncHmiScreenBarVisibility();
       loadHmiScreen(true).catch(console.error);
     }
     if (isPopupOpen('project')) updateHomeScreenLabel();
@@ -10710,9 +10844,16 @@ window.PeakLogicHmi = (function () {
     loadHmiAssets(true).catch(() => { /* preload; setup shows error on open if needed */ });
   }
 
-  function openFromUrlParam(screenId) {
+  function openFromUrlParam(screenId, opts = {}) {
     const sid = String(screenId || '').trim();
     if (!sid || !hmiConfig.screens.some((s) => s.id === sid)) return;
+    if (opts.force) {
+      hmiViewScreenId = sid;
+      hmiLoadedUrl = '';
+      renderHmiNavBar();
+      loadHmiScreen(true).catch(console.error);
+      return;
+    }
     navigateHmiView(sid);
   }
 

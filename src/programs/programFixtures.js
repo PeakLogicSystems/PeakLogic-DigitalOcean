@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { ST_DIR } = require('../config');
 const { parseProgram, collectProgramTagRefs } = require('../engine/parser');
-const { defaultMetaForId } = require('../fleet/mqttOptaProgram');
+const { defaultMetaForId } = require('../parc/mqttOptaProgram');
+const { applyDefaultLabel } = require('../tags/tagLabels');
 
 const FIXTURE_DIR = path.join(ST_DIR, 'fixtures');
 
@@ -13,6 +14,66 @@ const PROGRAM_FIXTURE_OVERRIDES = {
   'logic/21_all_st_features_memory.st': {
     tagsFile: 'tags.all_st_features.json',
     driversFile: 'drivers.logic.json',
+  },
+  'logic/22_motor_hoa.st': {
+    tagsFile: 'tags.motor_hoa.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/23_tpo_irrigation.st': {
+    tagsFile: 'tags.tpo_irrigation.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/24_motor_tpo_combined.st': {
+    tagsFile: 'tags.motor_tpo_combined.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/26_alternator_pumps.st': {
+    tagsFile: 'tags.alternator_pumps.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/27_alternator_2pump.st': {
+    tagsFile: 'tags.alternator_2pump.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/28_alternator_triplex.st': {
+    tagsFile: 'tags.alternator_triplex.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/29_reversing_motor.st': {
+    tagsFile: 'tags.reversing_motor.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/30_pool_controller.st': {
+    tagsFile: 'tags.pool_controller.json',
+    driversFile: 'drivers.pool_controller.json',
+  },
+  'logic/31_pool_lighting.st': {
+    tagsFile: 'tags.pool_lighting.json',
+    driversFile: 'drivers.pool_controller.json',
+  },
+  'logic/32_single_atu.st': {
+    tagsFile: 'tags.single_atu.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/33_dual_atu.st': {
+    tagsFile: 'tags.dual_atu.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/34_quad_atu.st': {
+    tagsFile: 'tags.quad_atu.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/35_lift_simplex.st': {
+    tagsFile: 'tags.lift_simplex.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'logic/36_duplex_lift_station.st': {
+    tagsFile: 'tags.duplex_lift_station.json',
+    driversFile: 'drivers.logic.json',
+  },
+  'opta/08_triplex_floats.st': {
+    tagsFile: 'tags.opta_triplex.json',
+    driversFile: 'drivers.opta.json',
   },
 };
 
@@ -24,7 +85,7 @@ function readProgramSource(rel) {
 
 function driverIdForFixtures(drivers) {
   const list = Array.isArray(drivers) ? drivers : [];
-  if (list.some((d) => d.type === 'mqtt_fleet' && d.enabled !== false)) return 'opta_mqtt_st';
+  if (list.some((d) => d.type === 'mqtt_parc' && d.enabled !== false)) return 'opta_mqtt_st';
   if (list.some((d) => d.id === 'opta_eth' || d.type === 'opta_remote')) return 'opta_eth';
   if (list.some((d) => d.id === 'opta_rtu')) return 'opta_rtu';
   return null;
@@ -49,7 +110,7 @@ function resolveProgramTags(rel, baseTags, drivers = []) {
   for (const id of refs) {
     const existing = byId.get(id);
     if (existing) {
-      const row = { ...existing };
+      const row = applyDefaultLabel({ ...existing });
       if (driverId && norm.startsWith('opta/')) row.driverId = driverId;
       out.push(row);
     } else {
@@ -73,7 +134,7 @@ function fixtureFilesForProgram(rel, drivers = []) {
   }
   if (norm.startsWith('opta/') || norm.startsWith('opta-mqtt/')) {
     const list = Array.isArray(drivers) ? drivers : [];
-    const mqtt = list.some((d) => d.type === 'mqtt_fleet' && d.enabled !== false);
+    const mqtt = list.some((d) => d.type === 'mqtt_parc' && d.enabled !== false);
     const eth = list.some((d) => d.id === 'opta_eth' || d.type === 'opta_remote');
     if (mqtt) {
       return { tagsFile: 'tags.opta_mqtt_st.json', driversFile: 'drivers.opta_mqtt_st.json' };

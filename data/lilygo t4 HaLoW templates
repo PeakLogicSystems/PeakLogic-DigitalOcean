@@ -1,0 +1,52 @@
+Asssited Living Facility requirements
+
+
+template #1-Mechanical room:
+a. Pulse in for incoming water flow meter
+b. Temp  Water Heater 1-Thermistor 
+c. Temp Water Heater 2-Thermistor
+d. Temp Water Heater 3-Thermistor
+e. Gas flow meter-Pulse input
+f.Water Heater Current Sensor #1
+g.Water Heater Current Sensor #2
+h.Water HeaterCurrent Sensor #3
+i.Rope leak detector
+
+template #2-Client room:
+a. Temp LR 1-Thermistor 
+b. Temp BR 2-Thermistor
+c. Temp 3-Thermistor
+d.A/C Blower Current Sensor #1
+e.A/C Blower Current Sensor #2
+f.Stove Current Sensor #3
+g.A/C pan Rope leak detector
+
+template #3-Client Bath room:
+a. Pulse in for toilet water flow meter
+b. Tub Showerleak detector
+
+template #4-Roof top A/C unit:
+a. Temp High side 1-Thermistor 
+b. Temp Low side  2-Thermistor
+d.A/C Compressor Current Sensor #1
+e.A/C Fan Current Sensor #2
+f.A/C pan Rope leak detector
+
+template #5-Kitchen:
+a. Pulse in for incoming water flow meter
+b. Temp  Refer 1-Thermistor 
+c. Temp Freezer 2-Thermistor
+
+template #6-Kitchen:
+a. Rope leak detector sink #1
+b. Pulse in for sink #1 water flow meter
+c. Rope leak detector sink #1
+d. Pulse in for sink #1 water flow meter
+e. Rope leak detector sink #1
+f. Pulse in for sink #1 water flow meter
+g. Rope leak detector sink #1
+h. Pulse in for sink #1 water flow meter
+i. Rope leak detector sink #1
+j. Pulse in for sink #1 water flow meter
+k. Rope leak detector sink #1
+l. Pulse in for sink #1 water flow meter

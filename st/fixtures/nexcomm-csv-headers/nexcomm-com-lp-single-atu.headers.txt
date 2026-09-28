@@ -1,0 +1,19 @@
+﻿datelogged
+High Level Float [System 1]
+Blower 1 [System 1]
+Blower 2 [System 1]
+Pressure Alarm 1 [System 1]
+Pressure Alarm 2 [System 1]
+Motor Run 1 [System 1]
+Motor Run 2 [System 1]
+Motor 1 Starts [System 1]
+Motor 1 Run Time [System 1]
+Motor 2 Starts [System 1]
+Motor 2 Run Time [System 1]
+Total Flow previous 1Hr [System 1]
+CT 1
+CT 2
+CT 3
+AIN1
+High Water Alarm
+DIN16

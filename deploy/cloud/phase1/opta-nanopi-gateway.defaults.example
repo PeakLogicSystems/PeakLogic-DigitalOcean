@@ -1,0 +1,11 @@
+# Copy to opta-nanopi-gateway.defaults (gitignored locally) for NanoPi gateway field builds.
+# Opta connects to local Mosquitto on the NanoPi — NOT directly to cloud.
+# Enable with -DMV_MQTT_CLOUD_PRESET=1 in Arduino IDE compiler flags.
+#
+# See deploy/cloud/phase1/NANOPI-OPTA-GATEWAY-MQTT.md
+
+MV_MQTT_SKETCH_BROKER_DEFAULT=192.168.1.1
+MV_MQTT_SKETCH_PORT_DEFAULT=1883
+MV_MQTT_SKETCH_USER_DEFAULT=
+MV_MQTT_SKETCH_PASS_DEFAULT=
+MV_MQTT_SKETCH_TLS_DEFAULT=0

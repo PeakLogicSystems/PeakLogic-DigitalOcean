@@ -52,9 +52,9 @@
       "elementId": "orp_pv",
       "property": "text",
       "tagRole": "orpPv",
-      "format": "int",
+      "format": "fixed1",
       "min": 0,
-      "max": 1200
+      "max": 10
     },
     {
       "elementId": "cond_pv",
@@ -68,10 +68,10 @@
       "elementId": "orp_sp_value",
       "property": "text",
       "tagRole": "orpSp",
-      "format": "int",
+      "format": "fixed1",
       "interaction": "edit",
-      "min": 400,
-      "max": 900
+      "min": 0,
+      "max": 10
     },
     {
       "elementId": "btn_cl2_auto",

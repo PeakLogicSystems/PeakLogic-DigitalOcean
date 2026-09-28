@@ -1,0 +1,30 @@
+[Unit]
+Description=PeakLogic edge runtime (port 3090 — optional client/appliance API hub)
+Documentation=https://github.com/your-org/peaklogic
+After=network-online.target mongod.service mosquitto.service peaklogic-saas.service
+Wants=network-online.target
+Requires=mongod.service mosquitto.service
+
+[Service]
+Type=simple
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_INSTALL_DIR@
+EnvironmentFile=-/etc/peaklogic/runtime.env
+Environment=NODE_OPTIONS=
+Environment=NODE_ENV=production
+Environment=PEAKLOGIC_DEPLOYMENT=cloud
+Environment=PEAKLOGIC_PRODUCT=cloud
+Environment=PORT=3090
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=false
+ReadWritePaths=/var/lib/peaklogic @PEAKLOGIC_INSTALL_DIR@
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

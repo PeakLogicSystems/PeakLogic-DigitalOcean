@@ -1,0 +1,221 @@
+{
+  "tenant": {
+    "name": "PeakLogic ATU Service",
+    "slug": "atu-cloud",
+    "tenantId": "atu-cloud"
+  },
+  "sizingGuide": {
+    "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
+    "uplink": "cellular_mqtt",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
+    "atuToLiftPairing": [
+      {
+        "atu": "single_atu",
+        "typicalLift": "simplex or dual_duplex",
+        "note": "Residential 500 GPD often uses one single ATU only"
+      },
+      {
+        "atu": "dual_atu",
+        "typicalLift": "dual_duplex",
+        "note": "Two treatment trains; paired duplex lift for equalization"
+      },
+      {
+        "atu": "quad_atu",
+        "typicalLift": "simplex × N or dual_duplex × N",
+        "note": "Commercial sites scale lift count with collection network"
+      }
+    ],
+    "scaleExamples": [
+      {
+        "designGpd": 500,
+        "atu": [
+          {
+            "type": "single_atu",
+            "count": 1
+          }
+        ],
+        "lifts": []
+      },
+      {
+        "designGpd": 2500,
+        "atu": [
+          {
+            "type": "dual_atu",
+            "count": 1
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 4
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "profile": "dwts",
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 2,
+            "gpdEach": 5000,
+            "modules": "4× 1,250 gal parallel + drip"
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20,
+            "role": "collection",
+            "note": "10 simplex lifts per zone → duplex booster"
+          },
+          {
+            "type": "dual_duplex",
+            "count": 2,
+            "role": "booster",
+            "note": "Zone booster → trash tank → parallel ATU"
+          }
+        ]
+      }
+    ]
+  },
+  "stationTypes": {
+    "simplex": {
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "levelTag": "LVL_HIGH",
+      "pumps": 1,
+      "category": "lift",
+      "role": "lift"
+    },
+    "dual_duplex": {
+      "templateId": "lift_station_dual_duplex",
+      "defaultProgram": "logic/36_duplex_lift_station.st",
+      "alarmTag": "ALT_FAULT",
+      "levelTag": "TANK_LVL",
+      "pumps": 2,
+      "category": "lift",
+      "role": "lift",
+      "ioBaseOnly": true
+    },
+    "triplex": {
+      "templateId": "lift_station_triplex",
+      "defaultProgram": "logic/28_alternator_triplex.st",
+      "alarmTag": "TPX_ALM",
+      "levelTag": "TPX_LEVEL",
+      "pumps": 3,
+      "category": "lift",
+      "role": "lift"
+    },
+    "single_atu": {
+      "templateId": "lift_station_single_atu",
+      "defaultProgram": "logic/32_single_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "trains": 1,
+      "category": "atu",
+      "role": "atu",
+      "typicalGpd": "250–750"
+    },
+    "dual_atu": {
+      "templateId": "lift_station_dual_atu",
+      "defaultProgram": "logic/33_dual_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2"
+      ],
+      "levelTag": "LVL_HIGH",
+      "trains": 2,
+      "category": "atu",
+      "role": "atu",
+      "typicalGpd": "500–1500"
+    },
+    "quad_atu": {
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "trains": 4,
+      "category": "atu",
+      "role": "atu",
+      "typicalGpd": "1000–4000"
+    }
+  },
+  "profiles": {
+    "residential": {
+      "profileId": "residential-500gpd",
+      "name": "Oak Lane Residence",
+      "designGpd": 500,
+      "deviceCount": 1,
+      "cloudProject": "atu-cloud-residential",
+      "systemType": "atu_fleet",
+      "atu": [
+        "single_atu"
+      ],
+      "lifts": 0,
+      "step": 0,
+      "collection": 0,
+      "booster": 0
+    },
+    "commercial": {
+      "profileId": "commercial-10000gpd",
+      "name": "Harbor Commerce Park",
+      "designGpd": 10000,
+      "deviceCount": 24,
+      "cloudProject": "atu-cloud-commercial",
+      "systemType": "atu_fleet",
+      "atu": [
+        "quad_atu",
+        "quad_atu",
+        "quad_atu",
+        "quad_atu"
+      ],
+      "lifts": 20,
+      "step": 0,
+      "collection": 0,
+      "booster": 0
+    },
+    "dwts": {
+      "profileId": "dwts-10000gpd",
+      "name": "Magnolia Village DWTS",
+      "designGpd": 10000,
+      "deviceCount": 24,
+      "cloudProject": "atu-cloud-dwts",
+      "systemType": "dwts",
+      "atu": [
+        "quad_atu",
+        "quad_atu"
+      ],
+      "lifts": 22,
+      "step": 20,
+      "collection": 20,
+      "booster": 2
+    }
+  }
+}

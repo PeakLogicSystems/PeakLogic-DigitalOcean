@@ -1,0 +1,339 @@
+{
+  "product": "nexcomm-lp-com-dual-atu",
+  "templateId": "nexcomm_lp_com_dual_atu",
+  "sourceCsv": "st/fixtures/nexcomm-csv/nexcomm-lp-com-dual-atu.csv",
+  "rowCount": 66,
+  "fieldCount": 33,
+  "fields": [
+    {
+      "id": "HIGH_LEVEL_FLOAT",
+      "label": "High Level Float [System 1]",
+      "csvColumn": "High Level Float [System 1]",
+      "nexus": "High Level Float [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:high_level_float",
+      "sample": "Off"
+    },
+    {
+      "id": "HIGH_LEVEL_FLOAT_2",
+      "label": "High Level Float [System 2]",
+      "csvColumn": "High Level Float [System 2]",
+      "nexus": "High Level Float [System 2]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:high_level_float_2",
+      "sample": "On"
+    },
+    {
+      "id": "BLOWER_1",
+      "label": "Blower 1 [System 1]",
+      "csvColumn": "Blower 1 [System 1]",
+      "nexus": "Blower 1 [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:blower_1",
+      "sample": "On"
+    },
+    {
+      "id": "BLOWER_1_2",
+      "label": "Blower 1 [System 2]",
+      "csvColumn": "Blower 1 [System 2]",
+      "nexus": "Blower 1 [System 2]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:blower_1_2",
+      "sample": "Off"
+    },
+    {
+      "id": "BLOWER_2",
+      "label": "Blower 2 [System 1]",
+      "csvColumn": "Blower 2 [System 1]",
+      "nexus": "Blower 2 [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:blower_2",
+      "sample": "Off"
+    },
+    {
+      "id": "BLOWER_2_2",
+      "label": "Blower 2 [System 2]",
+      "csvColumn": "Blower 2 [System 2]",
+      "nexus": "Blower 2 [System 2]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:blower_2_2",
+      "sample": "Off"
+    },
+    {
+      "id": "PRESSURE_ALARM_1",
+      "label": "Pressure Alarm 1 [System 1]",
+      "csvColumn": "Pressure Alarm 1 [System 1]",
+      "nexus": "Pressure Alarm 1 [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pressure_alarm_1",
+      "sample": "Off"
+    },
+    {
+      "id": "PRESSURE_ALARM_1_2",
+      "label": "Pressure Alarm 1 [System 2]",
+      "csvColumn": "Pressure Alarm 1 [System 2]",
+      "nexus": "Pressure Alarm 1 [System 2]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pressure_alarm_1_2",
+      "sample": "Off"
+    },
+    {
+      "id": "REMOTE_PUMP_PANEL_1_ALARM",
+      "label": "Remote Pump Panel 1 Alarm",
+      "csvColumn": "Remote Pump Panel 1 Alarm",
+      "nexus": "Remote Pump Panel 1 Alarm",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:remote_pump_panel_1_alarm",
+      "sample": "On"
+    },
+    {
+      "id": "REMOTE_PUMP_PANEL_2_ALARM",
+      "label": "Remote Pump Panel 2 Alarm",
+      "csvColumn": "Remote Pump Panel 2 Alarm",
+      "nexus": "Remote Pump Panel 2 Alarm",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:remote_pump_panel_2_alarm",
+      "sample": "On"
+    },
+    {
+      "id": "PUMP_MOTOR_RUN_1",
+      "label": "Pump Motor Run 1 [System 1]",
+      "csvColumn": "Pump Motor Run 1 [System 1]",
+      "nexus": "Pump Motor Run 1 [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump_motor_run_1",
+      "sample": "Off"
+    },
+    {
+      "id": "PUMP_MOTOR_RUN_1_2",
+      "label": "Pump Motor Run 1 [System 2]",
+      "csvColumn": "Pump Motor Run 1 [System 2]",
+      "nexus": "Pump Motor Run 1 [System 2]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump_motor_run_1_2",
+      "sample": "On"
+    },
+    {
+      "id": "PUMP_MOTOR_RUN_2",
+      "label": "Pump Motor Run 2 [System 1]",
+      "csvColumn": "Pump Motor Run 2 [System 1]",
+      "nexus": "Pump Motor Run 2 [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump_motor_run_2",
+      "sample": "Off"
+    },
+    {
+      "id": "PUMP_MOTOR_RUN_2_2",
+      "label": "Pump Motor Run 2 [System 2]",
+      "csvColumn": "Pump Motor Run 2 [System 2]",
+      "nexus": "Pump Motor Run 2 [System 2]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:pump_motor_run_2_2",
+      "sample": "On"
+    },
+    {
+      "id": "DIN15",
+      "label": "DIN15",
+      "csvColumn": "DIN15",
+      "nexus": "DIN15",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:din15",
+      "sample": "0"
+    },
+    {
+      "id": "DIN16",
+      "label": "DIN16",
+      "csvColumn": "DIN16",
+      "nexus": "DIN16",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:din16",
+      "sample": "0"
+    },
+    {
+      "id": "AIN1",
+      "label": "AIN1",
+      "csvColumn": "AIN1",
+      "nexus": "AIN1",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:ain1",
+      "sample": "0"
+    },
+    {
+      "id": "PUMP_MOTOR_2_AMPS",
+      "label": "Pump Motor 2 Amps [System 1]",
+      "csvColumn": "Pump Motor 2 Amps [System 1]",
+      "nexus": "Pump Motor 2 Amps [System 1]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_2_amps",
+      "sample": "0.04131301115241636"
+    },
+    {
+      "id": "PUMP_MOTOR_1_AMPS",
+      "label": "Pump Motor 1 Amps [System 1]",
+      "csvColumn": "Pump Motor 1 Amps [System 1]",
+      "nexus": "Pump Motor 1 Amps [System 1]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_1_amps",
+      "sample": "0.0147910780669145"
+    },
+    {
+      "id": "PUMP_MOTOR_1_AMPS_2",
+      "label": "Pump Motor 1 Amps [System 2]",
+      "csvColumn": "Pump Motor 1 Amps [System 2]",
+      "nexus": "Pump Motor 1 Amps [System 2]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_1_amps_2",
+      "sample": "7.9361784386617105"
+    },
+    {
+      "id": "PUMP_MOTOR_2_AMPS_2",
+      "label": "Pump Motor 2 Amps [System 2]",
+      "csvColumn": "Pump Motor 2 Amps [System 2]",
+      "nexus": "Pump Motor 2 Amps [System 2]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_2_amps_2",
+      "sample": "2.0064862453531602"
+    },
+    {
+      "id": "BLOWER_2_AMPS",
+      "label": "Blower 2 Amps",
+      "csvColumn": "Blower 2 Amps",
+      "nexus": "Blower 2 Amps",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:blower_2_amps",
+      "sample": "14.434052044609667"
+    },
+    {
+      "id": "BLOWER_1_AMPS",
+      "label": "Blower 1 Amps",
+      "csvColumn": "Blower 1 Amps",
+      "nexus": "Blower 1 Amps",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:blower_1_amps",
+      "sample": "14.266249814126397"
+    },
+    {
+      "id": "PUMP_MOTOR_1_STARTS",
+      "label": "Pump Motor 1 Starts [System 1]",
+      "csvColumn": "Pump Motor 1 Starts [System 1]",
+      "nexus": "Pump Motor 1 Starts [System 1]",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:pump_motor_1_starts",
+      "sample": "4781"
+    },
+    {
+      "id": "PUMP_MOTOR_1_RUN_TIME",
+      "label": "Pump Motor 1 Run Time [System 1]",
+      "csvColumn": "Pump Motor 1 Run Time [System 1]",
+      "nexus": "Pump Motor 1 Run Time [System 1]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_1_run_time",
+      "sample": "2370.244722222222"
+    },
+    {
+      "id": "PUMP_MOTOR_2_STARTS",
+      "label": "Pump Motor 2 Starts [System 1]",
+      "csvColumn": "Pump Motor 2 Starts [System 1]",
+      "nexus": "Pump Motor 2 Starts [System 1]",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:pump_motor_2_starts",
+      "sample": "3784"
+    },
+    {
+      "id": "PUMP_MOTOR_2_RUN_TIME",
+      "label": "Pump Motor 2 Run Time [System 1]",
+      "csvColumn": "Pump Motor 2 Run Time [System 1]",
+      "nexus": "Pump Motor 2 Run Time [System 1]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_2_run_time",
+      "sample": "1295.6988888888889"
+    },
+    {
+      "id": "TOTAL_FLOW_PREVIOUS_1HR",
+      "label": "Total Flow previous 1Hr [System 1]",
+      "csvColumn": "Total Flow previous 1Hr [System 1]",
+      "nexus": "Total Flow previous 1Hr [System 1]",
+      "reg": null,
+      "type": "BOOL",
+      "payloadTemplate": "json:total_flow_previous_1hr",
+      "sample": "0"
+    },
+    {
+      "id": "PUMP_MOTOR_1_STARTS_2",
+      "label": "Pump Motor 1 Starts [System 2]",
+      "csvColumn": "Pump Motor 1 Starts [System 2]",
+      "nexus": "Pump Motor 1 Starts [System 2]",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:pump_motor_1_starts_2",
+      "sample": "3667"
+    },
+    {
+      "id": "PUMP_MOTOR_1_RUN_TIME_2",
+      "label": "Pump Motor 1 Run Time [System 2]",
+      "csvColumn": "Pump Motor 1 Run Time [System 2]",
+      "nexus": "Pump Motor 1 Run Time [System 2]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_1_run_time_2",
+      "sample": "1417.0758333333333"
+    },
+    {
+      "id": "PUMP_MOTOR_2_STARTS_2",
+      "label": "Pump Motor 2 Starts [System 2]",
+      "csvColumn": "Pump Motor 2 Starts [System 2]",
+      "nexus": "Pump Motor 2 Starts [System 2]",
+      "reg": null,
+      "type": "INT",
+      "payloadTemplate": "json:pump_motor_2_starts_2",
+      "sample": "3635"
+    },
+    {
+      "id": "PUMP_MOTOR_2_RUN_TIME_2",
+      "label": "Pump Motor 2 Run Time [System 2]",
+      "csvColumn": "Pump Motor 2 Run Time [System 2]",
+      "nexus": "Pump Motor 2 Run Time [System 2]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:pump_motor_2_run_time_2",
+      "sample": "1179.7752777777778"
+    },
+    {
+      "id": "TOTAL_FLOW_PREVIOUS_1HR_2",
+      "label": "Total Flow previous 1Hr [System 2]",
+      "csvColumn": "Total Flow previous 1Hr [System 2]",
+      "nexus": "Total Flow previous 1Hr [System 2]",
+      "reg": null,
+      "type": "REAL",
+      "payloadTemplate": "json:total_flow_previous_1hr_2",
+      "sample": "2003240.7499999998"
+    }
+  ]
+}

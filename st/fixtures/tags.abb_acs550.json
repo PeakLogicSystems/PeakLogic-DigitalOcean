@@ -1,0 +1,26 @@
+[
+  { "id": "MOTOR1_HOA", "label": "VFD HOA", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_STA", "label": "VFD status", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_START", "label": "VFD start", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_STOP", "label": "VFD stop", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_RESET", "label": "VFD fault reset", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_OFFLINE", "label": "VFD offline", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_RUN", "label": "VFD run cmd", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "MOTOR1_HRS", "label": "VFD run hours", "type": "REAL", "role": "memory", "value": 0 },
+  { "id": "MOTOR1_STARTS", "label": "VFD starts", "type": "INT", "role": "memory", "value": 0, "wordWidth": 16 },
+  { "id": "MOTOR1_CNTR", "label": "VFD start counter", "type": "COUNTER", "role": "memory", "value": 0, "preset": 999999, "mode": "CTU" },
+  { "id": "ACS_SPEED_PCT", "label": "VFD speed %", "type": "INT", "role": "memory", "value": 50, "wordWidth": 16 },
+  { "id": "VPB1", "label": "Auto run permissive", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "ACS_CW", "type": "INT", "role": "output", "value": 1150, "wordWidth": 16, "signed": false, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 0 } },
+  { "id": "ACS_REF1", "type": "INT", "role": "output", "value": 10000, "wordWidth": 16, "signed": true, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 1 } },
+  { "id": "ACS_REF2", "type": "INT", "role": "output", "value": 0, "wordWidth": 16, "signed": true, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 2 } },
+  { "id": "ACS_SW", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 3 } },
+  { "id": "ACS_FREQ_HZ", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 4 } },
+  { "id": "ACS_CURR_A", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 5 } },
+  { "id": "ACS_ACT3", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": true, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 6 } },
+  { "id": "ACS_ACT4", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": true, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 7 } },
+  { "id": "ACS_PWR_KW", "type": "REAL", "role": "input", "value": 0, "signed": true, "scale": 0.1, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 105 } },
+  { "id": "ACS_DCBUS_V", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 106 } },
+  { "id": "ACS_FAULT", "type": "INT", "role": "input", "value": 0, "wordWidth": 16, "signed": false, "driverId": "acs550", "driverAddress": { "table": "holding", "address": 400 } }
+]

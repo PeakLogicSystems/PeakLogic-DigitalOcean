@@ -3,7 +3,7 @@
 const express = require('express');
 const { version: APP_VERSION } = require('../../package.json');
 const { asyncHandler } = require('../util/http');
-const { PLATFORM_ADMIN_KEY } = require('../config');
+const { isPlatformAdminConfigured, platformAdminKeyMatches } = require('../config');
 const {
   attachPlatformAdmin,
   requirePlatformAdminWeb,
@@ -15,20 +15,19 @@ const {
   getPlatformAdminCookie,
 } = require('../auth/platformAdminSession');
 const tenantService = require('../services/tenantService');
-const { CMMS_PLANS } = require('../tenants/cmmsEntitlement');
-const { TENANT_PLANS } = require('../tenants/tenantPlan');
 
 const router = express.Router();
 router.use(attachPlatformAdmin);
 
 function adminLocals(req, extra = {}) {
   return {
-    title: extra.title || 'Platform Admin',
+    title: extra.title || 'Admin',
     version: APP_VERSION,
     activeNav: extra.activeNav || '',
     error: extra.error || null,
     success: extra.success || null,
     ...extra,
+    form: extra.form || {},
   };
 }
 
@@ -41,25 +40,28 @@ router.get('/', (req, res) => {
 
 router.get('/login', (req, res) => {
   if (req.platformAdmin) return res.redirect('/admin/tenants');
-  if (!PLATFORM_ADMIN_KEY) {
+  if (!isPlatformAdminConfigured()) {
     return res.status(503).render('admin/login', adminLocals(req, {
-      title: 'Platform Admin',
-      error: 'PLATFORM_ADMIN_KEY is not configured on this server.',
+      title: 'Admin',
+      error: 'PLATFORM_ADMIN_KEY is not set on this server. Edit /etc/peaklogic/saas.env, set a real key (openssl rand -hex 24), then: sudo systemctl restart peaklogic-saas',
     }));
   }
-  res.render('admin/login', adminLocals(req, { title: 'Platform Admin Login' }));
+  res.render('admin/login', adminLocals(req, {
+    title: 'Login',
+    message: req.query.message || null,
+  }));
 });
 
 router.post('/login', (req, res) => {
-  if (!PLATFORM_ADMIN_KEY) {
+  if (!isPlatformAdminConfigured()) {
     return res.status(503).render('admin/login', adminLocals(req, {
-      error: 'PLATFORM_ADMIN_KEY is not configured.',
+      error: 'PLATFORM_ADMIN_KEY is not configured in /etc/peaklogic/saas.env.',
     }));
   }
-  const key = String(req.body.platformAdminKey || '').trim();
-  if (key !== PLATFORM_ADMIN_KEY) {
+  const key = String(req.body.platformAdminKey || '').trim().replace(/\r/g, '');
+  if (!platformAdminKeyMatches(key)) {
     return res.render('admin/login', adminLocals(req, {
-      error: 'Invalid platform admin key.',
+      error: 'Invalid platform admin key. Edit /etc/peaklogic/saas.env on this server (not /home/peaklogic/saas.env), set PLATFORM_ADMIN_KEY=your-key with no quotes, then: sudo systemctl restart peaklogic-saas',
     }));
   }
   setPlatformAdminCookie(res, req);
@@ -68,7 +70,7 @@ router.post('/login', (req, res) => {
 
 router.get('/logout', (req, res) => {
   clearPlatformAdminCookie(res, req);
-  res.redirect('/admin/login');
+  res.redirect('/admin/login?message=Signed%20out');
 });
 
 router.get('/tenants', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
@@ -82,30 +84,28 @@ router.get('/tenants', requirePlatformAdminWeb, asyncHandler(async (req, res) =>
 
 router.get('/tenants/new', requirePlatformAdminWeb, (req, res) => {
   res.render('admin/tenant-new', adminLocals(req, {
-    title: 'Create tenant',
+    title: 'New customer',
     activeNav: 'new',
-    cmmsPlans: CMMS_PLANS.filter((p) => p !== 'none'),
   }));
 });
 
 router.post('/tenants', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
-  const cmmsEnabled = req.body.cmmsEnabled === 'on' || req.body.cmmsEnabled === 'true';
+  const b = req.body || {};
+  const cmmsEnabled = b.cmmsEnabled === 'on' || b.cmmsEnabled === 'true';
+
   const result = await tenantService.createTenantAsPlatform({
-    tenantName: req.body.tenantName,
-    tenantSlug: req.body.tenantSlug,
-    email: req.body.email,
-    password: req.body.password,
-    cmms: cmmsEnabled
-      ? { enabled: true, plan: req.body.cmmsPlan || 'standard' }
-      : undefined,
+    tenantName: b.tenantName,
+    tenantSlug: b.tenantSlug,
+    email: b.email,
+    password: b.password,
+    cmmsEnabled,
   });
   if (!result.ok) {
-    return res.status(result.status).render('admin/tenant-new', adminLocals(req, {
-      title: 'Create tenant',
+    return res.status(result.status || 400).render('admin/tenant-new', adminLocals(req, {
+      title: 'New customer',
       activeNav: 'new',
-      cmmsPlans: CMMS_PLANS.filter((p) => p !== 'none'),
       error: result.error,
-      form: req.body,
+      form: b,
     }));
   }
   res.redirect(`/admin/tenants/${result.tenant.id}?created=1`);
@@ -120,27 +120,17 @@ router.get('/tenants/:id', requirePlatformAdminWeb, asyncHandler(async (req, res
     tenant: result.tenant,
     users: result.users,
     userCount: result.userCount,
-    cmmsPlans: CMMS_PLANS.filter((p) => p !== 'none'),
-    tenantPlans: TENANT_PLANS,
     created: req.query.created === '1',
-    settingsUpdated: req.query.settings === 'updated' || req.query.cmms === 'updated',
+    settingsUpdated: req.query.cmms === 'updated',
   }));
 }));
 
 router.post('/tenants/:id/cmms', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
   const enabled = req.body.enabled === 'on' || req.body.enabled === 'true';
-  const cmmsPlan = req.body.cmmsPlan || req.body.plan || 'standard';
-  const peaklogicPlan = req.body.peaklogicPlan || req.body.tenantPlan || 'standard';
-  const result = await tenantService.updateTenantSettings(
-    req.params.id,
-    {
-      plan: peaklogicPlan,
-      cmms: { enabled, plan: cmmsPlan },
-    },
-    { enabledBy: 'platform-admin' },
-  );
+  const externalUrl = req.body.externalUrl || '';
+  const result = await tenantService.updateTenantCmms(req.params.id, { enabled, externalUrl });
   if (!result.ok) return res.status(result.status).send(result.error);
-  res.redirect(`/admin/tenants/${req.params.id}?settings=updated`);
+  res.redirect(`/admin/tenants/${req.params.id}?cmms=updated`);
 }));
 
 module.exports = router;

@@ -1,0 +1,25 @@
+{
+  "product": "nexcomm-lpl-lift-station",
+  "templateId": "nexcomm_lpl_lift_station",
+  "profile": "liftpoint_light",
+  "sourceCsv": "st/fixtures/nexcomm-csv/nexcomm-lpl-lift-station.csv",
+  "mqttSample": "st/fixtures/edgepoint-liftpoint-light-sample.json",
+  "matched": [
+    { "csvColumn": "High Level Float Alarm", "mvTag": "X1_I1 / LVL_HIGH", "payload": "json:inputs.0.9010", "reg": 9010 },
+    { "csvColumn": "Motor Fault", "mvTag": "X1_I3 / MOTOR_FAULT", "payload": "json:inputs.4.9050", "reg": 9050 },
+    { "csvColumn": "Pump 1 Run", "mvTag": "X1_I5 / P1_RUN_FB", "payload": "json:inputs.2.9030", "reg": 9030 },
+    { "csvColumn": "Pump 2 Run", "mvTag": "X1_I6 / P2_RUN_FB", "payload": "json:inputs.3.9040", "reg": 9040 },
+    { "csvColumn": "Input 5", "mvTag": "X1_I4", "payload": "json:inputs.5.9060", "reg": 9060 },
+    { "csvColumn": "Input 6", "mvTag": "X1_I7", "payload": "json:inputs.8.9090", "reg": 9090 },
+    { "csvColumn": "Pump 1 Motor Amps", "mvTag": "AI1 / P1_AMPS", "payload": "json:inputs.6.9070", "reg": 9070 },
+    { "csvColumn": "Pump 2 Motor Amps", "mvTag": "AI2 / P2_AMPS", "payload": "json:inputs.7.9080", "reg": 9080 },
+    { "csvColumn": "Pump 1 Motor Starts", "mvTag": "P1_STARTS", "payload": "json:in3_starts" },
+    { "csvColumn": "Pump 2 Motor Starts", "mvTag": "P2_STARTS", "payload": "json:in4_starts" },
+    { "csvColumn": "Pump 1 Motor Run Time", "mvTag": "P1_RUNTIME_HRS", "payload": "json:in3_runtime" },
+    { "csvColumn": "Pump 2 Motor Run Time", "mvTag": "P2_RUNTIME_HRS", "payload": "json:in4_runtime" },
+    { "csvColumn": "External Power", "mvTag": "EXT_POWER_OK", "payload": "json:battery_power" },
+    { "csvColumn": "Battery", "mvTag": "BATTERY_V", "payload": "json:vbat", "note": "Confirm live MQTT key if not vbat" },
+    { "csvColumn": "Flow Rate Pump1 (1 hr)", "mvTag": "P1_FLOW_1HR_GAL", "payload": "json:s1p1_total_1hr_flow" },
+    { "csvColumn": "Flow Rate Pump2 (1 hr)", "mvTag": "P2_FLOW_1HR_GAL", "payload": "json:s1p2_total_1hr_flow" }
+  ]
+}

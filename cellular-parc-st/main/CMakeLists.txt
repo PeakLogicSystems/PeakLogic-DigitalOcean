@@ -1,0 +1,36 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "device_cfg.c"
+        "mqtt_parc.c"
+        "modem_net.c"
+        "wifi_setup.c"
+        "setup_web.c"
+        "sm_i010.c"
+        "st/mv_bc.c"
+        "st/mv_base64.c"
+        "st/mv_tags.c"
+        "st/mv_io.c"
+        "st/mv_program.c"
+        "st/mv_rtc.c"
+        "st/mv_global_key.c"
+    INCLUDE_DIRS
+        "."
+        "st"
+    REQUIRES
+        nvs_flash
+        spiffs
+        esp_event
+        esp_netif
+        esp_wifi
+        esp_http_server
+        espressif__mqtt
+        espressif__cjson
+        espressif__esp_modem
+        driver
+        esp_driver_gpio
+        esp_driver_uart
+        esp_driver_i2c
+        esp_adc
+        esp_timer
+)

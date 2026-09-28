@@ -1,0 +1,22 @@
+[Unit]
+Description=PeakLogic SaaS platform
+After=network.target mongod.service mosquitto.service
+
+[Service]
+Type=simple
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_INSTALL_DIR@
+EnvironmentFile=/etc/peaklogic/saas.env
+Environment=NODE_ENV=production
+Environment=PEAKLOGIC_DEPLOYMENT=cloud
+Environment=PEAKLOGIC_PRODUCT=cloud
+Environment=PORT=3100
+Environment=PEAKLOGIC_PORT=3100
+Environment=PEAKLOGIC_DATA=/var/lib/peaklogic
+ExecStart=/usr/bin/node scripts/start-saas.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

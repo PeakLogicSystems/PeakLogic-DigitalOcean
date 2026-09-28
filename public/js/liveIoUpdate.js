@@ -1,7 +1,7 @@
 'use strict';
 
 /** Mirrors src/liveIoUpdate.js — keep in sync. */
-window.PeakLogicLiveIoUpdate = (function () {
+window.PeaklogicLiveIoUpdate = (function () {
   const LIVE_IO_UPDATE_KEY = 'mvLiveIoUpdate';
 
   function readLiveIoUpdatePref() {

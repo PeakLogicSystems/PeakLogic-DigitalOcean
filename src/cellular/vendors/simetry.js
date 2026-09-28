@@ -10,6 +10,7 @@ const DEFAULT_CALLBACK_URL = 'https://localhost/peaklogic/simetry/callback';
 const SIMETRY_DEFINITION = {
   id: 'simetry',
   displayName: 'Simetry',
+  aliases: ['simmetry'],
   docsUrl: 'https://simetry.freshdesk.com/support/solutions/articles/154000189151-api-access-to-connectivity-marketplace',
   signupUrl: 'https://simetry.com/',
   configSchema: [
@@ -19,7 +20,7 @@ const SIMETRY_DEFINITION = {
     { key: 'clientUuid', label: 'Client / Account UUID', required: false },
     { key: 'callbackUrl', label: 'Callback URL', required: false, placeholder: DEFAULT_CALLBACK_URL },
   ],
-  notes: 'Simetry Connectivity Marketplace (Teal API). Operations are async — queued then polled via operation-result.',
+  notes: 'Simetry Connectivity Marketplace (Teal API). Operations are async — queued then polled via operation-result. Billing uses eSIM billing preview and invoice preview endpoints.',
 };
 
 function mapSimetryStatus(entry) {
@@ -256,6 +257,105 @@ class SimetryAdapter extends SimVendorAdapter {
       .reduce((sum, row) => sum + (Number(row?.usage) || 0), 0);
 
     return { dataUsageMb: bytesToMb(totalBytes) };
+  }
+
+  formatTealPeriod(date) {
+    const d = date instanceof Date ? date : new Date(date);
+    if (Number.isNaN(d.getTime())) {
+      throw Object.assign(new Error('invalid billing period date'), { status: 400 });
+    }
+    return d.toISOString().slice(0, 19).replace('T', ' ');
+  }
+
+  async listPlans() {
+    const out = [];
+    let offset = 0;
+    const limit = 250;
+    let hasMore = true;
+
+    while (hasMore) {
+      const params = { limit, offset };
+      if (this.clientUuid) params.clientUuid = this.clientUuid;
+      const result = await this.enqueueAndPoll('/plans', { params });
+      const entries = Array.isArray(result?.entries) ? result.entries : [];
+      out.push(...entries);
+      hasMore = entries.length >= limit;
+      offset += limit;
+      if (offset > 10000) break;
+    }
+
+    return out;
+  }
+
+  mapBillingPreview(entry) {
+    const planLines = Array.isArray(entry?.entries) ? entry.entries : [];
+    const usageBytes = Number(entry?.totalEsimUsage)
+      || planLines.reduce((sum, line) => sum + (Number(line?.usage) || 0), 0);
+    const planAmount = planLines.reduce((sum, line) => sum + (Number(line?.total) || 0), 0);
+    const serviceFee = Number(entry?.esimServiceFee);
+    const total = Number(entry?.total);
+    const amount = Number.isFinite(total)
+      ? total
+      : (Number.isFinite(planAmount) ? planAmount : null);
+
+    return {
+      eid: entry?.eid != null ? String(entry.eid) : null,
+      success: entry?.success !== false,
+      errorMessage: entry?.errorMessage || null,
+      usageBytes: Number.isFinite(usageBytes) ? usageBytes : 0,
+      usageMb: bytesToMb(usageBytes),
+      amount: Number.isFinite(amount) ? amount : null,
+      serviceFee: Number.isFinite(serviceFee) ? serviceFee : null,
+      currency: 'USD',
+      planLines: planLines.map((line) => ({
+        planUuid: line?.planUuid || null,
+        planName: line?.planName || null,
+        planRate: line?.planRate ?? null,
+        usageBytes: Number(line?.usage) || 0,
+        usageMb: bytesToMb(line?.usage),
+        amount: line?.total ?? null,
+      })),
+    };
+  }
+
+  async getEsimBillingPreview({ periodStart, periodEnd, eids }) {
+    const entries = (eids || []).map((e) => String(e).trim()).filter(Boolean);
+    if (!entries.length) return [];
+
+    const params = { periodStart, periodEnd };
+    if (this.clientUuid) params.clientUuid = this.clientUuid;
+
+    const result = await this.enqueueAndPoll('/data-consumption/generate-esim-billing-preview', {
+      method: 'POST',
+      params,
+      body: { entries },
+    });
+
+    const rows = Array.isArray(result?.entries) ? result.entries : [];
+    return rows.map((entry) => this.mapBillingPreview(entry));
+  }
+
+  async getInvoicePreview({ period, clientUuid }) {
+    const cu = String(clientUuid || this.clientUuid || '').trim();
+    if (!cu) {
+      throw Object.assign(new Error('Simetry clientUuid required for invoice preview'), { status: 400 });
+    }
+    const periodValue = period || this.formatTealPeriod(new Date());
+    const params = { period: periodValue, clientUuid: cu };
+
+    try {
+      const result = await this.enqueueAndPoll('/data-consumption/generate-billing-invoice-preview', {
+        method: 'POST',
+        params,
+      });
+      return Array.isArray(result?.entries) ? result.entries[0] : result;
+    } catch (err) {
+      const result = await this.enqueueAndPoll('/data-consumption/generate-invoice-preview', {
+        method: 'POST',
+        params,
+      });
+      return Array.isArray(result?.entries) ? result.entries[0] : result;
+    }
   }
 }
 

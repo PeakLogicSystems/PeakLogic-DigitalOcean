@@ -1,5 +1,5 @@
-county,station_name,station_slug,station_type,lat,lng,device_id
-palm-beach,LS-001,ls-001,single_atu,26.7153,-80.0534,opta_ls_001
-palm-beach,LS-002,ls-002,dual_duplex,26.6200,-80.1100,opta_ls_002
-broward,LS-101,ls-101,dual_atu,26.1224,-80.1373,opta_ls_101
-miami-dade,LS-201,ls-201,quad_atu,25.7617,-80.1918,opta_ls_201
+county,station_name,station_slug,station_type,lat,lng,device_id,device_slug
+palm-beach,LS-001 Bayshore,ls-001-bayshore,dual_duplex,26.7153,-80.0534,opta_ls_001,dev-ls-001
+palm-beach,LS-002 Lake Worth,ls-002-lake-worth,quad_atu,26.6200,-80.1000,opta_ls_002,dev-ls-002
+broward,LS-003 Sunrise,sunrise-ls-003,single_atu,26.1224,-80.1373,opta_ls_003,dev-ls-003
+miami-dade,LS-004 Kendall,kendall-ls-004,dual_atu,25.7617,-80.1918,opta_ls_004,dev-ls-004

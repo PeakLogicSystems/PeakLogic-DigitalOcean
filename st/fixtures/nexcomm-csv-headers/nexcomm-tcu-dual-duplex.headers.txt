@@ -1,0 +1,45 @@
+﻿datelogged
+Product Id
+Hardware Rev.
+Software Id
+Software Rev
+Seconds on since reset
+S1 Float Status
+S1 Float Out of Sequence
+S1 High float on
+S1 Pump1 Motor and Run Fault
+S1 Pump2 Motor and Run Fault
+S1 HOA1 Switch Position
+S1 HOA2 Switch Position
+S1 Pump1 seconds on last hour
+S1 Pump1 starts last hour
+S1 Pump2 seconds on last hour
+S1 Pump2 starts last hour
+S1 Pump1 starts since reset
+S1 Pump1 run time since reset
+S1 Pump2 starts since reset
+S1 Pump2 run time since reset
+S2 Float status
+S2 Float out of sequence
+S2 High float on
+S2 Pump1 motor and run fault
+S2 Pump2 motor and run fault
+S2 HOA1 switch position
+S2 HOA2 switch position
+S2 Pump1 seconds on last hour
+S2 Pump1 starts last hour
+S2 Pump2 seconds on last hour
+S2 Pump2 starts last hour
+S2 Pump1 starts since reset
+S2 Pump1 run time since reset
+S2 Pump2 starts since reset
+S2 Pump2 run time since reset
+CT1 - True RMS
+CT2 - True RMS
+Power Source
+Battery Voltage
+Input Voltage
+Output Voltage
+Battery Current
+Input Current
+Die Temperature

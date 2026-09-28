@@ -1,0 +1,64 @@
+[
+  { "id": "I1", "label": "OFF float", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 0 } },
+  { "id": "I2", "label": "LEAD float", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 1 } },
+  { "id": "I3", "label": "LAG float", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 2 } },
+  { "id": "I4", "label": "LAG2 float", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 3 } },
+  { "id": "I5", "label": "HIGH level float", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 4 } },
+  { "id": "I6", "label": "Motor 1 run fb", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 5 } },
+  { "id": "I7", "label": "Motor 2 run fb", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 6 } },
+  { "id": "I8", "label": "Motor 3 run fb", "type": "BOOL", "role": "input", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "discrete", "address": 7 } },
+
+  { "id": "R1", "label": "Motor 1 contactor", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 0 } },
+  { "id": "R2", "label": "Motor 2 contactor", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 1 } },
+  { "id": "R3", "label": "Motor 3 contactor", "type": "BOOL", "role": "output", "value": false, "driverId": "opta_rtu", "driverAddress": { "table": "coil", "address": 2 } },
+
+  {
+    "id": "ALT1",
+    "label": "3-pump triplex alternator",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT3",
+    "preset": 3,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "onlineIds": ["", "", "", ""],
+      "unitOutIds": ["", "", "", ""],
+      "leadSelIds": ["", "", "", ""],
+      "lagSelIds": ["", "", "", ""],
+      "lag2SelIds": ["", "", "", ""],
+      "levelInputMode": "digital",
+      "levelControlEnabled": false,
+      "leadIndex": 0,
+      "lagIndex": -1,
+      "lag2Index": -1,
+      "activeUnit": 0
+    }
+  },
+
+  { "id": "M1_FTR_TMR", "label": "Motor 1 fail-to-run delay", "type": "TIMER", "role": "fb", "wordWidth": 16, "preset": 5000, "mode": "TON", "value": false, "fb": { "input": false, "elapsed": 0, "done": false } },
+  { "id": "M2_FTR_TMR", "label": "Motor 2 fail-to-run delay", "type": "TIMER", "role": "fb", "wordWidth": 16, "preset": 5000, "mode": "TON", "value": false, "fb": { "input": false, "elapsed": 0, "done": false } },
+  { "id": "M3_FTR_TMR", "label": "Motor 3 fail-to-run delay", "type": "TIMER", "role": "fb", "wordWidth": 16, "preset": 5000, "mode": "TON", "value": false, "fb": { "input": false, "elapsed": 0, "done": false } },
+
+  { "id": "SYS_RUN", "label": "System run enable", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MASTER_OFF", "label": "All pumps off (below OFF float)", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "LEAD_CALL", "label": "Lead demand latch", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LAG_CALL", "label": "Lag demand latch", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LAG2_CALL", "label": "Lag2 demand latch", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "LEAD_RUN", "label": "Lead pump running", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "MOTOR1_ONLINE", "label": "Pump 1 online", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR2_ONLINE", "label": "Pump 2 online", "type": "BOOL", "role": "memory", "value": true },
+  { "id": "MOTOR3_ONLINE", "label": "Pump 3 online", "type": "BOOL", "role": "memory", "value": true },
+
+  { "id": "M1_FTR", "label": "Pump 1 fail-to-run condition", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "M2_FTR", "label": "Pump 2 fail-to-run condition", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "M3_FTR", "label": "Pump 3 fail-to-run condition", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "M1_FAIL", "label": "Pump 1 fail-to-run alarm", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "M2_FAIL", "label": "Pump 2 fail-to-run alarm", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "M3_FAIL", "label": "Pump 3 fail-to-run alarm", "type": "BOOL", "role": "memory", "value": false },
+
+  { "id": "HIGH_ALM", "label": "High level alarm", "type": "BOOL", "role": "memory", "value": false },
+  { "id": "ALT_FAULT", "label": "Station fault summary", "type": "BOOL", "role": "memory", "value": false }
+]

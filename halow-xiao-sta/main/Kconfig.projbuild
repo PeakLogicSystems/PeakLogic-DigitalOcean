@@ -1,0 +1,244 @@
+menu "LilyGO T-HaLow (TX-AH) Configuration"
+
+    comment "MQTT uses HaLow (raw Ethernet via TX-AH). Wi-Fi AP is setup-only."
+
+    config TX_AH_UART_PORT
+        int "UART port for TX-AH module"
+        default 1
+        range 0 2
+
+    config TX_AH_UART_TX_GPIO
+        int "TX-AH UART TX GPIO (ESP32 -> module RX)"
+        default 4
+
+    config TX_AH_UART_RX_GPIO
+        int "TX-AH UART RX GPIO (ESP32 <- module TX)"
+        default 5
+
+    config TX_AH_UART_BAUD
+        int "TX-AH UART baud rate"
+        default 115200
+
+    config TX_AH_AT_TIMEOUT_MS
+        int "AT command response timeout (ms)"
+        default 3000
+        range 500 30000
+
+    config TX_AH_BSS_BW_STR
+        string "BSS bandwidth (1/2/4/8)"
+        default "8"
+
+    config TX_AH_USE_PAIRING
+        bool "Use AT+PAIR pairing (recommended for LilyGO AP/STA workflow)"
+        default y
+        help
+            When enabled, firmware sends AT+PAIR=1 and waits for PAIR SUCCESS.
+            Put the HaLow AP in pairing mode at the same time (see LilyGO docs).
+            Disable to use manual SSID + PSK below.
+
+    config TX_AH_PAIR_TIMEOUT_MS
+        int "Pairing / connect wait timeout (ms)"
+        default 30000
+        range 5000 120000
+
+    config HALOW_SSID
+        string "HaLow AP SSID (manual mode only)"
+        depends on !TX_AH_USE_PAIRING
+        default "hgic_ah_test"
+
+    config HALOW_PSK_HEX
+        string "HaLow WPA PSK as 64 hex chars (manual mode, or empty for open)"
+        depends on !TX_AH_USE_PAIRING
+        default ""
+
+endmenu
+
+menu "Device config (NVS defaults + setup AP)"
+
+    config DEVCFG_MQTT_BROKER_DEFAULT
+        string "Default MQTT broker host (HaLow/LAN reachable IP)"
+        default "10.10.10.1"
+
+    config DEVCFG_MQTT_PORT_DEFAULT
+        int "Default MQTT broker port"
+        default 1883
+        range 1 65535
+
+    config DEVCFG_HALOW_IP_DEFAULT
+        string "Default HaLow static IP"
+        default "10.10.10.2"
+
+    config DEVCFG_HALOW_GW_DEFAULT
+        string "Default HaLow gateway"
+        default "10.10.10.1"
+
+    config DEVCFG_HALOW_MASK_DEFAULT
+        string "Default HaLow netmask"
+        default "255.255.255.0"
+
+    config DEVCFG_WIFI_AP_SSID_DEFAULT
+        string "Wi-Fi setup AP SSID"
+        default "PeakLogic-T-HaLow"
+
+    config DEVCFG_WIFI_AP_PASS_DEFAULT
+        string "Wi-Fi setup AP password (8+ chars)"
+        default "peaklogic"
+
+    config DEVCFG_WIFI_AP_HTTP_PORT
+        int "Setup HTTP port on Wi-Fi AP"
+        default 8080
+        range 80 65535
+
+    config DEVCFG_SENSOR_TEMPLATE_DEFAULT
+        int "Default ALF sensor template (1-6)"
+        default 1
+        range 1 6
+
+endmenu
+
+
+
+menu "PeakLogic Parc (MQTT) Configuration"
+
+
+
+    config PARC_MQTT_BROKER_URI
+
+        string "MQTT broker URI (same broker the Opta + PeakLogic use)"
+
+        default "mqtt://192.168.1.233:1883"
+
+
+
+    config PARC_DEVICE_ID
+
+        string "Parc device ID (deviceId + topic path segment)"
+
+        default "thalow_01"
+
+
+
+    config PARC_DEVICE_NAME
+
+        string "Human-readable device name (telemetry \"name\")"
+
+        default "LilyGO T-HaLow Node"
+
+
+
+    choice PARC_DEVICE_MODE
+
+        prompt "Parc device mode (telemetry \"deviceMode\")"
+
+        default PARC_DEVICE_MODE_STANDALONE
+
+
+
+        config PARC_DEVICE_MODE_STANDALONE
+
+            bool "standalone"
+
+
+
+        config PARC_DEVICE_MODE_REMOTE_IO
+
+            bool "remote_io"
+
+    endchoice
+
+
+
+    config PARC_TOPIC_PREFIX
+
+        string "Parc topic prefix"
+
+        default "peaklogic/v1"
+
+
+
+    config PARC_GLOBAL_SITE_KEY
+
+        int "Global (P2P) site key 1..65535"
+
+        default 1
+
+        range 1 65535
+
+
+
+    config PARC_MQTT_USERNAME
+
+        string "MQTT username (leave empty for anonymous)"
+
+        default ""
+
+
+
+    config PARC_MQTT_PASSWORD
+
+        string "MQTT password (leave empty for none)"
+
+        default ""
+
+
+
+    config PARC_PUBLISH_INTERVAL_MS
+
+        int "Telemetry report interval (ms)"
+
+        default 2000
+
+        range 250 600000
+
+
+
+endmenu
+
+
+
+menu "Sensors (ALF templates — global tuning)"
+
+    comment "I/O layout is selected on /setup (ALF templates 1-6)."
+    comment "Reserved GPIO: 4/5 HaLow UART, 38 LED, 39-42 SPI."
+
+    config SENS_THERM_BETA
+        int "NTC thermistor beta (e.g. 3950)"
+        default 3950
+
+    config SENS_THERM_R0_OHM
+        int "NTC R0 at 25C (ohms)"
+        default 10000
+
+    config SENS_THERM_RS_OHM
+        int "Thermistor series resistor (ohms)"
+        default 10000
+
+    config SENS_CT_AMPS_PER_VOLT_X1000
+        int "CT scale: amps per volt RMS x1000 (SCT-013-030 = 30000)"
+        default 30000
+
+    config SENS_CT_SAMPLES
+        int "ADC samples per CT RMS window"
+        default 1200
+        range 200 4000
+
+    config SENS_FLOW_GLITCH_NS
+        int "Pulse PCNT glitch filter (ns, 0 = off)"
+        default 2000
+
+    config SENS_LEAK_LATCH
+        bool "Latch leak rope alarms until MQTT reset"
+        default y
+
+    config SENS_LEAK_FILTER_ALPHA_X1000
+        int "Leak EMA filter alpha x1000 (0 = off, 100 = 0.10)"
+        default 100
+        range 0 1000
+
+    config SENS_TASK_PERIOD_MS
+        int "Sensor sampling period (ms)"
+        default 1000
+        range 200 60000
+
+endmenu
+

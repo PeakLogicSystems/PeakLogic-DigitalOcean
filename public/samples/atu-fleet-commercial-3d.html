@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Commerce Park — ATU Cloud Fleet</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }
+    #canvas-wrap { position: absolute; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel { position: absolute; z-index: 10; background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 10px; padding: 14px 16px; font-size: 13px; line-height: 1.45; }
+    #title-panel { top: 14px; left: 14px; max-width: 420px; }
+    #title-panel h1 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    #title-panel p { color: #94a3b8; font-size: 12px; }
+    #legend { bottom: 14px; left: 14px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 12px; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); }
+    #fleet-list { bottom: 14px; right: 14px; width: 320px; max-height: 45vh; overflow: auto; }
+    #tank-panel { top: 14px; right: 14px; width: 340px; max-height: 55vh; overflow: auto; font-size: 11px; }
+    #tank-panel h2 { font-size: 12px; margin-bottom: 6px; }
+    #tank-panel ul { margin: 4px 0 10px 16px; color: #cbd5e1; }
+    #tank-panel li { margin-bottom: 3px; }
+    #fleet-list ul { list-style: none; margin-top: 8px; font-size: 12px; }
+    #fleet-list li { padding: 3px 0; border-bottom: 1px solid rgba(148,163,184,0.12); display: flex; justify-content: space-between; }
+    .alm { color: #f87171; font-weight: 600; }
+    .ok { color: #86efac; }
+  </style>
+</head>
+<body>
+  <div id="canvas-wrap"></div>
+  <div id="title-panel" class="panel">
+    <h1>Harbor Commerce Park</h1>
+    <p>10000 GPD design — 4 ATU, 20 lifts. 100% cloud (cellular Opta → MQTT).</p>
+  </div>
+  <div id="legend" class="panel">
+    <div class="legend-item"><span class="swatch" style="background:#22c55e"></span> ATU</div>
+    <div class="legend-item"><span class="swatch" style="background:#38bdf8"></span> Lift station</div>
+    
+    <div class="legend-item"><span class="swatch" style="background:#ef4444"></span> Alarm</div>
+  </div>
+  
+  <div id="fleet-list" class="panel"><strong>Fleet</strong><ul id="fleet-items"></ul></div>
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    const STATIONS = [
+  {
+    "name": "Harbor Quad ATU-1",
+    "slug": "harbor-qatu-1",
+    "type": "quad_atu",
+    "category": "atu",
+    "role": "atu",
+    "lat": 29.1366,
+    "lng": -81.0057,
+    "deviceId": "mv_atu_harbor_q1",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_QATU_1_ALM"
+  },
+  {
+    "name": "Harbor Quad ATU-2",
+    "slug": "harbor-qatu-2",
+    "type": "quad_atu",
+    "category": "atu",
+    "role": "atu",
+    "lat": 29.137800000000002,
+    "lng": -81.0065,
+    "deviceId": "mv_atu_harbor_q2",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_QATU_2_ALM"
+  },
+  {
+    "name": "Harbor Quad ATU-3",
+    "slug": "harbor-qatu-3",
+    "type": "quad_atu",
+    "category": "atu",
+    "role": "atu",
+    "lat": 29.139,
+    "lng": -81.0057,
+    "deviceId": "mv_atu_harbor_q3",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_QATU_3_ALM"
+  },
+  {
+    "name": "Harbor Quad ATU-4",
+    "slug": "harbor-qatu-4",
+    "type": "quad_atu",
+    "category": "atu",
+    "role": "atu",
+    "lat": 29.1402,
+    "lng": -81.0065,
+    "deviceId": "mv_atu_harbor_q4",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_QATU_4_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-01",
+    "slug": "harbor-ls-1",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.1384,
+    "lng": -80.9897,
+    "deviceId": "mv_ls_harbor_01",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_1_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-02",
+    "slug": "harbor-ls-2",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.14272623792125,
+    "lng": -80.98785929228062,
+    "deviceId": "mv_ls_harbor_02",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_2_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-03",
+    "slug": "harbor-ls-3",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.14780456403668,
+    "lng": -80.988378019326,
+    "deviceId": "mv_ls_harbor_03",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_3_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-04",
+    "slug": "harbor-ls-4",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.1481082039325,
+    "lng": -80.99662520776148,
+    "deviceId": "mv_ls_harbor_04",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_4_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-05",
+    "slug": "harbor-ls-5",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.151714791228134,
+    "lng": -81.00044326691025,
+    "deviceId": "mv_ls_harbor_05",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_5_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-06",
+    "slug": "harbor-ls-6",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.1544,
+    "lng": -81.0065,
+    "deviceId": "mv_ls_harbor_06",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_6_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-07",
+    "slug": "harbor-ls-7",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.14981267819554,
+    "lng": -81.01169148550551,
+    "deviceId": "mv_ls_harbor_07",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_7_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-08",
+    "slug": "harbor-ls-8",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.14972623792125,
+    "lng": -81.01802059094493,
+    "deviceId": "mv_ls_harbor_08",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_8_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-09",
+    "slug": "harbor-ls-9",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.14780456403668,
+    "lng": -81.024621980674,
+    "deviceId": "mv_ls_harbor_09",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_9_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-10",
+    "slug": "harbor-ls-10",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.1421082039325,
+    "lng": -81.02247774947377,
+    "deviceId": "mv_ls_harbor_10",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_10_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-11",
+    "slug": "harbor-ls-11",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.1384,
+    "lng": -81.0261,
+    "deviceId": "mv_ls_harbor_11",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_11_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-12",
+    "slug": "harbor-ls-12",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.133455728090002,
+    "lng": -81.02780366596501,
+    "deviceId": "mv_ls_harbor_12",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_12_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-13",
+    "slug": "harbor-ls-13",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.13134657697249,
+    "lng": -81.0200914855055,
+    "deviceId": "mv_ls_harbor_13",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_13_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-14",
+    "slug": "harbor-ls-14",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.12707376207875,
+    "lng": -81.01802059094493,
+    "deviceId": "mv_ls_harbor_14",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_14_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-15",
+    "slug": "harbor-ls-15",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.12318309573928,
+    "lng": -81.013421980674,
+    "deviceId": "mv_ls_harbor_15",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_15_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-16",
+    "slug": "harbor-ls-16",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.1264,
+    "lng": -81.0065,
+    "deviceId": "mv_ls_harbor_16",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_16_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-17",
+    "slug": "harbor-ls-17",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.125085208771868,
+    "lng": -81.00044326691025,
+    "deviceId": "mv_ls_harbor_17",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_17_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-18",
+    "slug": "harbor-ls-18",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.125455728090003,
+    "lng": -80.99333361034866,
+    "deviceId": "mv_ls_harbor_18",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_18_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-19",
+    "slug": "harbor-ls-19",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.13134657697249,
+    "lng": -80.9929085144945,
+    "deviceId": "mv_ls_harbor_19",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_19_ALM"
+  },
+  {
+    "name": "Harbor Lift LS-20",
+    "slug": "harbor-ls-20",
+    "type": "simplex",
+    "category": "lift",
+    "role": "lift",
+    "lat": 29.134073762078753,
+    "lng": -80.98785929228062,
+    "deviceId": "mv_ls_harbor_20",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_HARBOR_LS_20_ALM"
+  }
+];
+    const TANK_GUIDE = null;
+    const wrap = document.getElementById('canvas-wrap');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f172a);
+    const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 500);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(innerWidth, innerHeight);
+    wrap.appendChild(renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+    sun.position.set(40, 60, 30);
+    scene.add(sun);
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(120, 120), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
+    const lats = STATIONS.map(s => s.lat), lngs = STATIONS.map(s => s.lng);
+    const latMid = (Math.min(...lats) + Math.max(...lats)) / 2;
+    const lngMid = (Math.min(...lngs) + Math.max(...lngs)) / 2;
+    const markers = [];
+    const listEl = document.getElementById('fleet-items');
+    STATIONS.forEach((s, i) => {
+      const isAtu = s.category === 'atu';
+      const isBooster = s.role === 'booster';
+      const geo = isAtu ? new THREE.CylinderGeometry(1.2, 1.4, 3, 8) : new THREE.BoxGeometry(1.5, 2, 1.5);
+      const baseColor = isAtu ? 0x22c55e : (isBooster ? 0xf59e0b : 0x38bdf8);
+      const mat = new THREE.MeshStandardMaterial({ color: baseColor });
+      const mesh = new THREE.Mesh(geo, mat);
+      const x = (s.lng - lngMid) * 8000;
+      const z = -(s.lat - latMid) * 8000;
+      mesh.position.set(x, isAtu ? 1.5 : 1, z);
+      mesh.userData = s;
+      scene.add(mesh);
+      markers.push(mesh);
+      const li = document.createElement('li');
+      li.innerHTML = '<span>' + s.name + '</span><span class="off" data-slug="' + s.slug + '">…</span>';
+      listEl.appendChild(li);
+    });
+    camera.position.set(0, 35, 45);
+    controls.target.set(0, 0, 0);
+    async function poll() {
+      for (const m of markers) {
+        const s = m.userData;
+        try {
+          const r = await fetch('/api/parc/devices/' + encodeURIComponent(s.deviceId));
+          if (!r.ok) continue;
+          const dev = await r.json();
+          const tag = (dev.tags || []).find(t => t.id === s.alarmTag);
+          const alm = !!(tag && tag.value);
+          m.material.color.setHex(alm ? 0xef4444 : (s.category === 'atu' ? 0x22c55e : (s.role === 'booster' ? 0xf59e0b : 0x38bdf8)));
+          const span = listEl.querySelector('[data-slug="' + s.slug + '"]');
+          if (span) { span.textContent = alm ? 'ALARM' : 'OK'; span.className = alm ? 'alm' : 'ok'; }
+        } catch { /* offline */ }
+      }
+    }
+    setInterval(poll, 3000);
+    poll();
+    if (TANK_GUIDE) {
+      const el = document.getElementById('tank-content');
+      const sections = [
+        ['Home STEP (×' + TANK_GUIDE.homeStep.count + ')', TANK_GUIDE.homeStep.tanks],
+        ['Booster duplex (×' + TANK_GUIDE.boosterDuplex.count + ')', TANK_GUIDE.boosterDuplex.tanks],
+        ['Quad DWTU (×' + TANK_GUIDE.dwtuQuad.count + ')', TANK_GUIDE.dwtuQuad.tanks],
+      ];
+      sections.forEach(([title, tanks]) => {
+        const h = document.createElement('h3');
+        h.textContent = title;
+        h.style.fontSize = '11px';
+        h.style.marginTop = '8px';
+        el.appendChild(h);
+        const ul = document.createElement('ul');
+        tanks.forEach(t => {
+          const li = document.createElement('li');
+          const gal = t.capacityGal ? ' — ' + t.capacityGal.toLocaleString() + ' gal' : '';
+          li.textContent = t.label + gal + (t.rule ? ' (' + t.rule + ')' : '');
+          ul.appendChild(li);
+        });
+        el.appendChild(ul);
+      });
+    }
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); }
+    animate();
+    addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+  </script>
+</body>
+</html>

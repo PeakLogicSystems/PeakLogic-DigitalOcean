@@ -1,0 +1,40 @@
+{
+  "id": "pentair_intellichlor",
+  "label": "Pentair IntelliChlor — RS-485",
+  "vendor": "Pentair",
+  "model": "IntelliChlor salt chlorinator",
+  "transport": "pentair_rs485",
+  "sharedBus": true,
+  "driverId": "pentair_ic",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 3,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceClass": "intellichlor",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 60000,
+    "busGapMs": 150
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "pentair": [
+      { "id": "IC_SALT_PPM", "type": "INT", "role": "input", "point": "salt_ppm", "deviceClass": "intellichlor", "comment": "Salt level (ppm)" },
+      { "id": "IC_WATER_TEMP_F", "type": "INT", "role": "input", "point": "water_temp_f", "deviceClass": "intellichlor", "comment": "Water temp °F" },
+      { "id": "IC_ERROR", "type": "INT", "role": "input", "point": "ic_error", "deviceClass": "intellichlor", "comment": "Error/status bitmask" },
+      { "id": "IC_NO_FLOW", "type": "BOOL", "role": "input", "point": "ic_no_flow", "deviceClass": "intellichlor" },
+      { "id": "IC_LOW_SALT", "type": "BOOL", "role": "input", "point": "ic_low_salt", "deviceClass": "intellichlor" },
+      { "id": "IC_HIGH_SALT", "type": "BOOL", "role": "input", "point": "ic_high_salt", "deviceClass": "intellichlor" },
+      { "id": "IC_CLEAN", "type": "BOOL", "role": "input", "point": "ic_clean", "deviceClass": "intellichlor", "comment": "Cell clean reminder" },
+      { "id": "IC_TAKEOVER_CMD", "type": "BOOL", "role": "output", "point": "ic_takeover_cmd", "deviceClass": "intellichlor", "value": true, "comment": "Take bus control from panel" },
+      { "id": "IC_PERCENT_CMD", "type": "INT", "role": "output", "point": "ic_percent_cmd", "deviceClass": "intellichlor", "comment": "Chlorination % 0-100" }
+    ]
+  }
+}

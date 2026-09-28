@@ -1,0 +1,20 @@
+{
+  "board": "arduino:zephyr:uno_q",
+  "targets": {
+    "default": {
+      "build_properties": {
+        "compiler.cpp.extra_flags": ""
+      }
+    },
+    "ads1256": {
+      "build_properties": {
+        "compiler.cpp.extra_flags": "-DADC_ADS1256"
+      }
+    },
+    "no_dac": {
+      "build_properties": {
+        "compiler.cpp.extra_flags": "-DDAC_SOFT_MID"
+      }
+    }
+  }
+}

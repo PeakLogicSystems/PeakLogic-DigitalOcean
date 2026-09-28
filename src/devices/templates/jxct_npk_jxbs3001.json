@@ -1,0 +1,98 @@
+{
+  "id": "jxct_npk_jxbs3001",
+  "label": "JXCT JXBS-3001-NPK-RS — soil 7-in-1 sensor",
+  "vendor": "JXCT",
+  "model": "JXBS-3001-NPK-RS (7-in-1)",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "jxct_npk",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 7,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "SOIL_PH",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 6,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Soil pH (HR 0x0006, register ×100)"
+      },
+      {
+        "id": "SOIL_MOIST_PCT",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 18,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Soil moisture % (HR 0x0012, register ×10)"
+      },
+      {
+        "id": "SOIL_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 19,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Soil temperature °C (HR 0x0013, register ×10)"
+      },
+      {
+        "id": "SOIL_EC_US_CM",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 21,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil conductivity µS/cm (HR 0x0015)"
+      },
+      {
+        "id": "N_MG_KG",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 30,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil nitrogen mg/kg (HR 0x001E)"
+      },
+      {
+        "id": "P_MG_KG",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 31,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil phosphorus mg/kg (HR 0x001F)"
+      },
+      {
+        "id": "K_MG_KG",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 32,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil potassium mg/kg (HR 0x0020)"
+      }
+    ]
+  }
+}

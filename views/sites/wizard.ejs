@@ -1,0 +1,248 @@
+<%- include('../partials/shell-head', { title }) %>
+<%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
+<style>
+  .wiz-steps { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.25rem; }
+  .wiz-step-tab { flex:1 1 0; min-width:120px; padding:.6rem .75rem; border-radius:.5rem;
+    background:#fff; border:1px solid #e3e3e8; color:#6c6c78; font-size:.85rem; cursor:pointer; }
+  .wiz-step-tab .n { display:inline-flex; width:1.4rem; height:1.4rem; border-radius:50%;
+    background:#e9e9ef; color:#6c6c78; align-items:center; justify-content:center; font-weight:600; margin-right:.4rem; }
+  .wiz-step-tab.active { border-color:#7c3aed; color:#7c3aed; box-shadow:0 0 0 1px #7c3aed inset; }
+  .wiz-step-tab.active .n { background:#7c3aed; color:#fff; }
+  .wiz-step-tab.done .n { background:#2e7d32; color:#fff; }
+  .wiz-panel { display:none; }
+  .wiz-panel.active { display:block; }
+</style>
+
+<% var formData = (locals && locals.form) ? locals.form : {}; %>
+<% var types = (locals && locals.stationTypes) ? locals.stationTypes : []; %>
+<% var counties = (locals && locals.counties) ? locals.counties : []; %>
+
+<main class="container py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small mb-0">
+      <li class="breadcrumb-item"><a href="/sites">Sites</a></li>
+      <li class="breadcrumb-item active">Add location</li>
+    </ol>
+  </nav>
+
+  <h1 class="h4 mb-1">Add lift station</h1>
+  <p class="text-muted small mb-3">Owner: <strong><%= owner %></strong>. Pick a station type, set the address, then the edge/admin details.</p>
+
+  <% if (typeof installHint !== 'undefined' && installHint) { %>
+    <div class="alert alert-info py-2 small">QR install sticker — device <code><%= installHint.deviceId %></code> and station type are pre-filled.</div>
+  <% } %>
+
+  <% if (locals.error) { %><div class="alert alert-danger"><%= locals.error %></div><% } %>
+
+  <div class="wiz-steps" id="wizSteps">
+    <div class="wiz-step-tab" data-step="0"><span class="n">1</span>What</div>
+    <div class="wiz-step-tab" data-step="1"><span class="n">2</span>Where</div>
+    <div class="wiz-step-tab" data-step="2"><span class="n">3</span>Local admin</div>
+    <div class="wiz-step-tab" data-step="3"><span class="n">4</span>Review</div>
+  </div>
+
+  <form method="POST" action="/sites/new" id="wizForm">
+    <% if (typeof installToken !== 'undefined' && installToken) { %>
+    <input type="hidden" name="installToken" value="<%= installToken %>">
+    <% } %>
+
+    <!-- Step 1 — WHAT -->
+    <div class="wiz-panel" data-panel="0">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header bg-white fw-semibold">What — lift station</div>
+        <div class="card-body p-4">
+          <div class="row g-3">
+            <div class="col-md-12">
+              <label class="form-label">Device / station type</label>
+              <select name="stationType" id="stationType" class="form-select">
+                <% types.forEach(function(t) { %>
+                  <option value="<%= t.id %>"
+                    data-program="<%= t.program %>" data-template="<%= t.templateId %>"
+                    <%= (formData.stationType || 'triplex') === t.id ? 'selected' : '' %>>
+                    <%= t.label %> — <%= t.description %>
+                  </option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="col-md-8">
+              <label class="form-label">Station name</label>
+              <input type="text" name="stationName" class="form-control"
+                     placeholder="125 Yelvington Rd Triplex" value="<%= formData.stationName || '' %>">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Station slug</label>
+              <input type="text" name="stationSlug" class="form-control"
+                     placeholder="yelvington-triplex" pattern="[a-z0-9][a-z0-9-]*" value="<%= formData.stationSlug || '' %>">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — WHERE -->
+    <div class="wiz-panel" data-panel="1">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header bg-white fw-semibold">Where — location</div>
+        <div class="card-body p-4">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Address</label>
+              <input type="text" name="address" class="form-control"
+                     placeholder="125 Yelvington Rd, Palatka, FL 32131" value="<%= formData.address || '' %>">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">County</label>
+              <select name="county" class="form-select">
+                <% counties.forEach(function(c) { %>
+                  <option value="<%= c.slug %>" <%= (formData.county || 'putnam') === c.slug ? 'selected' : '' %>><%= c.name %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Latitude</label>
+              <input type="text" name="lat" class="form-control" placeholder="29.6441" value="<%= formData.lat || '' %>">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Longitude</label>
+              <input type="text" name="lng" class="form-control" placeholder="-81.5888" value="<%= formData.lng || '' %>">
+            </div>
+            <div class="form-text col-12">Leave lat/lng blank to drop the pin at the county centroid.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — LOCAL ADMIN -->
+    <div class="wiz-panel" data-panel="2">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header bg-white fw-semibold">Local admin — edge device</div>
+        <div class="card-body p-4">
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label">Device ID <span class="text-danger">*</span></label>
+              <input type="text" name="deviceId" class="form-control form-control-lg"
+                     placeholder="mv_f2e689fd60d96bab" value="<%= formData.deviceId || '' %>">
+              <div class="form-text">
+                From the Opta <code>/setup</code> page, or pre-filled when you scan the manufacture QR sticker.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Scan (ms)</label>
+              <input type="number" name="scanMs" class="form-control" min="10" value="<%= formData.scanMs || '100' %>">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-muted small">ST program (auto)</label>
+              <input type="text" id="programPreview" class="form-control bg-light" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-muted small">Device template (auto)</label>
+              <input type="text" id="templatePreview" class="form-control bg-light" readonly>
+            </div>
+            <input type="hidden" name="deviceSlug" value="">
+            <div class="form-text col-12">
+              The device <strong>name</strong> and <strong>slug</strong> are derived from the station and the Device ID.
+              Program and template come from the station type and run on the Opta at the edge (set to auto-run once it connects).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 — REVIEW -->
+    <div class="wiz-panel" data-panel="3">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header bg-white fw-semibold">Review</div>
+        <div class="card-body p-4">
+          <dl class="row mb-0" id="wizReview"></dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mb-5">
+      <button type="button" class="btn btn-outline-secondary" id="wizBack">Back</button>
+      <div>
+        <a href="/sites" class="btn btn-outline-secondary me-2">Cancel</a>
+        <button type="button" class="btn btn-purple" id="wizNext">Next</button>
+        <button type="submit" class="btn btn-purple d-none" id="wizSubmit">Add lift station</button>
+      </div>
+    </div>
+  </form>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById('wizForm');
+    var panels = Array.prototype.slice.call(form.querySelectorAll('.wiz-panel'));
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.wiz-step-tab'));
+    var backBtn = document.getElementById('wizBack');
+    var nextBtn = document.getElementById('wizNext');
+    var submitBtn = document.getElementById('wizSubmit');
+    var typeSel = document.getElementById('stationType');
+    var programPrev = document.getElementById('programPreview');
+    var templatePrev = document.getElementById('templatePreview');
+    var review = document.getElementById('wizReview');
+    var owner = <%- JSON.stringify(owner) %>;
+    var current = 0;
+
+    function syncType() {
+      var opt = typeSel.options[typeSel.selectedIndex];
+      programPrev.value = opt ? opt.getAttribute('data-program') : '';
+      templatePrev.value = opt ? opt.getAttribute('data-template') : '';
+    }
+    function val(name) {
+      var el = form.querySelector('[name="' + name + '"]');
+      return el ? el.value.trim() : '';
+    }
+    function buildReview() {
+      var typeLabel = typeSel.options[typeSel.selectedIndex].text;
+      var rows = [
+        ['Owner', owner],
+        ['Station type', typeLabel],
+        ['Station', val('stationName') || '(auto from county)'],
+        ['Where', (val('address') || '(no address)') + ' — ' + val('county')],
+        ['Map pin', (val('lat') && val('lng')) ? (val('lat') + ', ' + val('lng')) : 'county centroid'],
+        ['Device', (val('deviceId') || '(auto)') + ' · ' + templatePrev.value],
+        ['Program', programPrev.value],
+      ];
+      review.innerHTML = rows.map(function (r) {
+        return '<dt class="col-sm-3 text-muted">' + r[0] + '</dt><dd class="col-sm-9">' + (r[1] || '') + '</dd>';
+      }).join('');
+    }
+    function render() {
+      panels.forEach(function (p, i) { p.classList.toggle('active', i === current); });
+      tabs.forEach(function (t, i) {
+        t.classList.toggle('active', i === current);
+        t.classList.toggle('done', i < current);
+      });
+      backBtn.disabled = current === 0;
+      var isLast = current === panels.length - 1;
+      nextBtn.classList.toggle('d-none', isLast);
+      submitBtn.classList.toggle('d-none', !isLast);
+      if (isLast) buildReview();
+    }
+    function validatePanel(i) {
+      var fields = panels[i].querySelectorAll('input, select');
+      for (var k = 0; k < fields.length; k++) {
+        if (!fields[k].checkValidity()) { fields[k].reportValidity(); return false; }
+      }
+      return true;
+    }
+    nextBtn.addEventListener('click', function () {
+      if (!validatePanel(current)) return;
+      if (current < panels.length - 1) { current++; render(); }
+    });
+    backBtn.addEventListener('click', function () { if (current > 0) { current--; render(); } });
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var target = parseInt(t.getAttribute('data-step'), 10);
+        if (target > current && !validatePanel(current)) return;
+        current = target; render();
+      });
+    });
+    typeSel.addEventListener('change', syncType);
+    syncType();
+    render();
+  })();
+</script>
+
+<%- include('../partials/shell-foot') %>

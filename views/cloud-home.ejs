@@ -13,9 +13,18 @@
     <div class="col-md-6 col-lg-4">
       <div class="card h-100 shadow-sm border-primary">
         <div class="card-body">
-          <h2 class="h5">Fleet</h2>
+          <h2 class="h5">Assets</h2>
           <p class="text-muted small mb-3">Map, alarms, and lift station operations — counties, duplex, and ATU types.</p>
-          <a href="/fleet" class="btn btn-purple">Open fleet map</a>
+          <a href="/fleet" class="btn btn-purple">Open assets map</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-info">
+        <div class="card-body">
+          <h2 class="h5">Camera sites</h2>
+          <p class="text-muted small mb-3">Generate pairing codes to link edge appliances and sync remote cameras to the cloud.</p>
+          <a href="/remote-sites" class="btn btn-outline-purple">Pair appliances</a>
         </div>
       </div>
     </div>
@@ -32,7 +41,7 @@
       <div class="card h-100 shadow-sm">
         <div class="card-body">
           <h2 class="h5">Studio</h2>
-          <p class="text-muted small mb-3">SCADA runtime — open a project, HMI, tags, programs, and drivers.<% if (user.role === 'admin') { %> Admins: use <strong>Tools → Connectivity</strong> in Studio for Twilio, email, and SIM setup.<% } %></p>
+          <p class="text-muted small mb-3">SCADA runtime — open a project, HMI, tags, programs, and drivers. Training curriculum: <strong>Tools → Training</strong> in Studio (F2).<% if (user.role === 'admin') { %> Admins: use <strong>Tools → Connectivity</strong> for Twilio, email, and SIM setup.<% } %></p>
           <a href="/studio" class="btn btn-purple">Open Studio</a>
         </div>
       </div>

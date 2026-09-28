@@ -5,18 +5,15 @@
 const { MongoClient } = require('mongodb');
 
 const {
-
   CONFIG_URI,
-
   CONFIG_DB,
-
   CONFIG_COLLECTION,
-
   CONFIG_PROJECTS_COLLECTION,
-
-  TENANT_ID,
-
 } = require('../config');
+
+function resolveConfigTenantId() {
+  return require('../project/projectTenantContext').resolveConfigTenantId();
+}
 
 
 
@@ -125,126 +122,78 @@ async function connect() {
 
 
 
-function docId(key) {
+function docId(key, tenantId) {
+  const tid = tenantId || resolveConfigTenantId();
+  return `${tid}:${key}`;
+}
 
-  return `${TENANT_ID}:${key}`;
-
+function configTenantId(tenantId) {
+  return tenantId || resolveConfigTenantId();
 }
 
 
 
-async function readDocument(key) {
-
+async function readDocument(key, tenantId) {
   if (isMemoryMode()) {
-
-    return memoryDocs.get(docId(key)) || null;
-
+    return memoryDocs.get(docId(key, tenantId)) || null;
   }
-
   const database = await connect();
-
-  return database.collection(CONFIG_COLLECTION).findOne({ _id: docId(key) });
-
+  return database.collection(CONFIG_COLLECTION).findOne({ _id: docId(key, tenantId) });
 }
 
 
 
-async function writeDocument(key, data) {
-
+async function writeDocument(key, data, tenantId) {
+  const tid = configTenantId(tenantId);
   if (isMemoryMode()) {
-
-    const id = docId(key);
-
+    const id = docId(key, tid);
     const now = new Date();
-
     memoryDocs.set(id, {
-
       _id: id,
-
-      tenantId: TENANT_ID,
-
+      tenantId: tid,
       key,
-
       data,
-
       updatedAt: now,
-
       createdAt: memoryDocs.get(id)?.createdAt || now,
-
     });
-
     return;
-
   }
-
   const database = await connect();
-
   const now = new Date();
-
   await database.collection(CONFIG_COLLECTION).updateOne(
-
-    { _id: docId(key) },
-
+    { _id: docId(key, tid) },
     {
-
       $set: {
-
-        tenantId: TENANT_ID,
-
+        tenantId: tid,
         key,
-
         data,
-
         updatedAt: now,
-
       },
-
       $setOnInsert: { createdAt: now },
-
     },
-
     { upsert: true },
-
   );
-
 }
 
 
 
-async function loadAllDocuments(keys) {
-
+async function loadAllDocuments(keys, tenantId) {
   if (isMemoryMode()) {
-
     const out = new Map();
-
     for (const key of keys) {
-
-      const row = memoryDocs.get(docId(key));
-
+      const row = memoryDocs.get(docId(key, tenantId));
       if (row?.key) out.set(row.key, row.data);
-
     }
-
     return out;
-
   }
-
   const database = await connect();
-
-  const ids = keys.map((k) => docId(k));
-
+  const ids = keys.map((k) => docId(k, tenantId));
   const rows = await database.collection(CONFIG_COLLECTION).find({ _id: { $in: ids } }).toArray();
-
   const out = new Map();
-
   for (const row of rows) {
-
     if (row?.key) out.set(row.key, row.data);
-
   }
-
   return out;
-
 }
 
 
@@ -255,7 +204,7 @@ async function listProjectSnapshots() {
 
     return [...memoryProjects.values()]
 
-      .filter((r) => r.tenantId === TENANT_ID)
+      .filter((r) => r.tenantId === configTenantId())
 
       .sort((a, b) => String(b.savedAt || '').localeCompare(String(a.savedAt || '')))
 
@@ -279,7 +228,7 @@ async function listProjectSnapshots() {
 
   const rows = await database.collection(CONFIG_PROJECTS_COLLECTION)
 
-    .find({ tenantId: TENANT_ID })
+    .find({ tenantId: configTenantId() })
 
     .project({ projectId: 1, name: 1, savedAt: 1, tagCount: 1, driverCount: 1 })
 
@@ -309,7 +258,7 @@ async function readProjectSnapshot(projectId) {
 
   if (isMemoryMode()) {
 
-    return memoryProjects.get(`${TENANT_ID}:${projectId}`) || null;
+    return memoryProjects.get(`${configTenantId()}:${projectId}`) || null;
 
   }
 
@@ -317,7 +266,7 @@ async function readProjectSnapshot(projectId) {
 
   return database.collection(CONFIG_PROJECTS_COLLECTION).findOne({
 
-    tenantId: TENANT_ID,
+    tenantId: configTenantId(),
 
     projectId,
 
@@ -335,11 +284,11 @@ async function writeProjectSnapshot(projectId, doc, meta = {}) {
 
   if (isMemoryMode()) {
 
-    const id = `${TENANT_ID}:${projectId}`;
+    const id = `${configTenantId()}:${projectId}`;
 
     memoryProjects.set(id, {
 
-      tenantId: TENANT_ID,
+      tenantId: configTenantId(),
 
       projectId,
 
@@ -367,13 +316,13 @@ async function writeProjectSnapshot(projectId, doc, meta = {}) {
 
   await database.collection(CONFIG_PROJECTS_COLLECTION).updateOne(
 
-    { tenantId: TENANT_ID, projectId },
+    { tenantId: configTenantId(), projectId },
 
     {
 
       $set: {
 
-        tenantId: TENANT_ID,
+        tenantId: configTenantId(),
 
         projectId,
 
@@ -409,7 +358,7 @@ async function deleteProjectSnapshot(projectId) {
 
   if (isMemoryMode()) {
 
-    return memoryProjects.delete(`${TENANT_ID}:${projectId}`);
+    return memoryProjects.delete(`${configTenantId()}:${projectId}`);
 
   }
 
@@ -417,7 +366,7 @@ async function deleteProjectSnapshot(projectId) {
 
   const r = await database.collection(CONFIG_PROJECTS_COLLECTION).deleteOne({
 
-    tenantId: TENANT_ID,
+    tenantId: configTenantId(),
 
     projectId,
 
@@ -467,7 +416,7 @@ function status() {
 
     projectsCollection: CONFIG_PROJECTS_COLLECTION,
 
-    tenantId: TENANT_ID,
+    tenantId: configTenantId(),
 
   };
 

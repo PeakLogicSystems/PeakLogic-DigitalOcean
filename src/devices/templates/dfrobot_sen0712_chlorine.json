@@ -1,0 +1,38 @@
+{
+  "id": "dfrobot_sen0712_chlorine",
+  "label": "DFRobot SEN0712 — RS485 residual chlorine probe",
+  "vendor": "DFRobot",
+  "model": "SEN0712 residual chlorine",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "df_sen0712",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 1,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "CL_MG_L",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Residual chlorine mg/L (IR 0x0000, register ×100)"
+      }
+    ]
+  }
+}

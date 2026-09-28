@@ -2,17 +2,33 @@
 
 const API = (typeof window !== 'undefined' && window.PEAKLOGIC_API_BASE) || '/api';
 
+function isCloudContext() {
+  if (typeof window === 'undefined' || !window.location) return false;
+  if (window.PEAKLOGIC_DEPLOYMENT === 'cloud') return true;
+  const host = window.location.hostname || '';
+  const port = window.location.port || '';
+  return port === '3100' || /peaklogic\.io$/i.test(host);
+}
+
+function fetchErrorHint(origin) {
+  if (isCloudContext()) {
+    return `Cannot reach the PeakLogic Cloud server at ${origin}. The site may be down or HTTPS/nginx needs attention on the SaaS host (port 3100).`;
+  }
+  return `Cannot reach the PeakLogic server at ${origin}. Start MVP Suite with npm start (default http://127.0.0.1:3090/).`;
+}
+
 async function request(method, path, body) {
   let res;
   try {
     res = await fetch(API + path, {
       method,
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
       body: body != null ? JSON.stringify(body) : undefined,
     });
   } catch (e) {
     const hint = e.message === 'Failed to fetch'
-      ? `Cannot reach the PeakLogic server at ${location.origin}. Start MVP Suite with npm start (default http://127.0.0.1:3090/).`
+      ? fetchErrorHint(location.origin)
       : e.message;
     throw new Error(hint);
   }
@@ -35,8 +51,16 @@ async function request(method, path, body) {
 }
 
 window.api = {
-  getDashboard: (graphTags) => {
+  getDashboard: (graphTags, opts = {}) => {
+    const params = [];
+    if (graphTags?.length) params.push(`graphTags=${graphTags.join(',')}`);
+    if (opts.lite) params.push('lite=1');
     let q = '/dashboard';
+    if (params.length) q += `?${params.join('&')}`;
+    return request('GET', q);
+  },
+  getLive: (graphTags) => {
+    let q = '/live';
     if (graphTags?.length) q += `?graphTags=${graphTags.join(',')}`;
     return request('GET', q);
   },
@@ -47,7 +71,7 @@ window.api = {
       res = await fetch(`${API}/project/est?name=${encodeURIComponent(name || 'project')}`);
     } catch (e) {
       const hint = e.message === 'Failed to fetch'
-        ? `Cannot reach the PeakLogic server at ${location.origin}. Start MVP Suite with npm start.`
+        ? fetchErrorHint(location.origin)
         : e.message;
       throw new Error(hint);
     }
@@ -63,7 +87,7 @@ window.api = {
       res = await fetch(`${API}/projects/export?id=${encodeURIComponent(id)}`);
     } catch (e) {
       const hint = e.message === 'Failed to fetch'
-        ? `Cannot reach the PeakLogic server at ${location.origin}. Start MVP Suite with npm start.`
+        ? fetchErrorHint(location.origin)
         : e.message;
       throw new Error(hint);
     }
@@ -75,6 +99,42 @@ window.api = {
   },
   saveWorkspace: (project) => request('POST', '/workspace/save', { project }),
   listProjects: () => request('GET', '/projects'),
+  listImportableProjects: () => request('GET', '/projects/importable'),
+  importProjectFromLibrary: (file) => request('POST', '/projects/import/library', { file }),
+  importProjectNativePick: () => request('POST', '/projects/import/native-pick', {}),
+  importProjectFromPath: (path) => request('POST', '/projects/import/path', { path }),
+  async importProjectFile(file) {
+    if (!file) throw new Error('No file selected');
+    const buf = await file.arrayBuffer();
+    const bytes = new Uint8Array(buf);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
+    return request('POST', '/projects/import/file', {
+      filename: file.name || 'project.est.zip',
+      contentBase64: btoa(binary),
+    });
+  },
+  async deployProjectHubFile(fileOrBlob) {
+    if (!fileOrBlob) throw new Error('No project file selected');
+    if (typeof window.api?.importProjectFile === 'function') {
+      return window.api.importProjectFile(fileOrBlob);
+    }
+    const name = String(fileOrBlob.name || 'project');
+    if (/\.est\.zip$/i.test(name)) {
+      throw new Error('This server cannot import .est.zip yet — deploy the latest PeakLogic build, or use Project → Import after upgrading.');
+    }
+    const text = await fileOrBlob.text();
+    const doc = JSON.parse(text);
+    return request('POST', '/project/est', doc);
+  },
+  async exportEstDoc(name) {
+    const res = await fetch(`${API}/project/est?name=${encodeURIComponent(name || 'project')}`, {
+      credentials: 'same-origin',
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || res.statusText || 'Export failed');
+    return data;
+  },
   openProjectsFolder: () => request('POST', '/projects/open-folder', {}),
   saveProject: (name) => request('POST', '/projects/save', { name }),
   newProject: (name) => request('POST', '/projects/new', { name }),
@@ -82,6 +142,7 @@ window.api = {
   deleteProject: (id) => request('DELETE', `/projects?id=${encodeURIComponent(id)}`),
   putTags: (tags) => request('PUT', '/tags', { tags }),
   putDrivers: (drivers) => request('PUT', '/drivers', { drivers }),
+  saveNextcenturySetup: (body) => request('PUT', '/drivers/nextcentury/setup', body),
   connectDriver: (driverId) => request('POST', '/drivers/connect', { driverId }),
   disconnectDriver: (driverId) => request('POST', '/drivers/disconnect', { driverId }),
   testDriver: (cfg) => request('POST', '/drivers/test', cfg),
@@ -123,6 +184,7 @@ window.api = {
   clearForce: (tagId) => request('DELETE', `/debug/force?tagId=${encodeURIComponent(tagId)}`),
   clearGraph: () => request('POST', '/graph/clear', {}),
   modbusMove: (body) => request('POST', '/modbus/move', body),
+  modbusProbe: (body) => request('POST', '/modbus/probe', body),
   getSerialPorts: () => request('GET', '/system/serial-ports'),
   getTags: () => request('GET', '/tags'),
   ensureMotorTags: () => request('POST', '/tags/ensure-motor', {}),
@@ -189,6 +251,9 @@ window.api = {
   },
   sysLogMaintenance: (body) => request('POST', '/sys-log/maintenance', body),
   getIoMap: () => request('GET', '/io-map'),
+  patchIoMapTag: (tagId, body) => request('PATCH', `/io-map/tags/${encodeURIComponent(tagId)}`, body),
+  putIoMapBindings: (bindings) => request('PUT', '/io-map/bindings', { bindings }),
+  bindIoMapRoomTemplate: (body) => request('POST', '/io-map/bindings/room-template', body),
   parcDeployProgram: (id, body) => request('POST', `/parc/devices/${encodeURIComponent(id)}/program`, body || {}),
   parcSettings: () => request('GET', '/parc/settings'),
   putParcSettings: (settings) => request('PUT', '/parc/settings', settings),
@@ -209,7 +274,7 @@ window.api = {
       });
     } catch (e) {
       throw new Error(e.message === 'Failed to fetch'
-        ? `Cannot reach the PeakLogic server at ${location.origin}.`
+        ? fetchErrorHint(location.origin)
         : e.message);
     }
     if (!res.ok) {
@@ -240,54 +305,46 @@ window.api = {
   activateCellularSim: (id) => request('POST', `/cellular/sims/${encodeURIComponent(id)}/activate`, {}),
   deactivateCellularSim: (id) => request('POST', `/cellular/sims/${encodeURIComponent(id)}/deactivate`, {}),
   getCellularSimUsage: (id) => request('GET', `/cellular/sims/${encodeURIComponent(id)}/usage`),
+  syncCellularBilling: (body) => request('POST', '/cellular/billing/sync', body || {}),
+  getCellularBillingReport: (query) => {
+    const qs = new URLSearchParams();
+    Object.entries(query || {}).forEach(([key, value]) => {
+      if (value != null && value !== '') qs.set(key, String(value));
+    });
+    const suffix = qs.toString() ? `?${qs.toString()}` : '';
+    return request('GET', `/cellular/billing/report${suffix}`);
+  },
+  exportCellularBillingCsv: (query) => {
+    const qs = new URLSearchParams();
+    Object.entries(query || {}).forEach(([key, value]) => {
+      if (value != null && value !== '') qs.set(key, String(value));
+    });
+    const suffix = qs.toString() ? `?${qs.toString()}` : '';
+    return fetch(`${API}/cellular/billing/export${suffix}`, { credentials: 'same-origin' })
+      .then(async (res) => {
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || res.statusText || 'Export failed');
+        }
+        return res.text();
+      });
+  },
+  getCellularGatewayReports: () => request('GET', '/cellular/gateway/reports'),
+  autoLinkCellularGateway: (body) => request('POST', '/cellular/gateway/auto-link', body || {}),
   getMessagingStatus: () => request('GET', '/messaging/status'),
   saveMessagingConfig: (body) => request('PUT', '/messaging/config', body),
   testMessagingMail: (body) => request('POST', '/messaging/test/mail', body),
   testMessagingSms: (body) => request('POST', '/messaging/test/sms', body),
   listProjectHubLocal: () => request('GET', '/project-hub/catalog'),
-  async listLocationsPlatform() {
-    const platform = (typeof window !== 'undefined' && window.PEAKLOGIC_PLATFORM_API) || '/api';
-    const res = await fetch(`${platform}/locations`, { credentials: 'include' });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error || res.statusText || 'Locations failed');
-    return data;
-  },
-  studioLocationStorageKey() {
-    const tenant = (typeof window !== 'undefined' && window.PEAKLOGIC_TENANT_ID) || 'default';
-    return `mv_studio_location_${tenant}`;
-  },
-  getStudioLocationId() {
-    if (typeof window === 'undefined') return '';
-    const fromPage = String(window.PEAKLOGIC_STUDIO_LOCATION_ID || '').trim();
-    if (fromPage) {
-      try { localStorage.setItem(api.studioLocationStorageKey(), fromPage); } catch { /* ignore */ }
-      return fromPage;
-    }
-    try { return String(localStorage.getItem(api.studioLocationStorageKey()) || '').trim(); } catch { return ''; }
-  },
-  setStudioLocationId(id) {
-    if (typeof window === 'undefined') return;
-    const val = String(id || '').trim();
-    try {
-      if (val) localStorage.setItem(api.studioLocationStorageKey(), val);
-      else localStorage.removeItem(api.studioLocationStorageKey());
-    } catch { /* ignore */ }
-    window.PEAKLOGIC_STUDIO_LOCATION_ID = val;
-  },
-  async listProjectHubCloud(locationId) {
-    const loc = locationId != null ? locationId : api.getStudioLocationId();
-    const qs = loc ? `?locationId=${encodeURIComponent(loc)}` : '';
+  async listProjectHubCloud() {
     if (typeof window !== 'undefined' && window.PEAKLOGIC_PLATFORM_API) {
       const platform = window.PEAKLOGIC_PLATFORM_API;
-      const res = await fetch(`${platform}/project-hub/catalog${qs}`, { credentials: 'include' });
+      const res = await fetch(`${platform}/project-hub/catalog`, { credentials: 'include' });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || res.statusText || 'Cloud catalog failed');
       return data;
     }
-    const path = loc
-      ? `/project-hub/cloud/catalog?locationId=${encodeURIComponent(loc)}`
-      : '/project-hub/cloud/catalog';
-    return request('GET', path);
+    return request('GET', '/project-hub/cloud/catalog');
   },
   publishProjectHubLocal: (body) => request('POST', '/project-hub/publish', body || {}),
   publishProjectHubCloud: (body) => request('POST', '/project-hub/cloud/publish', body || {}),
@@ -315,18 +372,118 @@ window.api = {
   },
   async publishProjectHubPlatform(body) {
     const platform = (typeof window !== 'undefined' && window.PEAKLOGIC_PLATFORM_API) || '/api';
-    const payload = { ...(body || {}) };
-    if (!payload.locationId && api.getStudioLocationId()) {
-      payload.locationId = api.getStudioLocationId();
-    }
     const res = await fetch(`${platform}/project-hub/publish`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(body || {}),
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || res.statusText || 'Cloud publish failed');
     return data;
   },
+
+  async listLocations() {
+    const data = await request('GET', '/sites');
+    const locations = (data.sites || []).map((s) => ({
+      id: s.siteId || s.id,
+      name: s.name || s.siteId || s.id,
+      slug: s.slug || s.siteId || s.id,
+    }));
+    return { locations };
+  },
+  async listProjectHubCatalog(locationId) {
+    const qs = locationId ? `?locationId=${encodeURIComponent(locationId)}` : '';
+    const data = await request('GET', `/project-hub/catalog${qs}`);
+    let projects = data.projects || [];
+    if (locationId) {
+      projects = projects.filter((p) => !p.locationId || p.locationId === locationId);
+    }
+    return { projects };
+  },
+  fetchProjectHubEst: (id) => request('GET', `/project-hub/catalog/${encodeURIComponent(id)}/est`),
+  publishProjectHub: (body) => request('POST', '/project-hub/publish', body || {}),
+
+  // Cloud SaaS — tenant auth + Cloud Studio (cloudStudioUi.js)
+  authMe: () => request('GET', '/auth/me'),
+  logout: () => request('POST', '/auth/logout', {}),
+  listSites: () => request('GET', '/sites'),
+  createSite: (body) => request('POST', '/sites', body),
+  updateSite: (siteId, body) => request('PATCH', `/sites/${encodeURIComponent(siteId)}`, body),
+  deleteSite: (siteId) => request('DELETE', `/sites/${encodeURIComponent(siteId)}`),
+  siteCameras: (siteId) => request('GET', `/sites/${encodeURIComponent(siteId)}/cameras`),
+  listSiteDevices: () => request('GET', '/sites/devices'),
+  listCheckedInDevices: () => request('GET', '/sites/devices/checked-in'),
+  claimSiteDevice: (body) => request('POST', '/sites/devices/claim', body),
+  tenantCommissionKey: () => request('GET', '/tenant/commission-key'),
+  mqttConsole: () => request('GET', '/mqtt-console'),
+  mqttConsoleTraffic: (qs) => request('GET', `/mqtt-console/traffic${qs ? `?${qs}` : ''}`),
+  mqttConsoleFenceDevice: (deviceId, body) => request('POST', `/mqtt-console/devices/${encodeURIComponent(deviceId)}/fence`, body),
+  mqttConsoleSetSiteKey: (tenantId, body) => request('PATCH', `/mqtt-console/tenants/${encodeURIComponent(tenantId)}/site-key`, body),
+  createSiteDevice: (body) => request('POST', '/sites/devices', body),
+  unassignSiteDevice: (deviceId) => request('DELETE', `/sites/devices/${encodeURIComponent(deviceId)}`),
+  listFleetAssets: () => request('GET', '/fleet'),
+  createFleetAsset: (body) => request('POST', '/fleet', body),
+  deleteFleetAsset: (assetId) => request('DELETE', `/fleet/${encodeURIComponent(assetId)}`),
+  cloudAccessCatalog: () => request('GET', '/tenant/access-catalog'),
+  notificationScopeCatalog: (tenantId) => request(
+    'GET',
+    tenantId
+      ? `/tenant/notification-scope-catalog?tenantId=${encodeURIComponent(tenantId)}`
+      : '/users/notification-scope-catalog',
+  ),
+  listTenantUsers: () => request('GET', '/tenant/users'),
+  createTenantUser: (body) => request('POST', '/tenant/users', body),
+  updateTenantUser: (userId, body) => request('PUT', `/tenant/users/${encodeURIComponent(userId)}`, body),
+  resendTenantInvite: (userId) => request('POST', `/tenant/users/${encodeURIComponent(userId)}/resend-invite`),
+  deleteTenantUser: (userId) => request('DELETE', `/tenant/users/${encodeURIComponent(userId)}`),
+  listAdminTenants: () => request('GET', '/admin/tenants'),
+  listAdminPartners: () => request('GET', '/admin/partners'),
+  listAdminCustomers: () => request('GET', '/admin/customers'),
+  createAdminTenant: (body) => request('POST', '/admin/tenants', body),
+  updateAdminTenant: (tenantId, body) => request('PATCH', `/admin/tenants/${encodeURIComponent(tenantId)}`, body),
+  deleteAdminTenant: (tenantId) => request('DELETE', `/admin/tenants/${encodeURIComponent(tenantId)}`),
+  listAdminUsers: (tenantId) => request(
+    'GET',
+    tenantId ? `/admin/users?tenantId=${encodeURIComponent(tenantId)}` : '/admin/users',
+  ),
+  createAdminUser: (body) => request('POST', '/admin/users', body),
+  updateAdminUser: (userId, body) => request('PUT', `/admin/users/${encodeURIComponent(userId)}`, body),
+  resendAdminInvite: (userId) => request('POST', `/admin/users/${encodeURIComponent(userId)}/resend-invite`),
+  deleteAdminUser: (userId) => request('DELETE', `/admin/users/${encodeURIComponent(userId)}`),
+  patchTenantCmms: (tenantId, body) => request('PATCH', `/admin/tenants/${encodeURIComponent(tenantId)}/cmms`, body),
+  patchTenantPartner: (tenantId, body) => request('PATCH', `/admin/tenants/${encodeURIComponent(tenantId)}/partner`, body),
+  patchTenantType: (tenantId, body) => request('PATCH', `/admin/tenants/${encodeURIComponent(tenantId)}/type`, body),
+  tenantCmms: () => request('GET', '/tenant/cmms'),
+  listPartnerCustomers: () => request('GET', '/partner/customers'),
+  partnerBilling: () => request('GET', '/partner/billing'),
+  listAccessibleTenants: () => request('GET', '/partner/accessible-tenants'),
+  switchPartnerTenant: (body) => request('POST', '/partner/switch-tenant', body),
+  cmmsDashboard: () => request('GET', '/cmms/dashboard'),
+  listCmmsAssignees: () => request('GET', '/cmms/assignees'),
+  listCmmsWorkOrders: (query) => {
+    const qs = new URLSearchParams();
+    Object.entries(query || {}).forEach(([key, value]) => {
+      if (value != null && value !== '') qs.set(key, String(value));
+    });
+    const suffix = qs.toString() ? `?${qs.toString()}` : '';
+    return request('GET', `/cmms/work-orders${suffix}`);
+  },
+  createCmmsWorkOrder: (body) => request('POST', '/cmms/work-orders', body),
+  updateCmmsWorkOrder: (id, body) => request('PUT', `/cmms/work-orders/${encodeURIComponent(id)}`, body),
+  deleteCmmsWorkOrder: (id) => request('DELETE', `/cmms/work-orders/${encodeURIComponent(id)}`),
+  completeCmmsWorkOrder: (id) => request('POST', `/cmms/work-orders/${encodeURIComponent(id)}/complete`, {}),
+  listCmmsPmSchedules: (query) => {
+    const qs = new URLSearchParams();
+    Object.entries(query || {}).forEach(([key, value]) => {
+      if (value != null && value !== '') qs.set(key, String(value));
+    });
+    const suffix = qs.toString() ? `?${qs.toString()}` : '';
+    return request('GET', `/cmms/pm-schedules${suffix}`);
+  },
+  createCmmsPmSchedule: (body) => request('POST', '/cmms/pm-schedules', body),
+  updateCmmsPmSchedule: (id, body) => request('PUT', `/cmms/pm-schedules/${encodeURIComponent(id)}`, body),
+  deleteCmmsPmSchedule: (id) => request('DELETE', `/cmms/pm-schedules/${encodeURIComponent(id)}`),
+  completeCmmsPmSchedule: (id) => request('POST', `/cmms/pm-schedules/${encodeURIComponent(id)}/complete`, {}),
+  generateCmmsDuePmWorkOrders: () => request('POST', '/cmms/pm/generate-due', {}),
 };

@@ -1,0 +1,7 @@
+county,station_name,station_slug,station_type,lat,lng,device_id,device_slug,gateway_id,driver_id,address,owner
+putnam,125 Yelvington Rd Triplex,yelvington-triplex,triplex,29.6441,-81.5888,mv_pcu_yelvington_01,dev-pcu-yelvington,gw_pcu_yelvington_01,ls_yelvington,"125 Yelvington Rd, Palatka, FL 32131",Putnam County Utilities
+putnam,Reid St Simplex,reid-st-simplex,simplex,29.6486,-81.6304,mv_pcu_reid_01,dev-pcu-reid,gw_pcu_reid_01,ls_reid,"800 Reid St, Palatka, FL 32177",Putnam County Utilities
+putnam,Mosquito Lagoon Duplex,mosquito-lagoon-duplex,dual_duplex,29.6124,-81.5621,mv_pcu_mosquito_01,dev-pcu-mosquito,gw_pcu_mosquito_01,ls_mosquito,"Co Rd 309, East Palatka, FL 32131",Putnam County Utilities
+putnam,Cannan Grove Triplex,cannan-grove-triplex,triplex,29.6712,-81.7015,mv_pcu_cannan_01,dev-pcu-cannan,gw_pcu_cannan_01,ls_cannan,"Cannan Grove Rd, Palatka, FL 32177",Putnam County Utilities
+putnam,Bardin Rd Duplex,bardin-rd-duplex,dual_duplex,29.5898,-81.6543,mv_pcu_bardin_01,dev-pcu-bardin,gw_pcu_bardin_01,ls_bardin,"Bardin Rd, San Mateo, FL 32185",Putnam County Utilities
+putnam,SJR North Simplex,sjr-north-simplex,simplex,29.6335,-81.7152,mv_pcu_sjrn_01,dev-pcu-sjrn,gw_pcu_sjrn_01,ls_sjrn,"St Johns River Rd, Palatka, FL 32177",Putnam County Utilities

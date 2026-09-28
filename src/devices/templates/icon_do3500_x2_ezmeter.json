@@ -1,0 +1,210 @@
+{
+  "id": "icon_do3500_x2_ezmeter",
+  "label": "PC test — Icon DO3500×2 + EZMeter",
+  "vendor": "PeakLogic",
+  "model": "Icon DO3500 slaves 1–2 + EZ Meter slave 3",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "rs485_bus",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 16,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "DO1_MG_L",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 1,
+        "comment": "DO probe 1 mg/L — Icon slave 1 (IR 0–1 float BE)"
+      },
+      {
+        "id": "DO1_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 1,
+        "comment": "DO probe 1 temp °C — Icon slave 1"
+      },
+      {
+        "id": "DO1_MAIN_V",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 4,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 1,
+        "comment": "DO probe 1 main voltage — Icon slave 1"
+      },
+      {
+        "id": "DO1_TEMP_V",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 6,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 1,
+        "comment": "DO probe 1 temp voltage — Icon slave 1"
+      },
+
+      {
+        "id": "DO2_MG_L",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 2,
+        "comment": "DO probe 2 mg/L — Icon slave 2 (IR 0–1 float BE)"
+      },
+      {
+        "id": "DO2_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 2,
+        "comment": "DO probe 2 temp °C — Icon slave 2"
+      },
+      {
+        "id": "DO2_MAIN_V",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 4,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 2,
+        "comment": "DO probe 2 main voltage — Icon slave 2"
+      },
+      {
+        "id": "DO2_TEMP_V",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 6,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "slaveId": 2,
+        "comment": "DO probe 2 temp voltage — Icon slave 2"
+      },
+
+      {
+        "id": "EZ_KWH_IMP",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 16,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 0.01,
+        "slaveId": 3,
+        "comment": "EZ Meter summed kWh import — slave 3"
+      },
+      {
+        "id": "EZ_V_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 24,
+        "signed": false,
+        "scale": 0.1,
+        "slaveId": 3,
+        "comment": "EZ Meter Phase A V–N — slave 3"
+      },
+      {
+        "id": "EZ_I_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 25,
+        "signed": false,
+        "scale": 0.1,
+        "slaveId": 3,
+        "comment": "EZ Meter Phase A current — slave 3"
+      },
+      {
+        "id": "EZ_W_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 26,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "slaveId": 3,
+        "comment": "EZ Meter Phase A watts — slave 3"
+      },
+      {
+        "id": "EZ_HZ_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 28,
+        "signed": false,
+        "scale": 0.1,
+        "slaveId": 3,
+        "comment": "EZ Meter Phase A Hz — slave 3"
+      },
+      {
+        "id": "EZ_PF_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 29,
+        "signed": true,
+        "scale": 0.01,
+        "slaveId": 3,
+        "comment": "EZ Meter Phase A PF — slave 3"
+      }
+    ]
+  }
+}

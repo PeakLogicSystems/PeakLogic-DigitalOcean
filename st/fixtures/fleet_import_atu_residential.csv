@@ -1,0 +1,2 @@
+role,category,station_name,station_slug,station_type,design_gpd,lat,lng,device_id,device_slug,gateway_id,driver_id,address,owner
+atu,atu,"Oak Lane — single ATU",oak-atu,single_atu,500,29.0286,-81.3031,mv_atu_oak_01,dev-oak-atu,gw_dev-oak-atu,drv_oak_atu,"142 Oak Lane, DeLand, FL 32724",PeakLogic ATU Service

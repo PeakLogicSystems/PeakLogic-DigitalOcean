@@ -1,0 +1,8 @@
+[
+  { "id": "IFLO_RPM", "label": "IntelliFlo RPM", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "rpm", "deviceClass": "intelliflo", "deviceAddr": 96 } },
+  { "id": "IFLO_WATTS", "label": "IntelliFlo watts", "type": "INT", "role": "input", "value": 0, "driverId": "pentair_bus", "driverAddress": { "pentair": "watts", "deviceClass": "intelliflo", "deviceAddr": 96 } },
+  { "id": "IFLO_RUNNING", "label": "IntelliFlo running", "type": "BOOL", "role": "input", "value": false, "driverId": "pentair_bus", "driverAddress": { "pentair": "running", "deviceClass": "intelliflo", "deviceAddr": 96 } },
+  { "id": "IFLO_REMOTE_CMD", "label": "IntelliFlo remote cmd", "type": "BOOL", "role": "output", "value": false, "driverId": "pentair_bus", "driverAddress": { "pentair": "remote_cmd", "deviceClass": "intelliflo", "deviceAddr": 96 } },
+  { "id": "IFLO_RUN_CMD", "label": "IntelliFlo run cmd", "type": "BOOL", "role": "output", "value": false, "driverId": "pentair_bus", "driverAddress": { "pentair": "run_cmd", "deviceClass": "intelliflo", "deviceAddr": 96 } },
+  { "id": "IFLO_RPM_CMD", "label": "IntelliFlo RPM cmd", "type": "INT", "role": "output", "value": 1800, "wordWidth": 16, "driverId": "pentair_bus", "driverAddress": { "pentair": "rpm_cmd", "deviceClass": "intelliflo", "deviceAddr": 96 } }
+]

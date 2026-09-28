@@ -4,6 +4,10 @@ const { randomUUID } = require('crypto');
 const { getDb } = require('../db/mongo');
 const { checkCreateLimit, tenantLimits } = require('./limits');
 const { normalizeSlug, isValidSlug } = require('../util/slug');
+const {
+  DEFAULT_CLOUD_IOT_DRIVER,
+  validateCloudIotDriverType,
+} = require('../cloud/iotDriverPolicy');
 
 function now() {
   return new Date();
@@ -57,6 +61,9 @@ async function createDevice(tenantId, systemId, input) {
   const limitCheck = checkCreateLimit(count, limits.devicesPerSystem, 'Device');
   if (!limitCheck.ok) return { ok: false, status: 403, error: limitCheck.error };
 
+  const driverCheck = validateCloudIotDriverType(input.driverType);
+  if (!driverCheck.ok) return { ok: false, status: 400, error: driverCheck.error };
+
   const ts = now();
   const doc = {
     _id: randomUUID(),
@@ -64,7 +71,7 @@ async function createDevice(tenantId, systemId, input) {
     systemId,
     slug,
     name,
-    driverType: String(input.driverType || 'modbus_rtu'),
+    driverType: driverCheck.driverType,
     driverConfig: input.driverConfig && typeof input.driverConfig === 'object' ? input.driverConfig : {},
     templateId: input.templateId ? String(input.templateId) : null,
     enabled: input.enabled !== false,
@@ -94,7 +101,11 @@ async function updateDevice(tenantId, id, input) {
     if (!isValidSlug(slug)) return { ok: false, status: 400, error: 'Invalid slug' };
     updates.slug = slug;
   }
-  if (input.driverType !== undefined) updates.driverType = String(input.driverType);
+  if (input.driverType !== undefined) {
+    const driverCheck = validateCloudIotDriverType(input.driverType);
+    if (!driverCheck.ok) return { ok: false, status: 400, error: driverCheck.error };
+    updates.driverType = driverCheck.driverType;
+  }
   if (input.driverConfig !== undefined) {
     updates.driverConfig = input.driverConfig && typeof input.driverConfig === 'object' ? input.driverConfig : {};
   }

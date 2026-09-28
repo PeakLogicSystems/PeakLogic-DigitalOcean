@@ -41,7 +41,7 @@ window.HmiAssetPaths = (function () {
     let p = migrateHmiSvgPath(urlPath);
     if (!p || p.startsWith('@composite/')) return p;
     if (pathSet.has(p)) return p;
-    const mv = p.replace(/\/(opto22|mblogic)\//gi, '/peaklogic/');
+    const mv = p.replace(/\/(opto22|mblogic)\//gi, '/mv/');
     if (mv !== p && pathSet.has(mv)) return mv;
     const base = p.split('/').pop()?.toLowerCase();
     if (base && byBasename.has(base)) return byBasename.get(base);

@@ -1,0 +1,110 @@
+{
+  "id": "apg_true_echo_rtu",
+  "label": "APG True Echo — RS485 radar level (CR-L / Plus)",
+  "vendor": "Automation Products Group (APG)",
+  "model": "True Echo CR-L / True Echo Plus radar",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "apg_true_echo",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 7,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1,
+    "timeoutMs": 2000,
+    "pollIntervalMs": 500,
+    "frameDelayMs": 100
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "TE_DIST_CM",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": false,
+        "scale": 1,
+        "comment": "Distance cm (IR 0x0000, uint16) — APG True Echo FC04"
+      },
+      {
+        "id": "TE_DIST_MM",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 1,
+        "signed": false,
+        "scale": 1,
+        "comment": "Distance mm (IR 0x0001, uint16)"
+      },
+      {
+        "id": "TE_LVL_CM",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "signed": false,
+        "scale": 1,
+        "comment": "Level cm (IR 0x0002, uint16)"
+      },
+      {
+        "id": "TE_LVL_MM",
+        "type": "INT",
+        "role": "input",
+        "table": "input",
+        "address": 3,
+        "signed": false,
+        "scale": 1,
+        "comment": "Level mm (IR 0x0003, uint16)"
+      },
+      {
+        "id": "TE_SPACE",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 36,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "CDAB",
+        "signed": false,
+        "scale": 1,
+        "comment": "Space in selected units (IR 0x0024–0x0025 float32 CDAB)"
+      },
+      {
+        "id": "TE_LEVEL",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 38,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "CDAB",
+        "signed": false,
+        "scale": 1,
+        "comment": "Level in selected units (IR 0x0026–0x0027 float32 CDAB) — bind to TANK_LVL / ALT"
+      },
+      {
+        "id": "TE_DIST",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 40,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "CDAB",
+        "signed": false,
+        "scale": 1,
+        "comment": "Distance in selected units (IR 0x0028–0x0029 float32 CDAB)"
+      }
+    ]
+  }
+}

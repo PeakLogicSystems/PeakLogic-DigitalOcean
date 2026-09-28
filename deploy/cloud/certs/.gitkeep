@@ -1,0 +1,4 @@
+# Place self-signed or CA certs here when MOSQUITTO_TLS=true:
+#   server.crt  server.key  [ca.crt]
+# Generate test certs (DO droplet):
+#   openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 -nodes -subj "/CN=mqtt"

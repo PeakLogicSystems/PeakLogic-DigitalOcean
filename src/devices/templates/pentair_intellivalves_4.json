@@ -1,0 +1,43 @@
+{
+  "id": "pentair_intellivalves_4",
+  "label": "Pentair IntelliValve ×4 (intake, return, feature, backwash)",
+  "vendor": "Pentair",
+  "model": "IntelliValve (4 actuators)",
+  "transport": "pentair_rs485",
+  "sharedBus": true,
+  "driverId": "pentair_bus",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 8,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceClass": "intellivalve",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 120000,
+    "busGapMs": 120
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "pentair": [
+      { "id": "IV1_CMD", "type": "INT", "role": "output", "point": "pos_cmd", "deviceClass": "intellivalve", "deviceAddr": 12, "comment": "Intake — 0=pool 1=spa 2=middle" },
+      { "id": "IV1_AT_POS", "type": "BOOL", "role": "input", "point": "at_pos", "deviceClass": "intellivalve", "deviceAddr": 12 },
+      { "id": "IV1_POS", "type": "INT", "role": "input", "point": "pos_pv", "deviceClass": "intellivalve", "deviceAddr": 12 },
+      { "id": "IV2_CMD", "type": "INT", "role": "output", "point": "pos_cmd", "deviceClass": "intellivalve", "deviceAddr": 13, "comment": "Return — 0=pool 1=spa 2=middle" },
+      { "id": "IV2_AT_POS", "type": "BOOL", "role": "input", "point": "at_pos", "deviceClass": "intellivalve", "deviceAddr": 13 },
+      { "id": "IV2_POS", "type": "INT", "role": "input", "point": "pos_pv", "deviceClass": "intellivalve", "deviceAddr": 13 },
+      { "id": "IV3_CMD", "type": "INT", "role": "output", "point": "pos_cmd", "deviceClass": "intellivalve", "deviceAddr": 14, "comment": "Feature / cleaner — 0=off 1=on 2=middle" },
+      { "id": "IV3_AT_POS", "type": "BOOL", "role": "input", "point": "at_pos", "deviceClass": "intellivalve", "deviceAddr": 14 },
+      { "id": "IV3_POS", "type": "INT", "role": "input", "point": "pos_pv", "deviceClass": "intellivalve", "deviceAddr": 14 },
+      { "id": "BW_VLV1_CMD", "type": "INT", "role": "output", "point": "pos_cmd", "deviceClass": "intellivalve", "deviceAddr": 15, "comment": "Backwash — 0=filter 1=waste 2=rinse" },
+      { "id": "VLV1_AT_POS", "type": "BOOL", "role": "input", "point": "at_pos", "deviceClass": "intellivalve", "deviceAddr": 15 },
+      { "id": "VLV1_IV_POS", "type": "INT", "role": "input", "point": "pos_pv", "deviceClass": "intellivalve", "deviceAddr": 15 }
+    ]
+  }
+}

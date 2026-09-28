@@ -1,0 +1,39 @@
+{
+  "id": "hayward_tristar_vs",
+  "label": "Hayward TriStar VS — RS-485",
+  "vendor": "Hayward",
+  "model": "TriStar VS SP3200VSPND",
+  "transport": "hayward_rs485",
+  "sharedBus": true,
+  "driverId": "hayward_bus",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 3,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 19200,
+    "deviceAddr": 0,
+    "deviceClass": "vs_pump",
+    "parity": "none",
+    "stopBits": 2,
+    "pollIntervalMs": 5000,
+    "keepaliveMs": 1000,
+    "maxRpm": 3450
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "hayward": [
+      { "id": "TSVS_SPEED_PCT", "type": "INT", "role": "input", "point": "speed_pct", "deviceClass": "vs_pump" },
+      { "id": "TSVS_RPM", "type": "INT", "role": "input", "point": "rpm", "deviceClass": "vs_pump" },
+      { "id": "TSVS_WATTS", "type": "INT", "role": "input", "point": "watts", "deviceClass": "vs_pump" },
+      { "id": "TSVS_RUNNING", "type": "BOOL", "role": "input", "point": "running", "deviceClass": "vs_pump" },
+      { "id": "TSVS_SPEED_CMD", "type": "INT", "role": "output", "point": "speed_cmd", "deviceClass": "vs_pump" },
+      { "id": "TSVS_RUN_CMD", "type": "BOOL", "role": "output", "point": "run_cmd", "deviceClass": "vs_pump" }
+    ]
+  }
+}

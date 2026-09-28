@@ -1,0 +1,180 @@
+menu "PeakLogic Opta Gateway"
+
+    choice BOARD_VARIANT
+        prompt "LilyGO board"
+        default BOARD_T_ETH_ELITE_A7670X
+        help
+            T-ETH-ELITE-A7670X is the integrated SKU (W5500 + A7670 on one board).
+            Stacked = T-ETH-Elite mainboard + LTE shield + T-PCIE A7670 module.
+            GPIO map is identical; integrated board needs GPS-mux init on GPIO4.
+
+        config BOARD_T_ETH_ELITE_A7670X
+            bool "T-ETH-ELITE-A7670X (integrated)"
+        config BOARD_T_ETH_ELITE_STACKED
+            bool "T-ETH-Elite + LTE shield (stacked)"
+    endchoice
+
+    config DEVCFG_WIFI_AP_SSID_DEFAULT
+        string "Setup AP SSID"
+        default "PeakLogic-Gateway"
+
+    config DEVCFG_WIFI_AP_PASS_DEFAULT
+        string "Setup AP password (min 8 chars)"
+        default "peaklogic"
+
+    config DEVCFG_WIFI_AP_HTTP_PORT
+        int "Setup HTTP port on AP (192.168.4.1)"
+        default 8080
+        range 80 65535
+
+    config DEVCFG_LOCAL_MQTT_PORT_DEFAULT
+        int "Local MQTT broker port (Opta connects here)"
+        default 1883
+        range 1 65535
+
+    config DEVCFG_LAN_IP_DEFAULT
+        string "LAN IP (W5500 / Opta side)"
+        default "192.168.1.1"
+
+    config DEVCFG_LAN_MASK_DEFAULT
+        string "LAN netmask"
+        default "255.255.255.0"
+
+    config DEVCFG_CLOUD_MQTT_HOST_DEFAULT
+        string "Cloud MQTT broker host (droplet public IP)"
+        default "127.0.0.1"
+
+    config DEVCFG_CLOUD_MQTT_PORT_DEFAULT
+        int "Cloud MQTT broker port"
+        default 1883
+        range 1 65535
+
+    config DEVCFG_MODEM_APN_DEFAULT
+        string "Cellular APN"
+        default "teal"
+        help
+            Simetry/Teal Smart SIM default APN. Use meerkat.teal on Meerkat platform,
+            or your private APN if Simetry assigned one.
+
+    config GATEWAY_WAN_WIFI_FALLBACK
+        bool "Bench: use Wi-Fi STA as WAN instead of LTE modem"
+        default n
+        help
+            For development without the LTE shield. Connect to office Wi-Fi
+            with menuconfig WAN Wi-Fi SSID/password. Production: disable.
+
+    config GATEWAY_WAN_WIFI_SSID
+        string "Bench WAN Wi-Fi SSID"
+        depends on GATEWAY_WAN_WIFI_FALLBACK
+        default "mywifi"
+
+    config GATEWAY_WAN_WIFI_PASS
+        string "Bench WAN Wi-Fi password"
+        depends on GATEWAY_WAN_WIFI_FALLBACK
+        default ""
+
+endmenu
+
+menu "T-ETH-Elite W5500 (SPI Ethernet LAN)"
+
+    comment "LilyGO T-ETH-Elite defaults (LilyGO-T-ETH-Series utilities.h)"
+
+    config ETH_LAN_ENABLE
+        bool "Enable W5500 LAN for Opta"
+        default y
+
+    config ETH_W5500_SPI_HOST
+        int "SPI host (SPI2_HOST=1, SPI3_HOST=2)"
+        default 2
+
+    config ETH_W5500_SPI_MOSI
+        int "SPI MOSI GPIO"
+        default 21
+
+    config ETH_W5500_SPI_MISO
+        int "SPI MISO GPIO"
+        default 47
+
+    config ETH_W5500_SPI_SCLK
+        int "SPI SCLK GPIO"
+        default 48
+
+    config ETH_W5500_SPI_CS
+        int "SPI CS GPIO"
+        default 45
+
+    config ETH_W5500_INT_GPIO
+        int "W5500 INT GPIO (-1 = poll mode)"
+        default 14
+
+    config ETH_W5500_POLL_MS
+        int "W5500 poll period ms (0 = interrupt mode when INT wired)"
+        default 0
+
+    config ETH_W5500_SPI_MHZ
+        int "SPI clock MHz"
+        default 20
+        range 1 40
+
+endmenu
+
+menu "LTE modem (A7670 — T-ETH-ELITE-A7670X or stacked shield)"
+
+    comment "UART: ESP TX=GPIO6, RX=GPIO4, PWRKEY=GPIO3 (LilyGO pin map)"
+
+    config MODEM_LTE_ENABLE
+        bool "Enable A7670 cellular WAN (esp_modem PPP)"
+        default y
+        depends on !GATEWAY_WAN_WIFI_FALLBACK
+
+    config MODEM_UART_PORT
+        int "UART port for modem"
+        default 1
+        range 0 2
+
+    config MODEM_UART_TX_GPIO
+        int "Modem UART TX (ESP -> modem RX)"
+        default 6
+
+    config MODEM_UART_RX_GPIO
+        int "Modem UART RX (ESP <- modem TX)"
+        default 4
+
+    config MODEM_PWRKEY_GPIO
+        int "Modem PWRKEY GPIO"
+        default 3
+
+    config MODEM_DTR_GPIO
+        int "Modem DTR GPIO (-1 = unused)"
+        default 5
+
+    config MODEM_UART_BAUD
+        int "Modem UART baud rate"
+        default 115200
+
+    config MODEM_PWRON_PULSE_MS
+        int "PWRKEY low pulse duration (ms)"
+        default 1000
+        range 100 3000
+
+    config MODEM_GPS_ENABLE_GPIO
+        int "GPS enable GPIO (integrated A7670X only, GPIO4)"
+        depends on BOARD_T_ETH_ELITE_A7670X
+        default 4
+
+    config MODEM_GPS_ENABLE_LEVEL
+        int "GPS enable active level (integrated; use inverse for UART/data)"
+        depends on BOARD_T_ETH_ELITE_A7670X
+        default 0
+        range 0 1
+
+endmenu
+
+menu "Board extras"
+
+    config BOARD_STATUS_LED_GPIO
+        int "Status LED GPIO (T-ETH-Elite LED on GPIO38)"
+        default 38
+        range -1 48
+
+endmenu

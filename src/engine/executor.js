@@ -1,6 +1,11 @@
 'use strict';
 
 const { getArrayElement, setArrayElement: writeArrayElement } = require('../tags/tagArrays');
+const { globalBaseType } = require('../parc/globalTagMeta');
+
+function tagBaseType(t) {
+  return globalBaseType(t) || t?.type || 'BOOL';
+}
 
 function asBool(v) {
   return !!v;
@@ -35,9 +40,10 @@ function pushOutputTrace(trace, span, tagId, ctx) {
 
 function appendActionTraces(ast, ctx, trace) {
   function walk(stmts) {
-    for (const s of stmts) {
+    for (const s of stmts || []) {
       if (s.type === 'if') {
         walk(s.thenBody);
+        for (const branch of s.elsif || []) walk(branch.body);
         walk(s.elseBody);
       } else if (s.type === 'action') {
         pushOutputTrace(trace, s.tagSpan, s.tag, ctx);
@@ -118,6 +124,27 @@ function evalCall(node, ctx, trace) {
     }
     case 'FlowValue': return asNum(ctx.getFb(tagName)?.gpm ?? ctx.getValue(tagName));
     case 'FlowReady': return !!ctx.getFb(tagName)?.ready;
+    case 'AltActiveUnit': return asNum(ctx.getFb(tagName)?.activeUnit ?? ctx.getValue(tagName));
+    case 'AltReady': return !!ctx.getFb(tagName)?.ready;
+    case 'AltFault': return !!ctx.getFb(tagName)?.fault;
+    case 'AltLag': return asNum((ctx.getFb(tagName)?.lagIndex ?? -1) + 1);
+    case 'AltOffActive': return !!ctx.getFb(tagName)?.offActive;
+    case 'AltHighActive': return !!ctx.getFb(tagName)?.highActive;
+    case 'AltLowActive': return !!ctx.getFb(tagName)?.lowActive;
+    case 'AltLow2Active': return !!ctx.getFb(tagName)?.low2Active;
+    case 'AltPumpUp': {
+      const s = ctx.getFb(tagName)?.pumpStage;
+      return s === 'lag' || s === 'lag2' || s === 'up';
+    }
+    case 'AltPumpDown': {
+      const s = ctx.getFb(tagName)?.pumpStage;
+      return s === 'high' || s === 'down';
+    }
+    case 'RmtFwdRun': return !!ctx.getFb(tagName)?.fwdRun;
+    case 'RmtRevRun': return !!ctx.getFb(tagName)?.revRun;
+    case 'RmtFault': return !!ctx.getFb(tagName)?.fault;
+    case 'RmtReversing': return !!ctx.getFb(tagName)?.reversing;
+    case 'RmtStatus': return asNum(ctx.getFb(tagName)?.status ?? ctx.getValue(tagName));
     case 'ArrayValue': {
       const idx = typeof rest[0] === 'object' ? evalExpr(rest[0], ctx, trace) : rest[0];
       return asNum(ctx.getArrayValue(tagName, idx));
@@ -129,9 +156,19 @@ function evalCall(node, ctx, trace) {
 function runStmt(stmt, ctx, trace) {
   if (stmt.type === 'if') {
     if (asBool(evalExpr(stmt.cond, ctx, trace))) {
-      stmt.thenBody.forEach((s) => runStmt(s, ctx, trace));
+      (stmt.thenBody || []).forEach((s) => runStmt(s, ctx, trace));
     } else {
-      stmt.elseBody.forEach((s) => runStmt(s, ctx, trace));
+      let matched = false;
+      for (const branch of stmt.elsif || []) {
+        if (asBool(evalExpr(branch.cond, ctx, trace))) {
+          (branch.body || []).forEach((s) => runStmt(s, ctx, trace));
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) {
+        (stmt.elseBody || []).forEach((s) => runStmt(s, ctx, trace));
+      }
     }
     return;
   }
@@ -182,12 +219,100 @@ function runStmt(stmt, ctx, trace) {
       case 'FlowOut':
         if (stmt.inputTag) ctx.setFlowOut(stmt.tag, stmt.inputTag);
         break;
+      case 'AltEnable':
+        ctx.setAltEnable(stmt.tag, stmt.inputTag || null);
+        break;
+      case 'AltAdvance':
+        if (stmt.inputTag) ctx.setAltAdvance(stmt.tag, stmt.inputTag);
+        else ctx.pulseAltAdvance(stmt.tag);
+        break;
+      case 'AltAutoFault':
+        if (stmt.inputTag) ctx.setAltAutoFault(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltLead':
+        if (stmt.inputTag) ctx.setAltLead(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltOnline':
+        if (stmt.inputTag) ctx.setAltOnline(stmt.tag, stmt.unitIndex, stmt.inputTag);
+        break;
+      case 'AltUnitOut':
+        if (stmt.inputTag) ctx.setAltUnitOut(stmt.tag, stmt.unitIndex, stmt.inputTag);
+        break;
+      case 'AltOff':
+        if (stmt.inputTag) ctx.setAltOff(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltHigh':
+        if (stmt.inputTag) ctx.setAltHigh(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltLow':
+        if (stmt.inputTag) ctx.setAltLow(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltLag2':
+        if (stmt.inputTag) ctx.setAltLag2(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltLevel':
+        if (stmt.inputTag) ctx.setAltLevel(stmt.tag, stmt.inputTag);
+        break;
+      case 'AltLevelBands':
+        ctx.setAltLevelBands(stmt.tag, stmt, trace);
+        break;
+      case 'AltLeadSel':
+        if (stmt.inputTag) ctx.setAltLeadSel(stmt.tag, stmt.unitIndex, stmt.inputTag);
+        break;
+      case 'AltLagSel':
+        if (stmt.inputTag) ctx.setAltLagSel(stmt.tag, stmt.unitIndex, stmt.inputTag);
+        break;
+      case 'AltLag2Sel':
+        if (stmt.inputTag) ctx.setAltLag2Sel(stmt.tag, stmt.unitIndex, stmt.inputTag);
+        break;
+      case 'RmtFwdCmd':
+        if (stmt.inputTag) ctx.setRmtFwdCmd(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtRevCmd':
+        if (stmt.inputTag) ctx.setRmtRevCmd(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtFwdAux':
+        if (stmt.inputTag) ctx.setRmtFwdAux(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtRevAux':
+        if (stmt.inputTag) ctx.setRmtRevAux(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtOverload':
+        if (stmt.inputTag) ctx.setRmtOverload(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtHoa':
+        if (stmt.inputTag) ctx.setRmtHoa(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtFwdOut':
+        if (stmt.inputTag) ctx.setRmtFwdOut(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtRevOut':
+        if (stmt.inputTag) ctx.setRmtRevOut(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtReset':
+        if (stmt.inputTag) ctx.setRmtReset(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtOffline':
+        if (stmt.inputTag) ctx.setRmtOffline(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtHrs':
+        if (stmt.inputTag) ctx.setRmtHrs(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtStarts':
+        if (stmt.inputTag) ctx.setRmtStarts(stmt.tag, stmt.inputTag);
+        break;
+      case 'RmtSta':
+        if (stmt.inputTag) ctx.setRmtSta(stmt.tag, stmt.inputTag);
+        break;
       case 'SetArray':
         ctx.setArrayElement(
           stmt.tag,
           evalExpr(stmt.index, ctx, trace),
           evalExpr(stmt.valueExpr, ctx, trace),
         );
+        break;
+      case 'SetInt':
+        ctx.setAnalog(stmt.tag, evalExpr(stmt.valueExpr, ctx, trace));
         break;
       default: break;
     }
@@ -196,7 +321,7 @@ function runStmt(stmt, ctx, trace) {
 
 function execute(ast, ctx, trace) {
   if (ast?.type === 'program') {
-    for (const s of ast.body) runStmt(s, ctx, trace);
+    for (const s of ast.body || []) runStmt(s, ctx, trace);
     appendActionTraces(ast, ctx, trace);
   }
 }
@@ -205,10 +330,14 @@ function execute(ast, ctx, trace) {
 function collectExpressionTrace(ast, ctx) {
   const trace = [];
   function walkStmts(stmts) {
-    for (const s of stmts) {
+    for (const s of stmts || []) {
       if (s.type === 'if') {
         evalExpr(s.cond, ctx, trace);
         walkStmts(s.thenBody);
+        for (const branch of s.elsif || []) {
+          evalExpr(branch.cond, ctx, trace);
+          walkStmts(branch.body);
+        }
         walkStmts(s.elseBody);
       }
     }
@@ -235,7 +364,7 @@ function createContext(tagStore, oneShotFired) {
     },
     setArrayElement(id, index, val) {
       const t = tagStore.get(id);
-      if (!t || t.readonly || t.forceOutput) return;
+      if (!t || t.readonly) return;
       if (t.type !== 'INT' && t.type !== 'REAL') return;
       writeArrayElement(t, index, val);
       tagStore.markDirty(id);
@@ -246,8 +375,9 @@ function createContext(tagStore, oneShotFired) {
     },
     setBool(id, val) {
       const t = tagStore.get(id);
-      if (!t || t.readonly || t.forceOutput) return;
-      if (t.type === 'BOOL' || t.role === 'output' || t.role === 'memory') {
+      if (!t || t.readonly) return;
+      const base = tagBaseType(t);
+      if (base === 'BOOL' || t.role === 'output' || t.role === 'memory') {
         tagStore.setValue(id, !!val);
         tagStore.markDirty(id);
       }
@@ -299,9 +429,10 @@ function createContext(tagStore, oneShotFired) {
     },
     setAnalog(id, val) {
       const t = tagStore.get(id);
-      if (!t || t.readonly || t.forceOutput) return;
-      if (t.type === 'INT' || t.type === 'REAL' || t.role === 'output' || t.role === 'memory') {
-        const v = t.type === 'INT' ? Math.trunc(asNum(val)) : asNum(val);
+      if (!t || t.readonly) return;
+      const base = tagBaseType(t);
+      if (base === 'INT' || base === 'REAL' || t.role === 'output' || t.role === 'memory') {
+        const v = base === 'INT' ? Math.trunc(asNum(val)) : asNum(val);
         tagStore.setValue(id, v);
         tagStore.markDirty(id);
       }
@@ -378,6 +509,176 @@ function createContext(tagStore, oneShotFired) {
     setFlowOut(flowId, outTagId) {
       const t = this._flowFb(flowId);
       if (t) t.fb.outId = outTagId;
+    },
+    _altFb(altId) {
+      const t = tagStore.get(altId);
+      if (t?.type !== 'ALT') return null;
+      t.fb = { ...(t.fb || {}) };
+      return t;
+    },
+    setAltEnable(altId, enableTag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      if (enableTag) {
+        t.fb.enableId = enableTag;
+        const src = tagStore.get(enableTag);
+        t.fb.enabled = src ? !!src.value : false;
+      } else {
+        t.fb.enableId = '';
+        t.fb.enabled = true;
+      }
+    },
+    setAltAdvance(altId, advanceTag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.advanceId = advanceTag;
+    },
+    pulseAltAdvance(altId) {
+      const t = this._altFb(altId);
+      if (t) t.fb.advancePulse = true;
+    },
+    setAltAutoFault(altId, tag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.autoFaultId = tag;
+    },
+    setAltLead(altId, outTag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.leadOutId = outTag;
+    },
+    setAltOnline(altId, unitIndex, onlineTag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      const idx = Math.max(1, Math.min(4, Math.trunc(asNum(unitIndex)))) - 1;
+      const ids = Array.isArray(t.fb.onlineIds) ? t.fb.onlineIds.slice() : ['', '', '', ''];
+      while (ids.length < 4) ids.push('');
+      ids[idx] = onlineTag;
+      t.fb.onlineIds = ids;
+    },
+    setAltUnitOut(altId, unitIndex, outTag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      const idx = Math.max(1, Math.min(4, Math.trunc(asNum(unitIndex)))) - 1;
+      const ids = Array.isArray(t.fb.unitOutIds) ? t.fb.unitOutIds.slice() : ['', '', '', ''];
+      while (ids.length < 4) ids.push('');
+      ids[idx] = outTag;
+      t.fb.unitOutIds = ids;
+    },
+    _altSelIds(t, key) {
+      const ids = Array.isArray(t.fb[key]) ? t.fb[key].slice() : ['', '', '', ''];
+      while (ids.length < 4) ids.push('');
+      return ids;
+    },
+    setAltOff(altId, tag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.offId = tag;
+    },
+    setAltHigh(altId, tag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.highId = tag;
+    },
+    setAltLow(altId, tag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.lowId = tag;
+    },
+    setAltLag2(altId, tag) {
+      const t = this._altFb(altId);
+      if (t) t.fb.low2Id = tag;
+    },
+    setAltLevel(altId, tag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      t.fb.levelId = tag;
+      t.fb.levelControlEnabled = true;
+    },
+    setAltLevelBands(altId, stmt, trace) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      t.fb.levelLowLo = asNum(evalExpr(stmt.levelLowLo, this, trace));
+      t.fb.levelLowHi = asNum(evalExpr(stmt.levelLowHi, this, trace));
+      t.fb.levelHighLo = asNum(evalExpr(stmt.levelHighLo, this, trace));
+      t.fb.levelHighHi = asNum(evalExpr(stmt.levelHighHi, this, trace));
+      t.fb.levelControlEnabled = true;
+    },
+    setAltLeadSel(altId, unitIndex, tag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      const idx = Math.max(1, Math.min(4, Math.trunc(asNum(unitIndex)))) - 1;
+      const ids = this._altSelIds(t, 'leadSelIds');
+      ids[idx] = tag;
+      t.fb.leadSelIds = ids;
+    },
+    setAltLagSel(altId, unitIndex, tag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      const idx = Math.max(1, Math.min(4, Math.trunc(asNum(unitIndex)))) - 1;
+      const ids = this._altSelIds(t, 'lagSelIds');
+      ids[idx] = tag;
+      t.fb.lagSelIds = ids;
+    },
+    setAltLag2Sel(altId, unitIndex, tag) {
+      const t = this._altFb(altId);
+      if (!t) return;
+      const idx = Math.max(1, Math.min(4, Math.trunc(asNum(unitIndex)))) - 1;
+      const ids = this._altSelIds(t, 'lag2SelIds');
+      ids[idx] = tag;
+      t.fb.lag2SelIds = ids;
+    },
+    _rmtFb(rmtId) {
+      const t = tagStore.get(rmtId);
+      if (t?.type !== 'RMOTOR') return null;
+      t.fb = { ...(t.fb || {}) };
+      return t;
+    },
+    setRmtFwdCmd(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.fwdCmdId = tag;
+    },
+    setRmtRevCmd(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.revCmdId = tag;
+    },
+    setRmtFwdAux(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.fwdAuxId = tag;
+    },
+    setRmtRevAux(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.revAuxId = tag;
+    },
+    setRmtOverload(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.overloadId = tag;
+    },
+    setRmtHoa(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.hoaId = tag;
+    },
+    setRmtFwdOut(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.fwdOutId = tag;
+    },
+    setRmtRevOut(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.revOutId = tag;
+    },
+    setRmtReset(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.resetId = tag;
+    },
+    setRmtOffline(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.offlineId = tag;
+    },
+    setRmtHrs(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.hrsOutId = tag;
+    },
+    setRmtStarts(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.startsOutId = tag;
+    },
+    setRmtSta(rmtId, tag) {
+      const t = this._rmtFb(rmtId);
+      if (t) t.fb.staOutId = tag;
     },
   };
 }

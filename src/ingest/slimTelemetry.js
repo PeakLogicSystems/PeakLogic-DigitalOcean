@@ -33,6 +33,9 @@ function buildLatestDoc(msg) {
     systemId: msg.systemId || null,
     name: report.name || msg.deviceId,
     platform: report.platform || null,
+    firmwareVersion: report.firmwareVersion || null,
+    protocolVersion: report.protocolVersion ?? null,
+    mqttBufferBytes: report.mqttBufferBytes ?? null,
     runtime: report.runtime || null,
     tagCount: tags.length,
     tags: tags.map((t) => ({
@@ -80,6 +83,7 @@ function buildRegistryUpdate(msg) {
     deviceId: msg.deviceId,
     name: report.name || msg.deviceId,
     platform: report.platform || null,
+    firmwareVersion: report.firmwareVersion || null,
     online: true,
     lastSeenAt: ts,
     lastReport: {

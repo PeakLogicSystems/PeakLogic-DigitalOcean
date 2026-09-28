@@ -1,0 +1,23 @@
+{
+  "id": "lift_station_single_atu",
+  "label": "Lift station — single ATU",
+  "vendor": "PeakLogic",
+  "model": "Single ATU (duplex + TPO schedule)",
+  "transport": "mqtt_parc",
+  "stationType": "single_atu",
+  "defaultProgram": "logic/32_single_atu.st",
+  "tagsFromDevice": true,
+  "diCount": 8,
+  "doCount": 4,
+  "aiCount": 8,
+  "defaults": {
+    "deviceId": "lift_satu_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true
+  },
+  "driver": {
+    "enabled": true
+  },
+  "notes": "One duplex alternator gated by TPO1 daily schedule. Deploy logic/32_single_atu.st on device."
+}

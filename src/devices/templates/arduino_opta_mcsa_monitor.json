@@ -1,0 +1,42 @@
+{
+  "id": "arduino_opta_mcsa_monitor",
+  "label": "Arduino Opta — MCSA monitor",
+  "vendor": "Arduino / PeakLogic",
+  "model": "Opta MQTT ST + MCSA monitor",
+  "transport": "mqtt_parc_telemetry",
+  "sharedBus": false,
+  "driverId": "opta_mcsa_01",
+  "diCount": 2,
+  "aiCount": 10,
+  "tagsFromDevice": true,
+  "defaults": {
+    "brokerUrl": "mqtt://192.168.1.50:1883",
+    "deviceId": "opta_mcsa_01",
+    "topicPrefix": "peaklogic/v1",
+    "reportIntervalSec": 180
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 5000,
+    "telemetryOnly": false,
+    "remoteExecution": true
+  },
+  "telemetrySchema": {
+    "mcsa": "Cooked spectra with fund/rotor/bearing/ecc/stator plus load groups fan|pump|compressor|turbine based on deviceType 0–5.",
+    "env": "When I/O layout=HVAC: T1_C..T4_C, WATER_ROPE_MV, WR_DETECT, WR_INPUT_ON, COMP_FLT, FAN_FLT.",
+    "edgeAi": "compressor/fan labels in HVAC layout; pump-1/pump-2 in lift layout.",
+    "deviceType": "0 base, 1 fan, 2 pump, 3 compressor, 4 turbine, 5 all — configured on Opta /mcsa."
+  },
+  "notes": "HVAC configs B/D: /mcsa → I/O layout HVAC, motor wiring 1P + start cap (not plain 1P). Compressor run CT I1, fan run CT I2. Edge AI model single-phase-start-v1. Config A blower: run I2, start I3.",
+  "pdm": {
+    "motorType": "mixed",
+    "application": "mcsa_monitor",
+    "configuration": "configurable",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1 },
+      { "assetId": "pump-2", "pumpIndex": 2 },
+      { "assetId": "compressor" },
+      { "assetId": "fan" }
+    ]
+  }
+}

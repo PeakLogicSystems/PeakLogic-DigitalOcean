@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oak Lane Residence — ATU Cloud Fleet</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }
+    #canvas-wrap { position: absolute; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .panel { position: absolute; z-index: 10; background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 10px; padding: 14px 16px; font-size: 13px; line-height: 1.45; }
+    #title-panel { top: 14px; left: 14px; max-width: 420px; }
+    #title-panel h1 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    #title-panel p { color: #94a3b8; font-size: 12px; }
+    #legend { bottom: 14px; left: 14px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 12px; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); }
+    #fleet-list { bottom: 14px; right: 14px; width: 320px; max-height: 45vh; overflow: auto; }
+    #tank-panel { top: 14px; right: 14px; width: 340px; max-height: 55vh; overflow: auto; font-size: 11px; }
+    #tank-panel h2 { font-size: 12px; margin-bottom: 6px; }
+    #tank-panel ul { margin: 4px 0 10px 16px; color: #cbd5e1; }
+    #tank-panel li { margin-bottom: 3px; }
+    #fleet-list ul { list-style: none; margin-top: 8px; font-size: 12px; }
+    #fleet-list li { padding: 3px 0; border-bottom: 1px solid rgba(148,163,184,0.12); display: flex; justify-content: space-between; }
+    .alm { color: #f87171; font-weight: 600; }
+    .ok { color: #86efac; }
+  </style>
+</head>
+<body>
+  <div id="canvas-wrap"></div>
+  <div id="title-panel" class="panel">
+    <h1>Oak Lane Residence</h1>
+    <p>500 GPD design — 1 ATU, 0 lifts. 100% cloud (cellular Opta → MQTT).</p>
+  </div>
+  <div id="legend" class="panel">
+    <div class="legend-item"><span class="swatch" style="background:#22c55e"></span> ATU</div>
+    <div class="legend-item"><span class="swatch" style="background:#38bdf8"></span> Lift station</div>
+    
+    <div class="legend-item"><span class="swatch" style="background:#ef4444"></span> Alarm</div>
+  </div>
+  
+  <div id="fleet-list" class="panel"><strong>Fleet</strong><ul id="fleet-items"></ul></div>
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    const STATIONS = [
+  {
+    "name": "Oak Lane — single ATU",
+    "slug": "oak-atu",
+    "type": "single_atu",
+    "category": "atu",
+    "role": "atu",
+    "lat": 29.0286,
+    "lng": -81.3031,
+    "deviceId": "mv_atu_oak_01",
+    "alarmTag": "ALT_FAULT",
+    "levelTag": "LVL_HIGH",
+    "fleetAlarmTag": "FLEET_OAK_ATU_ALM"
+  }
+];
+    const TANK_GUIDE = null;
+    const wrap = document.getElementById('canvas-wrap');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f172a);
+    const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 500);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(innerWidth, innerHeight);
+    wrap.appendChild(renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+    sun.position.set(40, 60, 30);
+    scene.add(sun);
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(120, 120), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
+    const lats = STATIONS.map(s => s.lat), lngs = STATIONS.map(s => s.lng);
+    const latMid = (Math.min(...lats) + Math.max(...lats)) / 2;
+    const lngMid = (Math.min(...lngs) + Math.max(...lngs)) / 2;
+    const markers = [];
+    const listEl = document.getElementById('fleet-items');
+    STATIONS.forEach((s, i) => {
+      const isAtu = s.category === 'atu';
+      const isBooster = s.role === 'booster';
+      const geo = isAtu ? new THREE.CylinderGeometry(1.2, 1.4, 3, 8) : new THREE.BoxGeometry(1.5, 2, 1.5);
+      const baseColor = isAtu ? 0x22c55e : (isBooster ? 0xf59e0b : 0x38bdf8);
+      const mat = new THREE.MeshStandardMaterial({ color: baseColor });
+      const mesh = new THREE.Mesh(geo, mat);
+      const x = (s.lng - lngMid) * 8000;
+      const z = -(s.lat - latMid) * 8000;
+      mesh.position.set(x, isAtu ? 1.5 : 1, z);
+      mesh.userData = s;
+      scene.add(mesh);
+      markers.push(mesh);
+      const li = document.createElement('li');
+      li.innerHTML = '<span>' + s.name + '</span><span class="off" data-slug="' + s.slug + '">…</span>';
+      listEl.appendChild(li);
+    });
+    camera.position.set(0, 35, 45);
+    controls.target.set(0, 0, 0);
+    async function poll() {
+      for (const m of markers) {
+        const s = m.userData;
+        try {
+          const r = await fetch('/api/parc/devices/' + encodeURIComponent(s.deviceId));
+          if (!r.ok) continue;
+          const dev = await r.json();
+          const tag = (dev.tags || []).find(t => t.id === s.alarmTag);
+          const alm = !!(tag && tag.value);
+          m.material.color.setHex(alm ? 0xef4444 : (s.category === 'atu' ? 0x22c55e : (s.role === 'booster' ? 0xf59e0b : 0x38bdf8)));
+          const span = listEl.querySelector('[data-slug="' + s.slug + '"]');
+          if (span) { span.textContent = alm ? 'ALARM' : 'OK'; span.className = alm ? 'alm' : 'ok'; }
+        } catch { /* offline */ }
+      }
+    }
+    setInterval(poll, 3000);
+    poll();
+    if (TANK_GUIDE) {
+      const el = document.getElementById('tank-content');
+      const sections = [
+        ['Home STEP (×' + TANK_GUIDE.homeStep.count + ')', TANK_GUIDE.homeStep.tanks],
+        ['Booster duplex (×' + TANK_GUIDE.boosterDuplex.count + ')', TANK_GUIDE.boosterDuplex.tanks],
+        ['Quad DWTU (×' + TANK_GUIDE.dwtuQuad.count + ')', TANK_GUIDE.dwtuQuad.tanks],
+      ];
+      sections.forEach(([title, tanks]) => {
+        const h = document.createElement('h3');
+        h.textContent = title;
+        h.style.fontSize = '11px';
+        h.style.marginTop = '8px';
+        el.appendChild(h);
+        const ul = document.createElement('ul');
+        tanks.forEach(t => {
+          const li = document.createElement('li');
+          const gal = t.capacityGal ? ' — ' + t.capacityGal.toLocaleString() + ' gal' : '';
+          li.textContent = t.label + gal + (t.rule ? ' (' + t.rule + ')' : '');
+          ul.appendChild(li);
+        });
+        el.appendChild(ul);
+      });
+    }
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); }
+    animate();
+    addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+  </script>
+</body>
+</html>

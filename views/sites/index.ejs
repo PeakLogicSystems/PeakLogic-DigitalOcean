@@ -1,9 +1,24 @@
 <%- include('../partials/shell-head', { title }) %>
 <%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
 
+<%
+  function statusBadge(s) {
+    switch (s) {
+      case 'online-running': return '<span class="badge bg-success">online · running</span>';
+      case 'online-warning': return '<span class="badge bg-warning text-dark">online · warning</span>';
+      case 'online-faulted': return '<span class="badge bg-danger">online · faulted</span>';
+      default: return '<span class="badge bg-secondary">offline</span>';
+    }
+  }
+  var selected = locations.find(function (l) { return l.id === selectedLocationId; }) || locations[0] || null;
+%>
+
 <main class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h1 class="h3 mb-0">Sites</h1>
+    <% if (canManage) { %>
+      <a href="/sites/new" class="btn btn-purple">Add location</a>
+    <% } %>
   </div>
   <p class="text-muted small mb-4">
     Locations, systems, and devices for <%= tenant.name %>.
@@ -17,74 +32,125 @@
     <div class="alert alert-success py-2 small"><%= message %></div>
   <% } %>
 
-  <% if (canManage) { %>
-    <div class="card shadow-sm mb-4">
-      <div class="card-body">
-        <h2 class="h5 mb-3">Add location</h2>
-        <form action="/sites" method="POST" class="row g-3 align-items-end">
-          <div class="col-md-4">
-            <label class="form-label small" for="loc-name">Name</label>
-            <input type="text" class="form-control" id="loc-name" name="name" required
-                   placeholder="Plant A" value="<%= (form && form.name) || '' %>">
-          </div>
-          <div class="col-md-3">
-            <label class="form-label small" for="loc-slug">Slug</label>
-            <input type="text" class="form-control" id="loc-slug" name="slug" required
-                   placeholder="plant-a" pattern="[a-z0-9][a-z0-9-]*" title="Lowercase letters, numbers, hyphens"
-                   value="<%= (form && form.slug) || '' %>">
-          </div>
-          <div class="col-md-3">
-            <label class="form-label small" for="loc-desc">Description</label>
-            <input type="text" class="form-control" id="loc-desc" name="description"
-                   placeholder="Optional" value="<%= (form && form.description) || '' %>">
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-purple w-100">Add location</button>
-          </div>
-        </form>
+  <% if (!locations.length) { %>
+    <div class="card shadow-sm">
+      <div class="card-body text-muted p-4">
+        No locations yet.<% if (canManage) { %> Use <strong>Add location</strong> to run the setup wizard for your first lift station.<% } %>
       </div>
     </div>
-  <% } %>
+  <% } else { %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="row g-2 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label small mb-1" for="siteLocationSelect">Location</label>
+            <select id="siteLocationSelect" class="form-select"
+                    onchange="window.location = '/sites?locationId=' + encodeURIComponent(this.value);">
+              <% locations.forEach(function(loc) { %>
+                <option value="<%= loc.id %>" <%= (selected && loc.id === selected.id) ? 'selected' : '' %>>
+                  <%= loc.name %> (<%= loc.systemCount %> station<%= loc.systemCount === 1 ? '' : 's' %>)
+                </option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <% if (selected) { %>
+              <a href="/sites/<%= selected.id %>" class="btn btn-outline-purple">Manage location</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div class="card shadow-sm">
-    <div class="table-responsive">
-      <table class="table table-hover mb-0 align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Location</th>
-            <th>Slug</th>
-            <th>Systems</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (!locations.length) { %>
+    <% if (selected) { %>
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <span class="fw-semibold"><%= selected.name %> — lift stations</span>
+          <% if (canManage) { %>
+            <a href="/sites/new" class="btn btn-sm btn-purple">Add location</a>
+          <% } %>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover mb-0 align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Station</th>
+                <th>Type</th>
+                <th>Device ID</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (!selected.systems.length) { %>
+                <tr><td colspan="5" class="text-muted p-4">No stations in this location yet.</td></tr>
+              <% } else { %>
+                <% selected.systems.forEach(function(sys) { %>
+                  <tr>
+                    <td>
+                      <strong><%= sys.name %></strong>
+                      <div class="text-muted small"><code><%= sys.slug %></code></div>
+                    </td>
+                    <td><%= sys.stationType || '—' %></td>
+                    <td>
+                      <code><%= sys.deviceId || '—' %></code>
+                      <% if (sys.deviceId) { %>
+                        <% if (!sys.firmwareVersion) { %>
+                          <span class="badge bg-light text-muted border" title="No firmware reported yet">fw —</span>
+                        <% } else if (sys.firmwareStatus === 'outdated') { %>
+                          <span class="badge bg-warning-subtle text-warning-emphasis border border-warning"
+                                title="Firmware v<%= sys.firmwareVersion %> is older than the recommended v<%= recommendedFirmware %> — consider reflashing">fw v<%= sys.firmwareVersion %> <i class="bi bi-exclamation-triangle"></i></span>
+                        <% } else { %>
+                          <span class="badge bg-light text-dark border" title="Reported device firmware">fw v<%= sys.firmwareVersion %></span>
+                        <% } %>
+                      <% } %>
+                    </td>
+                    <td><%- statusBadge(sys.status) %></td>
+                    <td class="text-end">
+                      <a href="/fleet/stations/<%= sys.id %>" class="btn btn-sm btn-outline-secondary">Assets</a>
+                      <a href="/sites/<%= selected.id %>/systems/<%= sys.id %>" class="btn btn-sm btn-outline-purple">Devices</a>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% } %>
+
+    <div class="card shadow-sm">
+      <div class="card-header bg-white fw-semibold py-2">All locations</div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+          <thead class="table-light">
             <tr>
-              <td colspan="4" class="text-muted p-4">
-                No locations yet.<% if (canManage) { %> Add your first site above.<% } %>
-              </td>
+              <th>Location</th>
+              <th>Slug</th>
+              <th>Stations</th>
+              <th></th>
             </tr>
-          <% } else { %>
+          </thead>
+          <tbody>
             <% locations.forEach(function(loc) { %>
               <tr>
                 <td>
                   <strong><%= loc.name %></strong>
-                  <% if (loc.description) { %>
-                    <br><span class="text-muted small"><%= loc.description %></span>
-                  <% } %>
+                  <% if (loc.description) { %><br><span class="text-muted small"><%= loc.description %></span><% } %>
                 </td>
                 <td><code><%= loc.slug %></code></td>
                 <td><%= loc.systemCount %></td>
                 <td class="text-end">
+                  <a href="/sites?locationId=<%= loc.id %>" class="btn btn-sm btn-outline-secondary">View</a>
                   <a href="/sites/<%= loc.id %>" class="btn btn-sm btn-outline-purple">Manage</a>
                 </td>
               </tr>
             <% }); %>
-          <% } %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  <% } %>
 </main>
 
 <%- include('../partials/shell-foot') %>

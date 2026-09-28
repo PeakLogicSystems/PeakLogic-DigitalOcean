@@ -1,0 +1,40 @@
+[
+  {
+    "id": "vav_standard",
+    "label": "VAV — space temp + damper + heat",
+    "description": "Typical VAV controller layout. Same object instances on each physical device; tag prefix distinguishes devices.",
+    "tagPrefixPattern": "{profileId}_{deviceInstance}",
+    "deviceNamePattern": "",
+    "slots": [
+      {
+        "slotId": "space_temp",
+        "label": "{deviceLabel} space temp",
+        "tagId": "SAT",
+        "objectType": "analogInput",
+        "match": { "type": "name", "pattern": "(?i)(space|zone|room).*temp|SAT" },
+        "role": "input",
+        "tagType": "REAL"
+      },
+      {
+        "slotId": "damper",
+        "label": "{deviceLabel} damper",
+        "tagId": "DMP",
+        "objectType": "analogOutput",
+        "match": { "type": "name", "pattern": "(?i)damper|dmp" },
+        "role": "input",
+        "tagType": "REAL",
+        "optional": true
+      },
+      {
+        "slotId": "heat_valve",
+        "label": "{deviceLabel} heat",
+        "tagId": "HEAT",
+        "objectType": "binaryOutput",
+        "match": { "type": "name", "pattern": "(?i)heat|reheat|valve" },
+        "role": "input",
+        "tagType": "BOOL",
+        "optional": true
+      }
+    ]
+  }
+]

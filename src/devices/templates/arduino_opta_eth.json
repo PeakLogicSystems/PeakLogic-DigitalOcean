@@ -1,26 +1,40 @@
 {
-  "id": "arduino_opta_eth",
-  "label": "Arduino Opta — Ethernet ST runtime",
+  "id": "arduino_opta_parc",
+  "label": "Arduino Opta — MQTT Parc ST",
   "vendor": "Arduino",
-  "model": "Opta — PeakLogic remote ST",
-  "transport": "opta_remote",
-  "driverId": "opta_eth",
+  "model": "Opta — PeakLogic ST over MQTT (base + expansions via sync)",
+  "transport": "mqtt_parc",
+  "driverId": "opta_st_01",
+  "tagsFromDevice": true,
   "diCount": 8,
   "doCount": 4,
   "aiCount": 8,
   "defaults": {
-    "host": "192.168.1.50",
-    "port": 80,
-    "remoteExecution": true,
+    "deviceId": "opta_st_01",
+    "reportIntervalMs": 200,
     "scanMs": 100
   },
   "driver": {
     "enabled": true,
-    "timeoutMs": 8000
+    "type": "mqtt_parc",
+    "deviceId": "opta_st_01"
   },
   "tags": {
     "discrete": [{ "prefix": "I", "count": 8, "start": 0 }],
     "coil": [{ "prefix": "R", "count": 4, "start": 0 }],
-    "input": [{ "prefix": "I", "suffix": "_RAW", "count": 8, "start": 0 }]
+    "input": [{ "prefix": "I", "suffix": "_RAW", "count": 8, "start": 0 }],
+    "holding": [{ "prefix": "H", "count": 8, "start": 0 }]
+  },
+  "notes": "Adds mqtt_parc driver only. On Opta: /setup → Scan expansions. Then Drivers → Sync tags from Parc device.",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "duplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
+    ]
   }
 }

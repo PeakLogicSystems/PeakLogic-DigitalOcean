@@ -1,16 +1,28 @@
 'use strict';
 
 (function () {
-  const core = window.PeakLogicCore || {};
+  const core = window.PeaklogicCore || {};
   const $ = core.$ || ((id) => document.getElementById(id));
   const esc = core.esc || ((s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'));
   const POLL_MS = 800;
-  const liveIoPref = () => window.PeakLogicLiveIoUpdate || {};
-  const ioTs = () => window.PeakLogicIoTimestamp || {};
+  const liveIoPref = () => window.PeaklogicLiveIoUpdate || {};
+  const ioTs = () => window.PeaklogicIoTimestamp || {};
 
   let pollTimer = null;
   let lastTags = [];
   let lastPointSig = '';
+  let lastBindingsConfigSig = '';
+
+  function bindingsConfigSig(data) {
+    const sortJoin = (ids) => [...ids].sort().join('\0');
+    return [
+      sortJoin((data?.screens || []).map((s) => s.id)),
+      sortJoin((data?.roomScreens || []).map((r) => r.screenId)),
+      sortJoin((data?.wiredTags || []).map((t) => t.id)),
+      String((data?.bindings || []).length),
+      sortJoin((data?.points || []).map((p) => p.id)),
+    ].join('|');
+  }
   let lastRuntime = {};
 
   function readUpdatePref() {
@@ -36,12 +48,12 @@
   }
 
   function formatTagName(tag) {
-    const fmt = window.PeakLogicTagDisplay?.formatTag;
+    const fmt = window.PeaklogicTagDisplay?.formatTag;
     return fmt ? fmt(tag, lastTags) : tag.id;
   }
 
   function formatTagSub(tag) {
-    const fmt = window.PeakLogicTagDisplay?.formatTagSub;
+    const fmt = window.PeaklogicTagDisplay?.formatTagSub;
     return fmt ? fmt(tag, lastTags) : '';
   }
 
@@ -105,7 +117,7 @@
       return;
     }
 
-    const expIo = window.PeakLogicExpansionIo || {};
+    const expIo = window.PeaklogicExpansionIo || {};
     const { base, bySlot } = expIo.partitionIoTags?.(points) || { base: points, bySlot: new Map() };
     const slots = [...bySlot.keys()].sort((a, b) => a - b);
     const hasExpansion = slots.length > 0;
@@ -175,6 +187,13 @@
       html += renderGroup(slotPoints, { sectionTitle: title });
     }
     host.innerHTML = html;
+    window.PeaklogicIoMapBindings?.bindIoPointClicks?.();
+    const sel = window.PeaklogicIoMapBindings?.getSelectedTagId?.();
+    if (sel) {
+      document.querySelectorAll('[data-io-id]').forEach((el) => {
+        el.classList.toggle('io-map-selected', el.dataset.ioId === sel);
+      });
+    }
   }
 
   function updateIoMapLive(data) {
@@ -249,6 +268,16 @@
       } else {
         lastPointSig = sig;
         renderPoints(data);
+      }
+      const cfgSig = bindingsConfigSig(data);
+      const bindingsBusy = window.PeaklogicIoMapBindings?.isUiBusy?.();
+      if (bindingsBusy) {
+        window.PeaklogicIoMapBindings?.loadConfig?.(data, { liveOnly: true });
+      } else if (cfgSig !== lastBindingsConfigSig) {
+        lastBindingsConfigSig = cfgSig;
+        window.PeaklogicIoMapBindings?.loadConfig?.(data);
+      } else {
+        window.PeaklogicIoMapBindings?.loadConfig?.(data, { liveOnly: true });
       }
     } catch (e) {
       if (status) status.textContent = `Error: ${e.message}`;

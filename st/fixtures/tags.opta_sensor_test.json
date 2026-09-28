@@ -1,0 +1,189 @@
+[
+  {
+    "id": "I1_RAW",
+    "label": "Moisture sensor raw (I1)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I1_RAW" },
+    "graphEnabled": true,
+    "comment": "Resistive moisture probe — 0 dry, 70 moist, 700 submerged"
+  },
+  {
+    "id": "I2_RAW",
+    "label": "Temperature (°F)",
+    "type": "REAL",
+    "role": "input",
+    "value": 75,
+    "wordWidth": 16,
+    "linearize": "opta_ntc_divider",
+    "engUnit": "F",
+    "adcMax": 1023,
+    "adcMaxVoltage": 10,
+    "vSupply": 24,
+    "rFixed": 10000,
+    "rOptaInternal": 5850,
+    "ntcR25": 10000,
+    "ntcBeta": 3950,
+    "scale": 1.8,
+    "offset": 32,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I2_RAW" },
+    "graphEnabled": true,
+    "comment": "Opta 24 V NTC — ~670 raw @ 75°F; Cal panel: Opta NTC, display °F, adcMax 1023"
+  },
+  {
+    "id": "I3_RAW",
+    "label": "Current (A)",
+    "type": "INT",
+    "role": "input",
+    "value": 0,
+    "wordWidth": 16,
+    "scale": 0.048875,
+    "offset": 0,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "I3_RAW" },
+    "graphEnabled": true,
+    "comment": "0–1 V CT output, 0–5 A full scale (1 V ≈ 102 raw)"
+  },
+  {
+    "id": "R1",
+    "label": "Moisture alarm relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R1" }
+  },
+  {
+    "id": "R2",
+    "label": "Current overload relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R2" }
+  },
+  {
+    "id": "R3",
+    "label": "High temperature relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R3" }
+  },
+  {
+    "id": "R4",
+    "label": "System OK relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": true,
+    "driverId": "opta_mqtt_st",
+    "driverAddress": { "channel": "R4" }
+  },
+  {
+    "id": "H1",
+    "label": "Current overload threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 82,
+    "wordWidth": 16,
+    "comment": "Trip when I3_RAW exceeds this (~0.8 V ≈ 4 A on 0–5 A CT)"
+  },
+  {
+    "id": "H2",
+    "label": "High temperature threshold (°F)",
+    "type": "INT",
+    "role": "memory",
+    "value": 131,
+    "wordWidth": 16,
+    "comment": "Trip R3 when T1_F exceeds this (131°F = 55°C)"
+  },
+  {
+    "id": "MOIST_PCT",
+    "label": "Moisture %",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "comment": "0=dry .. 100=wet from I1_RAW"
+  },
+  {
+    "id": "H_WET_RAW",
+    "label": "Moisture wet cal (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 700,
+    "comment": "I1_RAW when submerged = 100%"
+  },
+  {
+    "id": "H_DRY_RAW",
+    "label": "Moisture dry cal (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "comment": "I1_RAW when dry = 0%"
+  },
+  {
+    "id": "H_MOIST_RAW",
+    "label": "Moist threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 70,
+    "comment": "MOIST_ALM when I1_RAW >= this"
+  },
+  {
+    "id": "H_SUB_RAW",
+    "label": "Submerged threshold (raw)",
+    "type": "INT",
+    "role": "memory",
+    "value": 700,
+    "comment": "SUBMERGED_ALM when I1_RAW >= this"
+  },
+  {
+    "id": "MOIST_ALM",
+    "label": "Moist alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "comment": "I1_RAW >= H_MOIST_RAW (70)"
+  },
+  {
+    "id": "SUBMERGED_ALM",
+    "label": "Submerged alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "comment": "I1_RAW >= H_SUB_RAW (700)"
+  },
+  {
+    "id": "T1_C",
+    "label": "Temp calc (°C, internal)",
+    "type": "INT",
+    "role": "memory",
+    "value": 24,
+    "graphEnabled": false,
+    "comment": "Internal piecewise °C — use T1_F for display/alarm"
+  },
+  {
+    "id": "T1_F",
+    "label": "Temperature (°F)",
+    "type": "INT",
+    "role": "memory",
+    "value": 75,
+    "graphEnabled": true,
+    "comment": "Display and R3 alarm — from I2_RAW via T1_C"
+  },
+  {
+    "id": "CT_AMPS",
+    "label": "Current estimate (A)",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "comment": "Approx amps from I3_RAW (5 A @ ~102 raw)"
+  }
+]

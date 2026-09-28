@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 936 764" width="936" height="764">
+  <rect width="936" height="764" fill="#f0fdf4"/>
+  <text x="468" y="40" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="24" font-weight="600" fill="#14532d">Villa East — Outbuilding</text>
+  <text x="468" y="62" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#166534">25 units · 601–625</text>
+  <rect id="room_601" x="72" y="72" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="148" y="126" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">601</text>
+  <rect id="room_602" x="232" y="72" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="308" y="126" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">602</text>
+  <rect id="room_603" x="392" y="72" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="468" y="126" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">603</text>
+  <rect id="room_604" x="552" y="72" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="628" y="126" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">604</text>
+  <rect id="room_605" x="712" y="72" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="788" y="126" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">605</text>
+  <rect id="room_606" x="72" y="188" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="148" y="242" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">606</text>
+  <rect id="room_607" x="232" y="188" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="308" y="242" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">607</text>
+  <rect id="room_608" x="392" y="188" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="468" y="242" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">608</text>
+  <rect id="room_609" x="552" y="188" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="628" y="242" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">609</text>
+  <rect id="room_610" x="712" y="188" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="788" y="242" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">610</text>
+  <rect id="room_611" x="72" y="304" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="148" y="358" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">611</text>
+  <rect id="room_612" x="232" y="304" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="308" y="358" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">612</text>
+  <rect id="room_613" x="392" y="304" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="468" y="358" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">613</text>
+  <rect id="room_614" x="552" y="304" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="628" y="358" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">614</text>
+  <rect id="room_615" x="712" y="304" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="788" y="358" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">615</text>
+  <rect id="room_616" x="72" y="420" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="148" y="474" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">616</text>
+  <rect id="room_617" x="232" y="420" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="308" y="474" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">617</text>
+  <rect id="room_618" x="392" y="420" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="468" y="474" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">618</text>
+  <rect id="room_619" x="552" y="420" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="628" y="474" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">619</text>
+  <rect id="room_620" x="712" y="420" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="788" y="474" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">620</text>
+  <rect id="room_621" x="72" y="536" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="148" y="590" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">621</text>
+  <rect id="room_622" x="232" y="536" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="308" y="590" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">622</text>
+  <rect id="room_623" x="392" y="536" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="468" y="590" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">623</text>
+  <rect id="room_624" x="552" y="536" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="628" y="590" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">624</text>
+  <rect id="room_625" x="712" y="536" width="152" height="108" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="788" y="590" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,sans-serif" font-size="16" fill="#14532d">625</text>
+</svg>

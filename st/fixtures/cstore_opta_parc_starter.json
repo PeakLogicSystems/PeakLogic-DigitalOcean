@@ -1,0 +1,29 @@
+{
+  "mode": "incremental",
+  "starterProject": "cstore-opta-parc-starter",
+  "onboardingDoc": "docs/CSTORE_OPTA_PARC_CLOUD.md",
+  "bridgeMode": "opta_parc_direct",
+  "mqttParcBroker": "mqtt://127.0.0.1:1883",
+  "product": "arduino opta mqtt parc",
+  "templateId": "lift_station_dual_duplex",
+  "defaultProgram": "logic/36_duplex_lift_station.st",
+  "fleet3dUrl": "/samples/cstore-opta-parc-fleet-3d.html",
+  "liftStations": [],
+  "bulkImportCsv": "st/fixtures/fleet_import_circle_k.csv",
+  "referenceOperator": {
+    "name": "Circle K",
+    "slug": "circle-k-florida",
+    "tenantId": "circle-k-florida",
+    "parent": "Alimentation Couche-Tard",
+    "website": "https://www.circlek.com",
+    "region": "Florida"
+  },
+  "planningInstalledBase": 500,
+  "commissioning": {
+    "doc": "docs/OPTA_PARC_CLOUD.md",
+    "brokerPort": 1883,
+    "topicPattern": "peaklogic/v1/{deviceId}/telemetry",
+    "addDriver": "Drivers → Add Opta Parc devices (from registry)",
+    "applyTemplate": "lift_station_dual_duplex"
+  }
+}

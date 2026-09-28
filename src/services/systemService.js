@@ -17,6 +17,7 @@ function publicSystem(doc) {
     slug: doc.slug,
     name: doc.name,
     description: doc.description ?? null,
+    metadata: doc.metadata ?? {},
     scanMs: doc.scanMs,
     runtimeConfig: doc.runtimeConfig ?? {},
     createdAt: doc.createdAt,
@@ -65,6 +66,7 @@ async function createSystem(tenantId, locationId, input) {
     slug,
     name,
     description: input.description ? String(input.description) : null,
+    metadata: input.metadata && typeof input.metadata === 'object' ? input.metadata : {},
     scanMs: Number.isFinite(scanMs) && scanMs > 0 ? scanMs : 100,
     runtimeConfig: input.runtimeConfig && typeof input.runtimeConfig === 'object' ? input.runtimeConfig : {},
     createdAt: ts,
@@ -94,6 +96,9 @@ async function updateSystem(tenantId, id, input) {
     updates.slug = slug;
   }
   if (input.description !== undefined) updates.description = input.description ? String(input.description) : null;
+  if (input.metadata !== undefined) {
+    updates.metadata = input.metadata && typeof input.metadata === 'object' ? input.metadata : {};
+  }
   if (input.scanMs !== undefined) {
     const scanMs = Number(input.scanMs);
     if (!Number.isFinite(scanMs) || scanMs <= 0) return { ok: false, status: 400, error: 'scanMs must be positive' };

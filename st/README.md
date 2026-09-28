@@ -6,7 +6,7 @@ Default program folder for PeakLogic. Active file is set in `data/settings.json`
 
 | Folder | Purpose |
 |--------|---------|
-| `logic/` | Basic ST: IsON/IsOFF, IF/ELSE, AND/OR/NOT, compares, WithInLimits, timer/counter, PID, AVG |
+| `logic/` | Basic ST: IsON/IsOFF, IF/ELSIF/ELSE, AND/OR/NOT, compares, WithInLimits, timer/counter, PID, AVG |
 | `mqtt/` | Logic using MQTT-mapped tags (load with `fixtures/mqtt.*.json`) |
 | `modbus/` | Same **generic I/O** names as `logic/`; Modbus tables/registers are in `fixtures/tags.modbus.json` |
 | `opta/` | Arduino Opta base-unit I/O over Modbus RTU (load with `fixtures/*opta*.json`) |

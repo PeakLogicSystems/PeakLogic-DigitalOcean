@@ -4,7 +4,7 @@ const { QUALITY } = require('../tags/constants');
 
 let native = null;
 try {
-  native = require('../../build/Release/mooreview_native.node');
+  native = require('../../native/build/Release/peaklogic_native.node');
 } catch {
   native = null;
 }

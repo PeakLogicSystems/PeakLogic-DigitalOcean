@@ -1,0 +1,20 @@
+[Unit]
+Description=PeakLogic Cloud Appliance
+After=network.target mongod.service mosquitto.service
+
+[Service]
+Type=simple
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_INSTALL_DIR@
+EnvironmentFile=/etc/peaklogic/env
+Environment=NODE_ENV=production
+Environment=PEAKLOGIC_DEPLOYMENT=cloud
+Environment=PEAKLOGIC_PRODUCT=mvp-suite
+Environment=PEAKLOGIC_DATA=/var/lib/peaklogic
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

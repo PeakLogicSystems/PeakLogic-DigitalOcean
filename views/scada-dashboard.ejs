@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
+  <link rel="stylesheet" href="/css/cloud-studio.css?v=<%= assetV %>">
 </head>
-<body class="dashboard-body">
+<body class="dashboard-body" data-mv-deployment="<%= typeof deployment !== 'undefined' ? deployment : 'cloud' %>">
   <header class="topbar">
-    <div class="topbar-brand"><a href="/" class="text-white text-decoration-none"><img src="/branding/peaklogic-icon.svg" alt="Logo" class="topbar-logo"></a></div>
+    <div class="topbar-brand"><a href="/" class="text-white text-decoration-none">Peak<span>Logic</span></a></div>
     <a href="/" class="btn btn-sm btn-outline-light ms-2" style="align-self:center">Cloud home</a>
     <a href="/sites" class="btn btn-sm btn-outline-light ms-1" style="align-self:center">Sites</a>
+    <a href="/remote-sites" class="btn btn-sm btn-outline-light ms-1" style="align-self:center" title="Generate pairing codes for appliance cameras">Camera sites</a>
     <div class="topbar-project-bar">
       <details class="topbar-project-details" id="project-menu-details">
         <summary class="topbar-project-trigger">Project <span class="topbar-project-caret" aria-hidden="true">▾</span></summary>
@@ -44,9 +46,11 @@
         <button type="button" class="topbar-menu-item view-tab" data-popup-open="tags" role="menuitem">Tags</button>
         <button type="button" class="topbar-menu-item view-tab" data-popup-open="alarms" role="menuitem">Alarms <span id="alarms-tab-badge" class="alarms-tab-badge view-hidden" aria-hidden="true"></span></button>
         <button type="button" class="topbar-menu-item view-tab" data-popup-open="drivers" role="menuitem">Drivers</button>
+        <button type="button" class="topbar-menu-item view-tab" data-popup-open="cameras" role="menuitem">Cameras</button>
         <button type="button" class="topbar-menu-item view-tab" data-popup-open="historian" role="menuitem">Historian</button>
         <button type="button" class="topbar-menu-item view-tab" data-popup-open="report" role="menuitem">Report</button>
-        <a href="/studio/cellular/sims" class="topbar-menu-item" role="menuitem">Connectivity…</a>
+        <a href="/studio/connectivity" class="topbar-menu-item" role="menuitem">Connectivity…</a>
+        <button type="button" class="topbar-menu-item view-tab" id="btn-training" data-popup-open="training" title="Training curriculum (F2)" role="menuitem">Training</button>
         <button type="button" class="topbar-menu-item view-tab" id="btn-help" data-popup-open="help" title="Help (F1)" role="menuitem">Help</button>
       </nav>
     </details>
@@ -59,31 +63,37 @@
         <div class="hmi-main-actions">
           <button type="button" class="btn btn-sm btn-help-context" data-help-section="hmi-overview" title="Help: HMI — overview">Help</button>
           <button type="button" id="btn-hmi-setup" class="btn">Setup…</button>
+          <button type="button" id="hmi-alarm-status" class="btn hmi-alarm-status view-hidden" title="Open the alarms list" aria-haspopup="dialog"><span class="hmi-alarm-status-label">Alarms</span><span id="hmi-alarm-status-detail" class="hmi-alarm-status-detail"></span></button>
           <button type="button" id="btn-hmi-reload" class="btn">Reload screen</button>
         </div>
       </div>
       <div class="hmi-main-body">
-        <nav id="hmi-nav-bar" class="hmi-nav-bar view-hidden" aria-label="HMI screen navigation"></nav>
-        <div id="hmi-live-status" class="hmi-live-status">
-          <div class="hmi-live-status-text">
-            <div id="hmi-screen-title" class="muted cell-mono"></div>
-            <p class="panel-hint hmi-display-hint">Live display — composed screen without grid lines. Open <strong>Setup…</strong> to edit on the tile grid.</p>
-          </div>
-          <button type="button" id="btn-hmi-hide-status" class="btn btn-sm hmi-live-status-toggle" title="Hide status message">Hide</button>
-        </div>
-        <button type="button" id="btn-hmi-show-status" class="btn btn-sm hmi-live-status-restore view-hidden" title="Show status message below screen tabs">Show status</button>
-        <div class="hmi-live-stage-wrap">
-          <aside id="hmi-alarm-sidebar" class="hmi-alarm-sidebar view-hidden" aria-label="Active alarms">
-            <div class="hmi-alarm-sidebar-head">
-              <div class="hmi-alarm-sidebar-head-main">
-                <h3 class="hmi-alarm-sidebar-title">Active alarms</h3>
-                <button type="button" id="btn-hmi-alarms-ack-all" class="btn btn-sm" disabled>Ack all</button>
+        <div class="hmi-screen-bar-shell">
+          <div id="hmi-screen-bar" class="hmi-screen-bar">
+            <nav id="hmi-nav-bar" class="hmi-nav-bar view-hidden" aria-label="HMI screen navigation"></nav>
+            <div id="hmi-live-status" class="hmi-live-status">
+              <div class="hmi-live-status-text">
+                <div id="hmi-screen-title" class="muted cell-mono"></div>
+                <p class="panel-hint hmi-display-hint">Live display — composed screen without grid lines. Open <strong>Setup…</strong> to edit on the tile grid.</p>
               </div>
-              <span id="hmi-alarm-sidebar-count" class="hmi-alarm-sidebar-count cell-mono"></span>
             </div>
-            <div id="hmi-alarm-sidebar-body" class="hmi-alarm-sidebar-body"></div>
-          </aside>
+          </div>
+          <button type="button" id="btn-hmi-toggle-screen-bar" class="btn btn-sm hmi-screen-bar-toggle" title="Hide screen tabs and status" aria-expanded="true" aria-controls="hmi-screen-bar">Hide</button>
+        </div>
+        <div class="hmi-live-stage-wrap">
           <div id="hmi-viewport" class="hmi-viewport hmi-viewport-live hmi-display-viewport"></div>
+        </div>
+        <div id="hmi-camera-popup" class="hmi-camera-popup view-hidden" role="dialog" aria-modal="true" aria-labelledby="hmi-camera-popup-title" aria-hidden="true">
+          <div class="hmi-camera-popup-backdrop" data-hmi-camera-close></div>
+          <div class="hmi-camera-popup-panel">
+            <header class="hmi-camera-popup-header">
+              <h2 id="hmi-camera-popup-title" class="hmi-camera-popup-title">Camera</h2>
+              <button type="button" class="btn btn-sm hmi-camera-popup-close" data-hmi-camera-close title="Close camera view">Close</button>
+            </header>
+            <div class="hmi-camera-popup-body">
+              <iframe id="hmi-camera-popup-frame" class="hmi-camera-popup-frame" title="Camera live view" allow="autoplay; fullscreen"></iframe>
+            </div>
+          </div>
         </div>
         <div id="hmi-room-popup" class="hmi-room-popup view-hidden" role="dialog" aria-modal="true" aria-labelledby="hmi-room-popup-title" aria-hidden="true">
           <div class="hmi-room-popup-backdrop" data-hmi-room-close></div>
@@ -104,6 +114,278 @@
   </main>
 
   <!-- ST Program floating panel -->
+  <!-- Cameras popup -->
+  <div class="app-popup view-hidden" data-popup="cameras" role="dialog" aria-labelledby="popup-cameras-title">
+    <div class="popup-chrome popup-chrome-wide popup-chrome-cameras popup-chrome-cameras-full">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-cameras-title">Cameras — administration</h2>
+        <div class="popup-header-actions">
+          <button type="button" id="btn-cameras-discover" class="btn btn-sm primary">Discover ONVIF</button>
+          <button type="button" id="btn-cameras-refresh-all" class="btn btn-sm">Refresh all</button>
+        </div>
+      </header>
+      <div class="cameras-shell cameras-shell-full">
+        <nav class="cameras-nav setup-nav" aria-label="Camera sections">
+          <button type="button" class="setup-tab active" data-cameras-tab-btn="overview">Overview</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="inventory">Inventory</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="detail">Detail</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="archive">Archive</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="events">Events</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="ai">AI history</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="discover">Discover</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="system">System</button>
+          <button type="button" class="setup-tab" data-cameras-tab-btn="settings">Settings</button>
+        </nav>
+        <div class="cameras-panels setup-panels popup-scroll">
+          <section class="cameras-panel setup-panel" data-cameras-tab="overview">
+            <p class="panel-hint">Fleet health: probe status, streaming, archive, and vision AI at a glance.</p>
+            <div id="cameras-overview-cards" class="cameras-overview-cards"></div>
+            <h3 class="hmi-block-title">Camera fleet</h3>
+            <div id="cameras-overview-fleet" class="cameras-overview-fleet"></div>
+            <p id="cameras-overview-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="inventory">
+            <p class="panel-hint">Manage IP cameras for HMI popup iframes. Enable ONVIF (8000) and RTSP (554) on Reolink cameras, set credentials in Settings, then Discover or Probe.</p>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-camera-add" class="btn">Add camera</button>
+              <button type="button" id="btn-cameras-refresh" class="btn">Refresh</button>
+              <button type="button" id="btn-cameras-probe-all" class="btn primary">Probe all</button>
+            </div>
+            <div id="cameras-inventory-table" class="cameras-inventory-table"></div>
+            <form id="camera-edit-form" class="camera-edit-form view-hidden">
+              <h3 class="hmi-block-title" id="camera-edit-title">Edit camera</h3>
+              <div class="form-grid compact">
+                <label>Camera ID <input id="cam-edit-id" maxlength="64" class="cell-mono" placeholder="auto from host"></label>
+                <label>Name <input id="cam-edit-name" maxlength="120"></label>
+                <label>Host <input id="cam-edit-host" required class="cell-mono" placeholder="192.168.1.50"></label>
+                <label>Port <input id="cam-edit-port" type="number" min="1" max="65535" value="80"></label>
+                <label>ONVIF URL <input id="cam-edit-onvif" class="cell-mono" placeholder="http://host:8000/onvif/device_service"></label>
+                <label>Viewer URL (iframe) <input id="cam-edit-viewer" class="cell-mono" placeholder="/api/cameras/id/player"></label>
+                <label>RTSP URL <input id="cam-edit-rtsp" class="cell-mono" placeholder="rtsp://user:pass@host:554/h264Preview_01_sub"></label>
+                <label>Vendor <input id="cam-edit-vendor" readonly class="cell-mono" placeholder="reolink"></label>
+                <label>ONVIF profile
+                  <select id="cam-edit-profile">
+                    <option value="">— unknown —</option>
+                    <option value="T">Profile T (recommended)</option>
+                    <option value="S">Profile S (legacy)</option>
+                  </select>
+                </label>
+                <label>Username <input id="cam-edit-user" autocomplete="username"></label>
+                <label>Password <input id="cam-edit-pass" type="password" autocomplete="current-password"></label>
+                <label>Manufacturer <input id="cam-edit-mfg" readonly class="cell-mono"></label>
+                <label>Model <input id="cam-edit-model" readonly class="cell-mono"></label>
+                <label>Probe status <input id="cam-edit-probe-status" readonly class="cell-mono"></label>
+                <label class="span-all">Probe message <input id="cam-edit-probe-error" readonly class="cell-mono"></label>
+                <label class="span-all">Notes <textarea id="cam-edit-notes" rows="2" maxlength="500"></textarea></label>
+              </div>
+              <div class="toolbar wrap">
+                <button type="submit" class="btn primary">Save</button>
+                <button type="button" id="btn-camera-probe" class="btn">Probe ONVIF</button>
+                <button type="button" id="btn-camera-snapshot" class="btn">Capture snapshot</button>
+                <button type="button" id="btn-camera-infer" class="btn">Run AI infer</button>
+                <button type="button" id="btn-camera-view-snapshots" class="btn">View archive</button>
+                <button type="button" id="btn-camera-test" class="btn">Test popup</button>
+                <button type="button" id="btn-camera-cancel-edit" class="btn">Cancel</button>
+                <button type="button" id="btn-camera-delete" class="btn danger view-hidden">Delete</button>
+              </div>
+            </form>
+            <p id="cameras-inventory-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="detail">
+            <div class="toolbar wrap cameras-detail-toolbar">
+              <label class="cameras-filter-label">Camera
+                <select id="cameras-detail-select" class="cameras-select">
+                  <option value="">— select camera —</option>
+                </select>
+              </label>
+              <button type="button" id="btn-detail-probe" class="btn btn-sm">Probe</button>
+              <button type="button" id="btn-detail-snapshot" class="btn btn-sm">Snapshot</button>
+              <button type="button" id="btn-detail-infer" class="btn btn-sm">AI infer</button>
+              <button type="button" id="btn-detail-popup" class="btn btn-sm primary">Live popup</button>
+              <button type="button" id="btn-detail-edit" class="btn btn-sm">Edit</button>
+            </div>
+            <div id="cameras-detail-body" class="cameras-detail-body">
+              <p class="panel-hint">Select a camera to view live stream, URLs, and latest snapshot.</p>
+            </div>
+            <p id="cameras-detail-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="archive">
+            <div class="toolbar wrap">
+              <label class="cameras-filter-label">Camera
+                <select id="cameras-archive-filter" class="cameras-select">
+                  <option value="">All cameras</option>
+                </select>
+              </label>
+              <button type="button" id="btn-archive-refresh" class="btn btn-sm primary">Refresh gallery</button>
+              <button type="button" id="btn-archive-capture" class="btn btn-sm">Capture now</button>
+            </div>
+            <div id="cameras-archive-gallery" class="cameras-archive-gallery"></div>
+            <p id="cameras-archive-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="events">
+            <div class="toolbar wrap">
+              <label class="cameras-filter-label">Camera
+                <select id="cameras-events-filter" class="cameras-select">
+                  <option value="">All cameras</option>
+                </select>
+              </label>
+              <label class="cameras-filter-label">Type
+                <select id="cameras-events-type" class="cameras-select">
+                  <option value="">All types</option>
+                  <option value="snapshot">snapshot</option>
+                  <option value="motion">motion</option>
+                  <option value="inference">inference</option>
+                  <option value="inference_alarm">inference_alarm</option>
+                  <option value="error">error</option>
+                  <option value="info">info</option>
+                </select>
+              </label>
+              <button type="button" id="btn-events-refresh" class="btn btn-sm primary">Refresh</button>
+            </div>
+            <div id="cameras-events-table" class="cameras-events-table"></div>
+            <p id="cameras-events-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="ai">
+            <div class="toolbar wrap">
+              <label class="cameras-filter-label">Camera
+                <select id="cameras-ai-filter" class="cameras-select">
+                  <option value="">All cameras</option>
+                </select>
+              </label>
+              <label class="cameras-filter-label">Hours
+                <select id="cameras-ai-hours" class="cameras-select">
+                  <option value="6">6 h</option>
+                  <option value="24" selected>24 h</option>
+                  <option value="72">72 h</option>
+                  <option value="168">7 d</option>
+                </select>
+              </label>
+              <button type="button" id="btn-ai-refresh" class="btn btn-sm primary">Refresh</button>
+              <button type="button" id="btn-ai-infer-selected" class="btn btn-sm">Run infer on selected</button>
+            </div>
+            <div id="cameras-ai-table" class="cameras-ai-table"></div>
+            <p id="cameras-ai-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="discover">
+            <p class="panel-hint">Scans with <strong>WS-Discovery</strong> (every network adapter + broadcast) and a <strong>TCP subnet sweep</strong> of your local /24 (ONVIF 8000/80, plus native 9000 &amp; RTSP 554 to detect cameras that have ONVIF turned off). Reolink ONVIF is on port <strong>8000</strong> and is <strong>disabled by default</strong>.</p>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-cameras-discover-tab" class="btn primary">Scan network</button>
+              <label class="cameras-inline-check"><input type="checkbox" id="cam-discover-subnet-sweep" checked> Subnet TCP sweep</label>
+            </div>
+            <div class="cameras-addip-bar">
+              <p class="panel-hint">Camera not found by scan? Enter its IP address (from your router's DHCP list or the Reolink app) to add it directly.</p>
+              <div class="toolbar wrap">
+                <label class="cameras-filter-label">IP address
+                  <input id="cameras-addip-host" type="text" inputmode="decimal" placeholder="192.168.1.88" class="cell-mono">
+                </label>
+                <button type="button" id="btn-cameras-add-ip" class="btn">Add &amp; probe by IP</button>
+              </div>
+              <p class="panel-hint">Uses the default credentials from <strong>Settings</strong>. Set them first if your camera requires a login.</p>
+            </div>
+            <div id="cameras-discover-needs-setup" class="cameras-discover-needs-setup view-hidden"></div>
+            <div id="cameras-discover-results" class="cameras-discover-results"></div>
+            <p id="cameras-discover-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="system">
+            <p class="panel-hint">go2rtc streaming proxy, MongoDB GridFS archive, and background services.</p>
+            <div id="cameras-system-panels" class="cameras-system-panels"></div>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-system-sync-go2rtc" class="btn primary">Sync streams to go2rtc</button>
+              <button type="button" id="btn-system-ai-refresh" class="btn">Refresh AI monitors</button>
+              <button type="button" id="btn-system-refresh" class="btn">Refresh status</button>
+            </div>
+            <p id="cameras-system-msg" class="muted cell-mono" aria-live="polite"></p>
+          </section>
+          <section class="cameras-panel setup-panel view-hidden" data-cameras-tab="settings">
+            <div id="cameras-cloud-host-panel" class="view-hidden">
+              <h3 class="hmi-block-title">Remote camera sites (cloud)</h3>
+              <p class="panel-hint">Generate pairing codes here, then paste them on the edge appliance under <strong>Tools → Cameras → Settings → Cloud Studio</strong>. ONVIF credentials stay on the appliance; only a redacted camera catalog syncs to the cloud.</p>
+              <div class="toolbar wrap">
+                <label>Site ID <input id="cam-cloud-new-site-id" type="text" placeholder="plant_a" class="cell-mono"></label>
+                <label>Name <input id="cam-cloud-new-site-name" type="text" placeholder="Plant A"></label>
+                <button type="button" id="btn-cam-cloud-create-site" class="btn primary">Create site &amp; keys</button>
+                <a href="/remote-sites" class="btn">Full camera sites page</a>
+                <button type="button" id="btn-cam-cloud-refresh-sites" class="btn">Refresh</button>
+              </div>
+              <div id="cam-cloud-pairing-banner" class="cameras-cloud-pairing-banner"></div>
+              <div id="cam-cloud-sites-table" class="cameras-cloud-sites-table"></div>
+              <p id="cam-cloud-sites-msg" class="muted cell-mono" aria-live="polite"></p>
+            </div>
+            <div id="cameras-appliance-settings">
+            <p class="panel-hint">Discovery defaults, credentials (<code>data/cameras.json</code>), archive, and vision AI. Install go2rtc: <code>npm run go2rtc:download</code>.</p>
+            <div class="form-grid compact">
+              <label>Discover timeout (ms) <input id="cam-set-timeout" type="number" min="1000" max="15000" step="500" value="4000"></label>
+              <label>ONVIF port (Reolink) <input id="cam-set-onvif-port" type="number" min="1" max="65535" value="8000"></label>
+              <label>RTSP port <input id="cam-set-rtsp-port" type="number" min="1" max="65535" value="554"></label>
+              <label>go2rtc port <input id="cam-set-go2rtc-port" type="number" min="1024" max="65535" value="1984"></label>
+              <label>MJPEG interval (ms) <input id="cam-set-mjpeg-ms" type="number" min="100" max="2000" step="50" value="200"></label>
+              <label>Stream backend
+                <select id="cam-set-stream-backend">
+                  <option value="go2rtc">go2rtc (H.264 WebRTC/MSE)</option>
+                  <option value="mjpeg">ONVIF snapshot MJPEG</option>
+                </select>
+              </label>
+              <label>Default username <input id="cam-set-user" autocomplete="username" placeholder="admin"></label>
+              <label>Default password <input id="cam-set-pass" type="password" autocomplete="current-password"></label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-go2rtc-enabled" checked> Enable go2rtc (auto-start on server boot)</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-add" checked> Auto-add discovered cameras to inventory</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-probe" checked> Auto-probe after discover</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/Facility Draw uploads to GridFS</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-snapshot-archive" checked> Archive camera snapshots to GridFS</label>
+              <label>Snapshot interval (ms) <input id="cam-set-snapshot-ms" type="number" min="15000" max="3600000" step="1000" value="60000"></label>
+              <label>Snapshot retention (days) <input id="cam-set-snapshot-days" type="number" min="1" max="365" value="30"></label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-prefer-sub" checked> Prefer substream (Reolink h264Preview_01_sub)</label>
+            </div>
+            <h3 class="hmi-block-title">Camera AI (edge + post-capture)</h3>
+            <div class="form-grid compact">
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-ai-enabled" checked> Enable camera vision AI</label>
+              <label>Backend
+                <select id="cam-set-ai-backend">
+                  <option value="stub">Stub (dev/test)</option>
+                  <option value="http">HTTP inference service</option>
+                  <option value="off">Off</option>
+                </select>
+              </label>
+              <label class="span-all">HTTP inference URL <input id="cam-set-ai-http-url" class="cell-mono" placeholder="http://127.0.0.1:8080/infer"></label>
+              <label>Model ID <input id="cam-set-ai-model" class="cell-mono" value="camera-vision"></label>
+              <label>Alarm threshold (0–1) <input id="cam-set-ai-alarm-threshold" type="number" min="0" max="1" step="0.05" value="0.85"></label>
+              <label>Alarm tag (BOOL memory) <input id="cam-set-ai-alarm-tag" class="cell-mono" placeholder="CAM_ALARM"></label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-ai-post" checked> Post-capture inference</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-ai-live" checked> Live edge inference (go2rtc frames)</label>
+              <label>Live sample interval (ms) <input id="cam-set-ai-live-ms" type="number" min="2000" max="60000" step="1000" value="5000"></label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-ai-motion" checked> ONVIF motion triggers</label>
+              <label>Motion cooldown (ms) <input id="cam-set-ai-motion-cooldown" type="number" min="3000" max="120000" step="1000" value="10000"></label>
+            </div>
+            <p id="cameras-ai-status" class="muted cell-mono" aria-live="polite"></p>
+            <p id="cameras-go2rtc-status" class="muted cell-mono" aria-live="polite"></p>
+            <h4 class="hmi-block-title">Cloud Studio (appliance → SaaS)</h4>
+            <p class="panel-hint">Pair this appliance to a Cloud site. ONVIF/RTSP credentials stay local; only a redacted camera catalog is synced. Live view is proxied through the outbound site agent.</p>
+            <div class="form-grid compact">
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-cloud-agent-enabled"> Enable site agent</label>
+              <label>Cloud URL <input id="cam-cloud-url" type="url" placeholder="https://cloud.example.com" class="cell-mono"></label>
+              <label>Site ID <input id="cam-cloud-site-id" type="text" placeholder="plant_a" class="cell-mono"></label>
+              <label>Pairing code <input id="cam-cloud-pairing" type="text" placeholder="from Cloud Studio" class="cell-mono" autocomplete="off"></label>
+              <label>Agent token <input id="cam-cloud-token" type="password" placeholder="filled after pairing" class="cell-mono" autocomplete="off"></label>
+            </div>
+            <p id="cameras-cloud-status" class="muted cell-mono" aria-live="polite"></p>
+            <div class="toolbar wrap">
+              <button type="button" id="btn-cameras-save-settings" class="btn primary">Save settings</button>
+              <button type="button" id="btn-cameras-sync-go2rtc" class="btn">Sync streams to go2rtc</button>
+              <button type="button" id="btn-cameras-ai-refresh" class="btn">Refresh AI monitors</button>
+              <button type="button" id="btn-cameras-cloud-save" class="btn">Save cloud pairing</button>
+              <button type="button" id="btn-cameras-cloud-sync" class="btn">Push inventory now</button>
+            </div>
+            <p id="cameras-settings-msg" class="muted cell-mono" aria-live="polite"></p>
+            </div>
+          </section>
+        </div>
+      </div>
+      <footer class="popup-footer">
+        <button type="button" class="btn popup-close" data-popup-close="cameras">Close</button>
+      </footer>
+    </div>
+  </div>
+
   <div class="app-popup view-hidden program-shell-stub" data-popup="program" role="dialog" aria-labelledby="popup-program-title" aria-hidden="true"></div>
   <div class="popup-chrome popup-chrome-program popup-chrome-floater view-hidden" id="program-chrome" role="dialog" aria-labelledby="popup-program-title">
     <div class="hmi-setup-drag-bar popup-header-draggable" data-floater-drag-handle title="Drag to move">⠿ Move</div>
@@ -228,7 +510,7 @@
         <button type="button" id="btn-alarms-ack-all" class="btn">Ack all</button>
         <button type="button" id="btn-alarms-notify-setup" class="btn">Notification users…</button>
         <label class="alarms-filter">
-          <input type="checkbox" id="alarms-show-acked" checked> Show acknowledged
+          <input type="checkbox" id="alarms-show-acked"> Show acknowledged
         </label>
         <span id="alarms-meta" class="muted cell-mono"></span>
       </div>
@@ -427,21 +709,21 @@
             <p class="panel-hint">One-shot register block copy between Modbus RTU (USB/serial) and Modbus TCP — useful for commissioning and migration.</p>
             <div class="form-grid compact">
               <label>RTU port
-                <select id="peaklogic-rtu-port"></select>
+                <select id="mv-rtu-port"></select>
               </label>
-              <label>Baud <input id="peaklogic-rtu-baud" type="number" value="9600"></label>
-              <label>RTU slave <input id="peaklogic-rtu-slave" type="number" value="1"></label>
-              <label>TCP host <input id="peaklogic-tcp-host" value="127.0.0.1"></label>
-              <label>TCP port <input id="peaklogic-tcp-port" type="number" value="502"></label>
-              <label>RTU addr <input id="peaklogic-rtu-addr" type="number" value="0"></label>
-              <label>TCP addr <input id="peaklogic-tcp-addr" type="number" value="0"></label>
-              <label>Count <input id="peaklogic-count" type="number" value="10"></label>
+              <label>Baud <input id="mv-rtu-baud" type="number" value="9600"></label>
+              <label>RTU slave <input id="mv-rtu-slave" type="number" value="1"></label>
+              <label>TCP host <input id="mv-tcp-host" value="127.0.0.1"></label>
+              <label>TCP port <input id="mv-tcp-port" type="number" value="502"></label>
+              <label>RTU addr <input id="mv-rtu-addr" type="number" value="0"></label>
+              <label>TCP addr <input id="mv-tcp-addr" type="number" value="0"></label>
+              <label>Count <input id="mv-count" type="number" value="10"></label>
             </div>
             <div class="toolbar">
-              <button type="button" id="peaklogic-rtu-tcp" class="btn primary">Move RTU → TCP</button>
-              <button type="button" id="peaklogic-tcp-rtu" class="btn">Move TCP → RTU</button>
+              <button type="button" id="mv-rtu-tcp" class="btn primary">Move RTU → TCP</button>
+              <button type="button" id="mv-tcp-rtu" class="btn">Move TCP → RTU</button>
             </div>
-            <pre id="peaklogic-result" class="log"></pre>
+            <pre id="mv-result" class="log"></pre>
           </section>
           <section class="drivers-panel setup-panel view-hidden" data-drivers-tab="nextcentury">
             <p class="panel-hint">Cloud API polling for NextCentury Meters — <strong>not</strong> Modbus or a COM port. On each poll the driver can <strong>auto-create tags</strong> from report rows (deviceId + usage/temp/leak). Use <strong>Fill from example</strong> for credentials; <strong>Load example tags</strong> is optional when auto-sync is off.</p>
@@ -993,11 +1275,11 @@
   <div class="app-popup view-hidden hmi-setup-shell-stub" data-popup="hmi-setup" role="dialog" aria-labelledby="popup-hmi-setup-title" aria-hidden="true"></div>
   <div class="popup-chrome popup-chrome-hmi-setup view-hidden" id="hmi-setup-chrome" role="dialog" aria-labelledby="popup-hmi-setup-title">
       <div class="hmi-setup-drag-bar popup-header-draggable" data-hmi-drag-handle title="Drag to move"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)">⠿ Move</div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)">⠿ Move</div>
       <header class="popup-header popup-header-split popup-header-draggable"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelDragStart(event)">
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)">
         <h2 id="popup-hmi-setup-title">HMI setup <span class="hmi-composer-version muted">· Composer v1.2</span> <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
         <div class="popup-header-actions">
           <button type="button" class="btn btn-sm btn-help-context" data-help-section="hmi-composer" title="Help: HMI — composer &amp; grid">Help</button>
@@ -1411,20 +1693,46 @@
         <button type="button" class="btn popup-close" data-popup-close="hmi-setup">Close</button>
       </footer>
       <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"
-        onmousedown="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.PeakLogicHmi&amp;&amp;window.PeakLogicHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
+  </div>
+
+  <div class="app-popup view-hidden" data-popup="training" role="dialog" aria-labelledby="popup-training-title">
+    <div class="popup-chrome popup-chrome-help">
+      <header class="popup-header popup-header-split">
+        <h2 id="popup-training-title">PeakLogic Training</h2>
+        <div class="popup-header-actions"></div>
+      </header>
+      <div class="training-panel-wrap" id="training-panel">
+        <div class="setup-tabs training-tabs" data-training-tabs aria-label="Training sections"></div>
+        <div class="help-panel training-panel">
+          <div class="training-tab-pane" data-training-tab="overview"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="peaklogic"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="cbm"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="mapping"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="parc"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="quizzes"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="instructor"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="assess"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="glossary"></div>
+        </div>
+      </div>
+      <footer class="popup-footer">
+        <button type="button" class="btn popup-close" data-popup-close="training">Close</button>
+      </footer>
+    </div>
   </div>
 
   <div class="app-popup view-hidden" data-popup="help" role="dialog" aria-labelledby="popup-help-title">
@@ -1535,7 +1843,7 @@
     </form>
   </dialog>
 
-  <script>window.PEAKLOGIC_API_BASE = '<%= peaklogicApiBase || "/api/studio" %>'; window.PEAKLOGIC_PLATFORM_API = '/api'; window.PEAKLOGIC_STUDIO_LOCATION_ID = <%- JSON.stringify(studioLocationId || '') %>;</script>
+  <script>window.PEAKLOGIC_API_BASE = '<%= peaklogicApiBase || "/api/studio" %>'; window.PEAKLOGIC_PLATFORM_API = '/api'; window.PEAKLOGIC_CLOUD_STUDIO = true; window.PEAKLOGIC_STUDIO_LOCATION_ID = <%- JSON.stringify(studioLocationId || '') %>;</script>
   <script src="/js/api.js"></script>
   <script src="/js/peaklogicCore.js"></script>
   <script src="/js/graph.js"></script>
@@ -1543,6 +1851,7 @@
   <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>
   <script src="/js/hmi.js?v=<%= assetV %>"></script>
   <script src="/js/hmiSetupUi.js?v=<%= assetV %>"></script>
+  <script src="/js/cameraAdminUi.js?v=<%= assetV %>"></script>
   <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>
   <script src="/js/stEditor.js"></script>
   <script src="/js/stPidEditor.js?v=<%= assetV %>"></script>
@@ -1550,6 +1859,8 @@
   <script src="/js/floatingPanel.js?v=<%= assetV %>"></script>
   <script src="/js/programUi.js?v=<%= assetV %>"></script>
   <script src="/js/help.js"></script>
+  <script src="/js/training-quizzes.js"></script>
+  <script src="/js/training.js"></script>
   <script src="/js/app.js?v=<%= assetV %>"></script>
 </body>
 </html>

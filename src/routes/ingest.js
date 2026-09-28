@@ -8,6 +8,7 @@ const { isEventHubIngest, isEventHubConfigured, publishTelemetry } = require('..
 const { QUEUES } = require('../messaging/queues');
 const { buildParcIngestEnvelope } = require('../messaging/ingestMessages');
 const { storeSlimTelemetry } = require('../ingest/storeSlimTelemetry');
+const { ingestApplianceAlarmRelay } = require('../ingest/processCloudAlarm');
 const { TELEMETRY_INGEST_MODE } = require('../config');
 const { authenticate } = require('../auth/middleware');
 
@@ -75,6 +76,24 @@ router.post('/parc', asyncHandler(async (req, res) => {
 
   const stored = await storeSlimTelemetry(envelope);
   return res.status(201).json({ ok: true, path: 'direct', stored });
+}));
+
+/** Appliance alarm relay — cloud sends email/SMS to tenant users. */
+router.post('/alarm', asyncHandler(async (req, res) => {
+  if (!canIngest(req)) {
+    return res.status(401).json({ error: 'Valid X-Ingest-Key or tenant JWT required' });
+  }
+
+  const body = req.body && typeof req.body === 'object' ? req.body : {};
+  if (!body.tenantId && req.auth?.tenantId) {
+    body.tenantId = req.auth.tenantId;
+  }
+
+  const result = await ingestApplianceAlarmRelay(body);
+  if (!result.ok) {
+    return res.status(result.status || 400).json({ error: result.error || 'Alarm ingest failed' });
+  }
+  return res.status(result.path === 'servicebus' ? 202 : 201).json({ ok: true, ...result });
 }));
 
 router.use(authenticate);

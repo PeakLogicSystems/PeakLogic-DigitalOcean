@@ -15,8 +15,11 @@ router.use(attachAuth);
 router.get('/catalog', asyncHandler(async (req, res) => {
   const tenantId = await applianceProjectAuth.resolveTenantId(req);
   if (!tenantId) return res.status(401).json({ error: 'Login or appliance pairing required' });
-  const projects = await projectRepositoryService.listProjects(tenantId);
-  res.json({ projects });
+  const locationId = req.query.locationId;
+  const projects = await projectRepositoryService.listProjects(tenantId, {
+    locationId: locationId != null && String(locationId).trim() ? locationId : undefined,
+  });
+  res.json({ projects, locationId: locationId || null });
 }));
 
 router.get('/catalog/:id/est', asyncHandler(async (req, res) => {
@@ -28,6 +31,7 @@ router.get('/catalog/:id/est', asyncHandler(async (req, res) => {
     slug: row.slug,
     name: row.name,
     version: row.version,
+    locationId: row.locationId || null,
   } });
 }));
 
@@ -50,17 +54,25 @@ router.post('/publish', asyncHandler(async (req, res) => {
     return res.status(400).json({ error: 'Missing doc (.est project snapshot)' });
   }
   const name = String(req.body?.name || doc?.project?.name || 'project').trim() || 'project';
-  const result = await projectRepositoryService.publishProject(tenantId, name, doc, {
-    description: req.body?.description,
-    slug: req.body?.slug,
-    publishedBy: req.auth?.userId || null,
-  });
-  res.status(201).json({ ok: true, ...result });
+  try {
+    const result = await projectRepositoryService.publishProject(tenantId, name, doc, {
+      description: req.body?.description,
+      slug: req.body?.slug,
+      locationId: req.body?.locationId,
+      publishedBy: req.auth?.userId || null,
+    });
+    res.status(201).json({ ok: true, ...result });
+  } catch (err) {
+    if (err.status === 404) return res.status(404).json({ error: err.message });
+    throw err;
+  }
 }));
 
 router.delete('/catalog/:id', authenticate, asyncHandler(async (req, res) => {
   await projectRepositoryService.deleteProject(req.auth.tenantId, req.params.id);
-  const projects = await projectRepositoryService.listProjects(req.auth.tenantId);
+  const projects = await projectRepositoryService.listProjects(req.auth.tenantId, {
+    locationId: req.query.locationId,
+  });
   res.json({ ok: true, projects });
 }));
 

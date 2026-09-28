@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360">
+  <defs>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Panel bezel -->
+  <rect x="8" y="8" width="464" height="344" rx="10" fill="url(#panelGrad)" stroke="#64748b" stroke-width="2" filter="url(#shadow)"/>
+  <text id="loop_label" x="240" y="36" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#0f172a">PID LOOP  LC-101</text>
+  <text x="240" y="54" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#64748b">PeakLogic faceplate � bind PV / SP / OUT / AUTO</text>
+
+  <!-- PV dial (process variable) -->
+  <text x="95" y="82" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#334155">PV</text>
+  <g id="pv_dial" transform="translate(95, 155)">
+    <circle cx="0" cy="0" r="52" fill="#006837" stroke="#334155" stroke-width="2"/>
+    <circle cx="0" cy="0" r="48" fill="#009245"/>
+    <circle cx="0" cy="0" r="44" fill="#96D48D"/>
+    <circle cx="0" cy="0" r="40" fill="#ffffff" opacity="0.15"/>
+    <g id="pv_needle">
+      <path fill="#FBB03B" d="M3.5,0c0,1.9-1.6,3.5-3.5,3.5s-3.5-1.6-3.5-3.5c0-1.5,2.2-24.9,3.1-34.4c0-0.5,0.7-0.5,0.8,0C1.3,-24.9,3.5,-1.5,3.5,0z" transform="rotate(-35)"/>
+    </g>
+    <circle cx="0" cy="0" r="5" fill="#334155"/>
+  </g>
+  <text id="pv_value" x="95" y="225" text-anchor="middle" font-family="Consolas, monospace" font-size="18" font-weight="600" fill="#0f172a">0.0</text>
+
+  <!-- SP numeric -->
+  <text x="240" y="82" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#334155">SP</text>
+  <g id="sp_bezel" transform="translate(190, 95)">
+    <rect width="100" height="44" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+    <rect x="4" y="4" width="92" height="36" rx="4" fill="#f8fafc"/>
+  </g>
+  <text id="sp_value" x="240" y="124" text-anchor="middle" font-family="Consolas, monospace" font-size="22" font-weight="700" fill="#0f172a">50.0</text>
+
+  <!-- OUT bar graph -->
+  <text x="375" y="82" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#334155">OUT %</text>
+  <g id="out_bar" transform="translate(330, 95)">
+    <rect width="90" height="120" rx="4" fill="#660000" opacity="0.15"/>
+    <rect id="out_bar_fill" x="10" y="70" width="14" height="40" fill="#2563eb"/>
+    <rect x="30" y="55" width="14" height="55" fill="#2563eb" opacity="0.5"/>
+    <rect x="50" y="40" width="14" height="70" fill="#2563eb" opacity="0.35"/>
+    <rect x="70" y="25" width="14" height="85" fill="#2563eb" opacity="0.2"/>
+    <rect x="0" y="115" width="90" height="5" fill="#475569"/>
+  </g>
+  <text id="out_value" x="375" y="230" text-anchor="middle" font-family="Consolas, monospace" font-size="18" font-weight="600" fill="#0f172a">0.0</text>
+
+  <!-- Mode indicators -->
+  <text x="95" y="260" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" fill="#64748b">MODE</text>
+  <g id="mode_auto" transform="translate(55, 270)">
+    <rect width="80" height="28" rx="14" fill="#64748b"/>
+    <text x="40" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#fff">AUTO</text>
+  </g>
+  <g id="mode_manual" transform="translate(145, 270)">
+    <rect width="80" height="28" rx="14" fill="#cbd5e1"/>
+    <text x="40" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#475569">MAN</text>
+  </g>
+
+  <!-- Alarm pilot -->
+  <g id="alarm_hi" transform="translate(330, 260)">
+    <circle cx="0" cy="0" r="16" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" fill="#64748b">HI ALM</text>
+  </g>
+  <g id="alarm_lo" transform="translate(410, 260)">
+    <circle cx="0" cy="0" r="16" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" fill="#64748b">LO ALM</text>
+  </g>
+
+  <!-- 3-pen trend strip (bind trend_pen1/2/3 to PV / SP / OUT) -->
+  <g id="pid_strip">
+    <rect id="strip_bg" x="24" y="310" width="432" height="32" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+    <polyline id="trend_pen1" fill="none" stroke="#2563eb" stroke-width="1.5" vector-effect="non-scaling-stroke" points="28,326 80,326 132,326 184,326 236,326 288,326 340,326 392,326 448,326"/>
+    <polyline id="trend_pen2" fill="none" stroke="#f59e0b" stroke-width="1.5" vector-effect="non-scaling-stroke" points="28,322 80,322 132,322 184,322 236,322 288,322 340,322 392,322 448,322"/>
+    <polyline id="trend_pen3" fill="none" stroke="#22c55e" stroke-width="1.5" vector-effect="non-scaling-stroke" points="28,318 80,318 132,318 184,318 236,318 288,318 340,318 392,318 448,318"/>
+    <text x="30" y="338" font-family="Segoe UI, Arial" font-size="8" fill="#64748b">PV</text>
+    <text x="52" y="338" font-family="Segoe UI, Arial" font-size="8" fill="#64748b">SP</text>
+    <text x="74" y="338" font-family="Segoe UI, Arial" font-size="8" fill="#64748b">OUT</text>
+  </g>
+</svg>

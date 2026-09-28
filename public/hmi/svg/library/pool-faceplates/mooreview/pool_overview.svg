@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 520" width="560" height="520">
+  <defs>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="lampGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="544" height="504" rx="10" fill="url(#panelGrad)" stroke="#64748b" stroke-width="2" filter="url(#shadow)"/>
+  <text id="pool_label" x="280" y="32" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#0f172a">POOL OVERVIEW</text>
+  <text x="280" y="50" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#64748b">Chemistry - Filter pump - Schedule - Backwash</text>
+
+  <!-- Flow permissive -->
+  <text x="48" y="74" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#334155">FLOW</text>
+  <g id="flow_lamp" transform="translate(48, 92)">
+    <circle cx="0" cy="0" r="14" fill="#ef4444" stroke="#334155" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" fill="#ef4444" opacity="0.45"/>
+  </g>
+
+  <!-- Chemistry PV row -->
+  <g id="chem_panel" transform="translate(120, 68)">
+    <rect x="0" y="0" width="320" height="72" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+    <text x="70" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">pH</text>
+    <text id="ph_pv" x="70" y="42" text-anchor="middle" font-family="Consolas, monospace" font-size="20" font-weight="700" fill="#0f172a">7.4</text>
+    <text x="70" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">PH_PV</text>
+
+    <text x="175" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">CL2 ppm</text>
+    <text id="orp_pv" x="175" y="42" text-anchor="middle" font-family="Consolas, monospace" font-size="20" font-weight="700" fill="#0f172a">2.0</text>
+    <text x="175" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">CL2_PV</text>
+
+    <text x="280" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">SALT ppm</text>
+    <text id="cond_pv" x="280" y="42" text-anchor="middle" font-family="Consolas, monospace" font-size="20" font-weight="700" fill="#0f172a">3200</text>
+    <text x="280" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">COND_PV</text>
+  </g>
+
+  <!-- CL2 setpoint + A/M -->
+  <g id="cl2_panel" transform="translate(448, 68)">
+    <rect x="0" y="0" width="96" height="72" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+    <text x="48" y="16" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">CL2 SP</text>
+    <g id="orp_sp_value">
+      <rect x="16" y="22" width="64" height="22" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+      <text x="48" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#0f172a">2.0</text>
+    </g>
+    <g id="btn_cl2_auto" transform="translate(4, 50)">
+      <rect width="42" height="18" rx="9" fill="#64748b"/>
+      <text x="21" y="13" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" font-weight="700" fill="#ffffff">AUTO</text>
+    </g>
+    <g id="btn_cl2_manual" transform="translate(50, 50)">
+      <rect width="42" height="18" rx="9" fill="#cbd5e1"/>
+      <text x="21" y="13" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" font-weight="700" fill="#475569">MAN</text>
+    </g>
+  </g>
+
+  <!-- Filter pump speed -->
+  <g id="pump_panel" transform="translate(24, 152)">
+    <rect x="0" y="0" width="512" height="80" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="256" y="16" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#475569">FILTER PUMP SPEED</text>
+
+    <text x="80" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">RPM PV</text>
+    <text id="pump_rpm_pv" x="80" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="22" font-weight="700" fill="#0f172a">0</text>
+
+    <text x="200" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">RPM SP</text>
+    <g id="pump_speed_sp">
+      <rect x="158" y="44" width="84" height="26" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+      <text x="200" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="18" font-weight="700" fill="#0f172a">1800</text>
+    </g>
+
+    <text x="340" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">PUMP MODE</text>
+    <g id="pump_hoa_bezel" transform="translate(290, 44)">
+      <rect width="100" height="32" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+      <rect x="3" y="3" width="94" height="26" rx="4" fill="#f8fafc"/>
+    </g>
+    <text id="pump_hoa_state" x="340" y="64" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" font-weight="700" fill="#0f172a">Auto</text>
+
+    <text x="440" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">RUN</text>
+    <g id="pump_run_lamp" transform="translate(440, 58)">
+      <circle cx="0" cy="0" r="16" fill="#64748b" stroke="#334155" stroke-width="2"/>
+      <circle cx="0" cy="0" r="12" fill="#64748b" opacity="0.35"/>
+    </g>
+  </g>
+
+  <!-- Filter schedule window -->
+  <g id="schedule_panel" transform="translate(24, 244)">
+    <rect x="0" y="0" width="512" height="88" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+    <text x="256" y="16" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#475569">FILTER SCHEDULE</text>
+
+    <text x="72" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">TIME NOW</text>
+    <text id="tod_value" x="72" y="62" text-anchor="middle" font-family="Consolas, monospace" font-size="20" font-weight="700" fill="#0f172a">08:00</text>
+
+    <g id="chk_24hr" transform="translate(138, 42)">
+      <rect width="16" height="16" rx="3" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+      <text x="22" y="13" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#0f172a">24 HR</text>
+    </g>
+
+    <text x="248" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">START</text>
+    <g id="window_start">
+      <rect x="218" y="42" width="60" height="22" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+      <text x="248" y="58" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#0f172a">08:00</text>
+    </g>
+
+    <text x="348" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">END</text>
+    <g id="window_end">
+      <rect x="318" y="42" width="60" height="22" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+      <text x="348" y="58" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#0f172a">20:00</text>
+    </g>
+
+    <text x="440" y="38" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">ENABLE</text>
+    <g id="btn_filter_enable" transform="translate(408, 44)">
+      <rect width="64" height="26" rx="5" fill="#22c55e" stroke="#475569" stroke-width="1.5"/>
+      <text x="32" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#ffffff">ON</text>
+    </g>
+    <text x="256" y="80" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">Window used when 24 HR is off</text>
+  </g>
+
+  <!-- Backwash 4-step sequence -->
+  <g id="bw_panel" transform="translate(24, 344)">
+    <rect x="0" y="0" width="512" height="80" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="256" y="16" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#475569">BACKWASH SEQUENCE</text>
+
+    <g id="bw_step_lamp" transform="translate(56, 48)">
+      <circle cx="0" cy="0" r="18" fill="#64748b" stroke="#334155" stroke-width="2"/>
+      <circle cx="0" cy="0" r="14" fill="#64748b" opacity="0.4"/>
+    </g>
+    <text id="bw_state" x="56" y="78" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#334155">IDLE</text>
+
+    <text x="150" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">1</text>
+    <text x="210" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">2</text>
+    <text x="270" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">3</text>
+    <text x="330" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#94a3b8">4</text>
+    <text x="150" y="52" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">Idle</text>
+    <text x="210" y="52" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">BW</text>
+    <text x="270" y="52" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">Rinse</text>
+    <text x="330" y="52" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">Return</text>
+
+    <line x1="168" y1="48" x2="192" y2="48" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="228" y1="48" x2="252" y2="48" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="288" y1="48" x2="312" y2="48" stroke="#cbd5e1" stroke-width="2"/>
+
+    <text x="400" y="36" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">MODE</text>
+    <g id="btn_bw_normal" transform="translate(368, 42)">
+      <rect width="64" height="20" rx="10" fill="#64748b"/>
+      <text x="32" y="14" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="700" fill="#ffffff">NORMAL</text>
+    </g>
+    <g id="btn_bw_backwash" transform="translate(368, 66)">
+      <rect width="64" height="20" rx="10" fill="#cbd5e1"/>
+      <text x="32" y="14" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="700" fill="#475569">BACKWASH</text>
+    </g>
+
+    <g id="btn_bw_start" transform="translate(456, 48)">
+      <rect width="48" height="36" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+      <text x="24" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="700" fill="#ffffff">START</text>
+    </g>
+  </g>
+
+  <!-- Pool lighting summary -->
+  <g id="light_panel" transform="translate(24, 432)">
+    <rect x="0" y="0" width="512" height="72" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+    <text x="256" y="16" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#475569">POOL LIGHTING</text>
+    <text x="72" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">MODE</text>
+    <text id="light_op_drum" x="72" y="54" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" font-weight="700" fill="#0f172a">OFF</text>
+    <g id="light_z1_relay" transform="translate(148, 40)"><circle cx="0" cy="0" r="10" fill="#64748b" stroke="#334155" stroke-width="1.5"/></g>
+    <g id="light_z2_relay" transform="translate(188, 40)"><circle cx="0" cy="0" r="10" fill="#64748b" stroke="#334155" stroke-width="1.5"/></g>
+    <g id="light_z3_relay" transform="translate(228, 40)"><circle cx="0" cy="0" r="10" fill="#64748b" stroke="#334155" stroke-width="1.5"/></g>
+    <g id="light_z4_relay" transform="translate(268, 40)"><circle cx="0" cy="0" r="10" fill="#64748b" stroke="#334155" stroke-width="1.5"/></g>
+    <g id="light_z5_relay" transform="translate(308, 40)"><circle cx="0" cy="0" r="10" fill="#64748b" stroke="#334155" stroke-width="1.5"/></g>
+    <g id="light_z6_relay" transform="translate(348, 40)"><circle cx="0" cy="0" r="10" fill="#64748b" stroke="#334155" stroke-width="1.5"/></g>
+    <text x="256" y="68" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#94a3b8">Z1-Z6 relay status — use pool_lighting tile for full control</text>
+    <g id="light_perm_lamp" transform="translate(440, 44)">
+      <circle cx="0" cy="0" r="12" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    </g>
+    <text x="440" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#64748b">PERM</text>
+  </g>
+</svg>

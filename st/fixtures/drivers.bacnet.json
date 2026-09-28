@@ -1,0 +1,12 @@
+[
+  {
+    "id": "bacnet1",
+    "type": "bacnet",
+    "enabled": true,
+    "port": 47808,
+    "apduTimeout": 6000,
+    "pollIntervalMs": 1000,
+    "writeEnabled": false,
+    "writePriority": 8
+  }
+]

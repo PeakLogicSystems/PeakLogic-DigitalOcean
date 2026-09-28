@@ -1,0 +1,67 @@
+{
+  "assignments": [
+    {
+      "positionId": "io_2",
+      "positionName": "Arduino Opta ST",
+      "deviceId": "mv_f2e689fd60d96bab",
+      "serialNumber": "0123b636f1c23964ee",
+      "vendor": "",
+      "model": "",
+      "platform": "",
+      "driverType": "mqtt_parc",
+      "meta": {
+        "ethIp": null,
+        "firmwareVersion": null,
+        "expansionModules": []
+      },
+      "swapType": "commission",
+      "installedAt": "2026-07-05T10:35:29.204Z",
+      "removedAt": null,
+      "note": "imported from driver config",
+      "id": "hw_1783247729205_h8iumr",
+      "_id": null
+    },
+    {
+      "positionId": "io_1",
+      "positionName": "Arduino Opta ST",
+      "deviceId": "mv_4fa861b9c0b36607",
+      "serialNumber": "",
+      "vendor": "",
+      "model": "",
+      "platform": "",
+      "driverType": "mqtt_parc",
+      "meta": {
+        "ethIp": null,
+        "firmwareVersion": null,
+        "expansionModules": []
+      },
+      "swapType": "commission",
+      "installedAt": "2026-07-04T21:23:11.209Z",
+      "removedAt": null,
+      "note": "imported from driver config",
+      "id": "hw_1783200191211_0v86i8",
+      "_id": null
+    },
+    {
+      "positionId": "arduino_opta_st",
+      "positionName": "Arduino Opta ST",
+      "deviceId": "mv_f2e689fd60d96bab",
+      "serialNumber": "0123b636f1c23964ee",
+      "vendor": "",
+      "model": "",
+      "platform": "",
+      "driverType": "mqtt_parc",
+      "meta": {
+        "ethIp": null,
+        "firmwareVersion": null,
+        "expansionModules": []
+      },
+      "swapType": "commission",
+      "installedAt": "2026-06-28T00:33:54.058Z",
+      "removedAt": null,
+      "note": "imported from driver config",
+      "id": "hw_1782606834058_43m32x",
+      "_id": null
+    }
+  ]
+}

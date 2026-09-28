@@ -2,18 +2,43 @@
 
 const { CONFIG_JSON_FILES, isConfigJsonFile } = require('./keys');
 const mongoBackend = require('./mongoBackend');
-const { migrateConfigFilesToMongo, syncBundledProjectsFromDisk } = require('./migrateFromFiles');
-const { safeId: projectSafeId } = require('../project/projectIds');
-const { CONFIG_URI } = require('../config');
+const { migrateConfigFilesToMongo } = require('./migrateFromFiles');
+const { CONFIG_URI, DEPLOYMENT_MODE } = require('../config');
+
+function resolveConfigTenantId() {
+  return require('../project/projectTenantContext').resolveConfigTenantId();
+}
+
+function defaultParcSettings() {
+  return require('../parc/deviceRegistry').defaultParcSettings();
+}
 
 const cache = new Map();
+const loadedTenants = new Set();
 let ready = false;
 let initPromise = null;
 const pendingWrites = new Map();
 let flushTimer = null;
 const FLUSH_MS = 50;
-/** @type {Array<{ id: string, name: string, savedAt: string|null, tagCount: number|null, driverCount: number|null }>} */
-let projectIndex = [];
+
+function cacheKey(tenantId, key) {
+  return `${tenantId}:${key}`;
+}
+
+function defaultWorkspaceDocuments() {
+  return {
+    'settings.json': {
+      scanMs: 100,
+      graphMaxPoints: 600,
+      graphPens: [],
+      startup: { mode: 'blank' },
+      project: {},
+    },
+    'tags.json': [],
+    'drivers.json': [],
+    'parc.json': { devices: {}, settings: defaultParcSettings() },
+  };
+}
 
 function initMemorySync() {
   if (CONFIG_URI !== 'memory' || ready) return false;
@@ -22,16 +47,20 @@ function initMemorySync() {
 }
 
 function readSync(key, fallback) {
-  if (!ready || !cache.has(key)) return fallback;
-  return cache.get(key);
+  const tid = resolveConfigTenantId();
+  const ck = cacheKey(tid, key);
+  if (!ready || !cache.has(ck)) return fallback;
+  return cache.get(ck);
 }
 
 function writeSync(key, data) {
   if (!ready) {
     throw new Error('configStore not ready');
   }
-  cache.set(key, data);
-  pendingWrites.set(key, data);
+  const tid = resolveConfigTenantId();
+  const ck = cacheKey(tid, key);
+  cache.set(ck, data);
+  pendingWrites.set(ck, { tenantId: tid, key, data });
   if (flushTimer) clearTimeout(flushTimer);
   flushTimer = setTimeout(() => {
     flushTimer = null;
@@ -45,9 +74,34 @@ async function flushPending() {
   if (!pendingWrites.size) return;
   const batch = new Map(pendingWrites);
   pendingWrites.clear();
-  for (const [key, data] of batch) {
-    await mongoBackend.writeDocument(key, data);
+  for (const [, row] of batch) {
+    await mongoBackend.writeDocument(row.key, row.data, row.tenantId);
   }
+}
+
+async function ensureTenantLoaded(tenantId, opts = {}) {
+  const tid = String(tenantId || '').trim();
+  if (!tid) throw new Error('tenantId required');
+  if (loadedTenants.has(tid)) return { tenantId: tid, seeded: false };
+
+  const keys = [...CONFIG_JSON_FILES];
+  let docs = await mongoBackend.loadAllDocuments(keys, tid);
+  let seeded = false;
+
+  if (docs.size === 0 && opts.seedIfEmpty !== false) {
+    const defaults = defaultWorkspaceDocuments();
+    for (const [key, data] of Object.entries(defaults)) {
+      await mongoBackend.writeDocument(key, data, tid);
+      docs.set(key, data);
+    }
+    seeded = true;
+  }
+
+  for (const [key, data] of docs) {
+    cache.set(cacheKey(tid, key), data);
+  }
+  loadedTenants.add(tid);
+  return { tenantId: tid, seeded, documentCount: docs.size };
 }
 
 async function init() {
@@ -56,37 +110,35 @@ async function init() {
     if (mongoBackend.isMemoryMode()) {
       mongoBackend.resetMemory();
     }
+
+    if (DEPLOYMENT_MODE === 'cloud') {
+      await mongoBackend.connect();
+      ready = true;
+      console.log('[configStore] mongo ready (cloud multi-tenant; lazy load per org)');
+      return { backend: 'mongo', status: mongoBackend.status() };
+    }
+
     const keys = [...CONFIG_JSON_FILES];
     let docs = await mongoBackend.loadAllDocuments(keys);
 
     if (docs.size === 0 && !mongoBackend.isMemoryMode()) {
       const imported = await migrateConfigFilesToMongo({
-        writeDocument: mongoBackend.writeDocument,
-        writeProjectSnapshot: mongoBackend.writeProjectSnapshot,
-        safeId: projectSafeId,
-      });
+        writeDocument: (key, data) => mongoBackend.writeDocument(key, data),
+      }, { seedProjects: false });
       if (imported.length) {
         docs = await mongoBackend.loadAllDocuments(keys);
         console.log(`[configStore] seeded ${imported.length} document(s) from data/`);
       }
     }
 
+    const tid = resolveConfigTenantId();
     for (const [key, data] of docs) {
-      cache.set(key, data);
+      cache.set(cacheKey(tid, key), data);
     }
-    projectIndex = await mongoBackend.listProjectSnapshots();
-    const synced = await syncBundledProjectsFromDisk({
-      writeProjectSnapshot: mongoBackend.writeProjectSnapshot,
-      safeId: projectSafeId,
-      existingIds: new Set(projectIndex.map((p) => p.id)),
-    });
-    if (synced.length) {
-      projectIndex = await mongoBackend.listProjectSnapshots();
-      console.log(`[configStore] synced bundled project(s): ${synced.join(', ')}`);
-    }
+    loadedTenants.add(tid);
     ready = true;
     const status = mongoBackend.status();
-    console.log(`[configStore] mongo ready (${docs.size} documents)`);
+    console.log(`[configStore] mongo ready (${docs.size} documents; projects on disk)`);
     return { backend: 'mongo', status };
   })();
   try {
@@ -107,7 +159,7 @@ async function shutdown() {
   ready = false;
   initPromise = null;
   cache.clear();
-  projectIndex = [];
+  loadedTenants.clear();
 }
 
 function status() {
@@ -115,41 +167,35 @@ function status() {
     backend: 'mongo',
     ready,
     cachedKeys: [...cache.keys()],
+    loadedTenants: [...loadedTenants],
+    projectsBackend: 'disk',
     mongo: mongoBackend.status(),
   };
 }
 
+/** @deprecated Projects live on disk — delegates to projectStore. */
 function listProjectsSync() {
-  return projectIndex.slice();
+  return require('../project/projectStore').listProjects();
 }
 
+/** @deprecated Projects live on disk — delegates to projectStore. */
 async function refreshProjectIndex() {
-  if (!ready && !mongoBackend.isMemoryMode()) return [];
-  projectIndex = await mongoBackend.listProjectSnapshots();
-  return projectIndex.slice();
+  return require('../project/projectStore').listProjectsFresh();
 }
 
-async function saveProjectDoc(projectId, doc) {
-  const id = projectSafeId(projectId || doc?.project?.name || 'project');
-  const saved = await mongoBackend.writeProjectSnapshot(id, doc, { name: doc?.project?.name || id });
-  await refreshProjectIndex();
-  return { id, savedAt: saved.savedAt };
+/** @deprecated Projects live on disk — delegates to projectStore. */
+async function saveProjectDoc(projectId, doc, deps) {
+  return require('../project/projectStore').saveProjectDoc(projectId || doc?.project?.name || 'project', doc, deps);
 }
 
+/** @deprecated Projects live on disk — delegates to projectStore. */
 async function loadProjectDoc(projectId) {
-  const id = projectSafeId(projectId);
-  const row = await mongoBackend.readProjectSnapshot(id);
-  if (!row?.data) {
-    throw Object.assign(new Error(`Project not found: ${id}`), { status: 404 });
-  }
-  return row.data;
+  return require('../project/projectStore').loadProjectDoc(projectId);
 }
 
+/** @deprecated Projects live on disk — delegates to projectStore. */
 async function deleteProjectDoc(projectId) {
-  const id = projectSafeId(projectId);
-  const ok = await mongoBackend.deleteProjectSnapshot(id);
-  await refreshProjectIndex();
-  return ok;
+  return require('../project/projectStore').deleteProjectDoc(projectId);
 }
 
 if (CONFIG_URI === 'memory') {
@@ -165,6 +211,7 @@ module.exports = {
   shutdown,
   status,
   flushPending,
+  ensureTenantLoaded,
   refreshProjectIndex,
   listProjectsSync,
   saveProjectDoc,

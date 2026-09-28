@@ -1,0 +1,163 @@
+{
+  "id": "nexcomm_epi_agitator",
+  "label": "Nexcomm EPI — agitator motors",
+  "vendor": "Nexcomm",
+  "model": "EPI agitator",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "nx_epi_agitator",
+  "stationType": "agitator",
+  "defaults": {
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
+    "serialNum": "REPLACE_SERIAL",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "mqttJson": {
+      "serialFromDefaults": true,
+      "topicTemplate": "/devices/{serial}/messages/events/",
+      "fields": [
+        {
+          "id": "MOTOR_1",
+          "label": "Motor 1",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_1",
+          "comment": "Nexus CSV: Motor 1"
+        },
+        {
+          "id": "MOTOR_2",
+          "label": "Motor 2",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_2",
+          "comment": "Nexus CSV: Motor 2"
+        },
+        {
+          "id": "MOTOR_3",
+          "label": "Motor 3",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_3",
+          "comment": "Nexus CSV: Motor 3"
+        },
+        {
+          "id": "MOTOR_4",
+          "label": "Motor 4",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_4",
+          "comment": "Nexus CSV: Motor 4"
+        },
+        {
+          "id": "MOTOR_5",
+          "label": "Motor 5",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_5",
+          "comment": "Nexus CSV: Motor 5"
+        },
+        {
+          "id": "MOTOR_6",
+          "label": "Motor 6",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_6",
+          "comment": "Nexus CSV: Motor 6"
+        },
+        {
+          "id": "MOTOR_7",
+          "label": "Motor 7",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_7",
+          "comment": "Nexus CSV: Motor 7"
+        },
+        {
+          "id": "MOTOR_8",
+          "label": "Motor 8",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_8",
+          "comment": "Nexus CSV: Motor 8"
+        },
+        {
+          "id": "MOTOR_9",
+          "label": "Motor 9",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_9",
+          "comment": "Nexus CSV: Motor 9"
+        },
+        {
+          "id": "MOTOR_10",
+          "label": "Motor 10",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_10",
+          "comment": "Nexus CSV: Motor 10"
+        },
+        {
+          "id": "MOTOR_11",
+          "label": "Motor 11",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_11",
+          "comment": "Nexus CSV: Motor 11"
+        },
+        {
+          "id": "MOTOR_12",
+          "label": "Motor 12",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_12",
+          "comment": "Nexus CSV: Motor 12"
+        },
+        {
+          "id": "MOTOR_13",
+          "label": "Motor 13",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_13",
+          "comment": "Nexus CSV: Motor 13"
+        },
+        {
+          "id": "MOTOR_14",
+          "label": "Motor 14",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_14",
+          "comment": "Nexus CSV: Motor 14"
+        },
+        {
+          "id": "MOTOR_15",
+          "label": "Motor 15",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_15",
+          "comment": "Nexus CSV: Motor 15"
+        },
+        {
+          "id": "MOTOR_16",
+          "label": "Motor 16",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_16",
+          "comment": "Nexus CSV: Motor 16"
+        },
+        {
+          "id": "CT1",
+          "label": "CT1",
+          "type": "REAL",
+          "payloadTemplate": "json:ct1",
+          "comment": "Nexus CSV: CT1"
+        },
+        {
+          "id": "CT2",
+          "label": "CT2",
+          "type": "REAL",
+          "payloadTemplate": "json:ct2",
+          "comment": "Nexus CSV: CT2"
+        },
+        {
+          "id": "OUTPUT1",
+          "label": "OUTPUT1",
+          "type": "BOOL",
+          "payloadTemplate": "json:output1",
+          "comment": "Nexus CSV: OUTPUT1"
+        }
+      ]
+    }
+  },
+  "notes": "Inbound tag map generated from st/fixtures/nexcomm-csv/nexcomm-epi-agitator.csv (1000 sample rows). Set serialNum to normalized Nexcomm serial (no hyphens). Broker defaults to mqtts://mqtt.peaklogic.io:8883. payloadTemplate json: keys are slug placeholders — align to live MQTT JSON or EPI register paths as needed. Alignment table: st/fixtures/nexcomm-inbound/nexcomm-epi-agitator.alignment.json"
+}

@@ -1,0 +1,67 @@
+{
+  "id": "dfrobot_sen0681_do",
+  "label": "DFRobot SEN0681 — RS485 dissolved oxygen probe",
+  "vendor": "DFRobot",
+  "model": "SEN0681 fluorescence DO",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "df_sen0681",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 3,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "DO_SAT_PCT",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 100,
+        "comment": "DO saturation % (IR 0x0000–0x0001 float BE, 1.0 = 100%)"
+      },
+      {
+        "id": "DO_MG_L",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "comment": "DO concentration mg/L (IR 0x0002–0x0003 float BE)"
+      },
+      {
+        "id": "DO_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 4,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "comment": "Temperature °C (IR 0x0004–0x0005 float BE)"
+      }
+    ]
+  }
+}

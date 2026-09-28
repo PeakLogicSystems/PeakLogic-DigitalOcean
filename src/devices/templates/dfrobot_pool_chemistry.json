@@ -1,0 +1,34 @@
+{
+  "id": "dfrobot_pool_chemistry",
+  "label": "DFRobot pool chemistry — SEN0711 pH + SEN0712 chlorine (RS-485)",
+  "vendor": "DFRobot",
+  "model": "SEN0711 + SEN0712 on local Modbus RTU (IOT-LINK PORT B / USB RS-485)",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "pool_chem_rtu",
+  "stationType": "pool_chemistry",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "pollIntervalMs": 5000
+  },
+  "tags": {
+    "dfrobotPoolChemistry": {
+      "phSlaveId": 1,
+      "clSlaveId": 2,
+      "phTagId": "PH_AI",
+      "clTagId": "ORP_AI"
+    }
+  },
+  "notes": "Local RS-485 pair for pool ST: SEN0711 slave 1 → PH_AI + WATER_TEMP_C + NH3_MG_L; SEN0712 slave 2 → ORP_AI (CL2 ppm). Default 4800 8N1. Set unique addresses (holding 0x07D0) before both share the bus. IOT-LINK: PEAKLOGIC_POOL_MODBUS_CHEM=true (PORT B). Cloud/NB-IoT: use dfrobot_pool_chemistry_dragino instead."
+}

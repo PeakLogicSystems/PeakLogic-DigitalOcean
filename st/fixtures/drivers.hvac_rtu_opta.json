@@ -1,0 +1,13 @@
+[
+  {
+    "id": "opta_rtu",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_rtu_01",
+    "name": "RTU Opta + D1608E",
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "telemetryOnly": false
+  }
+]

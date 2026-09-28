@@ -1,0 +1,19 @@
+{
+  "deviceId": "dragino_01",
+  "name": "Dragino RS485-NB",
+  "platform": "dragino-rs485-nb",
+  "reportIntervalSec": 300,
+  "dragino": {
+    "imei": "863663062798815",
+    "imsi": "460083513507309",
+    "model": "RS485-NB",
+    "payloadHex": "010304000100020008",
+    "time": "2024/12/11 09:34:15"
+  },
+  "tags": [
+    { "id": "CELL_SIGNAL", "type": "INT", "role": "input", "value": 25, "quality": "GOOD" },
+    { "id": "CELL_BATTERY_V", "type": "REAL", "role": "input", "value": 3.605, "quality": "GOOD" },
+    { "id": "MB_REG_1", "type": "INT", "role": "input", "value": 1, "quality": "GOOD" },
+    { "id": "MB_REG_2", "type": "INT", "role": "input", "value": 2, "quality": "GOOD" }
+  ]
+}

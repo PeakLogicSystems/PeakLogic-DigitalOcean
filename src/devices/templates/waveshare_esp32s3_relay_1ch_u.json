@@ -1,0 +1,49 @@
+{
+  "id": "waveshare_esp32s3_relay_1ch_u",
+  "label": "Waveshare ESP32-S3-Relay-1CH-U — MQTT Parc (pool satellite)",
+  "vendor": "Waveshare",
+  "model": "ESP32-S3-Relay-1CH-U (external SMA antenna) — isolated 1-ch relay",
+  "transport": "mqtt_parc",
+  "sharedBus": false,
+  "driverId": "ws_relay_01",
+  "diCount": 1,
+  "doCount": 1,
+  "aiCount": 0,
+  "defaults": {
+    "deviceId": "ws_relay_01",
+    "reportIntervalMs": 2000,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "relayGpio": 1,
+    "diGpio": 2,
+    "poolRole": "dose_acid"
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "ws_relay_01",
+    "remoteExecution": false,
+    "platform": "waveshare-esp32s3-relay-1ch"
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "R1",
+        "type": "BOOL",
+        "role": "output",
+        "value": false,
+        "driverAddress": { "channel": "R1" },
+        "comment": "Onboard isolated relay (NO, ≤10 A 250 VAC / 30 VDC) — GPIO1. Pilot a contactor for motors."
+      },
+      {
+        "id": "I1",
+        "type": "BOOL",
+        "role": "input",
+        "value": false,
+        "driverAddress": { "channel": "I1" },
+        "comment": "Aux DI on SH1.0 GPIO2 — flow switch, interlock, or spare."
+      }
+    ]
+  },
+  "notes": "DIN-rail Wi-Fi satellite for pool loads (dose pump, heater enable, one light zone, pump-contactor coil). Flash firmware/waveshare-esp32s3-relay-parc. /setup AP PeakLogic-Relay1CH. Prefer ESP32-S3-Relay-1CH-U + external antenna at the equipment pad. Bind pool tag via PEAKLOGIC_POOL_WAVESHARE_RELAYS or Drivers → retarget DOSE_*/LIGHT_Z*/PUMP_RUN_CMD to this driver (channel R1). See docs/WAVESHARE_ESP32S3_RELAY_POOL.md."
+}

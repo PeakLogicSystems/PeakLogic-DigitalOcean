@@ -1,0 +1,7 @@
+[
+  { "id": "JEP_RPM", "label": "Jandy ePump RPM", "type": "INT", "role": "input", "value": 0, "driverId": "jandy_bus", "driverAddress": { "jandy": "rpm", "deviceClass": "epump", "deviceAddr": 120 } },
+  { "id": "JEP_WATTS", "label": "Jandy ePump watts", "type": "INT", "role": "input", "value": 0, "driverId": "jandy_bus", "driverAddress": { "jandy": "watts", "deviceClass": "epump", "deviceAddr": 120 } },
+  { "id": "JEP_RUNNING", "label": "Jandy ePump running", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "running", "deviceClass": "epump", "deviceAddr": 120 } },
+  { "id": "JEP_RPM_CMD", "label": "Jandy ePump RPM cmd", "type": "INT", "role": "output", "value": 2400, "driverId": "jandy_bus", "driverAddress": { "jandy": "rpm_cmd", "deviceClass": "epump", "deviceAddr": 120 } },
+  { "id": "JEP_WATTS_CMD", "label": "Jandy ePump watts cmd", "type": "INT", "role": "output", "value": 0, "driverId": "jandy_bus", "driverAddress": { "jandy": "watts_cmd", "deviceClass": "epump", "deviceAddr": 120 } }
+]

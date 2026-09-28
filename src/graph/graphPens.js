@@ -49,6 +49,25 @@ function penTagIds(pens) {
   return (pens || []).map((p) => p.tagId);
 }
 
+/** Build archive/chart pens for all graphEnabled tags, preserving configured pen styling when present. */
+function pensFromEnabledTags(tagList, configuredPens = []) {
+  const penMap = new Map((configuredPens || []).map((p) => [p.tagId, p]));
+  const enabled = (tagList || []).filter((t) => t.graphEnabled !== false && isGraphableTag(t));
+  return enabled.map((t, i) => {
+    const prev = penMap.get(t.id);
+    if (prev) return { ...prev };
+    return {
+      tagId: t.id,
+      color: defaultColor(i),
+      scale: 1,
+      offset: 0,
+      ymin: 0,
+      ymax: 100,
+      autoScale: true,
+    };
+  });
+}
+
 function applyScaledValue(raw, pen) {
   return Number(raw) * (pen.scale || 1) + (pen.offset || 0);
 }
@@ -59,5 +78,6 @@ module.exports = {
   defaultColor,
   normalizePens,
   penTagIds,
+  pensFromEnabledTags,
   applyScaledValue,
 };

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" preserveAspectRatio="xMidYMid meet" role="img" aria-label="PeakLogic">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <g transform="scale(16)">
+    <path d="M4 28 L12 10 L18 20 L23 12 L28 28 Z" fill="#7C3AED"/>
+    <path d="M18 20 L23 12 L28 28 Z" fill="#22C55E" opacity="0.85"/>
+  </g>
+</svg>

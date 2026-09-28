@@ -1,0 +1,44 @@
+{
+  "id": "jxct_npk_jxbs3001_dragino_x4",
+  "label": "JXCT JXBS-3001-NPK-RS ×4 — soil 7-in-1 via Dragino (Modbus→MQTT)",
+  "vendor": "JXCT",
+  "model": "4× JXBS-3001-NPK-RS on one Dragino RS485-NB",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "dragino_jxct_x4",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 28,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "RS485",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1,
+    "deviceId": "dragino_jxct_x4"
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2500
+  },
+  "tags": {
+    "jxctSoil7in1": {
+      "slaves": [1, 2, 3, 4],
+      "idPrefix": "S{n}_"
+    }
+  },
+  "dragino": {
+    "bindAs": "mqtt_parc",
+    "gatewayPresetId": "dragino_rs485_nb",
+    "reportIntervalSec": 300,
+    "sensorPower5vMs": 5000,
+    "pollBlocks": [
+      { "functionCode": 3, "slaveId": 1, "startRegister": 6, "registerCount": 27, "comment": "Sensor 1 — S1_* tags" },
+      { "functionCode": 3, "slaveId": 2, "startRegister": 6, "registerCount": 27, "comment": "Sensor 2 — S2_* tags" },
+      { "functionCode": 3, "slaveId": 3, "startRegister": 6, "registerCount": 27, "comment": "Sensor 3 — S3_* tags" },
+      { "functionCode": 3, "slaveId": 4, "startRegister": 6, "registerCount": 27, "comment": "Sensor 4 — S4_* tags" }
+    ]
+  },
+  "notes": "Four JXCT seven-in-one soil probes on one RS485 bus → Dragino RS485-NB. Configure each probe to a unique Modbus address (holding reg 0x0100): slave 1, 2, 3, 4. Wire all A/B to Dragino RS485; power each probe 5–24 VDC. Tags: S1_SOIL_PH … S4_K_MG_KG (28 points). Cloud: POST /api/parc/dragino-gateway/bind-preset with presetId jxct_npk_jxbs3001_dragino_x4, then /plan — four AT+COMMAND lines (FC03 ×27 regs per slave) + AT+TDC=300. Single sensor: use jxct_npk_jxbs3001_dragino."
+}

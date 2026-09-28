@@ -22,7 +22,7 @@ function defaultEnabledSettings(prev = {}) {
       autoDiscoverDrivers: true,
       brokerUrl: prev.mqttParc?.brokerUrl || DEFAULT_MQTT_PARC_BROKER,
       topicPrefix: prev.mqttParc?.topicPrefix || 'peaklogic/v1',
-      clientId: prev.mqttParc?.clientId || 'peaklogic-central-hmi',
+      clientId: prev.mqttParc?.clientId || 'mv-central-hmi',
     },
   };
 }
@@ -33,9 +33,8 @@ function defaultEnabledSettings(prev = {}) {
  * @param {{ tagStore, driverManager }} deps
  */
 async function seedDefaultProjectIfEmpty(deps) {
-  const configStore = require('./index');
-  await configStore.refreshProjectIndex();
-  if (configStore.listProjectsSync().length > 0) return null;
+  const projectStore = require('../project/projectStore');
+  if (projectStore.listProjects().length > 0) return null;
 
   const { tagStore, driverManager } = deps;
   const prevSettings = persistence.readJson('settings.json', {});
@@ -58,11 +57,11 @@ async function seedDefaultProjectIfEmpty(deps) {
   });
   doc = { ...doc, settings, project: { ...doc.project, name: doc.project?.name || DEFAULT_ID } };
 
-  await configStore.saveProjectDoc(DEFAULT_ID, doc);
   persistence.writeJson('settings.json', settings);
   await persistence.flushConfig();
+  projectStore.saveProjectDoc(DEFAULT_ID, doc, { tagStore, driverManager, persistence });
 
-  console.log(`[configStore] seeded saved project "${DEFAULT_ID}" (startup + runtime + MQTT Parc enabled)`);
+  console.log(`[project] seeded saved project "${DEFAULT_ID}" → data/projects/ (startup + runtime + MQTT Parc enabled)`);
   return { id: DEFAULT_ID, name: doc.project.name };
 }
 

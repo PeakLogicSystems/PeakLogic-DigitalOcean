@@ -1,12 +1,26 @@
 'use strict';
 
 const { version: APP_VERSION } = require('../../package.json');
+const {
+  getTimezoneOffsetMinutes,
+  resolveTimezone,
+} = require('../settings/timezoneSettings');
 
 /** Must match MV_PROTOCOL_VERSION in firmware/.../mv_version.h */
 const OPTA_PROTOCOL_VERSION = 2;
 
 /** Max bytecode deploy payload (wire JSON); firmware MV_BC_MAX */
 const OPTA_PROGRAM_MAX_BYTES = 32768;
+
+function workspaceTimezone(explicit) {
+  if (explicit) return explicit;
+  try {
+    const persistence = require('../persistence');
+    return resolveTimezone(persistence);
+  } catch {
+    return resolveTimezone(null);
+  }
+}
 
 function parseSemver(v) {
   const m = String(v || '').match(/^(\d+)\.(\d+)\.(\d+)/);
@@ -24,21 +38,25 @@ function semverCompare(a, b) {
   return 0;
 }
 
-function clientHeaders() {
+function clientHeaders(opts = {}) {
+  const nowMs = Date.now();
+  const tz = workspaceTimezone(opts.timeZone);
   return {
     'X-MV-Client-Version': APP_VERSION,
     'X-MV-Protocol-Version': String(OPTA_PROTOCOL_VERSION),
-    'X-MV-Client-Time': String(Math.floor(Date.now() / 1000)),
-    'X-MV-Client-Tz-Offset': String(new Date().getTimezoneOffset()),
+    'X-MV-Client-Time': String(Math.floor(nowMs / 1000)),
+    'X-MV-Client-Tz-Offset': String(getTimezoneOffsetMinutes(tz, nowMs)),
   };
 }
 
 function clientDeployMeta(opts = {}) {
+  const nowMs = Date.now();
+  const tz = workspaceTimezone(opts.timeZone);
   const meta = {
     clientVersion: APP_VERSION,
     protocolVersion: OPTA_PROTOCOL_VERSION,
-    clientTimeUnix: Math.floor(Date.now() / 1000),
-    clientTzOffsetMin: new Date().getTimezoneOffset(),
+    clientTimeUnix: Math.floor(nowMs / 1000),
+    clientTzOffsetMin: getTimezoneOffsetMinutes(tz, nowMs),
   };
   if (opts.programName) meta.programName = String(opts.programName);
   if (opts.autoRunOnBoot === true) meta.autoRunOnBoot = true;
@@ -61,11 +79,18 @@ function bcDeployCrc(bcBase64) {
   return crc16Modbus(Buffer.from(String(bcBase64 || ''), 'base64'));
 }
 
-/** MQTT sync_time body — separate from put_program deploy meta. */
-function buildSyncTimeBody(nowMs = Date.now()) {
+/**
+ * MQTT sync_time body — separate from put_program deploy meta.
+ * Uses workspace timezone (default America/New_York), not the host OS zone
+ * (cloud Linux hosts are often UTC / GMT).
+ * @param {number} [nowMs]
+ * @param {string} [timeZone] IANA zone override
+ */
+function buildSyncTimeBody(nowMs = Date.now(), timeZone) {
+  const tz = workspaceTimezone(timeZone);
   return {
     unixUtc: Math.floor(nowMs / 1000),
-    tzOffsetMin: new Date(nowMs).getTimezoneOffset(),
+    tzOffsetMin: getTimezoneOffsetMinutes(tz, nowMs),
   };
 }
 

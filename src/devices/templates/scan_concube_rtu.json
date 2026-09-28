@@ -1,0 +1,27 @@
+{
+  "id": "scan_concube_rtu",
+  "label": "S::CAN con::cube — Modbus RTU (COM-5)",
+  "vendor": "s::can",
+  "model": "con::cube V3 station controller",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "scan_cube_rtu",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 10,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM5",
+    "baud": 38400,
+    "slaveId": 1,
+    "parity": "odd",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 3000
+  },
+  "tags": {
+    "concube": { "paramsPerGroup": 4, "defaultGroups": 1 }
+  }
+}

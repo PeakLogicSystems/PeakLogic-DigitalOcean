@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-512.png">
+  <script src="/js/pwa.js" defer></script>
   <title>Cloud Sims — PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 </head>
-<body class="cellular-sims-body">
+<body class="cloud-sims-body">
   <header class="topbar standalone-topbar">
-    <div class="topbar-brand"><a href="/" class="standalone-home-link"><img src="/branding/peaklogic-icon.svg" alt="Logo" class="topbar-logo"></a></div>
-    <h1 class="standalone-title">Cloud Sims</h1>
+    <div class="topbar-brand"><a href="/" class="standalone-home-link">Peak<span>Logic</span></a></div>
+    <h1 class="standalone-title">Cloud Sim Management</h1>
     <div class="standalone-meta popup-header-actions">
       <span id="cloud-sims-status" class="muted cell-mono" aria-live="polite">Loading…</span>
       <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
@@ -17,43 +22,50 @@
     </div>
   </header>
 
-  <main class="cellular-sims-main">
-    <p class="panel-hint">Simulated cloud-connected devices — useful for load-testing MQTT ingest and dashboards without real hardware.</p>
+  <main class="cloud-sims-main">
+    <% if (!cloudSimsEnabled) { %>
+    <section class="cloud-sims-disabled panel" role="alert">
+      <h2>Cloud Sim management is disabled</h2>
+      <p>Enable it in <a href="/">System setup</a> → <strong>Features</strong> → check <strong>Enable Cloud Sim management</strong> → <strong>Apply all settings</strong>, then reload this page.</p>
+      <p class="muted">Or set <code>PEAKLOGIC_CLOUD_SIMS=1</code> in <code>.env</code> and restart the server, or run with <code>PEAKLOGIC_DEPLOYMENT=cloud</code>.</p>
+    </section>
+    <% } else { %>
+    <p class="panel-hint cloud-sims-hint">
+      Create virtual Opta / Modbus devices that publish tenant-scoped MQTT telemetry into the cloud Parc hub.
+    </p>
 
-    <section class="cellular-sims-messaging panel cloud-sims-create">
-      <div class="cellular-sims-list-head">
-        <h2>New simulated device</h2>
-        <button type="button" class="btn" id="cloud-sims-refresh">Refresh</button>
-      </div>
-      <p id="cloud-sims-create-msg" class="muted" role="status"></p>
-      <form id="cloud-sims-create-form" class="cellular-sims-form">
-        <label>Name
-          <input type="text" id="sim-name" placeholder="Simulated Opta 01" required>
-        </label>
-        <label>Device ID
-          <input type="text" id="sim-device-id" placeholder="sim-opta-01" required>
-        </label>
-        <label>Tenant
-          <input type="text" id="sim-tenant" placeholder="demo">
-        </label>
+    <section class="cloud-sims-create panel">
+      <h2>Create sim</h2>
+      <form id="cloud-sims-create-form" class="cloud-sims-form">
+        <label>Name <input type="text" id="sim-name" required maxlength="128" placeholder="Demo Opta Line 1"></label>
+        <label>Tenant ID <input type="text" id="sim-tenant" required maxlength="64" value="demo-tenant" pattern="[a-zA-Z0-9._-]+"></label>
         <label>Type
           <select id="sim-type">
-            <option value="opta">Arduino Opta</option>
-            <option value="generic">Generic telemetry</option>
+            <option value="opta">Opta (virtual Parc telemetry)</option>
+            <option value="modbus">Modbus (register tags)</option>
+            <option value="mixed">Mixed (Opta + Modbus)</option>
           </select>
         </label>
-        <label>Report interval (sec)
-          <input type="number" id="sim-interval" min="5" value="60">
-        </label>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <label>MQTT device ID <input type="text" id="sim-device-id" maxlength="64" placeholder="auto-generated if blank"></label>
+        <label>Interval (ms) <input type="number" id="sim-interval" min="200" step="100" value="2000"></label>
+        <button type="submit" class="btn btn-primary">Create sim</button>
       </form>
+      <p id="cloud-sims-create-msg" class="cloud-sims-msg muted" aria-live="polite"></p>
     </section>
 
-    <section class="panel">
-      <div id="cloud-sims-table-wrap" class="muted">Loading…</div>
+    <section class="cloud-sims-list panel">
+      <div class="cloud-sims-list-head">
+        <h2>Sim instances</h2>
+        <button type="button" class="btn" id="cloud-sims-refresh">Refresh</button>
+      </div>
+      <div id="cloud-sims-table-wrap">
+        <p class="muted">Loading sims…</p>
+      </div>
     </section>
+    <% } %>
   </main>
 
+  <script>window.PEAKLOGIC_DEPLOYMENT = '<%= deployment %>';</script>
   <script>window.PEAKLOGIC_CLOUD_SIMS_ENABLED = <%= cloudSimsEnabled ? 'true' : 'false' %>;</script>
   <script src="/js/api.js?v=<%= assetV %>"></script>
   <script src="/js/cloudSimsPage.js?v=<%= assetV %>"></script>

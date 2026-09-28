@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-06-16T21:09:04.575Z",
+  "reports": [
+    {
+      "propertyName": "Ace Septic And Waste",
+      "propertyId": 39990,
+      "apiResponse": {
+        "rows": [
+          ["In-Line", "No Leak", "", "Toilet", "", "Leak Sensor", "69.8", "FA003195", "", "58.45", 15243.61, "15302.06", "1", "Bathroom"],
+          ["", "", "", "", "-", "Outdoor Transceiver", "5", "BC0077DF", "Generic", "0", 3, 3, "1", "Freezer"],
+          ["", "", "", "", "-", "Outdoor Transceiver", "41", "BC00776F", "Generic", "0", 2, 2, "1", "fridge"],
+          ["In-Line", "No Leak", "Sink", "Kitchen", "", "Leak Sensor", "69.8", "FA0032CF", "", "1.41", 516.72, "518.13", "1", "Kitchen"],
+          ["", "", "", "", "11F01BBC", "Integrated Electric Meter", "80.6", "11F01BBC", "EZ Meter - E (NextCentury Embedded)", "117", "27903.84", "28020.84", "1", "Power meter"],
+          ["Out-of-Line", "No Leak", "", "HVAC", "", "Leak Sensor", "68", "FA003A8C", "", "0", "0", "0", "1", "A/C pan"],
+          ["In-Line", "No Leak", "", "Kitchen", "", "Leak Sensor", "71.6", "FA003682", "", "0", 0, "0", "2", "kitchen sink"],
+          ["In-Line", "Light Leak", "", "Toilet", "", "Leak Sensor", "77", "FA0032A8", "", "40.07", 5224.73, "5264.8", "2", "toilet"]
+        ]
+      }
+    },
+    {
+      "propertyName": "Demo Case",
+      "propertyId": 40074,
+      "apiResponse": {
+        "rows": [
+          ["", "", "", "", "11F01A04", "Integrated Electric Meter", "", "11F01A04", "EZ Meter - E (NextCentury Embedded)", "", "", "", "3", "Electric meter"],
+          ["", "Leak Monitoring Not Enabled", "", "HVAC", "", "Leak Sensor", "", "FA003A90", "", "", "", "", "3", "HVAC"],
+          ["", "", "", "", "-", "Outdoor Transceiver", "", "BC0077F3", "Generic", "", "", "", "3", "Temp measurement"],
+          ["", "Leak Monitoring Not Enabled", "toilet", "Bathroom", "", "Leak Sensor", "", "FA003190", "", "", "", "", "3", "Toilet"],
+          ["", "", "", "", "5A01D82F", "Next Meter", "", "5A01D82F", "Generic", "", "", "", "3", "Ultrasonic flow meter"]
+        ]
+      }
+    }
+  ]
+}

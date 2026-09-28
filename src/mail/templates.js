@@ -114,7 +114,8 @@ function buildWelcomeEmail({ tenant, user, temporaryPassword }) {
 }
 
 function buildInviteEmail({ tenant, user, token }) {
-  const org = tenant?.name || tenant?.slug || 'your organization';
+  const org = tenant?.name || tenant?.slug || tenant?.tenantSlug || 'your organization';
+  const slug = tenant?.slug || tenant?.tenantSlug || '';
   const base = appBaseUrl();
   const inviteUrl = base
     ? `${base}/accept-invite?token=${encodeURIComponent(token)}`
@@ -123,7 +124,7 @@ function buildInviteEmail({ tenant, user, token }) {
   const text = [
     `You've been invited to join ${org} on PeakLogic.`,
     `Email: ${user?.email || ''}`,
-    `Organization slug: ${tenant?.slug || ''}`,
+    `Organization ID: ${slug}`,
     '',
     `Accept your invite and set your password (link expires in 7 days):`,
     inviteUrl,
@@ -132,11 +133,29 @@ function buildInviteEmail({ tenant, user, token }) {
     <p>You've been invited to join <strong>${escapeHtml(org)}</strong> on PeakLogic.</p>
     <ul>
       <li>Email: ${escapeHtml(user?.email || '')}</li>
-      <li>Organization slug: <code>${escapeHtml(tenant?.slug || '')}</code></li>
+      <li>Organization ID: <code>${escapeHtml(slug)}</code></li>
     </ul>
     <p><a href="${escapeHtml(inviteUrl)}">Accept invite and set your password</a> (link expires in 7 days).</p>
   `.trim();
   return { subject, text, html, inviteUrl };
+}
+
+function buildMfaCodeEmail({ tenant, user, code }) {
+  const org = tenant?.name || tenant?.slug || tenant?.tenantSlug || 'PeakLogic';
+  const subject = `Your PeakLogic sign-in code`;
+  const text = [
+    `Your PeakLogic verification code for ${org}:`,
+    '',
+    String(code),
+    '',
+    'This code expires in 10 minutes. If you did not try to sign in, contact your administrator.',
+  ].join('\n');
+  const html = `
+    <p>Your PeakLogic verification code for <strong>${escapeHtml(org)}</strong>:</p>
+    <p style="font-size:1.5rem;letter-spacing:0.2em;font-weight:700"><code>${escapeHtml(String(code))}</code></p>
+    <p>This code expires in 10 minutes. If you did not try to sign in, contact your administrator.</p>
+  `.trim();
+  return { subject, text, html };
 }
 
 module.exports = {
@@ -145,4 +164,5 @@ module.exports = {
   buildPasswordChangedEmail,
   buildWelcomeEmail,
   buildInviteEmail,
+  buildMfaCodeEmail,
 };

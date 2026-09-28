@@ -1,0 +1,48 @@
+{
+  "id": "dfrobot_sen0710_turbidity",
+  "label": "DFRobot SEN0710 — RS485 turbidity probe",
+  "vendor": "DFRobot",
+  "model": "SEN0710 turbidity",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "df_sen0710",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 2,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "TURB_NTU",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Turbidity NTU (IR 0x0000, register ×10)"
+      },
+      {
+        "id": "TURB_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 1,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Temperature °C (IR 0x0001, register ×10)"
+      }
+    ]
+  }
+}

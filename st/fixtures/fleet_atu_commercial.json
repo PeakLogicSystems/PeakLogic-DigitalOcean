@@ -1,0 +1,741 @@
+{
+  "description": "ATU cloud fleet — Harbor Commerce Park (10000 GPD design): 4 ATU, 20 lift stations, 100% cellular → cloud",
+  "tenant": {
+    "name": "PeakLogic ATU Service",
+    "slug": "atu-cloud",
+    "tenantId": "atu-cloud"
+  },
+  "sizingGuide": {
+    "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
+    "uplink": "cellular_mqtt",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
+    "atuToLiftPairing": [
+      {
+        "atu": "single_atu",
+        "typicalLift": "simplex or dual_duplex",
+        "note": "Residential 500 GPD often uses one single ATU only"
+      },
+      {
+        "atu": "dual_atu",
+        "typicalLift": "dual_duplex",
+        "note": "Two treatment trains; paired duplex lift for equalization"
+      },
+      {
+        "atu": "quad_atu",
+        "typicalLift": "simplex × N or dual_duplex × N",
+        "note": "Commercial sites scale lift count with collection network"
+      }
+    ],
+    "scaleExamples": [
+      {
+        "designGpd": 500,
+        "atu": [
+          {
+            "type": "single_atu",
+            "count": 1
+          }
+        ],
+        "lifts": []
+      },
+      {
+        "designGpd": 2500,
+        "atu": [
+          {
+            "type": "dual_atu",
+            "count": 1
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 4
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "profile": "dwts",
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 2,
+            "gpdEach": 5000,
+            "modules": "4× 1,250 gal parallel + drip"
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20,
+            "role": "collection",
+            "note": "10 simplex lifts per zone → duplex booster"
+          },
+          {
+            "type": "dual_duplex",
+            "count": 2,
+            "role": "booster",
+            "note": "Zone booster → trash tank → parallel ATU"
+          }
+        ]
+      }
+    ]
+  },
+  "profile": {
+    "id": "commercial-10000gpd",
+    "name": "Harbor Commerce Park",
+    "slug": "harbor-commerce",
+    "designGpd": 10000,
+    "address": "8800 Harbor Blvd, Port Orange, FL 32127",
+    "lat": 29.1384,
+    "lng": -81.0065
+  },
+  "devices": [
+    {
+      "name": "Harbor Quad ATU-1",
+      "slug": "harbor-qatu-1",
+      "stationType": "quad_atu",
+      "lat": 29.1366,
+      "lng": -81.0057,
+      "address": "8810 Harbor Blvd, Port Orange, FL",
+      "deviceId": "mv_atu_harbor_q1",
+      "deviceSlug": "dev-harbor-qatu-1",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 4,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_QATU_1_ALM",
+      "gatewayId": "gw_dev-harbor-qatu-1",
+      "driverId": "drv_harbor_qatu_1"
+    },
+    {
+      "name": "Harbor Quad ATU-2",
+      "slug": "harbor-qatu-2",
+      "stationType": "quad_atu",
+      "lat": 29.137800000000002,
+      "lng": -81.0065,
+      "address": "8820 Harbor Blvd, Port Orange, FL",
+      "deviceId": "mv_atu_harbor_q2",
+      "deviceSlug": "dev-harbor-qatu-2",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 4,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_QATU_2_ALM",
+      "gatewayId": "gw_dev-harbor-qatu-2",
+      "driverId": "drv_harbor_qatu_2"
+    },
+    {
+      "name": "Harbor Quad ATU-3",
+      "slug": "harbor-qatu-3",
+      "stationType": "quad_atu",
+      "lat": 29.139,
+      "lng": -81.0057,
+      "address": "8830 Harbor Blvd, Port Orange, FL",
+      "deviceId": "mv_atu_harbor_q3",
+      "deviceSlug": "dev-harbor-qatu-3",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 4,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_QATU_3_ALM",
+      "gatewayId": "gw_dev-harbor-qatu-3",
+      "driverId": "drv_harbor_qatu_3"
+    },
+    {
+      "name": "Harbor Quad ATU-4",
+      "slug": "harbor-qatu-4",
+      "stationType": "quad_atu",
+      "lat": 29.1402,
+      "lng": -81.0065,
+      "address": "8840 Harbor Blvd, Port Orange, FL",
+      "deviceId": "mv_atu_harbor_q4",
+      "deviceSlug": "dev-harbor-qatu-4",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_quad_atu",
+      "defaultProgram": "logic/34_quad_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT",
+        "ALT_FAULT2",
+        "ALT_FAULT3",
+        "ALT_FAULT4"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 4,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_QATU_4_ALM",
+      "gatewayId": "gw_dev-harbor-qatu-4",
+      "driverId": "drv_harbor_qatu_4"
+    },
+    {
+      "name": "Harbor Lift LS-01",
+      "slug": "harbor-ls-1",
+      "stationType": "simplex",
+      "lat": 29.1384,
+      "lng": -80.9897,
+      "address": "Harbor Commerce Park — pad 01",
+      "deviceId": "mv_ls_harbor_01",
+      "deviceSlug": "dev-harbor-ls-1",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_1_ALM",
+      "gatewayId": "gw_dev-harbor-ls-1",
+      "driverId": "drv_harbor_ls_1"
+    },
+    {
+      "name": "Harbor Lift LS-02",
+      "slug": "harbor-ls-2",
+      "stationType": "simplex",
+      "lat": 29.14272623792125,
+      "lng": -80.98785929228062,
+      "address": "Harbor Commerce Park — pad 02",
+      "deviceId": "mv_ls_harbor_02",
+      "deviceSlug": "dev-harbor-ls-2",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_2_ALM",
+      "gatewayId": "gw_dev-harbor-ls-2",
+      "driverId": "drv_harbor_ls_2"
+    },
+    {
+      "name": "Harbor Lift LS-03",
+      "slug": "harbor-ls-3",
+      "stationType": "simplex",
+      "lat": 29.14780456403668,
+      "lng": -80.988378019326,
+      "address": "Harbor Commerce Park — pad 03",
+      "deviceId": "mv_ls_harbor_03",
+      "deviceSlug": "dev-harbor-ls-3",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_3_ALM",
+      "gatewayId": "gw_dev-harbor-ls-3",
+      "driverId": "drv_harbor_ls_3"
+    },
+    {
+      "name": "Harbor Lift LS-04",
+      "slug": "harbor-ls-4",
+      "stationType": "simplex",
+      "lat": 29.1481082039325,
+      "lng": -80.99662520776148,
+      "address": "Harbor Commerce Park — pad 04",
+      "deviceId": "mv_ls_harbor_04",
+      "deviceSlug": "dev-harbor-ls-4",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_4_ALM",
+      "gatewayId": "gw_dev-harbor-ls-4",
+      "driverId": "drv_harbor_ls_4"
+    },
+    {
+      "name": "Harbor Lift LS-05",
+      "slug": "harbor-ls-5",
+      "stationType": "simplex",
+      "lat": 29.151714791228134,
+      "lng": -81.00044326691025,
+      "address": "Harbor Commerce Park — pad 05",
+      "deviceId": "mv_ls_harbor_05",
+      "deviceSlug": "dev-harbor-ls-5",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_5_ALM",
+      "gatewayId": "gw_dev-harbor-ls-5",
+      "driverId": "drv_harbor_ls_5"
+    },
+    {
+      "name": "Harbor Lift LS-06",
+      "slug": "harbor-ls-6",
+      "stationType": "simplex",
+      "lat": 29.1544,
+      "lng": -81.0065,
+      "address": "Harbor Commerce Park — pad 06",
+      "deviceId": "mv_ls_harbor_06",
+      "deviceSlug": "dev-harbor-ls-6",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_6_ALM",
+      "gatewayId": "gw_dev-harbor-ls-6",
+      "driverId": "drv_harbor_ls_6"
+    },
+    {
+      "name": "Harbor Lift LS-07",
+      "slug": "harbor-ls-7",
+      "stationType": "simplex",
+      "lat": 29.14981267819554,
+      "lng": -81.01169148550551,
+      "address": "Harbor Commerce Park — pad 07",
+      "deviceId": "mv_ls_harbor_07",
+      "deviceSlug": "dev-harbor-ls-7",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_7_ALM",
+      "gatewayId": "gw_dev-harbor-ls-7",
+      "driverId": "drv_harbor_ls_7"
+    },
+    {
+      "name": "Harbor Lift LS-08",
+      "slug": "harbor-ls-8",
+      "stationType": "simplex",
+      "lat": 29.14972623792125,
+      "lng": -81.01802059094493,
+      "address": "Harbor Commerce Park — pad 08",
+      "deviceId": "mv_ls_harbor_08",
+      "deviceSlug": "dev-harbor-ls-8",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_8_ALM",
+      "gatewayId": "gw_dev-harbor-ls-8",
+      "driverId": "drv_harbor_ls_8"
+    },
+    {
+      "name": "Harbor Lift LS-09",
+      "slug": "harbor-ls-9",
+      "stationType": "simplex",
+      "lat": 29.14780456403668,
+      "lng": -81.024621980674,
+      "address": "Harbor Commerce Park — pad 09",
+      "deviceId": "mv_ls_harbor_09",
+      "deviceSlug": "dev-harbor-ls-9",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_9_ALM",
+      "gatewayId": "gw_dev-harbor-ls-9",
+      "driverId": "drv_harbor_ls_9"
+    },
+    {
+      "name": "Harbor Lift LS-10",
+      "slug": "harbor-ls-10",
+      "stationType": "simplex",
+      "lat": 29.1421082039325,
+      "lng": -81.02247774947377,
+      "address": "Harbor Commerce Park — pad 10",
+      "deviceId": "mv_ls_harbor_10",
+      "deviceSlug": "dev-harbor-ls-10",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_10_ALM",
+      "gatewayId": "gw_dev-harbor-ls-10",
+      "driverId": "drv_harbor_ls_10"
+    },
+    {
+      "name": "Harbor Lift LS-11",
+      "slug": "harbor-ls-11",
+      "stationType": "simplex",
+      "lat": 29.1384,
+      "lng": -81.0261,
+      "address": "Harbor Commerce Park — pad 11",
+      "deviceId": "mv_ls_harbor_11",
+      "deviceSlug": "dev-harbor-ls-11",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_11_ALM",
+      "gatewayId": "gw_dev-harbor-ls-11",
+      "driverId": "drv_harbor_ls_11"
+    },
+    {
+      "name": "Harbor Lift LS-12",
+      "slug": "harbor-ls-12",
+      "stationType": "simplex",
+      "lat": 29.133455728090002,
+      "lng": -81.02780366596501,
+      "address": "Harbor Commerce Park — pad 12",
+      "deviceId": "mv_ls_harbor_12",
+      "deviceSlug": "dev-harbor-ls-12",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_12_ALM",
+      "gatewayId": "gw_dev-harbor-ls-12",
+      "driverId": "drv_harbor_ls_12"
+    },
+    {
+      "name": "Harbor Lift LS-13",
+      "slug": "harbor-ls-13",
+      "stationType": "simplex",
+      "lat": 29.13134657697249,
+      "lng": -81.0200914855055,
+      "address": "Harbor Commerce Park — pad 13",
+      "deviceId": "mv_ls_harbor_13",
+      "deviceSlug": "dev-harbor-ls-13",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_13_ALM",
+      "gatewayId": "gw_dev-harbor-ls-13",
+      "driverId": "drv_harbor_ls_13"
+    },
+    {
+      "name": "Harbor Lift LS-14",
+      "slug": "harbor-ls-14",
+      "stationType": "simplex",
+      "lat": 29.12707376207875,
+      "lng": -81.01802059094493,
+      "address": "Harbor Commerce Park — pad 14",
+      "deviceId": "mv_ls_harbor_14",
+      "deviceSlug": "dev-harbor-ls-14",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_14_ALM",
+      "gatewayId": "gw_dev-harbor-ls-14",
+      "driverId": "drv_harbor_ls_14"
+    },
+    {
+      "name": "Harbor Lift LS-15",
+      "slug": "harbor-ls-15",
+      "stationType": "simplex",
+      "lat": 29.12318309573928,
+      "lng": -81.013421980674,
+      "address": "Harbor Commerce Park — pad 15",
+      "deviceId": "mv_ls_harbor_15",
+      "deviceSlug": "dev-harbor-ls-15",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_15_ALM",
+      "gatewayId": "gw_dev-harbor-ls-15",
+      "driverId": "drv_harbor_ls_15"
+    },
+    {
+      "name": "Harbor Lift LS-16",
+      "slug": "harbor-ls-16",
+      "stationType": "simplex",
+      "lat": 29.1264,
+      "lng": -81.0065,
+      "address": "Harbor Commerce Park — pad 16",
+      "deviceId": "mv_ls_harbor_16",
+      "deviceSlug": "dev-harbor-ls-16",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_16_ALM",
+      "gatewayId": "gw_dev-harbor-ls-16",
+      "driverId": "drv_harbor_ls_16"
+    },
+    {
+      "name": "Harbor Lift LS-17",
+      "slug": "harbor-ls-17",
+      "stationType": "simplex",
+      "lat": 29.125085208771868,
+      "lng": -81.00044326691025,
+      "address": "Harbor Commerce Park — pad 17",
+      "deviceId": "mv_ls_harbor_17",
+      "deviceSlug": "dev-harbor-ls-17",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_17_ALM",
+      "gatewayId": "gw_dev-harbor-ls-17",
+      "driverId": "drv_harbor_ls_17"
+    },
+    {
+      "name": "Harbor Lift LS-18",
+      "slug": "harbor-ls-18",
+      "stationType": "simplex",
+      "lat": 29.125455728090003,
+      "lng": -80.99333361034866,
+      "address": "Harbor Commerce Park — pad 18",
+      "deviceId": "mv_ls_harbor_18",
+      "deviceSlug": "dev-harbor-ls-18",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_18_ALM",
+      "gatewayId": "gw_dev-harbor-ls-18",
+      "driverId": "drv_harbor_ls_18"
+    },
+    {
+      "name": "Harbor Lift LS-19",
+      "slug": "harbor-ls-19",
+      "stationType": "simplex",
+      "lat": 29.13134657697249,
+      "lng": -80.9929085144945,
+      "address": "Harbor Commerce Park — pad 19",
+      "deviceId": "mv_ls_harbor_19",
+      "deviceSlug": "dev-harbor-ls-19",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_19_ALM",
+      "gatewayId": "gw_dev-harbor-ls-19",
+      "driverId": "drv_harbor_ls_19"
+    },
+    {
+      "name": "Harbor Lift LS-20",
+      "slug": "harbor-ls-20",
+      "stationType": "simplex",
+      "lat": 29.134073762078753,
+      "lng": -80.98785929228062,
+      "address": "Harbor Commerce Park — pad 20",
+      "deviceId": "mv_ls_harbor_20",
+      "deviceSlug": "dev-harbor-ls-20",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_simplex",
+      "defaultProgram": "logic/35_lift_simplex.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "lift",
+      "role": "lift",
+      "pumps": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_HARBOR_LS_20_ALM",
+      "gatewayId": "gw_dev-harbor-ls-20",
+      "driverId": "drv_harbor_ls_20"
+    }
+  ],
+  "counts": {
+    "atu": 4,
+    "lift": 20,
+    "step": 0,
+    "collection": 0,
+    "booster": 0,
+    "total": 24
+  },
+  "importCsv": "st/fixtures/fleet_import_atu_commercial.csv",
+  "cloudProject": "atu-cloud-commercial",
+  "mqtt": {
+    "topicPrefix": "peaklogic/v1",
+    "cloudBrokerPort": 1883,
+    "optaLanBroker": "192.168.1.1:1883"
+  },
+  "cellular": {
+    "vendorHint": "hologram",
+    "apn": "hologram",
+    "linkApi": "/api/cellular/sims/:id/link"
+  }
+}

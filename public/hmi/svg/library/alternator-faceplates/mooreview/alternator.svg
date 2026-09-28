@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="480" height="320">
+  <defs>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="lampGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="464" height="304" rx="10" fill="url(#panelGrad)" stroke="#64748b" stroke-width="2" filter="url(#shadow)"/>
+  <text id="alt_label" x="240" y="34" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#0f172a">ALT1</text>
+  <text x="240" y="52" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#64748b">Lead / lag alternator � stage &amp; unit status</text>
+
+  <!-- Active lead unit -->
+  <text x="240" y="88" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#334155">LEAD UNIT</text>
+  <rect x="180" y="96" width="120" height="72" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <text id="lead_unit" x="240" y="148" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700" fill="#0f172a">�</text>
+  <text id="stage_text" x="240" y="188" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="700" fill="#334155">LEAD</text>
+
+  <!-- Level / stage lamps -->
+  <text x="240" y="214" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">LEVEL STAGE</text>
+  <g id="lamp_off" transform="translate(72, 248)">
+    <circle cx="0" cy="0" r="18" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#334155">OFF</text>
+  </g>
+  <g id="lamp_high" transform="translate(144, 248)">
+    <circle cx="0" cy="0" r="18" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#334155">HIGH</text>
+  </g>
+  <g id="lamp_lag" transform="translate(216, 248)">
+    <circle cx="0" cy="0" r="18" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#334155">LAG</text>
+  </g>
+  <g id="lamp_lag2" transform="translate(288, 248)">
+    <circle cx="0" cy="0" r="18" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#334155">LAG2</text>
+  </g>
+  <g id="lamp_fault" transform="translate(408, 248)">
+    <circle cx="0" cy="0" r="18" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#334155">FAULT</text>
+  </g>
+
+  <!-- Pump run indicators -->
+  <text x="48" y="118" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#64748b">PUMPS</text>
+  <g id="pump1_run" transform="translate(24, 132)">
+    <rect width="48" height="28" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+    <text x="24" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#ffffff">P1</text>
+  </g>
+  <g id="pump2_run" transform="translate(24, 168)">
+    <rect width="48" height="28" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+    <text x="24" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#ffffff">P2</text>
+  </g>
+  <g id="pump3_run" transform="translate(408, 132)">
+    <rect width="48" height="28" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+    <text x="24" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#ffffff">P3</text>
+  </g>
+  <g id="pump4_run" transform="translate(408, 168)">
+    <rect width="48" height="28" rx="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+    <text x="24" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="700" fill="#ffffff">P4</text>
+  </g>
+</svg>

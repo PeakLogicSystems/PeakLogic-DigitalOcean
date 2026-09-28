@@ -90,21 +90,21 @@ function cmdFailureHint(dev, opts = {}) {
   if (!dev || dev.stale || (dev.ageSec != null && dev.ageSec > 120)) {
     let msg = `No fresh telemetry — power-cycle Opta; set MQTT broker ${hint.optaBrokerIp}:1883 on http://<opta-ip>/setup`;
     if (opts.mqttHubUsername) {
-      msg += ' — Mosquitto password auth blocks Opta (firmware has no MQTT user/pass); set MOSQUITTO_ALLOW_ANONYMOUS=true on the gateway';
+      msg += ' — set MQTT username/password and TLS (port 8883) on Opta /setup (firmware v2.4.0+)';
     }
     return msg;
   }
 
   if (fw && semverCompare(fw, '2.3.18') < 0) {
-    return `Firmware ${fw} — upload PeakLogicOptaMqttSt v2.3.18+ via Arduino IDE (Parc deploy does not flash firmware)`;
+    return `Firmware ${fw} — upload PeaklogicOptaMqttSt v2.3.18+ via Arduino IDE (Parc deploy does not flash firmware)`;
   }
   if (fw && semverCompare(fw, '2.3.41') < 0) {
-    return `Telemetry OK but MQTT commands timeout on ${fw} — reflash PeakLogicOptaMqttSt v2.3.41+; Serial should show "MQTT subscribed cmd+config"`;
+    return `Telemetry OK but MQTT commands timeout on ${fw} — reflash PeaklogicOptaMqttSt v2.3.41+; Serial should show "MQTT subscribed cmd+config"`;
   }
   if (fw) {
     return `Telemetry OK but MQTT commands timeout on ${fw} — Serial: look for "MQTT subscribed cmd+config" (not "subscribe FAILED"); verify /setup broker ${hint.optaBrokerIp}:1883; put_program blocks other cmds until done`;
   }
-  return `MQTT commands timeout — reflash PeakLogicOptaMqttSt v2.3.41+; set broker ${hint.optaBrokerIp}:1883 on Opta /setup`;
+  return `MQTT commands timeout — reflash PeaklogicOptaMqttSt v2.3.41+; set broker ${hint.optaBrokerIp}:1883 on Opta /setup`;
 }
 
 function cmdTimeoutMessage({ deviceId, op, dev, hubBrokerUrl, registry }) {

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 520" width="1024" height="520">
+  <rect width="1024" height="520" fill="#f8fafc"/>
+  <text x="512" y="36" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="20" font-weight="600" fill="#0f172a">Dual air handlers</text>
+  <rect x="40" y="60" width="440" height="380" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="260" y="92" text-anchor="middle" font-size="15" font-weight="600" fill="#312e81">AHU 1</text>
+  <text x="60" y="140" font-size="12" fill="#334155">Supply °F</text>
+  <text id="val_ahu1_supply" x="420" y="140" text-anchor="end" font-family="Consolas,monospace" font-size="22" fill="#0f172a">—</text>
+  <text x="60" y="180" font-size="12" fill="#334155">Return °F</text>
+  <text id="val_ahu1_return" x="420" y="180" text-anchor="end" font-family="Consolas,monospace" font-size="22" fill="#0f172a">—</text>
+  <text x="60" y="230" font-size="12" fill="#334155">Pan leak</text>
+  <circle id="lamp_ahu1_pan" cx="420" cy="226" r="10" fill="#64748b"/>
+  <rect x="60" y="360" width="400" height="44" rx="4" fill="#fee2e2" stroke="#ef4444"/>
+  <circle id="lamp_ahu1_alm" cx="84" cy="382" r="10" fill="#64748b"/>
+  <text x="102" y="387" font-size="12" fill="#991b1b">AHU1 alarm</text>
+  <rect x="544" y="60" width="440" height="380" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="764" y="92" text-anchor="middle" font-size="15" font-weight="600" fill="#312e81">AHU 2</text>
+  <text x="564" y="140" font-size="12" fill="#334155">Supply °F</text>
+  <text id="val_ahu2_supply" x="924" y="140" text-anchor="end" font-family="Consolas,monospace" font-size="22" fill="#0f172a">—</text>
+  <text x="564" y="180" font-size="12" fill="#334155">Return °F</text>
+  <text id="val_ahu2_return" x="924" y="180" text-anchor="end" font-family="Consolas,monospace" font-size="22" fill="#0f172a">—</text>
+  <text x="564" y="230" font-size="12" fill="#334155">Pan leak</text>
+  <circle id="lamp_ahu2_pan" cx="924" cy="226" r="10" fill="#64748b"/>
+  <rect x="564" y="360" width="400" height="44" rx="4" fill="#fee2e2" stroke="#ef4444"/>
+  <circle id="lamp_ahu2_alm" cx="588" cy="382" r="10" fill="#64748b"/>
+  <text x="606" y="387" font-size="12" fill="#991b1b">AHU2 alarm</text>
+</svg>

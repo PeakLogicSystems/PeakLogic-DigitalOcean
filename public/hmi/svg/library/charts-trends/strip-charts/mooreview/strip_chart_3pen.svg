@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 40" width="432" height="40">
+  <rect id="strip_bg" x="0" y="0" width="432" height="40" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+  <polyline id="trend_pen1" fill="none" stroke="#2563eb" stroke-width="1.5" vector-effect="non-scaling-stroke" points="4,28 40,28 80,28 120,28 160,28 200,28 240,28 280,28 320,28 360,28 400,28 428,28"/>
+  <polyline id="trend_pen2" fill="none" stroke="#f59e0b" stroke-width="1.5" vector-effect="non-scaling-stroke" points="4,20 40,20 80,20 120,20 160,20 200,20 240,20 280,20 320,20 360,20 400,20 428,20"/>
+  <polyline id="trend_pen3" fill="none" stroke="#22c55e" stroke-width="1.5" vector-effect="non-scaling-stroke" points="4,12 40,12 80,12 120,12 160,12 200,12 240,12 280,12 320,12 360,12 400,12 428,12"/>
+  <text x="6" y="38" font-family="Segoe UI, Arial" font-size="8" fill="#64748b">PV</text>
+  <text x="34" y="38" font-family="Segoe UI, Arial" font-size="8" fill="#64748b">SP</text>
+  <text x="62" y="38" font-family="Segoe UI, Arial" font-size="8" fill="#64748b">OUT</text>
+</svg>

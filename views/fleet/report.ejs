@@ -1,9 +1,9 @@
-<%- include('../partials/shell-head', { title: 'Fleet report' }) %>
+<%- include('../partials/shell-head', { title: 'Assets report' }) %>
 <%- include('../partials/shell-nav', { user, tenant, cmmsEnabled, activeNav }) %>
 
 <main class="container py-4">
   <div class="mb-3">
-    <a href="/fleet" class="text-decoration-none small">&larr; Fleet map</a>
+    <a href="/fleet" class="text-decoration-none small">&larr; Assets map</a>
   </div>
   <h1 class="h4 mb-3">Daily operations summary</h1>
   <p class="text-muted small">Generated <%= new Date(report.generatedAt).toLocaleString() %></p>

@@ -1,0 +1,112 @@
+{
+  "id": "ezmeter_rgb",
+  "label": "EZ Meter RGB — RS485 watthour meter",
+  "vendor": "EZ Meter Technologies",
+  "model": "RGB Modbus RTU (Appendix F)",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "ezmeter",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 8,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "EZ_KWH_IMP",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 16,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Summed Acc. Wh Imp. (HR 16–17, units 10 Wh → ×0.01 = kWh)"
+      },
+      {
+        "id": "EZ_V_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 24,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Phase A V–N (×0.1 V)"
+      },
+      {
+        "id": "EZ_I_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 25,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Phase A current (×0.1 A)"
+      },
+      {
+        "id": "EZ_W_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 26,
+        "wordWidth": 32,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Phase A real power (HR 26–27, ×0.1 W)"
+      },
+      {
+        "id": "EZ_HZ_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 28,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Phase A frequency (×0.1 Hz)"
+      },
+      {
+        "id": "EZ_PF_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 29,
+        "signed": true,
+        "scale": 0.01,
+        "comment": "Phase A power factor (×0.01 %)"
+      },
+      {
+        "id": "EZ_WH_A",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 0,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Acc. Wh A import (HR 0–1, ×0.01 = kWh)"
+      },
+      {
+        "id": "EZ_KWH_EXP",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 18,
+        "wordWidth": 32,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Summed Acc. Wh Exp. (HR 18–19, ×0.01 = kWh)"
+      }
+    ]
+  }
+}

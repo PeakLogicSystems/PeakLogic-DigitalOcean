@@ -1,0 +1,67 @@
+# PeakLogic Phase 1 — Atlanta (atl1) production checklist (legacy: MQTT on SaaS)
+# Recommended: dedicated MQTT — CHECKLIST-ATL-MQTT.txt + docs/CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md
+# Full doc: docs/CLOUD_DEPLOY_DO_PHASE1_ATL.md
+# WinSCP steps: deploy/cloud/phase1/WINSCP-DEPLOY.md
+
+=== PREP (Windows) ===
+[ ] npm run build:phase1-bundles
+[ ] Prod secrets generated (separate from sandbox):
+      JWT_SECRET=_________________________
+      PLATFORM_ADMIN_KEY=__________________
+      ARCHIVE_SERVER_TOKEN=________________
+      MOSQUITTO_PASS=______________________
+
+=== ATL1 — VPC & Mongo ===
+[ ] VPC: peaklogic-prod-atl1 (region atl1)
+[ ] Managed Mongo: peaklogic-prod-mongo, atl1, DB peaklogic_cloud
+[ ] Mongo automated backups enabled
+[ ] Connection string saved
+
+=== ATL1 — cloud-2-archive-atl1 ===
+[ ] Droplet 1–2 GB, VPC peaklogic-prod-atl1
+[ ] Volume archive-prod-atl1 100+ GB → /data/archive
+[ ] Volume snapshot schedule enabled
+[ ] fw-archive-atl1: 8090 from cloud-1 private IP only
+[ ] WinSCP: peaklogic-archive-*.tgz → /tmp/
+[ ] /etc/peaklogic/archive.env configured
+[ ] install-archive.sh OK
+[ ] curl http://127.0.0.1:8090/health
+[ ] Private IP recorded: 10.___________________
+
+=== ATL1 — cloud-1-saas-atl1 ===
+[ ] Droplet 4 GB, same VPC
+[ ] fw-saas-atl1: 22, 80, 443, 8883
+[ ] WinSCP: peaklogic-cloud-*d.tgz → /tmp/
+[ ] /etc/peaklogic/saas.env (MONGODB_URI, secrets, PUBLIC_* for IP phase)
+[ ] install-saas.sh OK
+[ ] Mongo trusted source = cloud-1 PUBLIC IP
+[ ] npm run seed
+[ ] certbot (IP or temp host — full peaklogic.io after DNS cutover)
+[ ] curl http://127.0.0.1:3100/health
+
+=== ATL1 — MQTT + archive compact ===
+[ ] /etc/peaklogic/mqtt.env → enable-saas-mqtt.sh
+[ ] /etc/peaklogic/archive-compact.env (private IP + token)
+[ ] enable-phase1-archive-compact.sh
+[ ] ARCHIVE_COMPACT_DRY_RUN=1 compact job OK
+
+=== VERIFICATION GATE (before peaklogic.io DNS) ===
+[ ] Login on droplet IP / temp URL — demo tenant
+[ ] Studio + Sites smoke test
+[ ] MQTT pub test
+[ ] Archive reachable from cloud 1 (private IP)
+[ ] All systemd units active
+
+=== DNS CUTOVER (production) ===
+[ ] A peaklogic.io → cloud-1-saas-atl1 public IP
+[ ] A/CNAME www → same
+[ ] PUBLIC_APP_URL / PUBLIC_API_URL → https://peaklogic.io
+[ ] systemctl restart peaklogic-saas
+[ ] certbot --nginx -d peaklogic.io -d www.peaklogic.io (if not done)
+[ ] https://peaklogic.io/login verified
+
+=== SANDBOX (separate — nyc1) ===
+[ ] test.peaklogic.io → NYC droplet (see droplet-sandbox/INSTALL.txt)
+[ ] Separate Mongo cluster + secrets from prod
+
+Done: ____________  By: ____________

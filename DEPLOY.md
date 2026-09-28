@@ -40,7 +40,29 @@ Multi-tenant REST API backed by **DigitalOcean Managed MongoDB**. The app uses t
 3. Add the app as a **trusted source** on the Managed MongoDB cluster.
 4. Optional: set **HTTP port** to `3100` (or bind `PORT` from platform).
 
-## Droplet (systemd)
+## Droplet (systemd) — SaaS on port 3100 (recommended)
+
+Multi-tenant login, CMMS, and Studio. **Does not** run the legacy `server.js` appliance on 3090 unless you enable it later.
+
+1. Copy the cloud bundle to the droplet and extract to `/home/peaklogic`.
+2. Set `MONGODB_URI` to your **DO Managed MongoDB** `mongodb+srv://` string in `/etc/peaklogic/saas.env` (template created by install).
+3. Allowlist the droplet IP on the Managed MongoDB cluster.
+4. Run `deploy/cloud/debian/install-saas.sh` (see `deploy/cloud/debian/INSTALL-SAAS.txt`).
+5. `sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'` once after setting `JWT_SECRET` and `PLATFORM_ADMIN_KEY`.
+6. `certbot --nginx -d your.domain` — nginx proxies to `127.0.0.1:3100`.
+7. `systemctl status peaklogic-saas`
+
+**Optional edge runtime (port 3090)** for field clients / appliance API hub alongside SaaS:
+
+```bash
+sudo bash deploy/cloud/debian/enable-runtime-3090.sh
+```
+
+Point `peaklogic-client` at `http://<host>:3090/api` or reverse-proxy a subdomain. Tenant SaaS API stays on `https://your.domain/api` (3100).
+
+## Droplet (systemd) — legacy appliance (port 3090 only)
+
+Single-process `server.js` hub with local MongoDB + Mosquitto. Use `deploy/cloud/debian/install.sh` only for edge appliances or when you need the full runtime without multi-tenant SaaS.
 
 1. Clone to `/opt/peaklogic-cloud`, `npm ci --omit=dev`.
 2. Copy `.env.example` → `.env` and set `MONGODB_URI` to your DO connection string (not localhost).
@@ -70,3 +92,14 @@ npm run start:runtime
 ```
 
 That process is separate from the multi-tenant cloud API (`npm start` → `src/server.js`).
+
+## Azure (MV-Cloud Azure Edition)
+
+See **[products/mv-cloud-azure/README.md](./products/mv-cloud-azure/README.md)** — labeled **`mv-cloud-azure`** product with DocumentDB + Service Bus.
+
+```powershell
+cd products/mv-cloud-azure/deploy
+.\deploy.ps1 -DocumentDbAdminPassword '...' -JwtSecret '...' -PlatformAdminKey '...'
+```
+
+Health confirms edition: `{ "service": "mv-cloud-azure", "edition": "MV-Cloud Azure" }`.

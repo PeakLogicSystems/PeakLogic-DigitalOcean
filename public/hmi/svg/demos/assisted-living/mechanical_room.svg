@@ -7,10 +7,12 @@
   <text x="512" y="138" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#0c4a6e">Feeds all three water heaters</text>
   <text id="val_flow_gpm" x="512" y="168" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#0f172a">— GPM</text>
   <g id="grp_energy_elec">
-    <rect x="112" y="196" width="800" height="88" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
-    <text x="512" y="224" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#854d0e">Electric power meter</text>
-    <text x="512" y="244" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#713f12">Site electric meter — Next Century kWh total</text>
-    <text id="val_total_kw" x="512" y="272" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#0f172a">— kWh</text>
+    <rect x="112" y="196" width="800" height="118" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2"/>
+    <text x="512" y="224" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#854d0e">Electric power meter — Next Century</text>
+    <text x="280" y="252" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#713f12">Total kWh</text>
+    <text x="744" y="252" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#713f12">Last 10 min kWh</text>
+    <text id="val_total_kw" x="280" y="288" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#0f172a">—</text>
+    <text id="val_meter_interval" x="744" y="288" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#0f172a">—</text>
   </g>
   <g id="grp_energy_gas">
     <rect x="112" y="196" width="800" height="88" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>

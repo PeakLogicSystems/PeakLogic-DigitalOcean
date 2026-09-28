@@ -32,9 +32,9 @@
     #stats { bottom: 14px; right: 14px; text-align: right; font-size: 12px; color: #94a3b8; }
     #stats strong { color: #f1f5f9; display: block; font-size: 13px; margin-bottom: 4px; }
     .hint { margin-top: 8px; font-size: 11px; color: #64748b; }
-    #peaklogic-status { top: 14px; left: 50%; transform: translateX(-50%); font-size: 12px; padding: 8px 14px; }
-    #peaklogic-status.ok { border-color: rgba(34, 197, 94, 0.45); color: #86efac; }
-    #peaklogic-status.err { border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
+    #mv-status { top: 14px; left: 50%; transform: translateX(-50%); font-size: 12px; padding: 8px 14px; }
+    #mv-status.ok { border-color: rgba(34, 197, 94, 0.45); color: #86efac; }
+    #mv-status.err { border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
     #detail-panel {
       position: absolute; z-index: 20; right: 14px; bottom: 14px; width: 340px; max-height: 52vh;
       overflow: auto; display: none;
@@ -69,7 +69,7 @@
 </head>
 <body>
   <div id="canvas-wrap"></div>
-  <div id="peaklogic-status" class="panel err">PeakLogic live: connecting…</div>
+  <div id="mv-status" class="panel err">MV live: connecting…</div>
 
   <div id="title-panel" class="panel">
     <h1>Assisted Living Facility</h1>
@@ -115,7 +115,7 @@
     <dl id="detail-tags"></dl>
     <div id="detail-room-links" class="detail-room-links view-hidden" aria-label="Linked resident rooms"></div>
     <div class="actions">
-      <button type="button" id="btn-open-hmi" class="btn-row">Open in PeakLogic HMI</button>
+      <button type="button" id="btn-open-hmi" class="btn-row">Open in MV HMI</button>
       <button type="button" id="btn-close-detail">Close</button>
     </div>
   </div>
@@ -129,7 +129,7 @@
     <strong>Program summary</strong>
     <div>84 client rooms (24 floor 1 · 30 × floors 2–3) — numbered 101, 201, 301…</div>
     <div>3 common lounges (2 restrooms each) + 2 dining areas</div>
-    <div>Kitchen &amp; mechanical — combined PeakLogic summary zones · default view Floor 1</div>
+    <div>Kitchen &amp; mechanical — combined MV summary zones · default view Floor 1</div>
     <div>Indoor therapy pool (ground floor)</div>
   </div>
 
@@ -201,15 +201,15 @@
     const BATH_D = 2.6;
     const CORR_W = 2.4;
     /** PeakLogic REST root — appliance `/api`, cloud Studio `/api/studio`. */
-    let peaklogicApiRoot = String(window.PEAKLOGIC_API_BASE || '').trim();
-    if (!peaklogicApiRoot) {
+    let mvApiRoot = String(window.MV_API_BASE || '').trim();
+    if (!mvApiRoot) {
       try {
         if (window.parent !== window && window.parent.PEAKLOGIC_API_BASE) {
-          peaklogicApiRoot = String(window.parent.PEAKLOGIC_API_BASE).trim();
+          mvApiRoot = String(window.parent.PEAKLOGIC_API_BASE).trim();
         }
       } catch { /* ignore */ }
     }
-    if (!peaklogicApiRoot) peaklogicApiRoot = '/api';
+    if (!mvApiRoot) mvApiRoot = '/api';
     const zoneMeshes = [];
     const hoverMeshes = [];
     let liveMap = {};
@@ -223,14 +223,14 @@
       'Main lobby': 'Public entry and reception. Connects dining wings, main corridor, and visitor seating.',
       'Dining A': 'West-wing resident dining (~40 seats). Quick links to nearby Floor 1 rooms 101 and 105.',
       'Dining B': 'East-wing resident dining (~40 seats). Quick links to nearby Floor 1 rooms 112 and 118.',
-      'Commercial kitchen': 'Production kitchen — walk-in freezer, walk-in reefer, six prep sinks, and area alarm summary (PeakLogic screen_7).',
+      'Commercial kitchen': 'Production kitchen — walk-in freezer, walk-in reefer, six prep sinks, and area alarm summary (MV screen_7).',
       'Room 125 (office)': 'Ground-floor administration office (client room 125 in plan) — not a monitored resident suite.',
       'Common lounge': 'Ground-floor resident lounge — TV, reading, and social seating. Two corridor restrooms attached.',
       'Activity room': 'Ground-floor day/activity program space — crafts, games, and group events. Two corridor restrooms attached.',
-      'Mechanical room': 'House mechanical — three domestic water heaters, recirculation flow, and area alarm (PeakLogic screen_6).',
+      'Mechanical room': 'House mechanical — three domestic water heaters, recirculation flow, and area alarm (MV screen_6).',
       'Nurse station': 'Ground-floor staffing hub — call response, charting, and medication prep. Staff bath and handwash sink adjacent.',
       'Pool deck': 'Non-slip deck around therapy pool — wet area, no standing water alarm on deck itself.',
-      'Therapy pool': 'Indoor warm-water therapy pool — pH, ORP, temperature, flow, and pump monitoring (PeakLogic screen_5).',
+      'Therapy pool': 'Indoor warm-water therapy pool — pH, ORP, temperature, flow, and pump monitoring (MV screen_5).',
       'Pool coping': 'Pool edge coping and trim — visual only in this sample.',
     };
 
@@ -322,10 +322,16 @@
       ['Bedroom temp', `${p}_BED_TEMP`],
     ];
 
+    const COMM_RESTROOM_TAGS = (p) => [
+      ['Area alarm', `${p}_ALM`],
+      ['Sink leak', `${p}_SINK_LEAK`],
+      ['Toilet leak', `${p}_TOILET_LEAK`],
+    ];
+
     const ZONE_CATALOG = {
       pool: {
         label: 'Therapy Pool',
-        description: 'Exterior warm-water therapy pool — pH, ORP, temperature, flow, and pump monitoring (PeakLogic screen_5).',
+        description: 'Exterior warm-water therapy pool — pH, ORP, temperature, flow, and pump monitoring (MV screen_5).',
         alarmTag: 'ALF_POOL_ALM',
         detailScreen: 'screen_5',
         floorNum: 0,
@@ -333,14 +339,14 @@
       },
       mech: {
         label: 'Mechanical — 3× HWH + flow',
-        description: 'House mechanical — three domestic water heaters, recirculation flow, and area alarm (PeakLogic screen_6).',
+        description: 'House mechanical — three domestic water heaters, recirculation flow, and area alarm (MV screen_6).',
         alarmTag: 'ALF_MECH_ALM',
         detailScreen: 'screen_6',
-        tags: [['Area alarm', 'ALF_MECH_ALM'], ['DHW flow GPM', 'MECH_FLOW_GPM'], ['Meter kWh', 'MECH_METER_KWH'], ['WH1 °F', 'MECH_WH1_TEMP'], ['WH2 °F', 'MECH_WH2_TEMP'], ['WH3 °F', 'MECH_WH3_TEMP']],
+        tags: [['Area alarm', 'ALF_MECH_ALM'], ['DHW flow GPM', 'MECH_FLOW_GPM'], ['Meter total kWh', 'MECH_METER_KWH'], ['Meter 10 min kWh', 'MECH_METER_INTERVAL_KWH'], ['WH1 °F', 'MECH_WH1_TEMP'], ['WH2 °F', 'MECH_WH2_TEMP'], ['WH3 °F', 'MECH_WH3_TEMP']],
       },
       kitchen: {
         label: 'Commercial Kitchen',
-        description: 'Production kitchen — walk-in freezer, walk-in reefer, six prep sinks, and area alarm summary (PeakLogic screen_7).',
+        description: 'Production kitchen — walk-in freezer, walk-in reefer, six prep sinks, and area alarm summary (MV screen_7).',
         alarmTag: 'ALF_KITCH_ALM',
         detailScreen: 'screen_7',
         tags: [['Area alarm', 'ALF_KITCH_ALM'], ['Freezer °F', 'KITCH_FREEZER_TEMP'], ['Reefer °F', 'KITCH_REEFER_TEMP'], ['Freezer alarm', 'KITCH_FREEZER_ALM'], ['Reefer alarm', 'KITCH_REEFER_ALM'], ['Sink 1 leak', 'KITCH_SINK1_SINK_LEAK'], ['Sink 2 leak', 'KITCH_SINK2_SINK_LEAK']],
@@ -352,14 +358,14 @@
     }
 
     const FIXTURE_ZONES = {
-      'Common lounge — restroom 1': fixtureZone('GF Lounge RR 1', 'COMM_GF_LOUNGE_R1', 'screen_8', [['Area alarm', 'COMM_GF_LOUNGE_R1_ALM'], ['Bath mid leak', 'COMM_GF_LOUNGE_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_LOUNGE_R1_TOILET_LEAK']]),
-      'Common lounge — restroom 2': fixtureZone('GF Lounge RR 2', 'COMM_GF_LOUNGE_R2', 'screen_9', [['Area alarm', 'COMM_GF_LOUNGE_R2_ALM'], ['Bath mid leak', 'COMM_GF_LOUNGE_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_LOUNGE_R2_TOILET_LEAK']]),
-      'Activity room — restroom 1': fixtureZone('GF Activity RR 1', 'COMM_GF_ACT_R1', 'screen_10', [['Area alarm', 'COMM_GF_ACT_R1_ALM'], ['Bath mid leak', 'COMM_GF_ACT_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_ACT_R1_TOILET_LEAK']]),
-      'Activity room — restroom 2': fixtureZone('GF Activity RR 2', 'COMM_GF_ACT_R2', 'screen_11', [['Area alarm', 'COMM_GF_ACT_R2_ALM'], ['Bath mid leak', 'COMM_GF_ACT_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_GF_ACT_R2_TOILET_LEAK']]),
-      'Floor 2 lounge — restroom 1': fixtureZone('F2 Lounge RR 1', 'COMM_F2_LOUNGE_R1', 'screen_12', [['Area alarm', 'COMM_F2_LOUNGE_R1_ALM'], ['Bath mid leak', 'COMM_F2_LOUNGE_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F2_LOUNGE_R1_TOILET_LEAK']]),
-      'Floor 2 lounge — restroom 2': fixtureZone('F2 Lounge RR 2', 'COMM_F2_LOUNGE_R2', 'screen_13', [['Area alarm', 'COMM_F2_LOUNGE_R2_ALM'], ['Bath mid leak', 'COMM_F2_LOUNGE_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F2_LOUNGE_R2_TOILET_LEAK']]),
-      'Floor 3 lounge — restroom 1': fixtureZone('F3 Lounge RR 1', 'COMM_F3_LOUNGE_R1', 'screen_14', [['Area alarm', 'COMM_F3_LOUNGE_R1_ALM'], ['Bath mid leak', 'COMM_F3_LOUNGE_R1_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F3_LOUNGE_R1_TOILET_LEAK']]),
-      'Floor 3 lounge — restroom 2': fixtureZone('F3 Lounge RR 2', 'COMM_F3_LOUNGE_R2', 'screen_15', [['Area alarm', 'COMM_F3_LOUNGE_R2_ALM'], ['Bath mid leak', 'COMM_F3_LOUNGE_R2_BATH_MID_LEAK'], ['Toilet leak', 'COMM_F3_LOUNGE_R2_TOILET_LEAK']]),
+      'Common lounge — restroom 1': fixtureZone('GF Lounge RR 1', 'COMM_GF_LOUNGE_R1', 'screen_8', COMM_RESTROOM_TAGS('COMM_GF_LOUNGE_R1')),
+      'Common lounge — restroom 2': fixtureZone('GF Lounge RR 2', 'COMM_GF_LOUNGE_R2', 'screen_9', COMM_RESTROOM_TAGS('COMM_GF_LOUNGE_R2')),
+      'Activity room — restroom 1': fixtureZone('GF Activity RR 1', 'COMM_GF_ACT_R1', 'screen_10', COMM_RESTROOM_TAGS('COMM_GF_ACT_R1')),
+      'Activity room — restroom 2': fixtureZone('GF Activity RR 2', 'COMM_GF_ACT_R2', 'screen_11', COMM_RESTROOM_TAGS('COMM_GF_ACT_R2')),
+      'Floor 2 lounge — restroom 1': fixtureZone('F2 Lounge RR 1', 'COMM_F2_LOUNGE_R1', 'screen_12', COMM_RESTROOM_TAGS('COMM_F2_LOUNGE_R1')),
+      'Floor 2 lounge — restroom 2': fixtureZone('F2 Lounge RR 2', 'COMM_F2_LOUNGE_R2', 'screen_13', COMM_RESTROOM_TAGS('COMM_F2_LOUNGE_R2')),
+      'Floor 3 lounge — restroom 1': fixtureZone('F3 Lounge RR 1', 'COMM_F3_LOUNGE_R1', 'screen_14', COMM_RESTROOM_TAGS('COMM_F3_LOUNGE_R1')),
+      'Floor 3 lounge — restroom 2': fixtureZone('F3 Lounge RR 2', 'COMM_F3_LOUNGE_R2', 'screen_15', COMM_RESTROOM_TAGS('COMM_F3_LOUNGE_R2')),
       'Nurse station — bath': fixtureZone('GF Nurse bath', 'NRS_GF_BATH', 'screen_16', [['Area alarm', 'NRS_GF_BATH_ALM'], ['Bath mid leak', 'NRS_GF_BATH_BATH_MID_LEAK'], ['Toilet leak', 'NRS_GF_BATH_TOILET_LEAK']]),
       'Nurse station — sink': fixtureZone('GF Nurse sink', 'NRS_GF_SINK', 'screen_17', [['Area alarm', 'NRS_GF_SINK_ALM'], ['Sink leak', 'NRS_GF_SINK_SINK_LEAK']]),
       'Floor 2 nurse station — bath': fixtureZone('F2 Nurse bath', 'NRS_F2_BATH', 'screen_18', [['Area alarm', 'NRS_F2_BATH_ALM'], ['Bath mid leak', 'NRS_F2_BATH_BATH_MID_LEAK'], ['Toilet leak', 'NRS_F2_BATH_TOILET_LEAK']]),
@@ -785,19 +791,19 @@
       }
     }
 
-    async function pollPeakLogicLive() {
-      const el = document.getElementById('peaklogic-status');
+    async function pollMvLive() {
+      const el = document.getElementById('mv-status');
       try {
-        const res = await fetch(`${peaklogicApiRoot}/dashboard`, { credentials: 'same-origin' });
+        const res = await fetch(`${mvApiRoot}/dashboard`, { credentials: 'same-origin' });
         if (!res.ok) throw new Error(res.statusText);
         const data = await res.json();
         liveMap = Object.fromEntries((data.live || []).map((row) => [row.tagId || row.id, row]));
-        el.textContent = `PeakLogic live: ${Object.keys(liveMap).length} tags · runtime ${data.runtime?.running ? 'ON' : 'off'}`;
+        el.textContent = `MV live: ${Object.keys(liveMap).length} tags · runtime ${data.runtime?.running ? 'ON' : 'off'}`;
         el.classList.remove('err');
         el.classList.add('ok');
         if (selectedZone) updateDetailPanelValues(selectedZone);
       } catch (e) {
-        el.textContent = `PeakLogic live: offline (${e.message}) — open from PeakLogic server`;
+        el.textContent = `MV live: offline (${e.message}) — open from PeakLogic server`;
         el.classList.remove('ok');
         el.classList.add('err');
       }
@@ -817,7 +823,7 @@
           : (ud.detailScreen
             ? (hmiScreenConfigured(ud.detailScreen)
               ? hmiScreenLabel(ud.detailScreen)
-              : `${hmiScreenLabel(ud.detailScreen)} — click Open in PeakLogic HMI`)
+              : `${hmiScreenLabel(ud.detailScreen)} — click Open in MV HMI`)
             : '');
       }
       const dl = document.getElementById('detail-tags');
@@ -851,7 +857,7 @@
           b.textContent = `Room ${formatRoomNum(n)}`;
           b.addEventListener('click', () => {
             if (window.parent !== window) {
-              window.parent.postMessage({ type: 'peaklogic-hmi-open-room', roomNum: n }, window.location.origin);
+              window.parent.postMessage({ type: 'mv-hmi-open-room', roomNum: n }, window.location.origin);
             }
           });
           linksEl.appendChild(b);
@@ -864,7 +870,7 @@
       btnHmi.dataset.screen = ud.detailScreen || 'screen_1';
       btnHmi.textContent = ud.detailScreen && hmiScreenConfigured(ud.detailScreen)
         ? `Open ${hmiScreenLabel(ud.detailScreen)}`
-        : 'Open in PeakLogic HMI';
+        : 'Open in MV HMI';
     }
 
     function notifyParentHmiOpen(ud) {
@@ -873,10 +879,10 @@
       if (ud.linkedRooms?.length && !ud.detailScreen) return;
       try {
         if (ud.roomNum > 0) {
-          window.parent.postMessage({ type: 'peaklogic-hmi-open-room', roomNum: ud.roomNum }, window.location.origin);
+          window.parent.postMessage({ type: 'mv-hmi-open-room', roomNum: ud.roomNum }, window.location.origin);
         } else if (ud.detailScreen) {
           window.parent.postMessage({
-            type: 'peaklogic-hmi-open-area',
+            type: 'mv-hmi-open-area',
             screenId: ud.detailScreen,
             label: ud.label || '',
           }, window.location.origin);
@@ -951,7 +957,7 @@
       if (ud.linkedRooms?.length) {
         return `Linked rooms ${ud.linkedRooms.map(formatRoomNum).join(' & ')} · click for room links`;
       }
-      if (ud.roomNum > 0) return `Room ${formatRoomNum(ud.roomNum)} · click to open PeakLogic room popup`;
+      if (ud.roomNum > 0) return `Room ${formatRoomNum(ud.roomNum)} · click to open MV room popup`;
       if (ud.detailScreen) {
         const label = hmiScreenLabel(ud.detailScreen);
         return hmiScreenConfigured(ud.detailScreen)
@@ -1029,26 +1035,26 @@
     document.getElementById('btn-open-hmi').addEventListener('click', () => openMvHmiForSelection());
     document.getElementById('btn-export-png').addEventListener('click', exportTopViewPng);
 
-    let peaklogicPollMs = 60000;
-    let peaklogicPollTimer = null;
+    let mvPollMs = 60000;
+    let mvPollTimer = null;
     function scheduleMvPoll() {
-      if (peaklogicPollTimer) clearInterval(peaklogicPollTimer);
-      pollPeakLogicLive();
-      peaklogicPollTimer = setInterval(pollPeakLogicLive, peaklogicPollMs);
+      if (mvPollTimer) clearInterval(mvPollTimer);
+      pollMvLive();
+      mvPollTimer = setInterval(pollMvLive, mvPollMs);
     }
     window.addEventListener('message', (e) => {
       if (e.origin !== window.location.origin) return;
       const data = e.data;
       if (!data || typeof data !== 'object') return;
-      if (data.type === 'peaklogic-hmi-poll-config') {
+      if (data.type === 'mv-hmi-poll-config') {
         if (typeof data.apiBase === 'string' && data.apiBase.trim()) {
-          peaklogicApiRoot = data.apiBase.trim();
+          mvApiRoot = data.apiBase.trim();
         }
         if (Number.isFinite(Number(data.pollMs))) {
-          peaklogicPollMs = Math.max(5000, Number(data.pollMs));
+          mvPollMs = Math.max(5000, Number(data.pollMs));
         }
         scheduleMvPoll();
-      } else if (data.type === 'peaklogic-hmi-screen-catalog' && Array.isArray(data.screens)) {
+      } else if (data.type === 'mv-hmi-screen-catalog' && Array.isArray(data.screens)) {
         applyHmiScreenCatalog(data.screens);
         if (selectedZone) updateDetailPanelValues(selectedZone);
       }

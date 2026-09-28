@@ -14,9 +14,11 @@ const FB_PREFIX = {
   PID: 'PID',
   AVG: 'AVG',
   FLOW: 'FLOW',
+  ALT: 'ALT',
+  RMOTOR: 'RMOTOR',
 };
 
-const FB_TYPES = ['TIMER', 'COUNTER', 'PID', 'AVG', 'FLOW'];
+const FB_TYPES = ['TIMER', 'COUNTER', 'PID', 'AVG', 'FLOW', 'ALT', 'RMOTOR'];
 
 function memoryPrefixForType(type) {
   return MEMORY_PREFIX[type] || null;
@@ -33,7 +35,7 @@ function parseMemoryId(id) {
 }
 
 function parseFbId(id) {
-  const m = String(id || '').match(/^(TMR|CTR|PID|AVG|FLOW)(\d*)$/i);
+  const m = String(id || '').match(/^(TMR|CTR|PID|AVG|FLOW|ALT|RMOTOR)(\d*)$/i);
   if (!m) return null;
   return { prefix: m[1].toUpperCase(), num: m[2] || '' };
 }
@@ -88,9 +90,13 @@ function applyMemoryTagNaming(id, type, role, tags, skipIndex = null) {
   if (FB_TYPES.includes(type)) return id;
   const prefix = memoryPrefixForType(type);
   if (!prefix) return id;
-  const parsed = parseMemoryId(id);
+  const s = String(id || '').trim();
+  if (!s) return nextMemoryTagId(tags, type, skipIndex);
+  const parsed = parseMemoryId(s);
   if (parsed) return `${prefix}${parsed.num}`;
-  const fromFb = parseFbId(id);
+  // Keep explicit symbolic ids (MOTOR1_HOA, DI1, …) — only auto-name blank/TAG_* ids.
+  if (/^[A-Z][A-Z0-9_]*$/i.test(s) && !/^TAG_/i.test(s)) return s;
+  const fromFb = parseFbId(s);
   if (fromFb) return `${prefix}${fromFb.num || '1'}`;
   return nextMemoryTagId(tags, type, skipIndex);
 }
@@ -101,10 +107,14 @@ function applyMemoryTagNaming(id, type, role, tags, skipIndex = null) {
 function applyFbTagNaming(id, type, tags, skipIndex = null) {
   const prefix = fbPrefixForType(type);
   if (!prefix) return id;
-  const parsed = parseFbId(id);
+  const s = String(id || '').trim();
+  if (!s) return nextFbTagId(tags, type, skipIndex);
+  const parsed = parseFbId(s);
   if (parsed) return `${prefix}${parsed.num}`;
-  const fromMem = parseMemoryId(id);
+  const fromMem = parseMemoryId(s);
   if (fromMem) return `${prefix}${fromMem.num}`;
+  // Keep explicit symbolic ids (MOTOR1_CNTR, …) — only auto-name blank/TAG_* ids.
+  if (/^[A-Z][A-Z0-9_]*$/i.test(s) && !/^TAG_/i.test(s)) return s;
   return nextFbTagId(tags, type, skipIndex);
 }
 
@@ -137,6 +147,8 @@ function normalizeWordWidth(type, wordWidth) {
     return n >= 32 ? 32 : 16;
   }
   if (type === 'REAL' || type === 'PID' || type === 'AVG' || type === 'FLOW') return 32;
+  if (type === 'ALT') return 16;
+  if (type === 'RMOTOR') return 16;
   return 16;
 }
 
@@ -148,6 +160,8 @@ function formatWordWidthLabel(type, wordWidth) {
     return `${w}-bit`;
   }
   if (type === 'PID' || type === 'AVG' || type === 'FLOW') return '32-bit REAL';
+  if (type === 'ALT') return '16-bit INT';
+  if (type === 'RMOTOR') return '16-bit INT';
   return '—';
 }
 

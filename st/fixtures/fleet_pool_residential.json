@@ -1,0 +1,45 @@
+{
+  "profileId": "residential-pool",
+  "name": "Maple Street Pool",
+  "tenant": {
+    "tenantId": "pool-cloud",
+    "tenantSlug": "pool-cloud",
+    "name": "Pool Cloud"
+  },
+  "site": {
+    "profileId": "residential-pool",
+    "name": "Maple Street Pool",
+    "slug": "maple-street",
+    "address": "742 Maple Street, DeLand, FL 32724",
+    "lat": 29.0286,
+    "lng": -81.3031,
+    "cloudProject": "pool-cloud-residential"
+  },
+  "devices": [
+    {
+      "name": "Maple Street — pool gateway",
+      "slug": "maple-pool",
+      "deviceId": "mv_pool_maple_01",
+      "driverId": "pool_gateway",
+      "fleetAlarmTag": "FLEET_MAPLE_POOL_ALM",
+      "category": "pool"
+    }
+  ],
+  "telemetryTags": [
+    "PH_PV",
+    "ORP_PV",
+    "COND_PV",
+    "POOL_FLOW_OK",
+    "PUMP_RPM",
+    "MOTOR1_RUN",
+    "ALM_PH_LO",
+    "ALM_PH_HI",
+    "ALM_ORP_LO",
+    "ALM_ORP_HI",
+    "ALM_FLOW_LO",
+    "SITE_ALM"
+  ],
+  "homeownerRole": "homeowner",
+  "defaultProject": "pool-cloud-residential",
+  "description": "Residential pool — water quality and status via cellular gateway uplink"
+}

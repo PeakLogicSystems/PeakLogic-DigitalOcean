@@ -1,0 +1,1841 @@
+[
+  {
+    "id": "X1_I1",
+    "label": "OFF float",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I1"
+    }
+  },
+  {
+    "id": "X1_I2",
+    "label": "Lead float",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I2"
+    }
+  },
+  {
+    "id": "X1_I3",
+    "label": "Lag float",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I3"
+    }
+  },
+  {
+    "id": "X1_I4",
+    "label": "Lag2 float",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I4"
+    }
+  },
+  {
+    "id": "X1_I5",
+    "label": "OFF float",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I5"
+    }
+  },
+  {
+    "id": "X1_I6",
+    "label": "Pump 1 run feedback",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I6"
+    }
+  },
+  {
+    "id": "X1_I7",
+    "label": "Pump 2 run feedback",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I7"
+    }
+  },
+  {
+    "id": "X1_I8",
+    "label": "Pump 3 run feedback",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I8"
+    }
+  },
+  {
+    "id": "X1_I9",
+    "label": "Phase fault",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I9"
+    }
+  },
+  {
+    "id": "X1_I10",
+    "label": "Gen run",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I10"
+    }
+  },
+  {
+    "id": "X1_I11",
+    "label": "Gen fuel fault",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I11"
+    }
+  },
+  {
+    "id": "X1_I12",
+    "label": "Gen fault",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I12"
+    }
+  },
+  {
+    "id": "X1_I13",
+    "label": "Pump 1 motor fault",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I13"
+    }
+  },
+  {
+    "id": "X1_I14",
+    "label": "Pump 2 motor fault",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I14"
+    }
+  },
+  {
+    "id": "X1_I15",
+    "label": "Pump 3 motor fault",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I15"
+    }
+  },
+  {
+    "id": "X1_I16",
+    "label": "Control panel AC loss (UPS)",
+    "type": "BOOL",
+    "role": "input",
+    "value": false,
+    "driverAddress": {
+      "channel": "X1_I16"
+    },
+    "comment": "Generator panels: control-panel UPS dry contact — +24 V when AC to panel lost (not facility/main power)"
+  },
+  {
+    "id": "MOTOR1_TEMP",
+    "label": "Motor 1 winding temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI1"
+    },
+    "comment": "A0602 ch1 — 2-wire PT100 °C (Opta /setup → A0602 RTD enable)"
+  },
+  {
+    "id": "MOTOR2_TEMP",
+    "label": "Motor 2 winding temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI2"
+    },
+    "comment": "A0602 ch2 — 2-wire PT100 °C"
+  },
+  {
+    "id": "MOTOR3_TEMP",
+    "label": "Motor 3 winding temp",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI3"
+    },
+    "comment": "A0602 ch3 — 2-wire PT100 °C"
+  },
+  {
+    "id": "RTD4_TEMP",
+    "label": "RTD 4 spare",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI4"
+    },
+    "comment": "A0602 ch4 — 2-wire PT100 °C"
+  },
+  {
+    "id": "RTD5_TEMP",
+    "label": "RTD 5 spare",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI5"
+    },
+    "comment": "A0602 ch5 — 2-wire PT100 °C"
+  },
+  {
+    "id": "RTD6_TEMP",
+    "label": "RTD 6 spare",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI6"
+    },
+    "comment": "A0602 ch6 — 2-wire PT100 °C"
+  },
+  {
+    "id": "RTD7_TEMP",
+    "label": "RTD 7 spare",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI7"
+    },
+    "comment": "A0602 ch7 — 2-wire PT100 °C"
+  },
+  {
+    "id": "RTD8_TEMP",
+    "label": "RTD 8 spare",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverAddress": {
+      "channel": "X2_AI8"
+    },
+    "comment": "A0602 ch8 — 2-wire PT100 °C"
+  },
+  {
+    "id": "AI1",
+    "label": "Motor 1 phase A amps",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "scale": 0.48828125,
+    "offset": 0,
+    "driverAddress": {
+      "channel": "I1_RAW"
+    },
+    "graphEnabled": true,
+    "comment": "Opta analog in 1 — 0–1 V CT, 0–50 A (1 V = 50 A, raw×scale)"
+  },
+  {
+    "id": "AI2",
+    "label": "Motor 1 phase B amps",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "scale": 0.48828125,
+    "offset": 0,
+    "driverAddress": {
+      "channel": "I2_RAW"
+    },
+    "graphEnabled": true,
+    "comment": "Opta analog in 2 — 0–1 V CT, 0–50 A"
+  },
+  {
+    "id": "AI3",
+    "label": "Motor 1 phase C amps",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "scale": 0.48828125,
+    "offset": 0,
+    "driverAddress": {
+      "channel": "I3_RAW"
+    },
+    "graphEnabled": true,
+    "comment": "Opta analog in 3 — 0–1 V CT, 0–50 A"
+  },
+  {
+    "id": "AI4",
+    "label": "Motor 2 phase A amps",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "scale": 0.48828125,
+    "offset": 0,
+    "driverAddress": {
+      "channel": "I4_RAW"
+    },
+    "graphEnabled": true,
+    "comment": "Opta analog in 4 — 0–1 V CT, 0–50 A"
+  },
+  {
+    "id": "AI5",
+    "label": "Motor 2 phase B amps",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "scale": 0.48828125,
+    "offset": 0,
+    "driverAddress": {
+      "channel": "I5_RAW"
+    },
+    "graphEnabled": true,
+    "comment": "Opta analog in 5 — 0–1 V CT, 0–50 A"
+  },
+  {
+    "id": "AI6",
+    "label": "Motor 2 phase C amps",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "scale": 0.48828125,
+    "offset": 0,
+    "driverAddress": {
+      "channel": "I6_RAW"
+    },
+    "graphEnabled": true,
+    "comment": "Opta analog in 6 — 0–1 V CT, 0–50 A"
+  },
+  {
+    "id": "R1",
+    "label": "Pump 1 contactor",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverAddress": {
+      "channel": "R1"
+    }
+  },
+  {
+    "id": "R2",
+    "label": "Pump 2 contactor",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverAddress": {
+      "channel": "R2"
+    }
+  },
+  {
+    "id": "M1_FTR_TMR",
+    "label": "Pump 1 fail-to-run delay",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 5000,
+    "mode": "TON",
+    "value": false,
+    "fb": {
+      "input": false,
+      "elapsed": 0,
+      "done": false
+    }
+  },
+  {
+    "id": "M2_FTR_TMR",
+    "label": "Pump 2 fail-to-run delay",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 5000,
+    "mode": "TON",
+    "value": false,
+    "fb": {
+      "input": false,
+      "elapsed": 0,
+      "done": false
+    }
+  },
+  {
+    "id": "M1_FTR",
+    "label": "Pump 1 fail-to-run condition",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "M2_FTR",
+    "label": "Pump 2 fail-to-run condition",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "M1_FAIL",
+    "label": "Pump 1 fail-to-run alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "M2_FAIL",
+    "label": "Pump 2 fail-to-run alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_FAULT",
+    "label": "Pump 1 motor fault (X1_I11)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_FAULT",
+    "label": "Pump 2 motor fault (X1_I12)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "P1_RUN_FB",
+    "label": "Pump 1 run feedback (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "P2_RUN_FB",
+    "label": "Pump 2 run feedback (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "PHASE_FAULT",
+    "label": "Phase fault (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "GEN_RUN",
+    "label": "Generator running (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "GEN_FUEL_FAULT",
+    "label": "Generator fuel fault (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "GEN_FAULT",
+    "label": "Generator fault (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "POWER_FAIL",
+    "label": "Control panel AC loss",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0,
+    "comment": "Derived from X1_I16 — control-panel UPS AC loss (generator panels); drives R4; not facility power"
+  },
+  {
+    "id": "STATION_STA",
+    "label": "Station status (0=Online 1=Fault 2=Warning 3=Offline)",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR1_HAND",
+    "label": "Pump 1 hand run latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_HAND",
+    "label": "Pump 2 hand run latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT1",
+    "label": "3-pump triplex alternator",
+    "type": "ALT",
+    "role": "fb",
+    "mode": "ALT3",
+    "preset": 3,
+    "value": 0,
+    "fb": {
+      "enabled": false,
+      "onlineIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "unitOutIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "leadSelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lagSelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lag2SelIds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "levelInputMode": "digital",
+      "levelControlEnabled": false,
+      "leadIndex": 0,
+      "lagIndex": -1,
+      "activeUnit": 0,
+      "lagOutId": "LAG_RUN",
+      "lag2Index": -1
+    }
+  },
+  {
+    "id": "SYS_RUN",
+    "label": "System run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "ALT_OFF",
+    "label": "Alternator off",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_OFF",
+    "label": "Off float (pump-to-off)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "LVL_LEAD",
+    "label": "Lead float",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_LAG",
+    "label": "Lag float",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LVL_HIGH",
+    "label": "High level float",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LEAD_CALL",
+    "label": "Lead demand latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LAG_CALL",
+    "label": "Lag demand latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MASTER_OFF",
+    "label": "Master off (below off float)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "ALT_OFF_REQ",
+    "label": "Alternator off request",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_BUMP",
+    "label": "Rotate lead",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "P1_ALT_RUN",
+    "label": "Pump 1 alternator cmd",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "P2_ALT_RUN",
+    "label": "Pump 2 alternator cmd",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_ONLINE",
+    "label": "Pump 1 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR2_ONLINE",
+    "label": "Pump 2 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR1_RUN",
+    "label": "Pump 1 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_RUN",
+    "label": "Pump 2 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LEAD_RUN",
+    "label": "Lead running",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LAG_RUN",
+    "label": "Lag running",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "ALT_FAULT",
+    "label": "Alternator fault",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "TANK_LVL",
+    "label": "Wet well level %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 42,
+    "graphEnabled": true
+  },
+  {
+    "id": "MOTOR1_HOA",
+    "label": "Pump 1 HOA mode",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR1_STA",
+    "label": "Pump 1 status",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR1_START",
+    "label": "Pump 1 start",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_STOP",
+    "label": "Pump 1 stop",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_RESET",
+    "label": "Pump 1 reset",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_OFFLINE",
+    "label": "Pump 1 offline latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR1_HRS",
+    "label": "Pump 1 run hours",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0
+  },
+  {
+    "id": "MOTOR1_STARTS",
+    "label": "Pump 1 start count",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR1_START_MS",
+    "label": "Pump 1 last start duration ms",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "comment": "Edge AI: CT start signature on I1–I3"
+  },
+  {
+    "id": "MOTOR1_CNTR",
+    "label": "Pump 1 start counter",
+    "type": "COUNTER",
+    "role": "memory",
+    "value": 0,
+    "preset": 999999,
+    "mode": "CTU"
+  },
+  {
+    "id": "MOTOR2_HOA",
+    "label": "Pump 2 HOA mode",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR2_STA",
+    "label": "Pump 2 status",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR2_START",
+    "label": "Pump 2 start",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_STOP",
+    "label": "Pump 2 stop",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_RESET",
+    "label": "Pump 2 reset",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_OFFLINE",
+    "label": "Pump 2 offline latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR2_HRS",
+    "label": "Pump 2 run hours",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0
+  },
+  {
+    "id": "MOTOR2_STARTS",
+    "label": "Pump 2 start count",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR2_START_MS",
+    "label": "Pump 2 last start duration ms",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "comment": "Edge AI: CT start signature on I4–I6"
+  },
+  {
+    "id": "MOTOR2_CNTR",
+    "label": "Pump 2 start counter",
+    "type": "COUNTER",
+    "role": "memory",
+    "value": 0,
+    "preset": 999999,
+    "mode": "CTU"
+  },
+  {
+    "id": "R4",
+    "label": "Station alarm relay",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverAddress": {
+      "channel": "R4"
+    }
+  },
+  {
+    "id": "DDS_V_A",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_V_A"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_I_A",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_I_A"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_W_A",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_W_A"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_HZ_A",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_HZ_A"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_PF_A",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_PF_A"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_V_B",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_V_B"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_I_B",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_I_B"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_W_B",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_W_B"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_HZ_B",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_HZ_B"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_PF_B",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_PF_B"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_V_C",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_V_C"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_I_C",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_I_C"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_W_C",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_W_C"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_HZ_C",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_HZ_C"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_PF_C",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_PF_C"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_VA_A",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_VA_A"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_VA_B",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_VA_B"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_VA_C",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_VA_C"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_WH_SUM_IMP",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_WH_SUM_IMP"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_WH_SUM_EXP",
+    "type": "REAL",
+    "role": "input",
+    "value": 0,
+    "driverId": "opta_st_01",
+    "driverAddress": {
+      "channel": "DDS_WH_SUM_EXP"
+    },
+    "graphEnabled": true,
+    "comment": "EZ Meter via Opta RS485 fieldbus → MQTT Parc"
+  },
+  {
+    "id": "DDS_METER_KWH_PREV",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "driverId": null,
+    "driverAddress": null,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null
+  },
+  {
+    "id": "MECH_METER_INTERVAL_KWH",
+    "label": "Site electric meter interval kWh",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_KW_SUM",
+    "label": "Site total real power kW",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_KVA_SUM",
+    "label": "Site total apparent power kVA",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_PF_SYS",
+    "label": "Site system power factor",
+    "type": "REAL",
+    "role": "memory",
+    "value": 1,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_V_AVG",
+    "label": "Average phase voltage V",
+    "type": "REAL",
+    "role": "memory",
+    "value": 120,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_V_IMBAL_PCT",
+    "label": "Voltage imbalance %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_I_SUM",
+    "label": "Total phase current A",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_UNDERVOLT",
+    "label": "PQ undervoltage alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_OVERVOLT",
+    "label": "PQ overvoltage alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_PHASE_LOSS",
+    "label": "PQ phase loss alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_V_IMBAL",
+    "label": "PQ voltage imbalance alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_LOW_PF",
+    "label": "PQ low power factor alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_FREQ_FAULT",
+    "label": "PQ frequency alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_ALM",
+    "label": "Site power quality alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_NOM_V",
+    "label": "PQ nominal voltage setpoint",
+    "type": "REAL",
+    "role": "memory",
+    "value": 120,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_UV_V",
+    "label": "PQ undervoltage threshold V",
+    "type": "REAL",
+    "role": "memory",
+    "value": 108,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_OV_V",
+    "label": "PQ overvoltage threshold V",
+    "type": "REAL",
+    "role": "memory",
+    "value": 132,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_LOW_PF",
+    "label": "PQ low PF threshold",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0.85,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_FREQ_MIN",
+    "label": "PQ min frequency Hz",
+    "type": "REAL",
+    "role": "memory",
+    "value": 59.5,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_FREQ_MAX",
+    "label": "PQ max frequency Hz",
+    "type": "REAL",
+    "role": "memory",
+    "value": 60.5,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_IMBAL_PCT",
+    "label": "PQ max voltage imbalance %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 5,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_LOAD_I",
+    "label": "PQ loaded current threshold A",
+    "type": "REAL",
+    "role": "memory",
+    "value": 1,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_VA",
+    "label": "Phase A voltage THD est. %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_VB",
+    "label": "Phase B voltage THD est. %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_VC",
+    "label": "Phase C voltage THD est. %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_IA",
+    "label": "Phase A current THD est. %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_IB",
+    "label": "Phase B current THD est. %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_IC",
+    "label": "Phase C current THD est. %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_THD_ALM",
+    "label": "Site THD alarm (estimated)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false,
+    "graphEnabled": false,
+    "alarmsEnabled": true,
+    "alarmCondition": "on",
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "MECH_PQ_CFG_THD_PCT",
+    "label": "PQ max THD threshold %",
+    "type": "REAL",
+    "role": "memory",
+    "value": 8,
+    "graphEnabled": false,
+    "alarmsEnabled": false,
+    "alarmCondition": null,
+    "alarmInnerLow": null,
+    "alarmInnerHigh": null,
+    "alarmOuterLow": null,
+    "alarmOuterHigh": null,
+    "driverId": null,
+    "driverAddress": null,
+    "scale": 1,
+    "offset": 0
+  },
+  {
+    "id": "R3",
+    "label": "Pump 3 contactor",
+    "type": "BOOL",
+    "role": "output",
+    "value": false,
+    "driverAddress": {
+      "channel": "R3"
+    }
+  },
+  {
+    "id": "LVL_LAG2",
+    "label": "Lag2 float (3 pumps)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "LAG2_CALL",
+    "label": "Lag2 demand latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_FAULT",
+    "label": "Pump 3 motor fault (X1_I15)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "M3_FTR_TMR",
+    "label": "Pump 3 fail-to-run delay",
+    "type": "TIMER",
+    "role": "fb",
+    "wordWidth": 16,
+    "preset": 5000,
+    "mode": "TON",
+    "value": false,
+    "fb": {
+      "input": false,
+      "elapsed": 0,
+      "done": false
+    }
+  },
+  {
+    "id": "M3_FTR",
+    "label": "Pump 3 fail-to-run condition",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "M3_FAIL",
+    "label": "Pump 3 fail-to-run alarm",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_FAULT",
+    "label": "Pump 3 motor fault (X1_I12)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "P3_RUN_FB",
+    "label": "Pump 3 run feedback (derived)",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_HAND",
+    "label": "Pump 3 hand run latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "P3_ALT_RUN",
+    "label": "Pump 3 alternator cmd",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_ONLINE",
+    "label": "Pump 3 online",
+    "type": "BOOL",
+    "role": "memory",
+    "value": true
+  },
+  {
+    "id": "MOTOR3_RUN",
+    "label": "Pump 3 run",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_HOA",
+    "label": "Pump 3 HOA mode",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR3_STA",
+    "label": "Pump 3 status",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR3_START",
+    "label": "Pump 3 start",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_STOP",
+    "label": "Pump 3 stop",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_RESET",
+    "label": "Pump 3 reset",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_OFFLINE",
+    "label": "Pump 3 offline latch",
+    "type": "BOOL",
+    "role": "memory",
+    "value": false
+  },
+  {
+    "id": "MOTOR3_HRS",
+    "label": "Pump 3 run hours",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0
+  },
+  {
+    "id": "MOTOR3_STARTS",
+    "label": "Pump 3 start count",
+    "type": "INT",
+    "role": "memory",
+    "value": 0,
+    "wordWidth": 16
+  },
+  {
+    "id": "MOTOR3_START_MS",
+    "label": "Pump 3 last start duration ms",
+    "type": "REAL",
+    "role": "memory",
+    "value": 0,
+    "graphEnabled": true,
+    "comment": "Edge AI: CT start signature on expansion CT spare"
+  },
+  {
+    "id": "MOTOR3_CNTR",
+    "label": "Pump 3 start counter",
+    "type": "COUNTER",
+    "role": "memory",
+    "value": 0,
+    "preset": 999999,
+    "mode": "CTU"
+  }
+]

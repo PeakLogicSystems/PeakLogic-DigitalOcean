@@ -5,7 +5,7 @@
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = api;
   }
-  root.PeakLogicRoi = api;
+  root.PeaklogicRoi = api;
 })(typeof window !== 'undefined' ? window : globalThis, function roiCalculatorFactory() {
   function num(v, fallback = 0) {
     const n = Number(v);

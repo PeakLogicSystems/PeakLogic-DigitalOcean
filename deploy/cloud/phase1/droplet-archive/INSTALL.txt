@@ -1,0 +1,30 @@
+# Build bundles (Windows — est-pc)
+powershell -ExecutionPolicy Bypass -File scripts\create-archive-bundle.ps1
+# Output: dist\peaklogic-archive-YYYYMMDD.tgz
+
+# Upload via WinSCP to cloud-2-archive droplet /tmp/
+
+# SSH to archive droplet
+ssh root@ARCHIVE_DROPLET_IP
+
+# Optional: attach DO volume (recommended)
+# lsblk && mkfs.ext4 /dev/disk/by-id/scsi-0DO_Volume_archive && mkdir -p /data/archive && mount ...
+
+mkdir -p /opt/peaklogic-archive
+tar xzf /tmp/peaklogic-archive-*.tgz -C /opt/peaklogic-archive --strip-components=1
+
+# Secrets (generate token once — reuse on cloud 1)
+mkdir -p /etc/peaklogic
+cp /opt/peaklogic-archive/deploy/cloud/phase1/droplet-archive/archive.env.template /etc/peaklogic/archive.env
+nano /etc/peaklogic/archive.env
+# Set ARCHIVE_SERVER_TOKEN=<openssl rand -hex 32>
+
+PEAKLOGIC_SOURCE=/opt/peaklogic-archive PEAKLOGIC_ARCHIVE_DIR=/opt/peaklogic-archive \
+  PEAKLOGIC_SAAS_IP=10.x.x.x \
+  bash /opt/peaklogic-archive/deploy/cloud/debian/install-archive.sh
+
+curl -s http://127.0.0.1:8090/health
+systemctl status peaklogic-archive
+
+# Note private IP for cloud 1:
+ip -4 addr show | grep 10.

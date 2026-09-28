@@ -8,6 +8,16 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <meta name="theme-color" content="#7C3AED">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+
+  <link rel="apple-touch-icon" href="/icons/icon-512.png">
+
+  <script src="/js/pwa.js" defer></script>
+
   <title>Connectivity — PeakLogic</title>
 
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
@@ -18,7 +28,7 @@
 
   <header class="topbar standalone-topbar">
 
-    <div class="topbar-brand"><a href="<%= homeUrl || '/' %>" class="standalone-home-link"><img src="/branding/peaklogic-icon.svg" alt="Logo" class="topbar-logo"></a></div>
+    <div class="topbar-brand"><a href="<%= homeUrl || '/' %>" class="standalone-home-link">Peak<span>Logic</span></a></div>
 
     <h1 class="standalone-title">Connectivity</h1>
     <% if (typeof connectivityBuild !== 'undefined' && connectivityBuild) { %>
@@ -224,6 +234,80 @@
       <p id="cellular-vendor-msg" class="cellular-sims-msg muted" aria-live="polite"></p>
 
       <div id="cellular-vendors-table-wrap"><p class="muted">Loading vendors…</p></div>
+
+    </section>
+
+
+
+    <section class="cellular-sims-billing panel" id="cellular-billing-section">
+
+      <div class="cellular-sims-list-head">
+
+        <h2>Simetry billing</h2>
+
+        <div class="cellular-sims-actions">
+
+          <button type="button" class="btn btn-primary" id="cellular-billing-sync">Sync billing</button>
+
+          <button type="button" class="btn" id="cellular-billing-refresh">Refresh report</button>
+
+          <button type="button" class="btn" id="cellular-billing-export">Export CSV</button>
+
+        </div>
+
+      </div>
+
+      <p class="panel-hint">Pull per-eSIM billing previews from Simetry (Teal API) for the selected period. Link SIMs to tenants for customer allocation.</p>
+
+      <form id="cellular-billing-form" class="cellular-sims-form">
+
+        <label>Period start (UTC)
+
+          <input type="text" id="billing-period-start" placeholder="2026-08-01 00:00:00" autocomplete="off">
+
+        </label>
+
+        <label>Period end (UTC)
+
+          <input type="text" id="billing-period-end" placeholder="2026-08-11 23:59:59" autocomplete="off">
+
+        </label>
+
+        <label>Simetry vendor
+
+          <select id="billing-vendor-config"></select>
+
+        </label>
+
+        <label>Tenant filter (optional)
+
+          <input type="text" id="billing-tenant-id" placeholder="tenant slug" autocomplete="off">
+
+        </label>
+
+      </form>
+
+      <p id="cellular-billing-summary" class="cellular-sims-msg muted" aria-live="polite"></p>
+
+      <div id="cellular-billing-table-wrap"><p class="muted">Run <strong>Sync billing</strong> or <strong>Refresh report</strong> to load Simetry billing lines.</p></div>
+
+    </section>
+
+
+
+    <section class="cellular-sims-gateway panel" id="cellular-gateway-section">
+
+      <div class="cellular-sims-list-head">
+
+        <h2>Gateway SIM identity</h2>
+
+        <button type="button" class="btn" id="cellular-gateway-refresh">Refresh</button>
+
+      </div>
+
+      <p class="panel-hint">NanoPi gateways publish <code>peaklogic/v1/gateway/{gatewayId}/cellular</code> with ICCID from the LTE modem. Cloud auto-links when the ICCID matches a synced Simetry SIM.</p>
+
+      <div id="cellular-gateway-table-wrap"><p class="muted">Loading gateway reports…</p></div>
 
     </section>
 

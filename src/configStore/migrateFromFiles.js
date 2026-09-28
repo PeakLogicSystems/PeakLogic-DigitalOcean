@@ -33,7 +33,8 @@ async function migrateConfigFilesToMongo(backend, opts = {}) {
     await backend.writeDocument(key, data);
     imported.push(key);
   }
-  if (opts.seedProjects !== false) {
+  // Projects live on disk (data/projects/*.est.zip). Opt-in only for legacy Mongo seeding.
+  if (opts.seedProjects === true && typeof backend.writeProjectSnapshot === 'function') {
     const synced = await syncBundledProjectsFromDisk(backend);
     imported.push(...synced.map((id) => `projects/${id}`));
   }
@@ -49,7 +50,13 @@ async function syncBundledProjectsFromDisk(backend, opts = {}) {
   const imported = [];
   const existing = opts.existingIds || new Set();
   const { safeId } = backend;
-  const FORCE_REFRESH_IDS = new Set(['assisted-living', 'mle-wastewater']);
+  const FORCE_REFRESH_IDS = new Set([
+    'assisted-living',
+    'mle-wastewater',
+    'duplex-lift-station',
+    'putnam-county-cloud',
+    'putnam-mle-plant',
+  ]);
 
   for (const fname of listFileProjects()) {
     const id = fname.replace(/\.est\.json$/i, '');

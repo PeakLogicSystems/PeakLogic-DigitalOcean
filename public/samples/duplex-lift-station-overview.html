@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/samples/mv-live-api.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duplex Lift Station — Process Overview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #0f172a; color: #e2e8f0;
+    }
+    #layout {
+      display: flex; flex-direction: column; width: 100%; height: 100%;
+    }
+    #toolbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px 14px; background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    #toolbar h1 { font-size: 14px; font-weight: 600; }
+    #toolbar p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+    #status {
+      font-size: 12px; padding: 6px 10px; border-radius: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    #status.ok { color: #86efac; border-color: rgba(34, 197, 94, 0.4); }
+    #status.demo { color: #fcd34d; border-color: rgba(245, 158, 11, 0.4); }
+    #status.err { color: #fca5a5; border-color: rgba(239, 68, 68, 0.4); }
+    #svg-host {
+      flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+      padding: 12px; background: #111;
+    }
+    #svg-host svg { width: 100%; max-width: 1150px; height: auto; display: block; }
+  </style>
+</head>
+<body>
+  <div id="layout">
+    <div id="toolbar">
+      <div>
+        <h1>DUPLEXLS — Process Overview</h1>
+        <p>SCADA faceplate preview · live tags when runtime is connected</p>
+      </div>
+      <div id="status" class="demo">Demo mode</div>
+    </div>
+    <div id="svg-host" aria-label="Duplex lift station overview"></div>
+  </div>
+  <script>
+    (function () {
+      const SVG_URL = '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg';
+      const STATION_STA_LABELS = ['ONLINE', 'FAULT', 'WARNING', 'OFFLINE'];
+      const STATION_STA_COLORS = ['#22c55e', '#ef4444', '#fbed20', '#64748b'];
+      const WELL_TOP = 140;
+      const WELL_HEIGHT = 435;
+      const tagValues = new Map();
+      const tagMeta = new Map();
+      let mvApiRoot = String(window.MV_API_BASE || '/api').replace(/\/$/, '');
+      const statusEl = document.getElementById('status');
+      const host = document.getElementById('svg-host');
+
+      const DEMO = {
+        TANK_LVL: 42,
+        LVL_OFF: true,
+        LVL_LEAD: true,
+        LVL_LAG: false,
+        LVL_HIGH: false,
+        MOTOR1_RUN: true,
+        MOTOR2_RUN: false,
+        MOTOR1_STA: 1,
+        MOTOR2_STA: 0,
+        MOTOR1_HOA: 0,
+        MOTOR2_HOA: 0,
+        MOTOR1_HRS: 324.8,
+        MOTOR2_HRS: 311.2,
+        MOTOR1_STARTS: 1428,
+        MOTOR2_STARTS: 1391,
+        ALT1: { activeUnit: 1, pumpStage: 1, offActive: false, lowActive: false, highActive: false },
+        ALT_FAULT: false,
+        SYS_RUN: true,
+        STATION_STA: 0,
+        PHASE_FAULT: false,
+        GEN_RUN: false,
+        GEN_FUEL_FAULT: false,
+        GEN_FAULT: false,
+      };
+
+      function isOn(raw) {
+        return raw === true || raw === 1 || raw === '1' || String(raw).toLowerCase() === 'true';
+      }
+
+      function setFill(id, on, onColor, offColor) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.setAttribute('fill', on ? onColor : offColor);
+        if (el.tagName === 'circle') {
+          el.setAttribute('stroke', on ? onColor : (offColor === '#333333' ? '#444444' : offColor));
+        }
+      }
+
+      function setRectActive(id, active, activeFill, inactiveFill, activeStroke, inactiveStroke) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.setAttribute('fill', active ? activeFill : inactiveFill);
+        if (activeStroke || inactiveStroke) {
+          el.setAttribute('stroke', active ? (activeStroke || 'none') : (inactiveStroke || '#444444'));
+        }
+      }
+
+      function setText(id, text) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      }
+
+      function updateWetWellFill(pct) {
+        const fill = document.getElementById('wet_well_fill');
+        if (!fill) return;
+        const level = Math.max(0, Math.min(100, Number(pct) || 0));
+        const h = (level / 100) * WELL_HEIGHT;
+        fill.setAttribute('y', String(WELL_TOP + WELL_HEIGHT - h));
+        fill.setAttribute('height', String(h));
+        setText('val_tank_level', `${level.toFixed(1)}%`);
+      }
+
+      function altStageLabel(fb) {
+        if (!fb || typeof fb !== 'object') return '—';
+        if (isOn(fb.highActive)) return 'HIGH';
+        if (isOn(fb.lowActive)) return 'LAG';
+        if (isOn(fb.offActive)) return 'OFF';
+        const stage = Number(fb.pumpStage);
+        if (stage === 1) return 'LEAD';
+        if (stage === 2) return 'LAG';
+        return 'LEAD';
+      }
+
+      function formatHrs(v) {
+        const n = Number(v);
+        if (!Number.isFinite(n)) return '00000.0 HRS';
+        return `${String(Math.floor(n)).padStart(5, '0')}.${(n % 1).toFixed(1).slice(2)} HRS`;
+      }
+
+      function formatStarts(v) {
+        const n = Number(v);
+        return Number.isFinite(n) ? n.toLocaleString('en-US') : '0';
+      }
+
+      function applyTags() {
+        const tank = tagValues.get('TANK_LVL');
+        updateWetWellFill(tank);
+
+        setFill('lamp_float_high', isOn(tagValues.get('LVL_HIGH')), '#ff3333', '#333333');
+        setFill('lamp_float_lag', isOn(tagValues.get('LVL_LAG')), '#ffaa00', '#333333');
+        setFill('lamp_float_lead', isOn(tagValues.get('LVL_LEAD')), '#00ff00', '#333333');
+        setFill('lamp_float_off', isOn(tagValues.get('LVL_OFF')), '#00ff00', '#333333');
+
+        const altFb = tagMeta.get('ALT1')?.fb || tagValues.get('ALT1');
+        const altFault = isOn(tagValues.get('ALT_FAULT'));
+        const stationSta = Number(tagValues.get('STATION_STA'));
+        const staIdx = Number.isFinite(stationSta) ? Math.max(0, Math.min(3, Math.trunc(stationSta))) : 3;
+        setFill('lamp_status', true, STATION_STA_COLORS[staIdx], STATION_STA_COLORS[staIdx]);
+        setText('txt_station_status', STATION_STA_LABELS[staIdx] || 'OFFLINE');
+        setFill('lamp_phase_fault', isOn(tagValues.get('PHASE_FAULT')), '#ef4444', '#222222');
+        setFill('lamp_gen_run', isOn(tagValues.get('GEN_RUN')), '#22c55e', '#222222');
+        setFill('lamp_gen_fuel', isOn(tagValues.get('GEN_FUEL_FAULT')), '#fbed20', '#222222');
+        setFill('lamp_gen_fault', isOn(tagValues.get('GEN_FAULT')), '#ef4444', '#222222');
+
+        const p1Run = isOn(tagValues.get('MOTOR1_RUN'));
+        const p2Run = isOn(tagValues.get('MOTOR2_RUN'));
+        setRectActive('ind_p1_running', p1Run, '#006600', '#222222');
+        setRectActive('ind_p1_stopped', !p1Run, '#cc0000', '#222222', null, '#444444');
+        setRectActive('ind_p2_running', p2Run, '#006600', '#222222', null, '#444444');
+        setRectActive('ind_p2_stopped', !p2Run, '#cc0000', '#222222');
+
+        const hoa1 = Number(tagValues.get('MOTOR1_HOA'));
+        const hoa2 = Number(tagValues.get('MOTOR2_HOA'));
+        setRectActive('btn_p1_auto', hoa1 === 0, '#0044aa', '#333333', '#00aaff', '#555555');
+        setRectActive('btn_p1_off', hoa1 === 1, '#0044aa', '#333333', '#00aaff', '#555555');
+        setRectActive('btn_p1_hand', hoa1 === 2, '#0044aa', '#333333', '#00aaff', '#555555');
+        setRectActive('btn_p2_auto', hoa2 === 0, '#0044aa', '#333333', '#00aaff', '#555555');
+        setRectActive('btn_p2_off', hoa2 === 1, '#0044aa', '#333333', '#00aaff', '#555555');
+        setRectActive('btn_p2_hand', hoa2 === 2, '#0044aa', '#333333', '#00aaff', '#555555');
+
+        setText('val_p1_starts', formatStarts(tagValues.get('MOTOR1_STARTS')));
+        setText('val_p2_starts', formatStarts(tagValues.get('MOTOR2_STARTS')));
+        setText('val_p1_hrs', formatHrs(tagValues.get('MOTOR1_HRS')));
+        setText('val_p2_hrs', formatHrs(tagValues.get('MOTOR2_HRS')));
+      }
+
+      function ingestTagRow(t) {
+        const id = String(t?.id || t?.tagId || '').trim();
+        if (!id) return;
+        tagValues.set(id, t.value ?? t.val);
+        tagMeta.set(id, { type: t.type, fb: t.fb });
+      }
+
+      function loadDemo() {
+        for (const [id, val] of Object.entries(DEMO)) {
+          tagValues.set(id, val);
+          if (id === 'ALT1') tagMeta.set(id, { type: 'ALT', fb: val });
+        }
+        applyTags();
+      }
+
+      async function pollTags() {
+        try {
+          const res = await fetch(`${mvApiRoot}/tags/live`, { cache: 'no-store' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const rows = await res.json();
+          if (!Array.isArray(rows)) throw new Error('Invalid tag payload');
+          rows.forEach(ingestTagRow);
+          applyTags();
+          statusEl.textContent = 'Live tags connected';
+          statusEl.className = 'ok';
+        } catch (err) {
+          statusEl.textContent = `Demo mode · ${err.message || 'runtime offline'}`;
+          statusEl.className = 'demo';
+        }
+      }
+
+      fetch(SVG_URL)
+        .then((r) => {
+          if (!r.ok) throw new Error(`SVG not found (${r.status})`);
+          return r.text();
+        })
+        .then((svg) => {
+          host.innerHTML = svg;
+          loadDemo();
+          pollTags();
+          setInterval(pollTags, 1000);
+        })
+        .catch((err) => {
+          statusEl.textContent = err.message || 'Failed to load SVG';
+          statusEl.className = 'err';
+        });
+    }());
+  </script>
+</body>
+</html>

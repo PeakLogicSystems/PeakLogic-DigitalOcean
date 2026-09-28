@@ -1,0 +1,35 @@
+[
+  {
+    "id": "opta_ahu",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_ahu_01",
+    "name": "Dual AHU Opta + D1608E",
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": true,
+    "ioBaseOnly": false
+  },
+  {
+    "id": "opta_cond",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_cond_01",
+    "name": "Dual condenser Opta + D1608E",
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "telemetryOnly": false
+  },
+  {
+    "id": "dds_rgb",
+    "type": "modbus_rtu",
+    "enabled": true,
+    "serialPort": "/dev/ttyLP6",
+    "baud": 19200,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1,
+    "timeoutMs": 3000
+  }
+]

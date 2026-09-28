@@ -1,0 +1,12 @@
+Application that need to look at fish tanks:
+
+process airation for each tank is critical and need to be checked periodically ( 15 every minutes)
+
+Native way to process without using python?
+
+When a tank is properly aerating, the water surface is constantly bubbling and moving. 
+In your local edge software, you can isolate a tight Region of Interest (ROI) matrix directly over the 
+boiling surface of each individual tank.
+
+structural variance or structural similarity index (SSIM) between frames stops fluctuating, 
+the script detects that the texture has vanished and triggers an alarm.

@@ -38,16 +38,19 @@ window.GraphDraw = {
   formatAxisTime(ms, spanMs) {
     const d = new Date(ms);
     if (!Number.isFinite(ms)) return '—';
+    const tz = window.PeaklogicTime?.localeOpts?.() || {};
     const dayMs = 24 * 60 * 60 * 1000;
     if ((spanMs || 0) >= 7 * dayMs) {
-      return d.toLocaleString(undefined, { month: 'short', day: 'numeric' });
+      return d.toLocaleString(undefined, { ...tz, month: 'short', day: 'numeric' });
     }
     if ((spanMs || 0) >= dayMs) {
       return d.toLocaleString(undefined, {
-        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+        ...tz, month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
       });
     }
-    return d.toLocaleString(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    return d.toLocaleString(undefined, {
+      ...tz, hour: '2-digit', minute: '2-digit', second: '2-digit',
+    });
   },
 
   plotMargins(penCount = 1) {

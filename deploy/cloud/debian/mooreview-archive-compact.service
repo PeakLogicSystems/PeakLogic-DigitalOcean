@@ -1,0 +1,18 @@
+[Unit]
+Description=PeakLogic day-7 Mongo to zstd archive compaction
+Documentation=file:///home/peaklogic/docs/ARCHIVE_EXPORT.md
+After=network-online.target peaklogic-saas.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_INSTALL_DIR@
+EnvironmentFile=-/etc/peaklogic/saas.env
+EnvironmentFile=/etc/peaklogic/archive-compact.env
+ExecStart=/usr/bin/node scripts/run-archive-compact.js
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

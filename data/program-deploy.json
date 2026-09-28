@@ -1,0 +1,40 @@
+{
+  "devices": {
+    "opta_st_01": {
+      "programName": "program.st",
+      "bcCrc": 59152,
+      "bcBytes": 38,
+      "tagCount": 2,
+      "deviceCrc": 59152,
+      "deviceProgramName": "",
+      "programFromNv": true,
+      "autoRunOnBoot": true,
+      "runtimeRunning": true,
+      "action": "skip",
+      "reason": "NV CRC 0xe710 matches — ST already running",
+      "skipped": true,
+      "deployed": false,
+      "probeSource": "get_program+telemetry",
+      "deviceId": "opta_st_01",
+      "checkedAt": "2026-07-26T10:02:09.624Z"
+    },
+    "mv_f2e689fd60d96bab": {
+      "programName": "logic/36_duplex_lift_station.st",
+      "bcCrc": 63406,
+      "bcBytes": 2349,
+      "tagCount": 66,
+      "deviceCrc": 63406,
+      "deviceProgramName": "",
+      "programFromNv": true,
+      "autoRunOnBoot": true,
+      "runtimeRunning": true,
+      "action": "skip",
+      "reason": "NV CRC 0xf7ae matches — ST already running",
+      "skipped": true,
+      "deployed": false,
+      "probeSource": "get_program+telemetry",
+      "deviceId": "mv_f2e689fd60d96bab",
+      "checkedAt": "2026-07-20T09:49:39.137Z"
+    }
+  }
+}

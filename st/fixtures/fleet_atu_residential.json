@@ -1,0 +1,154 @@
+{
+  "description": "ATU cloud fleet — Oak Lane Residence (500 GPD design): 1 ATU, 0 lift stations, 100% cellular → cloud",
+  "tenant": {
+    "name": "PeakLogic ATU Service",
+    "slug": "atu-cloud",
+    "tenantId": "atu-cloud"
+  },
+  "sizingGuide": {
+    "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
+    "uplink": "cellular_mqtt",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
+    "atuToLiftPairing": [
+      {
+        "atu": "single_atu",
+        "typicalLift": "simplex or dual_duplex",
+        "note": "Residential 500 GPD often uses one single ATU only"
+      },
+      {
+        "atu": "dual_atu",
+        "typicalLift": "dual_duplex",
+        "note": "Two treatment trains; paired duplex lift for equalization"
+      },
+      {
+        "atu": "quad_atu",
+        "typicalLift": "simplex × N or dual_duplex × N",
+        "note": "Commercial sites scale lift count with collection network"
+      }
+    ],
+    "scaleExamples": [
+      {
+        "designGpd": 500,
+        "atu": [
+          {
+            "type": "single_atu",
+            "count": 1
+          }
+        ],
+        "lifts": []
+      },
+      {
+        "designGpd": 2500,
+        "atu": [
+          {
+            "type": "dual_atu",
+            "count": 1
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 4
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "designGpd": 10000,
+        "profile": "dwts",
+        "atu": [
+          {
+            "type": "quad_atu",
+            "count": 2,
+            "gpdEach": 5000,
+            "modules": "4× 1,250 gal parallel + drip"
+          }
+        ],
+        "lifts": [
+          {
+            "type": "simplex",
+            "count": 20,
+            "role": "collection",
+            "note": "10 simplex lifts per zone → duplex booster"
+          },
+          {
+            "type": "dual_duplex",
+            "count": 2,
+            "role": "booster",
+            "note": "Zone booster → trash tank → parallel ATU"
+          }
+        ]
+      }
+    ]
+  },
+  "profile": {
+    "id": "residential-500gpd",
+    "name": "Oak Lane Residence",
+    "slug": "oak-lane",
+    "designGpd": 500,
+    "address": "142 Oak Lane, DeLand, FL 32724",
+    "lat": 29.0286,
+    "lng": -81.3031
+  },
+  "devices": [
+    {
+      "name": "Oak Lane — single ATU",
+      "slug": "oak-atu",
+      "stationType": "single_atu",
+      "lat": 29.0286,
+      "lng": -81.3031,
+      "address": "142 Oak Lane, DeLand, FL 32724",
+      "deviceId": "mv_atu_oak_01",
+      "deviceSlug": "dev-oak-atu",
+      "owner": "PeakLogic ATU Service",
+      "templateId": "lift_station_single_atu",
+      "defaultProgram": "logic/32_single_atu.st",
+      "alarmTag": "ALT_FAULT",
+      "alarmTags": [
+        "ALT_FAULT"
+      ],
+      "levelTag": "LVL_HIGH",
+      "category": "atu",
+      "role": "atu",
+      "trains": 1,
+      "uplink": "cellular_mqtt",
+      "fleetAlarmTag": "FLEET_OAK_ATU_ALM",
+      "gatewayId": "gw_dev-oak-atu",
+      "driverId": "drv_oak_atu"
+    }
+  ],
+  "counts": {
+    "atu": 1,
+    "lift": 0,
+    "step": 0,
+    "collection": 0,
+    "booster": 0,
+    "total": 1
+  },
+  "importCsv": "st/fixtures/fleet_import_atu_residential.csv",
+  "cloudProject": "atu-cloud-residential",
+  "mqtt": {
+    "topicPrefix": "peaklogic/v1",
+    "cloudBrokerPort": 1883,
+    "optaLanBroker": "192.168.1.1:1883"
+  },
+  "cellular": {
+    "vendorHint": "hologram",
+    "apn": "hologram",
+    "linkApi": "/api/cellular/sims/:id/link"
+  }
+}

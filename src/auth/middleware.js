@@ -6,7 +6,7 @@ const {
   isValidPlatformAdminSession,
   getPlatformAdminCookie,
 } = require('./platformAdminSession');
-const { PLATFORM_ADMIN_KEY } = require('../config');
+const { platformAdminKeyMatches, isPlatformAdminConfigured } = require('../config');
 const tenantService = require('../services/tenantService');
 const { publicCmmsEntitlement } = require('../tenants/cmmsEntitlement');
 
@@ -69,9 +69,9 @@ function extractPlatformAdminKey(req) {
 }
 
 function isPlatformAdminAuthorized(req) {
-  if (!PLATFORM_ADMIN_KEY) return false;
+  if (!isPlatformAdminConfigured()) return false;
   const key = extractPlatformAdminKey(req);
-  if (key && key === PLATFORM_ADMIN_KEY) return true;
+  if (key && platformAdminKeyMatches(key)) return true;
   return isValidPlatformAdminSession(getPlatformAdminCookie(req));
 }
 
@@ -83,8 +83,8 @@ function attachPlatformAdmin(req, res, next) {
 }
 
 function requirePlatformAdmin(req, res, next) {
-  if (!PLATFORM_ADMIN_KEY) {
-    return res.status(503).json({ error: 'Platform admin API is not configured' });
+  if (!isPlatformAdminConfigured()) {
+    return res.status(503).json({ error: 'Control Center API is not configured' });
   }
   if (!isPlatformAdminAuthorized(req)) {
     return res.status(403).json({ error: 'Forbidden' });
@@ -94,8 +94,8 @@ function requirePlatformAdmin(req, res, next) {
 }
 
 function requirePlatformAdminWeb(req, res, next) {
-  if (!PLATFORM_ADMIN_KEY) {
-    return res.status(503).send('Platform admin is not configured (set PLATFORM_ADMIN_KEY).');
+  if (!isPlatformAdminConfigured()) {
+    return res.status(503).send('Control Center is not configured (set PLATFORM_ADMIN_KEY in /etc/peaklogic/saas.env).');
   }
   if (!isPlatformAdminAuthorized(req)) {
     return res.redirect('/admin/login');

@@ -1,0 +1,63 @@
+# PeakLogic Phase 1 — deployment checklist
+# Print and check off. Full steps: deploy/cloud/phase1/WINSCP-DEPLOY.md
+
+=== PREP (Windows dev machine) ===
+[ ] est-pc repo up to date
+[ ] Run: scripts\create-phase1-bundles.ps1
+[ ] dist\peaklogic-cloud-*d.tgz exists
+[ ] dist\peaklogic-archive-*.tgz exists
+[ ] Generated secrets saved securely:
+      JWT_SECRET=_________________________
+      PLATFORM_ADMIN_KEY=__________________
+      ARCHIVE_SERVER_TOKEN=________________
+      MOSQUITTO_PASS=______________________
+
+=== DIGITALOCEAN — shared ===
+[ ] Region chosen (same for all resources)
+[ ] VPC created (e.g. peaklogic-prod)
+[ ] SSH key added to account
+
+=== DO — Managed MongoDB ===
+[ ] Cluster created (10–20 GB starter)
+[ ] Database: peaklogic_cloud
+[ ] Connection string copied
+
+=== DO — Droplet cloud-2-archive ===
+[ ] Debian 12, 1–2 GB RAM, VPC attached
+[ ] Block volume 100+ GB mounted at /data/archive
+[ ] Cloud firewall: SSH from your IP; 8090 from cloud-1 private IP only
+[ ] WinSCP: upload peaklogic-archive-*.tgz → /tmp/
+[ ] Extract + install-archive.sh
+[ ] curl http://127.0.0.1:8090/health → ok
+[ ] Record private IP: ___________________
+
+=== DO — Droplet cloud-1-saas ===
+[ ] Debian 12, 4 GB RAM, VPC attached
+[ ] Cloud firewall: 22, 80, 443; 8883 for MQTT (restrict if possible)
+[ ] Verify on droplet IP FIRST — DNS peaklogic.io AFTER verification gate
+      (see CHECKLIST-ATL.txt / CLOUD_DEPLOY_DO_PHASE1_ATL.md)
+[ ] WinSCP: upload peaklogic-cloud-*d.tgz → /tmp/
+[ ] Copy saas.env.template → /etc/peaklogic/saas.env (secrets filled)
+[ ] install-saas.sh completed
+[ ] Mongo trusted source = this droplet public IP
+[ ] npm run seed
+[ ] certbot TLS
+[ ] https://peaklogic.io/login works (demo / demo)
+
+=== DO — MQTT + archive (cloud 1) ===
+[ ] mqtt.env → enable-saas-mqtt.sh
+[ ] archive-compact.env (token + archive private IP)
+[ ] enable-phase1-archive-compact.sh
+[ ] ARCHIVE_COMPACT_DRY_RUN=1 compact job succeeds
+
+=== VERIFY ===
+[ ] curl https://peaklogic.io/api/health or /health
+[ ] MQTT test from cloud 1: mosquitto_pub -h 127.0.0.1 -u peaklogic -P ... -t test -m ok
+[ ] Archive PUT test from cloud 1 (optional)
+[ ] systemctl list-timers | grep archive-compact
+
+=== FIELD APPLIANCES ===
+[ ] Cloud remote: tenantId, gatewayId, mqtts://peaklogic.io:8883
+[ ] MQTT credentials match MOSQUITTO_USER/PASS
+
+Done: ____________  By: ____________

@@ -1,0 +1,32 @@
+{
+  "id": "edgepoint_industrial",
+  "label": "EdgePoint Industrial — MQTT gateway",
+  "vendor": "Nexus Industrial",
+  "model": "EdgePoint Industrial RTU",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "edgepoint1",
+  "diCount": 16,
+  "doCount": 13,
+  "aiCount": 4,
+  "defaults": {
+    "brokerUrl": "mqtt://127.0.0.1:1883",
+    "serialNum": "40a36bcd7113",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "edgepoint": {
+      "includeMeta": true,
+      "includeInputs": true,
+      "includeOutputs": true,
+      "includeOutputWrites": true
+    }
+  },
+  "notes": "MQTT driver (not Modbus). Set broker URL and Nexus serial number when applying. Device publishes JSON to /devices/<serialnum>/messages/events/ — tags use json: dot paths (e.g. json:inputs.0.9010 for AC_IN1). Output commands publish {\"outputs\":[{\"reg\":9410,\"state\":1}]} to /devices/<serialnum>/messages/devicebound/. External Modbus data appears on /devices/<serialnum>/messages/events/module — add tags manually with json:modbus.registers paths. Default broker mqtt://127.0.0.1:1883; set username/password on driver if broker requires auth. Assumes gateway firmware per EdgePoint Data Dictionary 230921."
+}

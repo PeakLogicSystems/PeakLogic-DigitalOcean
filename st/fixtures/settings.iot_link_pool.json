@@ -83,6 +83,27 @@
             ]
           }
         ]
+      },
+      {
+        "id": "screen_schedule",
+        "name": "Schedule",
+        "svg": "/hmi/svg/demos/demo_process.svg",
+        "tiles": [
+          {
+            "col": 0,
+            "row": 0,
+            "colSpan": 12,
+            "rowSpan": 8,
+            "compositeId": "pool_filter_schedule",
+            "layers": [
+              {
+                "kind": "staticImage",
+                "z": 0,
+                "svg": "/hmi/svg/library/schedules/peaklogic/pool_filter_schedule.svg"
+              }
+            ]
+          }
+        ]
       }
     ],
     "bindings": []
@@ -90,6 +111,8 @@
   "features": {
     "poolController": true,
     "pentairHeatPump": true,
+    "pentairBus": true,
+    "intellifloPump": true,
     "optaIo": true,
     "modbusChemistryBus": false
   }

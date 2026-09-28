@@ -1,0 +1,13 @@
+[
+  {
+    "id": "opta_ahu_01",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_ahu_opta_01",
+    "name": "Opta — dual AHU monitor",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true,
+    "ioBaseOnly": false
+  }
+]

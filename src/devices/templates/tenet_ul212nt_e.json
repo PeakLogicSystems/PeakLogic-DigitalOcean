@@ -1,0 +1,53 @@
+{
+  "id": "tenet_ul212nt_e",
+  "label": "TENET UL212NT-E — ultrasonic fuel level (Modbus-17)",
+  "vendor": "Tenet Auto Electronics",
+  "model": "UL212NT-E / UL212-E (2.5 m)",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "ul212nt",
+  "defaultProgram": "modbus/09_ul212nt_e_level.st",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 2,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "FUEL_LEVEL_MM",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 256,
+        "wordWidth": 16,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Fuel height mm (HR 0x0100, Protocol 17 FC03 qty 1, raw ×10)"
+      },
+      {
+        "id": "FUEL_TILT",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 258,
+        "wordWidth": 16,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "Tilt (HR 0x0102, Protocol 17 FC03 qty 1, raw)"
+      }
+    ]
+  },
+  "notes": "ATO UL212-E Modbus protocol 17 manual: APP protocol 17, 9600, net address 1. Height command 01 03 01 00 00 01 85 F6. Tilt 01 03 01 02 00 01 24 36. Poll each register separately (do not burst 0x0100–0x0102). RS485: White=A, Yellow=B. Sample: st/modbus/09_ul212nt_e_level.st"
+}

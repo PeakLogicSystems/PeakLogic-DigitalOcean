@@ -23,27 +23,40 @@ async function storeSlimTelemetry(msg) {
   const historyDoc = buildHistoryDoc(msg);
   const registry = buildRegistryUpdate(msg);
 
+  // An online-birth (or any partial report) omits firmwareVersion/protocolVersion/
+  // mqttBufferBytes. Don't let those blanks overwrite the last real telemetry values,
+  // otherwise the UI flips back to "fw —" every time the device reconnects.
+  const latestSet = { ...latestDoc };
+  if (latestSet.firmwareVersion == null) delete latestSet.firmwareVersion;
+  if (latestSet.protocolVersion == null) delete latestSet.protocolVersion;
+  if (latestSet.mqttBufferBytes == null) delete latestSet.mqttBufferBytes;
+
   await db.collection(LATEST).updateOne(
     { tenantId: msg.tenantId, deviceId: msg.deviceId },
-    { $set: latestDoc },
+    { $set: latestSet },
     { upsert: true },
   );
 
   await db.collection(HISTORY).insertOne(historyDoc);
 
+  const registrySet = {
+    tenantId: registry.tenantId,
+    deviceId: registry.deviceId,
+    name: registry.name,
+    platform: registry.platform,
+    online: registry.online,
+    lastSeenAt: registry.lastSeenAt,
+    lastReport: registry.lastReport,
+    updatedAt: registry.updatedAt,
+  };
+  // Only overwrite firmwareVersion when the report carries one, so an online-birth
+  // (which may omit it) never wipes a previously reported version.
+  if (registry.firmwareVersion) registrySet.firmwareVersion = registry.firmwareVersion;
+
   await db.collection(REGISTRY).updateOne(
     { tenantId: msg.tenantId, deviceId: msg.deviceId },
     {
-      $set: {
-        tenantId: registry.tenantId,
-        deviceId: registry.deviceId,
-        name: registry.name,
-        platform: registry.platform,
-        online: registry.online,
-        lastSeenAt: registry.lastSeenAt,
-        lastReport: registry.lastReport,
-        updatedAt: registry.updatedAt,
-      },
+      $set: registrySet,
       $setOnInsert: { createdAt: registry.createdAt },
     },
     { upsert: true },

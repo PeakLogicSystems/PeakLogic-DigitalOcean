@@ -1,7 +1,7 @@
 'use strict';
 
 /** Shared DOM / string helpers for PeakLogic client modules */
-window.PeakLogicCore = {
+window.PeaklogicCore = {
   $(id) {
     return document.getElementById(id);
   },

@@ -1,0 +1,7 @@
+# PeakLogic Parc MQTT peer for LilyGO T-HaLow.
+# No Morse Micro / mm-iot-esp32 dependencies — the TX-AH module uses UART AT.
+dependencies:
+  idf:
+    version: ">=5.1.0"
+  espressif/mqtt: "^1.0.0"
+  espressif/cjson: "^1.7.19"

@@ -1,0 +1,70 @@
+{
+  "id": "icon_is750_ion",
+  "label": "Icon ProCon IS-750 — ion selective sensor (Modbus RTU)",
+  "vendor": "Icon Process Controls",
+  "model": "ProCon IS-750 Series Ion Sensor",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "is750_ion",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "IS750_MV",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 0,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "HR 0 — Electrode mV (−20000…20000 raw, ÷10)"
+      },
+      {
+        "id": "IS750_ION",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 1,
+        "signed": false,
+        "scale": 1,
+        "comment": "HR 1 — Ion concentration raw (0…10000; apply IS750_ION_DECIMAL)"
+      },
+      {
+        "id": "IS750_ION_DECIMAL",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 2,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "HR 2 — Ion decimal places (0…2)"
+      },
+      {
+        "id": "IS750_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 3,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "HR 3 — Temperature °C (register ×10)"
+      }
+    ]
+  },
+  "notes": "Measurement block §226-1041 (HR 0–3, FC03 read-only). Default 9600 8N1 slave 1 — re-address via broadcast 255. Ion engineering units: raw ÷ 10^IS750_ION_DECIMAL. Source: 26-1041 IS750-Ion Sensors Modbus Protocol V1.pdf"
+}

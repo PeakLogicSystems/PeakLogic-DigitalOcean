@@ -1,0 +1,56 @@
+{
+  "templateId": "lift_station_epi",
+  "description": "Nexus Cloud → PeakLogic register map for EdgePoint Industrial lift stations",
+  "defaultSerial": "40a36bce47f3",
+  "defaultProfile": "epi_master",
+  "mqttTopic": "/devices/<serial>/messages/events/",
+  "profiles": {
+    "epi_master": {
+      "label": "Master Lift Station (edge point industrial)",
+      "referenceDevice": "40a36bce47f3",
+      "stProgram": "logic/36_duplex_lift_station.st",
+      "registers": [
+        { "reg": 9010, "nexus": "High Level Float", "mvTag": "X1_I1 / LVL_HIGH" },
+        { "reg": 9020, "nexus": "Lag Float 2", "mvTag": "LVL_LAG2" },
+        { "reg": 9030, "nexus": "Lag Float", "mvTag": "X1_I3 / LVL_LAG" },
+        { "reg": 9040, "nexus": "Lead Float", "mvTag": "X1_I2 / LVL_LEAD" },
+        { "reg": 9050, "nexus": "OFF Float", "mvTag": "X1_I4 / LVL_OFF" },
+        { "reg": 9090, "nexus": "MS 1 Run", "mvTag": "X1_I5 / P1_RUN_FB" },
+        { "reg": 9100, "nexus": "MS 2 Run", "mvTag": "X1_I6 / P2_RUN_FB" },
+        { "reg": 9150, "nexus": "Phase Loss", "mvTag": "X1_I7 / PHASE_FAULT" },
+        { "reg": 9160, "nexus": "Gen Fault", "mvTag": "X1_I10 / GEN_FAULT" },
+        { "reg": 9180, "nexus": "Motor 1 CT", "mvTag": "AI1" },
+        { "reg": 9190, "nexus": "Motor 2 CT", "mvTag": "AI2" },
+        { "reg": 9200, "nexus": "Motor 3 CT", "mvTag": "AI3" },
+        { "reg": 9410, "nexus": "Output 1", "mvTag": "R1" },
+        { "reg": 9420, "nexus": "Output 2", "mvTag": "R2" }
+      ]
+    },
+    "liftpoint_light": {
+      "label": "LiftPoint Light (CSV nexcomm-lpl-lift-station + Salvation Army sample)",
+      "referenceDevice": "862406071948166",
+      "csv": "st/fixtures/nexcomm-csv/nexcomm-lpl-lift-station.csv",
+      "registers": [
+        { "reg": 9010, "nexus": "High Level Float Alarm", "mvTag": "X1_I1 / LVL_HIGH" },
+        { "reg": 9020, "nexus": "Lead Float", "mvTag": "X1_I2 / LVL_LEAD" },
+        { "reg": 9030, "nexus": "Pump 1 Run", "mvTag": "X1_I5 / P1_RUN_FB" },
+        { "reg": 9040, "nexus": "Pump 2 Run", "mvTag": "X1_I6 / P2_RUN_FB" },
+        { "reg": 9050, "nexus": "Motor Fault", "mvTag": "X1_I3 / MOTOR_FAULT" },
+        { "reg": 9060, "nexus": "Input 5", "mvTag": "X1_I4" },
+        { "reg": 9070, "nexus": "Pump 1 Motor Amps", "mvTag": "AI1 / P1_AMPS" },
+        { "reg": 9080, "nexus": "Pump 2 Motor Amps", "mvTag": "AI2 / P2_AMPS" },
+        { "reg": 9090, "nexus": "Input 6", "mvTag": "X1_I7" }
+      ],
+      "telemetryFields": [
+        { "json": "battery_power", "mvTag": "EXT_POWER_OK", "csv": "External Power" },
+        { "json": "vbat", "mvTag": "BATTERY_V", "csv": "Battery" },
+        { "json": "in3_starts", "mvTag": "P1_STARTS", "csv": "Pump 1 Motor Starts" },
+        { "json": "in4_starts", "mvTag": "P2_STARTS", "csv": "Pump 2 Motor Starts" },
+        { "json": "in3_runtime", "mvTag": "P1_RUNTIME_HRS", "csv": "Pump 1 Motor Run Time" },
+        { "json": "in4_runtime", "mvTag": "P2_RUNTIME_HRS", "csv": "Pump 2 Motor Run Time" },
+        { "json": "s1p1_total_1hr_flow", "mvTag": "P1_FLOW_1HR_GAL", "csv": "Flow Rate Pump1 (1 hr)" },
+        { "json": "s1p2_total_1hr_flow", "mvTag": "P2_FLOW_1HR_GAL", "csv": "Flow Rate Pump2 (1 hr)" }
+      ]
+    }
+  }
+}

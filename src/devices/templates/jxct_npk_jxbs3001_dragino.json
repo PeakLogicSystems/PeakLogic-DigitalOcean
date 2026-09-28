@@ -1,0 +1,117 @@
+{
+  "id": "jxct_npk_jxbs3001_dragino",
+  "label": "JXCT JXBS-3001-NPK-RS — soil 7-in-1 via Dragino (Modbus→MQTT)",
+  "vendor": "JXCT",
+  "model": "JXBS-3001-NPK-RS (7-in-1) + Dragino RS485-NB",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "dragino_jxct_01",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 7,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "RS485",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1,
+    "deviceId": "dragino_jxct_01"
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "SOIL_PH",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 6,
+        "wordWidth": 16,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Soil pH (HR 0x0006, register ×100)"
+      },
+      {
+        "id": "SOIL_MOIST_PCT",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 18,
+        "wordWidth": 16,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "Soil moisture % (HR 0x0012, register ×10)"
+      },
+      {
+        "id": "SOIL_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 19,
+        "wordWidth": 16,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Soil temperature °C (HR 0x0013, register ×10)"
+      },
+      {
+        "id": "SOIL_EC_US_CM",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 21,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil conductivity µS/cm (HR 0x0015)"
+      },
+      {
+        "id": "N_MG_KG",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 30,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil nitrogen mg/kg (HR 0x001E)"
+      },
+      {
+        "id": "P_MG_KG",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 31,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil phosphorus mg/kg (HR 0x001F)"
+      },
+      {
+        "id": "K_MG_KG",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 32,
+        "signed": false,
+        "scale": 1,
+        "comment": "Soil potassium mg/kg (HR 0x0020)"
+      }
+    ]
+  },
+  "dragino": {
+    "bindAs": "mqtt_parc",
+    "gatewayPresetId": "dragino_rs485_nb",
+    "reportIntervalSec": 300,
+    "sensorPower5vMs": 5000,
+    "pollBlocks": [
+      {
+        "functionCode": 3,
+        "startRegister": 6,
+        "registerCount": 27,
+        "comment": "SOIL_PH @ 0x0006 through K_MG_KG @ 0x0020 (single FC03 block)"
+      }
+    ]
+  },
+  "notes": "Remote JXCT seven-in-one soil probe on Dragino RS485-NB (NB-IoT). Wire sensor A/B to Dragino RS485; power probe 5–24 VDC (12 V typical). Default 9600 8N1, slave 1. Cloud: add Dragino gateway driver (dragino_rs485_nb), then POST /api/parc/dragino-gateway/bind-preset with presetId jxct_npk_jxbs3001_dragino (or jxct_npk_jxbs3001), then /plan for AT+COMMAND* + AT+TDC=300. Parc hub decodes Payload hex → SOIL_PH, SOIL_MOIST_PCT, SOIL_TEMP_C, SOIL_EC_US_CM, N/P/K. Local RS485 (no cellular): use jxct_npk_jxbs3001 instead."
+}

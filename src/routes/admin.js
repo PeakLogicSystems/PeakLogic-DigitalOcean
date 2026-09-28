@@ -27,26 +27,13 @@ router.get('/tenants/:tenantId', asyncHandler(async (req, res) => {
 
 router.patch('/tenants/:tenantId/cmms', asyncHandler(async (req, res) => {
   const body = req.body || {};
-  const patch = {};
-  if (body.cmms != null) {
-    patch.cmms = body.cmms;
-    if (body.plan != null) patch.plan = body.plan;
-  } else if (body.enabled !== undefined) {
-    patch.cmms = {
-      enabled: body.enabled === true || body.enabled === 'true',
-      plan: body.plan || 'standard',
-    };
-  } else if (body.plan != null) {
-    patch.plan = body.plan;
+  if (body.enabled === undefined && body.externalUrl === undefined) {
+    return res.status(400).json({ error: 'enabled or externalUrl required' });
   }
-  if (!patch.plan && !patch.cmms) {
-    return res.status(400).json({ error: 'plan or cmms required' });
-  }
-  const result = await tenantService.updateTenantSettings(
-    req.params.tenantId,
-    patch,
-    { enabledBy: 'platform-admin' },
-  );
+  const result = await tenantService.updateTenantCmms(req.params.tenantId, {
+    enabled: body.enabled === true || body.enabled === 'true',
+    externalUrl: body.externalUrl,
+  });
   if (!result.ok) return res.status(result.status).json({ error: result.error });
   res.json({ tenant: result.tenant });
 }));

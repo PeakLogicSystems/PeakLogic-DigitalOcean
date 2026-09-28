@@ -1,0 +1,222 @@
+menu "PeakLogic Parc ST"
+
+    choice BOARD_VARIANT
+        prompt "LilyGO board"
+        default BOARD_T_ETH_ELITE_A7670X
+        help
+            Integrated T-ETH-ELITE-A7670X is the primary target.
+
+        config BOARD_T_ETH_ELITE_A7670X
+            bool "T-ETH-ELITE-A7670X (integrated)"
+        config BOARD_T_ETH_ELITE_STACKED
+            bool "T-ETH-Elite + LTE shield (stacked)"
+    endchoice
+
+    config DEVCFG_WIFI_AP_SSID_DEFAULT
+        string "Setup AP SSID"
+        default "PeakLogic-ParcST"
+
+    config DEVCFG_WIFI_AP_PASS_DEFAULT
+        string "Setup AP password (min 8 chars)"
+        default "peaklogic"
+
+    config DEVCFG_WIFI_AP_HTTP_PORT
+        int "Setup HTTP port on AP"
+        default 8080
+        range 80 65535
+
+    config DEVCFG_CLOUD_MQTT_HOST_DEFAULT
+        string "Cloud MQTT broker host"
+        default "127.0.0.1"
+
+    config DEVCFG_CLOUD_MQTT_PORT_DEFAULT
+        int "Cloud MQTT broker port"
+        default 1883
+        range 1 65535
+
+    config DEVCFG_MODEM_APN_DEFAULT
+        string "Cellular APN"
+        default "teal"
+
+    config GATEWAY_WAN_WIFI_FALLBACK
+        bool "Bench: use Wi-Fi STA as WAN instead of LTE"
+        default y
+        help
+            Enable for office bring-up without a SIM. Disable for field images.
+
+    config GATEWAY_WAN_WIFI_SSID
+        string "Bench WAN Wi-Fi SSID"
+        depends on GATEWAY_WAN_WIFI_FALLBACK
+        default "mywifi"
+
+    config GATEWAY_WAN_WIFI_PASS
+        string "Bench WAN Wi-Fi password"
+        depends on GATEWAY_WAN_WIFI_FALLBACK
+        default ""
+
+endmenu
+
+menu "LTE modem (A7670)"
+
+    config MODEM_LTE_ENABLE
+        bool "Enable A7670 cellular WAN"
+        default y
+        depends on !GATEWAY_WAN_WIFI_FALLBACK
+
+    config MODEM_UART_PORT
+        int "UART port for modem"
+        default 1
+        range 0 2
+
+    config MODEM_UART_TX_GPIO
+        int "Modem UART TX"
+        default 6
+
+    config MODEM_UART_RX_GPIO
+        int "Modem UART RX"
+        default 4
+
+    config MODEM_PWRKEY_GPIO
+        int "Modem PWRKEY GPIO"
+        default 3
+
+    config MODEM_DTR_GPIO
+        int "Modem DTR GPIO"
+        default 5
+
+    config MODEM_UART_BAUD
+        int "Modem UART baud"
+        default 115200
+
+    config MODEM_PWRON_PULSE_MS
+        int "PWRKEY low pulse ms"
+        default 1000
+        range 100 3000
+
+    config MODEM_GPS_ENABLE_GPIO
+        int "GPS enable GPIO (integrated)"
+        depends on BOARD_T_ETH_ELITE_A7670X
+        default 4
+
+    config MODEM_GPS_ENABLE_LEVEL
+        int "GPS enable active level"
+        depends on BOARD_T_ETH_ELITE_A7670X
+        default 0
+        range 0 1
+
+endmenu
+
+menu "Sequent SM-I-010 (4 relays + 4 opto inputs)"
+
+    config SM_I010_ENABLE
+        bool "Enable Sequent SM-I-010 over I2C"
+        default y
+        help
+            Four Relays four HV Inputs HAT (SKU SM-I-010 / 4relind).
+            Maps opto inputs → I1..I4 and relays → R1..R4.
+            Wire to T-ETH-Elite default I2C: SDA=GPIO17, SCL=GPIO18
+            (40-pin header, Raspberry Pi compatible).
+
+    config SM_I010_I2C_PORT
+        int "I2C port number"
+        depends on SM_I010_ENABLE
+        default 0
+        range 0 1
+
+    config SM_I010_SDA_GPIO
+        int "I2C SDA GPIO (T-ETH-Elite default 17)"
+        depends on SM_I010_ENABLE
+        default 17
+
+    config SM_I010_SCL_GPIO
+        int "I2C SCL GPIO (T-ETH-Elite default 18)"
+        depends on SM_I010_ENABLE
+        default 18
+
+    config SM_I010_STACK
+        int "HAT stack level (address jumpers 0..7)"
+        depends on SM_I010_ENABLE
+        default 0
+        range 0 7
+
+endmenu
+
+menu "CT analog inputs (0–1 V → I1_RAW..I7_RAW)"
+
+    config CT_ADC_ENABLE
+        bool "Enable onboard ADC for motor CT transmitters"
+        default y
+        help
+            Read 0–1 V CT transmitters into I1_RAW..I7_RAW (12-bit, atten ~0–1.1 V).
+            Default GPIOs 32–38 match the duplex Parc ST wiring plan.
+            On ESP32-S3 (T-ETH Elite) those GPIOs are often not ADC1-capable —
+            change the pin numbers below to free ADC1 pins (GPIO 1–10) if init logs warnings.
+
+    config CT_ADC_GPIO_AI1
+        int "AI1 / I1_RAW GPIO (Motor 1 ØA CT)"
+        depends on CT_ADC_ENABLE
+        default 32
+
+    config CT_ADC_GPIO_AI2
+        int "AI2 / I2_RAW GPIO (Motor 1 ØB CT)"
+        depends on CT_ADC_ENABLE
+        default 33
+
+    config CT_ADC_GPIO_AI3
+        int "AI3 / I3_RAW GPIO (Motor 1 ØC CT)"
+        depends on CT_ADC_ENABLE
+        default 34
+
+    config CT_ADC_GPIO_AI4
+        int "AI4 / I4_RAW GPIO (Motor 2 ØA CT)"
+        depends on CT_ADC_ENABLE
+        default 35
+
+    config CT_ADC_GPIO_AI5
+        int "AI5 / I5_RAW GPIO (Motor 2 ØB CT)"
+        depends on CT_ADC_ENABLE
+        default 36
+
+    config CT_ADC_GPIO_AI6
+        int "AI6 / I6_RAW GPIO (Motor 2 ØC CT)"
+        depends on CT_ADC_ENABLE
+        default 37
+
+    config CT_ADC_GPIO_AI7
+        int "AI7 / I7_RAW GPIO (spare CT / station)"
+        depends on CT_ADC_ENABLE
+        default 38
+
+endmenu
+
+menu "Board extras"
+
+    config BOARD_STATUS_LED_GPIO
+        int "Status LED GPIO (-1 disable; 38 conflicts with CT AI7 default)"
+        default -1
+        range -1 48
+
+    config GPIO_RELAY_ENABLE
+        bool "Onboard GPIO relay (Waveshare ESP32-S3-Relay-1CH)"
+        default n
+        help
+            Drive R1 from a GPIO through the Waveshare optocoupler.
+            Use with SM-I-010 disabled. Fail-safe: R1 off when MQTT drops.
+
+    config GPIO_RELAY_PIN
+        int "Relay GPIO (Waveshare 1CH default 1)"
+        depends on GPIO_RELAY_ENABLE
+        default 1
+        range 0 48
+
+    config GPIO_DI1_PIN
+        int "Aux DI GPIO mapped to I1 (SH1.0 GPIO2, -1 disable)"
+        depends on GPIO_RELAY_ENABLE
+        default 2
+        range -1 48
+
+    config MV_PLATFORM_ID
+        string "Parc platform id"
+        default "lilygo-t-eth-elite-parc-st"
+
+endmenu

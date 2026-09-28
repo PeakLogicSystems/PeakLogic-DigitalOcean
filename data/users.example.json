@@ -1,0 +1,34 @@
+[
+  {
+    "id": "example-user-1",
+    "email": "operator@example.com",
+    "role": "operator",
+    "active": true,
+    "profile": {
+      "displayName": "Operator",
+      "firstName": "Pat",
+      "lastName": "Example",
+      "title": "Plant operator",
+      "department": "Operations",
+      "phone": "",
+      "mobile": "+15550100",
+      "locale": "en-US",
+      "timezone": "America/New_York",
+      "alarmNotifications": {
+        "enabled": true,
+        "email": true,
+        "sms": false,
+        "push": false,
+        "minLevel": "inner",
+        "emailAddress": "",
+        "phone": "+15550100",
+        "quietHours": {
+          "enabled": false,
+          "start": "22:00",
+          "end": "07:00",
+          "timezone": "America/New_York"
+        }
+      }
+    }
+  }
+]

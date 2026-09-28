@@ -65,10 +65,24 @@ async function ensureIndexes(db) {
   await database.collection('parc_devices').createIndex({ tenantId: 1, lastSeenAt: -1 });
 
   await database.collection('project_repository').createIndex(
-    { tenantId: 1, slug: 1 },
+    { tenantId: 1, locationId: 1, slug: 1 },
     { unique: true },
   );
+  await database.collection('project_repository').createIndex({ tenantId: 1, locationId: 1, updatedAt: -1 });
   await database.collection('project_repository').createIndex({ tenantId: 1, updatedAt: -1 });
+
+  await database.collection('connectivity_billing').createIndex(
+    { tenantId: 1, systemId: 1 },
+    { unique: true },
+  );
+  await database.collection('connectivity_billing').createIndex({ tenantId: 1, renewalAt: 1 });
+  await database.collection('connectivity_billing').createIndex({ tenantId: 1, status: 1 });
+  await database.collection('connectivity_billing').createIndex({ deviceId: 1 });
+  await database.collection('connectivity_billing').createIndex({ renewalAt: 1, status: 1, autoRenew: 1 });
+
+  await database.collection('install_manifests').createIndex({ deviceId: 1, status: 1 });
+  await database.collection('install_manifests').createIndex({ status: 1, manufacturedAt: -1 });
+  await database.collection('install_manifests').createIndex({ claimedTenantId: 1, claimedAt: -1 });
 
   return {
     collections: [
@@ -80,6 +94,8 @@ async function ensureIndexes(db) {
       'device_telemetry_latest',
       'device_telemetry',
       'parc_devices',
+      'connectivity_billing',
+      'install_manifests',
     ],
   };
 }

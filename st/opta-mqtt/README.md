@@ -4,14 +4,14 @@ Structured Text runs **on the Opta**; PeakLogic **est-pc** deploys **bytecode** 
 
 ## 1. Flash firmware
 
-`firmware/arduino-opta-mqtt-st/PeakLogicOptaMqttSt/`
+`firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt/`
 
 Add **`mv_bc.cpp`**, **`mv_base64.cpp`** to the sketch (same folder as `mv_st.cpp`).
 
-In `PeakLogicOptaMqttSt.ino`, set MQTT broker + device id:
+In `PeaklogicOptaMqttSt.ino`, set MQTT broker + device id:
 
 ```cpp
-static PlMqttConfig g_mqttCfg = {
+static MvMqttConfig g_mqttCfg = {
   "192.168.1.233",  // MQTT broker IP (PeakLogic PC LAN)
   1883,
   "opta_st_01",     // must match driver deviceId

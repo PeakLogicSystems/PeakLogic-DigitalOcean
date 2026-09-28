@@ -2,6 +2,7 @@
 
 const persistence = require('../persistence');
 const { moveOnce, moveReverse } = require('../drivers/modbusMove');
+const { pushRemoteTagForce } = require('./pushRemoteTagForce');
 
 function createApiRoutes(deps) {
   const { tagStore, driverManager, scanEngine, graphHistory, sendJson } = deps;
@@ -21,6 +22,24 @@ function createApiRoutes(deps) {
       if (pathname === '/api/tags' && req.method === 'POST') {
         const t = tagStore.upsert(body);
         sendJson(res, 201, { tag: t });
+        return true;
+      }
+      if (pathname === '/api/tags/write' && req.method === 'POST') {
+        const tagId = body?.tagId;
+        if (!tagId) {
+          sendJson(res, 400, { error: 'tagId required' });
+          return true;
+        }
+        try {
+          const t = tagStore.writeHmiMemory(tagId, body?.value);
+          if (!t) {
+            sendJson(res, 404, { error: 'Tag not found' });
+            return true;
+          }
+          sendJson(res, 200, { tag: t });
+        } catch (e) {
+          sendJson(res, e.status || 500, { error: e.message });
+        }
         return true;
       }
       if (pathname.startsWith('/api/tags/') && req.method === 'DELETE') {
@@ -140,6 +159,12 @@ function createApiRoutes(deps) {
           sendJson(res, 404, { error: 'Tag not found' });
           return true;
         }
+        try {
+          await pushRemoteTagForce(driverManager, scanEngine, t, tagStore);
+        } catch (e) {
+          sendJson(res, 502, { error: e.message || 'Remote force failed', tag: t });
+          return true;
+        }
         sendJson(res, 200, { tag: t });
         return true;
       }
@@ -147,6 +172,12 @@ function createApiRoutes(deps) {
         const tagId = url.searchParams.get('tagId');
         const which = url.searchParams.get('which') || null;
         const t = tagStore.clearForce(tagId, which);
+        try {
+          if (t) await pushRemoteTagForce(driverManager, scanEngine, t, tagStore);
+        } catch (e) {
+          sendJson(res, 502, { error: e.message || 'Remote force clear failed', tag: t });
+          return true;
+        }
         sendJson(res, 200, { tag: t });
         return true;
       }

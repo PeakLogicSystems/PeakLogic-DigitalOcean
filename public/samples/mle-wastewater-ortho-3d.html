@@ -32,9 +32,9 @@
     #stats { bottom: 14px; right: 14px; text-align: right; font-size: 12px; color: #94a3b8; max-width: 300px; }
     #stats strong { color: #f1f5f9; display: block; font-size: 13px; margin-bottom: 4px; }
     .hint { margin-top: 8px; font-size: 11px; color: #64748b; }
-    #peaklogic-status { top: 14px; left: 50%; transform: translateX(-50%); font-size: 12px; padding: 8px 14px; }
-    #peaklogic-status.ok { border-color: rgba(34, 197, 94, 0.45); color: #86efac; }
-    #peaklogic-status.err { border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
+    #mv-status { top: 14px; left: 50%; transform: translateX(-50%); font-size: 12px; padding: 8px 14px; }
+    #mv-status.ok { border-color: rgba(34, 197, 94, 0.45); color: #86efac; }
+    #mv-status.err { border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
     #detail-panel {
       position: absolute; z-index: 20; right: 14px; bottom: 14px; width: 340px; max-height: 52vh;
       overflow: auto; display: none;
@@ -61,12 +61,30 @@
 </head>
 <body>
   <div id="canvas-wrap"></div>
-  <div id="peaklogic-status" class="panel err">PeakLogic live: connecting…</div>
+  <div id="mv-status" class="panel err">MV live: connecting…</div>
 
   <div id="title-panel" class="panel">
-    <h1>MLE Wastewater Plant</h1>
-    <p>Two separate 125,000 gal circular integrated MLE tanks — each with internal anoxic + aerobic zones, dedicated blowers, and DO control.</p>
+    <h1 id="title-heading">MLE Wastewater Plant</h1>
+    <p id="title-sub">Two separate 125,000 gal circular integrated MLE tanks — each with internal anoxic + aerobic zones, dedicated blowers, and DO control.</p>
   </div>
+  <script>
+    (function applyPutnamBranding() {
+      try {
+        const q = new URLSearchParams(location.search);
+        const title = (q.get('title') || '').trim();
+        const sub = (q.get('subtitle') || '').trim();
+        if (title) {
+          document.title = title + ' — 3D Orthographic';
+          const h = document.getElementById('title-heading');
+          if (h) h.textContent = title;
+        }
+        if (sub) {
+          const p = document.getElementById('title-sub');
+          if (p) p.textContent = sub;
+        }
+      } catch { /* ignore */ }
+    })();
+  </script>
 
   <div id="controls" class="panel">
     <label>
@@ -96,7 +114,7 @@
     <p id="detail-sub" class="hint"></p>
     <dl id="detail-tags"></dl>
     <div class="actions">
-      <button type="button" id="btn-open-hmi">Open in PeakLogic HMI</button>
+      <button type="button" id="btn-open-hmi">Open in MV HMI</button>
       <button type="button" id="btn-close-detail">Close</button>
     </div>
   </div>
@@ -373,8 +391,8 @@
       return hmiScreenCatalog.has(String(screenId || '').trim());
     }
 
-    async function pollPeakLogicLive() {
-      const statusEl = document.getElementById('peaklogic-status');
+    async function pollMvLive() {
+      const statusEl = document.getElementById('mv-status');
       try {
         const res = await fetch('/api/dashboard', { credentials: 'same-origin' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -384,11 +402,11 @@
         for (const t of tags) {
           if (t?.id) tagValues.set(t.id, t.value ?? t.val);
         }
-        statusEl.textContent = `PeakLogic live: ${tagValues.size} tags`;
+        statusEl.textContent = `MV live: ${tagValues.size} tags`;
         statusEl.className = 'panel ok';
         if (selectedZone) updateDetailPanelValues(selectedZone);
       } catch (e) {
-        statusEl.textContent = `PeakLogic live: offline (${e.message})`;
+        statusEl.textContent = `MV live: offline (${e.message})`;
         statusEl.className = 'panel err';
       }
     }
@@ -438,14 +456,14 @@
       btnHmi.dataset.screen = ud.detailScreen || 'screen_1';
       btnHmi.textContent = ud.detailScreen && hmiScreenConfigured(ud.detailScreen)
         ? `Open ${hmiScreenLabel(ud.detailScreen)}`
-        : 'Open in PeakLogic HMI';
+        : 'Open in MV HMI';
     }
 
     function notifyParentHmiOpen(ud) {
       if (window.parent === window || !ud?.detailScreen) return;
       try {
         window.parent.postMessage({
-          type: 'peaklogic-hmi-open-area',
+          type: 'mv-hmi-open-area',
           screenId: ud.detailScreen,
           label: ud.label || '',
         }, window.location.origin);
@@ -544,21 +562,21 @@
       controls.update();
     });
 
-    let peaklogicPollMs = 60000;
-    let peaklogicPollTimer = null;
+    let mvPollMs = 60000;
+    let mvPollTimer = null;
     function scheduleMvPoll() {
-      if (peaklogicPollTimer) clearInterval(peaklogicPollTimer);
-      pollPeakLogicLive();
-      peaklogicPollTimer = setInterval(pollPeakLogicLive, peaklogicPollMs);
+      if (mvPollTimer) clearInterval(mvPollTimer);
+      pollMvLive();
+      mvPollTimer = setInterval(pollMvLive, mvPollMs);
     }
     window.addEventListener('message', (e) => {
       if (e.origin !== window.location.origin) return;
       const data = e.data;
       if (!data || typeof data !== 'object') return;
-      if (data.type === 'peaklogic-hmi-poll-config' && Number.isFinite(Number(data.pollMs))) {
-        peaklogicPollMs = Math.max(5000, Number(data.pollMs));
+      if (data.type === 'mv-hmi-poll-config' && Number.isFinite(Number(data.pollMs))) {
+        mvPollMs = Math.max(5000, Number(data.pollMs));
         scheduleMvPoll();
-      } else if (data.type === 'peaklogic-hmi-screen-catalog' && Array.isArray(data.screens)) {
+      } else if (data.type === 'mv-hmi-screen-catalog' && Array.isArray(data.screens)) {
         applyHmiScreenCatalog(data.screens);
         if (selectedZone) updateDetailPanelValues(selectedZone);
       }

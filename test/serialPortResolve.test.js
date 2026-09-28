@@ -16,6 +16,12 @@ describe('resolveFromPortList', () => {
     assert.equal(r.fallback, false);
   });
 
+  it('matches configured port case-insensitively', () => {
+    const r = resolveFromPortList('com11', ports);
+    assert.equal(r.path, 'COM11');
+    assert.equal(r.fallback, false);
+  });
+
   it('does not fallback to a port reserved by another driver', () => {
     const r = resolveFromPortList('COM3', ports, ['COM11']);
     assert.equal(r.path, 'COM12');

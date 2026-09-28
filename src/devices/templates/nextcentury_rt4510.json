@@ -1,0 +1,35 @@
+{
+  "id": "nextcentury_rt4510",
+  "label": "NextCentury Meters — Current readings (rt_4510)",
+  "vendor": "NextCentury",
+  "model": "API report rt_4510",
+  "transport": "nextcentury",
+  "sharedBus": false,
+  "driverId": "nextcentury1",
+  "defaults": {
+    "reportId": "rt_4510",
+    "pollIntervalMs": 900000
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 20000,
+    "propertyDelayMs": 600
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "NC_STATUS_DEVICES",
+        "type": "INT",
+        "role": "input",
+        "driverAddress": { "deviceId": "_meta", "field": "_deviceCount" }
+      },
+      {
+        "id": "NC_STATUS_LAST_COLLECT",
+        "type": "INT",
+        "role": "input",
+        "driverAddress": { "deviceId": "_meta", "field": "_lastCollectEpoch" }
+      }
+    ]
+  },
+  "notes": "Tags auto-sync on each poll (usage/temp/leak per device). Disable autoSyncTags on the driver to manage tags manually. Credentials: driver email/password or NEXTCENTURY_EMAIL / NEXTCENTURY_PASSWORD env vars."
+}

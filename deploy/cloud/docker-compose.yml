@@ -1,0 +1,72 @@
+services:
+  mongodb:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mv-cloud
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - '1883:1883'
+      - '${MOSQUITTO_TLS_PORT:-8883}:8883'
+    volumes:
+      - ./mosquitto-entrypoint.sh:/mosquitto-entrypoint.sh:ro
+      - ./certs:/mosquitto/certs:ro
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-config:/mosquitto/config
+    entrypoint: ['/bin/sh', '/mosquitto-entrypoint.sh']
+    environment:
+      MOSQUITTO_ALLOW_ANONYMOUS: ${MOSQUITTO_ALLOW_ANONYMOUS:-false}
+      MOSQUITTO_USER: ${MOSQUITTO_USER:-}
+      MOSQUITTO_PASS: ${MOSQUITTO_PASS:-}
+      MOSQUITTO_TLS: ${MOSQUITTO_TLS:-true}
+      PEAKLOGIC_DOMAIN: ${PEAKLOGIC_DOMAIN:-peaklogic.io}
+    networks:
+      - mv-cloud
+
+  peaklogic:
+    build:
+      context: ../..
+      dockerfile: deploy/cloud/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '${PEAKLOGIC_PORT:-3090}:3090'
+    env_file:
+      - .env
+    environment:
+      PEAKLOGIC_DEPLOYMENT: cloud
+      PEAKLOGIC_MAX_TAGS: "70912"
+      PEAKLOGIC_DATA: /data
+      PORT: '3090'
+      MONGODB_URI: mongodb://mongodb:27017
+      PEAKLOGIC_CONFIG_URI: mongodb://mongodb:27017
+      PEAKLOGIC_MQTT_BROKER: mqtt://mosquitto:1883
+      MOSQUITTO_USER: ${MOSQUITTO_USER:-}
+      MOSQUITTO_PASS: ${MOSQUITTO_PASS:-}
+    volumes:
+      - peaklogic-data:/data
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+    networks:
+      - mv-cloud
+
+networks:
+  mv-cloud:
+
+volumes:
+  mongo-data:
+  mosquitto-data:
+  mosquitto-config:
+  peaklogic-data:

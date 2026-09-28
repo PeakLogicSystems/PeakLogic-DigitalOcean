@@ -16,6 +16,7 @@ try {
 const { DEPLOYMENT_MODE } = require('../config');
 const { getTenantRuntime, runInTenantContext } = require('../runtime/tenantRuntimePool');
 const { asyncHandler } = require('../util/http');
+const { loadShellContext } = require('../web/shellContext');
 
 function requireStudioAuth(req, res, next) {
   if (req.auth) return next();
@@ -44,34 +45,57 @@ function createStudioRoutes() {
   const router = express.Router();
 
   const studioWeb = createStudioAuthRouter();
+
+  async function renderConnectivityPage(req, res) {
+    const { isCellularSimsEnabled } = require('../cellular/cellularSimsEnabled');
+    if (!isCellularSimsEnabled()) {
+      return res.redirect('/studio');
+    }
+    const ctx = await loadShellContext(req);
+    if (!ctx) {
+      return res.redirect('/login?next=/studio/connectivity');
+    }
+    const highlightSystemId = String(req.query.systemId || '').trim();
+    const { listStationTypes } = require('../fleet/stationTypes');
+    res.render('cellular-sims', {
+      title: 'Connectivity',
+      assetV: APP_VERSION,
+      appVersion: APP_VERSION,
+      product: 'cloud-studio',
+      deployment: DEPLOYMENT_MODE,
+      peaklogicApiBase: '/api/studio',
+      peaklogicPlatformApi: '/api',
+      homeUrl: '/studio',
+      connectivityBuild: 'commissioning-v2-qr',
+      useShellNav: true,
+      stationTypes: listStationTypes(),
+      user: ctx.user,
+      tenant: ctx.tenant,
+      cmmsEnabled: ctx.cmmsEnabled,
+      activeNav: 'connectivity',
+      highlightSystemId,
+    });
+  }
+
+  studioWeb.get('/connectivity', withTenantRuntime(renderConnectivityPage));
   studioWeb.get(
     '/cellular/sims',
-    withTenantRuntime((req, res) => {
-      const { DEPLOYMENT_MODE } = require('../config');
-      const { isCellularSimsEnabled } = require('../cellular/cellularSimsEnabled');
-      if (!isCellularSimsEnabled()) {
-        return res.redirect('/studio');
-      }
-      res.render('cellular-sims', {
-        title: 'Connectivity — PeakLogic',
-        assetV: APP_VERSION,
-        appVersion: APP_VERSION,
-        product: 'cloud-studio',
-        deployment: DEPLOYMENT_MODE,
-        peaklogicApiBase: '/api/studio',
-        homeUrl: '/studio',
-        connectivityBuild: 'email-sms-v2',
-      });
-    }),
+    (req, res) => {
+      const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+      return res.redirect(`/studio/connectivity${qs}`);
+    },
   );
   studioWeb.get(
     '/',
     withTenantRuntime((req, res) => {
+      const studioLocationId = String(req.query.locationId || req.query.location || '').trim();
       res.render('scada-dashboard', {
         title: 'PeakLogic Studio',
         assetV: APP_VERSION,
         product: 'cloud-studio',
+        deployment: DEPLOYMENT_MODE,
         peaklogicApiBase: '/api/studio',
+        studioLocationId,
       });
     }),
   );
@@ -92,7 +116,10 @@ function createStudioRoutes() {
   studioApi.use(
     '/',
     withTenantRuntime((req, res, next) => {
-      const api = createExpressApi(req.tenantRuntime.deps);
+      const api = createExpressApi({
+        ...req.tenantRuntime.deps,
+        tenantId: req.auth.tenantId,
+      });
       return api(req, res, next);
     }),
   );

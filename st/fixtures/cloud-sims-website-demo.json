@@ -1,0 +1,36 @@
+{
+  "description": "Website demo cloud sims — JXCT soil ×4 and DFRobot pool chemistry (Dragino profile tag names)",
+  "tenantId": "demo-tenant",
+  "sims": [
+    {
+      "name": "Website demo — JXCT soil ×4",
+      "type": "jxct_soil",
+      "mqttDeviceId": "dragino_jxct_x4",
+      "config": {
+        "intervalMs": 5000,
+        "sensorCount": 4,
+        "modbusPreset": "jxct_npk_jxbs3001_dragino_x4"
+      },
+      "tags": [
+        "S1_SOIL_PH", "S1_SOIL_MOIST_PCT", "S1_SOIL_TEMP_C", "S1_SOIL_EC_US_CM", "S1_N_MG_KG", "S1_P_MG_KG", "S1_K_MG_KG",
+        "S2_SOIL_PH", "S3_SOIL_PH", "S4_K_MG_KG"
+      ]
+    },
+    {
+      "name": "Website demo — pool chemistry",
+      "type": "pool_chemistry",
+      "mqttDeviceId": "dragino_pool_chem",
+      "config": {
+        "intervalMs": 5000,
+        "modbusPreset": "dfrobot_pool_chemistry_dragino"
+      },
+      "tags": ["PH_PV", "CL_PV", "WATER_TEMP_C", "NH3_MG_L"]
+    }
+  ],
+  "setup": [
+    "Enable Cloud Sims (PEAKLOGIC_CLOUD_SIMS=1 or cloud deployment)",
+    "Run: node scripts/seed-website-demo-sims.js",
+    "Add mqtt_parc drivers with matching deviceId (or bind-preset for Dragino decode maps)",
+    "Sync tags from device on each driver"
+  ]
+}

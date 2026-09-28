@@ -1,0 +1,8 @@
+zone,device_id,driver_id,driver_template,platform,notes
+walkin,cstore_walkin_01,cstore_walkin,nexcomm_halo_mqtt,nexcomm-halo,"Walk-in cooler"
+freezer,cstore_freezer_01,cstore_freezer,nexcomm_halo_mqtt,nexcomm-halo,"Café reach-in freezer"
+rack,cstore_rack_01,cstore_rack,nexcomm_halo_mqtt,nexcomm-halo,"Beverage rack (expansion)"
+rtu-mcsa,cstore_rtu_mcsa,cstore_rtu_mcsa,mcxn947_hvac_mcsa,mcxn947-hvac,"Café RTU — Nexcomm HVAC MCSA"
+restroom-leak,cstore_rr_leak,cstore_rr_leak,nexcomm_halow_leak_mqtt,nexcomm-halow,"Restroom leak"
+irrig-leak,cstore_irrig_leak,cstore_irrig_leak,nexcomm_halow_leak_mqtt,nexcomm-halow,"Forecourt irrigation leak"
+lift,cstore_lift_01,cstore_lift,mqtt_parc,iot-link-io,"Grease trap / duplex lift"

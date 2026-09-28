@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+  <rect width="1024" height="768" fill="#f1f5f9"/>
+  <text x="512" y="48" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" font-weight="600" fill="#0f172a">Floor 14</text>
+  <text x="512" y="72" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" fill="#64748b">1401–1495 · 4 wings × up to 25 rooms</text>
+  <rect id="wing_1" x="80" y="100" width="420" height="268" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="290" y="226" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#1e3a8a">Wing 1</text>
+  <text x="290" y="250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#1e40af">1401–1425</text>
+  <rect id="wing_2" x="524" y="100" width="420" height="268" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="734" y="226" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#1e3a8a">Wing 2</text>
+  <text x="734" y="250" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#1e40af">1426–1450</text>
+  <rect id="wing_3" x="80" y="392" width="420" height="268" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="290" y="518" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#1e3a8a">Wing 3</text>
+  <text x="290" y="542" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#1e40af">1451–1475</text>
+  <rect id="wing_4" x="524" y="392" width="420" height="268" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="734" y="518" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#1e3a8a">Wing 4</text>
+  <text x="734" y="542" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#1e40af">1476–1495</text>
+</svg>

@@ -1,0 +1,58 @@
+{
+  "id": "dfrobot_sen0711_ammonia_ph",
+  "label": "DFRobot SEN0711 — RS485 ammonia / pH probe",
+  "vendor": "DFRobot",
+  "model": "SEN0711 ammonia nitrogen + pH",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "df_sen0711",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 3,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 4800,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "NH3_MG_L",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 0,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Ammonia nitrogen mg/L (IR 0x0000, register ×100)"
+      },
+      {
+        "id": "NH3_PH",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 1,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "pH (IR 0x0001, register ×100)"
+      },
+      {
+        "id": "NH3_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "input",
+        "address": 2,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "Temperature °C (IR 0x0002, register ×10)"
+      }
+    ]
+  }
+}

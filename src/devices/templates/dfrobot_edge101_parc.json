@@ -1,0 +1,96 @@
+{
+  "id": "dfrobot_edge101_parc",
+  "label": "DFRobot Edge101 — MQTT Parc (Ethernet + RS485 chemistry)",
+  "vendor": "DFRobot",
+  "model": "Edge101 DFR0886 — isolated RS485 + IP101 Ethernet",
+  "transport": "mqtt_parc",
+  "sharedBus": false,
+  "driverId": "edge101_01",
+  "stationType": "pool_chemistry",
+  "diCount": 3,
+  "doCount": 0,
+  "aiCount": 4,
+  "defaults": {
+    "deviceId": "edge101_01",
+    "reportIntervalMs": 3000,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "platform": "dfrobot-edge101"
+  },
+  "driver": {
+    "enabled": true,
+    "type": "mqtt_parc",
+    "deviceId": "edge101_01",
+    "remoteExecution": false,
+    "platform": "dfrobot-edge101"
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "I1",
+        "type": "BOOL",
+        "role": "input",
+        "value": false,
+        "driverAddress": { "channel": "I1" },
+        "comment": "Onboard user button GPIO38 (active low)."
+      },
+      {
+        "id": "I2",
+        "type": "BOOL",
+        "role": "input",
+        "value": false,
+        "driverAddress": { "channel": "I2" },
+        "comment": "Header GPIO37 input-only spare DI — add an external pull-up."
+      },
+      {
+        "id": "ETH_LINK",
+        "type": "BOOL",
+        "role": "input",
+        "value": false,
+        "driverAddress": { "channel": "ETH_LINK" },
+        "comment": "IP101 Ethernet has a DHCP/static IP."
+      },
+      {
+        "id": "PH_AI",
+        "type": "REAL",
+        "role": "input",
+        "value": 0,
+        "driverAddress": { "channel": "PH_AI" },
+        "comment": "SEN0711 pH (slave 1, IR1 ×0.01) on isolated RS485 @ 4800 8N1."
+      },
+      {
+        "id": "ORP_AI",
+        "type": "REAL",
+        "role": "input",
+        "value": 0,
+        "driverAddress": { "channel": "ORP_AI" },
+        "comment": "SEN0712 free chlorine ppm (slave 2, IR0 ×0.01). Pool ST treats ORP_* as CL2."
+      },
+      {
+        "id": "WATER_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "value": 0,
+        "driverAddress": { "channel": "WATER_TEMP_C" },
+        "comment": "SEN0711 temperature °C (IR2 ×0.1)."
+      },
+      {
+        "id": "NH3_MG_L",
+        "type": "REAL",
+        "role": "input",
+        "value": 0,
+        "driverAddress": { "channel": "NH3_MG_L" },
+        "comment": "SEN0711 ammonia mg/L (IR0 ×0.01)."
+      },
+      {
+        "id": "CHEM_OK",
+        "type": "BOOL",
+        "role": "input",
+        "value": false,
+        "driverAddress": { "channel": "CHEM_OK" },
+        "comment": "Last SEN0711 and SEN0712 Modbus replies both succeeded."
+      }
+    ]
+  },
+  "notes": "Flash firmware/dfrobot-edge101-parc. Setup AP PeakLogic-Edge101 / peaklogic → http://192.168.4.1:8080/setup. Ethernet WAN preferred; Wi-Fi STA is fallback. Isolated RS485: SEN0711 slave 1 + SEN0712 slave 2 @ 4800 8N1. Set unique probe addresses (holding 0x07D0) before both share the bus. Wiki: https://wiki.dfrobot.com/dfr0886/"
+}

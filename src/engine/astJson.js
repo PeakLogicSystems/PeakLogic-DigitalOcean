@@ -35,6 +35,10 @@ function astToJson(node) {
         type: 'if',
         cond: astToJson(node.cond),
         thenBody: (node.thenBody || []).map(astToJson),
+        elsif: (node.elsif || []).map((branch) => ({
+          cond: astToJson(branch.cond),
+          body: (branch.body || []).map(astToJson),
+        })),
         elseBody: (node.elseBody || []).map(astToJson),
       };
     case 'program':

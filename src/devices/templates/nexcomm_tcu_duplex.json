@@ -1,0 +1,219 @@
+{
+  "id": "nexcomm_tcu_duplex",
+  "label": "Nexcomm TCU — duplex lift",
+  "vendor": "Nexcomm",
+  "model": "TCU duplex",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "nx_tcu_duplex",
+  "stationType": "dual_duplex",
+  "defaults": {
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
+    "serialNum": "REPLACE_SERIAL",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "mqttJson": {
+      "serialFromDefaults": true,
+      "topicTemplate": "/devices/{serial}/messages/events/",
+      "fields": [
+        {
+          "id": "OFF_FLOAT",
+          "label": "Off Float",
+          "type": "BOOL",
+          "payloadTemplate": "json:off_float",
+          "comment": "Nexus CSV: Off Float"
+        },
+        {
+          "id": "LEAD_FLOAT",
+          "label": "Lead Float",
+          "type": "BOOL",
+          "payloadTemplate": "json:lead_float",
+          "comment": "Nexus CSV: Lead Float"
+        },
+        {
+          "id": "LAG_FLOAT",
+          "label": "Lag Float",
+          "type": "BOOL",
+          "payloadTemplate": "json:lag_float",
+          "comment": "Nexus CSV: Lag Float"
+        },
+        {
+          "id": "HIGH_FLOAT",
+          "label": "High Float",
+          "type": "BOOL",
+          "payloadTemplate": "json:high_float",
+          "comment": "Nexus CSV: High Float"
+        },
+        {
+          "id": "MOTOR_1_RUN_TIME_FAULT",
+          "label": "Motor 1 Run Time Fault",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_1_run_time_fault",
+          "comment": "Nexus CSV: Motor 1 Run Time Fault"
+        },
+        {
+          "id": "MOTOR_2_RUN_TIME_FAULT",
+          "label": "Motor 2 Run Time Fault",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_2_run_time_fault",
+          "comment": "Nexus CSV: Motor 2 Run Time Fault"
+        },
+        {
+          "id": "MOTOR_1_FAULT",
+          "label": "Motor 1 Fault",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_1_fault",
+          "comment": "Nexus CSV: Motor 1 Fault"
+        },
+        {
+          "id": "MOTOR_2_FAULT",
+          "label": "Motor 2 Fault",
+          "type": "BOOL",
+          "payloadTemplate": "json:motor_2_fault",
+          "comment": "Nexus CSV: Motor 2 Fault"
+        },
+        {
+          "id": "ON_TIME_SINCE_RESET",
+          "label": "On Time since reset",
+          "type": "INT",
+          "payloadTemplate": "json:on_time_since_reset",
+          "comment": "Nexus CSV: On Time since reset"
+        },
+        {
+          "id": "PUMP1_RUN_TIME_PREVIOUS_HOUR",
+          "label": "Pump1 Run Time Previous Hour",
+          "type": "INT",
+          "payloadTemplate": "json:pump1_run_time_previous_hour",
+          "comment": "Nexus CSV: Pump1 Run Time Previous Hour"
+        },
+        {
+          "id": "PUMP1_STARTS_PREVIOUS_HOUR",
+          "label": "Pump1 Starts Previous Hour",
+          "type": "BOOL",
+          "payloadTemplate": "json:pump1_starts_previous_hour",
+          "comment": "Nexus CSV: Pump1 Starts Previous Hour"
+        },
+        {
+          "id": "PUMP2_RUN_TIME_PREVIOUS_HOUR",
+          "label": "Pump2 Run Time Previous Hour",
+          "type": "INT",
+          "payloadTemplate": "json:pump2_run_time_previous_hour",
+          "comment": "Nexus CSV: Pump2 Run Time Previous Hour"
+        },
+        {
+          "id": "PUMP2_STARTS_PREVIOUS_HOUR",
+          "label": "Pump2 Starts Previous Hour",
+          "type": "BOOL",
+          "payloadTemplate": "json:pump2_starts_previous_hour",
+          "comment": "Nexus CSV: Pump2 Starts Previous Hour"
+        },
+        {
+          "id": "VBAT",
+          "label": "VBAT",
+          "type": "REAL",
+          "payloadTemplate": "json:vbat",
+          "comment": "Nexus CSV: VBAT"
+        },
+        {
+          "id": "VIN",
+          "label": "VIN",
+          "type": "REAL",
+          "payloadTemplate": "json:vin",
+          "comment": "Nexus CSV: VIN"
+        },
+        {
+          "id": "VOUT",
+          "label": "VOUT",
+          "type": "REAL",
+          "payloadTemplate": "json:vout",
+          "comment": "Nexus CSV: VOUT"
+        },
+        {
+          "id": "IBAT",
+          "label": "IBAT",
+          "type": "REAL",
+          "payloadTemplate": "json:ibat",
+          "comment": "Nexus CSV: IBAT"
+        },
+        {
+          "id": "IIN",
+          "label": "IIN",
+          "type": "REAL",
+          "payloadTemplate": "json:iin",
+          "comment": "Nexus CSV: IIN"
+        },
+        {
+          "id": "MAIN_POWER_LOSS",
+          "label": "Main Power Loss",
+          "type": "BOOL",
+          "payloadTemplate": "json:main_power_loss",
+          "comment": "Nexus CSV: Main Power Loss"
+        },
+        {
+          "id": "PHASE_1_VOLTAGE_L1_TO_L2",
+          "label": "Phase 1 Voltage (L1 to L2)",
+          "type": "REAL",
+          "payloadTemplate": "json:phase_1_voltage_l1_to_l2",
+          "comment": "Nexus CSV: Phase 1 Voltage (L1 to L2)"
+        },
+        {
+          "id": "PHASE_2_VOLTAGE_L2_TO_L3",
+          "label": "Phase 2 Voltage (L2 to L3)",
+          "type": "REAL",
+          "payloadTemplate": "json:phase_2_voltage_l2_to_l3",
+          "comment": "Nexus CSV: Phase 2 Voltage (L2 to L3)"
+        },
+        {
+          "id": "PHASE_3_VOLTAGE_L3_TO_L1",
+          "label": "Phase 3 Voltage (L3 to L1)",
+          "type": "REAL",
+          "payloadTemplate": "json:phase_3_voltage_l3_to_l1",
+          "comment": "Nexus CSV: Phase 3 Voltage (L3 to L1)"
+        },
+        {
+          "id": "PHASE_1_CURRENT",
+          "label": "Phase 1 Current",
+          "type": "BOOL",
+          "payloadTemplate": "json:phase_1_current",
+          "comment": "Nexus CSV: Phase 1 Current"
+        },
+        {
+          "id": "PHASE_2_CURRENT",
+          "label": "Phase 2 Current",
+          "type": "REAL",
+          "payloadTemplate": "json:phase_2_current",
+          "comment": "Nexus CSV: Phase 2 Current"
+        },
+        {
+          "id": "PHASE_3_CURRENT",
+          "label": "Phase 3 Current",
+          "type": "BOOL",
+          "payloadTemplate": "json:phase_3_current",
+          "comment": "Nexus CSV: Phase 3 Current"
+        },
+        {
+          "id": "PUMP_1_WATER_FAULT",
+          "label": "Pump 1 Water Fault",
+          "type": "BOOL",
+          "payloadTemplate": "json:pump_1_water_fault",
+          "comment": "Nexus CSV: Pump 1 Water Fault"
+        },
+        {
+          "id": "PUMP_2_WATER_FAULT",
+          "label": "Pump 2 Water Fault",
+          "type": "BOOL",
+          "payloadTemplate": "json:pump_2_water_fault",
+          "comment": "Nexus CSV: Pump 2 Water Fault"
+        }
+      ]
+    }
+  },
+  "notes": "Inbound tag map generated from st/fixtures/nexcomm-csv/nexcomm-tcu-duplex.csv (99 sample rows). Set serialNum to normalized Nexcomm serial (no hyphens). Broker defaults to mqtts://mqtt.peaklogic.io:8883. payloadTemplate json: keys are slug placeholders — align to live MQTT JSON or EPI register paths as needed. Alignment table: st/fixtures/nexcomm-inbound/nexcomm-tcu-duplex.alignment.json"
+}

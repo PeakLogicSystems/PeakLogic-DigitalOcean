@@ -1,0 +1,18 @@
+[
+  {
+    "id": "jandy_bus",
+    "type": "jandy_rs485",
+    "enabled": true,
+    "serialPort": "/dev/ttyLP4",
+    "baud": 9600,
+    "deviceClass": "epump",
+    "deviceAddr": 120,
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 60000,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30,
+    "busGapMs": 120,
+    "comment": "Shared Jandy AquaLink RS-485 — ePump, AquaPure, heaters"
+  }
+]

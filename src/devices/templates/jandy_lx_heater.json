@@ -1,0 +1,35 @@
+{
+  "id": "jandy_lx_heater",
+  "label": "Jandy LX Heater — RS-485",
+  "vendor": "Jandy",
+  "model": "LX heater",
+  "transport": "jandy_rs485",
+  "sharedBus": true,
+  "driverId": "jandy_bus",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 2,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM4",
+    "baud": 9600,
+    "deviceAddr": 56,
+    "deviceClass": "lx_heater",
+    "parity": "none",
+    "stopBits": 1,
+    "pollIntervalMs": 120000,
+    "busGapMs": 120
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000,
+    "frameDelayMs": 30
+  },
+  "tags": {
+    "jandy": [
+      { "id": "JLX_RUNNING", "type": "BOOL", "role": "input", "point": "heater_running", "deviceClass": "lx_heater" },
+      { "id": "JLX_ERROR", "type": "BOOL", "role": "input", "point": "heater_error", "deviceClass": "lx_heater" },
+      { "id": "JLX_STATUS", "type": "INT", "role": "input", "point": "status_raw", "deviceClass": "lx_heater" }
+    ]
+  }
+}

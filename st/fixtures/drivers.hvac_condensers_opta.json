@@ -1,0 +1,24 @@
+[
+  {
+    "id": "opta_cond_01",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_cond_opta_01",
+    "name": "Opta MCSA — condenser 1",
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "telemetryOnly": true
+  },
+  {
+    "id": "opta_cond_02",
+    "type": "mqtt_parc",
+    "enabled": true,
+    "deviceId": "hvac_cond_opta_02",
+    "name": "Opta MCSA — condenser 2",
+    "reportIntervalSec": 1,
+    "scanMs": 100,
+    "remoteExecution": false,
+    "telemetryOnly": true
+  }
+]

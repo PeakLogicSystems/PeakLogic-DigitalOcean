@@ -1,0 +1,4 @@
+[
+  { "id": "JHP_RUNNING", "label": "Jandy heat pump running", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "heater_running", "deviceClass": "heat_pump", "deviceAddr": 112 } },
+  { "id": "JHP_ERROR", "label": "Jandy heat pump error", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "heater_error", "deviceClass": "heat_pump", "deviceAddr": 112 } }
+]

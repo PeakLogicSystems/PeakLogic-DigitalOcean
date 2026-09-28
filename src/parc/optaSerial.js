@@ -110,6 +110,7 @@ module.exports = {
   isMvDeviceId,
   isLegacyOptaDeviceId,
   isAteccDeviceId,
+  isFieldParcDeviceId: isAteccDeviceId,
   extractAteccSerialFromReport,
   resolveParcDeviceId,
   /** @deprecated use LEGACY_DEVICE_ID_PREFIX */

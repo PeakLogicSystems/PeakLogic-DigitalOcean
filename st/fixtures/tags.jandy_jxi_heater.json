@@ -1,0 +1,4 @@
+[
+  { "id": "JXI_RUNNING", "label": "JXi heater running", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "heater_running", "deviceClass": "jxi_heater", "deviceAddr": 104 } },
+  { "id": "JXI_ERROR", "label": "JXi heater error", "type": "BOOL", "role": "input", "value": false, "driverId": "jandy_bus", "driverAddress": { "jandy": "heater_error", "deviceClass": "jxi_heater", "deviceAddr": 104 } }
+]

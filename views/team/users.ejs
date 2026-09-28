@@ -15,26 +15,42 @@
   <div class="card shadow-sm mb-4">
     <div class="card-body">
       <h2 class="h5 mb-3">Invite user</h2>
-      <form action="/team/users/invite" method="POST" class="row g-3 align-items-end">
-        <div class="col-md-4">
-          <label class="form-label small" for="invite-email">Email</label>
-          <input type="email" class="form-control" id="invite-email" name="email" required>
+      <form action="/team/users/invite" method="POST">
+        <div class="row g-3 align-items-end mb-3">
+          <div class="col-md-4">
+            <label class="form-label small" for="invite-email">Email</label>
+            <input type="email" class="form-control" id="invite-email" name="email" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small" for="invite-name">Display name</label>
+            <input type="text" class="form-control" id="invite-name" name="displayName" placeholder="Optional">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small" for="invite-role">Role</label>
+            <select class="form-select" id="invite-role" name="role">
+              <option value="operator">Operator</option>
+              <option value="viewer">Viewer</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-purple w-100">Send invite</button>
+          </div>
         </div>
-        <div class="col-md-3">
-          <label class="form-label small" for="invite-name">Display name</label>
-          <input type="text" class="form-control" id="invite-name" name="displayName" placeholder="Optional">
-        </div>
-        <div class="col-md-3">
-          <label class="form-label small" for="invite-role">Role</label>
-          <select class="form-select" id="invite-role" name="role">
-            <option value="operator">Operator</option>
-            <option value="viewer">Viewer</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <button type="submit" class="btn btn-purple w-100">Send invite</button>
-        </div>
+        <details class="border rounded p-3 bg-light">
+          <summary class="fw-semibold small mb-0">Assets map coverage (optional — <%= floridaCountyCount %> Florida counties)</summary>
+          <p class="text-muted small mt-2 mb-2">Leave unchecked for full assets access (legacy). Check counties to restrict operators/viewers to those areas.</p>
+          <div class="row g-1" style="max-height:200px;overflow:auto">
+            <% floridaCounties.forEach(function(c) { %>
+              <div class="col-md-3 col-lg-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="counties" value="<%= c.slug %>" id="invite-county-<%= c.slug %>">
+                  <label class="form-check-label small" for="invite-county-<%= c.slug %>"><%= c.name %></label>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        </details>
       </form>
     </div>
   </div>
@@ -46,6 +62,7 @@
           <tr>
             <th>User</th>
             <th>Role</th>
+            <th>Coverage</th>
             <th>Status</th>
             <th></th>
           </tr>
@@ -58,6 +75,17 @@
                 <span class="text-muted small"><%= u.email %></span>
               </td>
               <td><span class="badge bg-light text-dark border"><%= u.role %></span></td>
+              <td class="small">
+                <% const countyList = u.profile?.fleetScopes?.counties; %>
+                <% if (u.role === 'admin') { %>
+                  <span class="text-muted">All counties</span>
+                <% } else if (!countyList || !countyList.length) { %>
+                  <span class="text-muted">All (unset)</span>
+                <% } else { %>
+                  <span><%= countyList.length %> counties</span>
+                <% } %>
+                <a href="/team/users/<%= u.id %>/coverage" class="ms-1">Edit</a>
+              </td>
               <td>
                 <% if (u.invitePending) { %>
                   <span class="badge bg-warning text-dark">Invite pending</span>

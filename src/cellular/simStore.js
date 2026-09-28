@@ -3,7 +3,7 @@
 const { MongoClient } = require('mongodb');
 const persistence = require('../persistence');
 const { CONFIG_URI, CONFIG_DB } = require('../config');
-const { normalizeSimRecord, summarizeSim } = require('./simRecordSchema');
+const { normalizeSimRecord, summarizeSim, normalizeIccid } = require('./simRecordSchema');
 
 const FALLBACK_FILE = 'cellular_sims.json';
 const COLLECTION = String(process.env.PEAKLOGIC_CELLULAR_SIMS_COLLECTION || 'cellular_sims').trim() || 'cellular_sims';
@@ -120,12 +120,23 @@ async function get(id) {
 async function findByIccid(vendor, iccid) {
   const col = await ensureCollection();
   const v = String(vendor).trim().toLowerCase();
-  const i = String(iccid).trim();
+  const i = normalizeIccid(iccid);
   if (col) {
     const row = await col.findOne({ vendor: v, iccid: i });
     return summarizeSim(row);
   }
-  return summarizeSim(readFallbackRows().find((r) => r.vendor === v && r.iccid === i) || null);
+  return summarizeSim(readFallbackRows().find((r) => r.vendor === v && normalizeIccid(r.iccid) === i) || null);
+}
+
+async function findByIccidAny(iccid) {
+  const i = normalizeIccid(iccid);
+  if (!i) return null;
+  const col = await ensureCollection();
+  if (col) {
+    const row = await col.findOne({ iccid: i });
+    return summarizeSim(row);
+  }
+  return summarizeSim(readFallbackRows().find((r) => normalizeIccid(r.iccid) === i) || null);
 }
 
 async function upsertFromVendor(input, prev = null) {
@@ -186,6 +197,7 @@ module.exports = {
   list,
   get,
   findByIccid,
+  findByIccidAny,
   upsertFromVendor,
   update,
   remove,

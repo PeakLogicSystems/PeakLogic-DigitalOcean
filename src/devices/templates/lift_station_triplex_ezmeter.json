@@ -1,0 +1,57 @@
+{
+  "id": "lift_station_triplex_ezmeter",
+  "label": "TRIPLEXLS + EZ Meter — triplex lift + facility PQ",
+  "vendor": "PeakLogic",
+  "model": "TRIPLEXLS (ALT3) + EZ Meter DDS-RGB on Opta RS485",
+  "transport": "mqtt_parc",
+  "stationType": "triplex",
+  "defaultProgram": "logic/39_triplex_lift_station_ezmeter.st",
+  "tagsFromDevice": false,
+  "ioBaseOnly": false,
+  "diCount": 16,
+  "doCount": 4,
+  "aiCount": 6,
+  "defaults": {
+    "deviceId": "triplexls_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true,
+    "ioBaseOnly": false
+  },
+  "driver": {
+    "enabled": true,
+    "ioBaseOnly": false
+  },
+  "tags": {
+    "logicFixture": "tags.triplex_lift_station_ezmeter.json",
+    "expansions": [
+      { "slot": 1, "type": "d1608e" },
+      { "slot": 2, "type": "a0602", "rtdsEnabled": true }
+    ]
+  },
+  "fieldbus": {
+    "compileFlags": ["MV_FIELDBUS=1", "MV_EZMETER=1"],
+    "ezmeter": {
+      "slaveId": 1,
+      "baud": 9600,
+      "livePollMs": 30000,
+      "energyPollMs": 300000
+    }
+  },
+  "facility": {
+    "driver": "ezmeter"
+  },
+  "notes": "TRIPLEXLS + EZ Meter: flash PeaklogicOptaMqttSt with MV_FIELDBUS=1 MV_EZMETER=1; RS485 to DDS-RGB at main service. ST logic/39_triplex_lift_station_ezmeter.st drives R4 (station alarm) on LVL_HIGH, MECH_PQ_ALM, or motor fault DIs X1_I13–X1_I15. Pumps on R1–R3.",
+  "pdm": {
+    "motorType": "pump",
+    "application": "lift_station",
+    "configuration": "triplex",
+    "locationClass": "strip_mall",
+    "floatLadder": "pull_down",
+    "assets": [
+      { "assetId": "pump-1", "pumpIndex": 1, "pumpRole": "lead" },
+      { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" },
+      { "assetId": "pump-3", "pumpIndex": 3, "pumpRole": "lag2" }
+    ]
+  }
+}

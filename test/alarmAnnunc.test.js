@@ -9,7 +9,35 @@ describe('alarm annunciator', () => {
   it('tracks active alarm and ack', () => {
     const store = new TagStore();
     store.replaceAll([{
-      id: 'AI1',
+      id: 'VPR1',
+      type: 'REAL',
+      role: 'memory',
+      alarmsEnabled: true,
+      alarmOuterLow: 0,
+      alarmInnerLow: 10,
+      alarmInnerHigh: 80,
+      alarmOuterHigh: 90,
+      value: -1,
+    }]);
+    const snap = store.liveSnapshot().find((e) => e.tagId === 'VPR1');
+    assert.equal(snap.alarmLevel, ALARM_LEVELS.OUTER_LOW);
+    assert.equal(snap.alarmAcked, false);
+    assert.ok(snap.alarmSince);
+
+    assert.equal(store.ackAlarm('VPR1'), true);
+    const snap2 = store.liveSnapshot().find((e) => e.tagId === 'VPR1');
+    assert.equal(snap2.alarmAcked, true);
+
+    store.setValue('VPR1', 50);
+    const snap3 = store.liveSnapshot().find((e) => e.tagId === 'VPR1');
+    assert.equal(snap3.alarmLevel, ALARM_LEVELS.NORMAL);
+    assert.equal(snap3.alarmAcked, false);
+  });
+
+  it('preserves ack while alarm stays active across severity change', () => {
+    const store = new TagStore();
+    store.replaceAll([{
+      id: 'VPR2',
       type: 'REAL',
       role: 'memory',
       alarmsEnabled: true,
@@ -19,38 +47,39 @@ describe('alarm annunciator', () => {
       alarmOuterHigh: 90,
       value: 5,
     }]);
-    const snap = store.liveSnapshot().find((e) => e.tagId === 'AI1');
+    store.ackAlarm('VPR2');
+    store.setValue('VPR2', -1);
+    const snap = store.liveSnapshot().find((e) => e.tagId === 'VPR2');
     assert.equal(snap.alarmLevel, ALARM_LEVELS.OUTER_LOW);
-    assert.equal(snap.alarmAcked, false);
-    assert.ok(snap.alarmSince);
+    assert.equal(snap.alarmAcked, true);
 
-    assert.equal(store.ackAlarm('AI1'), true);
-    const snap2 = store.liveSnapshot().find((e) => e.tagId === 'AI1');
-    assert.equal(snap2.alarmAcked, true);
+    store.setValue('VPR2', 50);
+    const cleared = store.liveSnapshot().find((e) => e.tagId === 'VPR2');
+    assert.equal(cleared.alarmLevel, ALARM_LEVELS.NORMAL);
+    assert.equal(cleared.alarmAcked, false);
 
-    store.setValue('AI1', 50);
-    const snap3 = store.liveSnapshot().find((e) => e.tagId === 'AI1');
-    assert.equal(snap3.alarmLevel, ALARM_LEVELS.NORMAL);
-    assert.equal(snap3.alarmAcked, false);
+    store.setValue('VPR2', -1);
+    const reAlarm = store.liveSnapshot().find((e) => e.tagId === 'VPR2');
+    assert.equal(reAlarm.alarmLevel, ALARM_LEVELS.OUTER_LOW);
+    assert.equal(reAlarm.alarmAcked, false);
   });
 
-  it('re-alarm on severity change clears ack', () => {
+  it('acks digital BOOL alarms while condition remains on', () => {
     const store = new TagStore();
     store.replaceAll([{
-      id: 'AI2',
-      type: 'REAL',
+      id: 'ALF_MECH_ALM',
+      type: 'BOOL',
       role: 'memory',
       alarmsEnabled: true,
-      alarmOuterLow: 0,
-      alarmInnerLow: 10,
-      alarmInnerHigh: 80,
-      alarmOuterHigh: 90,
-      value: 15,
+      alarmCondition: 'on',
+      value: true,
     }]);
-    store.ackAlarm('AI2');
-    store.setValue('AI2', 5);
-    const snap = store.liveSnapshot().find((e) => e.tagId === 'AI2');
-    assert.equal(snap.alarmLevel, ALARM_LEVELS.OUTER_LOW);
-    assert.equal(snap.alarmAcked, false);
+    assert.equal(store.ackAllAlarms(), 1);
+    const snap = store.liveSnapshot().find((e) => e.tagId === 'ALF_MECH_ALM');
+    assert.equal(snap.alarmLevel, 'alarm');
+    assert.equal(snap.alarmAcked, true);
+    store.setValue('ALF_MECH_ALM', true);
+    const snap2 = store.liveSnapshot().find((e) => e.tagId === 'ALF_MECH_ALM');
+    assert.equal(snap2.alarmAcked, true);
   });
 });

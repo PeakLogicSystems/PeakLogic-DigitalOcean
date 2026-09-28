@@ -1,0 +1,338 @@
+{
+  "id": "nexcomm_tcu_dual_duplex",
+  "label": "Nexcomm TCU — dual duplex",
+  "vendor": "Nexcomm",
+  "model": "TCU dual duplex",
+  "transport": "mqtt",
+  "sharedBus": false,
+  "driverId": "nx_tcu_dual_duplex",
+  "stationType": "dual_duplex",
+  "defaults": {
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
+    "serialNum": "REPLACE_SERIAL",
+    "clientId": "peaklogic",
+    "subscribeQos": 0,
+    "publishQos": 0
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 10000
+  },
+  "tags": {
+    "mqttJson": {
+      "serialFromDefaults": true,
+      "topicTemplate": "/devices/{serial}/messages/events/",
+      "fields": [
+        {
+          "id": "PRODUCT_ID",
+          "label": "Product Id",
+          "type": "REAL",
+          "payloadTemplate": "json:product_id",
+          "comment": "Nexus CSV: Product Id"
+        },
+        {
+          "id": "HARDWARE_REV",
+          "label": "Hardware Rev.",
+          "type": "REAL",
+          "payloadTemplate": "json:hardware_rev",
+          "comment": "Nexus CSV: Hardware Rev."
+        },
+        {
+          "id": "SOFTWARE_ID",
+          "label": "Software Id",
+          "type": "INT",
+          "payloadTemplate": "json:software_id",
+          "comment": "Nexus CSV: Software Id"
+        },
+        {
+          "id": "SOFTWARE_REV",
+          "label": "Software Rev",
+          "type": "INT",
+          "payloadTemplate": "json:software_rev",
+          "comment": "Nexus CSV: Software Rev"
+        },
+        {
+          "id": "SECONDS_ON_SINCE_RESET",
+          "label": "Seconds on since reset",
+          "type": "INT",
+          "payloadTemplate": "json:seconds_on_since_reset",
+          "comment": "Nexus CSV: Seconds on since reset"
+        },
+        {
+          "id": "S1_FLOAT_STATUS",
+          "label": "S1 Float Status",
+          "type": "INT",
+          "payloadTemplate": "json:s1_float_status",
+          "comment": "Nexus CSV: S1 Float Status"
+        },
+        {
+          "id": "S1_FLOAT_OUT_OF_SEQUENCE",
+          "label": "S1 Float Out of Sequence",
+          "type": "BOOL",
+          "payloadTemplate": "json:s1_float_out_of_sequence",
+          "comment": "Nexus CSV: S1 Float Out of Sequence"
+        },
+        {
+          "id": "S1_HIGH_FLOAT_ON",
+          "label": "S1 High float on",
+          "type": "INT",
+          "payloadTemplate": "json:s1_high_float_on",
+          "comment": "Nexus CSV: S1 High float on"
+        },
+        {
+          "id": "S1_PUMP1_MOTOR_AND_RUN_FAULT",
+          "label": "S1 Pump1 Motor and Run Fault",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump1_motor_and_run_fault",
+          "comment": "Nexus CSV: S1 Pump1 Motor and Run Fault"
+        },
+        {
+          "id": "S1_PUMP2_MOTOR_AND_RUN_FAULT",
+          "label": "S1 Pump2 Motor and Run Fault",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump2_motor_and_run_fault",
+          "comment": "Nexus CSV: S1 Pump2 Motor and Run Fault"
+        },
+        {
+          "id": "S1_HOA1_SWITCH_POSITION",
+          "label": "S1 HOA1 Switch Position",
+          "type": "BOOL",
+          "payloadTemplate": "json:s1_hoa1_switch_position",
+          "comment": "Nexus CSV: S1 HOA1 Switch Position"
+        },
+        {
+          "id": "S1_HOA2_SWITCH_POSITION",
+          "label": "S1 HOA2 Switch Position",
+          "type": "BOOL",
+          "payloadTemplate": "json:s1_hoa2_switch_position",
+          "comment": "Nexus CSV: S1 HOA2 Switch Position"
+        },
+        {
+          "id": "S1_PUMP1_SECONDS_ON_LAST_HOUR",
+          "label": "S1 Pump1 seconds on last hour",
+          "type": "BOOL",
+          "payloadTemplate": "json:s1_pump1_seconds_on_last_hour",
+          "comment": "Nexus CSV: S1 Pump1 seconds on last hour"
+        },
+        {
+          "id": "S1_PUMP1_STARTS_LAST_HOUR",
+          "label": "S1 Pump1 starts last hour",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump1_starts_last_hour",
+          "comment": "Nexus CSV: S1 Pump1 starts last hour"
+        },
+        {
+          "id": "S1_PUMP2_SECONDS_ON_LAST_HOUR",
+          "label": "S1 Pump2 seconds on last hour",
+          "type": "BOOL",
+          "payloadTemplate": "json:s1_pump2_seconds_on_last_hour",
+          "comment": "Nexus CSV: S1 Pump2 seconds on last hour"
+        },
+        {
+          "id": "S1_PUMP2_STARTS_LAST_HOUR",
+          "label": "S1 Pump2 starts last hour",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump2_starts_last_hour",
+          "comment": "Nexus CSV: S1 Pump2 starts last hour"
+        },
+        {
+          "id": "S1_PUMP1_STARTS_SINCE_RESET",
+          "label": "S1 Pump1 starts since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump1_starts_since_reset",
+          "comment": "Nexus CSV: S1 Pump1 starts since reset"
+        },
+        {
+          "id": "S1_PUMP1_RUN_TIME_SINCE_RESET",
+          "label": "S1 Pump1 run time since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump1_run_time_since_reset",
+          "comment": "Nexus CSV: S1 Pump1 run time since reset"
+        },
+        {
+          "id": "S1_PUMP2_STARTS_SINCE_RESET",
+          "label": "S1 Pump2 starts since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump2_starts_since_reset",
+          "comment": "Nexus CSV: S1 Pump2 starts since reset"
+        },
+        {
+          "id": "S1_PUMP2_RUN_TIME_SINCE_RESET",
+          "label": "S1 Pump2 run time since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s1_pump2_run_time_since_reset",
+          "comment": "Nexus CSV: S1 Pump2 run time since reset"
+        },
+        {
+          "id": "S2_FLOAT_STATUS",
+          "label": "S2 Float status",
+          "type": "INT",
+          "payloadTemplate": "json:s2_float_status",
+          "comment": "Nexus CSV: S2 Float status"
+        },
+        {
+          "id": "S2_FLOAT_OUT_OF_SEQUENCE",
+          "label": "S2 Float out of sequence",
+          "type": "BOOL",
+          "payloadTemplate": "json:s2_float_out_of_sequence",
+          "comment": "Nexus CSV: S2 Float out of sequence"
+        },
+        {
+          "id": "S2_HIGH_FLOAT_ON",
+          "label": "S2 High float on",
+          "type": "INT",
+          "payloadTemplate": "json:s2_high_float_on",
+          "comment": "Nexus CSV: S2 High float on"
+        },
+        {
+          "id": "S2_PUMP1_MOTOR_AND_RUN_FAULT",
+          "label": "S2 Pump1 motor and run fault",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump1_motor_and_run_fault",
+          "comment": "Nexus CSV: S2 Pump1 motor and run fault"
+        },
+        {
+          "id": "S2_PUMP2_MOTOR_AND_RUN_FAULT",
+          "label": "S2 Pump2 motor and run fault",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump2_motor_and_run_fault",
+          "comment": "Nexus CSV: S2 Pump2 motor and run fault"
+        },
+        {
+          "id": "S2_HOA1_SWITCH_POSITION",
+          "label": "S2 HOA1 switch position",
+          "type": "BOOL",
+          "payloadTemplate": "json:s2_hoa1_switch_position",
+          "comment": "Nexus CSV: S2 HOA1 switch position"
+        },
+        {
+          "id": "S2_HOA2_SWITCH_POSITION",
+          "label": "S2 HOA2 switch position",
+          "type": "BOOL",
+          "payloadTemplate": "json:s2_hoa2_switch_position",
+          "comment": "Nexus CSV: S2 HOA2 switch position"
+        },
+        {
+          "id": "S2_PUMP1_SECONDS_ON_LAST_HOUR",
+          "label": "S2 Pump1 seconds on last hour",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump1_seconds_on_last_hour",
+          "comment": "Nexus CSV: S2 Pump1 seconds on last hour"
+        },
+        {
+          "id": "S2_PUMP1_STARTS_LAST_HOUR",
+          "label": "S2 Pump1 starts last hour",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump1_starts_last_hour",
+          "comment": "Nexus CSV: S2 Pump1 starts last hour"
+        },
+        {
+          "id": "S2_PUMP2_SECONDS_ON_LAST_HOUR",
+          "label": "S2 Pump2 seconds on last hour",
+          "type": "BOOL",
+          "payloadTemplate": "json:s2_pump2_seconds_on_last_hour",
+          "comment": "Nexus CSV: S2 Pump2 seconds on last hour"
+        },
+        {
+          "id": "S2_PUMP2_STARTS_LAST_HOUR",
+          "label": "S2 Pump2 starts last hour",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump2_starts_last_hour",
+          "comment": "Nexus CSV: S2 Pump2 starts last hour"
+        },
+        {
+          "id": "S2_PUMP1_STARTS_SINCE_RESET",
+          "label": "S2 Pump1 starts since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump1_starts_since_reset",
+          "comment": "Nexus CSV: S2 Pump1 starts since reset"
+        },
+        {
+          "id": "S2_PUMP1_RUN_TIME_SINCE_RESET",
+          "label": "S2 Pump1 run time since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump1_run_time_since_reset",
+          "comment": "Nexus CSV: S2 Pump1 run time since reset"
+        },
+        {
+          "id": "S2_PUMP2_STARTS_SINCE_RESET",
+          "label": "S2 Pump2 starts since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump2_starts_since_reset",
+          "comment": "Nexus CSV: S2 Pump2 starts since reset"
+        },
+        {
+          "id": "S2_PUMP2_RUN_TIME_SINCE_RESET",
+          "label": "S2 Pump2 run time since reset",
+          "type": "INT",
+          "payloadTemplate": "json:s2_pump2_run_time_since_reset",
+          "comment": "Nexus CSV: S2 Pump2 run time since reset"
+        },
+        {
+          "id": "CT1_TRUE_RMS",
+          "label": "CT1 - True RMS",
+          "type": "REAL",
+          "payloadTemplate": "json:ct1_true_rms",
+          "comment": "Nexus CSV: CT1 - True RMS"
+        },
+        {
+          "id": "CT2_TRUE_RMS",
+          "label": "CT2 - True RMS",
+          "type": "REAL",
+          "payloadTemplate": "json:ct2_true_rms",
+          "comment": "Nexus CSV: CT2 - True RMS"
+        },
+        {
+          "id": "POWER_SOURCE",
+          "label": "Power Source",
+          "type": "BOOL",
+          "payloadTemplate": "json:power_source",
+          "comment": "Nexus CSV: Power Source"
+        },
+        {
+          "id": "BATTERY_VOLTAGE",
+          "label": "Battery Voltage",
+          "type": "REAL",
+          "payloadTemplate": "json:battery_voltage",
+          "comment": "Nexus CSV: Battery Voltage"
+        },
+        {
+          "id": "INPUT_VOLTAGE",
+          "label": "Input Voltage",
+          "type": "REAL",
+          "payloadTemplate": "json:input_voltage",
+          "comment": "Nexus CSV: Input Voltage"
+        },
+        {
+          "id": "OUTPUT_VOLTAGE",
+          "label": "Output Voltage",
+          "type": "REAL",
+          "payloadTemplate": "json:output_voltage",
+          "comment": "Nexus CSV: Output Voltage"
+        },
+        {
+          "id": "BATTERY_CURRENT",
+          "label": "Battery Current",
+          "type": "REAL",
+          "payloadTemplate": "json:battery_current",
+          "comment": "Nexus CSV: Battery Current"
+        },
+        {
+          "id": "INPUT_CURRENT",
+          "label": "Input Current",
+          "type": "REAL",
+          "payloadTemplate": "json:input_current",
+          "comment": "Nexus CSV: Input Current"
+        },
+        {
+          "id": "DIE_TEMPERATURE",
+          "label": "Die Temperature",
+          "type": "REAL",
+          "payloadTemplate": "json:die_temperature",
+          "comment": "Nexus CSV: Die Temperature"
+        }
+      ]
+    }
+  },
+  "notes": "Inbound tag map generated from st/fixtures/nexcomm-csv/nexcomm-tcu-dual-duplex.csv (98 sample rows). Set serialNum to normalized Nexcomm serial (no hyphens). Broker defaults to mqtts://mqtt.peaklogic.io:8883. payloadTemplate json: keys are slug placeholders — align to live MQTT JSON or EPI register paths as needed. Alignment table: st/fixtures/nexcomm-inbound/nexcomm-tcu-dual-duplex.alignment.json"
+}

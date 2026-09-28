@@ -1,0 +1,48 @@
+{
+  "description": "Sample Florida fleet lift station — Putnam County Utilities, triplex, Arduino Opta Parc",
+  "tenant": {
+    "name": "Putnam County Utilities",
+    "slug": "putnam-county-utilities",
+    "signupNote": "Create tenant at /login signup before importing stations"
+  },
+  "station": {
+    "owner": "Putnam County Utilities",
+    "name": "125 Yelvington Rd Triplex",
+    "slug": "yelvington-triplex",
+    "address": "125 Yelvington Rd, Palatka, FL 32131",
+    "county": "putnam",
+    "countyName": "Putnam",
+    "region": "Northeast Florida",
+    "stationType": "triplex",
+    "stationTypeLabel": "Triplex lift",
+    "lat": 29.6441,
+    "lng": -81.5888
+  },
+  "device": {
+    "label": "Arduino Opta Parc (MQTT)",
+    "driverType": "mqtt_parc",
+    "deviceId": "mv_pcu_yelvington_01",
+    "deviceSlug": "dev-pcu-yelvington",
+    "templateId": "lift_station_triplex",
+    "defaultProgram": "logic/28_alternator_triplex.st",
+    "remoteExecution": true,
+    "reportIntervalMs": 200
+  },
+  "fieldInstall": {
+    "pumps": 3,
+    "panel": "Triplex alternator (ALT3)",
+    "io": "Level floats (DI), pump runs/faults (DI), motor outputs (DO)",
+    "uplink": "Cellular MQTT to tenant Parc hub"
+  },
+  "scadaAlarmTags": [
+    "ALT_FAULT",
+    "LVL_HIGH",
+    "LVL_LAG",
+    "LVL_LAG2",
+    "MOTOR1_RUN",
+    "MOTOR2_RUN",
+    "MOTOR3_RUN"
+  ],
+  "importCsv": "st/fixtures/fleet_import_putnam.csv",
+  "fleetManifest": "st/fixtures/fleet_putnam_county.json"
+}

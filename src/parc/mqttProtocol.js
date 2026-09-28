@@ -35,8 +35,10 @@ function topics(cfg, deviceId) {
 }
 
 function deviceIdFromTopic(topic, cfg) {
-  const info = telemetryTopicInfo(topic, cfg);
-  if (info?.deviceId) return info.deviceId;
+  const telem = telemetryTopicInfo(topic, cfg);
+  if (telem?.deviceId) return telem.deviceId;
+  const online = onlineTopicInfo(topic, cfg);
+  if (online?.deviceId) return online.deviceId;
 
   const prefix = topicPrefix(cfg) + '/';
   if (!topic.startsWith(prefix)) return null;
@@ -50,6 +52,25 @@ function deviceIdFromTopic(topic, cfg) {
   }
   if (parts.length === 2 && (parts[1] === 'online' || parts[1] === 'config' || parts[1] === 'cmd')) {
     return DEVICE_ID_RE.test(parts[0]) ? parts[0] : null;
+  }
+  return null;
+}
+
+/** Parse Parc or tenant-scoped online topic → { deviceId, tenantId? }. */
+function onlineTopicInfo(topic, cfg) {
+  const prefix = topicPrefix(cfg) + '/';
+  if (!topic.startsWith(prefix) || !topic.endsWith('/online')) return null;
+  const rest = topic.slice(prefix.length, -('/online'.length));
+  const parts = rest.split('/').filter(Boolean);
+  if (parts.length === 1) {
+    const id = parts[0];
+    return DEVICE_ID_RE.test(id) ? { deviceId: id, tenantId: null } : null;
+  }
+  if (parts.length === 2) {
+    const tenantId = parts[0];
+    const deviceId = parts[1];
+    if (!TENANT_ID_RE.test(tenantId) || !DEVICE_ID_RE.test(deviceId)) return null;
+    return { tenantId, deviceId };
   }
   return null;
 }
@@ -117,6 +138,7 @@ module.exports = {
   topics,
   globalTopics,
   deviceIdFromTopic,
+  onlineTopicInfo,
   telemetryTopicInfo,
   parseGlobalTopic,
 };

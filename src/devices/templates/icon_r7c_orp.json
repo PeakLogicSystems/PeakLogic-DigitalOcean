@@ -1,0 +1,69 @@
+{
+  "id": "icon_r7c_orp",
+  "label": "Icon ProCon R7C — ORP/pH transmitter (Modbus RTU)",
+  "vendor": "Icon Process Controls",
+  "model": "ProCon R7C Series ORP Sensor Transmitter",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "r7c",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 1,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "R7C_ORP_MV",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 0,
+        "signed": true,
+        "scale": 0.1,
+        "comment": "HR 0 — ORP mV (−20000…20000 raw, ÷10)"
+      },
+      {
+        "id": "R7C_PH",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 1,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "HR 1 — pH (0…1400 raw, ÷100)"
+      },
+      {
+        "id": "R7C_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 2,
+        "signed": false,
+        "scale": 0.1,
+        "comment": "HR 2 — Temperature °C (0…1400 raw, ÷10)"
+      },
+      {
+        "id": "R7C_CURRENT",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 3,
+        "signed": false,
+        "scale": 1,
+        "comment": "HR 3 — Loop current output (raw, 0 decimals)"
+      }
+    ]
+  },
+  "notes": "Measurement block §26-1040 (HR 0–3, FC03 read-only). Default 9600 8N1 slave 1 — re-address via broadcast 255 (HR 16). Calibration/config registers (HR 4–21, 112–116, 200) not mapped. Source: 26-1040 R7C Series Modbus Protocol V1.pdf"
+}

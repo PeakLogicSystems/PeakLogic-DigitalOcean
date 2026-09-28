@@ -18,6 +18,9 @@ const {
   modbusDintArrayTags,
 } = require('./tagBuilders');
 const { loadJsonTemplates } = require('./loadJsonTemplates');
+const { defaultModbusRtuSerialPort } = require('../appliance/defaultRs485Port');
+
+const DEFAULT_RTU_SERIAL = defaultModbusRtuSerialPort();
 
 const BUILTIN_PRESETS = [
   {
@@ -136,12 +139,12 @@ const BUILTIN_PRESETS = [
     vendor: 'Waveshare',
     model: 'Modbus RTU IO 8CH',
     transport: 'modbus_rtu',
-    defaults: { serialPort: 'COM3', baud: 9600, slaveId: 1, parity: 'none' },
+    defaults: { serialPort: DEFAULT_RTU_SERIAL, baud: 9600, slaveId: 1, parity: 'none' },
     driver: (opts) => ({
       id: opts.driverId || 'ws_rtu_8',
       type: 'modbus_rtu',
       enabled: true,
-      serialPort: opts.serialPort || 'COM3',
+      serialPort: opts.serialPort || DEFAULT_RTU_SERIAL,
       baud: opts.baud ?? 9600,
       slaveId: opts.slaveId ?? 1,
       parity: opts.parity || 'none',
@@ -179,12 +182,12 @@ const BUILTIN_PRESETS = [
     vendor: 'Generic',
     model: '8DI/8DO RTU',
     transport: 'modbus_rtu',
-    defaults: { serialPort: 'COM3', baud: 9600, slaveId: 1, parity: 'none' },
+    defaults: { serialPort: DEFAULT_RTU_SERIAL, baud: 9600, slaveId: 1, parity: 'none' },
     driver: (opts) => ({
       id: opts.driverId || 'mb_rtu_8',
       type: 'modbus_rtu',
       enabled: true,
-      serialPort: opts.serialPort || 'COM3',
+      serialPort: opts.serialPort || DEFAULT_RTU_SERIAL,
       baud: opts.baud ?? 9600,
       slaveId: opts.slaveId ?? 1,
       parity: opts.parity || 'none',
@@ -211,10 +214,23 @@ function listPresets() {
     defaults: p.defaults,
     driverId: p.driver({}).id,
     sharedBus: p.sharedBus !== false,
+    concube: !!p.concube,
+    applyOptions: p.concube ? {
+      paramGroups: {
+        label: 'Parameter groups (4 each)',
+        min: 1,
+        max: 16,
+        default: p.concube.defaultGroups ?? 1,
+      },
+    } : null,
     diCount: p.diCount ?? 8,
     doCount: p.doCount ?? 8,
     aiCount: p.aiCount ?? 0,
     hrCount: p.hrCount ?? 0,
+    tagsFromDevice: p.tagsFromDevice === true,
+    stProgram: p.stProgram || '',
+    stProgramLabel: p.stProgramLabel || '',
+    stationType: p.stationType || '',
   }));
 }
 
@@ -237,13 +253,22 @@ function buildFromPreset(presetId, options = {}) {
     if (defined.serialPort) opts.serialPort = defined.serialPort;
     if (defined.host) opts.host = defined.host;
     if (defined.port != null) opts.port = defined.port;
+    for (const k of [
+      'paramGroups', 'paramCount', 'paramStart', 'includeSystemTags',
+      'brokerUrl', 'serialNum', 'clientId', 'username', 'password',
+      'deviceId', 'topicPrefix',
+    ]) {
+      if (defined[k] != null) opts[k] = defined[k];
+    }
   } else {
     opts = { ...defs, ...defined, driverId };
   }
   return {
     preset: { id: preset.id, label: preset.label },
     driver: preset.driver(opts),
-    tags: preset.tags(opts),
+    tags: preset.tagsFromDevice ? [] : preset.tags(opts),
+    stProgram: preset.stProgram || '',
+    stProgramLabel: preset.stProgramLabel || '',
   };
 }
 

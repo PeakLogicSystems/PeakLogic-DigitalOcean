@@ -2,7 +2,7 @@
 
 const crypto = require('crypto');
 const mqtt = require('mqtt');
-const { topics, deviceIdFromTopic, telemetryTopicInfo, parseGlobalTopic, globalTopics, topicPrefix } = require('./mqttProtocol');
+const { topics, deviceIdFromTopic, telemetryTopicInfo, onlineTopicInfo, parseGlobalTopic, globalTopics, topicPrefix } = require('./mqttProtocol');
 const { DEFAULT_GLOBAL_SITE_KEY, siteKeyToAddrKey, normalizeSiteKey } = require('./globalAddressKey');
 const { decodeGlobalMqttPayload } = require('./globalMqttPayload');
 const { publishGlobalTag: publishGlobalTagPayload } = require('./globalMqttPublish');
@@ -10,13 +10,14 @@ const { globalBaseType } = require('./globalTagMeta');
 const { optaStatusToParcReport } = require('./optaTelemetryMapper');
 const { parseMqttJson } = require('./parseMqttJson');
 const { cmdTimeoutMessage } = require('./cmdFailureHint');
+const mongoSysLog = require('../logger/mongoSysLog');
 
 function defaultCentralSettings() {
   return {
     enabled: false,
     brokerUrl: 'mqtt://127.0.0.1:1883',
     topicPrefix: 'peaklogic/v1',
-    clientId: 'peaklogic-central-hmi',
+    clientId: 'mv-central-hmi',
     username: '',
     password: '',
     commandTimeoutMs: 15000,
@@ -41,6 +42,23 @@ class MqttCentralHub {
     this._globalMirrorDeps = null;
     this._telemetryParseWarnAt = new Map();
     this._cmdDiagAt = new Map();
+    this._deviceMqttLogAt = new Map();
+  }
+
+  _logDeviceMqttEvent(deviceId, event, message, extra = {}) {
+    const id = String(deviceId || '').trim();
+    if (!id) return;
+    const key = `${id}:${event}`;
+    const now = Date.now();
+    const last = this._deviceMqttLogAt.get(key) || 0;
+    const minGap = event === 'client_connect' || event === 'client_disconnect' ? 2000 : 60000;
+    if (now - last < minGap) return;
+    this._deviceMqttLogAt.set(key, now);
+    mongoSysLog.info('mqtt', message, {
+      event,
+      clientId: id,
+      ...extra,
+    });
   }
 
   _logTelemetryParseError(deviceId, err, text) {
@@ -136,7 +154,9 @@ class MqttCentralHub {
     ];
     if (this.cfg.cloudTenantIngest) {
       subs.push(`${topicPrefix(this.cfg)}/+/+/telemetry`);
+      subs.push(`${topicPrefix(this.cfg)}/+/+/online`);
     }
+    subs.push(`${topicPrefix(this.cfg)}/gateway/+/cellular`);
     if (this.cfg.legacyOpta !== false) {
       subs.push(this.cfg.legacyOptaTopic || 'opta/status');
       subs.push('opta/set/relay/#');
@@ -180,9 +200,9 @@ class MqttCentralHub {
     await this.stop({ rejectPending: false });
     this.cfg = nextCfg;
 
-    const baseClientId = this.cfg.clientId || 'peaklogic-central-hmi';
-    const clientId = baseClientId === 'peaklogic-central-hmi'
-      ? `peaklogic-central-hmi-${process.pid}`
+    const baseClientId = this.cfg.clientId || 'mv-central-hmi';
+    const clientId = baseClientId === 'mv-central-hmi'
+      ? `mv-central-hmi-${process.pid}`
       : baseClientId;
 
     this.client = mqtt.connect(this.cfg.brokerUrl, {
@@ -196,16 +216,39 @@ class MqttCentralHub {
     this.client.on('connect', () => {
       this.connected = true;
       this._markSubsNotReady();
+      mongoSysLog.info('mqtt', 'Central hub connected to broker', {
+        event: 'hub_connect',
+        brokerUrl: this.cfg.brokerUrl,
+        clientId,
+      });
       this._ensureSubsReady().catch((e) => {
         console.error('[mqtt-parc-hub] subscribe:', e.message);
+        mongoSysLog.error('mqtt', 'Hub subscribe failed', {
+          event: 'hub_error',
+          brokerUrl: this.cfg.brokerUrl,
+          message: e.message,
+        });
       });
     });
     this.client.on('message', (topic, buf) => this._onMessage(topic, buf));
     this.client.on('close', () => {
       this.connected = false;
       this._markSubsNotReady();
+      mongoSysLog.warn('mqtt', 'Central hub disconnected from broker', {
+        event: 'hub_disconnect',
+        brokerUrl: this.cfg.brokerUrl,
+        clientId,
+      });
     });
-    this.client.on('error', (e) => console.error('[mqtt-parc-hub]', e.message));
+    this.client.on('error', (e) => {
+      console.error('[mqtt-parc-hub]', e.message);
+      mongoSysLog.error('mqtt', `Hub broker error: ${e.message}`, {
+        event: 'hub_error',
+        brokerUrl: this.cfg.brokerUrl,
+        message: e.message,
+        clientId,
+      });
+    });
 
     await new Promise((resolve, reject) => {
       const timeoutMs = Math.max(3000, Number(this.cfg.connectTimeoutMs) || 15000);
@@ -319,8 +362,28 @@ class MqttCentralHub {
     return true;
   }
 
+  _handleGatewayCellular(topic, text) {
+    try {
+      const { parseGatewayCellularTopic, ingestGatewayCellularMessage } = require('../cellular/gatewayCellularIngest');
+      if (!parseGatewayCellularTopic(topic, this.cfg)) return false;
+      ingestGatewayCellularMessage(topic, text, this.cfg).then((result) => {
+        if (result?.autoLink?.linked) {
+          console.info(`[mqtt-parc-hub] auto-linked SIM ${result.autoLink.iccid} to gateway ${result.autoLink.gatewayId}`);
+        } else if (result?.autoLink?.suggestSync) {
+          console.info(`[mqtt-parc-hub] gateway ${result.report?.gatewayId} ICCID ${result.report?.iccid} not in inventory — sync Simetry`);
+        }
+      }).catch((err) => {
+        console.warn('[mqtt-parc-hub] gateway cellular ingest:', err.message || err);
+      });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   _onMessage(topic, buf) {
     const text = buf.toString();
+    if (this._handleGatewayCellular(topic, text)) return;
     if (this._handleLegacyOpta(topic, text)) return;
     if (this._mirrorGlobalTag(topic, text)) {
       if (parseGlobalTopic(topic, this.cfg)) return;
@@ -338,18 +401,69 @@ class MqttCentralHub {
         if (telem?.tenantId) {
           report.meta = { ...(report.meta || {}), tenantId: telem.tenantId };
         }
+        try {
+          const { extractGlobalSiteKeyFromReport } = require('./commissionFence');
+          const siteKey = extractGlobalSiteKeyFromReport(report);
+          if (siteKey != null) {
+            report.meta = { ...(report.meta || {}), globalSiteKey: siteKey };
+          }
+        } catch { /* optional */ }
         const mongoTagLogger = require('../logger/mongoTagLogger');
         mongoTagLogger.logEdgeFromReport(report).catch(() => {});
         const ingest = this.registry.ingestReport(report);
-        if (ingest.ok && this._autoDiscoveryDeps) {
-          const { maybeAutoDiscoverDriver } = require('./parcDiscovery');
-          maybeAutoDiscoverDriver({
-            report,
-            registry: this.registry,
-            ...this._autoDiscoveryDeps,
-          }).catch((e) => {
-            console.warn('[mqtt-parc] auto-discovery:', e.message || e);
+        if (report.runtime && report.runtime.running !== true) {
+          setImmediate(() => {
+            try {
+              const { maybeRecoverParcDevice } = require('./parcDeviceRecovery');
+              maybeRecoverParcDevice(deviceId, {
+                reason: 'telemetry-st-stopped',
+                registry: this.registry,
+                hub: this,
+              }).catch((e) => {
+                console.warn(`[parc-recovery] ${deviceId}:`, e.message || e);
+              });
+            } catch { /* optional */ }
           });
+        }
+        if (ingest.ok) {
+          this._logDeviceMqttEvent(deviceId, 'client_connect', `Device connected: ${deviceId}`, {
+            ip: report.ethIp || report.meta?.ethIp || null,
+          });
+          try {
+            const { isCellularSimsEnabled } = require('../cellular/cellularSimsEnabled');
+            if (isCellularSimsEnabled()) {
+              const {
+                syncDeviceCellularRegistration,
+              } = require('../cellular/deviceCellularSync');
+              syncDeviceCellularRegistration({
+                deviceId,
+                tenantId: telem?.tenantId || report.meta?.tenantId,
+                report,
+              }).then((sync) => {
+                if (sync?.ok && sync.registration && this.isLive()) {
+                  const topic = `${topicPrefix(this.cfg)}/${deviceId}/registration`;
+                  this.client.publish(topic, JSON.stringify(sync.registration), { qos: 1, retain: true });
+                }
+              }).catch((err) => {
+                console.warn('[mqtt-parc-hub] device cellular sync:', err.message || err);
+              });
+            }
+          } catch { /* optional */ }
+        }
+        if (ingest.ok && this._autoDiscoveryDeps?.driverManager) {
+          const settings = typeof this._autoDiscoveryDeps.getSettings === 'function'
+            ? this._autoDiscoveryDeps.getSettings()
+            : {};
+          if (settings?.mqttParc?.enabled !== false) {
+            const { ensureParcDriverForDevice } = require('./parcDriverSync');
+            ensureParcDriverForDevice(deviceId, {
+              driverManager: this._autoDiscoveryDeps.driverManager,
+              registry: this.registry,
+              tagStore: this._autoDiscoveryDeps.tagStore,
+            }).catch((e) => {
+              console.warn('[mqtt-parc] registry driver sync:', e.message || e);
+            });
+          }
         }
         try {
           const { DEPLOYMENT_MODE } = require('../config');
@@ -387,17 +501,33 @@ class MqttCentralHub {
 
     if (topic.endsWith('/online')) {
       try {
+        const onlineInfo = onlineTopicInfo(topic, this.cfg);
+        const onlineDeviceId = onlineInfo?.deviceId || deviceId;
+        if (!onlineDeviceId) return;
         const msg = parseMqttJson(text);
-        if (msg?.online === false) {
-          const dev = this.registry.getDevice(deviceId);
-          if (dev) {
-            this.registry.ingestReport({
-              deviceId,
-              tags: dev.tags || [],
-              runtime: { ...(dev.runtime || {}), running: false },
-              meta: { online: false },
-            });
-          }
+        const existing = this.registry.getDevice(onlineDeviceId);
+        if (msg?.online === true) {
+          this._logDeviceMqttEvent(onlineDeviceId, 'client_connect', `Device connected: ${onlineDeviceId}`);
+          this.registry.ingestReport({
+            deviceId: onlineDeviceId,
+            name: existing?.name || onlineDeviceId,
+            platform: existing?.platform || 'arduino-opta-mqtt-st',
+            tags: existing?.tags || [],
+            meta: {
+              ...(existing?.meta || {}),
+              online: true,
+              pendingTelemetry: !(existing?.tags?.length),
+              ...(onlineInfo?.tenantId ? { tenantId: onlineInfo.tenantId } : {}),
+            },
+          });
+        } else if (msg?.online === false && existing) {
+          this._logDeviceMqttEvent(onlineDeviceId, 'client_disconnect', `Device disconnected: ${onlineDeviceId}`);
+          this.registry.ingestReport({
+            deviceId: onlineDeviceId,
+            tags: existing.tags || [],
+            runtime: { ...(existing.runtime || {}), running: false },
+            meta: { ...(existing.meta || {}), online: false },
+          });
         }
       } catch { /* ignore */ }
     }
@@ -411,17 +541,10 @@ class MqttCentralHub {
   }
 
   async sendCommand(deviceId, op, body, opts = {}) {
+    const broker = this.cfg.brokerUrl || 'mqtt broker';
     if (!this.client?.connected) {
-      const broker = this.cfg.brokerUrl || 'mqtt broker';
       return Promise.reject(new Error(
         `MQTT hub not connected to ${broker} — System setup → Enable MQTT Parc hub, then run npm run mqtt:start or fix broker URL`,
-      ));
-    }
-    try {
-      await this._ensureSubsReady();
-    } catch (e) {
-      return Promise.reject(new Error(
-        `MQTT hub not ready (${e.message || e}) — retry in a few seconds`,
       ));
     }
     const prevDone = this._deviceCmdTail.get(deviceId) || Promise.resolve();
@@ -431,6 +554,18 @@ class MqttCentralHub {
     this._deviceCmdTail.set(deviceId, tail);
     try {
       await prevDone;
+      if (!this.client?.connected) {
+        throw new Error(
+          `MQTT hub not connected to ${broker} — System setup → Enable MQTT Parc hub, then run npm run mqtt:start or fix broker URL`,
+        );
+      }
+      try {
+        await this._ensureSubsReady();
+      } catch (e) {
+        throw new Error(
+          `MQTT hub not ready (${e.message || e}) — retry in a few seconds`,
+        );
+      }
       return await this._sendCommandOnce(deviceId, op, body, opts);
     } finally {
       release();
@@ -454,11 +589,13 @@ class MqttCentralHub {
     const timeoutMs = opts.timeoutMs
       ?? (op === 'put_program' ? putTimeout : baseTimeout);
     const cmdTopic = t.cmd;
-    for (const [pendingId, p] of this._pending) {
-      if (p.deviceId === deviceId) {
-        clearTimeout(p.timer);
-        this._pending.delete(pendingId);
-        p.reject(new Error(`Superseded by ${op} on ${deviceId}`));
+    if (op === 'put_program' || op === 'get_program') {
+      for (const [pendingId, p] of this._pending) {
+        if (p.deviceId === deviceId) {
+          clearTimeout(p.timer);
+          this._pending.delete(pendingId);
+          p.reject(new Error(`Superseded by ${op} on ${deviceId}`));
+        }
       }
     }
     return new Promise((resolve, reject) => {

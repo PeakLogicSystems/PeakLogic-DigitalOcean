@@ -18,6 +18,10 @@ describe('payloadTemplate', () => {
   it('formats write payloads', () => {
     assert.equal(formatPayloadForWrite(true, 'bool'), '1');
     assert.equal(formatPayloadForWrite(3, 'json'), '{"value":3}');
+    assert.equal(
+      formatPayloadForWrite(true, 'edgepoint:output:9410'),
+      '{"outputs":[{"reg":9410,"state":1}]}',
+    );
   });
 
   it('maps parsed values to tag types', () => {

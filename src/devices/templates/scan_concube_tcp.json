@@ -1,0 +1,25 @@
+{
+  "id": "scan_concube_tcp",
+  "label": "S::CAN con::cube — Modbus TCP",
+  "vendor": "s::can",
+  "model": "con::cube V3 station controller",
+  "transport": "modbus_tcp",
+  "sharedBus": false,
+  "driverId": "scan_cube_tcp",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 10,
+  "hrCount": 0,
+  "defaults": {
+    "host": "192.168.1.10",
+    "port": 502,
+    "slaveId": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 3000
+  },
+  "tags": {
+    "concube": { "paramsPerGroup": 4, "defaultGroups": 1 }
+  }
+}

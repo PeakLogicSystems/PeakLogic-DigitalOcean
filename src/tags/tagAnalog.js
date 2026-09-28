@@ -30,7 +30,8 @@ function isDigitalTagType(type) {
 }
 
 function isAlarmCapableType(type) {
-  return isNumericTagType(type) || isDigitalTagType(type);
+  const t = String(type || '').toUpperCase();
+  return isNumericTagType(type) || isDigitalTagType(type) || t === 'PID';
 }
 
 function normalizeScale(scale) {
@@ -79,7 +80,8 @@ function scaleEngToRaw(eng, tag) {
 }
 
 function alarmLimitsValid(tag) {
-  if (!tag?.alarmsEnabled || !isNumericTagType(tag.type)) return false;
+  const numeric = isNumericTagType(tag?.type) || String(tag?.type || '').toUpperCase() === 'PID';
+  if (!tag?.alarmsEnabled || !numeric) return false;
   const ol = tag.alarmOuterLow;
   const il = tag.alarmInnerLow;
   const ih = tag.alarmInnerHigh;
@@ -102,6 +104,16 @@ function isAlarmActive(level) {
 
 function evaluateAlarmLevel(tag, value = tag?.value) {
   if (!tag?.alarmsEnabled || !isAlarmCapableType(tag.type)) return null;
+  if (String(tag.type || '').toUpperCase() === 'PID') {
+    if (!alarmLimitsValid(tag)) return null;
+    const v = Number(value);
+    if (!Number.isFinite(v)) return null;
+    if (v < tag.alarmOuterLow) return ALARM_LEVELS.OUTER_LOW;
+    if (v < tag.alarmInnerLow) return ALARM_LEVELS.INNER_LOW;
+    if (v <= tag.alarmInnerHigh) return ALARM_LEVELS.NORMAL;
+    if (v <= tag.alarmOuterHigh) return ALARM_LEVELS.INNER_HIGH;
+    return ALARM_LEVELS.OUTER_HIGH;
+  }
   if (isDigitalTagType(tag.type)) {
     if (!tag.alarmCondition) return null;
     return digitalAlarmActive(tag, value) ? 'alarm' : ALARM_LEVELS.NORMAL;
@@ -126,7 +138,8 @@ function formatScaleLabel(tag) {
 }
 
 function formatAlarmLimitsLabel(tag) {
-  if (!tag?.alarmsEnabled || !isNumericTagType(tag.type)) return 'off';
+  const numeric = isNumericTagType(tag?.type) || String(tag?.type || '').toUpperCase() === 'PID';
+  if (!tag?.alarmsEnabled || !numeric) return 'off';
   const parts = [
     tag.alarmOuterLow,
     tag.alarmInnerLow,

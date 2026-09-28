@@ -1,0 +1,23 @@
+{
+  "id": "lift_station_dual_atu",
+  "label": "Lift station — dual ATU",
+  "vendor": "PeakLogic",
+  "model": "Dual ATU (2 duplex + 2 TPO)",
+  "transport": "mqtt_parc",
+  "stationType": "dual_atu",
+  "defaultProgram": "logic/33_dual_atu.st",
+  "tagsFromDevice": true,
+  "diCount": 16,
+  "doCount": 8,
+  "aiCount": 16,
+  "defaults": {
+    "deviceId": "lift_datu_01",
+    "reportIntervalMs": 200,
+    "scanMs": 100,
+    "remoteExecution": true
+  },
+  "driver": {
+    "enabled": true
+  },
+  "notes": "Two independent duplex alternators, each driven by its own TPO. Deploy logic/33_dual_atu.st on device."
+}

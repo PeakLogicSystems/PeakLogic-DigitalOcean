@@ -24,6 +24,10 @@ function parsePayload(payload, template) {
 function formatPayloadForWrite(value, template) {
   if (template === 'bool') return value ? '1' : '0';
   if (template === 'json') return JSON.stringify({ value });
+  if (template && template.startsWith('edgepoint:output:')) {
+    const reg = Number(template.slice('edgepoint:output:'.length));
+    return JSON.stringify({ outputs: [{ reg, state: value ? 1 : 0 }] });
+  }
   return String(value);
 }
 

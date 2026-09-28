@@ -1,0 +1,72 @@
+{
+  "id": "seeed_h2s_101990863",
+  "label": "Seeed SKU 101990863 — RS485 H2S sensor (S-H2S-01)",
+  "vendor": "Seeed Studio",
+  "model": "S-H2S-01 / SenseCAP H2S",
+  "transport": "modbus_rtu",
+  "sharedBus": false,
+  "driverId": "seeed_h2s",
+  "diCount": 0,
+  "doCount": 0,
+  "aiCount": 4,
+  "hrCount": 0,
+  "defaults": {
+    "serialPort": "COM3",
+    "baud": 9600,
+    "slaveId": 16,
+    "parity": "none",
+    "stopBits": 1
+  },
+  "driver": {
+    "enabled": true,
+    "timeoutMs": 2000
+  },
+  "tags": {
+    "explicit": [
+      {
+        "id": "H2S_PPM",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 8192,
+        "wordWidth": 32,
+        "encoding": "float32",
+        "byteOrder": "BE",
+        "signed": false,
+        "scale": 1,
+        "comment": "H2S concentration ppm (HR 0x2000, float32 BE)"
+      },
+      {
+        "id": "H2S_TEMP_C",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 8196,
+        "signed": true,
+        "scale": 0.01,
+        "comment": "Air temperature °C (HR 0x2004, int16 ÷100)"
+      },
+      {
+        "id": "H2S_RH_PCT",
+        "type": "REAL",
+        "role": "input",
+        "table": "holding",
+        "address": 8198,
+        "signed": false,
+        "scale": 0.01,
+        "comment": "Humidity %RH (HR 0x2006, uint16 ÷100)"
+      },
+      {
+        "id": "H2S_MAX_PPM",
+        "type": "INT",
+        "role": "input",
+        "table": "holding",
+        "address": 8200,
+        "signed": false,
+        "scale": 1,
+        "graphEnabled": false,
+        "comment": "Configured H2S full scale ppm (HR 0x2008, default 100)"
+      }
+    ]
+  }
+}
