@@ -120,6 +120,38 @@
   border-color: var(--peaklogic-navy-border);
 }
 
+.brand-logo-icon {
+  height: 30px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.brand-logotype {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.brand-logotype-peak {
+  color: #fff;
+}
+
+.brand-logotype-logic {
+  color: #a78bfa;
+}
+
+.footer-peaklogic .brand-logotype-peak {
+  color: var(--peaklogic-navy);
+}
+
+.tenant-badge-slot {
+  display: flex;
+  align-items: center;
+  margin-left: 0.9rem;
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--peaklogic-navy-border);
+}
+
 .tenant-badge {
   width: 34px;
   height: 34px;
@@ -131,6 +163,33 @@
   font-size: 0.82rem;
   color: #fff;
   flex-shrink: 0;
+}
+
+.footer-peaklogic {
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted, #64748b);
+  font-size: 0.85rem;
+}
+
+.footer-peaklogic .brand-logo-icon {
+  height: 20px;
+}
+
+.footer-peaklogic .brand-logotype {
+  font-size: 0.95rem;
+}
+
+.footer-powered-by {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .user-menu-btn {
