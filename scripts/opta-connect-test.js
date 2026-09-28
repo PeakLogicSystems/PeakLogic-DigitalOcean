@@ -53,8 +53,8 @@ function rawHttp10(path) {
     console.error('driver HTTP FAIL:', e.message);
     console.error('');
     console.error('If browser works on WiFi AP (192.168.4.1:8080) but this fails on', host + ':', port);
-    console.error('  → re-flash est-pc/firmware/arduino-opta-st/MooreviewOptaSt (mv_http.cpp fix)');
-    console.error('  → Serial @115200: click Connect in MooreVIEW; expect "GET /api/status"');
+    console.error('  → re-flash est-pc/firmware/arduino-opta-st/PeaklogicOptaSt (mv_http.cpp fix)');
+    console.error('  → Serial @115200: click Connect in PeakLogic; expect "GET /api/status"');
     process.exit(1);
   }
 })();

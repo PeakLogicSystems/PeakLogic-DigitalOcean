@@ -4,7 +4,7 @@
 set -euo pipefail
 
 CERT_DIR="${MOSQUITTO_CERT_DIR:-/etc/mosquitto/certs}"
-DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
 LE_DIR="/etc/letsencrypt/live/${DOMAIN}"
 DAYS="${MOSQUITTO_TLS_SELF_SIGNED_DAYS:-825}"
 

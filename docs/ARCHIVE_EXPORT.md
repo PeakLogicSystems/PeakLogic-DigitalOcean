@@ -1,10 +1,10 @@
 # Mongo hot (0–7d) → zstd archive (server 2)
 
-Two-cloud-server layout for mooreVIEW telemetry:
+Two-cloud-server layout for PeakLogic telemetry:
 
 | Server | Role |
 |--------|------|
-| **Cloud 1 (hot)** | MongoDB 7, mooreVIEW, MQTT — JSON documents **0–7 days** |
+| **Cloud 1 (hot)** | MongoDB 7, PeakLogic, MQTT — JSON documents **0–7 days** |
 | **Cloud 2 (archive)** | zstd JSONL blobs + sidecar indexes only — **no Mongo** |
 
 Appliances stay unchanged (local JSON / spool). Cloud alarms and echo remain on server 1.
@@ -146,7 +146,7 @@ Never rely on TTL alone for ACE/Boyette compliance partitions.
 | Variable | Example | Purpose |
 |----------|---------|---------|
 | `MONGODB_URI` | `mongodb://127.0.0.1:27017` | Hot DB |
-| `MONGODB_DB` | `mooreview` | |
+| `MONGODB_DB` | `peaklogic` | |
 | `MONGODB_COLLECTION` | `tag_logs` | |
 | `ARCHIVE_SERVER_URL` | `https://archive.internal:8090` | Server 2 base URL |
 | `ARCHIVE_SERVER_TOKEN` | secret | Bearer auth |

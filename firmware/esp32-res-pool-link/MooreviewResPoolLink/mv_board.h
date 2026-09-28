@@ -25,13 +25,13 @@
 #define MV_FIRMWARE_VERSION "2.0.1-standalone"
 #define MV_PROTOCOL_VERSION 2
 
-#define SETUP_AP_SSID "MooreVIEW-ResPool"
-#define SETUP_AP_PASS "mooreview"
+#define SETUP_AP_SSID "PeakLogic-ResPool"
+#define SETUP_AP_PASS "peaklogic"
 #define SETUP_HTTP_PORT 8080
 
 /* Same sketch defaults as Opta MQTT Parc (mv_config.h). */
 #ifndef MV_MQTT_SKETCH_BROKER_DEFAULT
-#define MV_MQTT_SKETCH_BROKER_DEFAULT "mqtt.mooreview.io"
+#define MV_MQTT_SKETCH_BROKER_DEFAULT "mqtt.peaklogic.io"
 #endif
 #ifndef MV_MQTT_SKETCH_PORT_DEFAULT
 #define MV_MQTT_SKETCH_PORT_DEFAULT 8883
@@ -40,7 +40,7 @@
 #define MV_MQTT_SKETCH_TLS_DEFAULT 1
 #endif
 #ifndef MV_MQTT_SKETCH_USER_DEFAULT
-#define MV_MQTT_SKETCH_USER_DEFAULT "mooreview"
+#define MV_MQTT_SKETCH_USER_DEFAULT "peaklogic"
 #endif
 #ifndef MV_MQTT_SKETCH_PASS_DEFAULT
 #define MV_MQTT_SKETCH_PASS_DEFAULT "f20ba87c93b64d6b5b0606357385b9e528af2a10bb883d1f"

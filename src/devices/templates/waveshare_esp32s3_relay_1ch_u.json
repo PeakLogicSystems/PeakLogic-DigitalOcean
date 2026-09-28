@@ -45,5 +45,5 @@
       }
     ]
   },
-  "notes": "DIN-rail Wi-Fi satellite for pool loads (dose pump, heater enable, one light zone, pump-contactor coil). Flash firmware/waveshare-esp32s3-relay-parc. /setup AP MooreVIEW-Relay1CH. Prefer ESP32-S3-Relay-1CH-U + external antenna at the equipment pad. Bind pool tag via MOOREVIEW_POOL_WAVESHARE_RELAYS or Drivers → retarget DOSE_*/LIGHT_Z*/PUMP_RUN_CMD to this driver (channel R1). See docs/WAVESHARE_ESP32S3_RELAY_POOL.md."
+  "notes": "DIN-rail Wi-Fi satellite for pool loads (dose pump, heater enable, one light zone, pump-contactor coil). Flash firmware/waveshare-esp32s3-relay-parc. /setup AP PeakLogic-Relay1CH. Prefer ESP32-S3-Relay-1CH-U + external antenna at the equipment pad. Bind pool tag via PEAKLOGIC_POOL_WAVESHARE_RELAYS or Drivers → retarget DOSE_*/LIGHT_Z*/PUMP_RUN_CMD to this driver (channel R1). See docs/WAVESHARE_ESP32S3_RELAY_POOL.md."
 }

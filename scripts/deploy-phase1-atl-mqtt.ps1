@@ -1,4 +1,4 @@
-# MooreVIEW Phase 1 ATL (atl1) — automated upload + remote install
+# PeakLogic Phase 1 ATL (atl1) — automated upload + remote install
 # After DO resources exist and phase1-atl.local.env is filled:
 #   npm run deploy:phase1-atl
 #
@@ -133,8 +133,8 @@ if (-not $SkipBuild -and -not $SkipUpload) {
   }
 }
 
-$saasBundle = if ($cfg.ContainsKey('SAAS_BUNDLE') -and $cfg['SAAS_BUNDLE']) { $cfg['SAAS_BUNDLE'] } else { Find-LatestBundle 'mooreview-cloud-*d.tgz' }
-$archiveBundle = if ($cfg.ContainsKey('ARCHIVE_BUNDLE') -and $cfg['ARCHIVE_BUNDLE']) { $cfg['ARCHIVE_BUNDLE'] } else { Find-LatestBundle 'mooreview-archive-*.tgz' }
+$saasBundle = if ($cfg.ContainsKey('SAAS_BUNDLE') -and $cfg['SAAS_BUNDLE']) { $cfg['SAAS_BUNDLE'] } else { Find-LatestBundle 'peaklogic-cloud-*d.tgz' }
+$archiveBundle = if ($cfg.ContainsKey('ARCHIVE_BUNDLE') -and $cfg['ARCHIVE_BUNDLE']) { $cfg['ARCHIVE_BUNDLE'] } else { Find-LatestBundle 'peaklogic-archive-*.tgz' }
 
 Write-Host "Config:     $ConfigPath"
 Write-Host "SaaS bundle:  $saasBundle"
@@ -153,11 +153,11 @@ if (-not $SkipSshTest -and -not $DryRun) {
 
 $deployEnvLocal = Join-Path $env:TEMP "phase1-deploy-$(Get-Date -Format 'yyyyMMddHHmmss').env"
 Write-DeployEnvFile $cfg $deployEnvLocal
-$remoteDeployEnv = '/etc/mooreview/phase1-deploy.env'
+$remoteDeployEnv = '/etc/peaklogic/phase1-deploy.env'
 $remoteInstallPath = '/tmp/phase1-remote-install.sh'
 
 function Sync-DeployEnv([string]$SshHost) {
-  Invoke-Ssh $sshArgs $SshHost "install -d -m 0750 /etc/mooreview"
+  Invoke-Ssh $sshArgs $SshHost "install -d -m 0750 /etc/peaklogic"
   Invoke-Scp $sshArgs $deployEnvLocal "${SshHost}:${remoteDeployEnv}"
   Invoke-Ssh $sshArgs $SshHost "chmod 0640 ${remoteDeployEnv}"
 }
@@ -237,9 +237,9 @@ Write-Host @"
 
 Next manual steps (if not done yet):
   1. MongoDB trusted source = SaaS droplet PUBLIC IP
-  2. DNS A mqtt.mooreview.io -> MQTT public IP (if RUN_MQTT_CERTBOT=true)
-  3. After verification: DNS A mooreview.io -> SaaS public IP, update PUBLIC_* URLs, restart SaaS
-  4. Field MQTT URL: mqtts://mqtt.mooreview.io:8883
+  2. DNS A mqtt.peaklogic.io -> MQTT public IP (if RUN_MQTT_CERTBOT=true)
+  3. After verification: DNS A peaklogic.io -> SaaS public IP, update PUBLIC_* URLs, restart SaaS
+  4. Field MQTT URL: mqtts://mqtt.peaklogic.io:8883
 
 Checklist: deploy/cloud/phase1/CHECKLIST-ATL-MQTT.txt
 "@ -ForegroundColor Green

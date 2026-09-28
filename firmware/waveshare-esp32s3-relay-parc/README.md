@@ -1,4 +1,4 @@
-# Waveshare ESP32-S3-Relay-1CH-U — MooreVIEW Parc
+# Waveshare ESP32-S3-Relay-1CH-U — PeakLogic Parc
 
 Arduino firmware for the **ESP32-S3-Relay-1CH** / **1CH-U** (external SMA antenna). The board is a **pool satellite**: IOT-LINK or Cloud Studio runs `30_pool_controller.st`; this module is remote I/O for **one isolated relay**.
 
@@ -20,15 +20,15 @@ MQTT loss **opens** the relay (fail-safe OFF). Use that for dose pumps, heater e
 2. Board: **ESP32S3 Dev Module**  
 3. **USB CDC On Boot: Enabled**  
 4. Libraries: **ArduinoJson** 7.x, **PubSubClient**  
-5. Open `MooreviewWsRelay1ch/MooreviewWsRelay1ch.ino` and upload (USB-C)
+5. Open `PeaklogicWsRelay1ch/PeaklogicWsRelay1ch.ino` and upload (USB-C)
 
 ## Commission
 
-1. Join AP **`MooreVIEW-Relay1CH`** / `mooreview`  
+1. Join AP **`PeakLogic-Relay1CH`** / `peaklogic`  
 2. Open `http://192.168.4.1:8080/setup`  
 3. Enter **home Wi-Fi** name + password, pool hub LAN IP (IOT-LINK Mosquitto), unique `deviceId` (`ws_relay_spa`, `ws_relay_acid`, …)  
 4. **Save & join home Wi-Fi** — confirm WAN IP and `http://192.168.4.1:8080/api/status`  
-5. In MooreVIEW: **Drivers → Device template → Waveshare ESP32-S3-Relay-1CH-U** with that `deviceId`
+5. In PeakLogic: **Drivers → Device template → Waveshare ESP32-S3-Relay-1CH-U** with that `deviceId`
 
 Prefer the **-U** SKU plus the included SMA antenna at the equipment pad (metal enclosures kill the ceramic antenna).
 

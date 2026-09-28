@@ -169,8 +169,8 @@ function createTenantAuthRoutes() {
             code: result._mfaCode,
           });
           if (!mail.sent) {
-            const devMfa = process.env.MOOREVIEW_MFA_DEV === '1'
-              || process.env.MOOREVIEW_MFA_DEV === 'true';
+            const devMfa = process.env.PEAKLOGIC_MFA_DEV === '1'
+              || process.env.PEAKLOGIC_MFA_DEV === 'true';
             if (devMfa && mail.reason === 'mail_not_configured') {
               console.warn(
                 `[auth] MFA dev mode — SMTP not configured; sign-in code for ${result._user.email}: ${result._mfaCode}`,

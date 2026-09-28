@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 # Dedicated Mosquitto MQTT droplet (Phase 1 ATL — cloud-mqtt-atl1).
-# Does NOT install mooreVIEW SaaS. Field devices: mqtts://mqtt.mooreview.io:8883
+# Does NOT install PeakLogic SaaS. Field devices: mqtts://mqtt.peaklogic.io:8883
 #
-#   sudo MOOREVIEW_INSTALL_DIR=/opt/mooreview-mqtt bash deploy/cloud/debian/install-mqtt-droplet.sh
+#   sudo PEAKLOGIC_INSTALL_DIR=/opt/peaklogic-mqtt bash deploy/cloud/debian/install-mqtt-droplet.sh
 #
 # Requires deploy/cloud/debian/* and phase1/droplet-mqtt/mqtt.env.template on the host
-# (included in mooreview-cloud-*d.tgz SaaS bundle, or copy scripts manually).
+# (included in peaklogic-cloud-*d.tgz SaaS bundle, or copy scripts manually).
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/opt/mooreview-mqtt}"
-MQTT_ENV="${MOOREVIEW_MQTT_ENV:-/etc/mooreview/mqtt.env}"
-DOMAIN="${MOOREVIEW_DOMAIN:-mqtt.mooreview.io}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/opt/peaklogic-mqtt}"
+MQTT_ENV="${PEAKLOGIC_MQTT_ENV:-/etc/peaklogic/mqtt.env}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-mqtt.peaklogic.io}"
 
-log() { printf '[mooreview-mqtt-droplet] %s\n' "$*"; }
-die() { printf '[mooreview-mqtt-droplet] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-mqtt-droplet] %s\n' "$*"; }
+die() { printf '[peaklogic-mqtt-droplet] ERROR: %s\n' "$*" >&2; exit 1; }
 
 strip_crlf() {
   local f="$1"
@@ -33,7 +33,7 @@ apt-get update -qq
 apt-get install -y -qq mosquitto mosquitto-clients certbot
 
 install -d -m 0755 "$INSTALL_DIR"
-install -d -m 0750 -o root -g root /etc/mooreview
+install -d -m 0750 -o root -g root /etc/peaklogic
 
 ENV_TEMPLATE=""
 for candidate in \
@@ -65,13 +65,13 @@ source "$MQTT_ENV"
 set +a
 
 MOSQUITTO_ALLOW_ANONYMOUS="${MOSQUITTO_ALLOW_ANONYMOUS:-false}"
-MOSQUITTO_USER="${MOSQUITTO_USER:-mooreview}"
+MOSQUITTO_USER="${MOSQUITTO_USER:-peaklogic}"
 MOSQUITTO_PASS="${MOSQUITTO_PASS:-}"
 MOSQUITTO_TLS="${MOSQUITTO_TLS:-true}"
 MOSQUITTO_TLS_PORT="${MOSQUITTO_TLS_PORT:-8883}"
-MOOREVIEW_DOMAIN="${MOOREVIEW_DOMAIN:-$DOMAIN}"
+PEAKLOGIC_DOMAIN="${PEAKLOGIC_DOMAIN:-$DOMAIN}"
 
-MOSQUITTO_CONFD="/etc/mosquitto/conf.d/mooreview.conf"
+MOSQUITTO_CONFD="/etc/mosquitto/conf.d/peaklogic.conf"
 MOSQUITTO_MAIN="/etc/mosquitto/mosquitto.conf"
 
 install -d -m 0755 -o mosquitto -g mosquitto /var/lib/mosquitto
@@ -86,7 +86,7 @@ fi
 for f in /etc/mosquitto/conf.d/*; do
   [[ -f "$f" ]] || continue
   base="$(basename "$f")"
-  [[ "$base" == "mooreview.conf" ]] && continue
+  [[ "$base" == "peaklogic.conf" ]] && continue
   [[ "$base" == *.disabled ]] && continue
   log "Disabling stock Mosquitto config: $f"
   mv -f "$f" "${f}.disabled"
@@ -105,11 +105,11 @@ else
 fi
 
 if [[ "$MOSQUITTO_TLS" == "true" ]]; then
-  if [[ ! -f "/etc/letsencrypt/live/${MOOREVIEW_DOMAIN}/fullchain.pem" ]]; then
-    log "No LE cert yet for ${MOOREVIEW_DOMAIN} — run certbot first, then re-run this script"
-    log "  certbot certonly --standalone -d ${MOOREVIEW_DOMAIN} --non-interactive --agree-tos -m admin@mooreview.io"
+  if [[ ! -f "/etc/letsencrypt/live/${PEAKLOGIC_DOMAIN}/fullchain.pem" ]]; then
+    log "No LE cert yet for ${PEAKLOGIC_DOMAIN} — run certbot first, then re-run this script"
+    log "  certbot certonly --standalone -d ${PEAKLOGIC_DOMAIN} --non-interactive --agree-tos -m admin@peaklogic.io"
   fi
-  MOOREVIEW_DOMAIN="$MOOREVIEW_DOMAIN" bash "$SCRIPT_DIR/setup-mosquitto-tls.sh"
+  PEAKLOGIC_DOMAIN="$PEAKLOGIC_DOMAIN" bash "$SCRIPT_DIR/setup-mosquitto-tls.sh"
   if [[ -f "$SCRIPT_DIR/mosquitto-tls.conf" ]]; then
     grep -q '^listener 8883' "$MOSQUITTO_CONFD" 2>/dev/null || cat "$SCRIPT_DIR/mosquitto-tls.conf" >> "$MOSQUITTO_CONFD"
   fi
@@ -125,7 +125,7 @@ fi
 
 PRIVATE_IP="$(hostname -I | awk '{print $1}')"
 log "Dedicated MQTT droplet ready"
-log "  Field:    mqtts://${MOOREVIEW_DOMAIN}:${MOSQUITTO_TLS_PORT} (user ${MOSQUITTO_USER})"
-log "  Internal: mqtt://${PRIVATE_IP}:1883 (VPC — set on SaaS MOOREVIEW_MQTT_BROKER)"
+log "  Field:    mqtts://${PEAKLOGIC_DOMAIN}:${MOSQUITTO_TLS_PORT} (user ${MOSQUITTO_USER})"
+log "  Internal: mqtt://${PRIVATE_IP}:1883 (VPC — set on SaaS PEAKLOGIC_MQTT_BROKER)"
 log "  Env:      $MQTT_ENV"
-log "Next: configure SaaS — MOOREVIEW_MQTT_PRIVATE_IP=${PRIVATE_IP} bash deploy/cloud/debian/configure-saas-mqtt-remote.sh"
+log "Next: configure SaaS — PEAKLOGIC_MQTT_PRIVATE_IP=${PRIVATE_IP} bash deploy/cloud/debian/configure-saas-mqtt-remote.sh"

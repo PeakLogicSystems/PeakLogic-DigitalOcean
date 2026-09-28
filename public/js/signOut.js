@@ -3,7 +3,7 @@
 /** Shared sign-out for dashboard and standalone pages (/cmms, /io-map, …). */
 (function (root) {
   function performSignOut() {
-    const api = root.MooreviewApi || root.api;
+    const api = root.PeaklogicApi || root.api;
     const done = () => { root.location.href = '/login'; };
     if (api?.logout) {
       return Promise.resolve(api.logout()).catch(() => {}).finally(done);
@@ -21,5 +21,5 @@
     });
   }
 
-  root.MooreviewSignOut = { bind: bindSignOut, perform: performSignOut };
+  root.PeaklogicSignOut = { bind: bindSignOut, perform: performSignOut };
 })(typeof window !== 'undefined' ? window : globalThis);

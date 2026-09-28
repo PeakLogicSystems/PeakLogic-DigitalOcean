@@ -78,11 +78,11 @@ menu "Device config (NVS defaults + setup AP)"
 
     config DEVCFG_WIFI_AP_SSID_DEFAULT
         string "Wi-Fi setup AP SSID"
-        default "MooreVIEW-T-HaLow"
+        default "PeakLogic-T-HaLow"
 
     config DEVCFG_WIFI_AP_PASS_DEFAULT
         string "Wi-Fi setup AP password (8+ chars)"
-        default "mooreview"
+        default "peaklogic"
 
     config DEVCFG_WIFI_AP_HTTP_PORT
         int "Setup HTTP port on Wi-Fi AP"
@@ -98,13 +98,13 @@ endmenu
 
 
 
-menu "MooreVIEW Parc (MQTT) Configuration"
+menu "PeakLogic Parc (MQTT) Configuration"
 
 
 
     config PARC_MQTT_BROKER_URI
 
-        string "MQTT broker URI (same broker the Opta + MooreVIEW use)"
+        string "MQTT broker URI (same broker the Opta + PeakLogic use)"
 
         default "mqtt://192.168.1.233:1883"
 
@@ -152,7 +152,7 @@ menu "MooreVIEW Parc (MQTT) Configuration"
 
         string "Parc topic prefix"
 
-        default "mooreview/v1"
+        default "peaklogic/v1"
 
 
 

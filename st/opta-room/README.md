@@ -1,6 +1,6 @@
 # Opta Room — ST programs
 
-Programs for **MooreVIEW Opta Room** (`firmware/arduino-opta-room`). Not for generic `arduino-opta-mqtt-st`.
+Programs for **PeakLogic Opta Room** (`firmware/arduino-opta-room`). Not for generic `arduino-opta-mqtt-st`.
 
 Deploy via MQTT Parc (same as `st/opta-mqtt/README.md`). Tags include slotted `SHELLY<n>_*` from WiFi Shelly Flood peripherals.
 

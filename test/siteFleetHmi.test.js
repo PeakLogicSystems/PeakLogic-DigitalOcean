@@ -116,7 +116,7 @@ describe('duplex lift HMI repair', () => {
           id: 'screen_2',
           number: 2,
           name: 'DUPLEXLS',
-          svg: '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg',
+          svg: '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg',
           inheritProjectLayout: true,
           tiles: [],
         },
@@ -149,7 +149,7 @@ describe('duplex lift HMI repair', () => {
           id: 'screen_2',
           number: 2,
           name: 'DUPLEXLS',
-          svg: '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg',
+          svg: '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg',
           tiles: [],
         },
         {

@@ -34,9 +34,9 @@ function createPageRoutes({ appVersion, product, deployment }) {
 function connectivityViewLocals(base) {
   return {
     ...base,
-    title: 'Connectivity — MooreView',
+    title: 'Connectivity — PeakLogic',
     homeUrl: '/',
-    mooreviewApiBase: '/api',
+    peaklogicApiBase: '/api',
     connectivityBuild: 'email-sms-v2',
   };
 }
@@ -44,7 +44,7 @@ function connectivityViewLocals(base) {
 function dashboardViewLocals({ appVersion, product, deployment, embedded }) {
   const dep = deployment || 'appliance';
   return {
-    title: dep === 'cloud' ? 'MooreView Cloud Studio' : 'MooreView',
+    title: dep === 'cloud' ? 'PeakLogic Cloud Studio' : 'PeakLogic',
     assetV: `${appVersion}-ps15`,
     appVersion,
     product: product || 'mvp-suite',

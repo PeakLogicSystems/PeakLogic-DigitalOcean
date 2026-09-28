@@ -182,7 +182,7 @@ const MODE_ID = {
 const META_PRESET = 0x01;
 const META_MODE = 0x02;
 const META_PID = 0x04;
-/** Tag participates in P2P global MQTT (mooreview/v1/g/{siteKey}/{tag}). */
+/** Tag participates in P2P global MQTT (peaklogic/v1/g/{siteKey}/{tag}). */
 const META_GLOBAL = 0x08;
 const NO_TAG = 0xffff;
 

@@ -5,8 +5,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = process.env.MOOREVIEW_DATA || path.join(ROOT, 'data');
-const PID_FILE = path.join(DATA_DIR, 'mooreview.pid');
+const DATA_DIR = process.env.PEAKLOGIC_DATA || path.join(ROOT, 'data');
+const PID_FILE = path.join(DATA_DIR, 'peaklogic.pid');
 const PORT = Number(process.env.PORT) || 3090;
 
 function readPidFile() {
@@ -37,7 +37,7 @@ function killPid(pid) {
     } else {
       process.kill(pid, 'SIGTERM');
     }
-    console.log(`Stopped MooreVIEW (PID ${pid})`);
+    console.log(`Stopped PeakLogic (PID ${pid})`);
     return true;
   } catch (e) {
     const msg = e.stderr?.toString?.() || e.message || String(e);
@@ -93,7 +93,7 @@ function main() {
   }
 
   if (!stopped) {
-    console.log(`No MooreVIEW server on port ${PORT}`);
+    console.log(`No PeakLogic server on port ${PORT}`);
     process.exit(0);
   }
 

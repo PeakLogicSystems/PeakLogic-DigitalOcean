@@ -1,4 +1,4 @@
-# MooreVIEW cellular Opta gateway — MQTT bridge (Option B).
+# PeakLogic cellular Opta gateway — MQTT bridge (Option B).
 # LilyGO T-ETH-Elite + LTE Shield (A7670) or bench Wi-Fi WAN fallback.
 
 cmake_minimum_required(VERSION 3.16)

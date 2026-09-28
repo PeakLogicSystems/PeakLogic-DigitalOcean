@@ -1,5 +1,5 @@
 {
-  "composite": "/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg",
+  "composite": "/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg",
   "parts": [
     "/hmi/svg/library/charts-trends/standard/mv/editable/chart.svg",
     "/hmi/svg/library/charts-trends/strip-charts/mv/chart-strip/strip_chart_aqua.svg",
@@ -42,5 +42,5 @@
     "/hmi/svg/library/gauges-meters/dial-backgrounds/mv/gauge-dial-bg/gauge_dialbg_violet.svg",
     "/hmi/svg/library/gauges-meters/dial-backgrounds/mv/gauge-dial-bg/gauge_dialbg_white.svg"
   ],
-  "note": "Use library/pid-faceplates/mooreview/pid_loop_standard.svg or compose from MV gauge dial + bar graph + bezels."
+  "note": "Use library/pid-faceplates/peaklogic/pid_loop_standard.svg or compose from MV gauge dial + bar graph + bezels."
 }

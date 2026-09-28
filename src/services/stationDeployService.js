@@ -119,7 +119,7 @@ async function deployStationProgram(args) {
       ok: false,
       status: 502,
       error: `Opta MQTT buffer is ${bufBytes} B but the program deploy is ${payloadBytes} B — `
-        + 'the device would drop it. Reflash the Opta with MooreviewOptaMqttSt v2.3.55+ '
+        + 'the device would drop it. Reflash the Opta with PeaklogicOptaMqttSt v2.3.55+ '
         + '(allocates the MQTT packet buffer at boot so it is not stuck at 256 B), then deploy again.',
     };
   }
@@ -135,7 +135,7 @@ async function deployStationProgram(args) {
       ok: false,
       status: 502,
       error: `Deploy (put_program) failed: ${err.message}. `
-        + 'If the device is online, its MQTT buffer is likely too small — reflash MooreviewOptaMqttSt v2.3.55+.',
+        + 'If the device is online, its MQTT buffer is likely too small — reflash PeaklogicOptaMqttSt v2.3.55+.',
     };
   }
 

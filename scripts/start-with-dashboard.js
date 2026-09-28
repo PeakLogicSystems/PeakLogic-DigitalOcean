@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Start MooreVIEW and open the dashboard after /health responds.
+ * Start PeakLogic and open the dashboard after /health responds.
  * Used by portable install launchers so the browser does not hit a dead port
  * or another process already bound to 3090.
  */
@@ -12,8 +12,8 @@ const http = require('http');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const port = Number(process.env.PORT || process.env.MOOREVIEW_PORT || 3090);
-const openUrl = process.env.MOOREVIEW_OPEN_URL || `http://127.0.0.1:${port}/`;
+const port = Number(process.env.PORT || process.env.PEAKLOGIC_PORT || 3090);
+const openUrl = process.env.PEAKLOGIC_OPEN_URL || `http://127.0.0.1:${port}/`;
 
 const server = spawn(process.execPath, ['server.js'], {
   cwd: ROOT,

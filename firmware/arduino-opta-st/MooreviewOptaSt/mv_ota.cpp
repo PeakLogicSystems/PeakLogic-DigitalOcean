@@ -235,7 +235,7 @@ void mvOtaBegin() {
 #endif
 #if defined(MV_HAS_ARDUINO_OTA)
   g_ota.wifiOta = true;
-  ArduinoOTA.setHostname("mooreview-opta");
+  ArduinoOTA.setHostname("peaklogic-opta");
   if (MV_OTA_PASSWORD[0]) ArduinoOTA.setPassword(MV_OTA_PASSWORD);
   ArduinoOTA.onStart([]() {
     if (g_runtimeRunning) *g_runtimeRunning = false;

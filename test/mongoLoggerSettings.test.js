@@ -14,7 +14,7 @@ describe('normalizeMongoLogger', () => {
   it('saves uri with defaults', () => {
     const ml = normalizeMongoLogger({ uri: 'mongodb://127.0.0.1:27017' }, {});
     assert.equal(ml.uri, 'mongodb://127.0.0.1:27017');
-    assert.equal(ml.db, 'mooreview');
+    assert.equal(ml.db, 'peaklogic');
     assert.equal(ml.collection, 'tag_logs');
     assert.equal(ml.edgeCollection, 'edge_inference');
     assert.equal(ml.sampleIntervalMs, 5000);
@@ -30,7 +30,7 @@ describe('normalizeMongoLogger', () => {
   it('merges db/collection on partial update without uri key', () => {
     const ml = normalizeMongoLogger(
       { db: 'archive', sampleIntervalMs: 10000 },
-      { mongoLogger: { uri: 'mongodb://host', db: 'mooreview', collection: 'tag_logs' } }
+      { mongoLogger: { uri: 'mongodb://host', db: 'peaklogic', collection: 'tag_logs' } }
     );
     assert.equal(ml.uri, 'mongodb://host');
     assert.equal(ml.db, 'archive');
@@ -60,15 +60,15 @@ describe('resolveMongoLoggerForDeployment', () => {
   const prevDb = process.env.MONGODB_DB;
 
   it('cloud replaces localhost tenant URI with platform env', () => {
-    process.env.MONGODB_URI = 'mongodb+srv://cloud.example/mooreview_cloud';
-    process.env.MONGODB_DB = 'mooreview_cloud';
+    process.env.MONGODB_URI = 'mongodb+srv://cloud.example/peaklogic_cloud';
+    process.env.MONGODB_DB = 'peaklogic_cloud';
     try {
       const ml = resolveMongoLoggerForDeployment(
-        { uri: 'mongodb://127.0.0.1:27017', db: 'mooreview' },
+        { uri: 'mongodb://127.0.0.1:27017', db: 'peaklogic' },
         'cloud',
       );
-      assert.equal(ml.uri, 'mongodb+srv://cloud.example/mooreview_cloud');
-      assert.equal(ml.db, 'mooreview_cloud');
+      assert.equal(ml.uri, 'mongodb+srv://cloud.example/peaklogic_cloud');
+      assert.equal(ml.db, 'peaklogic_cloud');
     } finally {
       if (prevUri == null) delete process.env.MONGODB_URI;
       else process.env.MONGODB_URI = prevUri;

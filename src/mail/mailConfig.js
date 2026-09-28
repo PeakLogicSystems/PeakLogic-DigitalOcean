@@ -19,9 +19,9 @@ function getMailConfig() {
     process.env.SMTP_PASS || process.env.SMTP_PASSWORD || platform.pass || '',
   ).trim();
   const from = String(
-    process.env.MAIL_FROM || process.env.SMTP_FROM || platform.from || user || 'noreply@mooreview.local',
+    process.env.MAIL_FROM || process.env.SMTP_FROM || platform.from || user || 'noreply@peaklogic.local',
   ).trim();
-  const fromName = String(process.env.MAIL_FROM_NAME || platform.fromName || 'MooreVIEW').trim() || 'MooreVIEW';
+  const fromName = String(process.env.MAIL_FROM_NAME || platform.fromName || 'PeakLogic').trim() || 'PeakLogic';
   return { host, port, secure, user, pass, from, fromName };
 }
 

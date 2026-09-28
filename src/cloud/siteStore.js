@@ -93,7 +93,7 @@ class SiteStore {
     const rec = {
       siteId: id,
       name: String(name || id).trim() || id,
-      tenantId: String(tenantId || process.env.MOOREVIEW_TENANT_ID || 'demo').trim() || 'demo',
+      tenantId: String(tenantId || process.env.PEAKLOGIC_TENANT_ID || 'demo').trim() || 'demo',
       address: String(address || '').trim(),
       county: String(county || '').trim().toLowerCase(),
       lat: Number.isFinite(Number(lat)) ? Number(lat) : null,

@@ -105,7 +105,7 @@ function defaultLabel(doc, suffix) {
   return loc ? `${loc} ${tail}` : `${doc.deviceId} ${tail}`;
 }
 
-/** Normalize NC portal description to a MooreVIEW tag id (e.g. "RM101_Toilet_Leak" → RM101_TOILET_LEAK). */
+/** Normalize NC portal description to a PeakLogic tag id (e.g. "RM101_Toilet_Leak" → RM101_TOILET_LEAK). */
 function normalizeDescriptionTagId(description) {
   const raw = String(description || '').replace(/^\s+|\s+$/g, '').replace(/^\t+/, '').trim();
   if (!raw || /\s/.test(raw)) return '';
@@ -206,7 +206,7 @@ function deviceDocToTags(doc, driverId) {
 }
 
 /**
- * Build MooreVIEW tag rows from a NextCentury device cache (Map or iterable entries).
+ * Build PeakLogic tag rows from a NextCentury device cache (Map or iterable entries).
  */
 function buildNextcenturyTags(deviceCache, driverId, meta = {}) {
   const incoming = [...makeStatusTags(driverId, meta)];

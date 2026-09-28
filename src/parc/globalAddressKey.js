@@ -43,11 +43,11 @@ function siteKeyToAddrKey(siteKey) {
 }
 
 function topicPrefix(cfg) {
-  return String(cfg?.topicPrefix || 'mooreview/v1').trim().replace(/\/+$/, '') || 'mooreview/v1';
+  return String(cfg?.topicPrefix || 'peaklogic/v1').trim().replace(/\/+$/, '') || 'peaklogic/v1';
 }
 
 /**
- * Global P2P tag topic: mooreview/v1/g/{siteKey4}/{tagName}
+ * Global P2P tag topic: peaklogic/v1/g/{siteKey4}/{tagName}
  */
 function globalTopic(cfg, siteKey, tagName) {
   const tag = String(tagName || '').trim();

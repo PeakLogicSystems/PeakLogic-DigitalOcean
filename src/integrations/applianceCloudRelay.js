@@ -89,7 +89,7 @@ function enrichReportForCloud(report, cfg = config) {
       locationSlug: cfg.locationSlug,
       systemSlug: cfg.systemSlug,
       relayedAt: new Date().toISOString(),
-      source: 'mooreview-appliance',
+      source: 'peaklogic-appliance',
       ...(cellular ? { cellular } : {}),
     },
     ...(cellular ? {

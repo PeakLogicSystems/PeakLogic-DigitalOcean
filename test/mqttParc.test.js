@@ -6,38 +6,38 @@ const { topics, deviceIdFromTopic, onlineTopicInfo, telemetryTopicInfo, normaliz
 
 describe('mqttProtocol', () => {
   it('builds topics for device', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     const t = topics(cfg, 'site-01');
-    assert.equal(t.telemetry, 'mooreview/v1/site-01/telemetry');
-    assert.equal(t.cmd, 'mooreview/v1/site-01/cmd');
-    assert.equal(t.cmdResponse, 'mooreview/v1/site-01/cmd/response');
+    assert.equal(t.telemetry, 'peaklogic/v1/site-01/telemetry');
+    assert.equal(t.cmd, 'peaklogic/v1/site-01/cmd');
+    assert.equal(t.cmdResponse, 'peaklogic/v1/site-01/cmd/response');
   });
 
   it('parses deviceId from topic', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     assert.equal(
-      deviceIdFromTopic('mooreview/v1/rpi-02/telemetry', cfg),
+      deviceIdFromTopic('peaklogic/v1/rpi-02/telemetry', cfg),
       'rpi-02'
     );
     assert.equal(
-      deviceIdFromTopic('mooreview/v1/mv_f2e689fd60d96bab/cmd/response', cfg),
+      deviceIdFromTopic('peaklogic/v1/mv_f2e689fd60d96bab/cmd/response', cfg),
       'mv_f2e689fd60d96bab',
     );
     assert.equal(
-      deviceIdFromTopic('mooreview/v1/mv_f2e689fd60d96bab/online', cfg),
+      deviceIdFromTopic('peaklogic/v1/mv_f2e689fd60d96bab/online', cfg),
       'mv_f2e689fd60d96bab',
     );
     assert.equal(deviceIdFromTopic('other/rpi-02/telemetry', cfg), null);
   });
 
   it('parses tenant-scoped online and telemetry topics', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     assert.deepEqual(
-      onlineTopicInfo('mooreview/v1/acme-corp/mv_opta01/online', cfg),
+      onlineTopicInfo('peaklogic/v1/acme-corp/mv_opta01/online', cfg),
       { tenantId: 'acme-corp', deviceId: 'mv_opta01' },
     );
     assert.equal(
-      deviceIdFromTopic('mooreview/v1/acme-corp/mv_opta01/online', cfg),
+      deviceIdFromTopic('peaklogic/v1/acme-corp/mv_opta01/online', cfg),
       'mv_opta01',
     );
   });

@@ -1,5 +1,5 @@
 /*
- * MooreVIEW service worker — installable PWA app shell.
+ * PeakLogic service worker — installable PWA app shell.
  *
  * Strategy:
  *   - Navigations (HTML): network-first, fall back to the cached shell when offline.

@@ -32,14 +32,14 @@ function defaultMqttParcSettings(prev = {}) {
   return {
     enabled: true,
     brokerUrl: String(prev.brokerUrl || DEFAULT_MQTT_PARC_BROKER).trim() || DEFAULT_MQTT_PARC_BROKER,
-    topicPrefix: String(prev.topicPrefix || 'mooreview/v1').trim().replace(/\/+$/, '') || 'mooreview/v1',
+    topicPrefix: String(prev.topicPrefix || 'peaklogic/v1').trim().replace(/\/+$/, '') || 'peaklogic/v1',
     clientId: prev.clientId || 'mv-central-hmi',
     username: prev.username || '',
     password: prev.password || '',
     autoDiscoverDrivers: prev.autoDiscoverDrivers === true,
     globalSiteKey: resolveGlobalSiteKey(prev),
     cloudTenantIngest: prev.cloudTenantIngest === true
-      || process.env.MOOREVIEW_DEPLOYMENT === 'cloud',
+      || process.env.PEAKLOGIC_DEPLOYMENT === 'cloud',
   };
 }
 
@@ -119,17 +119,17 @@ function mergeMqttParcSettings(incoming, prev) {
 
 /** True when a tenant System setup save may start/stop/reload the process MQTT hub. */
 function tenantMqttParcMayReloadHub() {
-  return process.env.MOOREVIEW_DEPLOYMENT !== 'cloud';
+  return process.env.PEAKLOGIC_DEPLOYMENT !== 'cloud';
 }
 
 /**
  * Platform MQTT hub config for cloud SaaS. Always enabled and pinned to
- * MOOREVIEW_MQTT_BROKER — tenant System setup checkboxes must not move this.
+ * PEAKLOGIC_MQTT_BROKER — tenant System setup checkboxes must not move this.
  */
 function cloudHubMqttParcSettings(prev = {}) {
-  const envBroker = String(process.env.MOOREVIEW_MQTT_BROKER || '').trim();
-  const envUser = String(process.env.MOSQUITTO_USER || process.env.MOOREVIEW_MQTT_USER || '').trim();
-  const envPass = String(process.env.MOSQUITTO_PASS || process.env.MOOREVIEW_MQTT_PASS || '');
+  const envBroker = String(process.env.PEAKLOGIC_MQTT_BROKER || '').trim();
+  const envUser = String(process.env.MOSQUITTO_USER || process.env.PEAKLOGIC_MQTT_USER || '').trim();
+  const envPass = String(process.env.MOSQUITTO_PASS || process.env.PEAKLOGIC_MQTT_PASS || '');
   const base = defaultMqttParcSettings(prev);
   return {
     ...base,
@@ -143,10 +143,10 @@ function cloudHubMqttParcSettings(prev = {}) {
 
 /** Cloud SaaS: pin mqttParc broker/creds to env so tenant localhost cannot steal the hub. */
 function applyCloudMqttParcEnv(settings) {
-  if (process.env.MOOREVIEW_DEPLOYMENT !== 'cloud') {
+  if (process.env.PEAKLOGIC_DEPLOYMENT !== 'cloud') {
     return { settings, changed: false };
   }
-  const envBroker = String(process.env.MOOREVIEW_MQTT_BROKER || '').trim();
+  const envBroker = String(process.env.PEAKLOGIC_MQTT_BROKER || '').trim();
   if (!envBroker) return { settings, changed: false };
 
   const next = { ...settings };
@@ -206,15 +206,15 @@ async function bootstrapMqttParc(options = {}) {
   const cloudPatch = applyCloudMqttParcEnv(settings);
   settings = cloudPatch.settings;
   let cloudChanged = cloudPatch.changed;
-  if (process.env.MOOREVIEW_DEPLOYMENT === 'cloud' && !String(process.env.MOOREVIEW_MQTT_BROKER || '').trim()) {
-    console.warn('[mqtt-parc] MOOREVIEW_MQTT_BROKER unset — cloud hub may listen on localhost instead of mv-mqtt');
+  if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud' && !String(process.env.PEAKLOGIC_MQTT_BROKER || '').trim()) {
+    console.warn('[mqtt-parc] PEAKLOGIC_MQTT_BROKER unset — cloud hub may listen on localhost instead of mv-mqtt');
   }
   const drivers = options.drivers || persistence.readJson('drivers.json', []);
   const { settings: merged, changed: settingsChanged } = ensureMqttParcInSettings(settings, drivers);
   if ((settingsChanged || cloudChanged) && options.persist !== false) {
     persistence.writeJson('settings.json', merged);
   }
-  const hubSettings = process.env.MOOREVIEW_DEPLOYMENT === 'cloud'
+  const hubSettings = process.env.PEAKLOGIC_DEPLOYMENT === 'cloud'
     ? { mqttParc: cloudHubMqttParcSettings(merged.mqttParc) }
     : merged;
   const hubResult = await startMqttParcHubFromSettings(hubSettings);
@@ -243,12 +243,12 @@ async function ensureMqttHubConnected(options = {}) {
   let settings = options.settings || persistence.readJson('settings.json', {});
   const drivers = options.drivers || persistence.readJson('drivers.json', []);
   const hub = getMqttCentralHub(registry);
-  if (process.env.MOOREVIEW_DEPLOYMENT === 'cloud') {
+  if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
     const mqttParc = cloudHubMqttParcSettings(settings.mqttParc);
-    if (!String(process.env.MOOREVIEW_MQTT_BROKER || mqttParc.brokerUrl || '').trim()) {
+    if (!String(process.env.PEAKLOGIC_MQTT_BROKER || mqttParc.brokerUrl || '').trim()) {
       return {
         connected: false,
-        error: 'MOOREVIEW_MQTT_BROKER unset — cloud Parc hub cannot ingest field Optas',
+        error: 'PEAKLOGIC_MQTT_BROKER unset — cloud Parc hub cannot ingest field Optas',
       };
     }
     const hubResult = await startMqttParcHubFromSettings({ mqttParc });

@@ -68,7 +68,7 @@ const LS_STUDY_CONTEXT_BASE = {
   serviceHistory: [{
     date: '2024-01-15',
     type: 'install',
-    vendor: 'MooreVIEW sim',
+    vendor: 'PeakLogic sim',
     notes: 'Duplex lift station — 6-month PdM study seed',
   }],
 };
@@ -138,7 +138,7 @@ function buildStudySettings({ days = 180, applyProductionProfile = true } = {}) 
       simSeedDays: clampDays(days),
       forecastMethods: ['health_index', 'run_amps_creep', 'start_time_ms'],
       reportTitle: 'Lift Station PdM Study',
-      reportCompany: 'MooreVIEW Sim',
+      reportCompany: 'PeakLogic Sim',
     }, prev),
     cmms: normalizeCmmsSettings({
       autoWorkOrdersFromPdm: true,
@@ -556,7 +556,7 @@ function buildComparisonMarkdown({ scenarios, outputDir }) {
     lines.push('');
   }
 
-  lines.push('## Review in MooreVIEW', '');
+  lines.push('## Review in PeakLogic', '');
   lines.push('1. **Historian → Logger config → PdM** — 8 assets (`pump-1-*` / `pump-2-*` for each scenario).');
   lines.push('2. **CMMS** (`/cmms`) — filter source **pdm** — up to 8 proactive PM work orders.');
   lines.push('3. Live pumps `pump-1` / `pump-2` use **production early-warning profile** (`data/pdm-production-early-warning.json`).');

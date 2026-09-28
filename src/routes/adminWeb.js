@@ -48,7 +48,7 @@ router.get('/login', (req, res) => {
   if (!isPlatformAdminConfigured()) {
     return res.status(503).render('admin/login', adminLocals(req, {
       title: 'Platform Admin',
-      error: 'PLATFORM_ADMIN_KEY is not set on this server. Edit /etc/mooreview/saas.env, set a real key (openssl rand -hex 24), then: sudo systemctl restart mooreview-saas',
+      error: 'PLATFORM_ADMIN_KEY is not set on this server. Edit /etc/peaklogic/saas.env, set a real key (openssl rand -hex 24), then: sudo systemctl restart peaklogic-saas',
     }));
   }
   res.render('admin/login', adminLocals(req, {
@@ -60,13 +60,13 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   if (!isPlatformAdminConfigured()) {
     return res.status(503).render('admin/login', adminLocals(req, {
-      error: 'PLATFORM_ADMIN_KEY is not configured in /etc/mooreview/saas.env.',
+      error: 'PLATFORM_ADMIN_KEY is not configured in /etc/peaklogic/saas.env.',
     }));
   }
   const key = String(req.body.platformAdminKey || '').trim().replace(/\r/g, '');
   if (!platformAdminKeyMatches(key)) {
     return res.render('admin/login', adminLocals(req, {
-      error: 'Invalid platform admin key. Edit /etc/mooreview/saas.env on this server (not /home/mooreview/saas.env), set PLATFORM_ADMIN_KEY=your-key with no quotes, then: sudo systemctl restart mooreview-saas',
+      error: 'Invalid platform admin key. Edit /etc/peaklogic/saas.env on this server (not /home/peaklogic/saas.env), set PLATFORM_ADMIN_KEY=your-key with no quotes, then: sudo systemctl restart peaklogic-saas',
     }));
   }
   setPlatformAdminCookie(res, req);
@@ -134,7 +134,7 @@ router.post('/tenants', requirePlatformAdminWeb, asyncHandler(async (req, res) =
   } catch (err) {
     console.error('[admin] onboard customer failed:', err.stack || err.message);
     return res.status(500).render('admin/tenant-new', newTenantLocals(req, {
-      error: err.message || 'Could not create customer. Check server logs (journalctl -u mooreview-saas).',
+      error: err.message || 'Could not create customer. Check server logs (journalctl -u peaklogic-saas).',
       form: b,
     }));
   }
@@ -213,11 +213,11 @@ router.post('/tenants/:id/delete', requirePlatformAdminWeb, asyncHandler(async (
 router.post('/tenants/:id/cmms', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
   const enabled = req.body.enabled === 'on' || req.body.enabled === 'true';
   const cmmsPlan = req.body.cmmsPlan || req.body.plan || 'standard';
-  const mooreviewPlan = req.body.mooreviewPlan || req.body.tenantPlan || 'standard';
+  const peaklogicPlan = req.body.peaklogicPlan || req.body.tenantPlan || 'standard';
   const result = await tenantService.updateTenantSettings(
     req.params.id,
     {
-      plan: mooreviewPlan,
+      plan: peaklogicPlan,
       cmms: { enabled, plan: cmmsPlan },
     },
     { enabledBy: 'platform-admin' },

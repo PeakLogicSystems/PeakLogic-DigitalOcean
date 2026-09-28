@@ -14,7 +14,7 @@ function resolveParcTagRole(row, type, id) {
   return role;
 }
 
-/** Map Parc telemetry tag row → MooreVIEW tag store row. */
+/** Map Parc telemetry tag row → PeakLogic tag store row. */
 function parcRowToStoreTag(row, driverId) {
   const id = String(row?.id || '').trim();
   if (!id) return null;

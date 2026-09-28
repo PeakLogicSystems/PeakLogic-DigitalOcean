@@ -6,7 +6,7 @@
  *
  * Usage:
  *   npm run seed:bundled-projects
- *   MOOREVIEW_CONFIG_URI=mongodb://127.0.0.1:27017 npm run seed:bundled-projects
+ *   PEAKLOGIC_CONFIG_URI=mongodb://127.0.0.1:27017 npm run seed:bundled-projects
  */
 
 const path = require('path');
@@ -14,7 +14,7 @@ const { CONFIG_URI } = require(path.join(__dirname, '../src/config'));
 
 async function main() {
   if (CONFIG_URI === 'memory') {
-    console.error('Bundled project seed requires MongoDB (MOOREVIEW_CONFIG_URI), not memory mode.');
+    console.error('Bundled project seed requires MongoDB (PEAKLOGIC_CONFIG_URI), not memory mode.');
     process.exit(1);
   }
 

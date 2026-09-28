@@ -1,7 +1,7 @@
 # AI, Edge, and Cloud Architecture
 
 **Document version:** 1.0  
-**Product:** mooreVIEW  
+**Product:** PeakLogic  
 **Audience:** Integrators, cloud operators, IoT-Link field deployment  
 **Generated:** Run `npm run build:ai-edge-cloud-pdf` for build date
 
@@ -55,15 +55,15 @@ Appliances **link to cloud**; they do not replace it. Field buses (Modbus RTU, B
 
 ## 3. AI vs pseudo-AI — where each resides
 
-MooreVIEW uses **five processing layers**. **Host ONNX** is neural inference on cloud / IoT-Link; **UNO Q** runs true FFT MCSA and on-device classification (heuristic + spectral, optional ONNX later).
+PeakLogic uses **five processing layers**. **Host ONNX** is neural inference on cloud / IoT-Link; **UNO Q** runs true FFT MCSA and on-device classification (heuristic + spectral, optional ONNX later).
 
 ### 3.1 Device pseudo-AI (Arduino Opta firmware)
 
 | Item | Detail |
 |------|--------|
-| **Code** | `firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt/mv_edge_ai.cpp` + `mv_mcsa_m7.cpp` |
+| **Code** | `firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt/mv_edge_ai.cpp` + `mv_mcsa_m7.cpp` |
 | **Pseudo MCSA** | Between ingest windows: `mcsa[]` spectra **synthesized** from CT amps |
-| **M4 true FFT (2.3.80+)** | Every **5 min** M7 captures I1–I6 (0–1 V: 16-bit, 16× burst OS, 512 Hz / 2048 samp / 4 s) → SRAM4 → **Cortex-M4** residual FFT. Flash `MooreviewOptaMcsaM4` with 1.5/0.5 MB split. |
+| **M4 true FFT (2.3.80+)** | Every **5 min** M7 captures I1–I6 (0–1 V: 16-bit, 16× burst OS, 512 Hz / 2048 samp / 4 s) → SRAM4 → **Cortex-M4** residual FFT. Flash `PeaklogicOptaMcsaM4` with 1.5/0.5 MB split. |
 | **edgeAi[]** | Start-time labels on M7; spectral labels from M4 after each ingest |
 | **Labels** | `healthy`, `seal_leak`, `clog_ragging`, `impeller_worn`, plus M4 `bearing_wear` / `eccentricity` |
 | **Uplink** | Parc telemetry → cloud or via IoT-Link LAN broker |
@@ -76,7 +76,7 @@ M7 ST scan is not blocked by FFT. Default **0–1 V DC RMS** CTs: 16-bit ADC, sc
 |------|--------|
 | **Template** | `mcxn947_hvac_mcsa`, lift MCSA platforms |
 | **Signal** | Real FFT cooked spectra in `mcsa[]` (fund, rotor, bearing bins) |
-| **Classification** | Typically on **MooreVIEW host** after uplink |
+| **Classification** | Typically on **PeakLogic host** after uplink |
 | **Typical site** | C-store RTU, IoT-Link + HaLow/MCSA node |
 
 Signal processing on device; **decision layer** on cloud or IoT-Link runtime.
@@ -229,7 +229,7 @@ Do **not** position the Windows MVP Suite PC as the primary field appliance. **I
 | Concern | Path |
 |---------|------|
 | Opta pseudo-AI / MCSA-lite | `firmware/.../mv_edge_ai.cpp` |
-| Opta M4 true FFT (5 min ingest) | `firmware/.../mv_mcsa_m7.cpp`, `MooreviewOptaMcsaM4/` |
+| Opta M4 true FFT (5 min ingest) | `firmware/.../mv_mcsa_m7.cpp`, `PeaklogicOptaMcsaM4/` |
 | UNO Q true FFT + edge classify | `firmware/arduino-uno-q-mcsa/` |
 | Host inference orchestration | `src/inference/hostInference.js` |
 | Rule classifier (pseudo) | `src/inference/ruleClassifier.js` |
@@ -238,8 +238,8 @@ Do **not** position the Windows MVP Suite PC as the primary field appliance. **I
 | PdM forecast | `src/pdm/failureForecast.js` |
 | Feature alignment | `src/pdm/featureAlign.js` |
 | Cloud remote uplink | `src/integrations/applianceCloudRelay.js` |
-| IoT-Link service | `deploy/iot-link/mooreview-iot-link-generic.service` |
+| IoT-Link service | `deploy/iot-link/peaklogic-iot-link-generic.service` |
 
 ---
 
-*mooreVIEW · AI / Edge / Cloud architecture v1.0*
+*PeakLogic · AI / Edge / Cloud architecture v1.0*

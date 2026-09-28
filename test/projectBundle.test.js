@@ -50,7 +50,7 @@ describe('projectBundle', () => {
     };
 
     const bundle = packMvDraw(doc, {}, { readAsset });
-    assert.equal(bundle.format, 'mooreview-bundle');
+    assert.equal(bundle.format, 'peaklogic-bundle');
     assert.equal(bundle.kind, 'mvdraw');
     assert.equal(bundle.assets.length, 1);
     assert.equal(bundle.assets[0].ref, 'uploads/plot.png');

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # Phase 1 — dedicated Mosquitto droplet (no Node SaaS).
-# Run as root on mooreview-mqtt after copying deploy/cloud helpers + mqtt.env.
+# Run as root on peaklogic-mqtt after copying deploy/cloud helpers + mqtt.env.
 #
 #   sudo bash deploy/cloud/phase1/install-mqtt-droplet.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEBIAN_DIR="$(cd "$SCRIPT_DIR/../debian" && pwd)"
-MQTT_ENV="${MOOREVIEW_MQTT_ENV:-/etc/mooreview/mqtt.env}"
+MQTT_ENV="${PEAKLOGIC_MQTT_ENV:-/etc/peaklogic/mqtt.env}"
 
-log() { printf '[mooreview-mqtt] %s\n' "$*"; }
-die() { printf '[mooreview-mqtt] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-mqtt] %s\n' "$*"; }
+die() { printf '[peaklogic-mqtt] ERROR: %s\n' "$*" >&2; exit 1; }
 
 [[ "${EUID:-$(id -u)}" -eq 0 ]] || die "Run as root"
 
@@ -18,7 +18,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
 apt-get install -y -qq mosquitto mosquitto-clients openssl ca-certificates
 
-install -d -m 0750 /etc/mooreview
+install -d -m 0750 /etc/peaklogic
 if [[ ! -f "$MQTT_ENV" ]]; then
   install -m 0640 "$SCRIPT_DIR/.env.mqtt.example" "$MQTT_ENV"
   die "Created $MQTT_ENV — set MOSQUITTO_PASS (and domain), then re-run"
@@ -35,7 +35,7 @@ set +a
 [[ -n "${MOSQUITTO_USER:-}" && -n "${MOSQUITTO_PASS:-}" ]] || die "MOSQUITTO_USER/PASS required in $MQTT_ENV"
 [[ "${MOSQUITTO_PASS}" != "CHANGE_ME_STRONG_SECRET" ]] || die "Replace CHANGE_ME_STRONG_SECRET in $MQTT_ENV"
 
-DOMAIN="${MOOREVIEW_DOMAIN:-mqtt.mooreview.io}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-mqtt.peaklogic.io}"
 ALLOW_ANON="${MOSQUITTO_ALLOW_ANONYMOUS:-false}"
 
 log "Configuring Mosquitto password file…"
@@ -53,7 +53,7 @@ install -d -m 0755 "$CONF_D"
 CAFILE=/etc/mosquitto/certs/server.crt
 if [[ "${MOSQUITTO_TLS:-false}" == "true" ]]; then
   log "Installing MQTT TLS material for ${DOMAIN}…"
-  MOOREVIEW_DOMAIN="$DOMAIN" bash "$DEBIAN_DIR/setup-mosquitto-tls.sh"
+  PEAKLOGIC_DOMAIN="$DOMAIN" bash "$DEBIAN_DIR/setup-mosquitto-tls.sh"
   [[ -f /etc/mosquitto/certs/ca.crt ]] && CAFILE=/etc/mosquitto/certs/ca.crt
 fi
 
@@ -81,7 +81,7 @@ fi
     echo "keyfile /etc/mosquitto/certs/server.key"
     echo "require_certificate false"
   fi
-} > "$CONF_D/mooreview.conf"
+} > "$CONF_D/peaklogic.conf"
 
 # Disable default listener conflict if present
 if [[ -f /etc/mosquitto/mosquitto.conf ]]; then

@@ -1,7 +1,7 @@
 'use strict';
 
 /** Shared Opta expansion module I/O helpers (X{n}_ tags from D1608E / A0602). */
-window.MooreviewExpansionIo = (function () {
+window.PeaklogicExpansionIo = (function () {
   const EXPANSION_RE = /^X(\d+)_/;
 
   function isExpansionIoTag(tag) {

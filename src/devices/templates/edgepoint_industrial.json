@@ -12,7 +12,7 @@
   "defaults": {
     "brokerUrl": "mqtt://127.0.0.1:1883",
     "serialNum": "40a36bcd7113",
-    "clientId": "mooreview",
+    "clientId": "peaklogic",
     "subscribeQos": 0,
     "publishQos": 0
   },

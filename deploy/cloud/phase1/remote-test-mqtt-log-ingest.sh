@@ -4,12 +4,12 @@ node <<'NODE'
 const fs = require('fs');
 const http = require('http');
 const env = {};
-for (const raw of fs.readFileSync('/etc/mooreview/saas.env', 'utf8').split(/\r?\n/)) {
+for (const raw of fs.readFileSync('/etc/peaklogic/saas.env', 'utf8').split(/\r?\n/)) {
   const line = raw.trim();
   const i = line.indexOf('=');
   if (i > 0) env[line.slice(0, i)] = line.slice(i + 1);
 }
-const token = env.MOOREVIEW_MQTT_LOG_INGEST_TOKEN || env.PLATFORM_ADMIN_KEY || '';
+const token = env.PEAKLOGIC_MQTT_LOG_INGEST_TOKEN || env.PLATFORM_ADMIN_KEY || '';
 const body = JSON.stringify({
   host: 'mv-mqtt-test',
   lines: [

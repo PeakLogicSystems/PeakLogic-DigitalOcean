@@ -200,12 +200,12 @@
     const BATH_W = 2.4;
     const BATH_D = 2.6;
     const CORR_W = 2.4;
-    /** MooreVIEW REST root — appliance `/api`, cloud Studio `/api/studio`. */
+    /** PeakLogic REST root — appliance `/api`, cloud Studio `/api/studio`. */
     let mvApiRoot = String(window.MV_API_BASE || '').trim();
     if (!mvApiRoot) {
       try {
-        if (window.parent !== window && window.parent.MOOREVIEW_API_BASE) {
-          mvApiRoot = String(window.parent.MOOREVIEW_API_BASE).trim();
+        if (window.parent !== window && window.parent.PEAKLOGIC_API_BASE) {
+          mvApiRoot = String(window.parent.PEAKLOGIC_API_BASE).trim();
         }
       } catch { /* ignore */ }
     }
@@ -803,7 +803,7 @@
         el.classList.add('ok');
         if (selectedZone) updateDetailPanelValues(selectedZone);
       } catch (e) {
-        el.textContent = `MV live: offline (${e.message}) — open from MooreVIEW server`;
+        el.textContent = `MV live: offline (${e.message}) — open from PeakLogic server`;
         el.classList.remove('ok');
         el.classList.add('err');
       }
@@ -819,7 +819,7 @@
         sub.textContent = 'Dining area — open linked resident rooms below';
       } else {
         sub.textContent = ud.roomNum > 0
-          ? 'Resident room — opens room sensor popup in MooreVIEW'
+          ? 'Resident room — opens room sensor popup in PeakLogic'
           : (ud.detailScreen
             ? (hmiScreenConfigured(ud.detailScreen)
               ? hmiScreenLabel(ud.detailScreen)

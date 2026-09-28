@@ -20,10 +20,10 @@
 
 // WiFi setup AP (Opta WiFi variant)
 #ifndef MV_WIFI_AP_SSID
-#define MV_WIFI_AP_SSID "MooreVIEW-Opta"
+#define MV_WIFI_AP_SSID "PeakLogic-Opta"
 #endif
 #ifndef MV_WIFI_AP_PASS
-#define MV_WIFI_AP_PASS "mooreview"
+#define MV_WIFI_AP_PASS "peaklogic"
 #endif
 #ifndef MV_WIFI_AP_IP
 #define MV_WIFI_AP_IP 192, 168, 4, 1

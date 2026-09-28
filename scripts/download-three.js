@@ -23,7 +23,7 @@ function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest);
     https.get(url, {
-      headers: { 'User-Agent': 'MooreVIEW-three-download' },
+      headers: { 'User-Agent': 'PeakLogic-three-download' },
     }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         file.close();

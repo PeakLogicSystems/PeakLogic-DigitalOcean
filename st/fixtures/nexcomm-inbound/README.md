@@ -19,4 +19,4 @@ Regenerate:
 node scripts/nexcomm-csv/generate-inbound-templates.js
 ```
 
-Apply under **Drivers → Device template**. Set `serialNum` (normalized) and Mosquitto user/pass for `mqtts://mqtt.mooreview.io:8883`.
+Apply under **Drivers → Device template**. Set `serialNum` (normalized) and Mosquitto user/pass for `mqtts://mqtt.peaklogic.io:8883`.

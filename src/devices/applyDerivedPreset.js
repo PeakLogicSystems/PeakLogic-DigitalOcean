@@ -81,7 +81,7 @@ function buildEzMeterPqDerivedPreset() {
   return {
     id: EZMETER_PQ_DERIVED_PRESET_ID,
     label: 'EZ Meter — facility PQ derived measurement set',
-    vendor: 'MooreVIEW',
+    vendor: 'PeakLogic',
     model: 'Facility power quality (ST-derived)',
     transport: 'derived',
     tagsOnly: true,

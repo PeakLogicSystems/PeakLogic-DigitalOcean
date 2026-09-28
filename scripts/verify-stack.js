@@ -3,11 +3,11 @@
 'use strict';
 
 /**
- * Automated smoke verification for MooreVIEW Mongo config, projects, and stack health.
+ * Automated smoke verification for PeakLogic Mongo config, projects, and stack health.
  *
  * Usage:
  *   npm run verify-stack
- *   MOOREVIEW_CONFIG_URI=mongodb://127.0.0.1:27017 npm run verify-stack
+ *   PEAKLOGIC_CONFIG_URI=mongodb://127.0.0.1:27017 npm run verify-stack
  *
  * Uses an isolated temp data dir and test Mongo database. Optionally probes a live server
  * on PORT when reachable (GET /health, GET /api/projects).
@@ -61,9 +61,9 @@ async function dropTestDatabase(uri, testDb) {
 }
 
 async function runInProcessChecks(uri, testDb, tmpDir) {
-  process.env.MOOREVIEW_DATA = tmpDir;
-  process.env.MOOREVIEW_CONFIG_URI = uri;
-  process.env.MOOREVIEW_CONFIG_DB = testDb;
+  process.env.PEAKLOGIC_DATA = tmpDir;
+  process.env.PEAKLOGIC_CONFIG_URI = uri;
+  process.env.PEAKLOGIC_CONFIG_DB = testDb;
   delete process.env.MONGODB_URI;
   delete process.env.MONGO_URL;
 
@@ -248,18 +248,18 @@ async function runHttpChecks(port) {
 }
 
 async function main() {
-  const uri = String(process.env.MOOREVIEW_CONFIG_URI || process.env.MONGODB_URI || '').trim();
+  const uri = String(process.env.PEAKLOGIC_CONFIG_URI || process.env.MONGODB_URI || '').trim();
   if (!uri || uri === 'memory') {
-    record('Mongo URI configured', false, 'Set MOOREVIEW_CONFIG_URI or MONGODB_URI (not memory)');
+    record('Mongo URI configured', false, 'Set PEAKLOGIC_CONFIG_URI or MONGODB_URI (not memory)');
     console.log('');
     console.log(`Result: ${results.filter((r) => r.ok).length}/${results.length} passed`);
     process.exit(1);
   }
 
-  const testDb = process.env.MOOREVIEW_VERIFY_DB || `mv_verify_${Date.now()}`;
+  const testDb = process.env.PEAKLOGIC_VERIFY_DB || `mv_verify_${Date.now()}`;
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-verify-stack-'));
 
-  console.log('MooreVIEW verify-stack');
+  console.log('PeakLogic verify-stack');
   console.log(`  mongo: ${uri}`);
   console.log(`  test db: ${testDb}`);
   console.log(`  temp data: ${tmpDir}`);

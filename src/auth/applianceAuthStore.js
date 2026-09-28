@@ -73,10 +73,10 @@ class ApplianceAuthStore {
 
   ensureSeed() {
     if (this._store.seededAt && Object.keys(this._store.users).length) return;
-    const adminEmail = (process.env.MOOREVIEW_SEED_ADMIN_EMAIL || 'admin@local').toLowerCase();
-    const adminPass = process.env.MOOREVIEW_SEED_ADMIN_PASSWORD || 'ChangeMeAdmin!';
-    const opEmail = (process.env.MOOREVIEW_SEED_OPERATOR_EMAIL || 'operator@local').toLowerCase();
-    const opPass = process.env.MOOREVIEW_SEED_OPERATOR_PASSWORD || 'operator';
+    const adminEmail = (process.env.PEAKLOGIC_SEED_ADMIN_EMAIL || 'admin@local').toLowerCase();
+    const adminPass = process.env.PEAKLOGIC_SEED_ADMIN_PASSWORD || 'ChangeMeAdmin!';
+    const opEmail = (process.env.PEAKLOGIC_SEED_OPERATOR_EMAIL || 'operator@local').toLowerCase();
+    const opPass = process.env.PEAKLOGIC_SEED_OPERATOR_PASSWORD || 'operator';
 
     if (!Object.values(this._store.users).some((u) => u.role === 'admin')) {
       const id = `user_${randomToken(6)}`;

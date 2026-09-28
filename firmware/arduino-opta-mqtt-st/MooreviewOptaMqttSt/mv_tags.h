@@ -118,7 +118,7 @@ struct MvTag {
   int32_t forceI;
   float forceR;
 
-  /** P2P global tag — pub/sub on mooreview/v1/g/{siteKey}/{id}. */
+  /** P2P global tag — pub/sub on peaklogic/v1/g/{siteKey}/{id}. */
   bool isGlobal;
 };
 

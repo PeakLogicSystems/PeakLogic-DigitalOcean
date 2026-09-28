@@ -1,4 +1,4 @@
-# Building mooreVIEW T-HaLow firmware
+# Building PeakLogic T-HaLow firmware
 
 ESP-IDF project for the **LilyGO T-HaLow** (ESP32-S3 + TX-AH HaLow module). Target path: `halow-xiao-sta/`.
 
@@ -41,7 +41,7 @@ First-time optional configuration:
 idf.py menuconfig
 ```
 
-Useful menus: **Device config**, **TX-AH**, **mooreVIEW Parc**, **Sensors**.
+Useful menus: **Device config**, **TX-AH**, **PeakLogic Parc**, **Sensors**.
 
 ---
 
@@ -73,7 +73,7 @@ If `idf.py` is not found, run the ESP-IDF export script (`export.ps1` / `export.
 ## After flash
 
 1. Put the HaLow AP in **pairing mode** (default `AT+PAIR` workflow).
-2. Connect to Wi-Fi AP **`mooreVIEW-T-HaLow`** / password **`mooreview`**.
+2. Connect to Wi-Fi AP **`PeakLogic-T-HaLow`** / password **`peaklogic`**.
 3. Open **`http://192.168.4.1:8080/setup`** — broker, HaLow IP, device ID, ALF sensor template.
 4. **Save & reboot**. MQTT runs over HaLow when the link is up.
 

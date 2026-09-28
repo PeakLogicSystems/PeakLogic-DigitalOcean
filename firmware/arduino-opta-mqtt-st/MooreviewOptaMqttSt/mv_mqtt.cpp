@@ -1281,7 +1281,7 @@ bool mvMqttTestConnection(const char* host, uint16_t port, const char* user, con
     return false;
   }
   if (!strcmp(host, "127.0.0.1") || !strcmp(host, "localhost")) {
-    setErr("Broker cannot be 127.0.0.1 on device — use MooreVIEW / cloud LAN IP");
+    setErr("Broker cannot be 127.0.0.1 on device — use PeakLogic / cloud LAN IP");
     if (stateOut) *stateOut = -1;
     return false;
   }
@@ -1380,7 +1380,7 @@ bool mvMqttTestConnection(const char* host, uint16_t port, const char* user, con
   }
 
   char testTopic[96];
-  snprintf(testTopic, sizeof(testTopic), "mooreview/v1/%s/setup-test", devId ? devId : "opta");
+  snprintf(testTopic, sizeof(testTopic), "peaklogic/v1/%s/setup-test", devId ? devId : "opta");
   const bool pubOk = testMqtt->publish(testTopic, "{\"source\":\"opta-setup\",\"ok\":true}");
   testMqtt->disconnect();
   Ethernet.maintain();

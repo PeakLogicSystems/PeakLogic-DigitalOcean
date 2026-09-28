@@ -49,8 +49,8 @@
   function fmtTime(v) {
     if (!v) return '—';
     try {
-      if (window.MooreviewTime?.formatFriendly) return window.MooreviewTime.formatFriendly(v);
-      return new Date(v).toLocaleString(undefined, window.MooreviewTime?.localeOpts?.() || {});
+      if (window.PeaklogicTime?.formatFriendly) return window.PeaklogicTime.formatFriendly(v);
+      return new Date(v).toLocaleString(undefined, window.PeaklogicTime?.localeOpts?.() || {});
     } catch { return String(v); }
   }
 
@@ -951,7 +951,7 @@
       await refreshCameras();
       closeEditForm();
       setMsg('cameras-inventory-msg', 'Camera saved.', true);
-      window.MooreviewHmiCameras?.refreshPicker?.();
+      window.PeaklogicHmiCameras?.refreshPicker?.();
     } catch (err) {
       setMsg('cameras-inventory-msg', err.message || String(err), false);
     }
@@ -966,7 +966,7 @@
       await refreshCameras();
       closeEditForm();
       setMsg('cameras-inventory-msg', 'Camera deleted.', true);
-      window.MooreviewHmiCameras?.refreshPicker?.();
+      window.PeaklogicHmiCameras?.refreshPicker?.();
     } catch (e) {
       setMsg('cameras-inventory-msg', e.message, false);
     }
@@ -995,7 +995,7 @@
       setMsg(msgId, ok
         ? `Probe OK — ${data.camera?.name || cameraId} ready`
         : `Probe failed: ${data.probe?.error || 'unknown error'}`, ok);
-      window.MooreviewHmiCameras?.refreshPicker?.();
+      window.PeaklogicHmiCameras?.refreshPicker?.();
       if (activeTab === 'detail') loadDetail();
     } catch (e) {
       setMsg(msgId, e.message || String(e), false);
@@ -1018,7 +1018,7 @@
       const okN = (data.probed || []).filter((p) => p.ok).length;
       const total = (data.probed || []).length;
       setMsg('cameras-inventory-msg', `Probed ${okN}/${total} camera(s).`, okN === total);
-      window.MooreviewHmiCameras?.refreshPicker?.();
+      window.PeaklogicHmiCameras?.refreshPicker?.();
     } catch (e) {
       setMsg('cameras-inventory-msg', e.message || String(e), false);
     }
@@ -1089,7 +1089,7 @@
           true,
         );
       }
-      window.MooreviewHmiCameras?.refreshPicker?.();
+      window.PeaklogicHmiCameras?.refreshPicker?.();
     } catch (e) {
       setMsg(msgId, e.message || String(e), false);
     }
@@ -1114,7 +1114,7 @@
       populateCameraSelects();
       renderInventoryTable();
       renderCameraMenu();
-      window.MooreviewHmiCameras?.refreshPicker?.();
+      window.PeaklogicHmiCameras?.refreshPicker?.();
       if (data.ok) {
         setMsg('cameras-discover-msg', `${host} added and probed OK (${data.cameraId}). Use it from the top-bar camera icon or Inventory.`, true);
         if ($('cameras-addip-host')) $('cameras-addip-host').value = '';
@@ -1348,7 +1348,7 @@
   }
 
   function isCloudStudioHost() {
-    return window.MOOREVIEW_CLOUD_STUDIO === true
+    return window.PEAKLOGIC_CLOUD_STUDIO === true
       || document.body?.dataset?.mvDeployment === 'cloud';
   }
 
@@ -1578,7 +1578,7 @@
     });
   }
 
-  window.MooreviewCameras = {
+  window.PeaklogicCameras = {
     refresh: refreshCameras,
     open: () => {
       showCamerasTab(isCloudStudioHost() ? 'settings' : 'overview');
@@ -1590,11 +1590,11 @@
     },
   };
 
-  window.MooreviewHmiCameras = {
+  window.PeaklogicHmiCameras = {
     refreshPicker: refreshHmiPicker,
   };
 
-  window.MooreviewCameraMenu = {
+  window.PeaklogicCameraMenu = {
     render: renderCameraMenu,
     open: openCameraFromMenu,
   };

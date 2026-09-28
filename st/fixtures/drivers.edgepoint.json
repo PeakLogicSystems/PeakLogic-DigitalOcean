@@ -4,7 +4,7 @@
     "type": "mqtt",
     "enabled": true,
     "brokerUrl": "mqtt://127.0.0.1:1883",
-    "clientId": "mooreview-edgepoint",
+    "clientId": "peaklogic-edgepoint",
     "subscriptions": ["/devices/40a36bcd7113/messages/events/"],
     "subscribeQos": 0,
     "publishQos": 0,

@@ -25,7 +25,7 @@ describe('draginoTelemetry', () => {
       segment: 'pump01',
       deviceId: 'dragino_pump01',
     });
-    assert.equal(parseDraginoTopic('mooreview/v1/dragino_01/telemetry', cfg), null);
+    assert.equal(parseDraginoTopic('peaklogic/v1/dragino_01/telemetry', cfg), null);
   });
 
   it('draginoSubscribePattern returns wildcard when enabled', () => {
@@ -63,17 +63,17 @@ describe('draginoTelemetry', () => {
   });
 
   it('draginoCloudMqttTopics builds flat and tenant Parc paths', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     assert.deepEqual(draginoCloudMqttTopics(cfg, 'dragino_pump01'), {
-      pubTopic: 'mooreview/v1/dragino_pump01/telemetry',
-      subTopic: 'mooreview/v1/dragino_pump01/downlink',
+      pubTopic: 'peaklogic/v1/dragino_pump01/telemetry',
+      subTopic: 'peaklogic/v1/dragino_pump01/downlink',
       flat: true,
     });
     assert.deepEqual(
       draginoCloudMqttTopics(cfg, 'dragino_pump01', 'acme-corp'),
       {
-        pubTopic: 'mooreview/v1/acme-corp/dragino_pump01/telemetry',
-        subTopic: 'mooreview/v1/acme-corp/dragino_pump01/downlink',
+        pubTopic: 'peaklogic/v1/acme-corp/dragino_pump01/telemetry',
+        subTopic: 'peaklogic/v1/acme-corp/dragino_pump01/downlink',
         flat: false,
       },
     );

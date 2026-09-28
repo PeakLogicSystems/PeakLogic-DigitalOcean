@@ -1,8 +1,8 @@
 'use strict';
 
 /** ST program editor, library, and scan runtime controls */
-window.MooreviewProgram = (function () {
-  const { $, esc, on, onChange } = window.MooreviewCore;
+window.PeaklogicProgram = (function () {
+  const { $, esc, on, onChange } = window.PeaklogicCore;
 
   let deps = null;
   let programActivePath = '';
@@ -19,7 +19,7 @@ window.MooreviewProgram = (function () {
 
   const ST_NEW_TEMPLATE = '(* New ST program — edit and Save program *)\nIF IsON(DI) THEN TurnON(Q); END_IF;\n';
   let stParcMaxLines = 500;
-  const liveIoPref = () => window.MooreviewLiveIoUpdate || {};
+  const liveIoPref = () => window.PeaklogicLiveIoUpdate || {};
 
   function programMetaKey(meta, activeProgram) {
     const m = meta && typeof meta === 'object' ? meta : {};
@@ -121,11 +121,11 @@ window.MooreviewProgram = (function () {
   }
 
   function expIo() {
-    return window.MooreviewExpansionIo || {};
+    return window.PeaklogicExpansionIo || {};
   }
 
   function programIoTags() {
-    return window.MooreviewProgramIoTags || {};
+    return window.PeaklogicProgramIoTags || {};
   }
 
   function programIoTagList() {
@@ -149,12 +149,12 @@ window.MooreviewProgram = (function () {
   }
 
   function formatIoTagName(tag) {
-    const fmt = window.MooreviewTagDisplay?.formatTag;
+    const fmt = window.PeaklogicTagDisplay?.formatTag;
     return fmt ? fmt(tag, d().getTags()) : tag.id;
   }
 
   function formatIoTagSub(tag) {
-    const fmt = window.MooreviewTagDisplay?.formatTagSub;
+    const fmt = window.PeaklogicTagDisplay?.formatTagSub;
     return fmt ? fmt(tag, d().getTags()) : '';
   }
 
@@ -169,7 +169,7 @@ window.MooreviewProgram = (function () {
       return;
     }
     host.classList.remove('view-hidden');
-    const fmt = window.MooreviewTagDisplay?.formatTag || ((t) => t.id || t);
+    const fmt = window.PeaklogicTagDisplay?.formatTag || ((t) => t.id || t);
     const rows = refs.map((id) => {
       const tag = tags.find((t) => t.id === id) || { id, label: '' };
       const main = esc(fmt(tag, tags));
@@ -210,7 +210,7 @@ window.MooreviewProgram = (function () {
       const highlight = scanActive && on;
       const forced = entry && (entry.forceInput || entry.forceOutput);
       const stopped = !scanActive;
-      const ts = window.MooreviewIoTimestamp;
+      const ts = window.PeaklogicIoTimestamp;
       return `<div class="io-point digital ${highlight ? 'on' : 'off'}${forced ? ' forced' : ''}" data-io="${esc(tag.id)}" data-io-type="BOOL">
         <span class="io-name">${esc(formatIoTagName(tag))}</span>
         ${formatIoTagSub(tag) ? `<span class="io-tag-id muted">${esc(formatIoTagSub(tag))}</span>` : ''}
@@ -224,7 +224,7 @@ window.MooreviewProgram = (function () {
       const entry = d().liveEntryFor(tag.id, live);
       const forced = entry && (entry.forceInput || entry.forceOutput);
       const stopped = !scanActive;
-      const ts = window.MooreviewIoTimestamp;
+      const ts = window.PeaklogicIoTimestamp;
       return `<div class="io-point analog${forced ? ' forced' : ''}" data-io="${esc(tag.id)}" data-io-type="${esc(tag.type)}">
         <span class="io-name">${esc(formatIoTagName(tag))}</span>
         ${formatIoTagSub(tag) ? `<span class="io-tag-id muted">${esc(formatIoTagSub(tag))}</span>` : ''}
@@ -379,7 +379,7 @@ window.MooreviewProgram = (function () {
       }
       const valEl = el.querySelector('[data-io-val]');
       if (valEl) valEl.textContent = d().formatIoValue(entry);
-      const tsApi = window.MooreviewIoTimestamp;
+      const tsApi = window.PeaklogicIoTimestamp;
       let tsEl = el.querySelector('.io-ts');
       if (!tsEl && tsApi?.ioTsSpan) {
         tsEl = document.createElement('span');
@@ -1338,8 +1338,8 @@ window.MooreviewProgram = (function () {
       $('program-errors').className = r.programOk ? 'inline-msg ok' : 'inline-msg err';
       return syncProgramTagRefs().then(() => d().refreshAll());
     }).catch((e) => showProgramError(e.message)));
-    window.MooreviewTagDisplay?.bindAll(document);
-    window.addEventListener('mooreview-tag-display', () => {
+    window.PeaklogicTagDisplay?.bindAll(document);
+    window.addEventListener('peaklogic-tag-display', () => {
       renderProgramTagLegend();
       renderProgramIoPanel(d().getLastLive(), d().getLastRuntime());
     });

@@ -1,6 +1,6 @@
 // Reusable 3D lift-station objects (simplex / duplex / triplex).
 //
-// These match the MooreVIEW lift-station device templates + ST programs:
+// These match the PeakLogic lift-station device templates + ST programs:
 //   src/devices/templates/lift_station_{simplex,duplex,triplex}.json
 //   st/logic/lift_station_{simplex,duplex,triplex}.st
 //

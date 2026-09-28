@@ -156,10 +156,10 @@ async function connect() {
       await collection.createIndex({ event: 1, at: -1, 'pen.tagId': 1 });
       await edgeCollection.createIndex({ at: -1 });
       await edgeCollection.createIndex({ assetId: 1, at: -1 });
-      console.log(`[MooreVIEW] MongoDB logger connected: ${dbName()}.${collectionName()} + ${edgeCollectionName()}`);
+      console.log(`[PeakLogic] MongoDB logger connected: ${dbName()}.${collectionName()} + ${edgeCollectionName()}`);
       return true;
     } catch (e) {
-      console.warn('[MooreVIEW] MongoDB logger:', e.message);
+      console.warn('[PeakLogic] MongoDB logger:', e.message);
       client = null;
       collection = null;
       edgeCollection = null;
@@ -205,7 +205,7 @@ async function insertOne(doc) {
     await collection.insertOne({ ...doc, at: doc.at || new Date() });
     return true;
   } catch (e) {
-    console.warn('[MooreVIEW] MongoDB insert:', e.message);
+    console.warn('[PeakLogic] MongoDB insert:', e.message);
     return false;
   }
 }
@@ -220,7 +220,7 @@ async function insertMany(docs) {
     );
     return true;
   } catch (e) {
-    console.warn('[MooreVIEW] MongoDB insertMany:', e.message);
+    console.warn('[PeakLogic] MongoDB insertMany:', e.message);
     return false;
   }
 }
@@ -550,7 +550,7 @@ async function logEdgeInferences(docs) {
     );
     return { ok: true, count: docs.length };
   } catch (e) {
-    console.warn('[MooreVIEW] MongoDB edge insert:', e.message);
+    console.warn('[PeakLogic] MongoDB edge insert:', e.message);
     return { ok: false, error: e.message || String(e) };
   }
 }

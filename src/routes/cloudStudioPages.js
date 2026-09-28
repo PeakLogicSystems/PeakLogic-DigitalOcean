@@ -10,11 +10,11 @@ const { requireAuth } = require('../tenants/authMiddleware');
 function createCloudStudioPages(opts = {}) {
   const router = express.Router();
   const appVersion = opts.appVersion || '0.0.0';
-  const product = opts.product || process.env.MOOREVIEW_PRODUCT || 'mvp-suite';
+  const product = opts.product || process.env.PEAKLOGIC_PRODUCT || 'mvp-suite';
 
   function renderStudio(req, res, page) {
     res.render('cloud-studio', {
-      title: 'MooreView Cloud Studio',
+      title: 'PeakLogic Cloud Studio',
       appVersion,
       product,
       deployment: 'cloud',

@@ -28,7 +28,7 @@
     }
   ],
   "setup": [
-    "Enable Cloud Sims (MOOREVIEW_CLOUD_SIMS=1 or cloud deployment)",
+    "Enable Cloud Sims (PEAKLOGIC_CLOUD_SIMS=1 or cloud deployment)",
     "Run: node scripts/seed-website-demo-sims.js",
     "Add mqtt_parc drivers with matching deviceId (or bind-preset for Dragino decode maps)",
     "Sync tags from device on each driver"

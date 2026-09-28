@@ -25,7 +25,7 @@ let connecting = null;
 
 
 
-/** In-memory store for unit tests (MOOREVIEW_CONFIG_URI=memory). */
+/** In-memory store for unit tests (PEAKLOGIC_CONFIG_URI=memory). */
 
 const memoryDocs = new Map();
 
@@ -69,7 +69,7 @@ async function connect() {
 
     throw new Error(
 
-      'MongoDB required for configuration — set MOOREVIEW_CONFIG_URI or MONGODB_URI (e.g. mongodb://127.0.0.1:27017)',
+      'MongoDB required for configuration — set PEAKLOGIC_CONFIG_URI or MONGODB_URI (e.g. mongodb://127.0.0.1:27017)',
 
     );
 
@@ -100,7 +100,7 @@ async function connect() {
       const msg = String(err?.message || err);
       if (err?.code === 'ECONNREFUSED' || msg.includes('ECONNREFUSED')) {
         throw new Error(
-          `Cannot connect to MongoDB at ${u} — start MongoDB locally or set MOOREVIEW_CONFIG_URI to your server`,
+          `Cannot connect to MongoDB at ${u} — start MongoDB locally or set PEAKLOGIC_CONFIG_URI to your server`,
           { cause: err },
         );
       }

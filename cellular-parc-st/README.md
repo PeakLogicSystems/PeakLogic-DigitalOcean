@@ -1,6 +1,6 @@
-# mooreVIEW cellular Parc ST — ESP32 soft PLC
+# PeakLogic cellular Parc ST — ESP32 soft PLC
 
-ESP-IDF firmware for **LilyGO T-ETH-ELITE-A7670X**. The ESP32 runs **ST as MVBC bytecode** (same IR as the PC soft PLC and Arduino Opta) and speaks **MQTT Parc** directly to the mooreVIEW cloud broker.
+ESP-IDF firmware for **LilyGO T-ETH-ELITE-A7670X**. The ESP32 runs **ST as MVBC bytecode** (same IR as the PC soft PLC and Arduino Opta) and speaks **MQTT Parc** directly to the PeakLogic cloud broker.
 
 **Default build = no modem** (Wi-Fi STA WAN) for [cloud-arduino testing](../docs/LILYGO_PARC_CLOUD.md) — same Mosquitto path as [Opta Parc cloud](../docs/OPTA_PARC_CLOUD.md). Enable LTE in menuconfig for field images.
 
@@ -25,8 +25,8 @@ This is **not** an Opta bridge. There is no local MQTT broker and no Opta in the
 
 | Direction | Topics |
 |-----------|--------|
-| Device → hub | `mooreview/v1/{deviceId}/telemetry`, `online`, `cmd/response` |
-| Hub → device | `mooreview/v1/{deviceId}/cmd`, `config` |
+| Device → hub | `peaklogic/v1/{deviceId}/telemetry`, `online`, `cmd/response` |
+| Hub → device | `peaklogic/v1/{deviceId}/cmd`, `config` |
 
 `platform`: `lilygo-t-eth-elite-parc-st` · `protocolVersion`: **2**
 
@@ -43,9 +43,9 @@ This is **not** an Opta bridge. There is no local MQTT broker and no Opta in the
 ## Setup
 
 1. Flash firmware (`idf.py set-target esp32s3 && idf.py build flash monitor`).
-2. Join Wi-Fi AP **`mooreVIEW-ParcST`** / `mooreview`.
+2. Join Wi-Fi AP **`PeakLogic-ParcST`** / `peaklogic`.
 3. Open `http://192.168.4.1:8080/setup` — set deviceId, cloud MQTT host/user/pass, APN.
-4. In mooreVIEW: add device with transport **`mqtt_parc`**, matching `deviceId`.
+4. In PeakLogic: add device with transport **`mqtt_parc`**, matching `deviceId`.
 5. Download & Start ST (e.g. lift simplex) — hub sends `put_program` with base64 MVBC.
 
 ### Bench (no SIM)
@@ -102,7 +102,7 @@ Motor CT transmitters (1.00 V = 50 A) map to `I1_RAW`…`I7_RAW` / hub tags `AI1
 
 ### Duplex ST program
 
-`st/logic/37_duplex_lift_station_parc_st.st` + `st/fixtures/tags.duplex_lift_station_parc_st.json` — ALT2 duplex matched to the I/O above. Download & Start from mooreVIEW (or `put_program`). Set `CT_FTR_EN` when CT fail-to-run should use amps instead of command echo.
+`st/logic/37_duplex_lift_station_parc_st.st` + `st/fixtures/tags.duplex_lift_station_parc_st.json` — ALT2 duplex matched to the I/O above. Download & Start from PeakLogic (or `put_program`). Set `CT_FTR_EN` when CT fail-to-run should use amps instead of command echo.
 
 ## Build
 

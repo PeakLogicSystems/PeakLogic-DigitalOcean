@@ -436,7 +436,7 @@ async function refreshMessaging() {
     const canSave = Boolean(data.canSave && data.capabilities?.saveConfig !== false);
     setMessagingSaveEnabled(canSave);
     if (!canSave && data.capabilities?.saveConfig === false) {
-      const hint = '<p class="panel-hint cellular-sims-msg-error">Save is unavailable — deploy platform messaging files and restart mooreview-saas.</p>';
+      const hint = '<p class="panel-hint cellular-sims-msg-error">Save is unavailable — deploy platform messaging files and restart peaklogic-saas.</p>';
       document.getElementById('messaging-mail-status')?.insertAdjacentHTML('beforeend', hint);
       document.getElementById('messaging-sms-status')?.insertAdjacentHTML('beforeend', hint);
     }

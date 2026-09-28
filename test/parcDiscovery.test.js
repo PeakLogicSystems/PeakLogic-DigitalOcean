@@ -3,7 +3,7 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-disc-'));
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-disc-'));
 
 const { describe, it, after } = require('node:test');
 const assert = require('node:assert/strict');
@@ -149,13 +149,13 @@ describe('parcDiscovery', () => {
   });
 
   it('boot reconcile patchWorkspaceDrivers updates workspace.est.json', async (t) => {
-    const uri = process.env.MOOREVIEW_CONFIG_URI || process.env.MONGODB_URI || '';
+    const uri = process.env.PEAKLOGIC_CONFIG_URI || process.env.MONGODB_URI || '';
     if (!uri) {
       t.skip('MONGODB_URI not set');
       return;
     }
-    process.env.MOOREVIEW_CONFIG_URI = uri;
-    process.env.MOOREVIEW_CONFIG_DB = `mv_disc_test_${Date.now()}`;
+    process.env.PEAKLOGIC_CONFIG_URI = uri;
+    process.env.PEAKLOGIC_CONFIG_DB = `mv_disc_test_${Date.now()}`;
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/configStore')];
     delete require.cache[require.resolve('../src/configStore/mongoBackend')];
@@ -164,7 +164,7 @@ describe('parcDiscovery', () => {
     await configStore.init();
 
     persistence.writeJson('workspace.est.json', {
-      format: 'mooreview-est',
+      format: 'peaklogic-est',
       version: 1,
       drivers: [{ id: 'mock1', type: 'mock' }],
       tags: [],
@@ -190,6 +190,6 @@ describe('parcDiscovery', () => {
 
 after(() => {
   try {
-    fs.rmSync(process.env.MOOREVIEW_DATA, { recursive: true, force: true });
+    fs.rmSync(process.env.PEAKLOGIC_DATA, { recursive: true, force: true });
   } catch { /* ignore */ }
 });

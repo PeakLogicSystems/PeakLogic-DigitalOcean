@@ -45,7 +45,7 @@ function makeLiftStationGrid() {
     },
   };
   const svg = {
-    dataset: { hmiAssetPath: '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg' },
+    dataset: { hmiAssetPath: '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg' },
     namespaceURI: svgNs,
     classList: { contains: () => false, add() {}, remove() {}, toggle() {} },
     querySelector(sel) {

@@ -40,8 +40,8 @@ function getJson(port, path) {
 
 describe('tenantFleet appliance mount', () => {
   it('does not 404 sibling /api routes when not cloud deployment', async () => {
-    const prev = process.env.MOOREVIEW_DEPLOYMENT;
-    delete process.env.MOOREVIEW_DEPLOYMENT;
+    const prev = process.env.PEAKLOGIC_DEPLOYMENT;
+    delete process.env.PEAKLOGIC_DEPLOYMENT;
 
     const app = express();
     const api = express.Router();
@@ -67,8 +67,8 @@ describe('tenantFleet appliance mount', () => {
         assert.notEqual(fleet.body?.error, 'Not found');
       });
     } finally {
-      if (prev === undefined) delete process.env.MOOREVIEW_DEPLOYMENT;
-      else process.env.MOOREVIEW_DEPLOYMENT = prev;
+      if (prev === undefined) delete process.env.PEAKLOGIC_DEPLOYMENT;
+      else process.env.PEAKLOGIC_DEPLOYMENT = prev;
     }
   });
 });
@@ -87,15 +87,15 @@ describe('listCheckedInUnassignedDevices', () => {
   });
 
   it('cloud checked-in list accepts only ATECC-based field device ids', () => {
-    const prev = process.env.MOOREVIEW_DEPLOYMENT;
-    process.env.MOOREVIEW_DEPLOYMENT = 'cloud';
+    const prev = process.env.PEAKLOGIC_DEPLOYMENT;
+    process.env.PEAKLOGIC_DEPLOYMENT = 'cloud';
     try {
       assert.equal(isAssignableParcDeviceId('opta_field_01'), false);
       assert.equal(isAssignableParcDeviceId('mv_f2e689fd60d96bab'), true);
       assert.equal(isAssignableParcDeviceId('opta_0123b636f1c23964ee'), true);
     } finally {
-      if (prev === undefined) delete process.env.MOOREVIEW_DEPLOYMENT;
-      else process.env.MOOREVIEW_DEPLOYMENT = prev;
+      if (prev === undefined) delete process.env.PEAKLOGIC_DEPLOYMENT;
+      else process.env.PEAKLOGIC_DEPLOYMENT = prev;
     }
   });
 

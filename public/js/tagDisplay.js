@@ -1,8 +1,8 @@
 'use strict';
 
 /** Shared tag id / label display preference (program Live I/O, HMI bindings, tag legend). */
-window.MooreviewTagDisplay = (function () {
-  const KEY = 'mooreview-tag-display';
+window.PeaklogicTagDisplay = (function () {
+  const KEY = 'peaklogic-tag-display';
   const MODES = ['id', 'label', 'both'];
 
   function getMode() {
@@ -16,7 +16,7 @@ window.MooreviewTagDisplay = (function () {
     document.querySelectorAll('[data-tag-display-mode]').forEach((el) => {
       el.value = mode;
     });
-    window.dispatchEvent(new CustomEvent('mooreview-tag-display', { detail: { mode } }));
+    window.dispatchEvent(new CustomEvent('peaklogic-tag-display', { detail: { mode } }));
   }
 
   function resolveTag(tagOrId, tags) {

@@ -507,7 +507,7 @@ describe('hmiConfig', () => {
     const assets = listSvgAssets(publicRoot);
     assert.ok(assets.some((a) => a.path.includes('demos/demo_process.svg')));
     assert.ok(assets.some((a) => a.path.includes('library/controls/pilot-lights')));
-    assert.ok(assets.some((a) => a.path.includes('library/pid-faceplates/mooreview/pid_loop_standard.svg')));
+    assert.ok(assets.some((a) => a.path.includes('library/pid-faceplates/peaklogic/pid_loop_standard.svg')));
   });
 
   it('normalizeHmi keeps PID faceplate tile layers as staticImage', () => {
@@ -526,7 +526,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticText',
             z: 0,
-            svg: '/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg',
+            svg: '/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg',
             label: 'PMP-100',
           }],
         }],
@@ -558,7 +558,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/motor-faceplates/mooreview/motor_hoa.svg',
+            svg: '/hmi/svg/library/motor-faceplates/peaklogic/motor_hoa.svg',
           }],
         }],
       }],
@@ -586,7 +586,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticText',
             z: 0,
-            svg: '/hmi/svg/library/schedules/mooreview/tpo_daily.svg',
+            svg: '/hmi/svg/library/schedules/peaklogic/tpo_daily.svg',
             label: 'TPO-1 DAILY CYCLE',
           }],
         }],
@@ -616,7 +616,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/schedules/mooreview/tpo_daily.svg',
+            svg: '/hmi/svg/library/schedules/peaklogic/tpo_daily.svg',
           }],
         }],
       }],
@@ -663,7 +663,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/motor-faceplates/mooreview/motor_hoa.svg',
+            svg: '/hmi/svg/library/motor-faceplates/peaklogic/motor_hoa.svg',
           }],
         }],
       }],
@@ -771,7 +771,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_controller.svg',
+            svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_controller.svg',
           }],
         }],
       }],
@@ -797,7 +797,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_controller.svg',
+            svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_controller.svg',
           }],
         }],
       }],
@@ -820,7 +820,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_pump.svg',
+            svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_pump.svg',
           }],
         }],
       }],
@@ -846,7 +846,7 @@ describe('hmiConfig', () => {
           layers: [{
             kind: 'staticImage',
             z: 0,
-            svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_controller.svg',
+            svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_controller.svg',
           }],
         }],
       }],
@@ -903,11 +903,11 @@ describe('hmiConfig', () => {
 
   it('normalizeHmi infers mobile pool compositeId from faceplate svg', () => {
     const cases = [
-      { svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_pump.svg', compositeId: 'pool_pump' },
-      { svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_chemistry.svg', compositeId: 'pool_chemistry' },
-      { svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_backwash.svg', compositeId: 'pool_backwash' },
-      { svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_lighting.svg', compositeId: 'pool_lighting' },
-      { svg: '/hmi/svg/library/pool-faceplates/mooreview/pool_controller.svg', compositeId: 'pool_controller' },
+      { svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_pump.svg', compositeId: 'pool_pump' },
+      { svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_chemistry.svg', compositeId: 'pool_chemistry' },
+      { svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_backwash.svg', compositeId: 'pool_backwash' },
+      { svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_lighting.svg', compositeId: 'pool_lighting' },
+      { svg: '/hmi/svg/library/pool-faceplates/peaklogic/pool_controller.svg', compositeId: 'pool_controller' },
     ];
     for (const { svg, compositeId } of cases) {
       const hmi = normalizeHmi({

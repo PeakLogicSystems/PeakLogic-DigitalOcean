@@ -1,7 +1,7 @@
-# mooreVIEW Cloud — Vertical Shard Architecture
+# PeakLogic Cloud — Vertical Shard Architecture
 
 **Document version:** 1.0  
-**Product:** mooreVIEW Cloud SaaS  
+**Product:** PeakLogic Cloud SaaS  
 **Audience:** Platform operators, integrators, CFO / capacity planning  
 **Generated:** Run `npm run build:cloud-vertical-shards-pdf` for build date
 
@@ -9,7 +9,7 @@
 
 ## Executive summary
 
-mooreVIEW cloud scale-out uses **vertical ingest shards** (lift/septic/WWTP, pools, ALF, c-store/grocery) on top of a **fixed control plane** (SaaS + LB + shared Mongo + MQTT + archive). MQTT topics remain **`mooreview/v1/{tenantId}/{deviceId}/…`** — sharding is implemented via a **tenant → vertical → shard** registry, not a wire-protocol change.
+PeakLogic cloud scale-out uses **vertical ingest shards** (lift/septic/WWTP, pools, ALF, c-store/grocery) on top of a **fixed control plane** (SaaS + LB + shared Mongo + MQTT + archive). MQTT topics remain **`peaklogic/v1/{tenantId}/{deviceId}/…`** — sharding is implemented via a **tenant → vertical → shard** registry, not a wire-protocol change.
 
 **Key rules:**
 
@@ -51,8 +51,8 @@ Tag mix @ M18: lift **61%** · pool **21%** · c-store **12%** · ALF slim **5%*
                                │ mqtts://broker:8883
                                ▼
               ┌────────────────────────────────────────┐
-              │  MQTT TIER  (cloud-mqtt-atl1 — mqtt.mooreview.io) │
-              │  mooreview/v1/{tenant}/{device}/…        │
+              │  MQTT TIER  (cloud-mqtt-atl1 — mqtt.peaklogic.io) │
+              │  peaklogic/v1/{tenant}/{device}/…        │
               └────────────────┬───────────────────────┘
                                │  N hub subscribers (1 per ingest cell)
                                ▼
@@ -93,9 +93,9 @@ Tag mix @ M18: lift **61%** · pool **21%** · c-store **12%** · ALF slim **5%*
 
 | Setting | Value |
 |---------|-------|
-| `MOOREVIEW_INGEST_SHARD_ID` | `shard-lift` |
-| `MOOREVIEW_VERTICAL` | `lift` |
-| `MOOREVIEW_MAX_TAGS` | `525312` |
+| `PEAKLOGIC_INGEST_SHARD_ID` | `shard-lift` |
+| `PEAKLOGIC_VERTICAL` | `lift` |
+| `PEAKLOGIC_MAX_TAGS` | `525312` |
 | Droplet | **32 GB / 8 vCPU** |
 | Host ONNX | **on** (`host-supplement`) |
 | Historian pens | 8/site @ **300 s** |
@@ -104,9 +104,9 @@ Tag mix @ M18: lift **61%** · pool **21%** · c-store **12%** · ALF slim **5%*
 
 | Setting | Value |
 |---------|-------|
-| `MOOREVIEW_INGEST_SHARD_ID` | `shard-pool` |
-| `MOOREVIEW_VERTICAL` | `pool` |
-| `MOOREVIEW_MAX_TAGS` | `131072` |
+| `PEAKLOGIC_INGEST_SHARD_ID` | `shard-pool` |
+| `PEAKLOGIC_VERTICAL` | `pool` |
+| `PEAKLOGIC_MAX_TAGS` | `131072` |
 | Droplet | **16 GB** |
 | Historian pens | 8/site (PH, ORP, flow, pump) |
 
@@ -114,9 +114,9 @@ Tag mix @ M18: lift **61%** · pool **21%** · c-store **12%** · ALF slim **5%*
 
 | Setting | Value |
 |---------|-------|
-| `MOOREVIEW_INGEST_SHARD_ID` | `shard-alf` |
-| `MOOREVIEW_VERTICAL` | `alf` |
-| `MOOREVIEW_MAX_TAGS` | `26112` |
+| `PEAKLOGIC_INGEST_SHARD_ID` | `shard-alf` |
+| `PEAKLOGIC_VERTICAL` | `alf` |
+| `PEAKLOGIC_MAX_TAGS` | `26112` |
 | Droplet | **8 GB** |
 | Host ONNX | **off** |
 | Uplink | Appliance `cloudRemote` slim ~400 tags |
@@ -125,9 +125,9 @@ Tag mix @ M18: lift **61%** · pool **21%** · c-store **12%** · ALF slim **5%*
 
 | Setting | Value |
 |---------|-------|
-| `MOOREVIEW_INGEST_SHARD_ID` | `shard-cstore` |
-| `MOOREVIEW_VERTICAL` | `cstore` |
-| `MOOREVIEW_MAX_TAGS` | `65536` |
+| `PEAKLOGIC_INGEST_SHARD_ID` | `shard-cstore` |
+| `PEAKLOGIC_VERTICAL` | `cstore` |
+| `PEAKLOGIC_MAX_TAGS` | `65536` |
 | Droplet | **16 GB** |
 | Historian pens | 6/site (cooler, RTU, leak) |
 
@@ -138,20 +138,20 @@ Tag mix @ M18: lift **61%** · pool **21%** · c-store **12%** · ALF slim **5%*
 **Wire format (unchanged):**
 
 ```text
-mooreview/v1/{tenantId}/{deviceId}/telemetry
-mooreview/v1/{tenantId}/{deviceId}/online
+peaklogic/v1/{tenantId}/{deviceId}/telemetry
+peaklogic/v1/{tenantId}/{deviceId}/online
 ```
 
 **Shard assignment** via tenant metadata — each cell subscribes only to assigned tenants:
 
 ```text
-shard-lift:    mooreview/v1/ace-septic/#, mooreview/v1/putnam-county/#, …
-shard-pool:    mooreview/v1/pool-cloud/#, …
-shard-alf:     mooreview/v1/alf-sunrise/#, …
-shard-cstore:  mooreview/v1/circle-k-florida/#, …
+shard-lift:    peaklogic/v1/ace-septic/#, peaklogic/v1/putnam-county/#, …
+shard-pool:    peaklogic/v1/pool-cloud/#, …
+shard-alf:     peaklogic/v1/alf-sunrise/#, …
+shard-cstore:  peaklogic/v1/circle-k-florida/#, …
 ```
 
-**Do not** run multiple ingest nodes with global `mooreview/v1/+/telemetry` subscribe — that duplicates all processing.
+**Do not** run multiple ingest nodes with global `peaklogic/v1/+/telemetry` subscribe — that duplicates all processing.
 
 ---
 
@@ -254,7 +254,7 @@ MQTT topics are tenant-scoped. Options:
 |----------|------|
 | **Split tenant per vertical** (`acme-lift`, `acme-pool`) | Recommended M18–M36 |
 | Route by `device.category` in SaaS | Single tenant, multiple verticals |
-| Topic v2 `mooreview/v2/{vertical}/…` | Only if tenant-split outgrown |
+| Topic v2 `peaklogic/v2/{vertical}/…` | Only if tenant-split outgrown |
 
 ---
 
@@ -264,7 +264,7 @@ MQTT topics are tenant-scoped. Options:
 |------|---------|
 | `tenant.vertical` | `lift \| pool \| alf \| cstore` |
 | Mongo `ingest_shards` | Tenant → shard routing |
-| `MOOREVIEW_INGEST_TENANTS` + filtered hub subscribe | No global `+/telemetry` |
+| `PEAKLOGIC_INGEST_TENANTS` + filtered hub subscribe | No global `+/telemetry` |
 | SaaS shard router | Parc cmds + live tags |
 | Fleet aggregator | `/fleet` across shards |
 | Slim ALF uplink on appliance | Keep ALF shard small |
@@ -292,10 +292,10 @@ MQTT topics are tenant-scoped. Options:
 | Phase 1 ATL + dedicated MQTT | `docs/CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md` |
 | Archive pipeline | `docs/ARCHIVE_EXPORT.md` |
 | AI / edge / cloud roles | `docs/AI_EDGE_CLOUD.md` |
-| Infrastructure projections | `docs/marketing/MooreVIEW-Infrastructure-Projections.md` |
+| Infrastructure projections | `docs/marketing/PeakLogic-Infrastructure-Projections.md` |
 
 ---
 
-*mooreVIEW Cloud Vertical Shards v1.0 — platform planning.*
+*PeakLogic Cloud Vertical Shards v1.0 — platform planning.*
 
-*mooreVIEW is a company powered by [The Purple Standard](https://purple-standard.com).*
+*PeakLogic is a company powered by [The Purple Standard](https://purple-standard.com).*

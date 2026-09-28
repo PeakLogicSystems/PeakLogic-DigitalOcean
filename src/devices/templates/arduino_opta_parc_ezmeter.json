@@ -42,7 +42,7 @@
   "facility": {
     "driver": "ezmeter"
   },
-  "notes": "Hybrid site: MQTT Parc for Opta I/O + ST; EZ Meter DDS-RGB on Opta RS485 A/B (9600 8N1, slave ID 1). Flash MooreviewOptaMqttSt with -DMV_FIELDBUS=1 -DMV_EZMETER=1 (Board → compile flags). Firmware polls DDS_* and publishes estimated MECH_PQ_THD_* (RGB v1.600 has no harmonic registers). Load logic/ezmeter_facility_pq.st for MECH_PQ_* alarms. Wire meter L1/L2/L3 + neutral to EZ Meter; RS485 to Opta terminal block.",
+  "notes": "Hybrid site: MQTT Parc for Opta I/O + ST; EZ Meter DDS-RGB on Opta RS485 A/B (9600 8N1, slave ID 1). Flash PeaklogicOptaMqttSt with -DMV_FIELDBUS=1 -DMV_EZMETER=1 (Board → compile flags). Firmware polls DDS_* and publishes estimated MECH_PQ_THD_* (RGB v1.600 has no harmonic registers). Load logic/ezmeter_facility_pq.st for MECH_PQ_* alarms. Wire meter L1/L2/L3 + neutral to EZ Meter; RS485 to Opta terminal block.",
   "pdm": {
     "motorType": "pump",
     "application": "lift_station",

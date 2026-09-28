@@ -12,10 +12,10 @@ const {
 describe('wavesharePoolRelay', () => {
   it('parses a single-board env trio', () => {
     const bindings = parseWaveshareRelayBindings({
-      MOOREVIEW_POOL_WAVESHARE_RELAY: 'true',
-      MOOREVIEW_POOL_WAVESHARE_ROLE: 'heater',
-      MOOREVIEW_POOL_WAVESHARE_DEVICE_ID: 'ws_relay_heat',
-      MOOREVIEW_POOL_WAVESHARE_DI: 'flow_sw',
+      PEAKLOGIC_POOL_WAVESHARE_RELAY: 'true',
+      PEAKLOGIC_POOL_WAVESHARE_ROLE: 'heater',
+      PEAKLOGIC_POOL_WAVESHARE_DEVICE_ID: 'ws_relay_heat',
+      PEAKLOGIC_POOL_WAVESHARE_DI: 'flow_sw',
     });
     assert.equal(bindings.length, 1);
     assert.equal(bindings[0].role, 'heater');
@@ -25,7 +25,7 @@ describe('wavesharePoolRelay', () => {
 
   it('parses a multi-board RELAYS list', () => {
     const bindings = parseWaveshareRelayBindings({
-      MOOREVIEW_POOL_WAVESHARE_RELAYS: 'dose_acid:ws_relay_acid:flow_sw,light_z1:ws_relay_lz1',
+      PEAKLOGIC_POOL_WAVESHARE_RELAYS: 'dose_acid:ws_relay_acid:flow_sw,light_z1:ws_relay_lz1',
     });
     assert.equal(bindings.length, 2);
     assert.equal(bindings[0].diRole, 'flow_sw');
@@ -35,14 +35,14 @@ describe('wavesharePoolRelay', () => {
 
   it('rejects unknown roles', () => {
     assert.throws(
-      () => parseWaveshareRelayBindings({ MOOREVIEW_POOL_WAVESHARE_RELAYS: 'fountain:ws_x' }),
+      () => parseWaveshareRelayBindings({ PEAKLOGIC_POOL_WAVESHARE_RELAYS: 'fountain:ws_x' }),
       /Unknown Waveshare pool relay role/,
     );
   });
 
   it('accepts spa_jets as a residential spa load', () => {
     const bindings = parseWaveshareRelayBindings({
-      MOOREVIEW_POOL_WAVESHARE_RELAYS: 'spa_jets:ws_relay_spa',
+      PEAKLOGIC_POOL_WAVESHARE_RELAYS: 'spa_jets:ws_relay_spa',
     });
     assert.equal(bindings[0].role, 'spa_jets');
   });

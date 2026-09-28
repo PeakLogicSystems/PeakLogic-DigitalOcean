@@ -65,8 +65,8 @@ function encodeMessage(type, payload = {}) {
 }
 
 function isCloudDeployment() {
-  return process.env.MOOREVIEW_DEPLOYMENT === 'cloud'
-    || process.env.MOOREVIEW_CLOUD_SITES === '1';
+  return process.env.PEAKLOGIC_DEPLOYMENT === 'cloud'
+    || process.env.PEAKLOGIC_CLOUD_SITES === '1';
 }
 
 module.exports = {

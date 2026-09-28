@@ -5,39 +5,39 @@ Copy this entire folder to the target device (OpenWrt router, Raspberry Pi, or L
 
 Contents
 --------
-  mooreview-st-oem/     Node runtime + web UI (program, tags, drivers, I/O map)
-  mooreview-st-oem/sdk/ C++ SDK for OpenWrt OEM daemons (production target)
-  mooreview-st-oem/hal/ Pi SM-I-001 HAL plugin sources (bench / optional I/O)
-  mooreview-st-oem/docs/OPENWRT.md   OpenWrt deployment (primary)
-  mooreview-st-oem/docs/HAL.md       HAL driver reference
+  peaklogic-st-oem/     Node runtime + web UI (program, tags, drivers, I/O map)
+  peaklogic-st-oem/sdk/ C++ SDK for OpenWrt OEM daemons (production target)
+  peaklogic-st-oem/hal/ Pi SM-I-001 HAL plugin sources (bench / optional I/O)
+  peaklogic-st-oem/docs/OPENWRT.md   OpenWrt deployment (primary)
+  peaklogic-st-oem/docs/HAL.md       HAL driver reference
 
 Quick install — Raspberry Pi / Linux (systemd)
 -----------------------------------------------
-  cd mooreview-st-oem
+  cd peaklogic-st-oem
   npm install
   npm run build-native          # required for SM-I-001 HAL plugin only
-  sudo cp deploy/mooreview-st-oem.service /etc/systemd/system/
-  sudo systemctl enable --now mooreview-st-oem
+  sudo cp deploy/peaklogic-st-oem.service /etc/systemd/system/
+  sudo systemctl enable --now peaklogic-st-oem
 
   Open http://<device-ip>:3090
 
 Quick install — OpenWrt (production)
 ------------------------------------
-  See mooreview-st-oem/docs/OPENWRT.md
+  See peaklogic-st-oem/docs/OPENWRT.md
 
   Summary:
     1. opkg install node (enable CONFIG_PACKAGE_node=y in build)
-    2. Copy mooreview-st-oem to /opt/mooreview-st-oem
-    3. cd /opt/mooreview-st-oem && npm install --production
-    4. Set MOOREVIEW_DATA=/etc/mooreview, PORT=3090
-    5. Start via procd/init (use deploy/mooreview-st-oem.service as template)
+    2. Copy peaklogic-st-oem to /opt/peaklogic-st-oem
+    3. cd /opt/peaklogic-st-oem && npm install --production
+    4. Set PEAKLOGIC_DATA=/etc/peaklogic, PORT=3090
+    5. Start via procd/init (use deploy/peaklogic-st-oem.service as template)
     6. Cross-compile OEM C++ apps: sdk/ + toolchain-openwrt.cmake
        MV_HOST=127.0.0.1 MV_PORT=3090
 
 Environment
 -----------
-  MOOREVIEW_PRODUCT=st-oem
-  MOOREVIEW_DATA=./data          (use /etc/mooreview on routers)
+  PEAKLOGIC_PRODUCT=st-oem
+  PEAKLOGIC_DATA=./data          (use /etc/peaklogic on routers)
   PORT=3090
   MV_HOST=127.0.0.1              (SDK clients)
   MV_PORT=3090                   (SDK clients)

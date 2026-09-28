@@ -1,6 +1,6 @@
 # MV-workstation and Cursor chat sync (cursaves)
 
-Second Windows PC setup for MooreVIEW development with **Cursor chat history** synced between machines via a private GitHub repo.
+Second Windows PC setup for PeakLogic development with **Cursor chat history** synced between machines via a private GitHub repo.
 
 ## Overview
 
@@ -10,11 +10,11 @@ Second Windows PC setup for MooreVIEW development with **Cursor chat history** s
 | Data path (workstation) | `C:\data\est-pc` |
 | Data path (home PC) | `C:\Users\Public\data\est-pc` |
 | Windows file share | `\\192.168.1.76\workbox` — user **`roy`** |
-| Cursor chat sync repo | **`mooreview/mooreview-cursaves`** (private) |
-| GitHub account for cursaves | **`mooreview`** (not Windows user `roy`) |
+| Cursor chat sync repo | **`peaklogic/peaklogic-cursaves`** (private) |
+| GitHub account for cursaves | **`peaklogic`** (not Windows user `roy`) |
 | Tool | [cursaves](https://github.com/tibbinova/cursaves) (Windows fork 0.9.2+) |
 
-**Two different logins:** Windows SMB (`roy`) copies project files. GitHub (`mooreview`) syncs Cursor chats. They are unrelated.
+**Two different logins:** Windows SMB (`roy`) copies project files. GitHub (`peaklogic`) syncs Cursor chats. They are unrelated.
 
 ## One-time setup
 
@@ -40,7 +40,7 @@ cd C:\data\est-pc\scripts
 
 Or double-click **`Setup-MV-Cursaves-Sync.cmd`**.
 
-The script installs `uv`, `cursaves`, and `gh` (GitHub CLI), logs in as **mooreview**, initializes `%USERPROFILE%\.cursaves`, and runs the first sync.
+The script installs `uv`, `cursaves`, and `gh` (GitHub CLI), logs in as **peaklogic**, initializes `%USERPROFILE%\.cursaves`, and runs the first sync.
 
 With a personal access token:
 
@@ -78,7 +78,7 @@ See [UPDATES.md](./UPDATES.md) for Linux/cloud deploy; cursaves is **Windows Cur
 | Location | Content |
 |----------|---------|
 | `%USERPROFILE%\.config\cursaves\config.json` | Backend type (`git`) |
-| `%USERPROFILE%\.cursaves\` | Local git repo; remote `mooreview/mooreview-cursaves` |
+| `%USERPROFILE%\.cursaves\` | Local git repo; remote `peaklogic/peaklogic-cursaves` |
 | GitHub repo | Compressed Cursor chat snapshots (keep private) |
 
 cursaves does **not** store GitHub passwords. Auth uses `gh auth` and Windows Git Credential Manager.
@@ -87,7 +87,7 @@ cursaves does **not** store GitHub passwords. Auth uses `gh auth` and Windows Gi
 
 ### `repository not found`
 
-GitHub is not logged in as **mooreview**, or the token lacks `repo` scope.
+GitHub is not logged in as **peaklogic**, or the token lacks `repo` scope.
 
 ```powershell
 gh auth login
@@ -145,5 +145,5 @@ Install cursaves manually:
 
 ```powershell
 uv tool install --force git+https://github.com/tibbinova/cursaves.git
-cursaves init --remote https://github.com/mooreview/mooreview-cursaves.git
+cursaves init --remote https://github.com/peaklogic/peaklogic-cursaves.git
 ```

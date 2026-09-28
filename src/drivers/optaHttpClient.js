@@ -133,7 +133,7 @@ async function optaHttpRequest(url, options = {}) {
   const detail = errors.length ? errors.join('; ') : 'unknown error';
   throw new Error(
     `Cannot reach Opta at ${url} (${detail}). `
-    + 'On this PC run: npm run opta-test — then re-flash est-pc/firmware/arduino-opta-st/MooreviewOptaSt '
+    + 'On this PC run: npm run opta-test — then re-flash est-pc/firmware/arduino-opta-st/PeaklogicOptaSt '
     + '(mv_http.cpp Opta fix; not the OneDrive fork).',
   );
 }

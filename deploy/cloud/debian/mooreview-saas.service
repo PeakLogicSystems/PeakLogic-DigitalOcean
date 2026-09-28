@@ -1,19 +1,19 @@
 [Unit]
-Description=MooreVIEW SaaS platform
+Description=PeakLogic SaaS platform
 After=network.target mongod.service mosquitto.service
 
 [Service]
 Type=simple
-User=mooreview
-Group=mooreview
-WorkingDirectory=@MOOREVIEW_INSTALL_DIR@
-EnvironmentFile=/etc/mooreview/saas.env
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_INSTALL_DIR@
+EnvironmentFile=/etc/peaklogic/saas.env
 Environment=NODE_ENV=production
-Environment=MOOREVIEW_DEPLOYMENT=cloud
-Environment=MOOREVIEW_PRODUCT=cloud
+Environment=PEAKLOGIC_DEPLOYMENT=cloud
+Environment=PEAKLOGIC_PRODUCT=cloud
 Environment=PORT=3100
-Environment=MOOREVIEW_PORT=3100
-Environment=MOOREVIEW_DATA=/var/lib/mooreview
+Environment=PEAKLOGIC_PORT=3100
+Environment=PEAKLOGIC_DATA=/var/lib/peaklogic
 ExecStart=/usr/bin/node scripts/start-saas.js
 Restart=on-failure
 RestartSec=5

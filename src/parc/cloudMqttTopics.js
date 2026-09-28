@@ -16,7 +16,7 @@ function normalizeTenantId(id) {
  * Tenant-scoped Parc topics for cloud ingest.
  * Local appliance hub uses mqttProtocol.topics(); uplink uses these.
  *
- * mooreview/v1/{tenantId}/{deviceId}/telemetry
+ * peaklogic/v1/{tenantId}/{deviceId}/telemetry
  */
 function cloudTopics(cfg, tenantId, deviceId) {
   const id = normalizeDeviceId(deviceId);

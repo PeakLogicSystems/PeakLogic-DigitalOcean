@@ -1,5 +1,5 @@
 /*
- * MooreVIEW Opta Room — room integration controller + ST + MQTT Parc (mooreview/v1)
+ * PeakLogic Opta Room — room integration controller + ST + MQTT Parc (peaklogic/v1)
  * Aggregates Shelly Flood Gen4 WiFi peripherals; relays tags over PARC (Ethernet).
  * Base runtime shared with arduino-opta-mqtt-st; room-specific: mv_peripheral.
  */
@@ -51,7 +51,7 @@ static MvMqttConfig g_mqttCfg = {
   MV_MQTT_SKETCH_BROKER_DEFAULT,
   1883,
   "opta_st_01",
-  "mooreview/v1",
+  "peaklogic/v1",
   2000,
 };
 
@@ -224,7 +224,7 @@ static void registerApiRoutes() {
 void setup() {
   Serial.begin(115200);
   delay(1500);
-  MV_LOG("MooreVIEW Opta Room boot (Serial 115200)");
+  MV_LOG("PeakLogic Opta Room boot (Serial 115200)");
   mvRtcWarnIfUnset();
   MV_LOG_CMD2("firmware ", MV_FIRMWARE_VERSION);
 

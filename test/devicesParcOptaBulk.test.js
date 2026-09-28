@@ -3,7 +3,7 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-bulk-'));
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-bulk-'));
 
 const { describe, it, after } = require('node:test');
 const assert = require('node:assert/strict');
@@ -122,8 +122,8 @@ describe('bulkAddParcOpta helper', () => {
   });
 
   it('parseDeviceIds fromRegistry on cloud keeps only field ATECC device ids', () => {
-    const prev = process.env.MOOREVIEW_DEPLOYMENT;
-    process.env.MOOREVIEW_DEPLOYMENT = 'cloud';
+    const prev = process.env.PEAKLOGIC_DEPLOYMENT;
+    process.env.PEAKLOGIC_DEPLOYMENT = 'cloud';
     try {
       const reg = {
         listDevices: () => [
@@ -135,8 +135,8 @@ describe('bulkAddParcOpta helper', () => {
       const ids = parseDeviceIds({ fromRegistry: true }, reg);
       assert.deepEqual(ids.sort(), ['mv_6a5d39e90a82fb61', 'opta_0123b636f1c23964ee'].sort());
     } finally {
-      if (prev === undefined) delete process.env.MOOREVIEW_DEPLOYMENT;
-      else process.env.MOOREVIEW_DEPLOYMENT = prev;
+      if (prev === undefined) delete process.env.PEAKLOGIC_DEPLOYMENT;
+      else process.env.PEAKLOGIC_DEPLOYMENT = prev;
     }
   });
 

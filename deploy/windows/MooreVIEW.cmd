@@ -1,5 +1,5 @@
 @echo off
-title MooreVIEW MVP Suite
+title PeakLogic MVP Suite
 cd /d "%~dp0"
 
 where node >nul 2>&1
@@ -13,8 +13,8 @@ if errorlevel 1 (
   exit /b 1
 )
 
-if not defined MOOREVIEW_DATA set "MOOREVIEW_DATA=%LOCALAPPDATA%\MooreVIEW\data"
-if not exist "%MOOREVIEW_DATA%" mkdir "%MOOREVIEW_DATA%" 2>nul
+if not defined PEAKLOGIC_DATA set "PEAKLOGIC_DATA=%LOCALAPPDATA%\PeakLogic\data"
+if not exist "%PEAKLOGIC_DATA%" mkdir "%PEAKLOGIC_DATA%" 2>nul
 
 if not exist "node_modules\" (
   echo Installing dependencies...
@@ -27,7 +27,7 @@ if not exist "node_modules\" (
 )
 
 start "" "http://127.0.0.1:3090"
-echo MooreVIEW MVP Suite — http://127.0.0.1:3090
-echo Data: %MOOREVIEW_DATA%
+echo PeakLogic MVP Suite — http://127.0.0.1:3090
+echo Data: %PEAKLOGIC_DATA%
 echo Press Ctrl+C to stop.
 node server.js

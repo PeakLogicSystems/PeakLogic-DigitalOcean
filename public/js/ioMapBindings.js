@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  const core = window.MooreviewCore || {};
+  const core = window.PeaklogicCore || {};
   const $ = core.$ || ((id) => document.getElementById(id));
   const esc = core.esc || ((s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'));
 
@@ -680,7 +680,7 @@
     });
   }
 
-  window.MooreviewIoMapBindings = {
+  window.PeaklogicIoMapBindings = {
     loadConfig,
     bindIoPointClicks,
     selectTag,

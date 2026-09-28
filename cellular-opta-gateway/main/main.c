@@ -1,6 +1,6 @@
 /*
 
- * MooreVIEW Opta cellular gateway — MQTT bridge (Option B).
+ * PeakLogic Opta cellular gateway — MQTT bridge (Option B).
 
  *
 
@@ -116,7 +116,7 @@ void app_main(void)
 
 {
 
-    printf("\n\n=== MooreVIEW Opta Gateway (MQTT bridge) " __DATE__ " " __TIME__ " ===\n");
+    printf("\n\n=== PeakLogic Opta Gateway (MQTT bridge) " __DATE__ " " __TIME__ " ===\n");
 
 
 

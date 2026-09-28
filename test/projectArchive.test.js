@@ -14,16 +14,16 @@ describe('projectArchive', () => {
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-archive-'));
-    process.env.MOOREVIEW_DATA = tmpDir;
-    process.env.MOOREVIEW_ST = path.join(tmpDir, 'st');
+    process.env.PEAKLOGIC_DATA = tmpDir;
+    process.env.PEAKLOGIC_ST = path.join(tmpDir, 'st');
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/persistence')];
     delete require.cache[require.resolve('../src/programs/programStore')];
   });
 
   afterEach(() => {
-    delete process.env.MOOREVIEW_DATA;
-    delete process.env.MOOREVIEW_ST;
+    delete process.env.PEAKLOGIC_DATA;
+    delete process.env.PEAKLOGIC_ST;
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
 
@@ -77,9 +77,9 @@ describe('applyImportBuffer legacy json', () => {
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-import-'));
-    process.env.MOOREVIEW_DATA = tmpDir;
-    process.env.MOOREVIEW_ST = path.join(tmpDir, 'st');
-    fs.mkdirSync(process.env.MOOREVIEW_ST, { recursive: true });
+    process.env.PEAKLOGIC_DATA = tmpDir;
+    process.env.PEAKLOGIC_ST = path.join(tmpDir, 'st');
+    fs.mkdirSync(process.env.PEAKLOGIC_ST, { recursive: true });
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/persistence')];
     delete require.cache[require.resolve('../src/programs/programStore')];
@@ -108,8 +108,8 @@ describe('applyImportBuffer legacy json', () => {
   });
 
   afterEach(() => {
-    delete process.env.MOOREVIEW_DATA;
-    delete process.env.MOOREVIEW_ST;
+    delete process.env.PEAKLOGIC_DATA;
+    delete process.env.PEAKLOGIC_ST;
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
 
@@ -142,7 +142,7 @@ describe('projectStore zip library', () => {
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-proj-'));
-    process.env.MOOREVIEW_DATA = tmpDir;
+    process.env.PEAKLOGIC_DATA = tmpDir;
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/persistence')];
     delete require.cache[require.resolve('../src/project/projectStore')];
@@ -150,7 +150,7 @@ describe('projectStore zip library', () => {
   });
 
   afterEach(() => {
-    delete process.env.MOOREVIEW_DATA;
+    delete process.env.PEAKLOGIC_DATA;
     fs.rmSync(tmpDir, { recursive: true, force: true });
     delete require.cache[require.resolve('../src/persistence')];
     delete require.cache[require.resolve('../src/project/projectStore')];

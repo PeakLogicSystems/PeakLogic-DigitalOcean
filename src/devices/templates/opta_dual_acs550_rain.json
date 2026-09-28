@@ -1,7 +1,7 @@
 {
   "id": "opta_dual_acs550_rain",
   "label": "Opta + ACS550×2 + rain tip — Modbus RTU bus",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Opta slave 2 + ACS550 slaves 1 & 3 + tip bucket on I1",
   "transport": "modbus_rtu",
   "sharedBus": false,

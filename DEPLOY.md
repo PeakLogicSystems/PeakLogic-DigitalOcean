@@ -1,4 +1,4 @@
-# MooreVIEW Cloud — Deployment
+# PeakLogic Cloud — Deployment
 
 Multi-tenant REST API backed by **DigitalOcean Managed MongoDB**. The app uses the native `mongodb` driver with `MONGODB_URI` (TLS via `mongodb+srv://` on DO).
 
@@ -7,7 +7,7 @@ Multi-tenant REST API backed by **DigitalOcean Managed MongoDB**. The app uses t
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `MONGODB_URI` | Yes | Connection string (`mongodb+srv://user:pass@host/db?tls=true` on DO) |
-| `MONGODB_DB` | No | Database name (default `mooreview_cloud`) |
+| `MONGODB_DB` | No | Database name (default `peaklogic_cloud`) |
 | `JWT_SECRET` | Yes (prod) | Long random string for signing JWTs |
 | `JWT_EXPIRES_IN` | No | Token lifetime (default `7d`) |
 | `PORT` | No | HTTP port (default `3100`) |
@@ -23,8 +23,8 @@ Multi-tenant REST API backed by **DigitalOcean Managed MongoDB**. The app uses t
 4. Set `MONGODB_URI` on the app (App Platform env or Droplet `.env`). Example:
 
    ```
-   MONGODB_URI=mongodb+srv://doadmin:PASSWORD@db-mongodb-nyc3-12345.mongo.ondigitalocean.com/mooreview_cloud?tls=true&authSource=admin&replicaSet=db-mongodb-nyc3-12345
-   MONGODB_DB=mooreview_cloud
+   MONGODB_URI=mongodb+srv://doadmin:PASSWORD@db-mongodb-nyc3-12345.mongo.ondigitalocean.com/peaklogic_cloud?tls=true&authSource=admin&replicaSet=db-mongodb-nyc3-12345
+   MONGODB_DB=peaklogic_cloud
    ```
 
 5. **TLS**: DO Managed MongoDB requires TLS; `mongodb+srv` URLs enable it automatically.
@@ -44,13 +44,13 @@ Multi-tenant REST API backed by **DigitalOcean Managed MongoDB**. The app uses t
 
 Multi-tenant login, CMMS, and Studio. **Does not** run the legacy `server.js` appliance on 3090 unless you enable it later.
 
-1. Copy the cloud bundle to the droplet and extract to `/home/mooreview`.
-2. Set `MONGODB_URI` to your **DO Managed MongoDB** `mongodb+srv://` string in `/etc/mooreview/saas.env` (template created by install).
+1. Copy the cloud bundle to the droplet and extract to `/home/peaklogic`.
+2. Set `MONGODB_URI` to your **DO Managed MongoDB** `mongodb+srv://` string in `/etc/peaklogic/saas.env` (template created by install).
 3. Allowlist the droplet IP on the Managed MongoDB cluster.
 4. Run `deploy/cloud/debian/install-saas.sh` (see `deploy/cloud/debian/INSTALL-SAAS.txt`).
-5. `sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed'` once after setting `JWT_SECRET` and `PLATFORM_ADMIN_KEY`.
+5. `sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'` once after setting `JWT_SECRET` and `PLATFORM_ADMIN_KEY`.
 6. `certbot --nginx -d your.domain` — nginx proxies to `127.0.0.1:3100`.
-7. `systemctl status mooreview-saas`
+7. `systemctl status peaklogic-saas`
 
 **Optional edge runtime (port 3090)** for field clients / appliance API hub alongside SaaS:
 
@@ -58,16 +58,16 @@ Multi-tenant login, CMMS, and Studio. **Does not** run the legacy `server.js` ap
 sudo bash deploy/cloud/debian/enable-runtime-3090.sh
 ```
 
-Point `mooreview-client` at `http://<host>:3090/api` or reverse-proxy a subdomain. Tenant SaaS API stays on `https://your.domain/api` (3100).
+Point `peaklogic-client` at `http://<host>:3090/api` or reverse-proxy a subdomain. Tenant SaaS API stays on `https://your.domain/api` (3100).
 
 ## Droplet (systemd) — legacy appliance (port 3090 only)
 
 Single-process `server.js` hub with local MongoDB + Mosquitto. Use `deploy/cloud/debian/install.sh` only for edge appliances or when you need the full runtime without multi-tenant SaaS.
 
-1. Clone to `/opt/mooreview-cloud`, `npm ci --omit=dev`.
+1. Clone to `/opt/peaklogic-cloud`, `npm ci --omit=dev`.
 2. Copy `.env.example` → `.env` and set `MONGODB_URI` to your DO connection string (not localhost).
-3. Install `deploy/mooreview-cloud.service` (uses `src/server.js` for the cloud API).
-4. `sudo systemctl enable --now mooreview-cloud`.
+3. Install `deploy/peaklogic-cloud.service` (uses `src/server.js` for the cloud API).
+4. `sudo systemctl enable --now peaklogic-cloud`.
 5. Terminate TLS at nginx/Caddy; proxy to `127.0.0.1:3100`.
 
 ## Local development

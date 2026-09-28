@@ -15,7 +15,7 @@
     "enabled": true,
     "autoDiscoverDrivers": true,
     "brokerUrl": "mqtt://127.0.0.1:1883",
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "clientId": "mv-iot-link-pool"
   },
   "hmi": {
@@ -36,7 +36,7 @@
               {
                 "kind": "staticImage",
                 "z": 0,
-                "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_overview.svg"
+                "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_overview.svg"
               }
             ]
           }
@@ -57,7 +57,7 @@
               {
                 "kind": "staticImage",
                 "z": 0,
-                "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_pump.svg"
+                "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_pump.svg"
               }
             ]
           }
@@ -78,7 +78,7 @@
               {
                 "kind": "staticImage",
                 "z": 0,
-                "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_chemistry.svg"
+                "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_chemistry.svg"
               }
             ]
           }
@@ -99,7 +99,7 @@
               {
                 "kind": "staticImage",
                 "z": 0,
-                "svg": "/hmi/svg/library/schedules/mooreview/pool_filter_schedule.svg"
+                "svg": "/hmi/svg/library/schedules/peaklogic/pool_filter_schedule.svg"
               }
             ]
           }

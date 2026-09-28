@@ -31,10 +31,10 @@
 
   function formatDate(iso) {
     if (!iso) return '—';
-    if (window.MooreviewTime?.formatFriendly) return window.MooreviewTime.formatFriendly(iso);
+    if (window.PeaklogicTime?.formatFriendly) return window.PeaklogicTime.formatFriendly(iso);
     const d = new Date(iso);
     if (!Number.isFinite(d.getTime())) return '—';
-    return d.toLocaleString(undefined, window.MooreviewTime?.localeOpts?.() || {});
+    return d.toLocaleString(undefined, window.PeaklogicTime?.localeOpts?.() || {});
   }
 
   function markup() {
@@ -408,7 +408,7 @@
     });
   }
 
-  window.MooreviewCmms = {
+  window.PeaklogicCmms = {
     markup,
     mount,
     refreshAll,

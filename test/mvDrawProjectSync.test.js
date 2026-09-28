@@ -3,8 +3,8 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 const {
-  buildMooreviewProjectContext,
-  alignMvDrawForMooreviewProject,
+  buildPeaklogicProjectContext,
+  alignMvDrawForPeaklogicProject,
   shouldAutoLoadFromProject,
   DEFAULT_FACILITY_PLAN_URL,
 } = require('../mv-draw/src/projectSync');
@@ -12,8 +12,8 @@ const { blankMvDrawDoc } = require('../mv-draw/src/mvDrawFormat');
 const { normalizeComposerMode } = require('../src/hmi/hmiConfig');
 
 describe('mvDraw project sync', () => {
-  it('buildMooreviewProjectContext reports MooreVIEW project path', () => {
-    const ctx = buildMooreviewProjectContext(
+  it('buildPeaklogicProjectContext reports PeakLogic project path', () => {
+    const ctx = buildPeaklogicProjectContext(
       { project: { name: 'atu-cloud-dwts', lastOpenedId: 'abc' } },
       { savedAt: '2026-01-01T00:00:00.000Z', mvDraw: { nodes: [{ id: 'n1' }] } },
       blankMvDrawDoc(),
@@ -24,13 +24,13 @@ describe('mvDraw project sync', () => {
     assert.equal(ctx.synced, false);
   });
 
-  it('alignMvDrawForMooreviewProject sets name and mooreviewProject meta on integration', () => {
+  it('alignMvDrawForPeaklogicProject sets name and peaklogicProject meta on integration', () => {
     const ctx = { projectName: 'dwts-magnolia' };
-    const aligned = alignMvDrawForMooreviewProject(blankMvDrawDoc({ name: 'other' }), ctx, {
+    const aligned = alignMvDrawForPeaklogicProject(blankMvDrawDoc({ name: 'other' }), ctx, {
       project: { site: 'Magnolia Estates' },
     });
     assert.equal(aligned.name, 'dwts-magnolia');
-    assert.equal(aligned.meta.mooreviewProject, 'dwts-magnolia');
+    assert.equal(aligned.meta.peaklogicProject, 'dwts-magnolia');
     assert.equal(aligned.meta.site, 'Magnolia Estates');
   });
 

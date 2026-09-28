@@ -23,7 +23,7 @@ function createStubVendorAdapter(def) {
       }
       return {
         ok: false,
-        message: `${def.displayName} adapter is registered but not yet implemented in MooreVIEW`,
+        message: `${def.displayName} adapter is registered but not yet implemented in PeakLogic`,
         stub: true,
       };
     }

@@ -16,8 +16,8 @@ function cloudApiBase(cfg) {
 
 function applianceHeaders(cfg) {
   const headers = { Accept: 'application/json' };
-  if (cfg?.tenantId) headers['X-Mooreview-Tenant-Id'] = String(cfg.tenantId);
-  if (cfg?.applianceId) headers['X-Mooreview-Appliance-Id'] = String(cfg.applianceId);
+  if (cfg?.tenantId) headers['X-Peaklogic-Tenant-Id'] = String(cfg.tenantId);
+  if (cfg?.applianceId) headers['X-Peaklogic-Appliance-Id'] = String(cfg.applianceId);
   return headers;
 }
 
@@ -73,7 +73,7 @@ async function publishToCloud(doc, meta = {}, cloudRemote) {
       description: meta.description || '',
       doc,
     },
-    headers: cloudRemote?.pairingKey ? { 'X-Mooreview-Pairing-Key': String(cloudRemote.pairingKey) } : {},
+    headers: cloudRemote?.pairingKey ? { 'X-Peaklogic-Pairing-Key': String(cloudRemote.pairingKey) } : {},
   });
 }
 

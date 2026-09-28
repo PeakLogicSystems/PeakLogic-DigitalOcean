@@ -1,11 +1,11 @@
 # Opta + dual ACS550 + rain tip-bucket
 
-One **USB-RS485** master on the MooreVIEW PC polls three Modbus RTU slaves on a shared bus. Structured Text runs on the PC.
+One **USB-RS485** master on the PeakLogic PC polls three Modbus RTU slaves on a shared bus. Structured Text runs on the PC.
 
 ```
   Tip bucket ──► Opta I1 (slave 2)
   ACS550 #1 ────┤
-                ├── RS-485 ── USB adapter ── MooreVIEW PC
+                ├── RS-485 ── USB adapter ── PeakLogic PC
   ACS550 #2 ────┘   9600 8N1
 ```
 
@@ -56,7 +56,7 @@ Example: 50 tips for 0.50″ → `RAIN_K = 100`.
 
 Timers: `RAIN_HR_TMR` preset **3600000** ms, `RAIN_RATE_TMR` preset **60000** ms.
 
-## MooreVIEW setup
+## PeakLogic setup
 
 1. **Drivers → Device template → Opta + ACS550×2 + rain tip — Modbus RTU bus** → set COM port → Apply  
    (or load fixtures below)

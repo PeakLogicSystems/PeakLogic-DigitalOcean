@@ -1,7 +1,7 @@
 'use strict';
 
 /** Restore tenant orgs wiped by bundle deploy. Safe to re-run (skips existing slugs). */
-process.env.MOOREVIEW_DEPLOYMENT = process.env.MOOREVIEW_DEPLOYMENT || 'cloud';
+process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'cloud';
 
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +10,7 @@ const { DATA_DIR } = require('../src/config');
 
 const TO_RESTORE = [
   { tenantSlug: 'volition', name: 'Volition', tenantType: 'customer' },
-  { tenantSlug: 'mooreview', name: 'MooreVIEW System', tenantType: 'customer', cmmsEnabled: true },
+  { tenantSlug: 'peaklogic', name: 'PeakLogic System', tenantType: 'customer', cmmsEnabled: true },
 ];
 
 const dataFile = path.join(DATA_DIR, 'cloud_tenants.json');

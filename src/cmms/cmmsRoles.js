@@ -1,6 +1,6 @@
 'use strict';
 
-/** Map mooreview-cloud tenant roles to CMMS role hierarchy. */
+/** Map peaklogic-cloud tenant roles to CMMS role hierarchy. */
 const ROLE_LEVEL = {
   viewer: 1,
   operator: 2,

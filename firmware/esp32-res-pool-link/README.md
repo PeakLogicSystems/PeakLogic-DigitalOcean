@@ -10,9 +10,9 @@ Arduino firmware for a **home-pad controller**. It joins **home Wi-Fi**, talks t
 | Salt cell | IntelliChlor salt / temp / faults / % |
 | Filter | Local backwash sequencer on 4 relays |
 
-MQTT Parc uses the **same cloud credentials as Opta**: `mqtt.mooreview.io:8883`, user `mooreview`, firmware MOSQUITTO_PASS, Let's Encrypt Gen-Y CA. The pad still runs if that link is down. Valves do **not** fail-safe when MQTT is down.
+MQTT Parc uses the **same cloud credentials as Opta**: `mqtt.peaklogic.io:8883`, user `peaklogic`, firmware MOSQUITTO_PASS, Let's Encrypt Gen-Y CA. The pad still runs if that link is down. Valves do **not** fail-safe when MQTT is down.
 
-Open `http://192.168.4.1:8080/` on AP **`MooreVIEW-ResPool`** / `mooreview`, or `http://<lan-ip>:8080/` after it joins the house router.
+Open `http://192.168.4.1:8080/` on AP **`PeakLogic-ResPool`** / `peaklogic`, or `http://<lan-ip>:8080/` after it joins the house router.
 
 ## Two RS-485 pairs
 
@@ -57,7 +57,7 @@ Pilot actuators or contactors. Do not switch a pump motor on these contacts.
 2. Board: **ESP32S3 Dev Module**
 3. **USB CDC On Boot: Enabled**
 4. Libraries: **ArduinoJson** 7.x, **PubSubClient**
-5. Open `MooreviewResPoolLink/MooreviewResPoolLink.ino` and upload
+5. Open `PeaklogicResPoolLink/PeaklogicResPoolLink.ino` and upload
 
 | Board | Define in `mv_board.h` | R1–R4 GPIO |
 |-------|------------------------|------------|

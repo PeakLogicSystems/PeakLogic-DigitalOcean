@@ -1,14 +1,14 @@
 {
   "description": "DWTS cloud fleet — Magnolia Village DWTS (10000 GPD): 2 treatment plants, 20 simplex collection, 2 duplex booster — drip drainfield",
   "tenant": {
-    "name": "MooreVIEW ATU Service",
+    "name": "PeakLogic ATU Service",
     "slug": "atu-cloud",
     "tenantId": "atu-cloud"
   },
   "sizingGuide": {
     "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
     "uplink": "cellular_mqtt",
-    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to MooreVIEW cloud Mosquitto",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
     "atuToLiftPairing": [
       {
         "atu": "single_atu",
@@ -295,7 +295,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -333,7 +333,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -371,7 +371,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -409,7 +409,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -447,7 +447,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -485,7 +485,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -523,7 +523,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -561,7 +561,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -599,7 +599,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -637,7 +637,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -675,7 +675,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -713,7 +713,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -751,7 +751,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -789,7 +789,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -827,7 +827,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -865,7 +865,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -903,7 +903,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -941,7 +941,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -979,7 +979,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -1017,7 +1017,7 @@
           "rule": "Simplex lift — pumps to zone duplex booster force main"
         }
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_simplex",
       "defaultProgram": "logic/35_lift_simplex.st",
       "alarmTag": "ALT_FAULT",
@@ -1061,7 +1061,7 @@
         "4× parallel 1,250 gal treatment",
         "Drip drainfield"
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_dual_duplex",
       "defaultProgram": "logic/36_duplex_lift_station.st",
       "alarmTag": "ALT_FAULT",
@@ -1105,7 +1105,7 @@
         "4× parallel 1,250 gal treatment",
         "Drip drainfield"
       ],
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_dual_duplex",
       "defaultProgram": "logic/36_duplex_lift_station.st",
       "alarmTag": "ALT_FAULT",
@@ -1188,7 +1188,7 @@
         "moduleCount": 4,
         "dispersal": "drip_drainfield"
       },
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_quad_atu",
       "defaultProgram": "logic/34_quad_atu.st",
       "alarmTag": "ALT_FAULT",
@@ -1275,7 +1275,7 @@
         "moduleCount": 4,
         "dispersal": "drip_drainfield"
       },
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_quad_atu",
       "defaultProgram": "logic/34_quad_atu.st",
       "alarmTag": "ALT_FAULT",
@@ -1306,7 +1306,7 @@
   "importCsv": "st/fixtures/fleet_import_dwts_magnolia.csv",
   "cloudProject": "atu-cloud-dwts",
   "mqtt": {
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "cloudBrokerPort": 1883,
     "optaLanBroker": "192.168.1.1:1883"
   },

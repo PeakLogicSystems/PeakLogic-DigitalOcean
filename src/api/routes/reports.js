@@ -45,7 +45,7 @@ function createReportRoutes() {
       const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
       const project = (req.body?.meta?.projectName || 'report').replace(/[^\w.-]+/g, '_').slice(0, 40);
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `attachment; filename="MooreVIEW_${project}_${stamp}.pdf"`);
+      res.setHeader('Content-Disposition', `attachment; filename="PeakLogic_${project}_${stamp}.pdf"`);
       res.send(buf);
     } catch (e) {
       res.status(500).json({ error: e.message || String(e) });

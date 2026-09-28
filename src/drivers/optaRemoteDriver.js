@@ -234,7 +234,7 @@ class OptaRemoteDriver {
       } else if (/timeout|aborted/i.test(msg)) {
         extra = ` (${payloadBytes} bytes — check Opta Serial for PUT/POST /api/program)`;
       } else if (/invalid json|json NoMemory|incomplete body/i.test(msg)) {
-        extra = ` (${payloadBytes} bytes — re-flash est-pc/firmware/arduino-opta-st/MooreviewOptaSt; old firmware returns "invalid json" for large programs)`;
+        extra = ` (${payloadBytes} bytes — re-flash est-pc/firmware/arduino-opta-st/PeaklogicOptaSt; old firmware returns "invalid json" for large programs)`;
       }
       return { ok: false, errors: [`${msg}${extra}`] };
     }

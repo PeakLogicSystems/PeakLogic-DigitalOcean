@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Pack a mooreview-est JSON doc + ST source into a portable .est.zip archive.
+ * Pack a peaklogic-est JSON doc + ST source into a portable .est.zip archive.
  * Usage: node scripts/pack-est-json-to-archive.js input.est.json [program.st] [output.est.zip]
  */
 

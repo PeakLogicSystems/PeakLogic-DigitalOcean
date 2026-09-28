@@ -30,5 +30,5 @@
       "clTagId": "ORP_AI"
     }
   },
-  "notes": "Local RS-485 pair for pool ST: SEN0711 slave 1 → PH_AI + WATER_TEMP_C + NH3_MG_L; SEN0712 slave 2 → ORP_AI (CL2 ppm). Default 4800 8N1. Set unique addresses (holding 0x07D0) before both share the bus. IOT-LINK: MOOREVIEW_POOL_MODBUS_CHEM=true (PORT B). Cloud/NB-IoT: use dfrobot_pool_chemistry_dragino instead."
+  "notes": "Local RS-485 pair for pool ST: SEN0711 slave 1 → PH_AI + WATER_TEMP_C + NH3_MG_L; SEN0712 slave 2 → ORP_AI (CL2 ppm). Default 4800 8N1. Set unique addresses (holding 0x07D0) before both share the bus. IOT-LINK: PEAKLOGIC_POOL_MODBUS_CHEM=true (PORT B). Cloud/NB-IoT: use dfrobot_pool_chemistry_dragino instead."
 }

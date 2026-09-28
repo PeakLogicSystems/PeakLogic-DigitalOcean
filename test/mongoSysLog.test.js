@@ -3,7 +3,7 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-syslog-'));
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-syslog-'));
 
 const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert/strict');
@@ -14,10 +14,10 @@ describe('sysLogContext', () => {
   it('userFromRequest reads cloud headers', () => {
     const user = userFromRequest({
       headers: {
-        'x-mooreview-user-id': 'u42',
-        'x-mooreview-user-email': 'tech@example.com',
-        'x-mooreview-user-name': 'Tech User',
-        'x-mooreview-user-role': 'admin',
+        'x-peaklogic-user-id': 'u42',
+        'x-peaklogic-user-email': 'tech@example.com',
+        'x-peaklogic-user-name': 'Tech User',
+        'x-peaklogic-user-role': 'admin',
       },
     });
     assert.equal(user.id, 'u42');

@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # Phase 1 — archive droplet (cloud 2). No MongoDB.
-# Requires Node 20 + /home/mooreview/deploy/cloud/archive-server/server.js
+# Requires Node 20 + /home/peaklogic/deploy/cloud/archive-server/server.js
 #
 #   sudo bash deploy/cloud/phase1/install-archive-droplet.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-ARCHIVE_ENV="${MOOREVIEW_ARCHIVE_ENV:-/etc/mooreview/archive.env}"
-SERVICE_USER="${MOOREVIEW_USER:-mooreview}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+ARCHIVE_ENV="${PEAKLOGIC_ARCHIVE_ENV:-/etc/peaklogic/archive.env}"
+SERVICE_USER="${PEAKLOGIC_USER:-peaklogic}"
 SERVER_JS="$INSTALL_DIR/deploy/cloud/archive-server/server.js"
 
-log() { printf '[mooreview-archive] %s\n' "$*"; }
-die() { printf '[mooreview-archive] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-archive] %s\n' "$*"; }
+die() { printf '[peaklogic-archive] ERROR: %s\n' "$*" >&2; exit 1; }
 
 [[ "${EUID:-$(id -u)}" -eq 0 ]] || die "Run as root"
 [[ -f "$SERVER_JS" ]] || die "Missing $SERVER_JS — extract SaaS bundle or sync repo first"
@@ -36,7 +36,7 @@ if ! id "$SERVICE_USER" >/dev/null 2>&1; then
   useradd --system --home-dir "$INSTALL_DIR" --no-create-home --shell /usr/sbin/nologin "$SERVICE_USER"
 fi
 
-install -d -m 0750 -o root -g "$SERVICE_USER" /etc/mooreview
+install -d -m 0750 -o root -g "$SERVICE_USER" /etc/peaklogic
 install -d -m 0750 -o "$SERVICE_USER" -g "$SERVICE_USER" /data/archive
 
 if [[ ! -f "$ARCHIVE_ENV" ]]; then
@@ -51,10 +51,10 @@ fi
 
 chown -R "$SERVICE_USER:$SERVICE_USER" "$INSTALL_DIR/deploy/cloud/archive-server" 2>/dev/null || true
 
-install -m 0644 "$SCRIPT_DIR/mooreview-archive.service" /etc/systemd/system/mooreview-archive.service
+install -m 0644 "$SCRIPT_DIR/peaklogic-archive.service" /etc/systemd/system/peaklogic-archive.service
 systemctl daemon-reload
-systemctl enable mooreview-archive.service
-systemctl restart mooreview-archive.service
+systemctl enable peaklogic-archive.service
+systemctl restart peaklogic-archive.service
 
 if command -v ufw >/dev/null 2>&1; then
   log "UFW: prefer DO Cloud Firewall (8090 from SaaS IP only). Not opening 8090 to world."
@@ -64,9 +64,9 @@ sleep 1
 if curl -sf http://127.0.0.1:8090/health >/dev/null; then
   log "Archive healthy on :8090"
 else
-  journalctl -u mooreview-archive -n 30 --no-pager || true
+  journalctl -u peaklogic-archive -n 30 --no-pager || true
   die "Archive health check failed"
 fi
 
 log "Point SaaS ARCHIVE_SERVER_URL at http://<this-ip>:8090"
-log "Logs: journalctl -u mooreview-archive -f"
+log "Logs: journalctl -u peaklogic-archive -f"

@@ -95,9 +95,9 @@
       "/hmi/svg/library/numeric-displays/bezels/mv/bezel_digit_4.svg",
       "/hmi/svg/library/numeric-displays/bezels/mv/bezel_digit_8.svg",
       "/hmi/svg/library/numeric-displays/displays/mv/editable/displays.svg",
-      "/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg"
+      "/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg"
     ],
-    "pidNote": "Use library/pid-faceplates/mooreview/pid_loop_standard.svg or compose from MV gauge dial + bar graph + bezels."
+    "pidNote": "Use library/pid-faceplates/peaklogic/pid_loop_standard.svg or compose from MV gauge dial + bar graph + bezels."
   },
   "assets": [
     {
@@ -106,7 +106,7 @@
       "type": "svg",
       "group": "Demos",
       "subgroup": "screens",
-      "vendor": "mooreview",
+      "vendor": "peaklogic",
       "label": "demo controls"
     },
     {
@@ -115,7 +115,7 @@
       "type": "svg",
       "group": "Demos",
       "subgroup": "screens",
-      "vendor": "mooreview",
+      "vendor": "peaklogic",
       "label": "demo process"
     },
     {
@@ -17003,11 +17003,11 @@
       "label": "pb numeric strint"
     },
     {
-      "path": "/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg",
+      "path": "/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg",
       "name": "pid_loop_standard.svg",
       "type": "svg",
       "group": "PID faceplates",
-      "subgroup": "mooreview",
+      "subgroup": "peaklogic",
       "vendor": "pid_loop_standard.svg",
       "label": "pid loop standard"
     },

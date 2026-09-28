@@ -1,9 +1,9 @@
-# Upload SaaS bundle to mooreview.io droplet and restart mooreview-saas (code-only update).
+# Upload SaaS bundle to peaklogic.io droplet and restart peaklogic-saas (code-only update).
 param(
   [string]$DropletHost = 'mv-saas',
   [string]$BundlePath = '',
-  [string]$SshKey = "$env:USERPROFILE\.ssh\id_ed25519_mooreview",
-  [string]$RemoteInstall = '/home/mooreview',
+  [string]$SshKey = "$env:USERPROFILE\.ssh\id_ed25519_peaklogic",
+  [string]$RemoteInstall = '/home/peaklogic',
   [switch]$SkipBuild,
   [switch]$DryRun
 )
@@ -18,7 +18,7 @@ if (-not $SkipBuild) {
 }
 
 if (-not $BundlePath) {
-  $latest = Get-ChildItem $DistDir -Filter 'mooreview-cloud-*.tgz' -ErrorAction SilentlyContinue |
+  $latest = Get-ChildItem $DistDir -Filter 'peaklogic-cloud-*.tgz' -ErrorAction SilentlyContinue |
     Sort-Object LastWriteTime -Descending |
     Select-Object -First 1
   if (-not $latest) { throw "No bundle in $DistDir - run create-saas-bundle.ps1" }
@@ -41,35 +41,35 @@ $remoteScript = @'
 set -euo pipefail
 BUNDLE="/tmp/__LEAF__"
 INSTALL="__INSTALL__"
-echo "[deploy] stopping mooreview-saas..."
-systemctl stop mooreview-saas 2>/dev/null || true
+echo "[deploy] stopping peaklogic-saas..."
+systemctl stop peaklogic-saas 2>/dev/null || true
 echo "[deploy] extracting bundle..."
 mkdir -p "$INSTALL"
 tar xzf "$BUNDLE" -C "$INSTALL" --strip-components=1
 find "$INSTALL/deploy" -type f \( -name '*.sh' -o -name '*.service' \) -exec sed -i 's/\r$//' {} + 2>/dev/null || true
-chown -R mooreview:mooreview "$INSTALL"
+chown -R peaklogic:peaklogic "$INSTALL"
 echo "[deploy] npm ci..."
-sudo -u mooreview env HOME=/var/lib/mooreview bash -lc "cd '$INSTALL' && npm ci --omit=dev"
+sudo -u peaklogic env HOME=/var/lib/peaklogic bash -lc "cd '$INSTALL' && npm ci --omit=dev"
 echo "[deploy] seed tenant project libraries..."
-sudo -u mooreview env HOME=/var/lib/mooreview MOOREVIEW_DEPLOYMENT=cloud bash -lc "cd '$INSTALL' && node scripts/seed-tenant-projects.js" || true
+sudo -u peaklogic env HOME=/var/lib/peaklogic PEAKLOGIC_DEPLOYMENT=cloud bash -lc "cd '$INSTALL' && node scripts/seed-tenant-projects.js" || true
 echo "[deploy] patch live workspace screen_2 to DUPLEXLS if needed..."
-for WS in "/var/lib/mooreview/workspace.est.json" "$INSTALL/data/workspace.est.json"; do
+for WS in "/var/lib/peaklogic/workspace.est.json" "$INSTALL/data/workspace.est.json"; do
   if [ -f "$WS" ]; then
-    sudo -u mooreview env HOME=/var/lib/mooreview bash -lc "cd '$INSTALL' && node scripts/duplex-lift-station/patch-screen2-duplexls.js '$WS'" || true
+    sudo -u peaklogic env HOME=/var/lib/peaklogic bash -lc "cd '$INSTALL' && node scripts/duplex-lift-station/patch-screen2-duplexls.js '$WS'" || true
   fi
 done
 echo "[deploy] ensure Circle K duplex-100 library project..."
-sudo -u mooreview env HOME=/var/lib/mooreview bash -lc "cd '$INSTALL' && node scripts/circlek-fleet/generate-artifacts.js --duplex-100" || true
-echo "[deploy] point MQTT Parc hub at mv-mqtt (mqtt.mooreview.io)..."
+sudo -u peaklogic env HOME=/var/lib/peaklogic bash -lc "cd '$INSTALL' && node scripts/circlek-fleet/generate-artifacts.js --duplex-100" || true
+echo "[deploy] point MQTT Parc hub at mv-mqtt (mqtt.peaklogic.io)..."
 bash "$INSTALL/deploy/cloud/phase1/remote-fix-saas-mqtt-hub.sh" || true
-echo "[deploy] starting mooreview-saas..."
-systemctl start mooreview-saas
+echo "[deploy] starting peaklogic-saas..."
+systemctl start peaklogic-saas
 sleep 2
-echo "[deploy] verify mooreview-saas..."
-systemctl is-active mooreview-saas
+echo "[deploy] verify peaklogic-saas..."
+systemctl is-active peaklogic-saas
 curl -fsS http://127.0.0.1:3100/health 2>/dev/null | head -c 200 || true
 echo
-echo "[deploy] done - hard-refresh https://mooreview.io/login"
+echo "[deploy] done - hard-refresh https://peaklogic.io/login"
 '@ -replace '__LEAF__', $leaf -replace '__INSTALL__', $RemoteInstall
 
 if ($DryRun) {

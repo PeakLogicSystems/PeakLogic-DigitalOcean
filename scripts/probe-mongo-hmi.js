@@ -14,11 +14,11 @@ function loadEnvFile(filePath) {
     process.env[key] = trimmed.slice(eq + 1).trim();
   }
 }
-loadEnvFile('/etc/mooreview/saas.env');
+loadEnvFile('/etc/peaklogic/saas.env');
 (async () => {
   const c = new MongoClient(process.env.MONGODB_URI);
   await c.connect();
-  const db = c.db(process.env.MOOREVIEW_CONFIG_DB || 'mooreview_config');
+  const db = c.db(process.env.PEAKLOGIC_CONFIG_DB || 'peaklogic_config');
   for (const key of ['workspace.est.json', 'settings.json', 'project.est.json']) {
     const rows = await db.collection('config_documents').find({ key }).toArray();
     for (const r of rows) {

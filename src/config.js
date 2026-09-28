@@ -4,10 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = process.env.MOOREVIEW_DATA || path.join(ROOT, 'data');
+const DATA_DIR = process.env.PEAKLOGIC_DATA || path.join(ROOT, 'data');
 
 function resolveStDir() {
-  const raw = process.env.MOOREVIEW_ST || path.join(ROOT, 'st');
+  const raw = process.env.PEAKLOGIC_ST || path.join(ROOT, 'st');
   let dir = path.resolve(raw);
   try {
     if (fs.existsSync(dir)) {
@@ -24,7 +24,7 @@ const PUBLIC_DIR = path.join(ROOT, 'public');
 const DEFAULT_PROGRAM = 'program.st';
 
 function resolveDeploymentMode() {
-  if (String(process.env.MOOREVIEW_DEPLOYMENT || '').trim().toLowerCase() === 'cloud') {
+  if (String(process.env.PEAKLOGIC_DEPLOYMENT || '').trim().toLowerCase() === 'cloud') {
     return 'cloud';
   }
   try {
@@ -35,7 +35,7 @@ function resolveDeploymentMode() {
 }
 
 const DEPLOYMENT_MODE = resolveDeploymentMode();
-const TENANT_ID = process.env.MOOREVIEW_TENANT_ID
+const TENANT_ID = process.env.PEAKLOGIC_TENANT_ID
   || (DEPLOYMENT_MODE === 'cloud' ? '' : 'local');
 
 const TELEMETRY_INGEST_MODE = String(process.env.TELEMETRY_INGEST_MODE || 'local').trim().toLowerCase();
@@ -49,10 +49,10 @@ module.exports = {
   MAX_TAGS: 10000,
   DEFAULT_PORT: Number(process.env.PORT) || 3090,
   DEFAULT_SCAN_MS: 100,
-  DEFAULT_MQTT_PARC_BROKER: process.env.MOOREVIEW_MQTT_BROKER || 'mqtt://127.0.0.1:1883',
+  DEFAULT_MQTT_PARC_BROKER: process.env.PEAKLOGIC_MQTT_BROKER || 'mqtt://127.0.0.1:1883',
   DASHBOARD_POLL_MS: 800,
   LIVE_WS_INTERVAL_MS: 250,
-  AUTH_TOKEN: process.env.MOOREVIEW_TOKEN || '',
+  AUTH_TOKEN: process.env.PEAKLOGIC_TOKEN || '',
   DEPLOYMENT_MODE,
   TENANT_ID,
   TELEMETRY_INGEST_MODE,

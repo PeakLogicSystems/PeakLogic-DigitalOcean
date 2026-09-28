@@ -1,6 +1,6 @@
 # Opta Parc — NanoPi NEO CAT1 gateway (LAN :1883 → cloud :8883)
 
-Transparent gateway: Opta talks to **local Mosquitto** on the NanoPi; the NanoPi bridges **`mooreview/v1/#`** to the cloud over LTE.
+Transparent gateway: Opta talks to **local Mosquitto** on the NanoPi; the NanoPi bridges **`peaklogic/v1/#`** to the cloud over LTE.
 
 Field-validated stack: FriendlyWrt on NanoPi NEO + NEO CAT1 (`19d1:0001`), Mosquitto 1.6 SSL bridge.
 
@@ -28,10 +28,10 @@ Save — Opta reconnects to the NanoPi LAN broker. **Do not** point Opta at the 
 
 | Field | Value |
 |-------|--------|
-| **Host** | `mqtt.mooreview.io` (or `167.99.9.171`) |
+| **Host** | `mqtt.peaklogic.io` (or `167.99.9.171`) |
 | **Port** | **8883** |
 | **TLS** | **On** (Let's Encrypt via `ca-bundle`) |
-| **Username** | `mooreview` |
+| **Username** | `peaklogic` |
 | **Password** | `/etc/mosquitto/cloud.pass` on the NanoPi |
 
 Set password on the gateway:
@@ -46,7 +46,7 @@ Read password on the MQTT droplet:
 
 ```bash
 ssh mv-mqtt
-sudo grep MOSQUITTO_PASS /etc/mooreview/mqtt.env
+sudo grep MOSQUITTO_PASS /etc/peaklogic/mqtt.env
 ```
 
 Copy [nanopi-gateway-cloud.env.example](./nanopi-gateway-cloud.env.example) → `nanopi-gateway-cloud.env` locally (gitignored) for bench notes only — **do not commit** production passwords.
@@ -79,16 +79,16 @@ Wire **Opta Ethernet → NanoPi eth0** only. Do not connect eth0 to the office U
 ## Topics (unchanged)
 
 ```
-mooreview/v1/{deviceId}/telemetry
-mooreview/v1/{deviceId}/cmd
-mooreview/v1/{deviceId}/online
-mooreview/v1/{deviceId}/cmd/response
-mooreview/v1/g/{siteKey}/{tag}
+peaklogic/v1/{deviceId}/telemetry
+peaklogic/v1/{deviceId}/cmd
+peaklogic/v1/{deviceId}/online
+peaklogic/v1/{deviceId}/cmd/response
+peaklogic/v1/g/{siteKey}/{tag}
 ```
 
 `deviceId` = `opta_<ATECC608 serial>` (automatic on Opta).
 
-Bridge topic rule on NanoPi: `topic mooreview/v1/# both 1`
+Bridge topic rule on NanoPi: `topic peaklogic/v1/# both 1`
 
 ---
 
@@ -100,14 +100,14 @@ On the NanoPi (after `cloud.pass` is set):
 # local → cloud
 cat > /tmp/bridge-test.sh << 'EOF'
 #!/bin/sh
-mosquitto_sub -h mqtt.mooreview.io -p 8883 \
+mosquitto_sub -h mqtt.peaklogic.io -p 8883 \
   --cafile /etc/ssl/certs/ca-certificates.crt \
-  -u mooreview -P "$(cat /etc/mosquitto/cloud.pass)" \
-  -t mooreview/v1/test/gateway/ping -C 1 -W 8 &
+  -u peaklogic -P "$(cat /etc/mosquitto/cloud.pass)" \
+  -t peaklogic/v1/test/gateway/ping -C 1 -W 8 &
 SPID=$!
 sleep 2
 mosquitto_pub -h 127.0.0.1 -p 1883 \
-  -t mooreview/v1/test/gateway/ping -m ok -q 1
+  -t peaklogic/v1/test/gateway/ping -m ok -q 1
 wait $SPID
 EOF
 sh /tmp/bridge-test.sh
@@ -115,7 +115,7 @@ sh /tmp/bridge-test.sh
 
 Expect output `ok` from the subscriber.
 
-From mooreVIEW cloud (MQTT Parc hub enabled): confirm Opta **telemetry** after Opta is on `192.168.1.1:1883`.
+From PeakLogic cloud (MQTT Parc hub enabled): confirm Opta **telemetry** after Opta is on `192.168.1.1:1883`.
 
 ---
 
@@ -123,7 +123,7 @@ From mooreVIEW cloud (MQTT Parc hub enabled): confirm Opta **telemetry** after O
 
 | | Direct cloud ([OPTA-CLOUD-MQTT.md](./OPTA-CLOUD-MQTT.md)) | **NanoPi gateway (this doc)** |
 |--|-------------------------------------------------------------|-------------------------------|
-| Opta broker | `mqtt.mooreview.io:8883` + TLS + auth | **`192.168.1.1:1883`** anonymous |
+| Opta broker | `mqtt.peaklogic.io:8883` + TLS + auth | **`192.168.1.1:1883`** anonymous |
 | Uplink | Opta Ethernet or site LAN | **LTE on NanoPi** |
 | Credentials on Opta | Yes | **No** (gateway only) |
 

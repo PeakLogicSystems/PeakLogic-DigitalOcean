@@ -30,10 +30,10 @@ function logoutToken(token) {
   return applianceAuthStore.logout(token);
 }
 
-function attachMooreviewUser(req) {
+function attachPeaklogicUser(req) {
   if (!req.mvAuth?.user) return;
   const u = req.mvAuth.user;
-  req.mooreviewUser = {
+  req.peaklogicUser = {
     id: u.userId || u.id,
     email: u.email,
     name: u.name,
@@ -46,7 +46,7 @@ function attachSession(req, res, next) {
   const sess = sessionFromToken(token);
   req.mvAuth = sess;
   req.mvToken = token || null;
-  attachMooreviewUser(req);
+  attachPeaklogicUser(req);
   next();
 }
 
@@ -118,5 +118,5 @@ module.exports = {
   extractToken,
   sessionFromToken,
   logoutToken,
-  attachMooreviewUser,
+  attachPeaklogicUser,
 };

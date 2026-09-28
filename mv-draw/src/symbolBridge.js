@@ -95,7 +95,7 @@ function listMvDrawHmiAssets() {
     type: 'mvdraw',
     group: 'Site plan (MV Draw)',
     subgroup: s.group,
-    vendor: 'mooreview',
+    vendor: 'peaklogic',
     label: s.label,
     preview: `/api/mv-draw/symbols/${encodeURIComponent(s.type)}/preview.svg`,
     mvDrawType: s.type,

@@ -1,4 +1,4 @@
-# MooreVIEW Cloud Phase 1 — Atlanta Deploy (atl1)
+# PeakLogic Cloud Phase 1 — Atlanta Deploy (atl1)
 
 **Document version:** 1.0 · Run `npm run build:phase1-atl-deploy-pdf` for build date
 
@@ -6,7 +6,7 @@
 
 Mosquitto lives on **`cloud-mqtt-atl1`** from day one. Future growth is mostly: add SaaS droplets (+ Load Balancer when >1), bump Managed Mongo tier, optionally resize MQTT RAM — **no broker migration**.
 
-**Field broker URL (permanent):** `mqtts://mqtt.mooreview.io:8883`
+**Field broker URL (permanent):** `mqtts://mqtt.peaklogic.io:8883`
 
 **Automated deploy:** `npm run deploy:phase1-atl` (after DO resources exist)
 
@@ -20,7 +20,7 @@ Mosquitto lives on **`cloud-mqtt-atl1`** from day one. Future growth is mostly: 
          ┌───────────────────┼───────────────────┐
          │                   │                   │
          ▼                   ▼                   ▼
-  mooreview.io:443    mqtt.mooreview.io:8883   (archive VPC only)
+  peaklogic.io:443    mqtt.peaklogic.io:8883   (archive VPC only)
          │                   │
   ┌──────▼──────────┐  ┌─────▼─────────────┐
   │ cloud-1-saas    │  │ cloud-mqtt-atl1   │
@@ -33,14 +33,14 @@ Mosquitto lives on **`cloud-mqtt-atl1`** from day one. Future growth is mostly: 
                      │
          ┌───────────▼───────────┐     ┌─────────────────────┐
          │ DO Managed Mongo atl1 │     │ cloud-2-archive-atl1 │
-         │ mooreview_cloud       │     │ :8090 + volume       │
+         │ peaklogic_cloud       │     │ :8090 + volume       │
          └───────────────────────┘     └─────────────────────┘
 ```
 
 | Hostname | Role | Public ports |
 |----------|------|--------------|
-| `mooreview.io` | SaaS Studio, login, API | **443** (80 for certbot) |
-| `mqtt.mooreview.io` | Field MQTT TLS | **8883** |
+| `peaklogic.io` | SaaS Studio, login, API | **443** (80 for certbot) |
+| `mqtt.peaklogic.io` | Field MQTT TLS | **8883** |
 | Archive | zstd blobs | **none** (VPC 8090 from SaaS only) |
 
 **SaaS firewall:** 22, 80, 443 — **not 8883**.  
@@ -53,8 +53,8 @@ Mosquitto lives on **`cloud-mqtt-atl1`** from day one. Future growth is mostly: 
 
 | Resource | Name | Region | Spec |
 |----------|------|--------|------|
-| VPC | `mooreview-prod-atl1` | atl1 | |
-| MongoDB | `mooreview-prod-mongo` | atl1 | 10–20 GB → scale tier |
+| VPC | `peaklogic-prod-atl1` | atl1 | |
+| MongoDB | `peaklogic-prod-mongo` | atl1 | 10–20 GB → scale tier |
 | Droplet | `cloud-1-saas-atl1` | atl1 | **4 GB** / 2 vCPU |
 | Droplet | `cloud-mqtt-atl1` | atl1 | **4 GB** / 2 vCPU |
 | Droplet | `cloud-2-archive-atl1` | atl1 | **1–2 GB** |
@@ -69,10 +69,10 @@ Mosquitto lives on **`cloud-mqtt-atl1`** from day one. Future growth is mostly: 
 
 | Record | Target | When |
 |--------|--------|------|
-| **`mqtt.mooreview.io`** | **cloud-mqtt public IP** | **Before field device onboarding** |
-| `mooreview.io` | cloud-1-saas public IP | After SaaS verification gate |
-| `www.mooreview.io` | same | Production cutover |
-| `test.mooreview.io` | NYC sandbox | Independent |
+| **`mqtt.peaklogic.io`** | **cloud-mqtt public IP** | **Before field device onboarding** |
+| `peaklogic.io` | cloud-1-saas public IP | After SaaS verification gate |
+| `www.peaklogic.io` | same | Production cutover |
+| `test.peaklogic.io` | NYC sandbox | Independent |
 
 ---
 
@@ -100,12 +100,12 @@ openssl rand -hex 16   # MOSQUITTO_PASS  (shared: mqtt + SaaS hub + field)
 
 | Droplet | File | Purpose |
 |---------|------|---------|
-| cloud-mqtt | `/etc/mooreview/mqtt.env` | `MOOREVIEW_DOMAIN=mqtt.mooreview.io`, Mosquitto auth |
-| cloud-1-saas | `/etc/mooreview/saas.env` | Mongo URI, JWT, `PUBLIC_*` URLs |
-| cloud-1-saas | `/etc/mooreview/archive-compact.env` | Archive private IP + token |
-| cloud-2-archive | `/etc/mooreview/archive.env` | `ARCHIVE_ROOT`, token, port 8090 |
+| cloud-mqtt | `/etc/peaklogic/mqtt.env` | `PEAKLOGIC_DOMAIN=mqtt.peaklogic.io`, Mosquitto auth |
+| cloud-1-saas | `/etc/peaklogic/saas.env` | Mongo URI, JWT, `PUBLIC_*` URLs |
+| cloud-1-saas | `/etc/peaklogic/archive-compact.env` | Archive private IP + token |
+| cloud-2-archive | `/etc/peaklogic/archive.env` | `ARCHIVE_ROOT`, token, port 8090 |
 
-**SaaS MQTT:** Do **not** run `enable-saas-mqtt.sh`. Use `configure-saas-mqtt-remote.sh` to set `MOOREVIEW_MQTT_BROKER=mqtt://10.x.x.x:1883`.
+**SaaS MQTT:** Do **not** run `enable-saas-mqtt.sh`. Use `configure-saas-mqtt-remote.sh` to set `PEAKLOGIC_MQTT_BROKER=mqtt://10.x.x.x:1883`.
 
 Templates in repo: `deploy/cloud/phase1/droplet-*/`
 
@@ -142,13 +142,13 @@ RUN_SAAS_CERTBOT=false
 
 1. `npm run build:phase1-bundles`
 2. Create VPC, Mongo, firewalls, three droplets, archive volume — all **atl1**
-3. DNS: `mqtt.mooreview.io` → MQTT droplet IP
+3. DNS: `mqtt.peaklogic.io` → MQTT droplet IP
 4. **cloud-2-archive** — install → record **private IP**
 5. **cloud-mqtt-atl1** — certbot → `install-mqtt-droplet.sh` → record **private IP**
 6. **cloud-1-saas** — `saas.env` → `install-saas.sh` → Mongo allowlist → seed
 7. `configure-saas-mqtt-remote.sh` with MQTT private IP
-8. Verify on IPs — **before** `mooreview.io` DNS
-9. `certbot --nginx` for mooreview.io (after DNS)
+8. Verify on IPs — **before** `peaklogic.io` DNS
+9. `certbot --nginx` for peaklogic.io (after DNS)
 10. `enable-phase1-archive-compact.sh`
 11. DNS cutover → update `PUBLIC_*` → restart SaaS
 
@@ -160,15 +160,15 @@ RUN_SAAS_CERTBOT=false
 
 - [ ] DO resources created (VPC, Mongo, droplets, firewalls, volume)
 - [ ] `phase1-atl.local.env` filled (SSH, Mongo URI, secrets)
-- [ ] DNS `A mqtt.mooreview.io` → MQTT public IP (or `RUN_MQTT_CERTBOT=false`)
+- [ ] DNS `A mqtt.peaklogic.io` → MQTT public IP (or `RUN_MQTT_CERTBOT=false`)
 - [ ] SSH works to archive, mqtt, saas from deploy PC
 - [ ] `npm run deploy:phase1-atl`
 - [ ] Mongo trusted source = SaaS **public** IP
 
 ### VPC and Mongo
 
-- [ ] VPC: `mooreview-prod-atl1` (region atl1)
-- [ ] Managed Mongo: `mooreview-prod-mongo`, DB `mooreview_cloud`
+- [ ] VPC: `peaklogic-prod-atl1` (region atl1)
+- [ ] Managed Mongo: `peaklogic-prod-mongo`, DB `peaklogic_cloud`
 - [ ] Mongo automated backups enabled
 - [ ] Connection string saved
 
@@ -184,7 +184,7 @@ RUN_SAAS_CERTBOT=false
 
 - [ ] Droplet 4 GB, same VPC
 - [ ] Firewall: 22, 8883
-- [ ] certbot for `mqtt.mooreview.io` (if not automated)
+- [ ] certbot for `mqtt.peaklogic.io` (if not automated)
 - [ ] `mosquitto_pub` local test OK
 - [ ] Private IP recorded: 10._______
 
@@ -199,7 +199,7 @@ RUN_SAAS_CERTBOT=false
 
 ### Archive compact (SaaS)
 
-- [ ] `/etc/mooreview/archive-compact.env` configured
+- [ ] `/etc/peaklogic/archive-compact.env` configured
 - [ ] `enable-phase1-archive-compact.sh`
 - [ ] Compact dry-run OK
 
@@ -210,7 +210,7 @@ RUN_SAAS_CERTBOT=false
 **MQTT droplet:**
 
 ```bash
-mosquitto_pub -h 127.0.0.1 -u mooreview -P '...' -t test -m ok
+mosquitto_pub -h 127.0.0.1 -u peaklogic -P '...' -t test -m ok
 systemctl status mosquitto
 ```
 
@@ -218,22 +218,22 @@ systemctl status mosquitto
 
 ```bash
 curl -s http://127.0.0.1:3100/health
-grep MOOREVIEW_MQTT_BROKER /etc/mooreview/saas.env
-systemctl status mooreview-saas
+grep PEAKLOGIC_MQTT_BROKER /etc/peaklogic/saas.env
+systemctl status peaklogic-saas
 ! systemctl is-active mosquitto && echo "OK: no local mosquitto"
 ```
 
 **End-to-end (SaaS via VPC):**
 
 ```bash
-mosquitto_pub -h 10.x.x.x -u mooreview -P '...' \
-  -t 'mooreview/v1/demo-tenant/test_device/telemetry' \
+mosquitto_pub -h 10.x.x.x -u peaklogic -P '...' \
+  -t 'peaklogic/v1/demo-tenant/test_device/telemetry' \
   -m '{"deviceId":"test_device","tags":[{"id":"T1","type":"BOOL","value":true}]}'
 ```
 
 **Post-deploy:**
 
-- [ ] `mqtt.mooreview.io:8883` TLS reachable
+- [ ] `mqtt.peaklogic.io:8883` TLS reachable
 - [ ] SaaS login on droplet IP — demo tenant
 - [ ] No mosquitto on SaaS droplet
 - [ ] Archive reachable from SaaS (private IP)
@@ -242,11 +242,11 @@ mosquitto_pub -h 10.x.x.x -u mooreview -P '...' \
 
 ## 9. DNS cutover (production)
 
-- [ ] `A mooreview.io` → cloud-1-saas public IP
-- [ ] `PUBLIC_APP_URL` / `PUBLIC_API_URL` → `https://mooreview.io`
-- [ ] `systemctl restart mooreview-saas`
-- [ ] `https://mooreview.io/login` verified
-- [ ] Field provisioning: **`mqtts://mqtt.mooreview.io:8883`**
+- [ ] `A peaklogic.io` → cloud-1-saas public IP
+- [ ] `PUBLIC_APP_URL` / `PUBLIC_API_URL` → `https://peaklogic.io`
+- [ ] `systemctl restart peaklogic-saas`
+- [ ] `https://peaklogic.io/login` verified
+- [ ] Field provisioning: **`mqtts://mqtt.peaklogic.io:8883`**
 
 ---
 
@@ -256,7 +256,7 @@ mosquitto_pub -h 10.x.x.x -u mooreview -P '...' \
 |---------|-----|
 | SSH hangs on deploy | Set `SSH_KEY` in config; test `ssh -o ConnectTimeout=15 root@IP` |
 | certbot fails on mqtt | Point DNS first, or `RUN_MQTT_CERTBOT=false` |
-| SaaS health OK, no MQTT hub | Re-run deploy `-Step finish`; check `MOOREVIEW_MQTT_BROKER` |
+| SaaS health OK, no MQTT hub | Re-run deploy `-Step finish`; check `PEAKLOGIC_MQTT_BROKER` |
 | Compact dry-run fails | Add SaaS public IP to Mongo allowlist |
 | Local mosquitto on SaaS | Re-run `configure-saas-mqtt-remote.sh` |
 
@@ -266,9 +266,9 @@ mosquitto_pub -h 10.x.x.x -u mooreview -P '...' \
 
 | Stays fixed | Grows with fleet |
 |-------------|------------------|
-| `mqtt.mooreview.io` hostname | + SaaS droplets + LB on :443 |
+| `mqtt.peaklogic.io` hostname | + SaaS droplets + LB on :443 |
 | Archive volume + compact pipeline | Managed Mongo tier/disk |
-| VPC `mooreview-prod-atl1` | Ingest shards (:3090) → same MQTT VPC broker |
+| VPC `peaklogic-prod-atl1` | Ingest shards (:3090) → same MQTT VPC broker |
 
 **Do not redo:** field broker URL, Mongo URI pattern, archive pipeline, MQTT topic layout.
 
@@ -295,4 +295,4 @@ See also: `docs/CLOUD_VERTICAL_SHARDS.md` · `docs/marketing/CLOUD_INFRA_PRICING
 | `deploy/cloud/phase1/phase1-atl.env.example` | Deploy config template |
 | `scripts/deploy-phase1-atl-mqtt.ps1` | Windows orchestrator |
 
-**Sandbox:** `nyc1` @ `test.mooreview.io` — separate from production atl1.
+**Sandbox:** `nyc1` @ `test.peaklogic.io` — separate from production atl1.

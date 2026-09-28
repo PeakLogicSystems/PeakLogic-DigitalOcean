@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * MooreVIEW archive server (cloud 2) — zstd blob store only.
+ * PeakLogic archive server (cloud 2) — zstd blob store only.
  *
  *   ARCHIVE_ROOT=/data/archive ARCHIVE_SERVER_TOKEN=secret PORT=8090 node server.js
  */

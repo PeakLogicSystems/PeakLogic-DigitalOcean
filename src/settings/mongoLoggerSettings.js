@@ -2,7 +2,7 @@
 
 const DEFAULT_MONGO_LOGGER = {
   uri: 'mongodb://127.0.0.1:27017',
-  db: 'mooreview',
+  db: 'peaklogic',
   collection: 'tag_logs',
   edgeCollection: 'edge_inference',
   sysLogCollection: 'sys_log',
@@ -37,7 +37,7 @@ function resolveMongoLoggerForDeployment(ml, deployment) {
       return normalizeMongoLogger({
         ...normalized,
         uri: envUri,
-        db: process.env.MONGODB_DB || normalized.db || 'mooreview_cloud',
+        db: process.env.MONGODB_DB || normalized.db || 'peaklogic_cloud',
       }, {});
     }
   }

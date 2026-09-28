@@ -1,4 +1,4 @@
-# mooreVIEW — Site Admin, Login & Quick Start
+# PeakLogic — Site Admin, Login & Quick Start
 
 Operator and administrator guide for **edge appliances** (port 3090) and **Cloud SaaS** (port 3100): sign-in, first-time setup, site pairing, remote cameras, and user administration.
 
@@ -6,7 +6,7 @@ Operator and administrator guide for **edge appliances** (port 3090) and **Cloud
 
 ## Quick start — PC appliance
 
-Local all-in-one MooreVIEW for Windows or Linux field use.
+Local all-in-one PeakLogic for Windows or Linux field use.
 
 1. Install dependencies: `npm install`
 2. Copy `.env.example` to `.env` (optional flags)
@@ -16,7 +16,7 @@ Local all-in-one MooreVIEW for Windows or Linux field use.
 6. Configure **Drivers** (Modbus, MQTT, HTTPS, or simulation), then **Tags** or apply a **device template**
 7. Edit the **ST program**, click **Validate**, then **Start**
 
-**Windows installer:** copy `dist/mooreview-appliance-mvp-suite-*` to the target PC, run **Install mooreVIEW.bat**, then **Start mooreVIEW.bat**.
+**Windows installer:** copy `dist/peaklogic-appliance-mvp-suite-*` to the target PC, run **Install PeakLogic.bat**, then **Start PeakLogic.bat**.
 
 **IoT-Link (Linux gateway):** upload the tarball, run `deploy/iot-link/install-generic.sh`, open `http://<gateway-ip>:3090/login`.
 
@@ -43,7 +43,7 @@ Open **http://127.0.0.1:3100/login** and sign in with demo credentials (see Logi
 | Mode | Port | Entry | Use |
 |------|------|-------|-----|
 | Appliance | 3090 | `npm start` | Site PC / IoT-Link edge |
-| Cloud hub | 3090 | `MOOREVIEW_DEPLOYMENT=cloud npm start` | MQTT Parc ingest, cloud sims |
+| Cloud hub | 3090 | `PEAKLOGIC_DEPLOYMENT=cloud npm start` | MQTT Parc ingest, cloud sims |
 | Cloud SaaS | **3100** | `npm run start:saas` | Login, tenants, Sites, full Studio |
 
 ---
@@ -134,7 +134,7 @@ Sign in at **https://your-domain/login** (or `http://127.0.0.1:3100/login` local
 | Operator | `demo` | `operator@demo.local` | `demo` |
 | Platform admin | `demo` | `admin@demo.local` | `ChangeMeAdmin!` |
 
-Override seed values with env vars: `MOOREVIEW_SEED_TENANT`, `MOOREVIEW_SEED_ADMIN_EMAIL`, `MOOREVIEW_SEED_ADMIN_PASSWORD`, `MOOREVIEW_SEED_OPERATOR_EMAIL`, `MOOREVIEW_SEED_OPERATOR_PASSWORD`.
+Override seed values with env vars: `PEAKLOGIC_SEED_TENANT`, `PEAKLOGIC_SEED_ADMIN_EMAIL`, `PEAKLOGIC_SEED_ADMIN_PASSWORD`, `PEAKLOGIC_SEED_OPERATOR_EMAIL`, `PEAKLOGIC_SEED_OPERATOR_PASSWORD`.
 
 **Sign out:**
 
@@ -298,7 +298,7 @@ Sign in as `admin@demo.local` / `ChangeMeAdmin!` (after seed) or use `PLATFORM_A
 | `JWT_SECRET` | Session signing |
 | `PLATFORM_ADMIN_KEY` | Platform admin API key |
 | `MONGODB_URI` | DO Managed Mongo connection string |
-| `PUBLIC_APP_URL` | e.g. `https://mooreview.io` |
+| `PUBLIC_APP_URL` | e.g. `https://peaklogic.io` |
 
 ---
 
@@ -326,7 +326,7 @@ On the appliance, feature access is controlled per user in **System setup → Fe
 
 **Arduino Opta (MQTT Parc) quick start:**
 
-1. Flash **MooreviewOptaMqttSt** v2.3.41+ via Arduino IDE; set broker on `/setup`
+1. Flash **PeaklogicOptaMqttSt** v2.3.41+ via Arduino IDE; set broker on `/setup`
 2. Start Mosquitto on the PC (`npm run mqtt:start`) — broker must listen on **LAN IP**, not only localhost
 3. **System setup → General** — enable **MQTT Parc hub**, set **broker URL**, enable **Remote ST execution** → **Apply all settings**
 4. **Drivers** — template **Arduino Opta — MQTT Parc ST runtime** or **Add Opta Parc devices (bulk)**; `deviceId` must match firmware
@@ -347,7 +347,7 @@ On the appliance, feature access is controlled per user in **System setup → Fe
 | Modbus missing in cloud | Expected — use edge appliance for LAN field buses |
 | BACnet missing in cloud | Expected — BACnet/IP runs on edge appliance |
 | Session expired | Sign out and sign in again; protected routes redirect to `/login` |
-| Login 502 (production) | Check `MONGODB_URI`, Mongo allowlist, `journalctl -u mooreview-saas` |
+| Login 502 (production) | Check `MONGODB_URI`, Mongo allowlist, `journalctl -u peaklogic-saas` |
 | Scoped alarm contact gets no email | Scoped mode with empty lists; alarm tag not linked to selected site/device/asset |
 
 ---

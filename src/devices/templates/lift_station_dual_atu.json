@@ -1,7 +1,7 @@
 {
   "id": "lift_station_dual_atu",
   "label": "Lift station — dual ATU",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Dual ATU (2 duplex + 2 TPO)",
   "transport": "mqtt_parc",
   "stationType": "dual_atu",

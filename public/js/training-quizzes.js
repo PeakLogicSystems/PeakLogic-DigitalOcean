@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Module quizzes for MooreView Training (M0–M15, CBM-1–CBM-13).
+ * Module quizzes for PeakLogic Training (M0–M15, CBM-1–CBM-13).
  * Each question: one right answer, one almost-right, one plausible, one similar.
- * Loaded before training.js; used by MooreviewTraining Quizzes tab.
+ * Loaded before training.js; used by PeaklogicTraining Quizzes tab.
  */
-window.MooreviewTrainingQuizzes = (function () {
+window.PeaklogicTrainingQuizzes = (function () {
   const PASS_PERCENT = 80;
 
   function q(text, choices, answer, explain) {
@@ -18,9 +18,9 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'mv',
       title: 'M0 — Product map & first launch',
       questions: [
-        q('What is MooreView MVP Suite?', ['A local engineering appliance you run on a laptop', 'The cloud-only version of MooreView with no local runtime', 'Firmware that runs only on Arduino Opta hardware', 'A mobile app for viewing trends without configuration'], 0, 'MVP Suite is the local MooreView app at http://127.0.0.1:3090.'),
+        q('What is PeakLogic MVP Suite?', ['A local engineering appliance you run on a laptop', 'The cloud-only version of PeakLogic with no local runtime', 'Firmware that runs only on Arduino Opta hardware', 'A mobile app for viewing trends without configuration'], 0, 'MVP Suite is the local PeakLogic app at http://127.0.0.1:3090.'),
         q('Which key opens the full Training curriculum?', ['F1', 'F2', 'Ctrl+S', 'F1 then Training from Help sidebar'], 1, 'F2 opens Help → Training directly.'),
-        q('What file type stores a MooreView project snapshot?', ['.csv export from Historian', '.mvbundle (legacy import only)', '.est.zip', '.json driver template only'], 2, 'Projects are saved as portable .est.zip archives (mooreview-est-archive v1).'),
+        q('What file type stores a PeakLogic project snapshot?', ['.csv export from Historian', '.mvbundle (legacy import only)', '.est.zip', '.json driver template only'], 2, 'Projects are saved as portable .est.zip archives (peaklogic-est-archive v1).'),
         q('The default home page at http://127.0.0.1:3090 is…', ['MV Draw site-plan editor', 'The operator dashboard with live HMI', 'Cloud Studio login only', 'Historian trend chart'], 1, 'Dashboard is / ; MV Draw is /mv-draw under Tools.'),
         q('F1 Help is mainly for…', ['Structured course modules and quizzes', 'Operator and engineering reference while you work', 'Flashing Opta firmware over USB', 'Configuring the MQTT Parc hub only'], 1, 'F1 = in-app help; F2 = structured training.'),
         q('Before M0 labs, students should be able to…', ['Complete the Parc baseline and flash T-HaLow', 'Start MVP Suite and open Training', 'Deploy ST remotely with Download & Start', 'Configure MongoDB and export PdM reports'], 1, 'M0 verifies first launch and navigation.'),
@@ -70,7 +70,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Driver Test is used to…', ['Export historian data to CSV', 'Deploy ST to Opta over Parc', 'Verify communication before relying on tags', 'Apply HMI composite bindings'], 2, 'Always Test after configuring a driver.'),
         q('Apply on a driver card…', ['Validates ST syntax before Start', 'Activates configuration to the runtime', 'Acknowledges active alarms', 'Saves the project under a new name'], 1, 'Apply commits driver settings.'),
         q('Modbus RTU problems are often caused by…', ['Hist flag not checked on tags', 'HMI bindings left unapplied', 'Wrong COM port or slave ID', 'Parc hub disabled in System setup'], 2, 'See F1 Serial port troubleshooting.'),
-        q('mqtt_parc is a driver type for…', ['Modbus RTU on Arduino Opta serial', 'HTTPS REST polling to cloud APIs', 'MQTT Parc edge devices like Opta', 'Local mock drivers for bench simulation'], 2, 'Parc uses mooreview/v1 topics.'),
+        q('mqtt_parc is a driver type for…', ['Modbus RTU on Arduino Opta serial', 'HTTPS REST polling to cloud APIs', 'MQTT Parc edge devices like Opta', 'Local mock drivers for bench simulation'], 2, 'Parc uses peaklogic/v1 topics.'),
         q('A device template applied from Drivers…', ['Only adds tags without a driver', 'Creates driver(s) and tags for that product', 'Replaces ST with a PDF manual', 'Configures MV Draw floor plans only'], 1, 'Templates are the fastest way to add field I/O.'),
         q('The bacnet driver is used to…', ['Replace the campus BMS entirely', 'Import BACnet/IP points on the edge appliance alongside existing BAS', 'Poll Modbus RTU over RS-485', 'Deploy ST bytecode to Opta'], 1, 'Coexistence model — see docs/BACNET.md; edge appliance only.'),
         q('EZ Meter facility PQ derived measurement set requires…', ['Replacing all DDS_* tags with MQTT topics', 'Applying the full Modbus map template first on driver dds_rgb', 'Cloud Studio login only', 'A HaLow radio on the meter'], 1, 'Two-step apply — see docs/facilities/EZMETER_FACILITY_PQ.md.'),
@@ -105,7 +105,7 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'mv',
       title: 'M7 — MQTT Parc hub & Opta',
       questions: [
-        q('Parc telemetry topic pattern is…', ['modbus/rtu/slave/{id}/holding', 'mooreview/v1/{deviceId}/telemetry', 'mqtt://broker/status only', 'parc/opta/telemetry/v2'], 1, 'All Parc peers use mooreview/v1 layout.'),
+        q('Parc telemetry topic pattern is…', ['modbus/rtu/slave/{id}/holding', 'peaklogic/v1/{deviceId}/telemetry', 'mqtt://broker/status only', 'parc/opta/telemetry/v2'], 1, 'All Parc peers use peaklogic/v1 layout.'),
         q('Enable the Parc hub in…', ['Drivers → mqtt_parc → Test', 'Program → Remote → Connect', 'Project → System setup → MQTT Parc', 'HMI → Setup → Apply'], 2, 'Hub must be enabled and Applied.'),
         q('deviceId is…', ['The stable plant location for replace-hardware workflows', 'The operator role name in Cloud Studio', 'The MQTT identity of the physical device', 'The historian pen series name'], 2, 'Position ID is separate — stable plant location.'),
         q('Download & Start deploys…', ['HMI screens to the operator display', 'Driver templates to the project file', 'ST bytecode to a remote Opta over Parc', 'Historian archive to MongoDB'], 2, 'Remote programming uses cmd topic.'),
@@ -121,7 +121,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Pen config controls…', ['Which tags are logged to archive', 'Which tags appear on trend charts', 'MQTT telemetry publish rate', 'ST scan cycle interval'], 1, 'Pens are display series.'),
         q('Historian Report can export…', ['ST source code only', 'Driver Modbus maps only', 'CSV or PDF', 'Opta firmware .bin only'], 2, 'Reports use logged data.'),
         q('Flat historian line often means…', ['Hist not enabled or runtime stopped', 'MQTT Parc hub is working correctly', 'HMI bindings are all applied', 'Alarms are properly configured'], 0, 'Check Hist checkbox and runtime Start.'),
-        q('MongoDB in MooreView is used for…', ['Storing the project library under data/projects/', 'Long-term historian archive (when configured)', 'MQTT broker message relay', 'ST syntax validation'], 1, 'Projects live in .est.zip files on disk; Mongo is optional for historian/logs.'),
+        q('MongoDB in PeakLogic is used for…', ['Storing the project library under data/projects/', 'Long-term historian archive (when configured)', 'MQTT broker message relay', 'ST syntax validation'], 1, 'Projects live in .est.zip files on disk; Mongo is optional for historian/logs.'),
       ],
     },
     {
@@ -165,7 +165,7 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'mv',
       title: 'M12 — Cloud Studio',
       questions: [
-        q('Cloud Studio is…', ['The local MVP Suite at port 3090', 'MooreView cloud engineering/hosting tier', 'MV Draw desktop editor only', 'Opta firmware build toolchain'], 1, 'Contrast with local MVP Suite appliance.'),
+        q('Cloud Studio is…', ['The local MVP Suite at port 3090', 'PeakLogic cloud engineering/hosting tier', 'MV Draw desktop editor only', 'Opta firmware build toolchain'], 1, 'Contrast with local MVP Suite appliance.'),
         q('Modbus to field devices often requires…', ['Only a browser tab in Cloud Studio', 'Edge runtime at the site', 'Disabling all local drivers', 'Exporting historian PDF only'], 1, 'Field buses are edge-local.'),
         q('Entitlements control…', ['Modbus baud rate and parity', 'Which cloud features a tenant may use', 'HMI composite default bindings', 'Historian pen colors'], 1, 'Licensing and feature flags.'),
         q('M12 lab includes…', ['Parc baseline on Arduino Opta', 'Signing into Cloud Studio', 'T-HaLow ALF template selection', 'Modbus RTU wiring on bench'], 1, 'Hands-on cloud login and tour.'),
@@ -190,8 +190,8 @@ window.MooreviewTrainingQuizzes = (function () {
       title: 'M14 — Parc edge peers',
       questions: [
         q('M14 prerequisite is…', ['M10 MV Draw only', 'M7 Opta Parc baseline', 'M0 product map only', 'No prerequisites — start here'], 1, 'Complete Opta hub lab before LilyGO peers.'),
-        q('LilyGO T-HaLow uses which path for MQTT data?', ['USB serial to the PC only', 'Standard Wi-Fi AP for all telemetry', 'HaLow (802.11ah)', 'Modbus RTU over RS-485'], 2, 'Wi-Fi AP MooreView-T-HaLow is setup-only.'),
-        q('T-ETH gateway local broker for Opta is typically…', ['127.0.0.1:80', '192.168.4.1:8080 setup page', '192.168.1.1:1883', 'mqtt://cloud only — no local broker'], 2, 'Gateway forwards mooreview/v1/# to cloud.'),
+        q('LilyGO T-HaLow uses which path for MQTT data?', ['USB serial to the PC only', 'Standard Wi-Fi AP for all telemetry', 'HaLow (802.11ah)', 'Modbus RTU over RS-485'], 2, 'Wi-Fi AP PeakLogic-T-HaLow is setup-only.'),
+        q('T-ETH gateway local broker for Opta is typically…', ['127.0.0.1:80', '192.168.4.1:8080 setup page', '192.168.1.1:1883', 'mqtt://cloud only — no local broker'], 2, 'Gateway forwards peaklogic/v1/# to cloud.'),
         q('T-HaLow ALF template #2 is for…', ['Mechanical room pulse meters', 'Rooftop A/C compressor monitoring', 'Client room sensors', 'Kitchen six-sink leak ropes only'], 2, 'Templates 1–6 match ALF locations.'),
         q('Checkpoint D verifies…', ['Only M0 quiz score', 'Template vs fixture vs composite oral', 'T-HaLow telemetry and/or T-ETH cloud bridge', 'Only Cloud Studio login'], 2, 'Parc peer on bench or cloud path.'),
       ],
@@ -201,9 +201,9 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'mv',
       title: 'M15 — IP cameras & vision AI',
       questions: [
-        q('ONVIF WS-Discovery uses which UDP port?', ['554 RTSP', '8000 device service', '3702 multicast', '3090 MooreView HTTP'], 2, 'UDP 239.255.255.250:3702 for discovery.'),
-        q('Reolink cameras need which services enabled for MooreView probe?', ['FTP and SNMP only', 'ONVIF (8000) and RTSP (554)', 'Modbus RTU over RS-485', 'MQTT Parc hub only'], 1, 'ONVIF for probe/snapshot; RTSP for go2rtc.'),
-        q('go2rtc in MooreView is used for…', ['Flashing Opta firmware', 'H.264 live streaming via WebRTC/MSE', 'MongoDB historian pen samples', 'Modbus register polling'], 1, 'go2rtc proxies RTSP to browser-friendly streams.'),
+        q('ONVIF WS-Discovery uses which UDP port?', ['554 RTSP', '8000 device service', '3702 multicast', '3090 PeakLogic HTTP'], 2, 'UDP 239.255.255.250:3702 for discovery.'),
+        q('Reolink cameras need which services enabled for PeakLogic probe?', ['FTP and SNMP only', 'ONVIF (8000) and RTSP (554)', 'Modbus RTU over RS-485', 'MQTT Parc hub only'], 1, 'ONVIF for probe/snapshot; RTSP for go2rtc.'),
+        q('go2rtc in PeakLogic is used for…', ['Flashing Opta firmware', 'H.264 live streaming via WebRTC/MSE', 'MongoDB historian pen samples', 'Modbus register polling'], 1, 'go2rtc proxies RTSP to browser-friendly streams.'),
         q('Camera snapshots archive to GridFS bucket…', ['tag_logs', 'camera_snapshots', 'mqtt_parc', 'edge_inference only'], 1, 'JPEG snapshots stored in camera_snapshots bucket.'),
         q('Vision AI stub backend is for…', ['Production YOLO deployment', 'Dev/lab testing without external model', 'Disabling all inference permanently', 'ONVIF motion events only'], 1, 'Use http backend for real models in production.'),
         q('HMI I/O overlays on camera video are configured in…', ['Tags panel only', 'Tools → Cameras → Detail overlay registry', 'ST program editor', 'Historian pen setup'], 1, 'Per-camera overlay registry maps BOOL tags to video positions.'),
@@ -218,7 +218,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Reactive maintenance is…', ['Fix after failure', 'Fix on a fixed schedule regardless of condition', 'Fix when vibration trend exceeds baseline', 'Fix only when PdM forecast says 90% RUL'], 0, 'Highest downtime cost.'),
         q('Preventive maintenance is…', ['Fixed-interval service whether needed or not', 'Only when real-time sensors trip alarms', 'Never scheduled — purely reactive', 'Only performed after MQTT broker outage'], 0, 'May over- or under-maintain.'),
         q('CBM can reduce costs by…', ['Catching problems early', 'Disabling alarms to reduce notifications', 'Removing historians to save disk space', 'Skipping driver Test to save time'], 0, 'Early fixes are cheaper than emergencies.'),
-        q('Remote monitoring helps because…', ['Staff see issues without always being on-site', 'It eliminates all field wiring requirements', 'It removes the need for any gateways', 'It guarantees zero equipment failures'], 0, 'MooreView provides remote dashboards and alerts.'),
+        q('Remote monitoring helps because…', ['Staff see issues without always being on-site', 'It eliminates all field wiring requirements', 'It removes the need for any gateways', 'It guarantees zero equipment failures'], 0, 'PeakLogic provides remote dashboards and alerts.'),
       ],
     },
     {
@@ -227,9 +227,9 @@ window.MooreviewTrainingQuizzes = (function () {
       title: 'CBM-2 — IoT fundamentals',
       questions: [
         q('An IoT gateway often…', ['Replaces all BAS controllers on day one', 'Connects field devices to the network/cloud', 'Stores only paper log sheets', 'Runs only inside a spreadsheet'], 1, 'Gateway aggregates and forwards data.'),
-        q('MooreView in IoT architecture is…', ['Only a physical CT clamp', 'Cloud/HMI and analytics platform', 'Only the LilyGO setup Wi-Fi AP', 'Only a Modbus USB adapter'], 1, 'Sensors → gateway → MooreView.'),
+        q('PeakLogic in IoT architecture is…', ['Only a physical CT clamp', 'Cloud/HMI and analytics platform', 'Only the LilyGO setup Wi-Fi AP', 'Only a Modbus USB adapter'], 1, 'Sensors → gateway → PeakLogic.'),
         q('HaLow (802.11ah) is…', ['Long-range Wi-Fi for sensor networks', 'Standard Bluetooth audio streaming', 'Ethernet Power over Ethernet only', 'The same as cellular LTE Cat-1'], 0, 'Used by LilyGO T-HaLow peers.'),
-        q('Parc protocol uses…', ['Modbus RTU function code 03 only', 'Proprietary fax on phone lines', 'MQTT topics under mooreview/v1', 'HTTP GET to random public APIs'], 2, 'Parc is MooreView edge MQTT.'),
+        q('Parc protocol uses…', ['Modbus RTU function code 03 only', 'Proprietary fax on phone lines', 'MQTT topics under peaklogic/v1', 'HTTP GET to random public APIs'], 2, 'Parc is PeakLogic edge MQTT.'),
         q('Cellular IoT is useful when…', ['No reliable site Ethernet/Wi-Fi to cloud', 'You already have fiber to every sensor', 'You want to avoid all monthly carrier fees', 'Alarms and historians are permanently disabled'], 0, 'T-ETH gateway bridges Opta LAN to cloud.'),
       ],
     },
@@ -242,7 +242,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Leak rope is for…', ['Water leak detection along a line', 'Motor vibration on pump bearings', 'Supply air temperature at AHU', 'Modbus communication errors'], 0, 'Common in mechanical rooms and ceilings.'),
         q('Thermistor/temperature sensor on A/C might monitor…', ['Compressor MCSA signature only', 'Supply/return air or coil temp', 'Ethernet link speed', 'MQTT broker CPU load'], 1, 'Temperature is core HVAC CBM.'),
         q('Vibration sensor on a pump bearing helps detect…', ['Wear and imbalance early', 'IAQ CO₂ levels in offices', 'Incoming water pulse counts', 'Cloud tenant entitlement flags'], 0, 'MCSA/vibration → mechanical issues.'),
-        q('Flow pulse sensor might count…', ['Water or gas usage pulses', 'Keyboard entries in MooreView', 'Alarm ack button presses', 'ST validate error messages'], 0, 'Pulse meters integrate flow over time.'),
+        q('Flow pulse sensor might count…', ['Water or gas usage pulses', 'Keyboard entries in PeakLogic', 'Alarm ack button presses', 'ST validate error messages'], 0, 'Pulse meters integrate flow over time.'),
       ],
     },
     {
@@ -253,7 +253,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Whole-home monitoring might include…', ['HVAC, water heater, leak, sump, IAQ', 'Only industrial chiller plants', 'Only data-center server racks', 'Only commercial elevator controllers'], 0, 'Residential = dwellings and small sites.'),
         q('Sump pump monitoring helps…', ['Catch failure before flooding', 'Increase motor speed automatically', 'Disable all leak sensors', 'Remove MQTT from the home'], 0, 'High-value residential use case.'),
         q('IAQ sensors may measure…', ['CO₂, humidity, VOC, PM', 'Only 4–20 mA loop voltage', 'Only Modbus exception codes', 'Only Parc cmd response latency'], 0, 'Comfort and health.'),
-        q('Residential case study ties to MooreView…', ['Alarms on temp and leak tags', 'Only enterprise CMMS at 50 sites', 'Only MV Draw for factory floors', 'Only deleting all driver templates'], 0, 'Dashboard + alarms for homeowners/facility.'),
+        q('Residential case study ties to PeakLogic…', ['Alarms on temp and leak tags', 'Only enterprise CMMS at 50 sites', 'Only MV Draw for factory floors', 'Only deleting all driver templates'], 0, 'Dashboard + alarms for homeowners/facility.'),
         q('Solar/battery monitoring tracks…', ['Generation and storage health', 'Only HMI font preferences', 'Only Windows update schedule', 'Only ST comment syntax'], 0, 'Growing residential segment.'),
       ],
     },
@@ -262,12 +262,12 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'cbm',
       title: 'CBM-5 — Commercial',
       questions: [
-        q('Commercial BAS often integrates with…', ['HVAC, lighting, access — MooreView can complement', 'Only residential game consoles', 'Nothing — BAS cannot share data', 'Only social media dashboards'], 0, 'MooreView can monitor critical assets.'),
-        q('Multi-site office monitoring needs…', ['One sensor for all buildings', 'Consistent deviceId/Position ID strategy', 'No gateways at any site', 'No alarm escalation rules'], 1, 'Centralized MooreView project per org model.'),
+        q('Commercial BAS often integrates with…', ['HVAC, lighting, access — PeakLogic can complement', 'Only residential game consoles', 'Nothing — BAS cannot share data', 'Only social media dashboards'], 0, 'PeakLogic can monitor critical assets.'),
+        q('Multi-site office monitoring needs…', ['One sensor for all buildings', 'Consistent deviceId/Position ID strategy', 'No gateways at any site', 'No alarm escalation rules'], 1, 'Centralized PeakLogic project per org model.'),
         q('Chiller monitoring might use…', ['Temperature, pressure, current, flow', 'Only operator HMI font size', 'Only PDF report margins', 'Only email subject lines'], 0, 'Commercial HVAC assets.'),
         q('Generator monitoring checks…', ['Run hours, fuel, fault alarms', 'Only desktop wallpaper rotation', 'Only MV Draw line thickness', 'Only quiz pass percentages'], 0, 'Backup power is critical commercial load.'),
         q('Commercial case study emphasizes…', ['Centralized alarms and escalation', 'Disabling networks to reduce traffic', 'Removing all historians for privacy', 'No documentation of sensor placement'], 0, 'Operations at scale.'),
-        q('MooreView BACnet/IP integration typically…', ['Runs on the edge appliance and imports read-mostly BMS points', 'Requires ripping out the incumbent BAS', 'Uses the same RS-485 port as Modbus RTU', 'Works only inside Cloud Studio without a site agent'], 0, 'See docs/BACNET.md and M4 optional lab.'),
+        q('PeakLogic BACnet/IP integration typically…', ['Runs on the edge appliance and imports read-mostly BMS points', 'Requires ripping out the incumbent BAS', 'Uses the same RS-485 port as Modbus RTU', 'Works only inside Cloud Studio without a site agent'], 0, 'See docs/BACNET.md and M4 optional lab.'),
       ],
     },
     {
@@ -277,9 +277,9 @@ window.MooreviewTrainingQuizzes = (function () {
       questions: [
         q('Site survey before install should record…', ['Locations, access, power, network paths', 'Only team lunch preferences', 'Only monitor screen resolution', 'Nothing — mount sensors randomly'], 0, 'Planning prevents rework.'),
         q('Sensor placement should consider…', ['What failure mode you need to detect', 'Only cable color matching the wall', 'Only the cheapest mounting tape', 'Maximum distance from any power'], 0, 'Mount where the physics matter.'),
-        q('Functional test after wiring means…', ['Values make sense in MooreView Live I/O', 'Skip Driver Test to save time', 'Delete tags and reimport later', 'Close project without saving'], 0, 'Verify before leaving site.'),
-        q('PPE is required because…', ['Electrical and mechanical hazards exist', 'MooreView cannot open without a hard hat', 'F1 Help requires safety glasses to display', 'Export .est.zip fails without gloves'], 0, 'Safety first on install labs.'),
-        q('CBM-6 maps to MooreView…', ['M2 commissioning + M4 drivers', 'M12 cloud login only', 'M10 MV Draw symbols only', 'M11 ROI calculator only'], 0, 'Install → map tags → verify.'),
+        q('Functional test after wiring means…', ['Values make sense in PeakLogic Live I/O', 'Skip Driver Test to save time', 'Delete tags and reimport later', 'Close project without saving'], 0, 'Verify before leaving site.'),
+        q('PPE is required because…', ['Electrical and mechanical hazards exist', 'PeakLogic cannot open without a hard hat', 'F1 Help requires safety glasses to display', 'Export .est.zip fails without gloves'], 0, 'Safety first on install labs.'),
+        q('CBM-6 maps to PeakLogic…', ['M2 commissioning + M4 drivers', 'M12 cloud login only', 'M10 MV Draw symbols only', 'M11 ROI calculator only'], 0, 'Install → map tags → verify.'),
       ],
     },
     {
@@ -290,8 +290,8 @@ window.MooreviewTrainingQuizzes = (function () {
         q('DHCP on a bench gateway…', ['Assigns IP automatically', 'Permanently deletes ST programs', 'Disables MQTT on all ports', 'Formats the project .est.zip file'], 0, 'Static IP used when you need fixed broker address.'),
         q('Firewall must allow for MQTT often…', ['TCP 1883 (or TLS port if used)', 'Only ICMP ping — no TCP', 'Only UDP 53 with no other ports', 'All ports blocked by default always'], 0, 'Document site firewall rules.'),
         q('VPN might be used to…', ['Secure remote access to OT network', 'Increase motor RPM physically', 'Replace leak rope with software', 'Disable historian permanently'], 0, 'Cybersecurity segment from CBM-11.'),
-        q('Cellular APN is configured on…', ['Every individual thermistor sensor', 'Gateway device (e.g. T-ETH), not always on every sensor', 'Only the MooreView HMI font dialog', 'Only the Historian Report PDF header'], 1, 'Cloud creds on gateway for Opta bridge.'),
-        q('CBM-7 maps to MooreView…', ['M7 Parc, M12 cloud, M14 cellular', 'M3 Force tags only', 'M6 HMI composites only', 'M0 product map only'], 0, 'Networking labs across Parc path.'),
+        q('Cellular APN is configured on…', ['Every individual thermistor sensor', 'Gateway device (e.g. T-ETH), not always on every sensor', 'Only the PeakLogic HMI font dialog', 'Only the Historian Report PDF header'], 1, 'Cloud creds on gateway for Opta bridge.'),
+        q('CBM-7 maps to PeakLogic…', ['M7 Parc, M12 cloud, M14 cellular', 'M3 Force tags only', 'M6 HMI composites only', 'M0 product map only'], 0, 'Networking labs across Parc path.'),
       ],
     },
     {
@@ -299,11 +299,11 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'cbm',
       title: 'CBM-8 — Dashboards',
       questions: [
-        q('Device registration in MooreView is done via…', ['Only sending email to support', 'Drivers + templates; Parc deviceId', 'Only drawing symbols in MV Draw', 'Only acking alarms in bulk'], 1, 'Drivers connect field data.'),
+        q('Device registration in PeakLogic is done via…', ['Only sending email to support', 'Drivers + templates; Parc deviceId', 'Only drawing symbols in MV Draw', 'Only acking alarms in bulk'], 1, 'Drivers connect field data.'),
         q('Trend charts use…', ['Historian / live buffer pens', 'Only Modbus exception codes', 'Only ST syntax error list', 'Only CMMS ticket numbers'], 0, 'M8 historian module.'),
         q('HVAC dashboard should show…', ['Key temps, states, and alarms', 'Only broker source code', 'Only driver JSON on disk', 'Only Windows device manager'], 0, 'Operator-focused design.'),
-        q('API integration might use…', ['REST / MQTT per MooreView deployment', 'Only handwritten fax', 'Only Morse code over radio', 'Only printing paper reports'], 0, 'See platform docs for endpoints.'),
-        q('CBM-8 lab aligns with…', ['M6 HMI dashboard exercise', 'M14 T-HaLow template flash only', 'M4 Modbus wiring color code', 'M0 npm install only'], 0, 'Hands-on MooreView UI.'),
+        q('API integration might use…', ['REST / MQTT per PeakLogic deployment', 'Only handwritten fax', 'Only Morse code over radio', 'Only printing paper reports'], 0, 'See platform docs for endpoints.'),
+        q('CBM-8 lab aligns with…', ['M6 HMI dashboard exercise', 'M14 T-HaLow template flash only', 'M4 Modbus wiring color code', 'M0 npm install only'], 0, 'Hands-on PeakLogic UI.'),
       ],
     },
     {
@@ -315,7 +315,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Escalation means…', ['Notify additional people if unresolved', 'Delete the sensor from the project', 'Disable MQTT broker permanently', 'Remove all HMI screens'], 0, 'Critical alarms need follow-through.'),
         q('Suppression is used to…', ['Reduce nuisance alarms during known events', 'Hide all equipment problems forever', 'Disable all safety interlocks', 'Stop logging historian data always'], 0, 'Use with documented procedure.'),
         q('Four alarm types in lab might include…', ['High temp, vibration, leak, power fail', 'Only font rendering errors', 'Only PDF export failures', 'Only quiz browser cache'], 0, 'Typical building CBM set.'),
-        q('CBM-9 maps to MooreView…', ['M9 Alarms panel', 'M10 MV Draw scale tool', 'M7 Parc OTA only', 'M12 entitlements page only'], 0, 'Ack workflow in app.'),
+        q('CBM-9 maps to PeakLogic…', ['M9 Alarms panel', 'M10 MV Draw scale tool', 'M7 Parc OTA only', 'M12 entitlements page only'], 0, 'Ack workflow in app.'),
       ],
     },
     {
@@ -327,7 +327,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Trend analysis helps spot…', ['Gradual degradation over time', 'Only single-point typos in ST', 'Only HMI tile border color', 'Only DHCP lease duration'], 0, 'Historian data supports this.'),
         q('RUL estimate is…', ['Remaining useful life before likely failure', 'Random user login session id', 'Report upload bandwidth limit', 'Room unlock relay voltage'], 0, 'PdM forecast concept.'),
         q('Work orders may be triggered from…', ['Integrated CMMS on alarm transition (or manual WO)', 'Only saving the project file', 'Only placing MV Draw icons', 'Only opening F1 Help'], 0, 'M9 integrated CMMS + optional MQTT bridge.'),
-        q('CBM-10 maps to MooreView…', ['M8 historian + M11 PdM', 'M4 Modbus slave ID only', 'M0 first launch only', 'M14 HaLow pairing only'], 0, 'Data + analytics modules.'),
+        q('CBM-10 maps to PeakLogic…', ['M8 historian + M11 PdM', 'M4 Modbus slave ID only', 'M0 first launch only', 'M14 HaLow pairing only'], 0, 'Data + analytics modules.'),
       ],
     },
     {
@@ -337,9 +337,9 @@ window.MooreviewTrainingQuizzes = (function () {
       questions: [
         q('MFA stands for…', ['Multi-factor authentication', 'Motor force alarm on HOA tags', 'Main font attribute in HMI', 'Modbus file access protocol'], 0, 'Extra login security.'),
         q('MQTT credentials on Opta bridge site should be…', ['On gateway, not copied into every sensor unnecessarily', 'Emailed to all contractors in plain text', 'Posted on the operator HMI background', 'Disabled so brokers stay open'], 0, 'Least privilege.'),
-        q('Network segmentation…', ['Separates OT from office IT', 'Deletes all MooreView drivers', 'Stops ST runtime permanently', 'Removes historian pens'], 0, 'Limits blast radius.'),
+        q('Network segmentation…', ['Separates OT from office IT', 'Deletes all PeakLogic drivers', 'Stops ST runtime permanently', 'Removes historian pens'], 0, 'Limits blast radius.'),
         q('Firmware updates should be…', ['Planned and authenticated', 'Never performed under any circumstance', 'Downloaded from any random website', 'Applied only during unplanned outages without backup'], 0, 'Supply chain matters.'),
-        q('CBM-11 maps to MooreView…', ['M1 roles + M12 cloud tenancy', 'M10 MV Draw layers only', 'M3 Force on outputs only', 'M14 ALF template #6 only'], 0, 'Users and cloud isolation.'),
+        q('CBM-11 maps to PeakLogic…', ['M1 roles + M12 cloud tenancy', 'M10 MV Draw layers only', 'M3 Force on outputs only', 'M14 ALF template #6 only'], 0, 'Users and cloud isolation.'),
       ],
     },
     {
@@ -351,7 +351,7 @@ window.MooreviewTrainingQuizzes = (function () {
         q('Modbus timeout often means…', ['Wrong port, baud, or slave ID', 'Perfect wiring — ignore driver Test', 'Too many alarms acknowledged', 'Historian has too many pens'], 0, 'Driver Test isolates this.'),
         q('Flat historian line — check…', ['Hist enabled and runtime running', 'Only MV Draw symbol rotation', 'Only Cloud Studio logo', 'Only email signature length'], 0, 'Common student issue.'),
         q('Fault injection lab teaches…', ['Systematic diagnosis', 'Random guessing without symptoms', 'Deleting projects to fix comms', 'Ignoring driver Test results'], 0, 'Instructor breaks one thing per team.'),
-        q('CBM-12 maps to MooreView…', ['M4 driver Test + M7 Parc + F1 guides', 'M11 ROI calculator only', 'M0 product naming only', 'M13 presentation slides only'], 0, 'Cross-module debug skills.'),
+        q('CBM-12 maps to PeakLogic…', ['M4 driver Test + M7 Parc + F1 guides', 'M11 ROI calculator only', 'M0 product naming only', 'M13 presentation slides only'], 0, 'Cross-module debug skills.'),
       ],
     },
     {
@@ -359,17 +359,17 @@ window.MooreviewTrainingQuizzes = (function () {
       track: 'cbm',
       title: 'CBM-13 — Capstone',
       questions: [
-        q('Capstone teams should deliver…', ['Survey → install → MooreView → alarms → presentation', 'Only a multiple-choice retake', 'Only reading F1 without hands-on', 'Only cloud login with no field I/O'], 0, 'Full CBM deployment story.'),
+        q('Capstone teams should deliver…', ['Survey → install → PeakLogic → alarms → presentation', 'Only a multiple-choice retake', 'Only reading F1 without hands-on', 'Only cloud login with no field I/O'], 0, 'Full CBM deployment story.'),
         q('Capstone is weighted at…', ['20% of CBM certification grade', '0% — attendance only', '100% — no labs required', '5% — quizzes replace it'], 0, 'See Assessments tab.'),
         q('Presentation should include…', ['Recommendations from trend/alarm data', 'Only desktop wallpaper choices', 'Only broker config file hex dump', 'Only ST comment formatting'], 0, 'Data-driven maintenance advice.'),
-        q('Capstone uses MooreView modules…', ['M13 + M2–M9 + M14 integrated', 'M0 navigation only', 'Glossary definitions only', 'No MooreView — theory only'], 0, 'End-to-end integrator path.'),
+        q('Capstone uses PeakLogic modules…', ['M13 + M2–M9 + M14 integrated', 'M0 navigation only', 'Glossary definitions only', 'No PeakLogic — theory only'], 0, 'End-to-end integrator path.'),
         q('Team roles might include…', ['Lead, network, HMI, documentation', 'Only instructor — no student tasks', 'Only sales — no technical work', 'One passive observer only'], 0, 'See instructor guide capstone rubric.'),
       ],
     },
   ];
 
   function storageKey(quizId) {
-    return `mooreview-training-quiz-${quizId}`;
+    return `peaklogic-training-quiz-${quizId}`;
   }
 
   function loadResult(quizId) {
@@ -541,7 +541,7 @@ window.MooreviewTrainingQuizzes = (function () {
       <div class="help-body popup-scroll" data-training-body="quizzes">
         <section id="training-quiz-intro" class="help-section">
           <h3>Module quizzes</h3>
-          <p><strong>${QUIZZES.length} quizzes</strong> (${mvCount} MooreView + ${cbmCount} IoT CBM) · 5 questions each · <strong>${PASS_PERCENT}%</strong> to pass · Open-book (F1/F2 allowed).</p>
+          <p><strong>${QUIZZES.length} quizzes</strong> (${mvCount} PeakLogic + ${cbmCount} IoT CBM) · 5 questions each · <strong>${PASS_PERCENT}%</strong> to pass · Open-book (F1/F2 allowed).</p>
           <p>Each question has four similar choices — read carefully. Wrong answers are often almost correct.</p>
           <p>Scores save in this browser only (localStorage). Instructors: answer key in <code>docs/training/quizzes-answer-key.md</code>.</p>
           <p>Assign after each module; CBM certification counts quizzes toward 20% of final grade.</p>

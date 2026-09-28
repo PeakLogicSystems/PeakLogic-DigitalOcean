@@ -25,7 +25,7 @@ function parseMqttBrokerHostPort(brokerUrl, fallback = {}) {
   const raw = String(brokerUrl || '').trim();
   if (!raw) {
     return {
-      host: fallback.host || 'mooreview.io',
+      host: fallback.host || 'peaklogic.io',
       port: fallback.port ?? 1883,
       tls: false,
     };
@@ -41,7 +41,7 @@ function parseMqttBrokerHostPort(brokerUrl, fallback = {}) {
     };
   } catch {
     return {
-      host: fallback.host || 'mooreview.io',
+      host: fallback.host || 'peaklogic.io',
       port: fallback.port ?? 1883,
       tls: false,
     };
@@ -58,11 +58,11 @@ function resolveDraginoCloudBroker(opts = {}, mqttParc = {}) {
     };
   }
   const parsed = parseMqttBrokerHostPort(mqttParc.brokerUrl, {
-    host: 'mooreview.io',
+    host: 'peaklogic.io',
     port: 1883,
   });
   if (parsed.host === '127.0.0.1' || parsed.host === 'localhost' || parsed.host === 'mosquitto') {
-    return { host: 'mooreview.io', port: 1883, tls: false };
+    return { host: 'peaklogic.io', port: 1883, tls: false };
   }
   return parsed;
 }
@@ -98,7 +98,7 @@ function buildDraginoGatewayPlan(opts = {}, mqttParc = {}) {
   const tenantId = String(opts.tenantId || mqttParc?.dragino?.cloudTenantId || '').trim();
   const broker = resolveDraginoCloudBroker(opts, mqttParc);
   const reportIntervalSec = resolveDraginoReportIntervalSec(opts);
-  const topicCfg = { topicPrefix: mqttParc?.topicPrefix || 'mooreview/v1' };
+  const topicCfg = { topicPrefix: mqttParc?.topicPrefix || 'peaklogic/v1' };
   const mqttTopics = draginoCloudMqttTopics(topicCfg, deviceId, tenantId || undefined);
 
   const modbusReads = Array.isArray(opts.modbusReads) && opts.modbusReads.length
@@ -137,7 +137,7 @@ function buildDraginoGatewayPlan(opts = {}, mqttParc = {}) {
     `AT+PRO=3,5`,
     `AT+SERVADDR=${broker.host},${broker.port}`,
     `AT+CLIENT=${opts.clientId || deviceId}`.slice(0, 64),
-    'AT+UNAME=mooreview',
+    'AT+UNAME=peaklogic',
     'AT+PWD=<MOSQUITTO_PASS>',
     `AT+PUBTOPIC=${mqttTopics.pubTopic}`,
     `AT+SUBTOPIC=${mqttTopics.subTopic}`,
@@ -183,10 +183,10 @@ function buildDraginoGatewayPlan(opts = {}, mqttParc = {}) {
       brokerHost: broker.host,
       brokerPort: broker.port,
       tls: broker.tls,
-      username: opts.mqttUsername || mqttParc?.username || 'mooreview',
+      username: opts.mqttUsername || mqttParc?.username || 'peaklogic',
       pubTopic: mqttTopics.pubTopic,
       subTopic: mqttTopics.subTopic,
-      note: 'Dragino publishes JSON; MooreVIEW decodes Payload hex using bound Modbus template',
+      note: 'Dragino publishes JSON; PeakLogic decodes Payload hex using bound Modbus template',
     },
     rs485: {
       mode: 'modbus_rtu',
@@ -197,7 +197,7 @@ function buildDraginoGatewayPlan(opts = {}, mqttParc = {}) {
       reads,
     },
     atCommands,
-    mooreview: {
+    peaklogic: {
       presetId: opts.presetId || 'dragino_rs485_nb',
       driverType: 'mqtt_parc',
       telemetryOnly: true,
@@ -216,7 +216,7 @@ function buildDraginoGatewayPlan(opts = {}, mqttParc = {}) {
     },
     architecture: [
       'RS485 Modbus sensor(s) → Dragino RS485-NB (polled gateway, not passthrough)',
-      'NB-IoT → MQTT JSON → mooreview.io',
+      'NB-IoT → MQTT JSON → peaklogic.io',
       'Cloud Parc hub decodes Modbus map → parc.json → mqtt_parc driver',
     ],
   };

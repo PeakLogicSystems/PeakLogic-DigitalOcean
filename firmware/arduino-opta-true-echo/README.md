@@ -2,7 +2,7 @@
 
 Standalone Arduino Opta sketch that polls an [APG True Echo](https://apgsensors.com/) radar level transmitter over **RS-485 Modbus RTU** and prints readings on **Serial (115200)**.
 
-Use this to bring up wiring and Modbus before the PC template `apg_true_echo_rtu`. Review PDF: `docs/devices/MooreVIEW-APG-True-Echo-Device-Review.pdf`.
+Use this to bring up wiring and Modbus before the PC template `apg_true_echo_rtu`. Review PDF: `docs/devices/PeakLogic-APG-True-Echo-Device-Review.pdf`.
 
 ## Flash
 

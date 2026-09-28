@@ -15,7 +15,7 @@ describe('cmmsAlarmPublisher', () => {
   const cfg = normalizeCmmsIntegration({
     siteId: 'plant-a',
     tenantId: 'acme',
-    topicPrefix: 'mooreview/v1',
+    topicPrefix: 'peaklogic/v1',
   });
 
   const alarm = {
@@ -27,8 +27,8 @@ describe('cmmsAlarmPublisher', () => {
   };
 
   it('builds topic paths', () => {
-    assert.equal(topicAlarms(cfg), 'mooreview/v1/plant-a/alarms');
-    assert.equal(topicAlarmNotify(cfg), 'mooreview/v1/plant-a/alarm-notify');
+    assert.equal(topicAlarms(cfg), 'peaklogic/v1/plant-a/alarms');
+    assert.equal(topicAlarmNotify(cfg), 'peaklogic/v1/plant-a/alarm-notify');
   });
 
   it('builds alarm payload with schema v1', () => {
@@ -36,7 +36,7 @@ describe('cmmsAlarmPublisher', () => {
     assert.equal(p.schema, SCHEMA);
     assert.equal(p.siteId, 'plant-a');
     assert.equal(p.tenantId, 'acme');
-    assert.equal(p.source, 'mooreview');
+    assert.equal(p.source, 'peaklogic');
     assert.equal(p.projectName, 'demo');
     assert.equal(p.alarm.tagId, 'AI1');
     assert.equal(p.alarm.level, 'outerHigh');
@@ -66,11 +66,11 @@ describe('cmmsAlarmPublisher', () => {
       enabled: true,
       brokerUrl: 'mqtt://192.168.1.1:1883',
       siteId: 'site1',
-      topicPrefix: 'mooreview/v1/',
+      topicPrefix: 'peaklogic/v1/',
     });
     assert.equal(c.enabled, true);
     assert.equal(c.brokerUrl, 'mqtt://192.168.1.1:1883');
-    assert.equal(c.topicPrefix, 'mooreview/v1');
+    assert.equal(c.topicPrefix, 'peaklogic/v1');
     assert.equal(c.publishAlarmTopic, true);
     assert.equal(c.publishNotifyTopic, true);
   });

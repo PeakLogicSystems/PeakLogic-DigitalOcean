@@ -1,8 +1,8 @@
 # Copy to opta-cloud-mqtt.defaults (gitignored locally) for cloud field builds.
 # Enable with -DMV_MQTT_CLOUD_PRESET=1 in Arduino IDE compiler flags.
 
-MV_MQTT_SKETCH_BROKER_DEFAULT=mqtt.mooreview.io
+MV_MQTT_SKETCH_BROKER_DEFAULT=mqtt.peaklogic.io
 MV_MQTT_SKETCH_PORT_DEFAULT=8883
-MV_MQTT_SKETCH_USER_DEFAULT=mooreview
+MV_MQTT_SKETCH_USER_DEFAULT=peaklogic
 MV_MQTT_SKETCH_PASS_DEFAULT=REPLACE_WITH_MOSQUITTO_PASS_FROM_mv-mqtt
 MV_MQTT_SKETCH_TLS_DEFAULT=1

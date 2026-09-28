@@ -5,9 +5,9 @@ const assert = require('node:assert');
 const { defaultModbusRtuSerialPort, IOT_LINK_PORT_A } = require('../src/appliance/defaultRs485Port');
 
 describe('defaultRs485Port', () => {
-  it('prefers MOOREVIEW_RS485_PORT_A env', () => {
+  it('prefers PEAKLOGIC_RS485_PORT_A env', () => {
     assert.equal(
-      defaultModbusRtuSerialPort({ MOOREVIEW_RS485_PORT_A: '/dev/ttyCUSTOM' }),
+      defaultModbusRtuSerialPort({ PEAKLOGIC_RS485_PORT_A: '/dev/ttyCUSTOM' }),
       '/dev/ttyCUSTOM',
     );
   });

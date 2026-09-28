@@ -1,6 +1,6 @@
-# mooreVIEW Opta cellular gateway — MQTT bridge (Option B)
+# PeakLogic Opta cellular gateway — MQTT bridge (Option B)
 
-ESP-IDF firmware for **LilyGO T-ETH-ELITE-A7670X** (integrated W5500 + A7670 on one board). Provides a **local MQTT broker** for the Arduino Opta and **transparently forwards** all `mooreview/v1/#` traffic to the mooreVIEW cloud droplet over cellular.
+ESP-IDF firmware for **LilyGO T-ETH-ELITE-A7670X** (integrated W5500 + A7670 on one board). Provides a **local MQTT broker** for the Arduino Opta and **transparently forwards** all `peaklogic/v1/#` traffic to the PeakLogic cloud droplet over cellular.
 
 Also supports the **stacked** configuration (T-ETH-Elite mainboard + LTE shield + T-PCIE A7670) — same GPIO map, no GPS-mux init.
 
@@ -15,14 +15,14 @@ No separate LTE router — the modem board is the pipe.
                                               |
                                     mqtt_bridge (this firmware)
                                               |
- [ mooreVIEW cloud ] <---- cellular ---- [ A7670 (integrated) ]
+ [ PeakLogic cloud ] <---- cellular ---- [ A7670 (integrated) ]
         Mosquitto :1883 (+ auth)
 ```
 
 | Direction | Topics |
 |-----------|--------|
-| Opta → cloud | `mooreview/v1/{deviceId}/telemetry`, `online`, `cmd/response`, `g/{key}/{tag}` |
-| Cloud → Opta | `mooreview/v1/{deviceId}/cmd`, `config`, `g/{key}/{tag}` |
+| Opta → cloud | `peaklogic/v1/{deviceId}/telemetry`, `online`, `cmd/response`, `g/{key}/{tag}` |
+| Cloud → Opta | `peaklogic/v1/{deviceId}/cmd`, `config`, `g/{key}/{tag}` |
 
 Cloud MQTT credentials live **on the gateway** (Opta firmware has no MQTT auth).
 
@@ -35,14 +35,14 @@ Set once on the bench — same for all lift stations:
 | Ethernet | DHCP (factory default) |
 | MQTT broker IP | **`192.168.1.1`** |
 | MQTT port | **`1883`** |
-| Global site key | Match cloud mooreVIEW |
+| Global site key | Match cloud PeakLogic |
 
 The gateway LAN must be **`192.168.1.1/24`** (factory default in this firmware).
 
 ## Gateway configuration
 
 1. Flash this firmware.
-2. Connect phone/laptop to Wi-Fi AP **`mooreVIEW-Gateway`** / `mooreview`.
+2. Connect phone/laptop to Wi-Fi AP **`PeakLogic-Gateway`** / `peaklogic`.
 3. Open **`http://192.168.4.1:8080/setup`**.
 4. Set **cloud broker** = droplet public IP, port `1883`, username/password from `deploy/cloud/.env`.
 5. Set **APN** for your IoT SIM (e.g. `hologram`).
@@ -87,18 +87,18 @@ idf.py build flash monitor
 
 ### Bench test without cellular
 
-In menuconfig → **mooreVIEW Opta Gateway** → enable **Bench: use Wi-Fi STA as WAN**. Set office Wi-Fi SSID/password. Use this to test the MQTT bridge before the SIM is active.
+In menuconfig → **PeakLogic Opta Gateway** → enable **Bench: use Wi-Fi STA as WAN**. Set office Wi-Fi SSID/password. Use this to test the MQTT bridge before the SIM is active.
 
 ## Cloud droplet
 
-On the mooreVIEW cloud VM (`deploy/cloud`):
+On the PeakLogic cloud VM (`deploy/cloud`):
 
 - Mosquitto on port **1883**
 - Set gateway credentials in `/setup` to match `MOSQUITTO_USER` / `MOSQUITTO_PASS`
 - Enable **MQTT Parc hub** in System setup with the same broker URL
 - Open firewall **TCP 1883** inbound
 
-Link the field SIM in mooreVIEW **Tools → Cellular SIMs** to the gateway `gatewayId`.
+Link the field SIM in PeakLogic **Tools → Cellular SIMs** to the gateway `gatewayId`.
 
 ## TODO
 
@@ -110,7 +110,7 @@ Link the field SIM in mooreVIEW **Tools → Cellular SIMs** to the gateway `gate
 | File | Role |
 |------|------|
 | `main/mqtt_local.c` | Minimal MQTT broker for Opta on LAN :1883 |
-| `main/mqtt_bridge.c` | Cloud client + bidirectional `mooreview/v1/#` forward |
+| `main/mqtt_bridge.c` | Cloud client + bidirectional `peaklogic/v1/#` forward |
 | `main/eth_lan.c` | LAN netif + DHCP for Opta |
 | `main/modem_net.c` | Cellular WAN (A7670) + integrated board init |
 | `main/board_pins.h` | Pin map from Kconfig / board variant |

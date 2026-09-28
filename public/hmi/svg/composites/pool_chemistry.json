@@ -3,7 +3,7 @@
   "label": "Pool chemistry",
   "group": "Process equipment",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/pool-faceplates/mooreview/pool_chemistry.svg",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_chemistry.svg",
   "tagRoles": {
     "phPv": { "pick": "tagId", "tagId": "PH_PV", "types": ["REAL"] },
     "orpPv": { "pick": "tagId", "tagId": "ORP_PV", "types": ["REAL"] },
@@ -20,7 +20,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_chemistry.svg"
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_chemistry.svg"
     }
   ],
   "defaultBindings": [

@@ -19,7 +19,7 @@ function buildAlarmSmsBody({ tenantName, alarm }) {
   const level = formatAlarmLevel(alarm.level);
   const tagId = alarm.tagId || 'unknown';
   const value = alarm.value != null ? String(alarm.value) : '—';
-  const org = tenantName || 'MooreVIEW';
+  const org = tenantName || 'PeakLogic';
   return `[${org}] ${level}: ${tagId} = ${value}`.slice(0, 320);
 }
 

@@ -3,7 +3,7 @@
 const { normalizeExtents } = require('./extents');
 const { normalizeGroups } = require('./groups');
 
-const MV_DRAW_FORMAT = 'mooreview-mvdraw';
+const MV_DRAW_FORMAT = 'peaklogic-mvdraw';
 const MV_DRAW_VERSION = 1;
 const UNITS = new Set(['ft', 'm']);
 
@@ -139,7 +139,7 @@ function normalizeMvDraw(raw, meta = {}) {
       client: String(raw.meta?.client || meta.client || '').slice(0, 200),
       site: String(raw.meta?.site || meta.site || '').slice(0, 200),
       notes: String(raw.meta?.notes || meta.notes || '').slice(0, 2000),
-      mooreviewProject: String(raw.meta?.mooreviewProject || meta.mooreviewProject || '').slice(0, 120),
+      peaklogicProject: String(raw.meta?.peaklogicProject || meta.peaklogicProject || '').slice(0, 120),
     },
   };
 }

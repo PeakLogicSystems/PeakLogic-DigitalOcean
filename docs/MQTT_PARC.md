@@ -1,6 +1,6 @@
 # MQTT Parc hub (appliance)
 
-mooreVIEW PC acts as the **central MQTT Parc hub**: Mosquitto on the LAN, Opta firmware publishes `mooreview/v1/{deviceId}/telemetry`, and the hub ingests into `data/parc.json` for tag sync and remote ST.
+PeakLogic PC acts as the **central MQTT Parc hub**: Mosquitto on the LAN, Opta firmware publishes `peaklogic/v1/{deviceId}/telemetry`, and the hub ingests into `data/parc.json` for tag sync and remote ST.
 
 Hardware baseline checklist: [BASELINE_TEST.md](./BASELINE_TEST.md).
 
@@ -24,7 +24,7 @@ Or in `data/settings.json`:
 "mqttParc": {
   "enabled": true,
   "brokerUrl": "mqtt://192.168.1.233:1883",
-  "topicPrefix": "mooreview/v1"
+  "topicPrefix": "peaklogic/v1"
 },
 "remoteExecution": true
 ```

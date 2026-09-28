@@ -390,7 +390,7 @@
   async function renderDevices() {
     main.innerHTML = `
       <h1>Devices</h1>
-      <p class="cs-lead">On Opta <code>/setup</code>, check <strong>Cloud MQTT (TLS)</strong> and Save to connect to <code>mqtt.mooreview.io</code>. The device appears here only when its <strong>global site key</strong> matches this organization.</p>
+      <p class="cs-lead">On Opta <code>/setup</code>, check <strong>Cloud MQTT (TLS)</strong> and Save to connect to <code>mqtt.peaklogic.io</code>. The device appears here only when its <strong>global site key</strong> matches this organization.</p>
       <div class="cs-card" id="cs-dev-fence"></div>
       <div class="cs-toolbar">
         <button type="button" class="btn" id="cs-refresh-dev">Refresh</button>
@@ -512,7 +512,7 @@
         fenceHost.innerHTML = `
           <p><strong>Organization global site key</strong> <code>${esc(hex)}</code>
             ${digits ? ` · entry <code>${esc(digits)}</code>` : ''}</p>
-          <p class="cs-muted">Copy this key onto the Opta at <code>/setup</code>. TLS + Save connects to <code>mqtt.mooreview.io:8883</code>; the key decides which org sees the device.</p>
+          <p class="cs-muted">Copy this key onto the Opta at <code>/setup</code>. TLS + Save connects to <code>mqtt.peaklogic.io:8883</code>; the key decides which org sees the device.</p>
           <div class="cs-toolbar">
             <label>Device ID <input id="cs-claim-id" placeholder="mv_…" spellcheck="false"></label>
             <label>Global site key <input id="cs-claim-key" placeholder="${esc(hex)}" spellcheck="false"></label>
@@ -2176,7 +2176,7 @@
           <p><a class="btn btn-primary" href="${esc(data.externalUrl)}" target="_blank" rel="noopener">Open external CMMS</a></p></div>`;
         return;
       }
-      if (typeof MooreviewCmms === 'undefined') {
+      if (typeof PeaklogicCmms === 'undefined') {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
           s.src = `/js/cmmsApp.js?v=${encodeURIComponent(root.dataset.version || '')}`;
@@ -2191,7 +2191,7 @@
         const mount = document.createElement('div');
         mount.id = 'cmms-app-root';
         host.appendChild(mount);
-        await MooreviewCmms.mount(mount);
+        await PeaklogicCmms.mount(mount);
       }
     } catch (e) {
       main.innerHTML = `<h1>CMMS</h1><div class="cs-card"><p class="cs-err">${esc(e.message)}</p></div>`;

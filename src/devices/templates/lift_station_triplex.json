@@ -1,7 +1,7 @@
 {
   "id": "lift_station_triplex",
   "label": "Lift station — triplex (3 pump)",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Triplex alternator (ALT3)",
   "transport": "mqtt_parc",
   "stationType": "triplex",

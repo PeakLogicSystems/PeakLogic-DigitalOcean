@@ -95,7 +95,7 @@ function requirePlatformAdmin(req, res, next) {
 
 function requirePlatformAdminWeb(req, res, next) {
   if (!isPlatformAdminConfigured()) {
-    return res.status(503).send('Platform admin is not configured (set PLATFORM_ADMIN_KEY in /etc/mooreview/saas.env).');
+    return res.status(503).send('Platform admin is not configured (set PLATFORM_ADMIN_KEY in /etc/peaklogic/saas.env).');
   }
   if (!isPlatformAdminAuthorized(req)) {
     return res.redirect('/admin/login');

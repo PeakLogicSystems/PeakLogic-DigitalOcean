@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Issue Let's Encrypt cert for mqtt.mooreview.io and reload Mosquitto TLS
-# Requires: DNS A mqtt.mooreview.io → this droplet public IP, port 80 open
+# Issue Let's Encrypt cert for mqtt.peaklogic.io and reload Mosquitto TLS
+# Requires: DNS A mqtt.peaklogic.io → this droplet public IP, port 80 open
 set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
@@ -13,13 +13,13 @@ if ss -lnt | grep -q ':80 '; then
 fi
 
 certbot certonly --standalone \
-  -d mqtt.mooreview.io \
+  -d mqtt.peaklogic.io \
   --non-interactive --agree-tos \
   --register-unsafely-without-email \
   --preferred-challenges http
 
-MOOREVIEW_DOMAIN=mqtt.mooreview.io \
-  bash /home/mooreview/deploy/cloud/debian/setup-mosquitto-tls.sh
+PEAKLOGIC_DOMAIN=mqtt.peaklogic.io \
+  bash /home/peaklogic/deploy/cloud/debian/setup-mosquitto-tls.sh
 
 systemctl restart mosquitto
 sleep 1
@@ -28,13 +28,13 @@ ss -lnt | grep ':8883'
 
 set -a
 # shellcheck disable=SC1091
-. /etc/mooreview/mqtt.env
+. /etc/peaklogic/mqtt.env
 set +a
 
-mosquitto_pub -h mqtt.mooreview.io -p 8883 \
+mosquitto_pub -h mqtt.peaklogic.io -p 8883 \
   --capath /etc/ssl/certs \
   -u "$MOSQUITTO_USER" -P "$MOSQUITTO_PASS" \
   -t test/ping -m le-ok && echo MQTT_LE_TLS_OK
 
-ls -la /etc/letsencrypt/live/mqtt.mooreview.io/
+ls -la /etc/letsencrypt/live/mqtt.peaklogic.io/
 echo "Mosquitto using LE material via /etc/mosquitto/certs/"

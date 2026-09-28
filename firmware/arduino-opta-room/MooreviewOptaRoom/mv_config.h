@@ -43,10 +43,10 @@
 
 // WiFi setup AP (Opta WiFi variant)
 #ifndef MV_WIFI_AP_SSID
-#define MV_WIFI_AP_SSID "MooreVIEW-Opta"
+#define MV_WIFI_AP_SSID "PeakLogic-Opta"
 #endif
 #ifndef MV_WIFI_AP_PASS
-#define MV_WIFI_AP_PASS "mooreview"
+#define MV_WIFI_AP_PASS "peaklogic"
 #endif
 #ifndef MV_WIFI_AP_IP
 #define MV_WIFI_AP_IP 192, 168, 4, 1
@@ -68,7 +68,7 @@
 #define MV_OTA_QSPI_OFFSET 2
 #endif
 
-/** Sketch fallback when mqttBrokerSet is false — override in MooreviewOptaMqttSt.ino g_mqttCfg. */
+/** Sketch fallback when mqttBrokerSet is false — override in PeaklogicOptaMqttSt.ino g_mqttCfg. */
 #ifndef MV_MQTT_SKETCH_BROKER_DEFAULT
 #define MV_MQTT_SKETCH_BROKER_DEFAULT "192.168.1.233"
 #endif

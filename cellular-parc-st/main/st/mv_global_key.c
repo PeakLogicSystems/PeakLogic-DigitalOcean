@@ -30,7 +30,7 @@ bool mvGlobalTopic(const char *tag, const char *topic_prefix, char *out, size_t 
     }
     char addr[5];
     mvGlobalAddrKey(addr);
-    const char *pfx = (topic_prefix && topic_prefix[0]) ? topic_prefix : "mooreview/v1";
+    const char *pfx = (topic_prefix && topic_prefix[0]) ? topic_prefix : "peaklogic/v1";
     int n = snprintf(out, out_len, "%s/g/%s/%s", pfx, addr, tag);
     return n > 0 && (size_t)n < out_len;
 }

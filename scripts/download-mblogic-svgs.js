@@ -21,7 +21,7 @@ const { MV_SYMBOL_MAP, slugPart, libraryGroupDir } = require('../src/hmi/hmiAsse
 
 function fetchBuffer(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'MooreVIEW/1.0 (MBLogic library sync)' } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': 'PeakLogic/1.0 (MBLogic library sync)' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         return resolve(fetchBuffer(new URL(res.headers.location, url).href));
@@ -94,7 +94,7 @@ function categoryFolder(absPath, artRoot) {
   return `${base}/${sub}/mv`;
 }
 
-/** Strip MBLogic HMIBuilder metadata; add MooreVIEW-friendly element ids. */
+/** Strip MBLogic HMIBuilder metadata; add PeakLogic-friendly element ids. */
 function sanitizeMblogicSvg(text, fileName) {
   let s = text.replace(/^\uFEFF/, '');
   s = s.replace(/<script[\s\S]*?<\/script>/gi, '');

@@ -106,7 +106,7 @@ async function ensureCollection() {
     await collection.createIndex({ tenantId: 1, at: -1 });
     await collection.createIndex({ level: 1, category: 1, at: -1 });
     await collection.createIndex({ 'user.id': 1, at: -1 }, { sparse: true });
-    const ttlDays = Number(process.env.MOOREVIEW_SYSLOG_TTL_DAYS || 0);
+    const ttlDays = Number(process.env.PEAKLOGIC_SYSLOG_TTL_DAYS || 0);
     if (ttlDays > 0) {
       await collection.createIndex(
         { at: 1 },

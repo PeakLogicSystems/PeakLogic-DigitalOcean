@@ -2,7 +2,7 @@
   "deviceId": "unoq_mcsa_01",
   "name": "UNO Q edge motor fault",
   "broker": "mqtt://192.168.1.50:1883",
-  "topicPrefix": "mooreview/v1",
+  "topicPrefix": "peaklogic/v1",
   "username": "",
   "password": "",
   "fundHz": 60,

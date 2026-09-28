@@ -20,8 +20,8 @@ function mergeContext(patch) {
 /** Cloud gateway / auth middleware attaches user on req; normalize for syslog. */
 function userFromRequest(req) {
   if (!req || typeof req !== 'object') return null;
-  if (req.mooreviewUser && typeof req.mooreviewUser === 'object') {
-    const u = req.mooreviewUser;
+  if (req.peaklogicUser && typeof req.peaklogicUser === 'object') {
+    const u = req.peaklogicUser;
     return {
       id: String(u.id || u.userId || '').trim() || null,
       email: String(u.email || '').trim() || null,
@@ -30,10 +30,10 @@ function userFromRequest(req) {
     };
   }
   const h = req.headers || {};
-  const id = String(h['x-mooreview-user-id'] || h['x-user-id'] || '').trim();
-  const email = String(h['x-mooreview-user-email'] || h['x-user-email'] || '').trim();
-  const name = String(h['x-mooreview-user-name'] || '').trim();
-  const role = String(h['x-mooreview-user-role'] || '').trim();
+  const id = String(h['x-peaklogic-user-id'] || h['x-user-id'] || '').trim();
+  const email = String(h['x-peaklogic-user-email'] || h['x-user-email'] || '').trim();
+  const name = String(h['x-peaklogic-user-name'] || '').trim();
+  const role = String(h['x-peaklogic-user-role'] || '').trim();
   if (!id && !email && !name) return null;
   return {
     id: id || null,

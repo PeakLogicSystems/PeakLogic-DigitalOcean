@@ -22,7 +22,7 @@ describe('mvDrawToHmi', () => {
 
   it('compiles lift_duplex into alternator + motor_hoa tiles and bindings', () => {
     const doc = {
-      format: 'mooreview-mvdraw',
+      format: 'peaklogic-mvdraw',
       nodes: [{
         id: 'duplex-1',
         type: 'lift_duplex',
@@ -53,7 +53,7 @@ describe('mvDrawToHmi', () => {
 
   it('merges compiled screen into settings and area popup list', () => {
     const doc = {
-      format: 'mooreview-mvdraw',
+      format: 'peaklogic-mvdraw',
       nodes: [{
         id: 'p1',
         type: 'lift_simplex',

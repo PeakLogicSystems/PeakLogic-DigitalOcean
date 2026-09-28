@@ -1,14 +1,14 @@
 username = doadmin
 password = 9E40fT8CB76qNc31 hide
-host = mongodb+srv://private-mooreview-prod-mongo-fe130f89.mongo.ondigitalocean.com
+host = mongodb+srv://private-peaklogic-prod-mongo-fe130f89.mongo.ondigitalocean.com
 database = admin
 
-mongodb+srv://doadmin:9E40fT8CB76qNc31@private-mooreview-prod-mongo-fe130f89.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
+mongodb+srv://doadmin:9E40fT8CB76qNc31@private-peaklogic-prod-mongo-fe130f89.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
 
 
 username = doadmin
 password = <replace-with-your-password>
-host = mongodb+srv://private-mooreview-prod-mongo-fe130f89.mongo.ondigitalocean.com
+host = mongodb+srv://private-peaklogic-prod-mongo-fe130f89.mongo.ondigitalocean.com
 database = admin
 
 

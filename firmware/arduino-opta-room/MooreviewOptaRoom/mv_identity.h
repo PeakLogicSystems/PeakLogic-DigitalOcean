@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-/** Read ATECC608 serial and derive MooreVIEW Parc deviceId (mv_{16hex FNV-1a64}). */
+/** Read ATECC608 serial and derive PeakLogic Parc deviceId (mv_{16hex FNV-1a64}). */
 bool mvIdentityBegin();
 
 const char* mvIdentityDeviceId();

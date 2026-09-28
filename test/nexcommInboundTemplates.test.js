@@ -19,7 +19,7 @@ describe('nexcomm LPL lift station match', () => {
 
     const built = buildFromPreset('nexcomm_lpl_lift_station', {
       serialNum: '862406071948166',
-      brokerUrl: 'mqtts://mqtt.mooreview.io:8883',
+      brokerUrl: 'mqtts://mqtt.peaklogic.io:8883',
     });
     assert.equal(built.driver.type, 'mqtt');
     assert.equal(built.driver.serialNum, '862406071948166');

@@ -11,7 +11,7 @@
     "brokerUrl": "mqtt://127.0.0.1:1883",
     "deviceId": "halo_01",
     "topicPrefix": "nexcomm/halo",
-    "clientId": "mooreview",
+    "clientId": "peaklogic",
     "subscribeQos": 0,
     "publishQos": 0
   },

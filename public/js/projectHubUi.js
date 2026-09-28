@@ -2,7 +2,7 @@
 
 (function initProjectHubUi() {
   const $ = (id) => document.getElementById(id);
-  const sortApi = () => window.MooreviewProjectListSort;
+  const sortApi = () => window.PeaklogicProjectListSort;
 
   function closeProjectMenu() {
     const details = $('project-menu-details');
@@ -21,7 +21,7 @@
     return String(
       $('studio-location-select')?.value
       || $('project-hub-location')?.value
-      || window.MOOREVIEW_STUDIO_LOCATION_ID
+      || window.PEAKLOGIC_STUDIO_LOCATION_ID
       || '',
     ).trim();
   }
@@ -144,7 +144,7 @@
   }
 
   async function applyDeployedProject(nameHint) {
-    const refresh = window.mooreviewRefreshAll;
+    const refresh = window.peaklogicRefreshAll;
     if (typeof refresh !== 'function') {
       throw new Error('Studio UI is still loading — try again in a moment.');
     }
@@ -187,7 +187,7 @@
     if (!locationId) throw new Error('Choose a site before publishing to MV Cloud.');
     const name = currentProjectName();
     if (!window.confirm(`Publish "${name}" to MV Cloud for this site?`)) return;
-    await window.MooreviewHmi?.applyHmiSettingsIfDirty?.();
+    await window.PeaklogicHmi?.applyHmiSettingsIfDirty?.();
     const doc = await api.exportEstDoc(name);
     const result = await api.publishProjectHub({ name, doc, locationId });
     const entry = result.entry || result;
@@ -269,7 +269,7 @@
     const opts = items.length
       ? items.map((loc) => `<option value="${esc(loc.id)}">${esc(loc.name || loc.slug || loc.id)}</option>`).join('')
       : '<option value="">(no sites)</option>';
-    const preferred = String(window.MOOREVIEW_STUDIO_LOCATION_ID || '').trim();
+    const preferred = String(window.PEAKLOGIC_STUDIO_LOCATION_ID || '').trim();
     const studioSel = $('studio-location-select');
     const hubSel = $('project-hub-location');
     const studioWrap = $('studio-location-wrap');
@@ -359,11 +359,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    if (!$('project-hub-dialog') || !window.MOOREVIEW_BUILD || window.MOOREVIEW_BUILD.deployment !== 'cloud') return;
+    if (!$('project-hub-dialog') || !window.PEAKLOGIC_BUILD || window.PEAKLOGIC_BUILD.deployment !== 'cloud') return;
     bindHubDialog();
     bindLocationPickers();
     loadLocations().catch(console.error);
-    window.MooreviewProjectHubUi = {
+    window.PeaklogicProjectHubUi = {
       openHubDialog,
       refreshHubList,
     };

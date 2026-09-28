@@ -47,8 +47,8 @@ function getMailSetupStatus() {
     user: cfg.user || null,
     hasPassword: Boolean(cfg.pass),
     useSendGridApi: useSendGridApi(),
-    envFileHint: process.env.MOOREVIEW_DEPLOYMENT === 'cloud'
-      ? '/etc/mooreview/saas.env'
+    envFileHint: process.env.PEAKLOGIC_DEPLOYMENT === 'cloud'
+      ? '/etc/peaklogic/saas.env'
       : '.env',
     source: envSet('SMTP_HOST') ? 'env' : (storedConfigured ? 'saved' : 'none'),
     envOverrides: envSet('SMTP_HOST') ? fromEnv : null,
@@ -75,8 +75,8 @@ function getSmsSetupStatus() {
     hasAuthToken: Boolean(cfg.authToken),
     defaultCountry: cfg.defaultCountry,
     sharesTwilioSuperSimCredentials: Boolean(cfg.accountSid && cfg.authToken),
-    envFileHint: process.env.MOOREVIEW_DEPLOYMENT === 'cloud'
-      ? '/etc/mooreview/saas.env'
+    envFileHint: process.env.PEAKLOGIC_DEPLOYMENT === 'cloud'
+      ? '/etc/peaklogic/saas.env'
       : '.env',
     source: envSet('TWILIO_ACCOUNT_SID') ? 'env' : (storedConfigured ? 'saved' : 'none'),
   };
@@ -107,7 +107,7 @@ function getMessagingFormConfig() {
       user: saved.mail.user || cfgMail.user || '',
       pass: saved.mail.pass || (cfgMail.pass ? '********' : ''),
       from: saved.mail.from || cfgMail.from || '',
-      fromName: saved.mail.fromName || cfgMail.fromName || 'MooreVIEW',
+      fromName: saved.mail.fromName || cfgMail.fromName || 'PeakLogic',
       useSendGridApi: saved.mail.useSendGridApi ?? useSendGridApi() ?? false,
       hasPassword: Boolean(cfgMail.pass),
     },

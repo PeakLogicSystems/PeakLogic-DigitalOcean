@@ -17,7 +17,7 @@ void mvRtcSetUnixTz(uint32_t epochUtc, int tzOffsetMin);
 /** Set RTC from Unix epoch seconds (UTC). No-op when RTC unavailable. */
 void mvRtcSetUnix(uint32_t epochUtc);
 
-/** Sync RTC from MooreVIEW headers X-MV-Client-Time and optional X-MV-Client-Tz-Offset. */
+/** Sync RTC from PeakLogic headers X-MV-Client-Time and optional X-MV-Client-Tz-Offset. */
 void mvRtcSyncFromHeader(const char* unixSeconds, const char* tzOffsetMin);
 
 /** Queue RTC sync for main loop (HAL_RTC_SetTime must not run in HTTP/MQTT handlers). */

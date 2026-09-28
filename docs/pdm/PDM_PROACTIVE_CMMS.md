@@ -1,6 +1,6 @@
 # PdM → proactive CMMS (fix before breakdown)
 
-**North star:** mooreVIEW is **proactive, not reactive**. PdM detects degradation early; CMMS schedules the fix **before** failure — not after an alarm or overflow call.
+**North star:** PeakLogic is **proactive, not reactive**. PdM detects degradation early; CMMS schedules the fix **before** failure — not after an alarm or overflow call.
 
 ## Flow
 
@@ -16,7 +16,7 @@ Edge AI + SCADA historian
 
 ## When a work order is created
 
-After feature build (nightly batch, **Build features now**, or **Seed demo data**), mooreVIEW evaluates each mapped asset:
+After feature build (nightly batch, **Build features now**, or **Seed demo data**), PeakLogic evaluates each mapped asset:
 
 | Forecast severity | Action |
 |-------------------|--------|
@@ -62,7 +62,7 @@ Configure in **Historian → Logger config… → PdM** under **Proactive CMMS &
 
 ## Service history feedback
 
-When a PdM-sourced work order is marked **complete**, mooreVIEW appends a `pdm_pm` (or inferred type) entry to `pdm.assetContext[assetId].serviceHistory`. This persists in the project `.est.zip` on save.
+When a PdM-sourced work order is marked **complete**, PeakLogic appends a `pdm_pm` (or inferred type) entry to `pdm.assetContext[assetId].serviceHistory`. This persists in the project `.est.zip` on save.
 
 ## API
 

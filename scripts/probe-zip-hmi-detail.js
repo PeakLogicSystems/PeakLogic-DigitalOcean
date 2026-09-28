@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { unpackArchive } = require('../src/project/projectArchive');
-const zipPath = process.argv[2] || '/home/mooreview/data/workspace.est.zip';
+const zipPath = process.argv[2] || '/home/peaklogic/data/workspace.est.zip';
 const u = unpackArchive(fs.readFileSync(zipPath));
 const hmi = u.project?.settings?.hmi || {};
 const screens = (hmi.screens || []).map((s) => ({

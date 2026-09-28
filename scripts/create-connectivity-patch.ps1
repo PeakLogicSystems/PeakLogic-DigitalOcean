@@ -52,12 +52,12 @@ Get-ChildItem $StageRoot -Recurse -File -Include *.sh | ForEach-Object {
 @"
 Connectivity patch ($Stamp)
 =========================
-Upload this ENTIRE folder into /home/mooreview/ (merge/overwrite).
+Upload this ENTIRE folder into /home/peaklogic/ (merge/overwrite).
 
 Then on droplet:
-  sed -i 's/\r$//' /home/mooreview/deploy/cloud/debian/*.sh
-  sudo bash /home/mooreview/deploy/cloud/debian/apply-saas-upgrade.sh
-  sudo bash /home/mooreview/deploy/cloud/debian/verify-connectivity-deploy.sh
+  sed -i 's/\r$//' /home/peaklogic/deploy/cloud/debian/*.sh
+  sudo bash /home/peaklogic/deploy/cloud/debian/apply-saas-upgrade.sh
+  sudo bash /home/peaklogic/deploy/cloud/debian/verify-connectivity-deploy.sh
 
 Page check: title must be "Connectivity" and show "Alarm email" + "Alarm SMS" at top.
 "@ | Set-Content (Join-Path $StageRoot 'README-UPLOAD.txt') -Encoding UTF8

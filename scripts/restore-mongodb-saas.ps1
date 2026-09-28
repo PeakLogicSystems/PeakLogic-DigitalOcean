@@ -1,8 +1,8 @@
-# Restore MongoDB multitenant SaaS platform into mooreview-cloud from _extract-10c archive,
+# Restore MongoDB multitenant SaaS platform into peaklogic-cloud from _extract-10c archive,
 # then re-apply est-pc runtime + camera modules.
 param(
-  [string]$ArchiveRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) '_extract-10c\mooreview-cloud'),
-  [string]$CloudRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) 'mooreview-cloud'),
+  [string]$ArchiveRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) '_extract-10c\peaklogic-cloud'),
+  [string]$CloudRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) 'peaklogic-cloud'),
   [string]$EstRoot = (Split-Path $PSScriptRoot -Parent)
 )
 
@@ -114,13 +114,13 @@ if (Test-Path $saasPkg) {
   }
 }
 
-$svcPath = Join-Path $CloudRoot 'deploy\cloud\debian\mooreview-saas.service'
+$svcPath = Join-Path $CloudRoot 'deploy\cloud\debian\peaklogic-saas.service'
 if (Test-Path $svcPath) {
   $svc = Get-Content $svcPath -Raw
   if ($svc -match 'ExecStart=/usr/bin/node server\.js') {
     $svc = $svc -replace 'ExecStart=/usr/bin/node server\.js', 'ExecStart=/usr/bin/node src/server.js'
     Set-Content $svcPath $svc -Encoding UTF8 -NoNewline
-    Write-Host '  patched: mooreview-saas.service -> src/server.js' -ForegroundColor Green
+    Write-Host '  patched: peaklogic-saas.service -> src/server.js' -ForegroundColor Green
   }
 }
 

@@ -191,7 +191,7 @@ function buildPdfReport(payload) {
       margin: 48,
       info: {
         Title: config.title,
-        Author: config.company || 'MooreVIEW',
+        Author: config.company || 'PeakLogic',
         Subject: meta.rangeLabel || 'Historian report',
       },
     });

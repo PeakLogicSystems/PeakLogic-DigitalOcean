@@ -1,7 +1,7 @@
-MooreVIEW Cloud — SaaS install (port 3100)
+PeakLogic Cloud — SaaS install (port 3100)
 ==========================================
 
-Primary deployment for mooreview.io: multi-tenant login, Studio, CMMS.
+Primary deployment for peaklogic.io: multi-tenant login, Studio, CMMS.
 Uses DigitalOcean Managed MongoDB (not local mongod).
 
 Phase 1 (two droplets + archive): deploy/cloud/phase1/WINSCP-DEPLOY.md
@@ -18,14 +18,14 @@ Quick install — Phase 1 (WinSCP)
      powershell -ExecutionPolicy Bypass -File scripts\create-phase1-bundles.ps1
 
      Output:
-       dist\mooreview-cloud-YYYYMMDDd.tgz   → cloud-1-saas droplet
-       dist\mooreview-archive-YYYYMMDD.tgz  → cloud-2-archive droplet
+       dist\peaklogic-cloud-YYYYMMDDd.tgz   → cloud-1-saas droplet
+       dist\peaklogic-archive-YYYYMMDD.tgz  → cloud-2-archive droplet
 
 2. WinSCP: upload each .tgz to /tmp/ on the matching droplet.
 
 3. Follow deploy/cloud/phase1/WINSCP-DEPLOY.md (archive droplet first, then SaaS).
 
-4. Config templates (copy to /etc/mooreview/ before install scripts):
+4. Config templates (copy to /etc/peaklogic/ before install scripts):
 
      deploy/cloud/phase1/droplet-saas/saas.env.template
      deploy/cloud/phase1/droplet-saas/mqtt.env.template
@@ -36,17 +36,17 @@ Quick install — Phase 1 (WinSCP)
 
 6. Seed demo tenant (once, after secrets are set):
 
-     sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed'
+     sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'
 
 7. TLS:
 
-     certbot --nginx -d mooreview.io -d www.mooreview.io
+     certbot --nginx -d peaklogic.io -d www.peaklogic.io
 
 8. Verify:
 
      curl -s http://127.0.0.1:3100/health
-     curl -sI https://mooreview.io/login
-     systemctl status mooreview-saas nginx
+     curl -sI https://peaklogic.io/login
+     systemctl status peaklogic-saas nginx
 
 Single-droplet SaaS only: docs/CLOUD_DEPLOY_DO.md
 
@@ -59,16 +59,16 @@ Platform admin: `admin@demo.local` / `ChangeMeAdmin!`
 Optional — MQTT on SaaS droplet (Phase 1)
 -----------------------------------------
 
-     bash /home/mooreview/deploy/cloud/debian/enable-saas-mqtt.sh
+     bash /home/peaklogic/deploy/cloud/debian/enable-saas-mqtt.sh
 
 Optional — archive compaction timer
 -----------------------------------
 
-     bash /home/mooreview/deploy/cloud/debian/enable-phase1-archive-compact.sh
+     bash /home/peaklogic/deploy/cloud/debian/enable-phase1-archive-compact.sh
 
 Optional — port 3090 runtime (client-side / appliance hub)
 ----------------------------------------------------------
 
-     sudo bash /home/mooreview/deploy/cloud/debian/enable-runtime-3090.sh
+     sudo bash /home/peaklogic/deploy/cloud/debian/enable-runtime-3090.sh
 
 Legacy appliance install (3090 only): deploy/cloud/debian/install.sh

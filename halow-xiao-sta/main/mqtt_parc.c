@@ -1,8 +1,8 @@
 /*
- * MooreVIEW "Parc" MQTT client — implementation.
+ * PeakLogic "Parc" MQTT client — implementation.
  *
  * Modeled after the Arduino Opta firmware (firmware/arduino-opta-mqtt-st):
- * same "mooreview/v1" topic map, verbose JSON telemetry with a tags[] array,
+ * same "peaklogic/v1" topic map, verbose JSON telemetry with a tags[] array,
  * retained online/LWT, cmd/response, config, and global P2P tags. MQTT runs over
  * the HaLow L2 netif (TX-AH raw Ethernet). Wi-Fi AP is setup-only.
  *
@@ -44,8 +44,8 @@ static char s_topic_online[128];
 static char s_topic_cmd[128];
 static char s_topic_cmd_res[136];
 static char s_topic_config[128];
-static char s_global_prefix[96];   /* "mooreview/v1/g/<addr>/" */
-static char s_global_sub[100];     /* "mooreview/v1/g/<addr>/+" */
+static char s_global_prefix[96];   /* "peaklogic/v1/g/<addr>/" */
+static char s_global_sub[100];     /* "peaklogic/v1/g/<addr>/+" */
 static char s_addr_hex[5];         /* site key as 4 hex digits */
 static char s_client_id[64];
 
@@ -238,7 +238,7 @@ void parc_mqtt_maybe_publish_telemetry(const char *ip, int32_t rssi, bool link_u
 }
 
 /* ---------------------------------------------------------------------------
- * Global (P2P) tags: mooreview/v1/g/<addr>/<tag> = {"v":..,"t":".."} retained
+ * Global (P2P) tags: peaklogic/v1/g/<addr>/<tag> = {"v":..,"t":".."} retained
  * ------------------------------------------------------------------------- */
 
 static void publish_global(const char *tag, parc_tag_type_t type, double value, bool is_bool)
@@ -343,7 +343,7 @@ static void handle_global(const char *topic, const char *payload, int len)
 }
 
 /* ---------------------------------------------------------------------------
- * Commands: mooreview/v1/<id>/cmd -> mooreview/v1/<id>/cmd/response
+ * Commands: peaklogic/v1/<id>/cmd -> peaklogic/v1/<id>/cmd/response
  * ------------------------------------------------------------------------- */
 
 static void publish_cmd_response(cJSON *res)
@@ -507,7 +507,7 @@ static void handle_cmd(const char *payload, int len)
     }
     else if (strcmp(op, "sync_time") == 0)
     {
-        /* No RTC requirement; accept and echo so MooreVIEW is happy. */
+        /* No RTC requirement; accept and echo so PeakLogic is happy. */
         uint32_t unix_utc = 0;
         int tz = 0;
         if (body != NULL)
@@ -723,7 +723,7 @@ void parc_mqtt_start_with_cfg(const device_cfg_t *cfg, esp_netif_t *netif)
 
     esp_mqtt_client_register_event(s_client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
     esp_mqtt_client_start(s_client);
-    ESP_LOGI(TAG, "MooreVIEW Parc peer '%s' -> %s", id, broker_uri);
+    ESP_LOGI(TAG, "PeakLogic Parc peer '%s' -> %s", id, broker_uri);
     ESP_LOGI(TAG, "telemetry=%s  global=%s", s_topic_telemetry, s_global_prefix);
 }
 

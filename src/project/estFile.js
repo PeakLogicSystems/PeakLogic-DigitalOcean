@@ -19,12 +19,12 @@ const PACKAGE_VERSION = require('../../package.json').version;
 const PUBLIC_ROOT = path.join(__dirname, '../../public');
 const { readActiveProject, writeActiveProject } = require('../../mv-draw/src/mvDrawStore');
 const { normalizeMvDraw } = require('../../mv-draw/src/mvDrawFormat');
-const EST_FORMAT = 'mooreview-est';
+const EST_FORMAT = 'peaklogic-est';
 const EST_VERSION = 1;
-const ARCHIVE_FORMAT = 'mooreview-est-archive';
+const ARCHIVE_FORMAT = 'peaklogic-est-archive';
 const ARCHIVE_VERSION = 1;
 
-const BLANK_PROGRAM = '(* New MooreVIEW project — load an ST program or write logic here *)\n';
+const BLANK_PROGRAM = '(* New PeakLogic project — load an ST program or write logic here *)\n';
 const BLANK_ACTIVE_PROGRAM = '';
 const REMOTE_DRIVER_TYPES = new Set(['mqtt_parc', 'opta_remote']);
 
@@ -115,7 +115,7 @@ function normalizeTagImport(tag) {
 }
 
 /**
- * Accept mooreview-est, est config bundles ({ tags, drivers, program }), or a bare tags array.
+ * Accept peaklogic-est, est config bundles ({ tags, drivers, program }), or a bare tags array.
  * @returns {object} normalized import document; null fields mean "do not replace this section"
  */
 function coerceImportDoc(raw) {
@@ -179,7 +179,7 @@ function upgradeEstDocument(doc) {
   if (doc.format === EST_FORMAT && hasExplicitVersion && version !== EST_VERSION) {
     if (version > EST_VERSION) {
       warnings.push(
-        `Project format version ${version} is newer than this MooreVIEW (format v${EST_VERSION}). Unknown fields may be ignored.`,
+        `Project format version ${version} is newer than this PeakLogic (format v${EST_VERSION}). Unknown fields may be ignored.`,
       );
     } else {
       warnings.push(`Upgraded project from format version ${version} to ${EST_VERSION}.`);
@@ -187,7 +187,7 @@ function upgradeEstDocument(doc) {
   }
   const exportedBy = doc.exportedBy || doc.appVersion;
   if (exportedBy && exportedBy !== PACKAGE_VERSION) {
-    warnings.push(`Project was exported from MooreVIEW ${exportedBy}; this copy is ${PACKAGE_VERSION}.`);
+    warnings.push(`Project was exported from PeakLogic ${exportedBy}; this copy is ${PACKAGE_VERSION}.`);
   }
 
   const out = { ...doc, version: EST_VERSION };
@@ -244,7 +244,7 @@ function blankProjectDoc(name) {
       mqttParc: {
         enabled: true,
         brokerUrl: DEFAULT_MQTT_PARC_BROKER,
-        topicPrefix: 'mooreview/v1',
+        topicPrefix: 'peaklogic/v1',
       },
     },
   };

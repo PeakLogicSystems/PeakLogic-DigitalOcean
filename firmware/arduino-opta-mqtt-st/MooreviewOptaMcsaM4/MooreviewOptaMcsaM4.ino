@@ -1,8 +1,8 @@
 /*
- * MooreVIEW Opta — M4 coprocessor for true-FFT MCSA.
+ * PeakLogic Opta — M4 coprocessor for true-FFT MCSA.
  *
  * Flash with Tools → Flash split → 1.5MB M7 + 0.5MB M4, Target core → M4.
- * M7 sketch (MooreviewOptaMqttSt) boots this core via RPC.begin() / bootM4().
+ * M7 sketch (PeaklogicOptaMqttSt) boots this core via RPC.begin() / bootM4().
  * A/D ingest stays on M7 (scan-safe); this core only FFTs SRAM4 windows.
  */
 #include <Arduino.h>

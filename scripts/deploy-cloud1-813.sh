@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Full 8/13/2026 SaaS code deploy on cloud-1-saas-nyc1 (preserves /etc/mooreview + /var/lib/mooreview).
+# Full 8/13/2026 SaaS code deploy on cloud-1-saas-nyc1 (preserves /etc/peaklogic + /var/lib/peaklogic).
 set -euo pipefail
 
-BUNDLE="/tmp/mooreview-cloud-20260813d-repair.tgz"
-INSTALL_DIR="/home/mooreview"
+BUNDLE="/tmp/peaklogic-cloud-20260813d-repair.tgz"
+INSTALL_DIR="/home/peaklogic"
 REPAIR="/tmp/repair-cloud1-813.sh"
 
 log() { printf '[deploy-813] %s\n' "$*"; }
@@ -22,8 +22,8 @@ find "$INSTALL_DIR/deploy/cloud/debian" -type f -name '*.sh' -print0 \
   | xargs -0 sed -i 's/\r$//' 2>/dev/null || true
 
 log "Run install-saas.sh"
-export MOOREVIEW_SOURCE="$INSTALL_DIR"
-export MOOREVIEW_INSTALL_DIR="$INSTALL_DIR"
+export PEAKLOGIC_SOURCE="$INSTALL_DIR"
+export PEAKLOGIC_INSTALL_DIR="$INSTALL_DIR"
 bash "$INSTALL_DIR/deploy/cloud/debian/install-saas.sh"
 
 log "Restore runtime program settings (putnam-county-cloud baseline)"

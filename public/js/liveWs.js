@@ -3,7 +3,7 @@
 /**
  * WebSocket live updates — primary path for tag/runtime refresh (fallback: HTTP poll).
  */
-window.MooreviewLiveWs = (function () {
+window.PeaklogicLiveWs = (function () {
   let ws = null;
   let reconnectTimer = null;
   let onMessage = null;
@@ -13,7 +13,7 @@ window.MooreviewLiveWs = (function () {
   let failCount = 0;
 
   function wsUrl() {
-    const base = String(window.MOOREVIEW_API_BASE || '').trim().replace(/\/$/, '');
+    const base = String(window.PEAKLOGIC_API_BASE || '').trim().replace(/\/$/, '');
     const apiPath = base || '/api';
     const loc = window.location;
     const proto = loc.protocol === 'https:' ? 'wss:' : 'ws:';

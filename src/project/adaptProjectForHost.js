@@ -3,9 +3,9 @@
 const { defaultModbusRtuSerialPort } = require('../appliance/defaultRs485Port');
 
 function hostRs485Ports(env = process.env) {
-  const primary = String(env.MOOREVIEW_RS485_PORT_A || '').trim()
+  const primary = String(env.PEAKLOGIC_RS485_PORT_A || '').trim()
     || defaultModbusRtuSerialPort(env);
-  const secondary = String(env.MOOREVIEW_RS485_PORT_B || '').trim()
+  const secondary = String(env.PEAKLOGIC_RS485_PORT_B || '').trim()
     || (process.platform === 'win32' ? 'COM4' : '/dev/ttyLP4');
   return { primary, secondary };
 }

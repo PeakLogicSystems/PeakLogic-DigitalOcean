@@ -50,24 +50,24 @@ describe('globalMqttPayload', () => {
 });
 
 describe('mqttProtocol global + tenant telemetry', () => {
-  const cfg = { topicPrefix: 'mooreview/v1' };
+  const cfg = { topicPrefix: 'peaklogic/v1' };
 
   it('parses global tag topics', () => {
-    assert.deepEqual(parseGlobalTopic('mooreview/v1/g/0001/PumpRun', cfg), {
+    assert.deepEqual(parseGlobalTopic('peaklogic/v1/g/0001/PumpRun', cfg), {
       addrKey: '0001',
       tagName: 'PumpRun',
       siteKey: 1,
     });
-    assert.equal(parseGlobalTopic('mooreview/v1/site-01/telemetry', cfg), null);
+    assert.equal(parseGlobalTopic('peaklogic/v1/site-01/telemetry', cfg), null);
   });
 
   it('parses tenant-scoped telemetry topics', () => {
     assert.deepEqual(
-      telemetryTopicInfo('mooreview/v1/acme-corp/opta_st_01/telemetry', cfg),
+      telemetryTopicInfo('peaklogic/v1/acme-corp/opta_st_01/telemetry', cfg),
       { tenantId: 'acme-corp', deviceId: 'opta_st_01' },
     );
     assert.deepEqual(
-      telemetryTopicInfo('mooreview/v1/opta_st_01/telemetry', cfg),
+      telemetryTopicInfo('peaklogic/v1/opta_st_01/telemetry', cfg),
       { tenantId: null, deviceId: 'opta_st_01' },
     );
   });
@@ -81,10 +81,10 @@ describe('mqttCentralHub global mirror', () => {
       ...defaultCentralSettings(),
       enabled: true,
       globalSiteKey: 0x0001,
-      topicPrefix: 'mooreview/v1',
+      topicPrefix: 'peaklogic/v1',
     };
     hub.setGlobalMirrorDeps({ tagStore });
-    const topic = 'mooreview/v1/g/0001/SharedRun';
+    const topic = 'peaklogic/v1/g/0001/SharedRun';
     hub._mirrorGlobalTag(topic, encodeGlobalMqttPayload('BOOL', true));
     const tag = tagStore.get('SharedRun');
     assert.ok(tag);
@@ -102,7 +102,7 @@ describe('mqttCentralHub global outbound publish', () => {
       ...defaultCentralSettings(),
       enabled: true,
       globalSiteKey: 0x0001,
-      topicPrefix: 'mooreview/v1',
+      topicPrefix: 'peaklogic/v1',
     };
     hub.client = {
       connected: true,
@@ -127,7 +127,7 @@ describe('mqttCentralHub global outbound publish', () => {
     const n = publishDirtyGlobalTags(hub, tagStore);
     assert.equal(n, 1);
     assert.equal(published.length, 1);
-    assert.equal(published[0].topic, 'mooreview/v1/g/0001/PumpRun');
+    assert.equal(published[0].topic, 'peaklogic/v1/g/0001/PumpRun');
     assert.equal(published[0].opts.qos, 1);
     assert.equal(published[0].opts.retain, true);
     assert.deepEqual(JSON.parse(published[0].payload), { v: true, t: 'BOOL' });

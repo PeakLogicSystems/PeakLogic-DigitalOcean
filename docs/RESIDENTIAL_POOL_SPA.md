@@ -1,11 +1,11 @@
-# MooreVIEW — residential pool & spa
+# PeakLogic — residential pool & spa
 
 Home-pad app: **Pentair IntelliFlo + IntelliChlor on one RS-485**, optional Waveshare satellites on **home Wi-Fi**, IOT-LINK (or a small PC) as the hub.
 
 ```text
 Home Wi-Fi
     │
-    ├─ phone / tablet  →  MooreVIEW HMI  (homeowner)
+    ├─ phone / tablet  →  PeakLogic HMI  (homeowner)
     │
     └─ Waveshare ESP32-S3-Relay-1CH-U  (spa jets, lights, acid)
               │  MQTT Parc
@@ -19,14 +19,14 @@ IOT-LINK / PC  (30_pool_controller.st)
 Seed:
 
 ```bash
-# /etc/mooreview/env  — see deploy/iot-link/.env.residential-pool-spa.example
-MOOREVIEW_POOL_PROFILE=residential-spa
+# /etc/peaklogic/env  — see deploy/iot-link/.env.residential-pool-spa.example
+PEAKLOGIC_POOL_PROFILE=residential-spa
 node deploy/iot-link/seed-pool-config.js --force
 ```
 
 ## Shared RS-485: IntelliFlo + IntelliChlor
 
-**Yes.** They speak Pentair automation on **one** twisted pair (A/B), **9600 8N1**. MooreVIEW uses a single `pentair_bus` driver and tags with `deviceClass` `intelliflo` vs `intellichlor`.
+**Yes.** They speak Pentair automation on **one** twisted pair (A/B), **9600 8N1**. PeakLogic uses a single `pentair_bus` driver and tags with `deviceClass` `intelliflo` vs `intellichlor`.
 
 | Device | Address / class | Control | Monitor |
 |--------|-----------------|---------|---------|
@@ -37,13 +37,13 @@ Daisy-chain A/B (and shield/GND) pump ↔ cell ↔ IOT-LINK **PORT B**. Leave **
 
 **Do not** put DFRobot SEN0711/SEN0712 on this cable. Those are Modbus at **4800**. Use a second adapter (USB RS-485) or skip them — IntelliChlor already reports salt and cell temp.
 
-If an EasyTouch / IntelliTouch is still master, set `IC_TAKEOVER_CMD` only when you want MooreVIEW to own output %. Otherwise leave the panel in charge and treat IC tags as monitor-only.
+If an EasyTouch / IntelliTouch is still master, set `IC_TAKEOVER_CMD` only when you want PeakLogic to own output %. Otherwise leave the panel in charge and treat IC tags as monitor-only.
 
 ## Home Wi-Fi (Waveshare satellites)
 
 Each 1CH module is commissioned on a phone:
 
-1. Join AP **`MooreVIEW-Relay1CH`** / password `mooreview`.
+1. Join AP **`PeakLogic-Relay1CH`** / password `peaklogic`.
 2. Open `http://192.168.4.1:8080/setup`.
 3. **Home Wi-Fi name + password** (your house router).
 4. **Hub address** = IOT-LINK LAN IP (Mosquitto `:1883`).
@@ -53,7 +53,7 @@ Each 1CH module is commissioned on a phone:
 Prefer **ESP32-S3-Relay-1CH-U** + SMA antenna at the equipment pad.
 
 ```bash
-MOOREVIEW_POOL_WAVESHARE_RELAYS=spa_jets:ws_relay_spa,light_z1:ws_relay_lz1,dose_acid:ws_relay_acid:flow_sw
+PEAKLOGIC_POOL_WAVESHARE_RELAYS=spa_jets:ws_relay_spa,light_z1:ws_relay_lz1,dose_acid:ws_relay_acid:flow_sw
 ```
 
 IntelliFlo does **not** need a Waveshare pump pilot — speed and run live on the Pentair bus.

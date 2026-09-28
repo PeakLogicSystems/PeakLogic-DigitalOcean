@@ -1,4 +1,4 @@
-(* MooreVIEW ATU Service cloud fleet rollup *)
+(* PeakLogic ATU Service cloud fleet rollup *)
 (* Mirror FLEET_*_ALM from each device primary alarm after Drivers → Sync tags *)
 
 IF FLEET_OAK_ATU_ALM THEN TurnON(FLEET_ANY_ALM); ELSE TurnOFF(FLEET_ANY_ALM); END_IF;

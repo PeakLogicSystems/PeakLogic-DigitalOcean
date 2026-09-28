@@ -1,6 +1,6 @@
 """True FFT MCSA cook + motor-fault classification for Arduino UNO Q.
 
-Mirrors MooreVIEW host cooked-spectra schema (fund / rotor / bearing / ecc / pump)
+Mirrors PeakLogic host cooked-spectra schema (fund / rotor / bearing / ecc / pump)
 and Opta-compatible start labels, with extra FFT-only labels (bearing_wear, eccentricity).
 """
 from __future__ import annotations

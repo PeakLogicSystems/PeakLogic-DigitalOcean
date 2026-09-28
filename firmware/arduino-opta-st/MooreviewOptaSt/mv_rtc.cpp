@@ -100,6 +100,6 @@ const char* mvRtcStatusString() {
 void mvRtcWarnIfUnset() {
   if (g_rtcWarned || mvRtcHasWallClock()) return;
   g_rtcWarned = true;
-  Serial.println(F("[MV] RTC not set — MooreVIEW Connect syncs clock; using uptime in debug until then"));
+  Serial.println(F("[MV] RTC not set — PeakLogic Connect syncs clock; using uptime in debug until then"));
   Serial.flush();
 }

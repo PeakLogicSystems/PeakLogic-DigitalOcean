@@ -18,7 +18,7 @@ function collectionName() {
 }
 
 function dbName() {
-  return process.env.MONGODB_DB || 'mooreview';
+  return process.env.MONGODB_DB || 'peaklogic';
 }
 
 function uri() {

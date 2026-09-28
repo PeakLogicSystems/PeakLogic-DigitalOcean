@@ -8,9 +8,9 @@
   "driverId": "nx_lp_com_dual_atu",
   "stationType": "dual_atu",
   "defaults": {
-    "brokerUrl": "mqtts://mqtt.mooreview.io:8883",
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
     "serialNum": "REPLACE_SERIAL",
-    "clientId": "mooreview",
+    "clientId": "peaklogic",
     "subscribeQos": 0,
     "publishQos": 0
   },
@@ -257,5 +257,5 @@
       ]
     }
   },
-  "notes": "Inbound tag map generated from st/fixtures/nexcomm-csv/nexcomm-lp-com-dual-atu.csv (66 sample rows). Set serialNum to normalized Nexcomm serial (no hyphens). Broker defaults to mqtts://mqtt.mooreview.io:8883. payloadTemplate json: keys are slug placeholders — align to live MQTT JSON or EPI register paths as needed. Alignment table: st/fixtures/nexcomm-inbound/nexcomm-lp-com-dual-atu.alignment.json"
+  "notes": "Inbound tag map generated from st/fixtures/nexcomm-csv/nexcomm-lp-com-dual-atu.csv (66 sample rows). Set serialNum to normalized Nexcomm serial (no hyphens). Broker defaults to mqtts://mqtt.peaklogic.io:8883. payloadTemplate json: keys are slug placeholders — align to live MQTT JSON or EPI register paths as needed. Alignment table: st/fixtures/nexcomm-inbound/nexcomm-lp-com-dual-atu.alignment.json"
 }

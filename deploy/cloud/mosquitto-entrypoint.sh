@@ -5,7 +5,7 @@ CONF="/mosquitto/config/mosquitto.conf"
 PASSWD="/mosquitto/config/passwd"
 ALLOW_ANON="${MOSQUITTO_ALLOW_ANONYMOUS:-false}"
 TLS="${MOSQUITTO_TLS:-false}"
-DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
 USER="${MOSQUITTO_USER:-}"
 PASS="${MOSQUITTO_PASS:-}"
 

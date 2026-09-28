@@ -1,5 +1,5 @@
 /***********************************************************************
- * Arduino Opta — MooreVIEW Parc MQTT (mooreview/v1)
+ * Arduino Opta — PeakLogic Parc MQTT (peaklogic/v1)
  * Based on baselinedigankgexpansionwMQTT.ino
  ***********************************************************************/
 
@@ -10,11 +10,11 @@
 
 using namespace Opta;
 
-// ── MQTT / MooreVIEW Parc ──────────────────────────────────────
+// ── MQTT / PeakLogic Parc ──────────────────────────────────────
 const char* mqtt_server   = "192.168.1.100";
 const int   mqtt_port     = 1883;
 const char* device_id     = "opta_full_io_01";
-const char* topic_prefix  = "mooreview/v1";
+const char* topic_prefix  = "peaklogic/v1";
 
 const unsigned long LOOP_MS    = 100;
 const unsigned long REPORT_MS  = 180000;  // 3 min Parc telemetry (adjust)
@@ -287,6 +287,6 @@ void loop() {
     lastReport = now;
     String json = buildTelemetryJson();
     mqtt.publish(topicTelemetry().c_str(), json.c_str(), false);
-    Serial.println("mooreview telemetry published");
+    Serial.println("peaklogic telemetry published");
   }
 }

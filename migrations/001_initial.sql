@@ -1,4 +1,4 @@
--- MooreVIEW Cloud — multi-tenant hierarchy schema
+-- PeakLogic Cloud — multi-tenant hierarchy schema
 -- tenant → location → system → device
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";

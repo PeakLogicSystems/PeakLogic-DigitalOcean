@@ -14,9 +14,9 @@ describe('tenant workspace isolation', () => {
   let resolveConfigTenantId;
 
   before(async () => {
-    process.env.MOOREVIEW_DATA = dataDir;
-    process.env.MOOREVIEW_CONFIG_URI = 'memory';
-    process.env.MOOREVIEW_DEPLOYMENT = 'cloud';
+    process.env.PEAKLOGIC_DATA = dataDir;
+    process.env.PEAKLOGIC_CONFIG_URI = 'memory';
+    process.env.PEAKLOGIC_DEPLOYMENT = 'cloud';
 
     for (const mod of [
       '../src/config',
@@ -37,9 +37,9 @@ describe('tenant workspace isolation', () => {
   });
 
   after(() => {
-    delete process.env.MOOREVIEW_DATA;
-    delete process.env.MOOREVIEW_CONFIG_URI;
-    delete process.env.MOOREVIEW_DEPLOYMENT;
+    delete process.env.PEAKLOGIC_DATA;
+    delete process.env.PEAKLOGIC_CONFIG_URI;
+    delete process.env.PEAKLOGIC_DEPLOYMENT;
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   });
 

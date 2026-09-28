@@ -3,7 +3,7 @@
   "label": "Pool overview (stationary / kiosk)",
   "group": "Process equipment",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/pool-faceplates/mooreview/pool_overview.svg",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_overview.svg",
   "tagRoles": {
     "phPv": { "pick": "tagId", "tagId": "PH_PV", "types": ["REAL"] },
     "orpPv": { "pick": "tagId", "tagId": "ORP_PV", "types": ["REAL"] },
@@ -37,7 +37,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_overview.svg"
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_overview.svg"
     }
   ],
   "defaultBindings": [

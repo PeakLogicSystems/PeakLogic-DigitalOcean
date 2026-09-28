@@ -16,8 +16,8 @@ mongocloud-cred.txt
 # Nested local copies / bundles — do not commit
 mvcloud/
 mn-cloud/
-mooreview/
-mooreview-cloud/
+peaklogic/
+peaklogic-cloud/
 
 # Local portable deploy overrides (copy from deploy/portable-saas.config.example.ps1)
 deploy/portable-saas.config.ps1

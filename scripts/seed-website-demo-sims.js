@@ -7,7 +7,7 @@
  *   node scripts/seed-website-demo-sims.js
  *   node scripts/seed-website-demo-sims.js --no-start
  *
- * Requires MOOREVIEW_CLOUD_SIMS=1 (or cloud deployment) and a running MooreVIEW instance
+ * Requires PEAKLOGIC_CLOUD_SIMS=1 (or cloud deployment) and a running PeakLogic instance
  * with MQTT Parc hub broker configured — or run against simManager in-process (default).
  */
 
@@ -25,7 +25,7 @@ async function viaHttp(baseUrl) {
 }
 
 async function viaLocal() {
-  process.env.MOOREVIEW_CLOUD_SIMS = process.env.MOOREVIEW_CLOUD_SIMS || '1';
+  process.env.PEAKLOGIC_CLOUD_SIMS = process.env.PEAKLOGIC_CLOUD_SIMS || '1';
   const configStore = require('../src/configStore');
   if (configStore.initMemorySync) configStore.initMemorySync();
   const simStore = require('../src/cloud/simStore');
@@ -38,7 +38,7 @@ async function viaLocal() {
 }
 
 async function main() {
-  const baseUrl = process.env.MOOREVIEW_URL || process.argv.find((a) => a.startsWith('http'));
+  const baseUrl = process.env.PEAKLOGIC_URL || process.argv.find((a) => a.startsWith('http'));
   const result = baseUrl ? await viaHttp(baseUrl) : await viaLocal();
   for (const row of result.results || []) {
     const err = row.startError ? ` (start: ${row.startError})` : (row.started ? ' (running)' : '');

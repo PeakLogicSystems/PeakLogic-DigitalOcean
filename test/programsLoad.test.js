@@ -7,7 +7,7 @@ const os = require('os');
 const fs = require('fs');
 
 const tmpData = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-prog-load-'));
-process.env.MOOREVIEW_DATA = tmpData;
+process.env.PEAKLOGIC_DATA = tmpData;
 
 const { describe, it, before, beforeEach } = require('node:test');
 const assert = require('node:assert/strict');

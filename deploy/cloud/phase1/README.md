@@ -1,8 +1,8 @@
-# MooreVIEW Phase 1 — DigitalOcean deployment
+# PeakLogic Phase 1 — DigitalOcean deployment
 
 ## Recommended: three droplets (dedicated MQTT)
 
-Atlanta **`atl1`** — MQTT on **`cloud-mqtt-atl1`** from day one. Future growth: **add SaaS droplets + bump Mongo**; broker stays on `mqtt.mooreview.io`.
+Atlanta **`atl1`** — MQTT on **`cloud-mqtt-atl1`** from day one. Future growth: **add SaaS droplets + bump Mongo**; broker stays on `mqtt.peaklogic.io`.
 
 | Droplet | Role | Port(s) | RAM |
 |---------|------|---------|-----|
@@ -45,11 +45,11 @@ Plus **DO Managed MongoDB** (same region).
 
 | File | Copy to (on droplet) |
 |------|----------------------|
-| [droplet-saas/saas.env.template](droplet-saas/saas.env.template) | `/etc/mooreview/saas.env` |
-| [droplet-saas/mqtt.env.template](droplet-saas/mqtt.env.template) | `/etc/mooreview/mqtt.env` |
-| [droplet-saas/archive-compact.env.template](droplet-saas/archive-compact.env.template) | `/etc/mooreview/archive-compact.env` |
-| [droplet-archive/archive.env.template](droplet-archive/archive.env.template) | `/etc/mooreview/archive.env` |
-| [droplet-mqtt/mqtt.env.template](droplet-mqtt/mqtt.env.template) | `/etc/mooreview/mqtt.env` on **cloud-mqtt** |
+| [droplet-saas/saas.env.template](droplet-saas/saas.env.template) | `/etc/peaklogic/saas.env` |
+| [droplet-saas/mqtt.env.template](droplet-saas/mqtt.env.template) | `/etc/peaklogic/mqtt.env` |
+| [droplet-saas/archive-compact.env.template](droplet-saas/archive-compact.env.template) | `/etc/peaklogic/archive-compact.env` |
+| [droplet-archive/archive.env.template](droplet-archive/archive.env.template) | `/etc/peaklogic/archive.env` |
+| [droplet-mqtt/mqtt.env.template](droplet-mqtt/mqtt.env.template) | `/etc/peaklogic/mqtt.env` on **cloud-mqtt** |
 
 ## Scripts (on droplet after bundle extract)
 
@@ -78,8 +78,8 @@ See **[DEPLOY-ATL-MQTT-AUTOMATED.md](DEPLOY-ATL-MQTT-AUTOMATED.md)**.
 
 Output in `dist/`:
 
-- `mooreview-cloud-YYYYMMDDd.tgz` — cloud 1 SaaS
-- `mooreview-archive-YYYYMMDD.tgz` — cloud 2 archive server
+- `peaklogic-cloud-YYYYMMDDd.tgz` — cloud 1 SaaS
+- `peaklogic-archive-YYYYMMDD.tgz` — cloud 2 archive server
 
 ## Install scripts (on droplets)
 

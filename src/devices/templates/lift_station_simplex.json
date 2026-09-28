@@ -1,7 +1,7 @@
 {
   "id": "lift_station_simplex",
   "label": "Lift station — simplex (1 pump)",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Simplex submersible (float control)",
   "transport": "mqtt_parc",
   "stationType": "simplex",

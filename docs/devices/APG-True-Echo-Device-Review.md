@@ -1,8 +1,8 @@
-# MooreVIEW — APG True Echo Radar Device Review
+# PeakLogic — APG True Echo Radar Device Review
 
 **Vendor:** Automation Products Group (APG) — [apgsensors.com](https://apgsensors.com/)  
 **Models:** True Echo CR-L / True Echo Plus (RS-485 Modbus RTU)  
-**MooreVIEW template:** `apg_true_echo_rtu`  
+**PeakLogic template:** `apg_true_echo_rtu`  
 **Document purpose:** Integrator / engineering review of Modbus map, appliance tags, and Opta bring-up  
 **Generated:** _(build date)_
 
@@ -10,7 +10,7 @@
 
 ## 1. Summary
 
-MooreVIEW adds first-class support for APG **True Echo** radar level transmitters as a dedicated Modbus RTU instrument:
+PeakLogic adds first-class support for APG **True Echo** radar level transmitters as a dedicated Modbus RTU instrument:
 
 | Path | Role |
 |------|------|
@@ -24,7 +24,7 @@ Continuous level (`TE_LEVEL`) is intended for wet-well / tank control (bind to `
 
 ## 2. Communication defaults
 
-| Setting | Factory / MooreVIEW default |
+| Setting | Factory / PeakLogic default |
 |---------|-----------------------------|
 | Protocol | Modbus RTU (sensor is **server** only) |
 | Interface | RS-485 |
@@ -41,7 +41,7 @@ Vendor manuals: True Echo CR-L user manual (Modbus chapter — FC04 process valu
 
 ## 3. Wiring
 
-| MooreVIEW host | True Echo |
+| PeakLogic host | True Echo |
 |----------------|-----------|
 | RS-485 **A** (USB adapter or Opta A) | A / Data+ |
 | RS-485 **B** | B / Data− |
@@ -55,9 +55,9 @@ Power the sensor per APG manual (typically **12–24 VDC**). Do not power the se
 
 ## 4. Modbus process map (FC04 — Input Registers)
 
-Addresses are **0-based PDU** (same as MooreVIEW `driverAddress.address`).
+Addresses are **0-based PDU** (same as PeakLogic `driverAddress.address`).
 
-| Address | Type | Engineering meaning | MooreVIEW tag |
+| Address | Type | Engineering meaning | PeakLogic tag |
 |---------|------|---------------------|---------------|
 | 0 | uint16 | Distance (cm) | `TE_DIST_CM` |
 | 1 | uint16 | Distance (mm) | `TE_DIST_MM` |
@@ -74,11 +74,11 @@ APG documents float32 as **CDAB** (word-swapped big-endian):
 - Register *N* = bytes **C D**, register *N+1* = bytes **A B**
 - IEEE bit pattern **ABCD** = `(reg[N+1] << 16) | reg[N]`
 
-MooreVIEW `ModbusDriver` accepts `byteOrder: "CDAB"` on float32 tags. Selected units (mm / cm / m / in / ft) are configured in the APG sensor app; floats follow that unit setting.
+PeakLogic `ModbusDriver` accepts `byteOrder: "CDAB"` on float32 tags. Selected units (mm / cm / m / in / ft) are configured in the APG sensor app; floats follow that unit setting.
 
 ### 4.2 Configuration registers (holding — reference)
 
-Holding registers (FC03 read / FC16 write) include application type, unit setting, damping, blind zone, range, high/low level, distance offset, bus address, baud, etc. **Not mapped in v1 template** (process values only). Use the APG app or custom holding tags if site commissioning requires writes from MooreVIEW.
+Holding registers (FC03 read / FC16 write) include application type, unit setting, damping, blind zone, range, high/low level, distance offset, bus address, baud, etc. **Not mapped in v1 template** (process values only). Use the APG app or custom holding tags if site commissioning requires writes from PeakLogic.
 
 ---
 
@@ -140,7 +140,7 @@ Use this sketch to validate wiring and register decode before PC wizard apply.
 
 ## 7. Related Opta firmware (mqtt-st 2.3.81)
 
-Production sketch `MooreviewOptaMqttSt` (synced from `C:\data\MooreviewOptaMqttSt`) includes RS-485 **fieldbus** for **EZ Meter** (`-DMV_FIELDBUS=1 -DMV_EZMETER=1`), not True Echo process tags. True Echo on Opta for review/bring-up remains the **standalone sample** above; appliance PC master is the supported production path for radar level today.
+Production sketch `PeaklogicOptaMqttSt` (synced from `C:\data\PeaklogicOptaMqttSt`) includes RS-485 **fieldbus** for **EZ Meter** (`-DMV_FIELDBUS=1 -DMV_EZMETER=1`), not True Echo process tags. True Echo on Opta for review/bring-up remains the **standalone sample** above; appliance PC master is the supported production path for radar level today.
 
 | Flag | Device |
 |------|--------|

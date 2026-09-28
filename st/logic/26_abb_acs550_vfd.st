@@ -7,7 +7,7 @@
   Drive setup (panel):
     1. 9802 COMM PROT SEL = 1 (STD MODBUS)
     2. 5302 EFB STATION ID = slave (default 1) — cycle power after change
-    3. 5303 EFB BAUD RATE = 9.6 (match MooreVIEW baud)
+    3. 5303 EFB BAUD RATE = 9.6 (match PeakLogic baud)
     4. 5304 EFB PARITY = 1 (8N2) — factory Modbus default; or 0=8N1 / 2=8E1
     5. 5305 EFB CTRL PROFILE = 0 or 2 (ABB Drives) — required for 40001/40004
     6. 1001 EXT1 COMMANDS = 10 (COMM), 1103 REF1 SELECT = 8 (COMM)

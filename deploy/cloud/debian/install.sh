@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# MooreVIEW cloud — native Debian 11/12 / Ubuntu 22.04+ bootstrap (idempotent-ish).
-# Run as root: sudo MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview bash deploy/cloud/debian/install.sh
+# PeakLogic cloud — native Debian 11/12 / Ubuntu 22.04+ bootstrap (idempotent-ish).
+# Run as root: sudo PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash deploy/cloud/debian/install.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-ENV_FILE="${MOOREVIEW_ENV_FILE:-/etc/mooreview/env}"
-DATA_DIR="${MOOREVIEW_DATA_DIR:-/var/lib/mooreview}"
-SERVICE_USER="${MOOREVIEW_USER:-mooreview}"
-SOURCE_DIR="${MOOREVIEW_SOURCE:-$REPO_ROOT}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+ENV_FILE="${PEAKLOGIC_ENV_FILE:-/etc/peaklogic/env}"
+DATA_DIR="${PEAKLOGIC_DATA_DIR:-/var/lib/peaklogic}"
+SERVICE_USER="${PEAKLOGIC_USER:-peaklogic}"
+SOURCE_DIR="${PEAKLOGIC_SOURCE:-$REPO_ROOT}"
 
-log() { printf '[mooreview-install] %s\n' "$*"; }
-die() { printf '[mooreview-install] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-install] %s\n' "$*"; }
+die() { printf '[peaklogic-install] ERROR: %s\n' "$*" >&2; exit 1; }
 
 strip_crlf() {
   local f="$1"
@@ -29,7 +29,7 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
 fi
 
 if [[ ! -f "$SOURCE_DIR/package.json" ]] || [[ ! -f "$SOURCE_DIR/server.js" ]]; then
-  die "MooreVIEW source not found at $SOURCE_DIR (set MOOREVIEW_SOURCE if needed)"
+  die "PeakLogic source not found at $SOURCE_DIR (set PEAKLOGIC_SOURCE if needed)"
 fi
 
 DEBIAN_VERSION=""
@@ -64,7 +64,7 @@ esac
 if command -v free >/dev/null 2>&1; then
   MEM_MB="$(free -m | awk '/^Mem:/{print $2}')"
   if [[ "${MEM_MB:-0}" -lt 1800 ]]; then
-    log "Warning: ${MEM_MB} MB RAM detected — MooreVIEW cloud needs ≥2 GB (swap may help on SBC)"
+    log "Warning: ${MEM_MB} MB RAM detected — PeakLogic cloud needs ≥2 GB (swap may help on SBC)"
   fi
 fi
 
@@ -147,9 +147,9 @@ if ! id "$SERVICE_USER" >/dev/null 2>&1; then
 fi
 
 # --- Environment file ---
-install -d -m 0750 -o root -g "$SERVICE_USER" /etc/mooreview
+install -d -m 0750 -o root -g "$SERVICE_USER" /etc/peaklogic
 for deploy_file in "$SCRIPT_DIR"/.env.debian.example "$SCRIPT_DIR"/mosquitto-debian.conf \
-  "$SCRIPT_DIR"/mooreview.service "$SCRIPT_DIR"/install.sh; do
+  "$SCRIPT_DIR"/peaklogic.service "$SCRIPT_DIR"/install.sh; do
   strip_crlf "$deploy_file"
 done
 if [[ ! -f "$ENV_FILE" ]]; then
@@ -207,15 +207,15 @@ if [[ -n "$BUNDLED_PROJECTS_SRC" ]]; then
   fi
 fi
 
-ONLY_DEPS="${MOOREVIEW_ONLY_DEPS:-0}"
+ONLY_DEPS="${PEAKLOGIC_ONLY_DEPS:-0}"
 
 if [[ "$ONLY_DEPS" != "1" ]]; then
   # --- systemd unit (install before mosquitto so re-runs always register the service) ---
-  sed "s|@MOOREVIEW_INSTALL_DIR@|${INSTALL_DIR}|g" "$SCRIPT_DIR/mooreview.service" \
-    > /etc/systemd/system/mooreview.service
-  chmod 0644 /etc/systemd/system/mooreview.service
+  sed "s|@PEAKLOGIC_INSTALL_DIR@|${INSTALL_DIR}|g" "$SCRIPT_DIR/peaklogic.service" \
+    > /etc/systemd/system/peaklogic.service
+  chmod 0644 /etc/systemd/system/peaklogic.service
   systemctl daemon-reload
-  systemctl enable mooreview.service
+  systemctl enable peaklogic.service
 fi
 
 # --- Mosquitto (auth from env) ---
@@ -234,7 +234,7 @@ MOSQUITTO_USER="${MOSQUITTO_USER//$'\r'/}"
 MOSQUITTO_PASS="${MOSQUITTO_PASS//$'\r'/}"
 
 MOSQUITTO_MAIN="/etc/mosquitto/mosquitto.conf"
-MOSQUITTO_CONFD="/etc/mosquitto/conf.d/mooreview.conf"
+MOSQUITTO_CONFD="/etc/mosquitto/conf.d/peaklogic.conf"
 
 install -d -m 0755 -o mosquitto -g mosquitto /var/lib/mosquitto
 install -d -m 0755 /etc/mosquitto/conf.d
@@ -247,11 +247,11 @@ if [[ -f "$MOSQUITTO_MAIN" ]]; then
   fi
   # Auth before include_dir/listener starts implicit listener on 1883 (Ubuntu + Debian packages)
   if grep -qE '^[[:space:]]*allow_anonymous[[:space:]]+' "$MOSQUITTO_MAIN"; then
-    log "Disabling allow_anonymous in $MOSQUITTO_MAIN (use mooreview.conf)"
+    log "Disabling allow_anonymous in $MOSQUITTO_MAIN (use peaklogic.conf)"
     sed -i 's/^[[:space:]]*allow_anonymous[[:space:]]/# allow_anonymous /' "$MOSQUITTO_MAIN"
   fi
   if grep -qE '^[[:space:]]*password_file[[:space:]]+' "$MOSQUITTO_MAIN"; then
-    log "Disabling password_file in $MOSQUITTO_MAIN (use mooreview.conf)"
+    log "Disabling password_file in $MOSQUITTO_MAIN (use peaklogic.conf)"
     sed -i 's/^[[:space:]]*password_file[[:space:]]/# password_file /' "$MOSQUITTO_MAIN"
   fi
   if grep -qE '^[[:space:]]*per_listener_settings[[:space:]]+' "$MOSQUITTO_MAIN"; then
@@ -260,11 +260,11 @@ if [[ -f "$MOSQUITTO_MAIN" ]]; then
   fi
 fi
 
-# Stock conf.d snippets often define listener/auth and conflict with mooreview.conf
+# Stock conf.d snippets often define listener/auth and conflict with peaklogic.conf
 for f in /etc/mosquitto/conf.d/*; do
   [[ -f "$f" ]] || continue
   base="$(basename "$f")"
-  [[ "$base" == "mooreview.conf" ]] && continue
+  [[ "$base" == "peaklogic.conf" ]] && continue
   [[ "$base" == *.disabled ]] && continue
   log "Disabling stock Mosquitto config: $f"
   mv -f "$f" "${f}.disabled"
@@ -290,7 +290,7 @@ fi
 
 MOSQUITTO_TLS="${MOSQUITTO_TLS:-false}"
 MOSQUITTO_TLS="${MOSQUITTO_TLS//$'\r'/}"
-MOOREVIEW_DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
+PEAKLOGIC_DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
 if [[ "$MOSQUITTO_TLS" == "true" ]]; then
   log "Mosquitto: enabling TLS listener on port ${MOSQUITTO_TLS_PORT:-8883}"
   bash "$SCRIPT_DIR/setup-mosquitto-tls.sh"
@@ -315,18 +315,18 @@ if ! systemctl is-active --quiet mosquitto; then
 fi
 
 if [[ "$ONLY_DEPS" == "1" ]]; then
-  log "MOOREVIEW_ONLY_DEPS=1 — MongoDB + Mosquitto ready (no mooreview.service start)"
+  log "PEAKLOGIC_ONLY_DEPS=1 — MongoDB + Mosquitto ready (no peaklogic.service start)"
   exit 0
 fi
 
-if systemctl is-active --quiet mooreview.service 2>/dev/null; then
-  systemctl restart mooreview.service
+if systemctl is-active --quiet peaklogic.service 2>/dev/null; then
+  systemctl restart peaklogic.service
 else
-  systemctl start mooreview.service
+  systemctl start peaklogic.service
 fi
 
 log "Done."
-for svc in mongod mosquitto mooreview; do
+for svc in mongod mosquitto peaklogic; do
   if systemctl is-active --quiet "$svc" 2>/dev/null; then
     log "  $svc: active"
   else
@@ -335,11 +335,11 @@ for svc in mongod mosquitto mooreview; do
 done
 log "  Health: curl -s http://127.0.0.1:3090/health"
 log "  Env:    $ENV_FILE"
-log "  Logs:   journalctl -u mooreview -f"
+log "  Logs:   journalctl -u peaklogic -f"
 log "  Edit MOSQUITTO_PASS in $ENV_FILE and re-run this script to rotate MQTT credentials."
 if [[ "${MOSQUITTO_TLS:-false}" == "true" ]]; then
-  log "  MQTT TLS: mqtts://${MOOREVIEW_DOMAIN:-mooreview.io}:${MOSQUITTO_TLS_PORT:-8883} (user ${MOSQUITTO_USER:-?})"
+  log "  MQTT TLS: mqtts://${PEAKLOGIC_DOMAIN:-peaklogic.io}:${MOSQUITTO_TLS_PORT:-8883} (user ${MOSQUITTO_USER:-?})"
 else
-  log "  MQTT: mqtt://${MOOREVIEW_DOMAIN:-<host>}:1883 (set MOSQUITTO_TLS=true for mqtts://:8883)"
+  log "  MQTT: mqtt://${PEAKLOGIC_DOMAIN:-<host>}:1883 (set MOSQUITTO_TLS=true for mqtts://:8883)"
 fi
 log "  Docs: deploy/cloud/MQTT.md"

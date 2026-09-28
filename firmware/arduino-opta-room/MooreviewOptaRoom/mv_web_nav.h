@@ -8,7 +8,7 @@
   ".nav strong{color:#0f172a;font-weight:700;margin-right:.75rem}"
 
 #define MV_WEB_NAV_SETUP_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><strong>Setup</strong> <a href=\"/io-map\">I/O Map</a></nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><strong>Setup</strong> <a href=\"/io-map\">I/O Map</a></nav>"
 
 #define MV_WEB_NAV_IO_MAP_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><a href=\"/setup\">Setup</a> <strong>I/O Map</strong></nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><a href=\"/setup\">Setup</a> <strong>I/O Map</strong></nav>"

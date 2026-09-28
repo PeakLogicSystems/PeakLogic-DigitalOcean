@@ -1,8 +1,8 @@
-# mooreVIEW Cloud — Functional UI Validation Checklist
+# PeakLogic Cloud — Functional UI Validation Checklist
 
 **Document version:** 1.0  
-**Product:** mooreVIEW Cloud Studio (SaaS deployment)  
-**Scope:** End-to-end UI functional validation for cloud mode (`MOOREVIEW_DEPLOYMENT=cloud`, port 3100)
+**Product:** PeakLogic Cloud Studio (SaaS deployment)  
+**Scope:** End-to-end UI functional validation for cloud mode (`PEAKLOGIC_DEPLOYMENT=cloud`, port 3100)
 
 ---
 
@@ -64,7 +64,7 @@
 
 | ID | Test case | Steps | Expected result | Result | Notes |
 |----|-----------|-------|-----------------|--------|-------|
-| SHELL-01 | Studio page title | Open `/` as cloud user | Title shows "MooreVIEW Cloud Studio" (or cloud branding) | ☐ | |
+| SHELL-01 | Studio page title | Open `/` as cloud user | Title shows "PeakLogic Cloud Studio" (or cloud branding) | ☐ | |
 | SHELL-02 | Cloud secondary nav visible | On Studio `/` | Nav bar: Studio, Sites, Devices, Assets, People, CMMS; user label; Sign out | ☐ | |
 | SHELL-03 | Admin nav — platform admin | Log in as platform admin | **Admin** link visible in cloud nav | ☐ | |
 | SHELL-04 | Admin nav — operator hidden | Log in as operator (non-admin) | **Admin** link NOT visible | ☐ | |
@@ -312,7 +312,7 @@
 
 | ID | Test case | Steps | Expected result | Result | Notes |
 |----|-----------|-------|-----------------|--------|-------|
-| CMMS-01 | CMMS entitled — load | Tenant with CMMS enabled → `/cmms` | Embedded MooreviewCmms app loads | ☐ | |
+| CMMS-01 | CMMS entitled — load | Tenant with CMMS enabled → `/cmms` | Embedded PeaklogicCmms app loads | ☐ | |
 | CMMS-02 | CMMS disabled state | Tenant without entitlement | Disabled badge or external link message | ☐ | |
 | CMMS-03 | Overview tab stats | Open Overview | Open WOs, overdue PM, alarm WOs, PM WOs counts | ☐ | |
 | CMMS-04 | Work orders tab | Switch to Work orders | WO list and form visible | ☐ | |
@@ -354,7 +354,7 @@
 | SIM-03 | Start sim | Click Start on instance | Sim runs; status updates | ☐ | |
 | SIM-04 | Stop sim | Click Stop | Sim stops | ☐ | |
 | SIM-05 | Delete sim | Delete with confirm | Instance removed | ☐ | |
-| SIM-06 | Feature disabled | `MOOREVIEW_CLOUD_SIMS` off | Disabled message with setup instructions | ☐ | |
+| SIM-06 | Feature disabled | `PEAKLOGIC_CLOUD_SIMS` off | Disabled message with setup instructions | ☐ | |
 
 ---
 
@@ -388,7 +388,7 @@
 
 | ID | Test case | Steps | Expected result | Result | Notes |
 |----|-----------|-------|-----------------|--------|-------|
-| CS-01 | Brand header | Any Cloud Studio page | mooreVIEW brand visible | ☐ | |
+| CS-01 | Brand header | Any Cloud Studio page | PeakLogic brand visible | ☐ | |
 | CS-02 | Tenant slug label | Logged-in user on `/sites` | Correct tenant slug displayed | ☐ | |
 | CS-03 | Active nav highlight | Navigate between pages | Current page nav item highlighted | ☐ | |
 | CS-04 | Sign out — all pages | Sign out from People, Fleet, etc. | Consistent logout behavior | ☐ | |
@@ -461,4 +461,4 @@
 
 ---
 
-*Generated from mooreVIEW MVP Suite cloud UI inventory. Routes and features reflect `MOOREVIEW_DEPLOYMENT=cloud` SaaS mode (port 3100).*
+*Generated from PeakLogic MVP Suite cloud UI inventory. Routes and features reflect `PEAKLOGIC_DEPLOYMENT=cloud` SaaS mode (port 3100).*

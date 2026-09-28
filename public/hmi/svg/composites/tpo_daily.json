@@ -8,7 +8,7 @@
 
   "subgroup": "composites",
 
-  "preview": "/hmi/svg/library/schedules/mooreview/tpo_daily.svg",
+  "preview": "/hmi/svg/library/schedules/peaklogic/tpo_daily.svg",
 
   "tagRoles": {
 
@@ -46,7 +46,7 @@
 
       "kind": "staticImage",
 
-      "svg": "/hmi/svg/library/schedules/mooreview/tpo_daily.svg"
+      "svg": "/hmi/svg/library/schedules/peaklogic/tpo_daily.svg"
 
     }
 

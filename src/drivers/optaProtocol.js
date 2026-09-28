@@ -107,14 +107,14 @@ function checkOptaDeviceStatus(status) {
     );
   } else if (Number(status.protocolVersion) !== OPTA_PROTOCOL_VERSION) {
     errors.push(
-      `Protocol mismatch: Opta=${status.protocolVersion} MooreVIEW=${OPTA_PROTOCOL_VERSION} — re-flash Opta ST firmware`,
+      `Protocol mismatch: Opta=${status.protocolVersion} PeakLogic=${OPTA_PROTOCOL_VERSION} — re-flash Opta ST firmware`,
     );
   }
   if (!status.firmwareVersion) {
-    warnings.push('Opta firmwareVersion missing — re-flash MooreVIEW Opta ST firmware');
+    warnings.push('Opta firmwareVersion missing — re-flash PeakLogic Opta ST firmware');
   } else if (semverCompare(status.firmwareVersion, APP_VERSION) < 0) {
     warnings.push(
-      `Opta firmware ${status.firmwareVersion} is older than MooreVIEW ${APP_VERSION}`,
+      `Opta firmware ${status.firmwareVersion} is older than PeakLogic ${APP_VERSION}`,
     );
   }
   return {

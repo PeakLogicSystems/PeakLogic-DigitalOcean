@@ -1,7 +1,7 @@
 {
   "id": "icon_do3500_x2_ezmeter",
   "label": "PC test — Icon DO3500×2 + EZMeter",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Icon DO3500 slaves 1–2 + EZ Meter slave 3",
   "transport": "modbus_rtu",
   "sharedBus": false,

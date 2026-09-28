@@ -5,7 +5,7 @@ const { SimVendorAdapter } = require('./baseAdapter');
 const { normalizeStatus } = require('../simRecordSchema');
 
 const DEFAULT_BASE_URL = 'https://integrationapi.teal.global/api/v1';
-const DEFAULT_CALLBACK_URL = 'https://localhost/mooreview/simetry/callback';
+const DEFAULT_CALLBACK_URL = 'https://localhost/peaklogic/simetry/callback';
 
 const SIMETRY_DEFINITION = {
   id: 'simetry',

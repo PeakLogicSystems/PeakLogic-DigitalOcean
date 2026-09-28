@@ -1,4 +1,4 @@
-# MooreVIEW HMI — SVG graphics
+# PeakLogic HMI — SVG graphics
 
 Graphics are organized under `svg/library/` by function, with demo screens in `svg/demos/`.
 
@@ -6,7 +6,7 @@ Graphics are organized under `svg/library/` by function, with demo screens in `s
 
 | Group | Path | Contents |
 |-------|------|----------|
-| **Demos** | `demos/` | Built-in MooreVIEW demo screens |
+| **Demos** | `demos/` | Built-in PeakLogic demo screens |
 | **Controls — Pilot lights** | `library/controls/pilot-lights/` | MV `light_symbol*`, `pl_*` |
 | **Controls — Push buttons** | `library/controls/push-buttons/` | MV `roundsymbol_*`, `pb_*` |
 | **Controls — Switches** | `library/controls/selector-switches/` | MV selector switches |
@@ -23,9 +23,9 @@ Full index: `svg/graphics-catalog.json` · Legacy path redirects: `svg/path-alia
 
 ## PID faceplate
 
-MooreVIEW includes a ready-made PID loop faceplate:
+PeakLogic includes a ready-made PID loop faceplate:
 
-**`/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg`**
+**`/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg`**
 
 Bind element ids: `pv_dial`, `pv_value`, `sp_value`, `out_bar_fill`, `out_value`, `mode_auto`, `mode_manual`, `alarm_hi`, `alarm_lo`.
 

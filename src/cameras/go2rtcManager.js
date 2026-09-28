@@ -34,7 +34,7 @@ function settingsHost() {
 
 function buildConfigYaml(port) {
   return [
-    '# MooreVIEW go2rtc — auto-generated; streams added via API',
+    '# PeakLogic go2rtc — auto-generated; streams added via API',
     'api:',
     `  listen: "127.0.0.1:${port}"`,
     '  origin: "*"',
@@ -257,7 +257,7 @@ function createProxyMiddleware(getSettings) {
 
 /**
  * Proxy WebSocket upgrades for /api/go2rtc → go2rtc (required by <video-stream>).
- * Attach to the MooreVIEW HTTP server after listen().
+ * Attach to the PeakLogic HTTP server after listen().
  */
 function attachUpgradeProxy(server, getSettings, { pathPrefix = '/api/go2rtc' } = {}) {
   if (!server || typeof server.on !== 'function') return;

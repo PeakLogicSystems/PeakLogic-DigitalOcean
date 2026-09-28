@@ -21,7 +21,7 @@ window.MvDrawHelp = (function () {
           <li>Optional: <strong>Extents</strong> or sheet <strong>A–D</strong> for export crop.</li>
           <li>Place and connect symbols as above.</li>
         </ol>
-        <p>Projects use the <code>mooreview-mvdraw</code> JSON format. Portable MooreView <code>.est.zip</code> archives store layouts under <code>mv-draw/doc.json</code>.</p>
+        <p>Projects use the <code>peaklogic-mvdraw</code> JSON format. Portable PeakLogic <code>.est.zip</code> archives store layouts under <code>mv-draw/doc.json</code>.</p>
         <h4>Top bar</h4>
         <p>Left to right: <strong>File</strong> and <strong>Composer</strong> mode, project name, drawing tools (Select, Connect, Snap, export…), then <strong>Help</strong> and <strong>Close</strong> on the right.</p>
       `,
@@ -85,8 +85,8 @@ window.MvDrawHelp = (function () {
           <tr><td><strong>Open…</strong></td><td>Saved server projects or a local <code>.mvdraw.json</code> file.</td></tr>
           <tr><td><strong>Save</strong></td><td>Writes the active session project.</td></tr>
           <tr><td><strong>Save as…</strong></td><td>Named copy under <code>data/mv-draw/projects</code>.</td></tr>
-          <tr><td><strong>Save to MooreView project…</strong></td><td>Aligns name with the open MooreView project, embeds the plan in the active <code>.est.zip</code>, and links the HMI composer to Plan mode.</td></tr>
-          <tr><td><strong>Load from MooreView project</strong></td><td>Replace the active layout with the <code>mvDraw</code> section from the open <code>.est</code> snapshot.</td></tr>
+          <tr><td><strong>Save to PeakLogic project…</strong></td><td>Aligns name with the open PeakLogic project, embeds the plan in the active <code>.est.zip</code>, and links the HMI composer to Plan mode.</td></tr>
+          <tr><td><strong>Load from PeakLogic project</strong></td><td>Replace the active layout with the <code>mvDraw</code> section from the open <code>.est</code> snapshot.</td></tr>
           <tr><td><strong>PDF</strong></td><td>Vector layout download (respects extents). Use the <strong>Landscape</strong> / <strong>Portrait</strong> selector beside the export buttons.</td></tr>
           <tr><td><strong>DXF</strong></td><td>CAD export (basic R12-style polylines). Plot boundary respects the same orientation.</td></tr>
         </table>

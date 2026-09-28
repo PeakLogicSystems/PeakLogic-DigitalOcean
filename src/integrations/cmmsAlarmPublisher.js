@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * MooreVIEW CMMS Integration v1 — MQTT publisher (authoritative contract).
+ * PeakLogic CMMS Integration v1 — MQTT publisher (authoritative contract).
  *
  * Topics (siteId = settings.cmmsIntegration.siteId):
  *   {topicPrefix}/{siteId}/alarms         — alarm transition only
@@ -9,8 +9,8 @@
  *
  * Alarm payload (alarms topic):
  * {
- *   schema: "mooreview-cmms-integration-v1",
- *   publishedAt, siteId, tenantId, source: "mooreview", projectName?,
+ *   schema: "peaklogic-cmms-integration-v1",
+ *   publishedAt, siteId, tenantId, source: "peaklogic", projectName?,
  *   alarm: { tagId, level, previousLevel, value, since }
  * }
  *
@@ -54,7 +54,7 @@ function buildAlarmPayload(alarm, opts = {}) {
     publishedAt: new Date().toISOString(),
     siteId: cfg.siteId,
     tenantId: cfg.tenantId,
-    source: 'mooreview',
+    source: 'peaklogic',
     projectName: opts.projectName ?? projectNameFromSettings(),
     alarm: {
       tagId: alarm.tagId,
@@ -68,7 +68,7 @@ function buildAlarmPayload(alarm, opts = {}) {
 
 /**
  * @param {{ tagId: string, level: string, previousLevel?: string|null, value?: *, since: number }} alarm
- * @param {object[]} recipients — MooreVIEW publicUser rows
+ * @param {object[]} recipients — PeakLogic publicUser rows
  * @param {object} opts
  */
 function buildNotifyPayload(alarm, recipients, opts = {}) {

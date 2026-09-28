@@ -2,7 +2,7 @@
 
 const { fetchSnapshot, getSnapshotUri } = require('./onvifClient');
 
-const BOUNDARY = 'mooreview-mjpeg';
+const BOUNDARY = 'peaklogic-mjpeg';
 
 async function resolveSnapshotUrl(camera, creds) {
   if (camera.snapshotUrl) return camera.snapshotUrl;

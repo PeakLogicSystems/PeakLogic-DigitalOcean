@@ -36,6 +36,6 @@ idf.py build
 1. WAN up → Parc MQTT connects → `online` retained true.
 2. Boot log shows `Sequent SM-I-010 online` (or soft I/O if HAT unplugged).
 3. `GET /api/status` → `firmwareVersion` **0.3.0+**, `wanType` `wifi`.
-4. From Cloud Studio / mooreVIEW: Download & Start → `put_program OK`; reboot → NV program reloads.
+4. From Cloud Studio / PeakLogic: Download & Start → `put_program OK`; reboot → NV program reloads.
 5. Force `R1` from Tags → relay clicks; `sync_time` / site key on `/setup`.
 6. Guide: [docs/LILYGO_PARC_CLOUD.md](../docs/LILYGO_PARC_CLOUD.md).

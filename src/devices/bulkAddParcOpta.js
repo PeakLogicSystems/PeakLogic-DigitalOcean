@@ -51,7 +51,7 @@ function listRegistryDeviceIds(body, registry) {
   let ids = registry.listDevices().map((d) => d.deviceId);
   if (body?.includeRegistryNoise !== true) {
     ids = ids.filter((id) => !isParcRegistryNoiseId(id));
-    if (process.env.MOOREVIEW_DEPLOYMENT === 'cloud') {
+    if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
       const { isFieldParcDeviceId } = require('../parc/optaSerial');
       ids = ids.filter((id) => isFieldParcDeviceId(id));
     }

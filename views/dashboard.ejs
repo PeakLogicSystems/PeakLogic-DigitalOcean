@@ -8,7 +8,7 @@
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/icon-512.png">
   <script src="/js/pwa.js" defer></script>
-  <title>MooreView</title>
+  <title>PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 </head>
 <body class="dashboard-body<%= isCloud ? ' dashboard-cloud' : '' %>">
@@ -94,9 +94,9 @@
     </details>
     <div class="topbar-about-meta">
       <span class="topbar-user-meta view-hidden" id="topbar-user-meta" title="Signed-in user"></span>
-      <button type="button" class="topbar-action-btn view-hidden" id="btn-topbar-logout" title="Sign out of MooreView">Sign out</button>
-      <button type="button" class="topbar-text-btn" id="btn-topbar-about" title="About MooreView">About</button>
-      <span class="topbar-version muted cell-mono" title="MooreView release">v<%= appVersion %></span>
+      <button type="button" class="topbar-action-btn view-hidden" id="btn-topbar-logout" title="Sign out of PeakLogic">Sign out</button>
+      <button type="button" class="topbar-text-btn" id="btn-topbar-about" title="About PeakLogic">About</button>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
     </div>
   </header>
   <% if (isCloud) { %>
@@ -254,7 +254,7 @@
         <button type="button" id="btn-prog-pid" class="btn">PID loop…</button>
         <button type="button" id="btn-prog-validate" class="btn">Validate</button>
         <button type="button" id="btn-prog-debug-trace" class="btn" title="Show IF/THEN conditions and output tags using current tag values (no runtime start). Click again to clear.">Debug trace</button>
-        <button type="button" id="btn-prog-apply" class="btn primary" title="Validate ST and load into MooreView runtime (does not save to disk). Deploy to Opta on Start when Remote is on.">Load for runtime</button>
+        <button type="button" id="btn-prog-apply" class="btn primary" title="Validate ST and load into PeakLogic runtime (does not save to disk). Deploy to Opta on Start when Remote is on.">Load for runtime</button>
         <span id="prog-deploy-estimate" class="prog-deploy-estimate muted cell-mono" hidden title="Estimated Opta HTTP deploy size when Remote is on"></span>
         <span id="program-errors" class="inline-msg"></span>
       </div>
@@ -420,15 +420,15 @@
           </div>
         </details>
         <details id="cmms-integration" class="user-editor" open>
-          <summary>CMMS / MQTT integration (MooreView v1)</summary>
-          <p class="panel-hint">Publishes alarm events to MQTT for TPS CMMS or other subscribers. Topics: <code>mooreview/v1/{siteId}/alarms</code> and <code>{siteId}/alarm-notify</code>. See <code>docs/CMMS_INTEGRATION.md</code>.</p>
+          <summary>CMMS / MQTT integration (PeakLogic v1)</summary>
+          <p class="panel-hint">Publishes alarm events to MQTT for TPS CMMS or other subscribers. Topics: <code>peaklogic/v1/{siteId}/alarms</code> and <code>{siteId}/alarm-notify</code>. See <code>docs/CMMS_INTEGRATION.md</code>.</p>
           <div class="form-grid compact">
             <label class="historian-ctl"><input type="checkbox" id="cmms-enabled"> Enable CMMS MQTT publish</label>
             <label>Broker URL <input id="cmms-broker-url" placeholder="mqtt://127.0.0.1:1883"></label>
             <label>Site ID <input id="cmms-site-id" placeholder="local"></label>
             <label>Tenant ID <input id="cmms-tenant-id" placeholder="local"></label>
-            <label>Topic prefix <input id="cmms-topic-prefix" placeholder="mooreview/v1"></label>
-            <label>MQTT client ID <input id="cmms-client-id" placeholder="mooreview-cmms"></label>
+            <label>Topic prefix <input id="cmms-topic-prefix" placeholder="peaklogic/v1"></label>
+            <label>MQTT client ID <input id="cmms-client-id" placeholder="peaklogic-cmms"></label>
             <label class="historian-ctl"><input type="checkbox" id="cmms-publish-alarms" checked> Publish <code>{siteId}/alarms</code> topic</label>
             <label class="historian-ctl"><input type="checkbox" id="cmms-publish-notify" checked> Publish <code>{siteId}/alarm-notify</code> (with recipients)</label>
           </div>
@@ -916,7 +916,7 @@
   <div class="app-popup view-hidden" data-popup="about" role="dialog" aria-labelledby="popup-about-title">
     <div class="popup-chrome popup-chrome-about">
       <header class="popup-header popup-header-split">
-        <h2 id="popup-about-title">About MooreView</h2>
+        <h2 id="popup-about-title">About PeakLogic</h2>
         <div class="popup-header-actions">
           <button type="button" class="btn popup-close" data-popup-close="about" title="Close">Close</button>
         </div>
@@ -929,7 +929,7 @@
           <dt>Company</dt><dd><%= companyName %></dd>
           <dt>Edition</dt><dd class="cell-mono"><%= product %></dd>
           <dt>Deployment</dt><dd class="cell-mono"><%= deployment %></dd>
-          <dt>Project format</dt><dd class="cell-mono">mooreview-est v<%= estVersion %></dd>
+          <dt>Project format</dt><dd class="cell-mono">peaklogic-est v<%= estVersion %></dd>
           <dt>HMI Composer</dt><dd class="cell-mono">v1.2</dd>
         </dl>
         <p class="about-powered muted">Design system and visual identity by <strong><%= companyName %></strong>.</p>
@@ -1106,7 +1106,7 @@
           <input id="hist-log-uri" value="" placeholder="Leave blank on cloud — uses platform MONGODB_URI" autocomplete="off">
         </label>
         <label>Database
-          <input id="hist-log-db" value="mooreview" placeholder="mooreview">
+          <input id="hist-log-db" value="peaklogic" placeholder="peaklogic">
         </label>
         <label>SCADA collection
           <input id="hist-log-collection" value="tag_logs" placeholder="tag_logs">
@@ -1632,7 +1632,7 @@
             <p class="panel-hint">Timezone defaults to Eastern. Timestamps in logs and device clocks use this zone; data is still stored in UTC.</p>
             <p class="panel-hint">The selected screen loads first on the main HMI page. Use the navigation bar to switch screens after load. Configure screens, layout, and bindings via <strong>Setup&#x2026;</strong> on the HMI panel.</p>
             <h3 class="setup-subhead">On startup</h3>
-            <p class="panel-hint">Applied when MooreView boots (before drivers connect). Alarm notification users are under <strong>Alarms → Notification users…</strong>.</p>
+            <p class="panel-hint">Applied when PeakLogic boots (before drivers connect). Alarm notification users are under <strong>Alarms → Notification users…</strong>.</p>
             <div class="form-grid compact">
               <label>Load on boot
                 <select id="proj-startup-mode">
@@ -1663,14 +1663,14 @@
                 <input id="proj-mqtt-parc-broker" placeholder="mqtt://192.168.1.233:1883" title="Mosquitto or LAN MQTT broker; use mqtts://host:8883 for TLS">
               </label>
               <label>MQTT username
-                <input id="proj-mqtt-parc-user" placeholder="mooreview" autocomplete="off">
+                <input id="proj-mqtt-parc-user" placeholder="peaklogic" autocomplete="off">
               </label>
               <label>MQTT password
                 <input id="proj-mqtt-parc-pass" type="password" placeholder="broker password" autocomplete="new-password">
               </label>
               <label class="span-all">Global site key (hex, e.g. 0x0001)
                 <input id="proj-mqtt-parc-global-site-key" placeholder="0x0001" spellcheck="false">
-                <span class="muted">Must match Opta /setup Global site key; topics <code>mooreview/v1/g/{key}/{tag}</code>.</span>
+                <span class="muted">Must match Opta /setup Global site key; topics <code>peaklogic/v1/g/{key}/{tag}</code>.</span>
               </label>
               <label class="historian-ctl span-all">
                 <input type="checkbox" id="proj-remote-execution"> Remote ST execution (run logic on Opta via MQTT)
@@ -1684,7 +1684,7 @@
               </label>
             </div>
             <h3 class="setup-subhead">Cloud remote (appliance uplink)</h3>
-            <p class="panel-hint">When this MooreView runs as a site appliance, relay Parc telemetry to a cloud VM tenant topic <code>mooreview/v1/{tenantId}/{deviceId}/telemetry</code>. Set the same <code>tenantId</code> on the cloud VM and use the appliance <code>gatewayId</code> from pairing.</p>
+            <p class="panel-hint">When this PeakLogic runs as a site appliance, relay Parc telemetry to a cloud VM tenant topic <code>peaklogic/v1/{tenantId}/{deviceId}/telemetry</code>. Set the same <code>tenantId</code> on the cloud VM and use the appliance <code>gatewayId</code> from pairing.</p>
             <div class="form-grid compact">
               <label class="historian-ctl span-all">
                 <input type="checkbox" id="proj-cloud-remote-enabled"> Enable cloud remote uplink
@@ -1696,10 +1696,10 @@
                 <input id="proj-cloud-gateway-id" placeholder="uuid-from-pairing" spellcheck="false">
               </label>
               <label class="span-all">Cloud broker URL
-                <input id="proj-cloud-broker-url" placeholder="mqtts://mooreview.io:8883">
+                <input id="proj-cloud-broker-url" placeholder="mqtts://peaklogic.io:8883">
               </label>
               <label>Cloud MQTT username
-                <input id="proj-cloud-mqtt-user" placeholder="mooreview" autocomplete="off">
+                <input id="proj-cloud-mqtt-user" placeholder="peaklogic" autocomplete="off">
               </label>
               <label>Cloud MQTT password
                 <input id="proj-cloud-mqtt-pass" type="password" placeholder="broker password" autocomplete="new-password">
@@ -1709,7 +1709,7 @@
           </section>
 
           <section class="setup-panel view-hidden" data-setup-tab="features">
-            <p class="panel-hint">Single-tenant user access. Check which MooreView areas each account may use. Admins always have full access. Sign-in, sign-out, and alarm acknowledgements are recorded in MongoDB system log when logging is configured.</p>
+            <p class="panel-hint">Single-tenant user access. Check which PeakLogic areas each account may use. Admins always have full access. Sign-in, sign-out, and alarm acknowledgements are recorded in MongoDB system log when logging is configured.</p>
             <div id="setup-features-admin-only" class="view-hidden">
               <div class="toolbar wrap">
                 <button type="button" class="btn primary" id="btn-features-matrix-save">Save access matrix</button>
@@ -1765,7 +1765,7 @@
           </section>
 
           <section class="setup-panel view-hidden" data-setup-tab="projects">
-            <p class="panel-hint">Start a blank project, save snapshots to the on-disk library, or <strong>import/export .est.zip</strong> and legacy <strong>.est.json</strong> files to move projects between MooreView versions and PCs.</p>
+            <p class="panel-hint">Start a blank project, save snapshots to the on-disk library, or <strong>import/export .est.zip</strong> and legacy <strong>.est.json</strong> files to move projects between PeakLogic versions and PCs.</p>
             <div class="toolbar wrap">
               <button type="button" id="btn-proj-new" class="btn primary">New project</button>
             </div>
@@ -1806,11 +1806,11 @@
   <div class="app-popup view-hidden hmi-setup-shell-stub" data-popup="hmi-setup" role="dialog" aria-labelledby="popup-hmi-setup-title" aria-hidden="true"></div>
   <div class="popup-chrome popup-chrome-hmi-setup view-hidden" id="hmi-setup-chrome" role="dialog" aria-labelledby="popup-hmi-setup-title">
       <div class="hmi-setup-drag-bar popup-header-draggable" data-hmi-drag-handle title="Drag to move"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelDragStart(event)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelDragStart(event)">⠿ Move</div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)">⠿ Move</div>
       <header class="popup-header popup-header-split popup-header-draggable"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelDragStart(event)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelDragStart(event)">
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelDragStart(event)">
         <h2 id="popup-hmi-setup-title">HMI setup <span class="hmi-composer-version muted">· Composer v1.2</span> <span class="popup-drag-hint muted">— drag bar or header · edges to resize</span></h2>
         <div class="popup-header-actions">
           <button type="button" class="btn btn-sm btn-help-context" data-help-section="hmi-composer" title="Help: HMI — composer &amp; grid">Help</button>
@@ -2287,33 +2287,33 @@
         </div>
       </div>
       <div class="popup-resize-handle popup-resize-w" data-resize="w" aria-hidden="true"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-s" data-resize="s" aria-hidden="true"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-e" data-resize="e" aria-hidden="true"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-sw" data-resize="sw" aria-hidden="true"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
       <div class="popup-resize-handle popup-resize-se" data-resize="se" aria-hidden="true"
-        onmousedown="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"
-        ontouchstart="window.MooreviewHmi&amp;&amp;window.MooreviewHmi.onPanelResizeStart(event,this)"></div>
+        onmousedown="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"
+        ontouchstart="window.PeaklogicHmi&amp;&amp;window.PeaklogicHmi.onPanelResizeStart(event,this)"></div>
   </div>
 
   <div class="app-popup view-hidden" data-popup="training" role="dialog" aria-labelledby="popup-training-title">
     <div class="popup-chrome popup-chrome-help">
       <header class="popup-header popup-header-split">
-        <h2 id="popup-training-title">MooreView Training</h2>
+        <h2 id="popup-training-title">PeakLogic Training</h2>
         <div class="popup-header-actions"></div>
       </header>
       <div class="training-panel-wrap" id="training-panel">
         <div class="setup-tabs training-tabs" data-training-tabs aria-label="Training sections"></div>
         <div class="help-panel training-panel">
           <div class="training-tab-pane" data-training-tab="overview"></div>
-          <div class="training-tab-pane view-hidden" data-training-tab="mooreview"></div>
+          <div class="training-tab-pane view-hidden" data-training-tab="peaklogic"></div>
           <div class="training-tab-pane view-hidden" data-training-tab="cbm"></div>
           <div class="training-tab-pane view-hidden" data-training-tab="mapping"></div>
           <div class="training-tab-pane view-hidden" data-training-tab="parc"></div>
@@ -2332,7 +2332,7 @@
   <div class="app-popup view-hidden" data-popup="help" role="dialog" aria-labelledby="popup-help-title">
     <div class="popup-chrome popup-chrome-help">
       <header class="popup-header popup-header-split">
-        <h2 id="popup-help-title">MooreView Help</h2>
+        <h2 id="popup-help-title">PeakLogic Help</h2>
         <div class="popup-header-actions">
           <button type="button" class="btn popup-close" data-popup-close="help" title="Close">Close</button>
         </div>
@@ -2488,8 +2488,8 @@
   <script src="/js/api.js?v=<%= assetV %>"></script>
   <script src="/js/projectListSort.js?v=<%= assetV %>"></script>
   <script>
-    window.MOOREVIEW_DEPLOYMENT = '<%= deployment %>';
-    window.MOOREVIEW_BUILD = {
+    window.PEAKLOGIC_DEPLOYMENT = '<%= deployment %>';
+    window.PEAKLOGIC_BUILD = {
       version: '<%= appVersion %>',
       company: '<%= companyName %>',
       product: '<%= product %>',
@@ -2498,7 +2498,7 @@
       hmiComposerVersion: '1.2',
     };
   </script>
-  <script src="/js/mooreviewCore.js"></script>
+  <script src="/js/peaklogicCore.js"></script>
   <script src="/js/graph.js"></script>
   <script src="/js/hmiAssetPaths.js?v=<%= assetV %>"></script>
   <script src="/js/tagDisplay.js?v=<%= assetV %>"></script>

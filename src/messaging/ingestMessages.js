@@ -1,6 +1,6 @@
 'use strict';
 
-const SCHEMA = 'mooreview-parc-ingest-v1';
+const SCHEMA = 'peaklogic-parc-ingest-v1';
 
 /**
  * Envelope for parc-ingest Service Bus queue (edge telemetry uplink).

@@ -14,7 +14,7 @@ describe('partner access v1', () => {
   let store;
 
   beforeEach(() => {
-    process.env.MOOREVIEW_DATA = DATA_DIR;
+    process.env.PEAKLOGIC_DATA = DATA_DIR;
     store = new TenantStore();
     for (const f of fs.readdirSync(DATA_DIR)) {
       if (f.endsWith('.json')) fs.unlinkSync(path.join(DATA_DIR, f));

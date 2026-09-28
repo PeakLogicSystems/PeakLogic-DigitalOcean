@@ -1,7 +1,7 @@
 'use strict';
 
 /** Seed demo tenants/users and bundled Studio projects (run once after install). */
-process.env.MOOREVIEW_DEPLOYMENT = process.env.MOOREVIEW_DEPLOYMENT || 'cloud';
+process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'cloud';
 
 const { tenantStore } = require('../src/tenants/tenantStore');
 
@@ -14,7 +14,7 @@ try {
 
 const tenants = tenantStore.listTenants();
 const users = tenantStore.listUsers();
-console.log('[seed] MooreVIEW Cloud SaaS ready');
+console.log('[seed] PeakLogic Cloud SaaS ready');
 console.log(`[seed] tenants: ${tenants.length}, users: ${users.length}`);
 for (const u of users) {
   console.log(`[seed]   ${u.role} ${u.email}${u.tenantSlug ? ` (org ${u.tenantSlug})` : ''}`);

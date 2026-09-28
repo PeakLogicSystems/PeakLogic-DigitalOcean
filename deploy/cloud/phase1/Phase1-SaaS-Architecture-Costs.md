@@ -1,4 +1,4 @@
-# mooreVIEW Phase 1 — SaaS Architecture, Limits & Cost Model
+# PeakLogic Phase 1 — SaaS Architecture, Limits & Cost Model
 
 **500 devices · 32 camera/appliance uplinks · NYC1 Phase 1 topology · 2026**
 
@@ -10,7 +10,7 @@
 
 ## Executive summary
 
-Phase 1 production topology for mooreVIEW Cloud SaaS: **three DigitalOcean droplets** (SaaS, dedicated MQTT, archive) plus **Managed MongoDB**. This document adds **device/tag capacity limits** and a **2026 cost model** for a fleet of **500 field-service devices** and **32 camera/appliance cellular uplinks**.
+Phase 1 production topology for PeakLogic Cloud SaaS: **three DigitalOcean droplets** (SaaS, dedicated MQTT, archive) plus **Managed MongoDB**. This document adds **device/tag capacity limits** and a **2026 cost model** for a fleet of **500 field-service devices** and **32 camera/appliance cellular uplinks**.
 
 | Category | Monthly | Annual |
 |----------|---------|--------|
@@ -63,7 +63,7 @@ Tenant operator ──HTTPS──► nginx :443 ──► SaaS server.js :3100
                     └─────┬─────┘
                           │ MQTT client
                           ▼
-              mqtt.mooreview.io :8883 (Mosquitto)
+              mqtt.peaklogic.io :8883 (Mosquitto)
                           ▲
           ┌───────────────┼───────────────┐
           │               │               │
@@ -80,7 +80,7 @@ Tenant operator ──HTTPS──► nginx :443 ──► SaaS server.js :3100
 | **Fleet** | `/sites` pairing, site agent heartbeat, `/fleet` map, `/sites/devices` inventory |
 | **Integrations** | CMMS entitlement, Cloud Sims, Cellular SIM vendor registry |
 | **Runtime core** | `TagStore` → `ScanEngine` → `DriverManager`; `eventBus` → `alarmNotifier` |
-| **Data** | `cloud_tenants.json` / Mongo; `cloud_sites.json`; `/var/lib/mooreview` workspace; Mongo historian |
+| **Data** | `cloud_tenants.json` / Mongo; `cloud_sites.json`; `/var/lib/peaklogic` workspace; Mongo historian |
 
 ---
 
@@ -99,7 +99,7 @@ Directional limits for a **single Phase 1 stack** before the next DO tier or VM 
 | **MQTT connections (broker)** | **~2,000** (2 GB droplet) | 532 | 500 field + 32 uplink + overhead |
 | **Historian pens (hot Mongo)** | **~50,000 tags** (Mongo tier) | **~3,000** | 500 devices × ~6 pens |
 
-### Tag limits (`MOOREVIEW_MAX_TAGS`)
+### Tag limits (`PEAKLOGIC_MAX_TAGS`)
 
 | Profile | Calculation | Max tags |
 |---------|-------------|----------|
@@ -108,7 +108,7 @@ Directional limits for a **single Phase 1 stack** before the next DO tier or VM 
 | **500-device fleet** (minimal) | 500 × 3 pens + 2, +5% headroom | **1,664** |
 | **Appliance (edge PC)** | Default | **4,096** |
 
-Override at deploy time: `MOOREVIEW_MAX_TAGS=3328` in `/etc/mooreview/saas.env`.
+Override at deploy time: `PEAKLOGIC_MAX_TAGS=3328` in `/etc/peaklogic/saas.env`.
 
 ### Device counts @ 500-device reference fleet
 
@@ -134,14 +134,14 @@ Hot tier (~6.5 GB) fits within the **15 GB** base Managed Mongo plan. Archive vo
 |--------|-----------|-----------|
 | Devices per tenant | > **1,000** | Tenant shard or second SaaS node |
 | Total fleet devices | > **~2,000** on one MQTT droplet | Dedicated ingest VM or broker cluster |
-| Tag count | > **70,912** (or env cap) | Raise `MOOREVIEW_MAX_TAGS`; scale Mongo compute — see **`Phase1-Tag-Scaling-1M-5M-25M.md`** |
+| Tag count | > **70,912** (or env cap) | Raise `PEAKLOGIC_MAX_TAGS`; scale Mongo compute — see **`Phase1-Tag-Scaling-1M-5M-25M.md`** |
 | Hot Mongo | > **15 GB** steady | Add scalable storage ($0.215/GiB/mo) |
 | Archive | > **500 GB** | Expand block volume; consider object storage |
 | SaaS CPU/RAM | Sustained >70% on 4 GB | Step to 8 GB droplet ($48/mo) |
 
 Long-term target (`ARCHITECTURE.md`): **10M devices, 10K users** with sharded ingestion and VM split (ingestion · alarms · GUI · AI).
 
-**ALF large-tag fleets:** 60 campuses × 4,000 on-prem tags — use **rollup site-agent sync** (~600 cloud tags/campus). Full mirror breaks default **70,912** tag cap at ~18 campuses. See `MooreVIEW-Infrastructure-Projections.md` Part 10.
+**ALF large-tag fleets:** 60 campuses × 4,000 on-prem tags — use **rollup site-agent sync** (~600 cloud tags/campus). Full mirror breaks default **70,912** tag cap at ~18 campuses. See `PeakLogic-Infrastructure-Projections.md` Part 10.
 
 ---
 
@@ -251,9 +251,9 @@ Contribution                       $3,429/mo                         68.6%
 | `archive-prod-nyc` | Archive API :8090 | 2 GB / 1 vCPU + block volume |
 | Managed MongoDB | Hot historian (7-day rolling) | 10–20 GB tier |
 
-**DNS:** `mooreview.io` → SaaS · `mqtt.mooreview.io` → MQTT · `archive.mooreview.io` → Archive (optional)
+**DNS:** `peaklogic.io` → SaaS · `mqtt.peaklogic.io` → MQTT · `archive.peaklogic.io` → Archive (optional)
 
-**Env:** `/etc/mooreview/saas.env` — `MONGODB_URI`, `JWT_SECRET`, `MOOREVIEW_MQTT_BROKER=mqtts://mqtt.mooreview.io:8883`, `ARCHIVE_SERVER_URL`, `MOOREVIEW_MAX_TAGS`
+**Env:** `/etc/peaklogic/saas.env` — `MONGODB_URI`, `JWT_SECRET`, `PEAKLOGIC_MQTT_BROKER=mqtts://mqtt.peaklogic.io:8883`, `ARCHIVE_SERVER_URL`, `PEAKLOGIC_MAX_TAGS`
 
 ---
 
@@ -285,11 +285,11 @@ Contribution                       $3,429/mo                         68.6%
 | `DO-Phase1-Storage-Cost-Review.md` | Storage-only cost deep dive |
 | `ARCHITECTURE.md` | Appliance vs cloud roadmap |
 | `CLOUD_SAAS.md` | SaaS modes, routes, seed accounts |
-| `MooreVIEW-Infrastructure-Projections.md` | 5-year portfolio scaling |
+| `PeakLogic-Infrastructure-Projections.md` | 5-year portfolio scaling |
 | `Phase1-Tag-Scaling-1M-5M-25M.md` | **1M / 5M / 25M tags** · DO elastic · when to switch |
 
 ---
 
-*Phase 1 SaaS Architecture & Cost Model v1.0 — mooreVIEW platform planning.*
+*Phase 1 SaaS Architecture & Cost Model v1.0 — PeakLogic platform planning.*
 
-*mooreVIEW is a company powered by [The Purple Standard](https://purple-standard.com). © Purple Standard Holdings.*
+*PeakLogic is a company powered by [The Purple Standard](https://purple-standard.com). © Purple Standard Holdings.*

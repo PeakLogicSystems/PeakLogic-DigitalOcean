@@ -1,6 +1,6 @@
-# MooreVIEW UNO Q — edge motor fault detection
+# PeakLogic UNO Q — edge motor fault detection
 
-Arduino **UNO Q** dual-brain app: the STM32U585 samples motor current; the Qualcomm Dragonwing QRB2210 runs **true FFT MCSA** and classifies faults on-device, then uplinks MooreVIEW Parc MQTT (`mcsa[]` + `edgeAi[]`). Optional **Wi-Fi MQTT push to Opta** global tags.
+Arduino **UNO Q** dual-brain app: the STM32U585 samples motor current; the Qualcomm Dragonwing QRB2210 runs **true FFT MCSA** and classifies faults on-device, then uplinks PeakLogic Parc MQTT (`mcsa[]` + `edgeAi[]`). Optional **Wi-Fi MQTT push to Opta** global tags.
 
 This is **not** Opta MCSA-lite (synthesized spectra). Windows are real ADC captures (2048 Hz / 2048-pt FFT with six CTs).
 
@@ -10,8 +10,8 @@ CTs (AC, mid-rail bias) → A0–A5  (6 native ADC — no mux)
  STM32U585 MCU  sample + start detect + Bridge RPC
         │  get_window / get_start_event / get_rms
  QRB2210 Linux  numpy FFT cook → classify → Wi-Fi MQTT
-        ├─ mooreview/v1/{deviceId}/telemetry     → MooreVIEW
-        └─ mooreview/v1/g/{siteKey}/UQ_*         → Opta (optional)
+        ├─ peaklogic/v1/{deviceId}/telemetry     → PeakLogic
+        └─ peaklogic/v1/g/{siteKey}/UQ_*         → Opta (optional)
 ```
 
 ## Analog inputs — 6 CTs, no mux
@@ -47,20 +47,20 @@ Both boards are MQTT **clients** on the same broker (Opta Ethernet or Wi-Fi, UNO
 1. Set `broker` in `python/config.json` to the same Mosquitto Opta uses.
 2. Set `optaSiteKey` to the Opta global-tag key (setup GUI, default `0001`).
 3. Opta ST / tag table: mark memory tags **`UQ_AI1`…`UQ_AI6`**, **`UQ_MOTOR1_FAULT`**, **`UQ_MOTOR2_FAULT`**, **`UQ_P1_RUN_FB`** as **global**.
-4. Opta firmware already subscribes to `mooreview/v1/g/{key}/+` and writes `{"v":…}` into those tags.
+4. Opta firmware already subscribes to `peaklogic/v1/g/{key}/+` and writes `{"v":…}` into those tags.
 5. OR the tags into `R4` / station alarm — do **not** overwrite physical `MOTOR1_FAULT` DIs (`X1_I11`…).
 
-Raw 2 kHz samples stay on the UNO Q. MooreVIEW still gets the full `telemetry` topic.
+Raw 2 kHz samples stay on the UNO Q. PeakLogic still gets the full `telemetry` topic.
 
 Disable Opta push with `"optaPush": false` or `MV_OPTA_PUSH=0`.
 
 ## Deploy (App Lab)
 
 1. Install [Arduino App Lab](https://docs.arduino.cc/software/app-lab/) and connect the UNO Q (USB-C).
-2. Copy this folder to `/home/arduino/ArduinoApps/mooreview-uno-q-mcsa` (or **Open** in App Lab).
+2. Copy this folder to `/home/arduino/ArduinoApps/peaklogic-uno-q-mcsa` (or **Open** in App Lab).
 3. Copy `python/config.example.json` → `python/config.json` — set `broker`, `deviceId`, `optaSiteKey`.
 4. **Start** the app.
-5. MooreVIEW: template **Arduino UNO Q — edge motor fault (true FFT MCSA)**.
+5. PeakLogic: template **Arduino UNO Q — edge motor fault (true FFT MCSA)**.
 
 Local JSON: `http://<uno-q-ip>:8088/`
 
@@ -76,7 +76,7 @@ python main.py
 
 ## Telemetry
 
-Topic: `mooreview/v1/{deviceId}/telemetry`
+Topic: `peaklogic/v1/{deviceId}/telemetry`
 
 | Field | Meaning |
 |-------|---------|

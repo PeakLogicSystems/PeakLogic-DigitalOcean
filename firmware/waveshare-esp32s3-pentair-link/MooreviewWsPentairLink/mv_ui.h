@@ -30,7 +30,7 @@ button.ghost{background:#1b2538}button.danger{background:#a33}
 </head>
 <body>
 <header>
-  <h1>MooreVIEW Pentair Link</h1>
+  <h1>PeakLogic Pentair Link</h1>
   <p>IntelliFlo + IntelliChlor · 9600 RS-485 on A+ / B−</p>
 </header>
 <nav>
@@ -93,19 +93,19 @@ button.ghost{background:#1b2538}button.danger{background:#a33}
       <input name="staPass" id="staPass" type="password" autocomplete="new-password">
       <p class="hint"><button type="button" class="ghost act" onclick="scanWifi()">Scan networks</button></p>
       <ul id="scanList" class="hint"></ul>
-      <p class="hint">MQTT: <code>mqtt.mooreview.io:8883</code>, user <code>mooreview</code>. Blank password = firmware default.</p>
+      <p class="hint">MQTT: <code>mqtt.peaklogic.io:8883</code>, user <code>peaklogic</code>. Blank password = firmware default.</p>
       <label>MQTT host</label>
-      <input name="mqttHost" id="mqttHost" placeholder="mqtt.mooreview.io">
+      <input name="mqttHost" id="mqttHost" placeholder="mqtt.peaklogic.io">
       <label>MQTT port</label>
       <input name="mqttPort" id="mqttPort" type="number" value="8883">
       <label><input type="checkbox" name="mqttTls" id="mqttTls" value="1"> TLS (8883)</label>
       <label>MQTT user</label>
-      <input name="mqttUser" id="mqttUser" placeholder="mooreview">
+      <input name="mqttUser" id="mqttUser" placeholder="peaklogic">
       <label>MQTT password</label>
       <input name="mqttPass" id="mqttPass" type="password" placeholder="blank = firmware default">
       <div class="btns"><input type="submit" value="Save &amp; join home Wi-Fi"></div>
     </form>
-    <p class="hint">Setup AP: <code>MooreVIEW-Pentair</code> / <code>mooreview</code></p>
+    <p class="hint">Setup AP: <code>PeakLogic-Pentair</code> / <code>peaklogic</code></p>
   </div>
 </section>
 </main>

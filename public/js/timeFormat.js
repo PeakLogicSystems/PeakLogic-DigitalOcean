@@ -1,7 +1,7 @@
 'use strict';
 
 /** Workspace display timezone — default Eastern (America/New_York). */
-window.MooreviewTime = (function initMooreviewTime() {
+window.PeaklogicTime = (function initPeaklogicTime() {
   const DEFAULT_TIMEZONE = 'America/New_York';
   const COMMON_TIMEZONES = [
     'America/New_York',

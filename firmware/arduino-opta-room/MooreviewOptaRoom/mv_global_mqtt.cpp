@@ -10,7 +10,7 @@ static bool s_globalSubscribed = false;
 static void buildGlobalSubTopic(const char* topicPrefix) {
   char addr[5];
   mvGlobalAddrKey(addr);
-  snprintf(s_globalSubTopic, sizeof(s_globalSubTopic), "%s/g/%s/+", topicPrefix ? topicPrefix : "mooreview/v1", addr);
+  snprintf(s_globalSubTopic, sizeof(s_globalSubTopic), "%s/g/%s/+", topicPrefix ? topicPrefix : "peaklogic/v1", addr);
 }
 
 void mvGlobalMqttBegin(PubSubClient& mqtt, const char* topicPrefix) {
@@ -33,7 +33,7 @@ static bool topicMatchesGlobalTag(const char* topic, const char* topicPrefix, ch
   char addr[5];
   mvGlobalAddrKey(addr);
   char expectPrefix[72];
-  snprintf(expectPrefix, sizeof(expectPrefix), "%s/g/%s/", topicPrefix ? topicPrefix : "mooreview/v1", addr);
+  snprintf(expectPrefix, sizeof(expectPrefix), "%s/g/%s/", topicPrefix ? topicPrefix : "peaklogic/v1", addr);
   const size_t n = strlen(expectPrefix);
   if (strncmp(topic, expectPrefix, n) != 0) return false;
   const char* tagName = topic + n;

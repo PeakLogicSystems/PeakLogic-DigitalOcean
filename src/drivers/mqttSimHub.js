@@ -99,7 +99,7 @@ function start(cfg = {}) {
 
   if (cfg.publishToBroker !== false) {
     _publisher = mqtt.connect(_brokerUrl, {
-      clientId: `mooreview-mqtt-sim-${Date.now().toString(36)}`,
+      clientId: `peaklogic-mqtt-sim-${Date.now().toString(36)}`,
       reconnectPeriod: 5000,
     });
     _publisher.on('error', () => { /* broker optional — in-memory cache still works */ });

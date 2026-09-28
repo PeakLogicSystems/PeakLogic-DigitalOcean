@@ -1,4 +1,4 @@
-# mooreVIEW — Tag Scaling Architecture (1M · 5M · 25M)
+# PeakLogic — Tag Scaling Architecture (1M · 5M · 25M)
 
 **Current Phase 1 stack · DigitalOcean elastic services · when to switch**
 
@@ -10,7 +10,7 @@
 
 ## Executive summary
 
-mooreVIEW Cloud today runs as a **Phase 1 monolith** (SaaS + MQTT + archive + Managed Mongo) with a default **`MOOREVIEW_MAX_TAGS` cap of 70,912**. That architecture is correct through **~70K cloud tags** and **~500 cloud-centric field devices**. Beyond that, scale in **stages** — first on **DigitalOcean vertical resize and Managed MongoDB scalable storage**, then **VM split** (`ARCHITECTURE.md`), then **horizontal sharding** — rather than raising one env var on a 4 GB droplet.
+PeakLogic Cloud today runs as a **Phase 1 monolith** (SaaS + MQTT + archive + Managed Mongo) with a default **`PEAKLOGIC_MAX_TAGS` cap of 70,912**. That architecture is correct through **~70K cloud tags** and **~500 cloud-centric field devices**. Beyond that, scale in **stages** — first on **DigitalOcean vertical resize and Managed MongoDB scalable storage**, then **VM split** (`ARCHITECTURE.md`), then **horizontal sharding** — rather than raising one env var on a 4 GB droplet.
 
 | Tier | Cloud tags (TagStore) | Architecture mode | Primary DO move |
 |------|----------------------|-------------------|-----------------|
@@ -37,7 +37,7 @@ Internet → DO Firewall → nginx :443 → SaaS server.js :3100  (4 GB droplet)
                               │ mongodb+srv
                        Managed MongoDB (1–4 GiB tier, 15 GB base storage)
                               ▲
-              mqtt.mooreview.io :8883 (2 GB Mosquitto)
+              mqtt.peaklogic.io :8883 (2 GB Mosquitto)
                               ▲
                     field devices / site agents
 
@@ -49,7 +49,7 @@ Archive droplet :8090 (2 GB + block volume) ← day-7 compact job
 | Component | File / config | Limiting behavior |
 |-----------|---------------|-------------------|
 | **TagStore** | `src/tags/tagStore.js` | In-memory `Map`; one object per tag; `assertCapacity()` @ `MAX_TAGS` |
-| **Tag cap** | `MOOREVIEW_MAX_TAGS` · `src/config.js` | Cloud default **70,912** (`nextcenturyCloudSizing.js`) |
+| **Tag cap** | `PEAKLOGIC_MAX_TAGS` · `src/config.js` | Cloud default **70,912** (`nextcenturyCloudSizing.js`) |
 | **ScanEngine** | `src/runtime/scanEngine.js` | Iterates **all tags** each scan cycle |
 | **Historian** | `src/logger/mongoTagLogger.js` | Logs `graphEnabled` pens; default **5 s** sample (`MONGODB_SAMPLE_MS`) |
 | **Hot retention** | `ARCHIVE_EXPORT.md` | **7 days** Mongo → zstd archive compact |
@@ -59,7 +59,7 @@ Archive droplet :8090 (2 GB + block volume) ← day-7 compact job
 
 | Resource | Max | Reference fleet |
 |----------|-----|-----------------|
-| **`MOOREVIEW_MAX_TAGS`** | **70,912** | ~3K–8K @ 500 devices |
+| **`PEAKLOGIC_MAX_TAGS`** | **70,912** | ~3K–8K @ 500 devices |
 | **Devices / tenant** | **1,000** | 500 |
 | **MQTT connections** | **~2,000** | ~532 |
 | **Historian pens (hot)** | **~50,000** (Mongo tier bound) | ~3,000 |
@@ -132,7 +132,7 @@ Monolith scan cost grows **O(n tags)**. Directional sustained limits on a single
 
 Primary elastic database service for hot historian and tenant config.
 
-| Feature | Use for mooreVIEW | Notes |
+| Feature | Use for PeakLogic | Notes |
 |---------|-------------------|-------|
 | **Vertical resize** | Step **1 → 4 → 16 → 32 → 64 GiB** RAM tiers | Brief failover on HA clusters |
 | **Scalable storage** | Add **10 GiB increments** @ **~$0.215/GiB/mo** | **Scale storage without compute** — ideal for historian growth |
@@ -178,7 +178,7 @@ Replace block-volume archive when cumulative zstd exceeds **~500 GB – 1 TB**.
 
 1. **Enable Mongo scalable storage** + autoscale threshold **80%**
 2. **Resize SaaS droplet** RAM (4 → 8 → 16 GB) if CPU/RAM **> 70% sustained**
-3. **Raise `MOOREVIEW_MAX_TAGS`** only after RAM headroom confirmed
+3. **Raise `PEAKLOGIC_MAX_TAGS`** only after RAM headroom confirmed
 4. **Add second SaaS node + LB** before single node exceeds **~250K tags**
 5. **Migrate archive to Spaces** before **500 GB** block volume
 6. **Step Mongo compute tier** when query latency or CPU bound (not just disk)
@@ -227,7 +227,7 @@ Replace block-volume archive when cumulative zstd exceeds **~500 GB – 1 TB**.
 | Resource | Specification |
 |----------|---------------|
 | **TagStore** | **2–4 shards** by `tenantId` or `siteId` (platform) — **not** one 1M Map |
-| **`MOOREVIEW_MAX_TAGS`** | **262,144 – 1,048,576** per shard |
+| **`PEAKLOGIC_MAX_TAGS`** | **262,144 – 1,048,576** per shard |
 | **Hot Mongo** | **~880 GB** — **64 GiB HA** + **~900 GiB scalable storage** |
 | **MQTT** | **~200K – 350K** connections → **2-node broker cluster** |
 | **Scan** | Partitioned ingest — **≤ 250K tags / process** |
@@ -315,7 +315,7 @@ Replace block-volume archive when cumulative zstd exceeds **~500 GB – 1 TB**.
 
 **Architecture**
 
-Aligns with `MooreVIEW-Infrastructure-Projections.md` Part 7 ceiling and `ARCHITECTURE.md` **10M devices / 10K users** target — extended to **25M tag pens** (multi-vertical national fleet).
+Aligns with `PeakLogic-Infrastructure-Projections.md` Part 7 ceiling and `ARCHITECTURE.md` **10M devices / 10K users** target — extended to **25M tag pens** (multi-vertical national fleet).
 
 ```
  Multi-region DO (NYC + ATL + SFO) — tenant-aware routing
@@ -376,7 +376,7 @@ Aligns with `MooreVIEW-Infrastructure-Projections.md` Part 7 ceiling and `ARCHIT
 
 | Signal | Threshold | Switch |
 |--------|-----------|--------|
-| `MOOREVIEW_MAX_TAGS` API 413 errors | Any | Raise cap **or** shard tenant **before** raising cap |
+| `PEAKLOGIC_MAX_TAGS` API 413 errors | Any | Raise cap **or** shard tenant **before** raising cap |
 | SaaS heap **> 80%** | Sustained 15 min | Vertical resize **then** split ingest |
 | Mongo disk **> 80%** | Primary node | **Enable autoscale storage** (10 GiB increment) |
 | Mongo CPU **> 60%** | Sustained | **Resize compute tier** (not just storage) |
@@ -402,10 +402,10 @@ Ordered steps on DigitalOcean **without downtime goal**:
 
 1. **Provision Mongo HA 32 GiB** cluster · enable **scalable storage** + **autoscale @ 80%**
 2. **Migrate hot historian** (`mongodump` / logical migration) · verify indexes on `{ tagId: 1, ts: -1 }`
-3. **Deploy second SaaS ingest node** — MQTT consumer only · same codebase `MOOREVIEW_ROLE=ingest`
+3. **Deploy second SaaS ingest node** — MQTT consumer only · same codebase `PEAKLOGIC_ROLE=ingest`
 4. **Add DO Load Balancer** — GUI node registers; ingest bypasses LB (MQTT direct)
 5. **Split alarm notify** to third VM · wire `eventBus` → Redis/Kafka (platform seam)
-6. **Raise `MOOREVIEW_MAX_TAGS`** per shard · **never** above **250K** per process
+6. **Raise `PEAKLOGIC_MAX_TAGS`** per shard · **never** above **250K** per process
 7. **Migrate archive** to **Spaces** · point `ARCHIVE_SERVER_URL` to S3-compatible adapter
 8. **Load test** @ 80% target tags · watch scan p95 · Mongo disk slope
 9. **Cutover DNS** · drain Phase 1 monolith
@@ -439,7 +439,7 @@ At ALF/apartment pricing (**$110/asset**), **1M cloud tags** (rollup) is **far s
 | `DO-Phase1-Storage-Cost-Review.md` | Mongo storage economics |
 | `docs/ARCHITECTURE.md` | VM split · 10M device target |
 | `docs/ARCHIVE_EXPORT.md` | Hot → archive pipeline |
-| `MooreVIEW-Infrastructure-Projections.md` | Y1–Y5 + Part 10–11 verticals |
+| `PeakLogic-Infrastructure-Projections.md` | Y1–Y5 + Part 10–11 verticals |
 | [DO Mongo scalable storage](https://docs.digitalocean.com/products/databases/mongodb/how-to/resize/) | Autoscale & resize |
 | [DO Spaces pricing](https://www.digitalocean.com/pricing/spaces-object-storage) | Archive tier |
 
@@ -447,8 +447,8 @@ At ALF/apartment pricing (**$110/asset**), **1M cloud tags** (rollup) is **far s
 
 | Variable | Default | Scale note |
 |----------|---------|------------|
-| `MOOREVIEW_MAX_TAGS` | **70912** (cloud) | Per-process cap — shard above **250K** |
-| `MOOREVIEW_DEPLOYMENT` | `cloud` | Enables cloud sizing defaults |
+| `PEAKLOGIC_MAX_TAGS` | **70912** (cloud) | Per-process cap — shard above **250K** |
+| `PEAKLOGIC_DEPLOYMENT` | `cloud` | Enables cloud sizing defaults |
 | `MONGODB_URI` | — | Point to HA cluster @ 1M+ |
 | `MONGODB_SAMPLE_MS` | **5000** | Increase to reduce hot Mongo slope |
 | `ARCHIVE_SERVER_URL` | archive droplet | **Spaces** @ TB scale |
@@ -457,6 +457,6 @@ At ALF/apartment pricing (**$110/asset**), **1M cloud tags** (rollup) is **far s
 
 ---
 
-*Tag Scaling Architecture v1.0 — mooreVIEW platform planning.*
+*Tag Scaling Architecture v1.0 — PeakLogic platform planning.*
 
-*mooreVIEW is a company powered by [The Purple Standard](https://purple-standard.com). © Purple Standard Holdings.*
+*PeakLogic is a company powered by [The Purple Standard](https://purple-standard.com). © Purple Standard Holdings.*

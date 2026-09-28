@@ -12,8 +12,8 @@ function resolveMqttCfg() {
   const settings = persistence.readJson('settings.json', {});
   const mp = settings.mqttParc || {};
   return {
-    brokerUrl: String(mp.brokerUrl || process.env.MOOREVIEW_MQTT_BROKER || 'mqtt://127.0.0.1:1883').trim(),
-    topicPrefix: String(mp.topicPrefix || 'mooreview/v1').trim().replace(/\/+$/, '') || 'mooreview/v1',
+    brokerUrl: String(mp.brokerUrl || process.env.PEAKLOGIC_MQTT_BROKER || 'mqtt://127.0.0.1:1883').trim(),
+    topicPrefix: String(mp.topicPrefix || 'peaklogic/v1').trim().replace(/\/+$/, '') || 'peaklogic/v1',
     username: mp.username || process.env.MOSQUITTO_USER || '',
     password: mp.password || process.env.MOSQUITTO_PASS || '',
   };

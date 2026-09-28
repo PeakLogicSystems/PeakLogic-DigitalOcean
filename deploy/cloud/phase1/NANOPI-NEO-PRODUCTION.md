@@ -1,6 +1,6 @@
 # NanoPi NEO CAT1 — production deployment runbook
 
-Put a **mooreVIEW Opta Parc** site into production using a **NanoPi NEO** + **NEO CAT1** LTE module as the transparent MQTT gateway.
+Put a **PeakLogic Opta Parc** site into production using a **NanoPi NEO** + **NEO CAT1** LTE module as the transparent MQTT gateway.
 
 | Doc | Use |
 |-----|-----|
@@ -15,14 +15,14 @@ Put a **mooreVIEW Opta Parc** site into production using a **NanoPi NEO** + **NE
 ```
 [ Arduino Opta ] ── Ethernet ──► [ NanoPi 192.168.1.1:1883 ]
                                        Mosquitto (LAN, no auth)
-                                       bridge mooreview/v1/#
+                                       bridge peaklogic/v1/#
                                        ▼
-                              [ LTE → mqtt.mooreview.io:8883 ]
+                              [ LTE → mqtt.peaklogic.io:8883 ]
                                        ▼
-                              [ mooreVIEW cloud Parc hub ]
+                              [ PeakLogic cloud Parc hub ]
 ```
 
-- **Opta** runs ST + Parc firmware (`MooreviewOptaMqttSt`) — no change to sketch logic; only broker IP/port.
+- **Opta** runs ST + Parc firmware (`PeaklogicOptaMqttSt`) — no change to sketch logic; only broker IP/port.
 - **NanoPi** runs FriendlyWrt + Mosquitto; cloud credentials live **only on the NanoPi**.
 
 ---
@@ -37,7 +37,7 @@ Put a **mooreVIEW Opta Parc** site into production using a **NanoPi NEO** + **NE
 | 1 | 5 V / **3 A** DC supply | Barrel or screw terminal — **not** weak USB |
 | 1 | LTE antenna | MAIN port, tight |
 | 1 | Nano SIM | **Data** plan activated |
-| 1 | Arduino Opta | `MooreviewOptaMqttSt` flashed |
+| 1 | Arduino Opta | `PeaklogicOptaMqttSt` flashed |
 | 1 | Ethernet cable | Opta ↔ NanoPi **eth0** (direct or via panel switch) |
 
 Optional bench: USB-TTL serial (NanoPi debug header), office LAN cable for initial SSH.
@@ -51,7 +51,7 @@ Optional bench: USB-TTL serial (NanoPi debug header), office LAN cable for initi
 | OS image | FriendlyElec **h3-sd-friendlywrt** (OpenWrt 19.07, kernel 4.14) |
 | Setup script | `scripts/setup-nanopi-opta-gateway.sh` |
 | Mosquitto | 1.6.15 (OpenWrt `mosquitto-ssl`) |
-| Cloud broker | `mqtt.mooreview.io:8883`, user `mooreview` |
+| Cloud broker | `mqtt.peaklogic.io:8883`, user `peaklogic` |
 
 ---
 
@@ -97,7 +97,7 @@ Get cloud MQTT password from the droplet:
 
 ```bash
 ssh mv-mqtt
-sudo grep MOSQUITTO_PASS /etc/mooreview/mqtt.env
+sudo grep MOSQUITTO_PASS /etc/peaklogic/mqtt.env
 ```
 
 On the NanoPi:
@@ -134,7 +134,7 @@ Run the bridge test from [NANOPI-OPTA-GATEWAY-MQTT.md](./NANOPI-OPTA-GATEWAY-MQT
 Record on site worksheet:
 
 - NanoPi MAC / last bench DHCP IP
-- Gateway ID (auto: `gw_nanopi_<eth0 MAC suffix>`, stored in `/etc/mooreview-gateway.json`)
+- Gateway ID (auto: `gw_nanopi_<eth0 MAC suffix>`, stored in `/etc/peaklogic-gateway.json`)
 - SIM ICCID (auto: `sh /root/setup-nanopi-opta-gateway.sh read-cellular`)
 - Root password (secure store)
 - Cloud tenant / site name
@@ -142,15 +142,15 @@ Record on site worksheet:
 
 After `configure` or `apply-lan`, the gateway publishes a **retained** MQTT message:
 
-`mooreview/v1/gateway/{gatewayId}/cellular`
+`peaklogic/v1/gateway/{gatewayId}/cellular`
 
-Cloud mooreVIEW auto-links the ICCID to the Simetry SIM inventory when a match exists. When the Opta publishes telemetry through the gateway (`mqttBroker: 192.168.1.1`), cloud registration also attaches **ICCID + Simetry eID** to the Opta device record and publishes `mooreview/v1/{deviceId}/registration`.
+Cloud PeakLogic auto-links the ICCID to the Simetry SIM inventory when a match exists. When the Opta publishes telemetry through the gateway (`mqttBroker: 192.168.1.1`), cloud registration also attaches **ICCID + Simetry eID** to the Opta device record and publishes `peaklogic/v1/{deviceId}/registration`.
 
 ---
 
 ## 4. Opta preparation (bench)
 
-Flash **MooreviewOptaMqttSt** (Arduino IDE). Optional compile preset — copy `opta-nanopi-gateway.defaults.example` → local defaults, add flag `-DMV_MQTT_CLOUD_PRESET=1` so first boot seeds LAN broker.
+Flash **PeaklogicOptaMqttSt** (Arduino IDE). Optional compile preset — copy `opta-nanopi-gateway.defaults.example` → local defaults, add flag `-DMV_MQTT_CLOUD_PRESET=1` so first boot seeds LAN broker.
 
 ### Opta `/setup` (every site — same values)
 
@@ -206,13 +206,13 @@ Power-cycle after apply. SSH/LuCI from a laptop on the Opta cable: **`192.168.1.
 
 ---
 
-## 6. Cloud / mooreVIEW
+## 6. Cloud / PeakLogic
 
 On the **cloud** tenant (Cloud Studio or SaaS):
 
-1. **System setup → MQTT Parc hub** — enabled, broker `mqtts://mqtt.mooreview.io:8883` (or `mqtt://…:8883` per your deploy), credentials `mooreview` + `MOSQUITTO_PASS`.
+1. **System setup → MQTT Parc hub** — enabled, broker `mqtts://mqtt.peaklogic.io:8883` (or `mqtt://…:8883` per your deploy), credentials `peaklogic` + `MOSQUITTO_PASS`.
 2. **Drivers** — add **Arduino Opta — MQTT Parc ST runtime** with the Opta `deviceId` (`opta_<serial>` from `/api/status`).
-3. **Tools → Cellular SIMs** — sync Simetry inventory; gateway ICCID auto-links when the NanoPi publishes `mooreview/v1/gateway/{gatewayId}/cellular`.
+3. **Tools → Cellular SIMs** — sync Simetry inventory; gateway ICCID auto-links when the NanoPi publishes `peaklogic/v1/gateway/{gatewayId}/cellular`.
 4. Deploy ST program (**Download & Start**) when ready.
 
 ---
@@ -229,7 +229,7 @@ Check each item before leaving site.
 | 4 | Cloud bridge | `netstat -tn \| grep 8883` shows **ESTABLISHED** |
 | 5 | Opta Ethernet | Opta `/api/status` shows IP in `192.168.1.x` |
 | 6 | Opta MQTT | `/api/status` → `mqttConnected: true` |
-| 7 | Cloud telemetry | mooreVIEW driver **Linked**; telemetry updating |
+| 7 | Cloud telemetry | PeakLogic driver **Linked**; telemetry updating |
 | 8 | Cloud → Opta | **Download & Start** or cmd reaches device |
 | 9 | Global tags | Site key matches; `g/{key}/…` if used |
 
@@ -260,12 +260,12 @@ Technician: _________________________
 [ ] SD flashed FriendlyWrt; root password set
 [ ] setup-nanopi-opta-gateway.sh install-packages + configure
 [ ] /etc/mosquitto/cloud.pass set (600); bridge test passed on bench
-[ ] Opta flashed MooreviewOptaMqttSt; broker 192.168.1.1:1883 saved
+[ ] Opta flashed PeaklogicOptaMqttSt; broker 192.168.1.1:1883 saved
 [ ] Field wiring: Opta → eth0 only; 5V/3A supply; antenna fitted
 [ ] apply-lan executed; gateway reachable at 192.168.1.1
 [ ] Modem registered (NET not slow-searching > 3 min)
 [ ] Opta mqttConnected; cloud telemetry live
-[ ] SIM linked in mooreVIEW Cellular SIMs
+[ ] SIM linked in PeakLogic Cellular SIMs
 [ ] ST program deployed and running (if applicable)
 
 Notes: _______________________________________________________
@@ -283,7 +283,7 @@ Notes: _______________________________________________________
 | Opta no MQTT | Wrong broker or not on Opta LAN | Broker **192.168.1.1:1883**; Opta must DHCP from NanoPi |
 | Can't SSH after deploy | Still on office LAN / IP conflict | Use **192.168.1.1** on direct cable; unplug from site router |
 | SSH "no matching host key" | Old OpenWrt RSA key | `ssh -o HostKeyAlgorithms=+ssh-rsa …` |
-| Telemetry in cloud, no cmd down | Bridge topic or hub config | Confirm `mooreview/v1/#` bridge; cloud Parc hub enabled |
+| Telemetry in cloud, no cmd down | Bridge topic or hub config | Confirm `peaklogic/v1/#` bridge; cloud Parc hub enabled |
 
 **Logs on NanoPi:**
 

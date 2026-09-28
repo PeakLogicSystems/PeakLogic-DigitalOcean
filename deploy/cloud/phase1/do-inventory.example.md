@@ -15,10 +15,10 @@ Copy to `do-inventory.md` (gitignored locally) or a password manager. **Do not c
 
 | Name | Type | Size | Public IP | Notes |
 |------|------|------|-----------|-------|
-| mooreview-saas | Droplet | 4 GB | | Debian 12 |
-| mooreview-mqtt | Droplet | 2 GB | | Mosquitto |
-| mooreview-archive | Droplet | 2 GB + volume | | :8090 |
-| mooreview-mongo | Managed MongoDB | 10–20 GB | *(private host)* | DB `mooreview_cloud` |
+| peaklogic-saas | Droplet | 4 GB | | Debian 12 |
+| peaklogic-mqtt | Droplet | 2 GB | | Mosquitto |
+| peaklogic-archive | Droplet | 2 GB + volume | | :8090 |
+| peaklogic-mongo | Managed MongoDB | 10–20 GB | *(private host)* | DB `peaklogic_cloud` |
 | fw-saas | Firewall | | | 22, 80, 443 |
 | fw-mqtt | Firewall | | | 22, 1883, 8883 |
 | fw-archive | Firewall | | | 22, 8090←SaaS IP |
@@ -27,16 +27,16 @@ Copy to `do-inventory.md` (gitignored locally) or a password manager. **Do not c
 
 | Name | Type | Value |
 |------|------|-------|
-| mooreview.io | A | *(saas IP)* |
+| peaklogic.io | A | *(saas IP)* |
 | www | A | *(saas IP)* |
-| mqtt.mooreview.io | A | *(mqtt IP)* |
-| archive.mooreview.io | A | *(archive IP, optional)* |
+| mqtt.peaklogic.io | A | *(mqtt IP)* |
+| archive.peaklogic.io | A | *(archive IP, optional)* |
 
 ## Secrets (store offline)
 
 | Secret | Where used | Generated |
 |--------|------------|-----------|
-| Mongo connection string | `/etc/mooreview/saas.env` `MONGODB_URI` | DO console |
+| Mongo connection string | `/etc/peaklogic/saas.env` `MONGODB_URI` | DO console |
 | `JWT_SECRET` | saas.env | `openssl rand -hex 32` |
 | `PLATFORM_ADMIN_KEY` | saas.env | `openssl rand -hex 24` |
 | `MOSQUITTO_PASS` | mqtt.env + appliance uplink | |
@@ -49,5 +49,5 @@ Copy to `do-inventory.md` (gitignored locally) or a password manager. **Do not c
 - [ ] MQTT password + TLS
 - [ ] Archive firewall = SaaS IP only
 - [ ] `npm run seed` on SaaS
-- [ ] Appliance broker URL = `mqtts://mqtt.mooreview.io:8883`
+- [ ] Appliance broker URL = `mqtts://mqtt.peaklogic.io:8883`
 - [ ] Health checks pass (see ATL-MQTT acceptance checklist)

@@ -19,8 +19,8 @@ describe('cloud SaaS deploy assets', () => {
     assert.ok(fs.existsSync(path.join(root, 'docs/CLOUD_USER_GUIDE.md')));
   });
 
-  it('mooreview-saas.service uses root server.js', () => {
-    const svc = fs.readFileSync(path.join(root, 'deploy/cloud/debian/mooreview-saas.service'), 'utf8');
+  it('peaklogic-saas.service uses root server.js', () => {
+    const svc = fs.readFileSync(path.join(root, 'deploy/cloud/debian/peaklogic-saas.service'), 'utf8');
     assert.match(svc, /node server\.js/);
     assert.doesNotMatch(svc, /src\/server\.js/);
   });

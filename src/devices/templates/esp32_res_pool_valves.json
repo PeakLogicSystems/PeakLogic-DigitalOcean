@@ -1,7 +1,7 @@
 {
   "id": "esp32_res_pool_valves",
   "label": "Res-Pool-Link ESP32 — 4 backwash valves (MQTT Parc)",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "ESP32-S3-Relay-6CH / 4-relay (inlet, outlet, waste, spare)",
   "transport": "mqtt_parc",
   "sharedBus": false,
@@ -34,5 +34,5 @@
       { "id": "I1", "type": "BOOL", "role": "input", "value": false, "driverAddress": { "channel": "I1" }, "comment": "Optional flow switch (active low)" }
     ]
   },
-  "notes": "Flash firmware/esp32-res-pool-link. AP MooreVIEW-ResPool. Fail-safe FILTER (waste closed). See docs/RES_POOL_LINK.md."
+  "notes": "Flash firmware/esp32-res-pool-link. AP PeakLogic-ResPool. Fail-safe FILTER (waste closed). See docs/RES_POOL_LINK.md."
 }

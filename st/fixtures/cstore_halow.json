@@ -18,7 +18,7 @@
   },
   "mqtt": {
     "broker": "mqtt://127.0.0.1:1883",
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "nexcommPrefixes": [
       "nexcomm/halow",
       "nexcomm/halo",

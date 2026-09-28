@@ -1,6 +1,6 @@
-# MooreVIEW Opta — Modbus RTU slave (RS485)
+# PeakLogic Opta — Modbus RTU slave (RS485)
 
-Firmware for **Arduino Opta RS485** that exposes MooreVIEW Parc-equivalent I/O as a **Modbus RTU slave** on the onboard RS485 port. Pair with a **Dragino RS485-NB** cellular gateway using PC template `opta_parc_modbus_dragino`.
+Firmware for **Arduino Opta RS485** that exposes PeakLogic Parc-equivalent I/O as a **Modbus RTU slave** on the onboard RS485 port. Pair with a **Dragino RS485-NB** cellular gateway using PC template `opta_parc_modbus_dragino`.
 
 This sketch is **RS485 slave only** — no MQTT, no Ethernet ST. It cannot run at the same time as `mv_fieldbus` Modbus master on the same UART.
 
@@ -14,7 +14,7 @@ This sketch is **RS485 slave only** — no MQTT, no Ethernet ST. It cannot run a
 
 ## Flash
 
-1. Open `MooreviewOptaRtuSlave/MooreviewOptaRtuSlave.ino`
+1. Open `PeaklogicOptaRtuSlave/PeaklogicOptaRtuSlave.ino`
 2. **Tools → Board → Arduino Opta (RS485)** (or your Opta variant)
 3. Upload via USB
 4. Serial Monitor **115200** — expect `Opta Modbus RTU slave ready id=2 baud=9600`

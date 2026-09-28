@@ -3,7 +3,7 @@
   "label": "TRIPLEXLS (triplex lift station overview)",
   "group": "Process equipment",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/lift-station-faceplates/mooreview/triplexls.svg",
+  "preview": "/hmi/svg/library/lift-station-faceplates/peaklogic/triplexls.svg",
   "tagRoles": {
     "tankLevel": {
       "pick": "tagId",
@@ -221,7 +221,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/lift-station-faceplates/mooreview/triplexls.svg"
+      "svg": "/hmi/svg/library/lift-station-faceplates/peaklogic/triplexls.svg"
     }
   ],
   "defaultBindings": [

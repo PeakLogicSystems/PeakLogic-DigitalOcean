@@ -1,6 +1,6 @@
 # Alarm notification contacts and scoped assignment
 
-MooreVIEW separates **login accounts** from **alarm notification contacts**. Contacts can receive email/SMS when tags enter alarm states. Each contact may be assigned to **all** alarms or **selected** sites, field devices, and PdM/fleet assets.
+PeakLogic separates **login accounts** from **alarm notification contacts**. Contacts can receive email/SMS when tags enter alarm states. Each contact may be assigned to **all** alarms or **selected** sites, field devices, and PdM/fleet assets.
 
 ## Where to configure
 
@@ -55,7 +55,7 @@ Additional filters (unchanged):
 
 ## How alarms are matched
 
-On alarm transition, MooreVIEW resolves context from the tag:
+On alarm transition, PeakLogic resolves context from the tag:
 
 ```
 tag → driver → deviceId → cloud site assignment (or CMMS/cloud site ID on appliance)
@@ -101,6 +101,6 @@ When **CMMS / MQTT integration** is enabled, `{topicPrefix}/{siteId}/alarm-notif
 ## Related docs
 
 - [CLOUD_USER_GUIDE.md](CLOUD_USER_GUIDE.md)
-- [MOOREVIEW-SITE-ADMIN-LOGIN-QUICK-START.md](MOOREVIEW-SITE-ADMIN-LOGIN-QUICK-START.md)
+- [PEAKLOGIC-SITE-ADMIN-LOGIN-QUICK-START.md](PEAKLOGIC-SITE-ADMIN-LOGIN-QUICK-START.md)
 - [CMMS_INTEGRATION.md](CMMS_INTEGRATION.md)
 - [EST_PC_PARITY.md](EST_PC_PARITY.md)

@@ -21,8 +21,8 @@
 #define MV_FIRMWARE_VERSION "1.0.0-pentair-1ch"
 #define MV_PROTOCOL_VERSION 2
 
-#define SETUP_AP_SSID "MooreVIEW-Pentair"
-#define SETUP_AP_PASS "mooreview"
+#define SETUP_AP_SSID "PeakLogic-Pentair"
+#define SETUP_AP_PASS "peaklogic"
 #define SETUP_HTTP_PORT 8080
 
 #define PENTAIR_BAUD 9600
@@ -34,7 +34,7 @@
 #define PENTAIR_ADDR_DEFAULT 0x60
 
 #ifndef MV_MQTT_SKETCH_BROKER_DEFAULT
-#define MV_MQTT_SKETCH_BROKER_DEFAULT "mqtt.mooreview.io"
+#define MV_MQTT_SKETCH_BROKER_DEFAULT "mqtt.peaklogic.io"
 #endif
 #ifndef MV_MQTT_SKETCH_PORT_DEFAULT
 #define MV_MQTT_SKETCH_PORT_DEFAULT 8883
@@ -43,7 +43,7 @@
 #define MV_MQTT_SKETCH_TLS_DEFAULT 1
 #endif
 #ifndef MV_MQTT_SKETCH_USER_DEFAULT
-#define MV_MQTT_SKETCH_USER_DEFAULT "mooreview"
+#define MV_MQTT_SKETCH_USER_DEFAULT "peaklogic"
 #endif
 #ifndef MV_MQTT_SKETCH_PASS_DEFAULT
 #define MV_MQTT_SKETCH_PASS_DEFAULT "f20ba87c93b64d6b5b0606357385b9e528af2a10bb883d1f"

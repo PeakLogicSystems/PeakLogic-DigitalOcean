@@ -1,16 +1,16 @@
-# mooreVIEW Opta — Firmware & Operation Reference
+# PeakLogic Opta — Firmware & Operation Reference
 
-**Sketch:** `mooreVIEWOptaMqttSt`  
+**Sketch:** `PeakLogicOptaMqttSt`  
 **Current version:** `2.3.81` (`mv_version.h`)  
-**Protocol:** MQTT Parc `mooreview/v1/{deviceId}/…`; global P2P tags `mooreview/v1/g/{siteKey4}/{tagName}`
+**Protocol:** MQTT Parc `peaklogic/v1/{deviceId}/…`; global P2P tags `peaklogic/v1/g/{siteKey4}/{tagName}`
 
-mooreVIEW PC integrates via driver type **`mqtt_parc`**. In-app help: **F1 → MQTT Parc hub & Opta**.
+PeakLogic PC integrates via driver type **`mqtt_parc`**. In-app help: **F1 → MQTT Parc hub & Opta**.
 
 ---
 
 ## Overview
 
-mooreVIEWOptaMqttSt combines an on-device **ST bytecode runtime** with **MQTT Parc** telemetry and remote deploy. The PC hub ingests telemetry into `data/parc.json`; mooreVIEW deploys programs with `put_program`, runs ST with `runtime_start`, and syncs forces and time over MQTT.
+PeakLogicOptaMqttSt combines an on-device **ST bytecode runtime** with **MQTT Parc** telemetry and remote deploy. The PC hub ingests telemetry into `data/parc.json`; PeakLogic deploys programs with `put_program`, runs ST with `runtime_start`, and syncs forces and time over MQTT.
 
 ### Device modes (v2.3.46+)
 
@@ -46,20 +46,20 @@ Requires **24 V** on expansion modules for detection. Install **Arduino_Opta_Blu
 
 | Module | Role |
 |--------|------|
-| `mooreVIEWOptaMqttSt.ino` | Main loop, HTTP routes, deferred NV auto-run |
+| `PeakLogicOptaMqttSt.ino` | Main loop, HTTP routes, deferred NV auto-run |
 | `mv_mqtt.cpp` | Parc MQTT client, command dispatch, telemetry |
-| `mv_st.cpp`, `mv_bc.cpp` | ST bytecode VM (same AST as mooreVIEW PC) |
+| `mv_st.cpp`, `mv_bc.cpp` | ST bytecode VM (same AST as PeakLogic PC) |
 | `mv_tags.cpp`, `mv_io.cpp`, `mv_expansions.cpp` | Tag model, physical I/O, expansion tags |
 | `mv_program_store.cpp` | QSPI NV program file, CRC, auto-run flag |
 | `mv_store.cpp`, `mv_setup_web.cpp` | Device config KV (Ethernet, broker, expansions, **global site key**) |
-| `mv_global_key.cpp` | Global site key → addr key + topic helper (`mooreview/v1/g/{key}/{tag}`) |
+| `mv_global_key.cpp` | Global site key → addr key + topic helper (`peaklogic/v1/g/{key}/{tag}`) |
 | `mv_io_map.cpp` | `/io-map` web UI and JSON API |
 | `mv_rtc.cpp` | Software wall clock + queued HAL RTC |
 | `mv_identity.cpp` | ATECC608 → `mv_{16hex}` deviceId (FNV-1a 64) |
 | `mv_http.cpp` | Native Ethernet HTTP server |
 | `mv_watchdog.cpp` | Hardware + liveness watchdog (loop stall + idle reset) |
 | `mv_ota.cpp`, `mv_version.cpp` | OTA upload, version reporting |
-| `mv_mcsa_m7.cpp` + `MooreviewOptaMcsaM4` | 5 min I1–I6 ingest on M7; true FFT + classify on M4 |
+| `mv_mcsa_m7.cpp` + `PeaklogicOptaMcsaM4` | 5 min I1–I6 ingest on M7; true FFT + classify on M4 |
 | `mv_mcsa_mon.cpp` + `mv_mcsa_mon_web.cpp` | MCSA monitor config (`/mcsa`): deviceType 0–5, poles/slip, HVAC env |
 
 Serial debug: USB **115200**. Milestone logs use `[MV*]` prefix (always on).
@@ -74,18 +74,18 @@ DHCP or static IP configured on `/setup`. Default static example: `192.168.1.50`
 
 ### MQTT broker
 
-- **Topic prefix:** `mooreview/v1`
-- **Telemetry:** `mooreview/v1/{deviceId}/telemetry` (no ATECC serial in JSON)
-- **Global tags (P2P):** `mooreview/v1/g/{siteKey4}/{tagName}` — site key from NV config (default `0001`); firmware v2.3.47+ pub/sub at telemetry rate (retained); PC hub mirrors into tag store
-- **Commands:** `mooreview/v1/{deviceId}/cmd`
-- **Responses:** `mooreview/v1/{deviceId}/cmd/response`
-- **Config:** `mooreview/v1/{deviceId}/config` (pause telemetry during debug)
+- **Topic prefix:** `peaklogic/v1`
+- **Telemetry:** `peaklogic/v1/{deviceId}/telemetry` (no ATECC serial in JSON)
+- **Global tags (P2P):** `peaklogic/v1/g/{siteKey4}/{tagName}` — site key from NV config (default `0001`); firmware v2.3.47+ pub/sub at telemetry rate (retained); PC hub mirrors into tag store
+- **Commands:** `peaklogic/v1/{deviceId}/cmd`
+- **Responses:** `peaklogic/v1/{deviceId}/cmd/response`
+- **Config:** `peaklogic/v1/{deviceId}/config` (pause telemetry during debug)
 
-Broker IP/port saved in device NV on `/setup` (example: `192.168.1.233:1883`). Must match mooreVIEW **System setup → MQTT broker URL** (PC LAN IP, not `127.0.0.1` from the device). Reboot after broker change.
+Broker IP/port saved in device NV on `/setup` (example: `192.168.1.233:1883`). Must match PeakLogic **System setup → MQTT broker URL** (PC LAN IP, not `127.0.0.1` from the device). Reboot after broker change.
 
 ### PC hub
 
-Enable **MQTT Parc hub** and set broker URL in mooreVIEW System setup. Start Mosquitto on the PC LAN interface (`npm run mqtt:start`).
+Enable **MQTT Parc hub** and set broker URL in PeakLogic System setup. Start Mosquitto on the PC LAN interface (`npm run mqtt:start`).
 
 ---
 
@@ -114,7 +114,7 @@ Navigation bar links **Setup** ↔ **I/O Map** on both pages.
 
 ## MQTT command reference
 
-Publish JSON to `mooreview/v1/{deviceId}/cmd`:
+Publish JSON to `peaklogic/v1/{deviceId}/cmd`:
 
 ```json
 { "id": "<uuid>", "op": "<command>", "body": { … } }
@@ -164,7 +164,7 @@ Stop → runtime_stop (program remains in NV)
 clear_program / DELETE /api/program → clear NV program
 ```
 
-mooreVIEW **System setup → Auto-run ST on Opta after power-up** sends `autoRunOnBoot: true` with deploy. PC boot auto-start waits ~8 s before deploy when Remote is on.
+PeakLogic **System setup → Auto-run ST on Opta after power-up** sends `autoRunOnBoot: true` with deploy. PC boot auto-start waits ~8 s before deploy when Remote is on.
 
 ---
 
@@ -204,7 +204,7 @@ mooreVIEW **System setup → Auto-run ST on Opta after power-up** sends `autoRun
 | **2.3.41+** | MQTT cmd subscribe reliability; fix telemetry-OK-but-cmd-timeout |
 | **2.3.30–2.3.40** | NV program store, skip-deploy CRC, I/O map web UI, expansion telemetry |
 | **2.3.24+** | Native HTTP, RTC software clock, broker NV on `/setup` |
-| **2.3.18+** | Minimum for MQTT `put_program` deploy from mooreVIEW |
+| **2.3.18+** | Minimum for MQTT `put_program` deploy from PeakLogic |
 | **2.3.11+** | Fix 2.3.8 stack overflow in MQTT cmd handler |
 | **2.3.8** | **Do not use** — ~20 KB stack buffer broke all MQTT |
 
@@ -214,9 +214,9 @@ Always verify with GET `/api/status` → `firmwareVersion`.
 
 ## PC integration checklist
 
-- [ ] Flash **mooreVIEWOptaMqttSt v2.3.69+** via Arduino IDE
+- [ ] Flash **PeakLogicOptaMqttSt v2.3.69+** via Arduino IDE
 - [ ] Set MQTT broker on Opta `/setup` (LAN IP, port 1883) → Save → Reboot
-- [ ] Set **Global site key** on Opta `/setup` and mooreVIEW System setup (`mqttParc.globalSiteKey`, default `1`)
+- [ ] Set **Global site key** on Opta `/setup` and PeakLogic System setup (`mqttParc.globalSiteKey`, default `1`)
 - [ ] Choose **Device mode** on `/setup`: Standalone (ST on Opta) or Remote I/O (PC runs ST)
 - [ ] Start Mosquitto on PC LAN (`npm run mqtt:start`)
 - [ ] **System setup:** enable MQTT Parc hub, broker URL; **Remote ST execution** ON for Standalone, OFF for Remote I/O
@@ -238,7 +238,7 @@ Always verify with GET `/api/status` → `firmwareVersion`.
 | Telemetry OK, cmd timeout | Old firmware or subscribe fail | Reflash **v2.3.41+**; Serial: `MQTT subscribed cmd+config` |
 | Board hangs (ping OK, HTTP/MQTT dead) | Wedged stack without loop stall | **v2.3.56+** hardware + liveness watchdog auto-resets; check `/api/status` → `watchdog` |
 | Broker mismatch | `127.0.0.1` on device | Set PC LAN IP on `/setup` and System setup |
-| Deploy fails / old fw | Firmware &lt; 2.3.18 | Arduino IDE upload mooreVIEWOptaMqttSt |
+| Deploy fails / old fw | Firmware &lt; 2.3.18 | Arduino IDE upload PeakLogicOptaMqttSt |
 | HTTP dead during deploy | Large put on old fw | Use MQTT deploy; upgrade firmware |
 | ST not running after link | Linked ≠ running | **Download & Start**, not Connect alone |
 | Wrong deviceId | Manual id typo | Use **Add from Parc registry** or read `/setup` |

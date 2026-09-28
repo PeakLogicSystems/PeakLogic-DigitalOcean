@@ -1,4 +1,4 @@
-# Upload mooreview-cloud-*.tgz to a droplet via scp (Windows-friendly).
+# Upload peaklogic-cloud-*.tgz to a droplet via scp (Windows-friendly).
 param(
   [string]$DropletHost = 'root@206.189.198.96',
   [string]$RemotePath = '/tmp/',
@@ -13,8 +13,8 @@ $DistDir = Join-Path $EstRoot 'dist'
 
 if (-not $BundlePath) {
   $latest = @(
-    Get-ChildItem $DistDir -Filter 'mooreview-saas-*.tgz' -ErrorAction SilentlyContinue
-    Get-ChildItem $DistDir -Filter 'mooreview-cloud-*.tgz' -ErrorAction SilentlyContinue
+    Get-ChildItem $DistDir -Filter 'peaklogic-saas-*.tgz' -ErrorAction SilentlyContinue
+    Get-ChildItem $DistDir -Filter 'peaklogic-cloud-*.tgz' -ErrorAction SilentlyContinue
   ) | Sort-Object LastWriteTime -Descending | Select-Object -First 1
   if (-not $latest) {
     throw "No bundle in $DistDir - run: powershell -File scripts\create-saas-bundle.ps1"
@@ -62,12 +62,12 @@ Write-Host ''
 Write-Host 'Upload complete.' -ForegroundColor Green
 $leaf = Split-Path $BundlePath -Leaf
 Write-Host "  ssh $DropletHost"
-Write-Host '  mkdir -p /home/mooreview'
-Write-Host "  tar xzf /tmp/$leaf -C /home/mooreview --strip-components=1"
-if ($leaf -match 'mooreview-saas') {
-  Write-Host '  sudo MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview bash /home/mooreview/deploy/cloud/debian/install-saas.sh'
-  Write-Host "  sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed'"
+Write-Host '  mkdir -p /home/peaklogic'
+Write-Host "  tar xzf /tmp/$leaf -C /home/peaklogic --strip-components=1"
+if ($leaf -match 'peaklogic-saas') {
+  Write-Host '  sudo PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash /home/peaklogic/deploy/cloud/debian/install-saas.sh'
+  Write-Host "  sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'"
 } else {
-  Write-Host '  sudo MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview bash /home/mooreview/deploy/cloud/debian/install.sh'
-  Write-Host "  sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed:bundled-projects'"
+  Write-Host '  sudo PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash /home/peaklogic/deploy/cloud/debian/install.sh'
+  Write-Host "  sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed:bundled-projects'"
 }

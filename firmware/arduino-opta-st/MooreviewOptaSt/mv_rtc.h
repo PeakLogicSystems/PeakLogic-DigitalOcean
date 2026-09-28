@@ -8,7 +8,7 @@ bool mvRtcHasWallClock();
 /** Set RTC from Unix epoch seconds (UTC). No-op when RTC unavailable. */
 void mvRtcSetUnix(uint32_t epochUtc);
 
-/** Sync RTC from MooreVIEW header X-MV-Client-Time (Unix seconds). */
+/** Sync RTC from PeakLogic header X-MV-Client-Time (Unix seconds). */
 void mvRtcSyncFromHeader(const char* unixSeconds);
 
 /** Write "YYYY-MM-DD HH:MM:SS" into buf (NUL-terminated). Returns false if RTC invalid. */

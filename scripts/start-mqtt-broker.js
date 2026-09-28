@@ -10,9 +10,9 @@ const {
   detectLanIp,
 } = require('./mqtt-broker-paths');
 
-const DATA_DIR = process.env.MOOREVIEW_DATA || path.join(__dirname, '..', 'data');
+const DATA_DIR = process.env.PEAKLOGIC_DATA || path.join(__dirname, '..', 'data');
 const PID_FILE = path.join(DATA_DIR, 'mosquitto-dev.pid');
-const MARKER = '# MooreVIEW dev — LAN listener';
+const MARKER = '# PeakLogic dev — LAN listener';
 
 function isWindows() {
   return process.platform === 'win32';
@@ -155,7 +155,7 @@ async function main() {
   const { localOk, lanOk } = await lanListenerOk(lan);
   console.log(`Verify localhost:1883 → ${localOk ? 'OK' : 'FAIL'}`);
   if (lan !== '127.0.0.1') console.log(`Verify ${lan}:1883 → ${lanOk ? 'OK' : 'FAIL (check firewall or run as Admin to patch service conf)'}`);
-  console.log(`MooreVIEW mqttParc.brokerUrl → mqtt://${lan}:1883`);
+  console.log(`PeakLogic mqttParc.brokerUrl → mqtt://${lan}:1883`);
   if (!localOk && !lanOk) process.exit(1);
 }
 

@@ -26,7 +26,7 @@ describe('mvDrawStore saveNamedProject', () => {
     fs.cpSync(path.join(__dirname, '../mv-draw/src/groups.js'), path.join(formatPath, 'groups.js'));
     const { saveNamedProject } = require(storePath);
     const { project, file } = saveNamedProject('dwts_site', {
-      format: 'mooreview-mvdraw',
+      format: 'peaklogic-mvdraw',
       version: 1,
       name: 'Magnolia DWTS layout',
       units: 'ft',

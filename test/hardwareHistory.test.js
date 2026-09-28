@@ -3,7 +3,7 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-hw-'));
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-hw-'));
 
 const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert/strict');

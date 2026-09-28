@@ -13,7 +13,7 @@ function loadEnvFile(filePath) {
     process.env[k] = t.slice(eq + 1).trim();
   }
 }
-loadEnvFile('/etc/mooreview/saas.env');
+loadEnvFile('/etc/peaklogic/saas.env');
 const configStore = require('../src/configStore');
 (async () => {
   await configStore.init();

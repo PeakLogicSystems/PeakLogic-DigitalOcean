@@ -3,8 +3,8 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_CONFIG_URI = 'memory';
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-apply-'));
+process.env.PEAKLOGIC_CONFIG_URI = 'memory';
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-apply-'));
 const configStore = require('../src/configStore');
 configStore.initMemorySync();
 

@@ -17,12 +17,12 @@ function loadEnvFile(filePath) {
   }
 }
 
-loadEnvFile('/etc/mooreview/saas.env');
+loadEnvFile('/etc/peaklogic/saas.env');
 
 async function main() {
   const client = new MongoClient(process.env.MONGODB_URI);
   await client.connect();
-  const db = client.db(process.env.MOOREVIEW_CONFIG_DB || 'mooreview_config');
+  const db = client.db(process.env.PEAKLOGIC_CONFIG_DB || 'peaklogic_config');
   const snaps = await db.collection('project_snapshots').find({}).project({ tenantId: 1, projectId: 1, name: 1 }).limit(30).toArray();
   console.log('snapshots sample:', JSON.stringify(snaps, null, 2));
   const tenants = [...new Set(snaps.map((s) => s.tenantId))];

@@ -1,4 +1,4 @@
-# mooreVIEW Phase 1 — DigitalOcean Storage & Server Cost Review
+# PeakLogic Phase 1 — DigitalOcean Storage & Server Cost Review
 
 **500 devices · 50 MB/month per device · $10/mo renewal · NYC1 Phase 1 topology**
 
@@ -10,7 +10,7 @@
 
 ## Executive summary
 
-Directional **cost and revenue** estimate for mooreVIEW **Phase 1 DigitalOcean** deployment (`do-inventory.md` / `CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md`) at **500 monitored devices**, **50 MB/month** ingest per device, and **$10/month** monitoring renewal per device.
+Directional **cost and revenue** estimate for PeakLogic **Phase 1 DigitalOcean** deployment (`do-inventory.md` / `CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md`) at **500 monitored devices**, **50 MB/month** ingest per device, and **$10/month** monitoring renewal per device.
 
 ### Revenue @ $10/mo per device
 
@@ -187,6 +187,6 @@ If **$3/mo cellular** is bundled and passed through at cost on all 500 devices (
 
 ---
 
-*Phase 1 Storage Cost Review v1.1 — mooreVIEW platform planning.*
+*Phase 1 Storage Cost Review v1.1 — PeakLogic platform planning.*
 
-*mooreVIEW is a company powered by [The Purple Standard](https://purple-standard.com). © Purple Standard Holdings.*
+*PeakLogic is a company powered by [The Purple Standard](https://purple-standard.com). © Purple Standard Holdings.*

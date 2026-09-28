@@ -3,25 +3,25 @@
 'use strict';
 
 /**
- * Clear Mongo config store for the current tenant (fresh slate for MooreVIEW config).
+ * Clear Mongo config store for the current tenant (fresh slate for PeakLogic config).
  *
  * Usage:
  *   npm run fresh-start
- *   MOOREVIEW_CONFIG_URI=mongodb://127.0.0.1:27017 npm run fresh-start
+ *   PEAKLOGIC_CONFIG_URI=mongodb://127.0.0.1:27017 npm run fresh-start
  *
  * Environment:
- *   MOOREVIEW_CONFIG_URI / MONGODB_URI / MONGO_URL — Mongo connection (required, not "memory")
- *   MOOREVIEW_CONFIG_DB — config database (default: mooreview_config)
- *   MOOREVIEW_TENANT_ID — tenant scope (default: local)
- *   MOOREVIEW_FRESH_START_CLEAR_HISTORIAN=1 — also clear historian sample collections
+ *   PEAKLOGIC_CONFIG_URI / MONGODB_URI / MONGO_URL — Mongo connection (required, not "memory")
+ *   PEAKLOGIC_CONFIG_DB — config database (default: peaklogic_config)
+ *   PEAKLOGIC_TENANT_ID — tenant scope (default: local)
+ *   PEAKLOGIC_FRESH_START_CLEAR_HISTORIAN=1 — also clear historian sample collections
  *   MONGODB_DB / MONGODB_COLLECTION / MONGODB_EDGE_COLLECTION — historian targets when clearing
  *
  * Does NOT delete:
- *   - ST programs on disk (st/ or MOOREVIEW_ST)
+ *   - ST programs on disk (st/ or PEAKLOGIC_ST)
  *   - HMI asset files (public/hmi, data/hmi-imports)
  *
  * After running:
- *   1. Restart MooreVIEW (npm start) — config re-seeds from data/ when present, else empty library
+ *   1. Restart PeakLogic (npm start) — config re-seeds from data/ when present, else empty library
  *   2. npm run verify-stack — automated smoke checks
  *   3. Verify each subsystem in the browser (see verify-stack output checklist)
  */
@@ -41,7 +41,7 @@ const { DEFAULT_PDM } = require('../src/settings/pdmSettings');
 
 function historianUri() {
   return String(
-    process.env.MOOREVIEW_HISTORIAN_URI
+    process.env.PEAKLOGIC_HISTORIAN_URI
     || process.env.MONGODB_URI
     || process.env.MONGO_URL
     || CONFIG_URI,
@@ -84,20 +84,20 @@ async function clearHistorianCollections(client) {
 async function main() {
   const uri = String(CONFIG_URI || '').trim();
   if (!uri || uri === 'memory') {
-    console.error('Set MOOREVIEW_CONFIG_URI or MONGODB_URI to a real MongoDB server (not "memory").');
+    console.error('Set PEAKLOGIC_CONFIG_URI or MONGODB_URI to a real MongoDB server (not "memory").');
     process.exit(1);
   }
 
-  const clearHistorian = process.env.MOOREVIEW_FRESH_START_CLEAR_HISTORIAN === '1'
-    || process.env.MOOREVIEW_FRESH_START_CLEAR_HISTORIAN === 'true';
+  const clearHistorian = process.env.PEAKLOGIC_FRESH_START_CLEAR_HISTORIAN === '1'
+    || process.env.PEAKLOGIC_FRESH_START_CLEAR_HISTORIAN === 'true';
 
-  console.log('MooreVIEW fresh-start');
+  console.log('PeakLogic fresh-start');
   console.log(`  tenant: ${TENANT_ID}`);
   console.log(`  config db: ${CONFIG_DB}`);
   console.log(`  collections: ${CONFIG_COLLECTION}, ${CONFIG_PROJECTS_COLLECTION}`);
   console.log(`  data dir: ${DATA_DIR} (on-disk JSON not deleted)`);
   console.log(`  ST dir: ${ST_DIR} (programs not deleted)`);
-  console.log(`  clear historian: ${clearHistorian ? 'yes' : 'no (set MOOREVIEW_FRESH_START_CLEAR_HISTORIAN=1 to wipe)'}`);
+  console.log(`  clear historian: ${clearHistorian ? 'yes' : 'no (set PEAKLOGIC_FRESH_START_CLEAR_HISTORIAN=1 to wipe)'}`);
   console.log('');
 
   const client = new MongoClient(uri, { maxPoolSize: 4 });
@@ -135,7 +135,7 @@ async function main() {
     console.log('Next steps:');
     console.log('  1. Stop the server if running: npm run stop');
     console.log('  2. Optional: remove stale data/*.json to avoid re-import from disk');
-    console.log('  3. Start MooreVIEW: npm start');
+    console.log('  3. Start PeakLogic: npm start');
     console.log('  4. Run smoke checks: npm run verify-stack');
     console.log('  5. Verify UI: default project seed, startup load, save/open, tags/drivers, HMI, runtime, MQTT Parc');
   } finally {

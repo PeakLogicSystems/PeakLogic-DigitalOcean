@@ -21,7 +21,7 @@ function defaultDraginoSettings(cfg = {}) {
   };
 }
 
-/** MQTT publish topics for Dragino AT+PUBTOPIC / AT+SUBTOPIC (direct to MooreVIEW cloud). */
+/** MQTT publish topics for Dragino AT+PUBTOPIC / AT+SUBTOPIC (direct to PeakLogic cloud). */
 function draginoCloudMqttTopics(cfg, deviceId, tenantId) {
   const id = String(deviceId || '').trim();
   const tenant = String(tenantId || '').trim();
@@ -150,7 +150,7 @@ function normalizeDraginoPayload(body) {
   return String(raw || '');
 }
 
-/** Convert Dragino JSON uplink → MooreVIEW Parc v1 telemetry report. */
+/** Convert Dragino JSON uplink → PeakLogic Parc v1 telemetry report. */
 function draginoToParcReport(body, deviceId, opts = {}) {
   if (!body || typeof body !== 'object') {
     throw new Error('Dragino body required');

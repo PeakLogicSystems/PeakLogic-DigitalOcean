@@ -1,5 +1,5 @@
 /*
- * Persistent device configuration (NVS), Opta-style fields for MooreVIEW Parc.
+ * Persistent device configuration (NVS), Opta-style fields for PeakLogic Parc.
  *
  * SPDX-License-Identifier: Apache-2.0
  */

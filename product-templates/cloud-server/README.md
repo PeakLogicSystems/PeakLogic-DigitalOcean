@@ -1,4 +1,4 @@
-# mooreVIEW Cloud Studio
+# PeakLogic Cloud Studio
 
 **Full Studio on the SaaS droplet** (port **3100**): ST, Projects, Tags, Drivers, HMI, Historian, Training — plus **Sites & remote cameras** (outbound site agents).
 
@@ -6,14 +6,14 @@ This matches the prior Cloud Studio experience; remote camera pairing is additiv
 
 | Role | Port |
 |------|------|
-| Cloud Studio (this package) | **3100** behind nginx `mooreview-saas` |
+| Cloud Studio (this package) | **3100** behind nginx `peaklogic-saas` |
 | Site appliance (est-pc / IOT-LINK) | **3090** on site LAN |
 
 ## Start
 
 ```bash
-export MOOREVIEW_DEPLOYMENT=cloud
-export MOOREVIEW_PRODUCT=mvp-suite
+export PEAKLOGIC_DEPLOYMENT=cloud
+export PEAKLOGIC_PRODUCT=mvp-suite
 export PORT=3100
 npm install && npm start
 ```

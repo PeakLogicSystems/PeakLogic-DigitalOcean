@@ -53,13 +53,13 @@ class TenantStore {
 
   ensureSeed() {
     if (this._store.seededAt && Object.keys(this._store.tenants).length) return;
-    const tenantSlug = process.env.MOOREVIEW_SEED_TENANT || 'demo';
-    const adminEmail = process.env.MOOREVIEW_SEED_ADMIN_EMAIL || 'admin@demo.local';
-    const adminPass = process.env.MOOREVIEW_SEED_ADMIN_PASSWORD || 'ChangeMeAdmin!';
-    const opEmail = process.env.MOOREVIEW_SEED_OPERATOR_EMAIL || 'operator@demo.local';
-    const opPass = process.env.MOOREVIEW_SEED_OPERATOR_PASSWORD || 'demo';
-    const hoEmail = process.env.MOOREVIEW_SEED_HOMEOWNER_EMAIL || 'homeowner@demo.local';
-    const hoPass = process.env.MOOREVIEW_SEED_HOMEOWNER_PASSWORD || 'demo';
+    const tenantSlug = process.env.PEAKLOGIC_SEED_TENANT || 'demo';
+    const adminEmail = process.env.PEAKLOGIC_SEED_ADMIN_EMAIL || 'admin@demo.local';
+    const adminPass = process.env.PEAKLOGIC_SEED_ADMIN_PASSWORD || 'ChangeMeAdmin!';
+    const opEmail = process.env.PEAKLOGIC_SEED_OPERATOR_EMAIL || 'operator@demo.local';
+    const opPass = process.env.PEAKLOGIC_SEED_OPERATOR_PASSWORD || 'demo';
+    const hoEmail = process.env.PEAKLOGIC_SEED_HOMEOWNER_EMAIL || 'homeowner@demo.local';
+    const hoPass = process.env.PEAKLOGIC_SEED_HOMEOWNER_PASSWORD || 'demo';
 
     const existingBySlug = Object.values(this._store.tenants).find((t) => t.tenantSlug === tenantSlug);
     if (!existingBySlug && !this._store.tenants[tenantSlug]) {

@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
-# MooreVIEW archive server (cloud 2) — zstd blob store on :8090. No MongoDB.
+# PeakLogic archive server (cloud 2) — zstd blob store on :8090. No MongoDB.
 #
 # Run as root after WinSCP upload:
-#   sudo MOOREVIEW_SOURCE=/opt/mooreview-archive MOOREVIEW_ARCHIVE_DIR=/opt/mooreview-archive \
+#   sudo PEAKLOGIC_SOURCE=/opt/peaklogic-archive PEAKLOGIC_ARCHIVE_DIR=/opt/peaklogic-archive \
 #     bash deploy/cloud/debian/install-archive.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ARCHIVE_ENV="${MOOREVIEW_ARCHIVE_ENV:-/etc/mooreview/archive.env}"
+ARCHIVE_ENV="${PEAKLOGIC_ARCHIVE_ENV:-/etc/peaklogic/archive.env}"
 ARCHIVE_ROOT="${ARCHIVE_ROOT:-/data/archive}"
-ARCHIVE_DIR="${MOOREVIEW_ARCHIVE_DIR:-/opt/mooreview-archive}"
-SERVICE_USER="${MOOREVIEW_USER:-mooreview}"
-SOURCE_DIR="${MOOREVIEW_SOURCE:-$ARCHIVE_DIR}"
-SAAS_DROPLET_IP="${MOOREVIEW_SAAS_IP:-}"
+ARCHIVE_DIR="${PEAKLOGIC_ARCHIVE_DIR:-/opt/peaklogic-archive}"
+SERVICE_USER="${PEAKLOGIC_USER:-peaklogic}"
+SOURCE_DIR="${PEAKLOGIC_SOURCE:-$ARCHIVE_DIR}"
+SAAS_DROPLET_IP="${PEAKLOGIC_SAAS_IP:-}"
 
-log() { printf '[mooreview-archive] %s\n' "$*"; }
-die() { printf '[mooreview-archive] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-archive] %s\n' "$*"; }
+die() { printf '[peaklogic-archive] ERROR: %s\n' "$*" >&2; exit 1; }
 
 strip_crlf() {
   local f="$1"
@@ -56,8 +56,8 @@ if ! id "$SERVICE_USER" >/dev/null 2>&1; then
   useradd --system --home-dir "$ARCHIVE_DIR" --no-create-home --shell /usr/sbin/nologin "$SERVICE_USER"
 fi
 
-install -d -m 0750 -o root -g "$SERVICE_USER" /etc/mooreview
-strip_crlf "$SCRIPT_DIR/mooreview-archive.service"
+install -d -m 0750 -o root -g "$SERVICE_USER" /etc/peaklogic
+strip_crlf "$SCRIPT_DIR/peaklogic-archive.service"
 
 ENV_TEMPLATE=""
 for candidate in \
@@ -111,14 +111,14 @@ fi
 install -d -m 0750 -o "$SERVICE_USER" -g "$SERVICE_USER" "$ARCHIVE_ROOT"
 chown -R "$SERVICE_USER:$SERVICE_USER" "$ARCHIVE_DIR"
 
-sed -e "s|@MOOREVIEW_ARCHIVE_DIR@|${ARCHIVE_DIR}|g" \
+sed -e "s|@PEAKLOGIC_ARCHIVE_DIR@|${ARCHIVE_DIR}|g" \
     -e "s|@ARCHIVE_ROOT@|${ARCHIVE_ROOT}|g" \
-  "$SCRIPT_DIR/mooreview-archive.service" > /etc/systemd/system/mooreview-archive.service
-chmod 0644 /etc/systemd/system/mooreview-archive.service
+  "$SCRIPT_DIR/peaklogic-archive.service" > /etc/systemd/system/peaklogic-archive.service
+chmod 0644 /etc/systemd/system/peaklogic-archive.service
 
 systemctl daemon-reload
-systemctl enable mooreview-archive.service
-systemctl restart mooreview-archive.service
+systemctl enable peaklogic-archive.service
+systemctl restart peaklogic-archive.service
 
 if command -v ufw >/dev/null 2>&1; then
   ufw allow OpenSSH >/dev/null 2>&1 || true
@@ -126,19 +126,19 @@ if command -v ufw >/dev/null 2>&1; then
     log "UFW: allowing TCP ${PORT} from SaaS droplet ${SAAS_DROPLET_IP} only"
     ufw allow from "$SAAS_DROPLET_IP" to any port "$PORT" proto tcp >/dev/null 2>&1 || true
   else
-    log "UFW: allowing TCP ${PORT} (set MOOREVIEW_SAAS_IP on re-run to restrict source IP)"
+    log "UFW: allowing TCP ${PORT} (set PEAKLOGIC_SAAS_IP on re-run to restrict source IP)"
     ufw allow "${PORT}/tcp" >/dev/null 2>&1 || true
   fi
   ufw --force enable >/dev/null 2>&1 || true
 fi
 
 log "Done — archive server on port ${PORT}"
-if systemctl is-active --quiet mooreview-archive.service 2>/dev/null; then
-  log "  mooreview-archive: active"
+if systemctl is-active --quiet peaklogic-archive.service 2>/dev/null; then
+  log "  peaklogic-archive: active"
 else
-  log "  mooreview-archive: NOT running (journalctl -u mooreview-archive -n 40)"
+  log "  peaklogic-archive: NOT running (journalctl -u peaklogic-archive -n 40)"
 fi
 log "  Health: curl -s http://127.0.0.1:${PORT}/health"
 log "  Root:   ${ARCHIVE_ROOT}"
 log "  Env:    ${ARCHIVE_ENV}"
-log "  Logs:   journalctl -u mooreview-archive -f"
+log "  Logs:   journalctl -u peaklogic-archive -f"

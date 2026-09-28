@@ -417,7 +417,7 @@ function halCntTags(driverId, count = 2, prefix = 'HWCNT') {
   return tags;
 }
 
-/** MooreVIEW Opta / MQTT Parc channel tag (id matches firmware + telemetry). */
+/** PeakLogic Opta / MQTT Parc channel tag (id matches firmware + telemetry). */
 function optaChannelTag(driverId, id, type, role) {
   const t = String(type || 'BOOL').toUpperCase();
   const r = role || (t === 'BOOL' && /^R\d|_R\d|_PWM/i.test(id) ? 'output' : 'input');

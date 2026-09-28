@@ -36,16 +36,16 @@ class ModbusDriver {
   }
 
   _bindPortErrors() {
-    if (!this.client._mooreviewErr) {
-      this.client._mooreviewErr = true;
+    if (!this.client._peaklogicErr) {
+      this.client._peaklogicErr = true;
       this.client.on('error', (err) => {
         this._lastError = err.message || String(err);
         this.connected = false;
       });
     }
     const port = this.client?._port;
-    if (!port || port._mooreviewErr) return;
-    port._mooreviewErr = true;
+    if (!port || port._peaklogicErr) return;
+    port._peaklogicErr = true;
     port.on('error', (err) => {
       this._lastError = err.message || String(err);
       this.connected = false;

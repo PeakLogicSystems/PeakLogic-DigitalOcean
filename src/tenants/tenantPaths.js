@@ -10,7 +10,7 @@ const GLOBAL_DATA_FILES = new Set([
   'cloud_sites.json',
   'cmms.json',
   'cameras.json',
-  'mooreview.pid',
+  'peaklogic.pid',
   'sys_log.json',
   'parc.json',
 ]);

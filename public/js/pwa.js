@@ -1,4 +1,4 @@
-/* Registers the MooreView service worker for installable/offline support. */
+/* Registers the PeakLogic service worker for installable/offline support. */
 (function () {
   'use strict';
   if (!('serviceWorker' in navigator)) return;

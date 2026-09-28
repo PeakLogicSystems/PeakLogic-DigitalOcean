@@ -5,7 +5,7 @@
 /*
  * WiFi peripheral ingest — Opta as a ROOM INTEGRATION device.
  *
- * The Opta hosts a WiFi setup AP (SSID MooreVIEW-Opta, 192.168.4.1). Multiple Shelly
+ * The Opta hosts a WiFi setup AP (SSID PeakLogic-Opta, 192.168.4.1). Multiple Shelly
  * Flood Gen4 leak sensors in a room join that AP as stations and PUSH their state to the
  * Opta over HTTP (Shelly "Actions" webhook). The Opta maps each sensor to a slotted set
  * of tags that flow to the central HMI over PARC/MQTT (Ethernet) and are usable in ST.

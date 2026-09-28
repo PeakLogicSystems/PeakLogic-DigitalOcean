@@ -3,7 +3,7 @@
   "label": "Motor / pump (HOA + commands)",
   "group": "Motor control",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/motor-faceplates/mooreview/motor_hoa.svg",
+  "preview": "/hmi/svg/library/motor-faceplates/peaklogic/motor_hoa.svg",
   "tagRoles": {
     "hoa": { "pick": "tagId", "tagId": "MOTOR1_HOA", "types": ["INT"] },
     "status": { "pick": "tagId", "tagId": "MOTOR1_STA", "types": ["INT"] },
@@ -20,7 +20,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/motor-faceplates/mooreview/motor_hoa.svg"
+      "svg": "/hmi/svg/library/motor-faceplates/peaklogic/motor_hoa.svg"
     }
   ],
   "defaultBindings": [

@@ -5,7 +5,7 @@ const { globalTopic } = require('./globalAddressKey');
 const { globalBaseType } = require('./globalTagMeta');
 
 /**
- * Publish dirty global tags to mooreview/v1/g/{siteKey4}/{tag} (retained QoS1).
+ * Publish dirty global tags to peaklogic/v1/g/{siteKey4}/{tag} (retained QoS1).
  * @returns {number} count published
  */
 function publishDirtyGlobalTags(hub, tagStore) {

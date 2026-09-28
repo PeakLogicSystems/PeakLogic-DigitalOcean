@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -a
 # shellcheck disable=SC1091
-. /etc/mooreview/mqtt.env
+. /etc/peaklogic/mqtt.env
 set +a
 
 echo "=== openssl ==="
-openssl s_client -connect 127.0.0.1:8883 -servername mqtt.mooreview.io </dev/null 2>&1 | head -30
+openssl s_client -connect 127.0.0.1:8883 -servername mqtt.peaklogic.io </dev/null 2>&1 | head -30
 
 echo "=== mosquitto_pub cafile ==="
 mosquitto_pub -h 127.0.0.1 -p 8883 \
@@ -21,5 +21,5 @@ mosquitto_pub -h 127.0.0.1 -p 8883 --insecure \
 echo "exit=$?"
 
 echo "=== conf ==="
-cat /etc/mosquitto/conf.d/mooreview.conf
+cat /etc/mosquitto/conf.d/peaklogic.conf
 tail -20 /var/log/mosquitto/mosquitto.log

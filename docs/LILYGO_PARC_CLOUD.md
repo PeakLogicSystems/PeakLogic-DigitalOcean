@@ -10,11 +10,11 @@ Firmware tree: `cellular-parc-st/` · platform `lilygo-t-eth-elite-parc-st` · p
 LilyGO T-ETH-ELITE (Parc ST soft PLC)
         │  Wi-Fi STA → router → internet
         │  MQTT :1883  (plain — same as Opta)
-        │  mooreview/v1/{deviceId}/telemetry|cmd|…
+        │  peaklogic/v1/{deviceId}/telemetry|cmd|…
         ▼
 Cloud Mosquitto (MOSQUITTO_USER / MOSQUITTO_PASS)
         ▼
-MooreVIEW Cloud Studio — MQTT Parc hub → mqtt_parc driver
+PeakLogic Cloud Studio — MQTT Parc hub → mqtt_parc driver
 ```
 
 No A7670 modem, no Opta bridge, no local broker.
@@ -39,7 +39,7 @@ See `cellular-parc-st/BUILD.md`.
 
 ## Field config
 
-1. Join AP **`MooreVIEW-ParcST`** / `mooreview`.
+1. Join AP **`PeakLogic-ParcST`** / `peaklogic`.
 2. Open `http://192.168.4.1:8080/setup`.
 3. Set **Router Wi-Fi**, **Cloud MQTT** host/user/pass (password ≤ 47 chars), **deviceId**, **global site key**, **device mode**.
 4. Save → confirm WAN IP; check `http://192.168.4.1:8080/api/status`.

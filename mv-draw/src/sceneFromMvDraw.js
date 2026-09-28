@@ -297,7 +297,7 @@ function buildSceneFromMvDraw(rawProject, opts = {}) {
       };
 
   return {
-    source: 'mooreview-mvdraw',
+    source: 'peaklogic-mvdraw',
     name: doc.name || 'untitled',
     units: doc.units || 'ft',
     generatedAt: new Date().toISOString(),

@@ -6,7 +6,7 @@ const { isCloudSimsEnabled } = require('../../cloud/cloudSimsEnabled');
 function requireCloudSims(req, res, next) {
   if (!isCloudSimsEnabled()) {
     return res.status(403).json({
-      error: 'Cloud sim management requires MOOREVIEW_DEPLOYMENT=cloud, MOOREVIEW_CLOUD_SIMS=1, or settings cloudSims.enabled',
+      error: 'Cloud sim management requires PEAKLOGIC_DEPLOYMENT=cloud, PEAKLOGIC_CLOUD_SIMS=1, or settings cloudSims.enabled',
     });
   }
   return next();

@@ -13,7 +13,7 @@ describe('migrateFromFiles bundled sync', () => {
     const projectsDir = path.join(dir, 'projects');
     fs.mkdirSync(projectsDir, { recursive: true });
     const diskDoc = {
-      format: 'mooreview-est',
+      format: 'peaklogic-est',
       version: 1,
       savedAt: '2020-01-01T00:00:00.000Z',
       project: { name: 'Assisted Living' },
@@ -58,7 +58,7 @@ describe('migrateFromFiles bundled sync', () => {
     const projectsDir = path.join(dir, 'projects');
     fs.mkdirSync(projectsDir, { recursive: true });
     const diskDoc = {
-      format: 'mooreview-est',
+      format: 'peaklogic-est',
       version: 1,
       savedAt: new Date().toISOString(),
       project: { name: 'Assisted Living' },

@@ -46,7 +46,7 @@ describe('duplex lift station HMI bindings', () => {
     const screen = est.settings.hmi.screens.find((s) => s.id === 'screen_2');
     assert.ok(screen);
     assert.equal(screen.name, 'DUPLEXLS');
-    assert.equal(screen.svg, '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg');
+    assert.equal(screen.svg, '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg');
     assert.equal(screen.tiles.length, 1);
     assert.equal(screen.tiles[0].compositeId, 'duplexls');
     assert.equal(screen.tiles[0].layers[0].svg, screen.svg);
@@ -90,7 +90,7 @@ describe('duplex lift station HMI bindings', () => {
     const lift = listHmiComposites(PUBLIC)
       .find((c) => c.composite?.id === 'duplexls')?.composite;
     assert.ok(lift, 'duplexls composite');
-    assert.equal(lift.parts[0].svg, '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg');
+    assert.equal(lift.parts[0].svg, '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg');
     assert.ok(lift.defaultBindings.some((b) => b.elementId === 'btn_p1_start' && b.interaction === 'pulse'));
     assert.ok(lift.defaultBindings.some((b) => b.elementId === 'lamp_phase_fault' && b.tagRole === 'phaseFault'));
     assert.ok(lift.defaultBindings.some((b) => b.elementId === 'lamp_status' && b.tagRole === 'stationSta'));

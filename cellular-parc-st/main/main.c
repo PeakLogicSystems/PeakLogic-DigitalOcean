@@ -1,5 +1,5 @@
 /*
- * MooreVIEW cellular Parc ST — ESP32 soft PLC (runs MVBC like the PC / Opta).
+ * PeakLogic cellular Parc ST — ESP32 soft PLC (runs MVBC like the PC / Opta).
  *
  * Board: LilyGO T-ETH-ELITE-A7670X
  * Default WAN: Wi-Fi STA (no modem) for cloud-arduino / bench testing.
@@ -31,7 +31,7 @@ static parc_st_cfg_t s_cfg;
 
 void app_main(void)
 {
-    printf("\n\n=== MooreVIEW Parc ST (ESP32 soft PLC) %s " __DATE__ " " __TIME__ " ===\n",
+    printf("\n\n=== PeakLogic Parc ST (ESP32 soft PLC) %s " __DATE__ " " __TIME__ " ===\n",
            MV_FIRMWARE_VERSION);
 
     esp_err_t err = nvs_flash_init();

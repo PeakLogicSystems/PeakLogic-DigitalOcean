@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * MooreView Training — full curriculum (MooreView M0–M15 + IoT CBM CBM-1–CBM-13).
+ * PeakLogic Training — full curriculum (PeakLogic M0–M15 + IoT CBM CBM-1–CBM-13).
  * Open via Tools → Training.
  */
-window.MooreviewTraining = (function () {
+window.PeaklogicTraining = (function () {
   const MV_MODULES = [
     {
       id: 'm0',
@@ -113,7 +113,7 @@ window.MooreviewTraining = (function () {
       level: 'Specialty',
       prereq: 'M1',
       outcomes: 'Open MV Draw; scale plan; place symbols; save into .est.zip project.',
-      lab: 'Open assisted-living plan; place symbols; Save to MooreView project; export .est.zip.',
+      lab: 'Open assisted-living plan; place symbols; Save to PeakLogic project; export .est.zip.',
       help: 'F1 → MV Draw; mv-draw/README.md',
     },
     {
@@ -176,7 +176,7 @@ window.MooreviewTraining = (function () {
     { id: 'cbm5', num: 5, title: 'Commercial Applications', mapsTo: 'M13 vertical, M4 BACnet', exercise: 'Case study: multi-site office building monitoring; optional BAS point import.' },
     { id: 'cbm6', num: 6, title: 'Installation & Commissioning', mapsTo: 'M2, M4, M14', exercise: 'Install sensors on demonstration equipment.' },
     { id: 'cbm7', num: 7, title: 'Connectivity & Networking', mapsTo: 'M7, M12, M14', exercise: 'Configure gateway network and cloud reachability.' },
-    { id: 'cbm8', num: 8, title: 'Cloud Platforms & Dashboards — MooreView', mapsTo: 'M6, M8, M12, M15', exercise: 'Create HVAC equipment dashboard in MooreView; add camera popup on mechanical room screen.' },
+    { id: 'cbm8', num: 8, title: 'Cloud Platforms & Dashboards — PeakLogic', mapsTo: 'M6, M8, M12, M15', exercise: 'Create HVAC equipment dashboard in PeakLogic; add camera popup on mechanical room screen.' },
     { id: 'cbm9', num: 9, title: 'Alarm Management', mapsTo: 'M9', exercise: 'Configure high temp, vibration, leak, power failure alarms.' },
     { id: 'cbm10', num: 10, title: 'Data Analysis & Predictive Maintenance', mapsTo: 'M8, M11, M9, M15', exercise: 'Analyze six months of equipment trend data; review camera inference history.' },
     { id: 'cbm11', num: 11, title: 'Cybersecurity Best Practices', mapsTo: 'M1, M12', exercise: 'Review user roles and cloud tenant isolation.' },
@@ -186,10 +186,10 @@ window.MooreviewTraining = (function () {
 
   const CBM_TOPICS = {
     cbm1: 'Define CBM; compare reactive, preventive, predictive, condition-based maintenance; ROI; remote monitoring.',
-    cbm2: 'Sensors, controllers, edge devices, gateways, MooreView cloud, mobile apps; Wi-Fi, Ethernet, Bluetooth, HaLow, cellular.',
+    cbm2: 'Sensors, controllers, edge devices, gateways, PeakLogic cloud, mobile apps; Wi-Fi, Ethernet, Bluetooth, HaLow, cellular.',
     cbm3: 'Temperature, vibration/MCSA, current, voltage, pressure, flow, environmental, leak, occupancy sensors.',
     cbm4: 'Heat pumps, A/C, furnaces, water heaters, sump pumps, IAQ, leak detection, solar, battery storage.',
-    cbm5: 'Commercial HVAC, chillers, towers, boilers, compressors, pumps, refrigeration, BAS (MooreView BACnet/IP coexistence), generators.',
+    cbm5: 'Commercial HVAC, chillers, towers, boilers, compressors, pumps, refrigeration, BAS (PeakLogic BACnet/IP coexistence), generators.',
     cbm6: 'Site surveys, sensor placement, mounting, wiring, wireless survey, gateway install, calibration, functional test.',
     cbm7: 'IP addressing, DHCP, static IP, Wi-Fi, Ethernet, cellular, VPN, firewalls, cloud communications.',
     cbm8: 'Device registration, dashboard design, trend charts, asset management, reports, API integration.',
@@ -211,7 +211,7 @@ window.MooreviewTraining = (function () {
     { id: 'm7', title: 'M7 — Parc hub & Opta', time: '180 min', prep: 'Opta flashed; broker up; BASELINE_TEST on board.', teach: 'Parc topics; hub enable; mqtt_parc; Download & Start.', lab: 'Rotate pairs on Opta bench.', pitfalls: 'Hub off; deviceId typo.', verify: 'Checkpoint C telemetry + remote start.' },
     { id: 'm8', title: 'M8 — Historian & reports', time: '120 min', prep: 'Mongo optional; two changing tags.', teach: 'Hist vs pens; logger; CSV export.', lab: '5 min capture; export CSV.', pitfalls: 'Hist unchecked; runtime stopped.', verify: 'CSV has timestamps.' },
     { id: 'm9', title: 'M9 — Alarms & CMMS', time: '120 min', prep: 'Tag with IH limit; CMMS enabled for student login.', teach: 'Limits; ack; integrated /cmms WO + alarm auto-WO (reactive); PdM proactive PM WO (early warning); external MQTT bridge (optional).', lab: 'Trip alarm; Ack; open CMMS; seed PdM and verify proactive WO.', pitfalls: 'Wrong tag type for limit; confusing integrated CMMS vs MQTT publish; reactive vs proactive WO.', verify: 'Alarm trips, acks, CMMS WO visible; student explains proactive vs reactive.' },
-    { id: 'm10', title: 'M10 — MV Draw', time: '120 min', prep: 'Assisted-living plan asset.', teach: 'Scale plan; symbols; Save to MooreView project; .est.zip includes mv-draw/.', lab: 'Place symbols; save to project; export .est.zip; reload.', pitfalls: 'Lost scale factor; Plan composer mode vs dashboard.', verify: 'Symbols persist after import on second machine.' },
+    { id: 'm10', title: 'M10 — MV Draw', time: '120 min', prep: 'Assisted-living plan asset.', teach: 'Scale plan; symbols; Save to PeakLogic project; .est.zip includes mv-draw/.', lab: 'Place symbols; save to project; export .est.zip; reload.', pitfalls: 'Lost scale factor; Plan composer mode vs dashboard.', verify: 'Symbols persist after import on second machine.' },
     { id: 'm11', title: 'M11 — PdM & ROI', time: '90 min', prep: 'Demo with Hist or edge samples; Mongo recommended.', teach: 'Asset setup; health index; forecast; proactive CMMS; ROI calc — proactive not reactive.', lab: 'Seed demo data; build features; proactive check; CMMS WO; PdM PDF.', pitfalls: 'No data — use Seed demo data; proactive disabled in settings.', verify: 'Student explains forecast + proactive PM WO.' },
     { id: 'm12', title: 'M12 — Cloud Studio', time: '120 min', prep: 'Local: npm run start:saas + npm run seed. Or hosted DO droplet.', teach: 'Organization ID login; Sites, All devices, Assets map, /cmms entitlement; edge vs cloud field buses (Modbus, BACnet/IP); Deploy/Share project. Optional: CLOUD_DEPLOY_DO.md for integrators.', lab: 'Sign in org demo; tour /sites, /sites/devices, /fleet, /cmms; Deploy/Share in Studio; explain appliance + cloud remote uplink.', pitfalls: 'Cloud down — use slides; Modbus/BACnet on cloud fails by design — use edge appliance.', verify: 'Login + device inventory + map colors explained; CMMS entitlement articulated if enabled.' },
     { id: 'm13', title: 'M13 — Vertical lab', time: '180 min', prep: 'Vertical .est.zip per team.', teach: 'Assign vertical; M2–M6 on domain demo.', lab: 'Peer demo 10 min.', pitfalls: 'Team skips alarms.', verify: 'Final demo rubric.' },
@@ -227,7 +227,7 @@ window.MooreviewTraining = (function () {
     { id: 'cbm5', title: 'CBM-5 — Commercial', time: '60 min', teach: 'Multi-site office case.', exercise: 'Centralized alarm escalation.', mapsTo: 'M13; Position ID' },
     { id: 'cbm6', title: 'CBM-6 — Installation', time: '120 min', teach: 'Site survey; mounting; wiring safety.', exercise: 'Install on demo skid.', mapsTo: 'M2, M4' },
     { id: 'cbm7', title: 'CBM-7 — Networking', time: '90 min', teach: 'IP, DHCP, cellular, VPN.', exercise: 'Classroom IP table.', mapsTo: 'M7, M12, M14' },
-    { id: 'cbm8', title: 'CBM-8 — Dashboards', time: '120 min', teach: 'MooreView registration + HMI; optional camera popup.', exercise: 'HVAC dashboard lab.', mapsTo: 'M6, M8, M15' },
+    { id: 'cbm8', title: 'CBM-8 — Dashboards', time: '120 min', teach: 'PeakLogic registration + HMI; optional camera popup.', exercise: 'HVAC dashboard lab.', mapsTo: 'M6, M8, M15' },
     { id: 'cbm9', title: 'CBM-9 — Alarms', time: '90 min', teach: 'Thresholds; escalation.', exercise: 'Four alarm types.', mapsTo: 'M9' },
     { id: 'cbm10', title: 'CBM-10 — PdM analysis', time: '90 min', teach: 'Trends; RUL; proactive CMMS before alarm.', exercise: 'Seed PdM demo; verify proactive WO.', mapsTo: 'M8, M11, M9' },
     { id: 'cbm11', title: 'CBM-11 — Cybersecurity', time: '60 min', teach: 'MFA; segmentation; creds on gateway.', exercise: 'Review roles.', mapsTo: 'M1, M12' },
@@ -238,7 +238,7 @@ window.MooreviewTraining = (function () {
   function instructorModuleHtml(m, isCbm) {
     if (isCbm) {
       return `
-        <p><strong>Time:</strong> ${m.time} · <strong>MooreView labs:</strong> ${m.mapsTo}</p>
+        <p><strong>Time:</strong> ${m.time} · <strong>PeakLogic labs:</strong> ${m.mapsTo}</p>
         <h4>Teach</h4><p>${m.teach}</p>
         <h4>Exercise</h4><p>${m.exercise}</p>
       `;
@@ -259,7 +259,7 @@ window.MooreviewTraining = (function () {
         id: 'ig-intro',
         title: 'How to use this guide',
         html: `
-          <p>Instructor-facing notes for the unified <strong>MooreView M0–M15</strong> + <strong>IoT CBM CBM-1–CBM-13</strong> curriculum. Learners use other Training tabs; trainers use this tab and the full document:</p>
+          <p>Instructor-facing notes for the unified <strong>PeakLogic M0–M15</strong> + <strong>IoT CBM CBM-1–CBM-13</strong> curriculum. Learners use other Training tabs; trainers use this tab and the full document:</p>
           <p><code>docs/training/instructor-guide.md</code></p>
           <h4>Opening script</h4>
           <p>Start every cohort with F2 → <strong>Overview → Start here</strong>. Who / Where / What / Why / How — about 10–15 minutes before M0 or CBM-1.</p>
@@ -277,8 +277,8 @@ window.MooreviewTraining = (function () {
             <tr><td>CBM Basic</td><td>1 day</td><td>CBM-1–4 + M0</td></tr>
             <tr><td>CBM Intermediate</td><td>2 days</td><td>CBM-1–10 + M6/M8/M9</td></tr>
             <tr><td>CBM Advanced</td><td>3 days</td><td>Full CBM + capstone</td></tr>
-            <tr><td>MooreView Operator</td><td>~12 h</td><td>M0, M1, M3, M6, M8, M9, M13</td></tr>
-            <tr><td>MooreView Integrator</td><td>~7 days</td><td>M0–M15</td></tr>
+            <tr><td>PeakLogic Operator</td><td>~12 h</td><td>M0, M1, M3, M6, M8, M9, M13</td></tr>
+            <tr><td>PeakLogic Integrator</td><td>~7 days</td><td>M0–M15</td></tr>
           </table>
         `,
       },
@@ -324,7 +324,7 @@ window.MooreviewTraining = (function () {
             <tr><td>2</td><td>CBM-6 install lab</td><td>CBM-7–8 + M6 dashboard</td></tr>
             <tr><td>3</td><td>CBM-9–10</td><td>CBM-11–12; CBM-13 capstone</td></tr>
           </table>
-          <h4>MooreView integrator — 7 days</h4>
+          <h4>PeakLogic integrator — 7 days</h4>
           <table class="help-table">
             <tr><th>Day</th><th>Modules</th><th>Checkpoint</th></tr>
             <tr><td>1</td><td>M0, M1, M2</td><td>A</td></tr>
@@ -341,7 +341,7 @@ window.MooreviewTraining = (function () {
         id: 'ig-rubrics',
         title: 'Assessment rubrics',
         html: `
-          <h4>MooreView checkpoints</h4>
+          <h4>PeakLogic checkpoints</h4>
           <table class="help-table">
             <tr><th>Gate</th><th>Pass criteria</th></tr>
             <tr><td>A (M2)</td><td>Template vs fixture vs composite; saved .est.zip</td></tr>
@@ -379,15 +379,15 @@ window.MooreviewTraining = (function () {
           </ol>
           <h4>T-HaLow (M14)</h4>
           <ol>
-            <li>AP <code>MooreView-T-HaLow</code> → <code>192.168.4.1:8080/setup</code></li>
+            <li>AP <code>PeakLogic-T-HaLow</code> → <code>192.168.4.1:8080/setup</code></li>
             <li>Set HaLow broker IP, deviceId, template #2</li>
             <li>Pair HaLow; add driver; Sync tags</li>
           </ol>
           <h4>T-ETH bridge (M14)</h4>
           <ol>
-            <li>Gateway <code>MooreView-Gateway</code> → cloud broker + APN</li>
+            <li>Gateway <code>PeakLogic-Gateway</code> → cloud broker + APN</li>
             <li>Opta broker = <code>192.168.1.1:1883</code></li>
-            <li>Confirm <code>mooreview/v1/#</code> on cloud broker</li>
+            <li>Confirm <code>peaklogic/v1/#</code> on cloud broker</li>
           </ol>
           <h4>IP cameras (M15 / Checkpoint E)</h4>
           <ol>
@@ -398,7 +398,7 @@ window.MooreviewTraining = (function () {
             <li>HMI <strong>Camera + I/O overlays</strong> tile (span 2×2) → inventory picker → Apply</li>
             <li>Live HMI: video + overlay reacts to tag; capture snapshot; Run infer (stub)</li>
           </ol>
-          <p><strong>Stuck?</strong> <code>mosquitto_sub -t 'mooreview/v1/#' -v</code> · cameras: <code>docs/CAMERAS.md</code></p>
+          <p><strong>Stuck?</strong> <code>mosquitto_sub -t 'peaklogic/v1/#' -v</code> · cameras: <code>docs/CAMERAS.md</code></p>
         `,
       },
       {
@@ -436,7 +436,7 @@ window.MooreviewTraining = (function () {
     }));
     return [
       ...core,
-      { id: 'ig-mv-header', title: 'MooreView modules (M0–M15)', html: '<p>Module-by-module instructor notes. Cross-reference learner tab <strong>MooreView</strong>.</p>' },
+      { id: 'ig-mv-header', title: 'PeakLogic modules (M0–M15)', html: '<p>Module-by-module instructor notes. Cross-reference learner tab <strong>PeakLogic</strong>.</p>' },
       ...mv,
       { id: 'ig-cbm-header', title: 'IoT CBM modules (CBM-1–CBM-13)', html: '<p>Theory and exercises. Cross-reference learner tab <strong>IoT CBM</strong> and <strong>Mapping</strong>.</p>' },
       ...cbm,
@@ -445,7 +445,7 @@ window.MooreviewTraining = (function () {
 
   const TOP_TABS = [
     { id: 'overview', label: 'Overview' },
-    { id: 'mooreview', label: 'MooreView' },
+    { id: 'peaklogic', label: 'PeakLogic' },
     { id: 'cbm', label: 'IoT CBM' },
     { id: 'mapping', label: 'Mapping' },
     { id: 'parc', label: 'Parc' },
@@ -471,7 +471,7 @@ window.MooreviewTraining = (function () {
 
   function cbmModuleHtml(m) {
     return `
-      <p><strong>MooreView labs:</strong> ${m.mapsTo}</p>
+      <p><strong>PeakLogic labs:</strong> ${m.mapsTo}</p>
       <h4>Topics</h4>
       <p>${CBM_TOPICS[m.id] || ''}</p>
       <h4>Exercise</h4>
@@ -501,33 +501,33 @@ window.MooreviewTraining = (function () {
       html: `
         <section class="help-section">
           <h3>Start here — plain introduction</h3>
-          <p class="training-intro-lead">Read this first if you are new to MooreView or building monitoring.</p>
+          <p class="training-intro-lead">Read this first if you are new to PeakLogic or building monitoring.</p>
           <table class="help-table training-intro-table">
-            <tr><th>Who</th><td>This training is for people who work on buildings and equipment: HVAC and service technicians, electricians, maintenance staff, facility managers, building engineers, sales staff, and anyone learning to set up MooreView.</td></tr>
-            <tr><th>Where</th><td>You learn in a classroom or on a laptop running MooreView at <code>http://127.0.0.1:3090</code> (press <kbd>F2</kbd> for this Training screen). On real jobs, sensors and controllers sit in mechanical rooms, on rooftops, and inside equipment. Data can stay on-site or go to the cloud through a gateway.</td></tr>
-            <tr><th>What</th><td><strong>MooreView</strong> is software that watches building equipment—heaters, air conditioners, pumps, leaks, and power use. This course has two parts: <strong>CBM-1–CBM-13</strong> explains <em>why</em> and <em>when</em> to monitor equipment health; <strong>M0–M15</strong> shows <em>how</em> to set up MooreView step by step (screens, alarms, charts, and remote controllers like Arduino Opta).</td></tr>
+            <tr><th>Who</th><td>This training is for people who work on buildings and equipment: HVAC and service technicians, electricians, maintenance staff, facility managers, building engineers, sales staff, and anyone learning to set up PeakLogic.</td></tr>
+            <tr><th>Where</th><td>You learn in a classroom or on a laptop running PeakLogic at <code>http://127.0.0.1:3090</code> (press <kbd>F2</kbd> for this Training screen). On real jobs, sensors and controllers sit in mechanical rooms, on rooftops, and inside equipment. Data can stay on-site or go to the cloud through a gateway.</td></tr>
+            <tr><th>What</th><td><strong>PeakLogic</strong> is software that watches building equipment—heaters, air conditioners, pumps, leaks, and power use. This course has two parts: <strong>CBM-1–CBM-13</strong> explains <em>why</em> and <em>when</em> to monitor equipment health; <strong>M0–M15</strong> shows <em>how</em> to set up PeakLogic step by step (screens, alarms, charts, and remote controllers like Arduino Opta).</td></tr>
             <tr><th>Why</th><td>Fix problems <em>before</em> equipment fails. Avoid costly emergency repairs and downtime. Keep people comfortable and safe. Catch leaks, overheating, and failing motors early—when fixes are cheaper and easier.</td></tr>
-            <tr><th>How</th><td>Open <strong>Tools → Training</strong> (<kbd>F2</kbd>). Work through the tabs: <strong>MooreView</strong> for hands-on labs, <strong>IoT CBM</strong> for concepts, <strong>Mapping</strong> to see how they connect. Basic path: connect sensors → gateway → MooreView → set alarms and dashboards → check trends. Your instructor may assign a shorter track (operator, integrator, or CBM certification).</td></tr>
+            <tr><th>How</th><td>Open <strong>Tools → Training</strong> (<kbd>F2</kbd>). Work through the tabs: <strong>PeakLogic</strong> for hands-on labs, <strong>IoT CBM</strong> for concepts, <strong>Mapping</strong> to see how they connect. Basic path: connect sensors → gateway → PeakLogic → set alarms and dashboards → check trends. Your instructor may assign a shorter track (operator, integrator, or CBM certification).</td></tr>
           </table>
 
           <h3>Unified training curriculum</h3>
-          <p><strong>MooreView platform labs</strong> (M0–M15) plus <strong>IoT Condition-Based Monitoring</strong> (CBM-1–CBM-13). Source: <code>IoT Condition monitoring training.pdf</code> v1.0.</p>
+          <p><strong>PeakLogic platform labs</strong> (M0–M15) plus <strong>IoT Condition-Based Monitoring</strong> (CBM-1–CBM-13). Source: <code>IoT Condition monitoring training.pdf</code> v1.0.</p>
           <h4>Intended audience</h4>
           <p>Service and HVAC technicians, electricians, maintenance staff, facility/building engineers, sales and operations managers, integrators.</p>
           <h4>Duration</h4>
           <table class="help-table">
             <tr><th>Track</th><th>Duration</th><th>Modules</th></tr>
-            <tr><td>CBM Basic</td><td>1 day</td><td>CBM-1–4 + MooreView intro</td></tr>
+            <tr><td>CBM Basic</td><td>1 day</td><td>CBM-1–4 + PeakLogic intro</td></tr>
             <tr><td>CBM Intermediate</td><td>2 days</td><td>CBM-1–10</td></tr>
             <tr><td>CBM Advanced certification</td><td>3 days</td><td>Full CBM + capstone</td></tr>
-            <tr><td>MooreView Operator</td><td>~12 h</td><td>M0, M1, M3, M6, M8, M9, M13</td></tr>
-            <tr><td>MooreView Integrator</td><td>~32 h</td><td>M0–M15 (full path)</td></tr>
+            <tr><td>PeakLogic Operator</td><td>~12 h</td><td>M0, M1, M3, M6, M8, M9, M13</td></tr>
+            <tr><td>PeakLogic Integrator</td><td>~32 h</td><td>M0–M15 (full path)</td></tr>
           </table>
           <h4>Learning objectives</h4>
           <ul>
             <li>Explain Condition-Based Monitoring concepts and maintenance strategies</li>
-            <li>Describe IoT architecture: sensors → gateway → MooreView cloud/HMI</li>
-            <li>Install, commission, and troubleshoot MooreView projects</li>
+            <li>Describe IoT architecture: sensors → gateway → PeakLogic cloud/HMI</li>
+            <li>Install, commission, and troubleshoot PeakLogic projects</li>
             <li>Build dashboards, historian trends, alarms, and PdM views</li>
             <li>Commission MQTT Parc hub, Arduino Opta, edge peers (LilyGO), and optional BACnet/IP from campus BAS</li>
           </ul>
@@ -541,7 +541,7 @@ window.MooreviewTraining = (function () {
             <li><strong>HMI</strong> — composites, bindings, Apply</li>
             <li><strong>System setup</strong> — Apply all settings</li>
           </ol>
-          <p>Use the tabs above for MooreView modules, IoT CBM modules, cross-reference mapping, Parc edge hardware, <strong>Quizzes</strong>, assessments, glossary, and <strong>Instructor</strong> (trainer guide).</p>
+          <p>Use the tabs above for PeakLogic modules, IoT CBM modules, cross-reference mapping, Parc edge hardware, <strong>Quizzes</strong>, assessments, glossary, and <strong>Instructor</strong> (trainer guide).</p>
         </section>
       `,
     },
@@ -549,12 +549,12 @@ window.MooreviewTraining = (function () {
       nav: false,
       html: `
         <section class="help-section">
-          <h3>CBM ↔ MooreView module map</h3>
+          <h3>CBM ↔ PeakLogic module map</h3>
           <table class="help-table">
-            <tr><th>CBM</th><th>Title</th><th>MooreView labs</th></tr>
+            <tr><th>CBM</th><th>Title</th><th>PeakLogic labs</th></tr>
             ${CBM_MODULES.map((m) => `<tr><td>CBM-${m.num}</td><td>${m.title}</td><td>${m.mapsTo}</td></tr>`).join('')}
           </table>
-          <h4>Role tracks (MooreView)</h4>
+          <h4>Role tracks (PeakLogic)</h4>
           <table class="help-table">
             <tr><th>Track</th><th>Modules</th><th>Hours</th></tr>
             <tr><td>Operator</td><td>M0, M1, M3, M6, M8, M9, M13</td><td>~12 h</td></tr>
@@ -569,18 +569,18 @@ window.MooreviewTraining = (function () {
       nav: false,
       html: `
         <section class="help-section">
-          <h3>MQTT Parc — MooreView edge protocol</h3>
-          <p>All Parc peers publish on <code>mooreview/v1/{deviceId}/…</code>. Enable the hub in <strong>Project → System setup → MQTT Parc</strong>, then add <code>mqtt_parc</code> drivers. See <strong>M7</strong> for hub baseline lab.</p>
+          <h3>MQTT Parc — PeakLogic edge protocol</h3>
+          <p>All Parc peers publish on <code>peaklogic/v1/{deviceId}/…</code>. Enable the hub in <strong>Project → System setup → MQTT Parc</strong>, then add <code>mqtt_parc</code> drivers. See <strong>M7</strong> for hub baseline lab.</p>
           <table class="help-table">
             <tr><th>Topic</th><th>Direction</th><th>Purpose</th></tr>
-            <tr><td><code>mooreview/v1/{id}/telemetry</code></td><td>Device → hub</td><td>Tag snapshot + runtime status (~1 Hz)</td></tr>
-            <tr><td><code>mooreview/v1/{id}/online</code></td><td>Device → hub</td><td>Retained LWT / presence</td></tr>
-            <tr><td><code>mooreview/v1/{id}/cmd</code></td><td>Hub → device</td><td><code>put_program</code>, <code>runtime_start</code>, <code>runtime_stop</code>, writes</td></tr>
-            <tr><td><code>mooreview/v1/{id}/cmd/response</code></td><td>Device → hub</td><td>Command ack / error</td></tr>
-            <tr><td><code>mooreview/v1/{id}/config</code></td><td>Hub → device</td><td>Pause telemetry during debug attach</td></tr>
-            <tr><td><code>mooreview/v1/{id}/g/{key}/{tag}</code></td><td>Both</td><td>Global site key grouped tags</td></tr>
+            <tr><td><code>peaklogic/v1/{id}/telemetry</code></td><td>Device → hub</td><td>Tag snapshot + runtime status (~1 Hz)</td></tr>
+            <tr><td><code>peaklogic/v1/{id}/online</code></td><td>Device → hub</td><td>Retained LWT / presence</td></tr>
+            <tr><td><code>peaklogic/v1/{id}/cmd</code></td><td>Hub → device</td><td><code>put_program</code>, <code>runtime_start</code>, <code>runtime_stop</code>, writes</td></tr>
+            <tr><td><code>peaklogic/v1/{id}/cmd/response</code></td><td>Device → hub</td><td>Command ack / error</td></tr>
+            <tr><td><code>peaklogic/v1/{id}/config</code></td><td>Hub → device</td><td>Pause telemetry during debug attach</td></tr>
+            <tr><td><code>peaklogic/v1/{id}/g/{key}/{tag}</code></td><td>Both</td><td>Global site key grouped tags</td></tr>
           </table>
-          <h4>MooreView PC — hub &amp; drivers</h4>
+          <h4>PeakLogic PC — hub &amp; drivers</h4>
           <ol>
             <li><strong>System setup → MQTT Parc</strong> — broker URL, hub enable, site key</li>
             <li><strong>Drivers → Apply template</strong> — <strong>Arduino Opta — MQTT Parc ST runtime</strong> or bulk <strong>Add Opta Parc devices</strong></li>
@@ -590,7 +590,7 @@ window.MooreviewTraining = (function () {
           <p><strong>deviceId</strong> — physical MQTT identity (e.g. <code>opta_a1b2c3</code>). <strong>Position ID</strong> — stable plant location id for replace-hardware workflows.</p>
 
           <h3>Arduino Opta — MQTT Parc ST</h3>
-          <p>Firmware: <code>firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt/</code> — on-device ST VM + Parc MQTT + setup web UI.</p>
+          <p>Firmware: <code>firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt/</code> — on-device ST VM + Parc MQTT + setup web UI.</p>
           <table class="help-table">
             <tr><th>Item</th><th>Detail</th></tr>
             <tr><td>Driver type</td><td><code>mqtt_parc</code></td></tr>
@@ -614,7 +614,7 @@ window.MooreviewTraining = (function () {
 
           <h4>LilyGO T-HaLow provisioning</h4>
           <ul>
-            <li>MQTT runs over <strong>HaLow</strong> (802.11ah); Wi-Fi AP <code>MooreView-T-HaLow</code> is setup-only</li>
+            <li>MQTT runs over <strong>HaLow</strong> (802.11ah); Wi-Fi AP <code>PeakLogic-T-HaLow</code> is setup-only</li>
             <li>Provisioning: <code>http://192.168.4.1:8080/setup</code> — broker IP, HaLow IP, deviceId, sensor template</li>
             <li>Pair HaLow AP per LilyGO workflow; broker must be reachable on the HaLow LAN</li>
           </ul>
@@ -622,8 +622,8 @@ window.MooreviewTraining = (function () {
           <h4>LilyGO T-ETH cellular gateway (Opta bridge)</h4>
           <ul>
             <li>Local broker for Opta: <strong>192.168.1.1:1883</strong> (configure once on bench)</li>
-            <li>Gateway forwards all <code>mooreview/v1/#</code> to cloud Mosquitto over cellular</li>
-            <li>Gateway setup: Wi-Fi AP <code>MooreView-Gateway</code> → <code>http://192.168.4.1:8080/setup</code> — cloud broker, APN</li>
+            <li>Gateway forwards all <code>peaklogic/v1/#</code> to cloud Mosquitto over cellular</li>
+            <li>Gateway setup: Wi-Fi AP <code>PeakLogic-Gateway</code> → <code>http://192.168.4.1:8080/setup</code> — cloud broker, APN</li>
             <li>Cloud MQTT credentials live on the gateway, not in Opta firmware</li>
           </ul>
 
@@ -658,7 +658,7 @@ window.MooreviewTraining = (function () {
             <tr><td>Troubleshooting exercise</td><td>10%</td></tr>
             <tr><td>Final capstone project</td><td>20%</td></tr>
           </table>
-          <h4>MooreView checkpoints</h4>
+          <h4>PeakLogic checkpoints</h4>
           <table class="help-table">
             <tr><th>Gate</th><th>Format</th><th>Pass criteria</th></tr>
             <tr><td>Checkpoint A (after M2)</td><td>Oral</td><td>Explain template vs fixture vs composite; show saved .est.zip</td></tr>
@@ -670,14 +670,14 @@ window.MooreviewTraining = (function () {
           </table>
           <h4>Suggested schedules</h4>
           <p><strong>CBM certification (3 days):</strong> Day 1 CBM-1–3 · Day 2 CBM-4–8 · Day 3 CBM-9–13 capstone.</p>
-          <p><strong>MooreView integrator:</strong> Day 1 M0–M2 · Day 2 M3–M5 · Day 3 M6 · Day 4 M7 Parc/Opta · Day 5 M8–M9 · Day 6 M14 Parc peers · Day 7+ M10–M13, M15 cameras.</p>
+          <p><strong>PeakLogic integrator:</strong> Day 1 M0–M2 · Day 2 M3–M5 · Day 3 M6 · Day 4 M7 Parc/Opta · Day 5 M8–M9 · Day 6 M14 Parc peers · Day 7+ M10–M13, M15 cameras.</p>
           <h4>Equipment</h4>
           <ul>
             <li>Arduino Opta (MQTT Parc ST firmware)</li>
             <li>Parc edge peers: LilyGO T-ETH gateway, T-HaLow sensor nodes</li>
             <li>ONVIF IP camera (Reolink) for M15 — same LAN as laptops</li>
             <li>Wireless sensors, CTs, leak rope, flow pulse</li>
-            <li>Laptop, tablet, MooreView web commissioning UI</li>
+            <li>Laptop, tablet, PeakLogic web commissioning UI</li>
             <li>Network tester, DMM, hand tools, PPE</li>
           </ul>
         </section>
@@ -692,16 +692,16 @@ window.MooreviewTraining = (function () {
             <tr><th>Term</th><th>Meaning</th></tr>
             <tr><td>CBM</td><td>Condition-Based Monitoring</td></tr>
             <tr><td>IoT</td><td>Internet of Things</td></tr>
-            <tr><td>BAS</td><td>Building automation system — MooreView coexists via BACnet/IP import on edge appliances, not BMS rip-replace</td></tr>
+            <tr><td>BAS</td><td>Building automation system — PeakLogic coexists via BACnet/IP import on edge appliances, not BMS rip-replace</td></tr>
             <tr><td>CMMS</td><td>Computerized Maintenance Management System</td></tr>
             <tr><td>CT</td><td>Current Transformer</td></tr>
             <tr><td>MCSA</td><td>Motor Current Signature Analysis</td></tr>
             <tr><td>RUL</td><td>Remaining Useful Life</td></tr>
             <tr><td>ST</td><td>Structured Text — IEC-style control logic</td></tr>
-            <tr><td>MQTT Parc</td><td>MooreView edge protocol — mooreview/v1 topics for Opta and peers</td></tr>
+            <tr><td>MQTT Parc</td><td>PeakLogic edge protocol — peaklogic/v1 topics for Opta and peers</td></tr>
             <tr><td>deviceId</td><td>MQTT Parc device identity (e.g. opta_*, thalow_*)</td></tr>
             <tr><td>Position ID</td><td>Stable plant location id (replace-hardware)</td></tr>
-            <tr><td>mqtt_parc</td><td>MooreView driver type for Parc MQTT devices</td></tr>
+            <tr><td>mqtt_parc</td><td>PeakLogic driver type for Parc MQTT devices</td></tr>
             <tr><td>bacnet</td><td>BACnet/IP driver — Who-Is discovery, object browse, present-value read/write (edge appliance)</td></tr>
             <tr><td>Download &amp; Start</td><td>Deploy ST bytecode to remote Opta over Parc</td></tr>
             <tr><td>Device template</td><td>Preset driver + tags for an instrument</td></tr>
@@ -710,7 +710,7 @@ window.MooreviewTraining = (function () {
             <tr><td>ONVIF</td><td>IP camera discovery and control standard (UDP 3702)</td></tr>
             <tr><td>go2rtc</td><td>Local RTSP→WebRTC/MSE streaming proxy for camera live view</td></tr>
             <tr><td>GridFS</td><td>MongoDB file storage for camera snapshots (optional; projects use .est.zip on disk)</td></tr>
-            <tr><td>.est.zip</td><td>Portable MooreView project archive (tags, drivers, ST programs, HMI, MV Draw)</td></tr>
+            <tr><td>.est.zip</td><td>Portable PeakLogic project archive (tags, drivers, ST programs, HMI, MV Draw)</td></tr>
             <tr><td>PdM</td><td>Predictive maintenance — SCADA + edge features, failure forecast, proactive CMMS PM</td></tr>
           </table>
         </section>
@@ -725,11 +725,11 @@ window.MooreviewTraining = (function () {
   }
 
   function renderTabBody(tabId) {
-    if (tabId === 'mooreview') {
+    if (tabId === 'peaklogic') {
       const sections = buildMvSections();
       return `
-        <nav class="help-nav" data-training-nav="mooreview" aria-label="MooreView modules"></nav>
-        <div class="help-body popup-scroll" data-training-body="mooreview">
+        <nav class="help-nav" data-training-nav="peaklogic" aria-label="PeakLogic modules"></nav>
+        <div class="help-body popup-scroll" data-training-body="peaklogic">
           ${sections.map((s) => `<section id="training-${s.id}" class="help-section"><h3>${s.title}</h3>${s.html}</section>`).join('')}
         </div>`;
     }
@@ -749,8 +749,8 @@ window.MooreviewTraining = (function () {
           ${sections.map((s) => `<section id="training-${s.id}" class="help-section"><h3>${s.title}</h3>${s.html}</section>`).join('')}
         </div>`;
     }
-    if (tabId === 'quizzes' && window.MooreviewTrainingQuizzes) {
-      return window.MooreviewTrainingQuizzes.renderQuizzesTabHtml();
+    if (tabId === 'quizzes' && window.PeaklogicTrainingQuizzes) {
+      return window.PeaklogicTrainingQuizzes.renderQuizzesTabHtml();
     }
     const content = TAB_CONTENT[tabId];
     return `<div class="help-body popup-scroll training-body-single">${content?.html || ''}</div>`;
@@ -770,9 +770,9 @@ window.MooreviewTraining = (function () {
     if (!pane || pane.dataset.rendered === '1') return;
     pane.innerHTML = renderTabBody(tabId);
     pane.dataset.rendered = '1';
-    if (tabId === 'quizzes' && window.MooreviewTrainingQuizzes) {
+    if (tabId === 'quizzes' && window.PeaklogicTrainingQuizzes) {
       const quizNav = pane.querySelector('[data-training-nav="quizzes"]');
-      const sections = window.MooreviewTrainingQuizzes.buildQuizSections();
+      const sections = window.PeaklogicTrainingQuizzes.buildQuizSections();
       if (quizNav) {
         quizNav.innerHTML = `<div class="help-nav-group"><div class="help-nav-label">Quizzes</div>
           <a href="#training-quiz-intro" data-training-link="quiz-intro">Overview</a>
@@ -790,15 +790,15 @@ window.MooreviewTraining = (function () {
           });
         });
       }
-      window.MooreviewTrainingQuizzes.bindQuizHandlers(pane);
+      window.PeaklogicTrainingQuizzes.bindQuizHandlers(pane);
     }
-    if (tabId === 'mooreview' || tabId === 'cbm' || tabId === 'instructor') {
+    if (tabId === 'peaklogic' || tabId === 'cbm' || tabId === 'instructor') {
       const sections =
-        tabId === 'mooreview' ? buildMvSections() : tabId === 'cbm' ? buildCbmSections() : buildInstructorSections();
+        tabId === 'peaklogic' ? buildMvSections() : tabId === 'cbm' ? buildCbmSections() : buildInstructorSections();
       const nav = pane.querySelector('[data-training-nav]');
       if (nav) {
         const label =
-          tabId === 'mooreview' ? 'M0–M15' : tabId === 'cbm' ? 'CBM-1–CBM-13' : 'Instructor';
+          tabId === 'peaklogic' ? 'M0–M15' : tabId === 'cbm' ? 'CBM-1–CBM-13' : 'Instructor';
         nav.innerHTML = `<div class="help-nav-group"><div class="help-nav-label">${label}</div>${renderNavForTab(tabId, sections)}</div>`;
         nav.querySelectorAll('[data-training-link]').forEach((a) => {
           a.addEventListener('click', (e) => {

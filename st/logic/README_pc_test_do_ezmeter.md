@@ -1,6 +1,6 @@
 # PC test — Icon DO3500 ×2 + EZ Meter
 
-MooreVIEW plant-PC project for one USB-RS485 adapter polling:
+PeakLogic plant-PC project for one USB-RS485 adapter polling:
 
 | Slave | Device | Tags |
 |------:|--------|------|

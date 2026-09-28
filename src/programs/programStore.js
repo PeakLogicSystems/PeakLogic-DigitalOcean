@@ -233,7 +233,7 @@ function warnLegacyDataSt() {
   try {
     if (fs.existsSync(legacy) && fs.readdirSync(legacy).some((n) => n.endsWith('.st'))) {
       console.warn(
-        `[programs] Legacy ${legacy} is ignored. Use ${stDir()} (set MOOREVIEW_ST to override).`
+        `[programs] Legacy ${legacy} is ignored. Use ${stDir()} (set PEAKLOGIC_ST to override).`
       );
     }
   } catch {

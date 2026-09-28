@@ -1,8 +1,8 @@
 /*
- * MooreVIEW Pentair Link — Waveshare ESP32-S3-Relay-1CH-U
+ * PeakLogic Pentair Link — Waveshare ESP32-S3-Relay-1CH-U
  *
  * Standalone IntelliFlo + IntelliChlor on onboard RS-485 (A+ / B−).
- * Local web UI + optional mqtt.mooreview.io telemetry uplink.
+ * Local web UI + optional mqtt.peaklogic.io telemetry uplink.
  *
  * Board: ESP32S3 Dev Module · USB CDC On Boot Enabled
  * Libraries: ArduinoJson 7.x, PubSubClient
@@ -35,7 +35,7 @@ static bool mqttTls = MV_MQTT_SKETCH_TLS_DEFAULT;
 static bool mqttInsecure = false;
 static char mqttUser[40] = MV_MQTT_SKETCH_USER_DEFAULT;
 static char mqttPass[MV_MQTT_PASSWORD_SIZE] = MV_MQTT_SKETCH_PASS_DEFAULT;
-static char topicPrefix[32] = "mooreview/v1";
+static char topicPrefix[32] = "peaklogic/v1";
 
 static bool di1 = false;
 static bool mqttUp = false;
@@ -73,7 +73,7 @@ static void loadCfg()
   mqttPort = prefs.getUShort("mqttPort", MV_MQTT_SKETCH_PORT_DEFAULT);
   strlcpy(mqttUser, prefs.getString("mqttUser", MV_MQTT_SKETCH_USER_DEFAULT).c_str(), sizeof(mqttUser));
   strlcpy(mqttPass, prefs.getString("mqttPass", MV_MQTT_SKETCH_PASS_DEFAULT).c_str(), sizeof(mqttPass));
-  strlcpy(topicPrefix, prefs.getString("topicPfx", "mooreview/v1").c_str(), sizeof(topicPrefix));
+  strlcpy(topicPrefix, prefs.getString("topicPfx", "peaklogic/v1").c_str(), sizeof(topicPrefix));
   gPumpAddr = (uint8_t)prefs.getUChar("pumpAddr", PENTAIR_ADDR_DEFAULT);
   gPtRpm = prefs.getUShort("setRpm", 2350);
   prefs.end();

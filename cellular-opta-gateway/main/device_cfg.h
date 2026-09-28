@@ -20,7 +20,7 @@
 
 typedef struct
 {
-    /* Cloud uplink (MooreVIEW droplet Mosquitto) */
+    /* Cloud uplink (PeakLogic droplet Mosquitto) */
     char cloud_mqtt_host[GWCFG_HOST_MAX];
     uint16_t cloud_mqtt_port;
     char cloud_mqtt_user[GWCFG_USER_MAX];
@@ -48,7 +48,7 @@ bool gateway_cfg_save(const gateway_cfg_t *cfg);
 void gateway_cfg_cloud_uri(const gateway_cfg_t *cfg, char *buf, size_t buf_len);
 
 /** Parc topic prefix forwarded by the bridge. */
-#define GW_MQTT_TOPIC_PREFIX "mooreview/v1"
+#define GW_MQTT_TOPIC_PREFIX "peaklogic/v1"
 
 /** Bridge subscription on cloud side. */
-#define GW_MQTT_BRIDGE_SUB "mooreview/v1/#"
+#define GW_MQTT_BRIDGE_SUB "peaklogic/v1/#"

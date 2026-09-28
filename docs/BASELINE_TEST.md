@@ -1,6 +1,6 @@
-# mooreVIEW baseline test (appliance + MQTT Parc + Opta)
+# PeakLogic baseline test (appliance + MQTT Parc + Opta)
 
-Use this **before** multi-tenant Cloud SaaS commissioning or fleet MQTT at scale. The baseline is **est-pc** (MVP Suite) on your PC with **MQTT Parc** and an **Arduino Opta** — the original integrated mooreVIEW stack.
+Use this **before** multi-tenant Cloud SaaS commissioning or fleet MQTT at scale. The baseline is **est-pc** (MVP Suite) on your PC with **MQTT Parc** and an **Arduino Opta** — the original integrated PeakLogic stack.
 
 **Cloud SaaS** (`npm run start:saas`, port **3100**) uses the **same est-pc codebase** — run this checklist on the appliance path first, then repeat optional cloud sections in `docs/testing/FULL_SYSTEM_TEST.md`.
 
@@ -12,8 +12,8 @@ Use this **before** multi-tenant Cloud SaaS commissioning or fleet MQTT at scale
 |-------|------------------|------|
 | HMI + ST + runtime + Parc hub | **est-pc** | `3090` |
 | MQTT broker (Mosquitto) | PC LAN | `1883` |
-| Edge device | **mooreVIEWOptaMqttSt** firmware | MQTT → broker |
-| Wire protocol | `mooreview/v1/{deviceId}/…` | Parc v1 topics |
+| Edge device | **PeakLogicOptaMqttSt** firmware | MQTT → broker |
+| Wire protocol | `peaklogic/v1/{deviceId}/…` | Parc v1 topics |
 
 **Not in baseline (add after Phase 1–3 pass):** multi-tenant Cloud SaaS login, tenant CMMS entitlements, alarm→CMMS MQTT v1 to external subscribers.
 
@@ -49,7 +49,7 @@ Open **http://127.0.0.1:3090** — dashboard loads, no cloud dependency.
 
 ## Phase 2 — MQTT broker on the PC
 
-mooreVIEW PC is the **central Parc hub**. The Opta must reach the same broker on your LAN IP (not only `127.0.0.1` from the device’s perspective).
+PeakLogic PC is the **central Parc hub**. The Opta must reach the same broker on your LAN IP (not only `127.0.0.1` from the device’s perspective).
 
 ```powershell
 npm run mqtt:start
@@ -69,7 +69,7 @@ mqtt://192.168.1.233:1883
 
 ---
 
-## Phase 3 — mooreVIEW Parc hub settings
+## Phase 3 — PeakLogic Parc hub settings
 
 **System setup → General** → enable MQTT Parc, set broker URL to your LAN IP.
 
@@ -79,7 +79,7 @@ Or `data/settings.json`:
 "mqttParc": {
   "enabled": true,
   "brokerUrl": "mqtt://192.168.1.233:1883",
-  "topicPrefix": "mooreview/v1"
+  "topicPrefix": "peaklogic/v1"
 }
 ```
 
@@ -97,10 +97,10 @@ This is the **current** baseline path (bytecode deploy, ST on device).
 
 | Step | Action |
 |------|--------|
-| 1 | Open `firmware/arduino-opta-mqtt-st/mooreVIEWOptaMqttSt/mooreVIEWOptaMqttSt.ino` |
+| 1 | Open `firmware/arduino-opta-mqtt-st/PeakLogicOptaMqttSt/PeakLogicOptaMqttSt.ino` |
 | 2 | Set `g_mqttCfg` broker IP = PC LAN IP, `deviceId` = `opta_st_01` |
 | 3 | Flash to Opta (libraries: ArduinoJson, PubSubClient, Arduino_Opta_Blueprint) |
-| 4 | Serial monitor: expect MQTT connect + `mooreview/v1/opta_st_01/online` |
+| 4 | Serial monitor: expect MQTT connect + `peaklogic/v1/opta_st_01/online` |
 
 Detail: [st/opta-mqtt/README.md](../st/opta-mqtt/README.md), [firmware/arduino-opta-mqtt-st/README.md](../firmware/arduino-opta-mqtt-st/README.md).
 
@@ -124,7 +124,7 @@ Use **either** Parc ST **or** legacy I/O for baseline — not both as primary.
 
 ---
 
-## Phase 5 — Driver + program on mooreVIEW PC
+## Phase 5 — Driver + program on PeakLogic PC
 
 ### MQTT Parc ST (recommended)
 
@@ -165,7 +165,7 @@ Uses HTTP `/api/status` — useful for `arduino-opta-st`, not the MQTT Parc base
 | 7 | ST deploy | Remote + **Download & Start**; no deploy errors |
 | 8 | I/O | `01_i1_to_r1.st` — toggle input, relay follows |
 
-When all pass, you have a **known-good mooreVIEW appliance baseline**.
+When all pass, you have a **known-good PeakLogic appliance baseline**.
 
 ---
 
@@ -180,7 +180,7 @@ Only after baseline sign-off:
 | CMMS alarm MQTT | `docs/CMMS_INTEGRATION.md` |
 | Cloud multi-tenant | **est-pc Cloud SaaS** — see `docs/CLOUD_USER_GUIDE.md` and `docs/CLOUD_DEPLOY_DO.md` |
 
-Keep the same Parc topic layout (`mooreview/v1/…`) when adding cloud ingest — cloud follows appliance behavior.
+Keep the same Parc topic layout (`peaklogic/v1/…`) when adding cloud ingest — cloud follows appliance behavior.
 
 ---
 

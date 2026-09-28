@@ -1,6 +1,6 @@
 'use strict';
 
-/** Map Arduino Opta status JSON (di_builtIn, analog, alarms) to MooreVIEW Parc tags. */
+/** Map Arduino Opta status JSON (di_builtIn, analog, alarms) to PeakLogic Parc tags. */
 function optaStatusToParcReport(deviceId, raw, meta = {}) {
   const tags = [];
   const pushBool = (id, val, role = 'input') => {

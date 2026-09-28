@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#49104F">
-  <title>CMMS — MooreView</title>
+  <title>CMMS — PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 </head>
 <body class="cmms-page-body">
@@ -13,7 +13,7 @@
     <h1 class="standalone-title">CMMS</h1>
     <div class="standalone-meta popup-header-actions">
       <span id="cmms-page-status" class="muted cell-mono" aria-live="polite">Loading…</span>
-      <span class="topbar-version muted cell-mono" title="MooreView release">v<%= appVersion %></span>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
       <button type="button" class="btn" id="btn-standalone-sign-out" title="Sign out">Sign out</button>
       <a href="/" class="btn popup-close page-close" title="Return to Studio">Studio</a>
     </div>
@@ -24,8 +24,8 @@
   <script src="/js/signOut.js?v=<%= assetV %>"></script>
   <script src="/js/cmmsApp.js?v=<%= assetV %>"></script>
   <script>
-    MooreviewSignOut.bind('btn-standalone-sign-out');
-    MooreviewCmms.mount(document.getElementById('cmms-app-root')).then(function () {
+    PeaklogicSignOut.bind('btn-standalone-sign-out');
+    PeaklogicCmms.mount(document.getElementById('cmms-app-root')).then(function () {
       var el = document.getElementById('cmms-page-status');
       if (el) el.textContent = 'Ready';
     }).catch(function (e) {

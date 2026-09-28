@@ -1,10 +1,10 @@
 # Opta M4 — MCSA FFT coprocessor
 
-Companion to `MooreviewOptaMqttSt` (M7). Does **not** run ST, MQTT, or Ethernet.
+Companion to `PeaklogicOptaMqttSt` (M7). Does **not** run ST, MQTT, or Ethernet.
 
 | | M7 | M4 |
 |--|----|----|
-| Sketch | `MooreviewOptaMqttSt` | this folder |
+| Sketch | `PeaklogicOptaMqttSt` | this folder |
 | Role | ST scan, MQTT, 5 min A/D ingest | FFT cook + classify |
 | Flash | Target core **M7** | Target core **M4** |
 | Split | **1.5MB M7 + 0.5MB M4** | same |

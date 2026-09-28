@@ -3,7 +3,7 @@
   "label": "Alternator (lead/lag status)",
   "group": "Motor control",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/alternator-faceplates/mooreview/alternator.svg",
+  "preview": "/hmi/svg/library/alternator-faceplates/peaklogic/alternator.svg",
   "tagRoles": {
     "alt": { "pick": "firstAlt", "types": ["ALT"] },
     "pump1Run": { "pick": "tagId", "tagId": "MOTOR1_RUN", "types": ["BOOL"] },
@@ -16,7 +16,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/alternator-faceplates/mooreview/alternator.svg"
+      "svg": "/hmi/svg/library/alternator-faceplates/peaklogic/alternator.svg"
     }
   ],
   "defaultBindings": [

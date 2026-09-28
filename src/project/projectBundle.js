@@ -6,7 +6,7 @@ const { EST_FORMAT } = require('./estFile');
 const { MV_DRAW_FORMAT, normalizeMvDraw } = require('../../mv-draw/src/mvDrawFormat');
 const { resolveUpload, uploadsDir, relativeUploadPath } = require('../../mv-draw/src/mvDrawStore');
 
-const BUNDLE_FORMAT = 'mooreview-bundle';
+const BUNDLE_FORMAT = 'peaklogic-bundle';
 const BUNDLE_VERSION = 1;
 
 const MIME_BY_EXT = {
@@ -174,7 +174,7 @@ function resolveImportPayload(raw, io = {}) {
     if (kind === 'est' || doc?.format === EST_FORMAT) {
       return { type: 'est', doc, warnings };
     }
-    throw Object.assign(new Error('Bundle doc is not a MooreVIEW or MV Draw project'), { status: 400 });
+    throw Object.assign(new Error('Bundle doc is not a PeakLogic or MV Draw project'), { status: 400 });
   }
   if (raw.format === MV_DRAW_FORMAT) {
     return { type: 'mvdraw', doc: normalizeMvDraw(raw), warnings: [] };

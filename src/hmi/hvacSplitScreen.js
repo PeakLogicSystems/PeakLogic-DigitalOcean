@@ -6,7 +6,7 @@ const { isHvacSplitProject } = require('./duplexlsScreen');
 
 const DATA_PROJECTS = path.join(__dirname, '../../data/projects');
 const DUPLEX_3D_URL = '/samples/duplex-lift-station-ortho-3d.html';
-const DUPLEXLS_SVG = '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg';
+const DUPLEXLS_SVG = '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg';
 
 function resolveHvacProjectId(projectName, hmi) {
   const n = String(projectName || '').toLowerCase();
@@ -22,7 +22,7 @@ function isDuplexlsHmiScreen(screen) {
   if (!screen) return false;
   if (String(screen.name || '').trim().toUpperCase() === 'DUPLEXLS') return true;
   const svg = String(screen.svg || '').trim();
-  if (/lift-station-faceplates\/mooreview\/duplexls|\/duplexls\.svg/i.test(svg)) return true;
+  if (/lift-station-faceplates\/peaklogic\/duplexls|\/duplexls\.svg/i.test(svg)) return true;
   return screen.tiles?.[0]?.compositeId === 'duplexls';
 }
 

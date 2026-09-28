@@ -2,7 +2,7 @@
 
 /** ST PID loop editor + analog tag pick lists (VPI / VPR / I/O). */
 window.StPidEditor = (function () {
-  const { esc } = window.MooreviewCore;
+  const { esc } = window.PeaklogicCore;
 
   function analogWireTags(allTags) {
     return (allTags || []).filter((t) =>

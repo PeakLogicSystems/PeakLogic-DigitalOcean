@@ -10,7 +10,7 @@ struct MvMqttConfig {
   const char* broker = MV_MQTT_SKETCH_BROKER_DEFAULT;
   uint16_t port = 1883;
   const char* deviceId = "opta_st_01";
-  const char* topicPrefix = "mooreview/v1";
+  const char* topicPrefix = "peaklogic/v1";
   uint32_t reportMs = 2000;
 };
 

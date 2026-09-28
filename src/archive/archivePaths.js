@@ -9,7 +9,7 @@ function sanitizeSegment(value, fallback = 'unknown') {
 }
 
 function resolveCompany(doc) {
-  const c = String(doc?.company ?? doc?.tenantId ?? process.env.MOOREVIEW_TENANT_ID ?? 'local').trim().toLowerCase();
+  const c = String(doc?.company ?? doc?.tenantId ?? process.env.PEAKLOGIC_TENANT_ID ?? 'local').trim().toLowerCase();
   return COMPANIES.has(c) ? c : sanitizeSegment(c, 'local');
 }
 

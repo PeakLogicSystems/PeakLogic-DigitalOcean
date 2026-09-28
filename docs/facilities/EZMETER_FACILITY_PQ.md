@@ -9,7 +9,7 @@ Polyphase revenue metering and **basic facility power quality** for mechanical r
 
 ## Overview
 
-| Layer | mooreVIEW artifact | Purpose |
+| Layer | PeakLogic artifact | Purpose |
 |-------|-------------------|---------|
 | Raw Modbus | Template **EZ Meter DDS-RGB 2.025 (full map)** | 50 tags: `DDS_*` energy, V/I/W/Hz/PF/VA, control/status |
 | Facility mirrors | Template **EZ Meter — facility PQ derived measurement set** | `MECH_METER_KWH`, `MECH_PQ_VA`… wired to `DDS_*` |

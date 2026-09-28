@@ -11,7 +11,7 @@
 
 void mvFillDeviceStatus(JsonObject root) {
   root["ok"] = true;
-  root["device"] = "mooreview-opta-st";
+  root["device"] = "peaklogic-opta-st";
   root["running"] = mvRuntimeRunning();
   root["scanMs"] = mvRuntimeScanMs();
   root["cycles"] = mvRuntimeCycles();

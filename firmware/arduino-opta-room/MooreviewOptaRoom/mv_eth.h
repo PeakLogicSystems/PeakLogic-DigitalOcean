@@ -2,7 +2,7 @@
 
 /* Ethernet from the mbed_opta board core (same as Arduino's Web Server example). */
 #if !defined(ARDUINO_OPTA) && !defined(ARDUINO_PORTENTA_H7_M7)
-#error "MooreVIEW Opta MQTT ST: set Tools -> Board -> Arduino Opta (WiFi / Lite / RS485)."
+#error "PeakLogic Opta MQTT ST: set Tools -> Board -> Arduino Opta (WiFi / Lite / RS485)."
 #endif
 
 #include <SPI.h>

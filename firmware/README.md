@@ -1,11 +1,11 @@
-# mooreVIEW Arduino ST Runtime
+# PeakLogic Arduino ST Runtime
 
-On-device **Structured Text interpreter** for Arduino Opta (and compatible Portenta H7 targets). mooreVIEW PC parses `.st` into a JSON AST; firmware loads and executes that AST on every scan cycle.
+On-device **Structured Text interpreter** for Arduino Opta (and compatible Portenta H7 targets). PeakLogic PC parses `.st` into a JSON AST; firmware loads and executes that AST on every scan cycle.
 
 ## Architecture
 
 ```
-mooreVIEW PC                          Arduino Opta
+PeakLogic PC                          Arduino Opta
 ─────────────                         ────────────
 .st source  ──parse──►  AST JSON  ──HTTP/MQTT──►  mvProgramLoad()
 tag metadata                              │      mvExecuteScan(dtMs)
@@ -55,7 +55,7 @@ Both share the same `mv_st.cpp` interpreter (keep copies in sync when editing).
 
 ## Deploy ST program
 
-**HTTP:** mooreVIEW `OptaRemoteDriver.deployProgram()` → `PUT /api/program`.
+**HTTP:** PeakLogic `OptaRemoteDriver.deployProgram()` → `PUT /api/program`.
 
 **MQTT:** `put_program` command with same JSON body (`src/parc/mqttOptaProgram.js`).
 

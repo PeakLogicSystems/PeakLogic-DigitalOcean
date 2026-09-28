@@ -1,9 +1,9 @@
 'use strict';
 
 /** HMI live view + setup composer */
-window.MooreviewHmi = (function () {
-  const { esc } = window.MooreviewCore;
-  const domGet = window.MooreviewCore.$;
+window.PeaklogicHmi = (function () {
+  const { esc } = window.PeaklogicCore;
+  const domGet = window.PeaklogicCore.$;
   const HmiView = window.HmiView;
 
   const HMI_BINDING_PROPS = ['visibility', 'flashState', 'fill', 'fill5', 'fill8', 'state3', 'backgroundFill', 'stroke', 'text', 'rotation', 'trend', 'opacity', 'class'];
@@ -84,8 +84,8 @@ window.MooreviewHmi = (function () {
   ];
   const HOME_SCREEN_ID = 'screen_1';
   const HMI_ASSET_PAGE_SIZE = 100;
-  const HMI_RECENT_ASSETS_KEY = 'mooreview-hmi-recent-assets';
-  const HMI_COMPOSER_SECTION_KEY = 'mooreview-hmi-composer-section';
+  const HMI_RECENT_ASSETS_KEY = 'peaklogic-hmi-recent-assets';
+  const HMI_COMPOSER_SECTION_KEY = 'peaklogic-hmi-composer-section';
   const HMI_RECENT_ASSETS_MAX = 48;
   const HMI_DEFAULT_WIDTH = 1024;
   const HMI_DEFAULT_HEIGHT = 800;
@@ -198,7 +198,7 @@ window.MooreviewHmi = (function () {
     return el.value === 'show';
   }
 
-  const HmiViewMode = () => window.MooreviewHmiViewMode || {};
+  const HmiViewMode = () => window.PeaklogicHmiViewMode || {};
 
   function hmiPollMsForSettings(settings) {
     return HmiViewMode().hmiPollMsFromSettings?.(settings) ?? 60_000;
@@ -212,8 +212,8 @@ window.MooreviewHmi = (function () {
     return HmiViewMode().isHmiTestMode?.(settings ?? lastSettings?.()) === true;
   }
 
-  const HMI_LIVE_STATUS_HIDDEN_KEY = 'mooreview-hmi-hide-live-status';
-  const HMI_ALARM_SIDEBAR_HIDDEN_KEY = 'mooreview-hmi-hide-alarm-sidebar';
+  const HMI_LIVE_STATUS_HIDDEN_KEY = 'peaklogic-hmi-hide-live-status';
+  const HMI_ALARM_SIDEBAR_HIDDEN_KEY = 'peaklogic-hmi-hide-alarm-sidebar';
 
   function isHmiAlarmSidebarUserVisible() {
     try {
@@ -951,7 +951,7 @@ window.MooreviewHmi = (function () {
 
   function isTpoFaceplatePath(path) {
     return HmiView.isTpoFaceplateAssetPath?.(path)
-      || /schedules\/mooreview\/tpo_daily|tpo_daily/i.test(String(path || ''));
+      || /schedules\/peaklogic\/tpo_daily|tpo_daily/i.test(String(path || ''));
   }
 
   function isPoolFaceplatePath(path) {
@@ -1191,7 +1191,7 @@ window.MooreviewHmi = (function () {
       frame.contentWindow.postMessage({
         type: 'mv-hmi-poll-config',
         pollMs,
-        apiBase: window.MOOREVIEW_API_BASE || '/api',
+        apiBase: window.PEAKLOGIC_API_BASE || '/api',
       }, window.location.origin);
     } catch { /* iframe not ready */ }
     syncHmiScreenCatalogTo3dFrame(frame);
@@ -1251,8 +1251,8 @@ window.MooreviewHmi = (function () {
     return !!(chrome && !chrome.classList.contains('view-hidden'));
   }
 
-  const HMI_SETUP_LAYOUT_KEY = 'mooreview-hmi-setup-layout';
-  const HMI_SETUP_POS_KEY = 'mooreview-hmi-setup-pos';
+  const HMI_SETUP_LAYOUT_KEY = 'peaklogic-hmi-setup-layout';
+  const HMI_SETUP_POS_KEY = 'peaklogic-hmi-setup-pos';
   const HMI_SETUP_MIN_W = 320;
   const HMI_SETUP_MIN_H = 240;
   const HMI_SETUP_WIDE_W = 640;
@@ -1888,7 +1888,7 @@ window.MooreviewHmi = (function () {
     if (!popup || !main || !condenser) {
       navigateHmiView(sid);
       showHmiLiveNotice(
-        `Area popup panel missing — redeploy views/scada-dashboard.ejs, restart mooreview-saas, hard-refresh.`,
+        `Area popup panel missing — redeploy views/scada-dashboard.ejs, restart peaklogic-saas, hard-refresh.`,
         true,
       );
       return;
@@ -1987,7 +1987,7 @@ window.MooreviewHmi = (function () {
       showHmiLiveNotice(
         hmiRoomPopupDomReady()
           ? `Could not open room ${padRoomNum(n)} popup.`
-          : `Room popup panel missing on this Studio page — redeploy views/scada-dashboard.ejs (includes #hmi-room-popup), restart mooreview-saas, hard-refresh.`,
+          : `Room popup panel missing on this Studio page — redeploy views/scada-dashboard.ejs (includes #hmi-room-popup), restart peaklogic-saas, hard-refresh.`,
         true,
       );
       return;
@@ -3200,7 +3200,7 @@ window.MooreviewHmi = (function () {
     for (const layer of layers) {
       if (layer.kind === 'navButton' || layer.kind === 'pageHotspot' || layer.kind === 'flashOverlay') continue;
       if (/\/charts-trends\/strip-charts\//i.test(String(layer.svg || ''))
-        && !/\/mooreview\/strip_chart_3pen/i.test(String(layer.svg || ''))
+        && !/\/peaklogic\/strip_chart_3pen/i.test(String(layer.svg || ''))
         && /strip_chart/i.test(String(layer.svg || ''))) {
         if (!/\/chart-strip\/strip_chart\.svg$/i.test(String(layer.svg || ''))) {
           layer.svg = HMI_STRIP_CHART;
@@ -5583,8 +5583,8 @@ window.MooreviewHmi = (function () {
     if (!list.length) return Promise.resolve(null);
     const user = window.__mvCloudUser;
     const live = lastLive();
-    const policy = window.MooreviewCloudHmiPolicy;
-    if (policy && user && window.MOOREVIEW_BUILD?.deployment === 'cloud') {
+    const policy = window.PeaklogicCloudHmiPolicy;
+    if (policy && user && window.PEAKLOGIC_BUILD?.deployment === 'cloud') {
       const liveForPolicy = Array.isArray(live) ? live.map((t) => ({ ...t })) : [];
       for (const row of list) {
         if (!policy.canWriteHmiTag(user, row.tagId, row.value, liveForPolicy)) {
@@ -6147,7 +6147,7 @@ window.MooreviewHmi = (function () {
 
   function hmiTagOptions(sel) {
     const list = [...tagList()].sort((a, b) => a.id.localeCompare(b.id));
-    const fmt = window.MooreviewTagDisplay?.formatTag || ((t) => t.id);
+    const fmt = window.PeaklogicTagDisplay?.formatTag || ((t) => t.id);
     return `<option value="">— tag —</option>${list.map((t) =>
       `<option value="${esc(t.id)}" ${t.id === sel ? 'selected' : ''}>${esc(fmt(t, list))} (${esc(t.type)})</option>`
     ).join('')}`;
@@ -6778,20 +6778,20 @@ window.MooreviewHmi = (function () {
     showHmiSetupMsg('Composites: one click places dial + needle + default bindings. Pick a REAL/INT tag, Test, then Test row.');
   }
 
-  function isMooreviewStripChart3Pen(path) {
-    return /\/mooreview\/strip_chart_3pen/i.test(String(path || ''));
+  function isPeaklogicStripChart3Pen(path) {
+    return /\/peaklogic\/strip_chart_3pen/i.test(String(path || ''));
   }
 
   function isUnifiedStripChartSvg(path) {
     const p = String(path || '');
     if (!/\/charts-trends\/strip-charts\//i.test(p)) return false;
-    if (isMooreviewStripChart3Pen(p)) return false;
+    if (isPeaklogicStripChart3Pen(p)) return false;
     return /strip_chart/i.test(p);
   }
 
   function normalizeStripChartPlacementPath(path) {
     if (!isUnifiedStripChartSvg(path)) return path;
-    if (isMooreviewStripChart3Pen(path)) return path;
+    if (isPeaklogicStripChart3Pen(path)) return path;
     return HMI_STRIP_CHART;
   }
 
@@ -7556,7 +7556,7 @@ window.MooreviewHmi = (function () {
     const list = [...tagList()]
       .filter((t) => isNumericHmiTagType(t.type))
       .sort((a, b) => a.id.localeCompare(b.id));
-    const fmt = window.MooreviewTagDisplay?.formatTag || ((t) => t.id);
+    const fmt = window.PeaklogicTagDisplay?.formatTag || ((t) => t.id);
     return `<option value="">— tag —</option>${list.map((t) =>
       `<option value="${esc(t.id)}" ${t.id === sel ? 'selected' : ''}>${esc(fmt(t, list))} (${esc(t.type)})</option>`
     ).join('')}`;
@@ -10626,8 +10626,8 @@ window.MooreviewHmi = (function () {
     domGet('btn-hmi-save-header')?.addEventListener('click', () => {
       applyHmiSettings().catch(() => { /* alert in applyHmiSettings */ });
     });
-    window.MooreviewTagDisplay?.bindAll(document);
-    window.addEventListener('mooreview-tag-display', () => {
+    window.PeaklogicTagDisplay?.bindAll(document);
+    window.addEventListener('peaklogic-tag-display', () => {
       if (domGet('hmi-bindings-table')) renderHmiBindingsTable();
       updateHmiStripChartPanel();
       updateHmiGaugeColumnPanel();

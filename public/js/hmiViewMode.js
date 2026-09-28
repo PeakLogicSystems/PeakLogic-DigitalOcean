@@ -1,6 +1,6 @@
 'use strict';
 
-window.MooreviewHmiViewMode = (function () {
+window.PeaklogicHmiViewMode = (function () {
   const HMI_POLL_MS_NORMAL = 60_000;
   const HMI_POLL_MS_TEST = 10_000;
 

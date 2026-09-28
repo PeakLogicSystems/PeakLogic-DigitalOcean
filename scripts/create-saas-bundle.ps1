@@ -1,4 +1,4 @@
-# Build mooreview-cloud-YYYYMMDDd.tgz — est-pc Cloud SaaS droplet bundle (WinSCP / DO).
+# Build peaklogic-cloud-YYYYMMDDd.tgz — est-pc Cloud SaaS droplet bundle (WinSCP / DO).
 param(
   [string]$EstRoot = (Split-Path $PSScriptRoot -Parent),
   [string]$OutputDir = (Join-Path (Split-Path $PSScriptRoot -Parent) 'dist'),
@@ -13,7 +13,7 @@ if (-not (Test-Path (Join-Path $EstRoot 'server.js'))) {
 }
 
 if (-not $BundleName) {
-  $BundleName = "mooreview-cloud-$(Get-Date -Format 'yyyyMMdd')$Suffix.tgz"
+  $BundleName = "peaklogic-cloud-$(Get-Date -Format 'yyyyMMdd')$Suffix.tgz"
 }
 $BundlePath = Join-Path $OutputDir $BundleName
 $ManifestPath = [System.IO.Path]::ChangeExtension($BundlePath, '.txt')
@@ -29,15 +29,15 @@ try {
   Pop-Location
 }
 
-$stageParent = Join-Path $env:TEMP "mooreview-saas-$([Guid]::NewGuid().ToString('N').Substring(0, 8))"
-$stageRoot = Join-Path $stageParent 'mooreview'
+$stageParent = Join-Path $env:TEMP "peaklogic-saas-$([Guid]::NewGuid().ToString('N').Substring(0, 8))"
+$stageRoot = Join-Path $stageParent 'peaklogic'
 New-Item -ItemType Directory -Path $stageRoot -Force | Out-Null
 
 $excludeDirs = @(
   'node_modules', '.git', 'dist', 'test', 'fork-manifests', 'product-templates',
   'cellular-opta-gateway', 'native', 'azure', '.github', 'build', 'sim-studies'
 )
-$excludeFiles = @('.env', 'saas.env', '.fork-origin', 'mooreview.pid')
+$excludeFiles = @('.env', 'saas.env', '.fork-origin', 'peaklogic.pid')
 
 $robocopyArgs = @(
   $EstRoot, $stageRoot,
@@ -65,7 +65,7 @@ if (Test-Path $BundlePath) { Remove-Item $BundlePath -Force }
 
 Push-Location $stageParent
 try {
-  & tar -czf $BundlePath mooreview
+  & tar -czf $BundlePath peaklogic
   if ($LASTEXITCODE -ne 0) { throw "tar failed with exit code $LASTEXITCODE" }
 } finally {
   Pop-Location
@@ -74,27 +74,27 @@ try {
 
 $sizeMb = [math]::Round((Get-Item $BundlePath).Length / 1MB, 1)
 $manifest = @"
-MooreVIEW Cloud SaaS droplet bundle
+PeakLogic Cloud SaaS droplet bundle
 Built: $(Get-Date -Format o)
 Archive: $BundleName
 Size: $sizeMb MB
 Source: $EstRoot
-Mode: est-pc unified cloud SaaS (MOOREVIEW_DEPLOYMENT=cloud, port 3100)
+Mode: est-pc unified cloud SaaS (PEAKLOGIC_DEPLOYMENT=cloud, port 3100)
 
 Includes:
   - Multi-tenant login, Sites, fleet, People, CMMS, full Studio
-  - Entry: node scripts/start-saas.js on port 3100 (mooreview-saas.service)
+  - Entry: node scripts/start-saas.js on port 3100 (peaklogic-saas.service)
   - Do NOT use install.sh (3090 hub) — use install-saas.sh only
   - Remote cameras / site agent hub APIs
   - install-saas.sh + npm run seed (demo org)
   - 16 bundled demo projects (data/projects/*.est.zip)
 
 WinSCP: upload to /tmp/, then:
-  mkdir -p /home/mooreview
-  tar xzf /tmp/$BundleName -C /home/mooreview --strip-components=1
-  sed -i 's/\r$//' /home/mooreview/deploy/cloud/debian/install-saas.sh
-  MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview bash /home/mooreview/deploy/cloud/debian/install-saas.sh
-  sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed'
+  mkdir -p /home/peaklogic
+  tar xzf /tmp/$BundleName -C /home/peaklogic --strip-components=1
+  sed -i 's/\r$//' /home/peaklogic/deploy/cloud/debian/install-saas.sh
+  PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash /home/peaklogic/deploy/cloud/debian/install-saas.sh
+  sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'
   curl -s http://127.0.0.1:3100/health
   # open https://your.domain/login  (nginx -> :3100)
 

@@ -1,6 +1,6 @@
-# mooreVIEW Cloud — User Guide
+# PeakLogic Cloud — User Guide
 
-Guide for **tenant operators** and **integrators** using Cloud Studio on a hosted mooreVIEW SaaS deployment.
+Guide for **tenant operators** and **integrators** using Cloud Studio on a hosted PeakLogic SaaS deployment.
 
 ## Sign in
 
@@ -43,7 +43,7 @@ Press **F1** for in-app Help, **F2** for Training.
 
 ## Sites — pair an edge appliance
 
-Site appliances run mooreVIEW locally (port 3090) and uplink telemetry to cloud.
+Site appliances run PeakLogic locally (port 3090) and uplink telemetry to cloud.
 
 1. Cloud: **Sites → Create site** — note **site ID**, **pairing code**, **agent token**
 2. Appliance: **System setup → Cloud remote**

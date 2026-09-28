@@ -327,7 +327,7 @@ const registry = new DeviceRegistry();
 function resolveRegistry() {
   // Cloud MQTT ingest writes the fleet registry. Per-tenant DeviceRegistry
   // copies created after 8/13 isolation stay empty — Live I/O must not use them.
-  if (process.env.MOOREVIEW_DEPLOYMENT === 'cloud') {
+  if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
     return registry;
   }
   try {
@@ -346,7 +346,7 @@ function getFleetRegistry() {
 
 /** Parc list/cmd/sync: cloud uses fleet registry; appliance uses tenant or appliance registry. */
 function resolveParcRegistry() {
-  if (process.env.MOOREVIEW_DEPLOYMENT === 'cloud') {
+  if (process.env.PEAKLOGIC_DEPLOYMENT === 'cloud') {
     return registry;
   }
   return resolveRegistry();

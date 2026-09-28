@@ -50,8 +50,8 @@ function readFixtureJson(name) {
 
 function resolveSerialPorts(env = process.env) {
   return {
-    portA: String(env.MOOREVIEW_RS485_PORT_A || IOT_LINK_DEFAULT_PORTS.portA).trim(),
-    portB: String(env.MOOREVIEW_RS485_PORT_B || IOT_LINK_DEFAULT_PORTS.portB).trim(),
+    portA: String(env.PEAKLOGIC_RS485_PORT_A || IOT_LINK_DEFAULT_PORTS.portA).trim(),
+    portB: String(env.PEAKLOGIC_RS485_PORT_B || IOT_LINK_DEFAULT_PORTS.portB).trim(),
   };
 }
 
@@ -60,15 +60,15 @@ function featureFlags(env = process.env) {
     if (v == null || v === '') return fallback;
     return /^(1|true|yes|on)$/i.test(String(v));
   };
-  const pentairBus = truthy(env.MOOREVIEW_POOL_PENTAIR_BUS, false);
-  const intellifloPump = truthy(env.MOOREVIEW_POOL_INTELLIFLO, pentairBus);
-  const intellivalve = truthy(env.MOOREVIEW_POOL_INTELLIVALVE, pentairBus);
-  const jandyBus = truthy(env.MOOREVIEW_POOL_JANDY_BUS, false);
-  const jandyEpump = truthy(env.MOOREVIEW_POOL_JANDY_EPUMP, jandyBus);
-  const haywardBus = truthy(env.MOOREVIEW_POOL_HAYWARD_BUS, false);
-  const haywardPump = truthy(env.MOOREVIEW_POOL_HAYWARD_PUMP, haywardBus);
+  const pentairBus = truthy(env.PEAKLOGIC_POOL_PENTAIR_BUS, false);
+  const intellifloPump = truthy(env.PEAKLOGIC_POOL_INTELLIFLO, pentairBus);
+  const intellivalve = truthy(env.PEAKLOGIC_POOL_INTELLIVALVE, pentairBus);
+  const jandyBus = truthy(env.PEAKLOGIC_POOL_JANDY_BUS, false);
+  const jandyEpump = truthy(env.PEAKLOGIC_POOL_JANDY_EPUMP, jandyBus);
+  const haywardBus = truthy(env.PEAKLOGIC_POOL_HAYWARD_BUS, false);
+  const haywardPump = truthy(env.PEAKLOGIC_POOL_HAYWARD_PUMP, haywardBus);
   return {
-    pentairHeatPump: truthy(env.MOOREVIEW_POOL_PENTAIR, true),
+    pentairHeatPump: truthy(env.PEAKLOGIC_POOL_PENTAIR, true),
     pentairBus,
     intellifloPump,
     intellivalve,
@@ -76,28 +76,28 @@ function featureFlags(env = process.env) {
     jandyEpump,
     haywardBus,
     haywardPump,
-    optaIo: truthy(env.MOOREVIEW_POOL_OPTA_IO, true),
-    modbusChemistryBus: truthy(env.MOOREVIEW_POOL_MODBUS_CHEM, false),
+    optaIo: truthy(env.PEAKLOGIC_POOL_OPTA_IO, true),
+    modbusChemistryBus: truthy(env.PEAKLOGIC_POOL_MODBUS_CHEM, false),
   };
 }
 
 function intellifloAddr(env = process.env) {
-  const n = Number(env.MOOREVIEW_POOL_INTELLIFLO_ADDR);
+  const n = Number(env.PEAKLOGIC_POOL_INTELLIFLO_ADDR);
   return Number.isFinite(n) && n > 0 ? n : DEFAULT_INTELLIFLO_ADDR;
 }
 
 function intellivalveAddr(env = process.env) {
-  const n = Number(env.MOOREVIEW_POOL_INTELLIVALVE_ADDR);
+  const n = Number(env.PEAKLOGIC_POOL_INTELLIVALVE_ADDR);
   return Number.isFinite(n) && n > 0 ? n : DEFAULT_INTELLIVALVE_ADDR;
 }
 
 function jandyEpumpAddr(env = process.env) {
-  const n = Number(env.MOOREVIEW_POOL_JANDY_EPUMP_ADDR);
+  const n = Number(env.PEAKLOGIC_POOL_JANDY_EPUMP_ADDR);
   return Number.isFinite(n) && n > 0 ? n : DEFAULT_JANDY_EPUMP_ADDR;
 }
 
 function haywardPumpHua(env = process.env) {
-  const n = Number(env.MOOREVIEW_POOL_HAYWARD_PUMP_HUA);
+  const n = Number(env.PEAKLOGIC_POOL_HAYWARD_PUMP_HUA);
   return Number.isFinite(n) && n >= 0 ? n : DEFAULT_HAYWARD_PUMP_HUA;
 }
 
@@ -350,7 +350,7 @@ function loadIotLinkPoolSettings(opts = {}) {
     ...base,
     mqttParc: {
       ...(base.mqttParc || {}),
-      brokerUrl: env.MOOREVIEW_MQTT_BROKER || base.mqttParc?.brokerUrl || DEFAULT_MQTT_PARC_BROKER,
+      brokerUrl: env.PEAKLOGIC_MQTT_BROKER || base.mqttParc?.brokerUrl || DEFAULT_MQTT_PARC_BROKER,
     },
     features: {
       ...(base.features || {}),
@@ -399,7 +399,7 @@ function buildIotLinkPoolEstDoc(opts = {}) {
 }
 
 /**
- * Write pool appliance config into MOOREVIEW_DATA (tags, drivers, settings, workspace).
+ * Write pool appliance config into PEAKLOGIC_DATA (tags, drivers, settings, workspace).
  * @param {{ writeJson: Function, flushConfig?: Function }} persistence
  * @param {{ force?: boolean, env?: NodeJS.ProcessEnv }} [opts]
  */

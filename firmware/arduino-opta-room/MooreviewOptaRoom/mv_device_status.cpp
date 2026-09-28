@@ -33,7 +33,7 @@ extern uint32_t g_lastCycleUs;
 
 void mvFillDeviceStatus(JsonObject root) {
   root["ok"] = true;
-  root["device"] = "mooreview-opta-mqtt-st";
+  root["device"] = "peaklogic-opta-mqtt-st";
   root["running"] = g_runtimeRunning;
   root["scanMs"] = g_scanMs;
   root["cycles"] = g_cycles;
@@ -87,7 +87,7 @@ void mvFillDeviceStatus(JsonObject root) {
 
 void mvFillDeviceStatusLite(JsonObject root) {
   root["ok"] = true;
-  root["device"] = "mooreview-opta-mqtt-st";
+  root["device"] = "peaklogic-opta-mqtt-st";
   root["running"] = g_runtimeRunning;
   root["scanMs"] = g_scanMs;
   root["cycles"] = g_cycles;

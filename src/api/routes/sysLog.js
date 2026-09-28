@@ -37,7 +37,7 @@ function createSysLogRoutes() {
         category: String(req.body?.category || 'manual').slice(0, 64),
         message,
         detail: req.body?.detail && typeof req.body.detail === 'object' ? req.body.detail : {},
-        user: req.mooreviewUser || undefined,
+        user: req.peaklogicUser || undefined,
       });
       res.json({ ok: true, entry });
     } catch (e) {

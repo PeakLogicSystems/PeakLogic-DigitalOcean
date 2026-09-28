@@ -13,7 +13,7 @@
     "enabled": false,
     "autoDiscoverDrivers": false,
     "brokerUrl": "mqtt://127.0.0.1:1883",
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "clientId": "mv-iot-link"
   },
   "hmi": {

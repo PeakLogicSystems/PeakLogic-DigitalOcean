@@ -3,7 +3,7 @@
   "label": "Filter pump weekly schedule",
   "group": "Schedules",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/schedules/mooreview/pool_filter_schedule.svg",
+  "preview": "/hmi/svg/library/schedules/peaklogic/pool_filter_schedule.svg",
   "tagRoles": {
     "filterTod": {
       "pick": "tagId",
@@ -67,7 +67,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/schedules/mooreview/pool_filter_schedule.svg"
+      "svg": "/hmi/svg/library/schedules/peaklogic/pool_filter_schedule.svg"
     }
   ],
   "defaultBindings": [

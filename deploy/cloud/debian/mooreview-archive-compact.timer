@@ -1,10 +1,10 @@
 [Unit]
-Description=Daily MooreVIEW archive compaction (02:15 UTC)
+Description=Daily PeakLogic archive compaction (02:15 UTC)
 
 [Timer]
 OnCalendar=*-*-* 02:15:00
 Persistent=true
-Unit=mooreview-archive-compact.service
+Unit=peaklogic-archive-compact.service
 
 [Install]
 WantedBy=timers.target

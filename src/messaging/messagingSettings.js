@@ -18,7 +18,7 @@ function normalizeMailInput(input = {}, prev = {}) {
     secure: input.secure === true || input.secure === 'true' || prev.secure === true,
     user: String(input.user ?? prev.user ?? '').trim(),
     from: String(input.from ?? prev.from ?? '').trim(),
-    fromName: String(input.fromName ?? prev.fromName ?? 'MooreVIEW').trim() || 'MooreVIEW',
+    fromName: String(input.fromName ?? prev.fromName ?? 'PeakLogic').trim() || 'PeakLogic',
     useSendGridApi,
   };
   if (passIn != null && !isMaskedSecret(passIn)) {

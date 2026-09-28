@@ -1,37 +1,37 @@
-# After SaaS bundle extracted to /home/mooreview — copy BEFORE install-saas.sh
+# After SaaS bundle extracted to /home/peaklogic — copy BEFORE install-saas.sh
 
-mkdir -p /etc/mooreview
-cp /home/mooreview/deploy/cloud/phase1/droplet-saas/saas.env.template /etc/mooreview/saas.env
-nano /etc/mooreview/saas.env
+mkdir -p /etc/peaklogic
+cp /home/peaklogic/deploy/cloud/phase1/droplet-saas/saas.env.template /etc/peaklogic/saas.env
+nano /etc/peaklogic/saas.env
 # MONGODB_URI, JWT_SECRET, PLATFORM_ADMIN_KEY, PUBLIC_* URLs
 
-export MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview
-bash /home/mooreview/deploy/cloud/debian/install-saas.sh
+export PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic
+bash /home/peaklogic/deploy/cloud/debian/install-saas.sh
 
 # Allowlist this droplet's public IP on DO Managed MongoDB
 
-sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed'
+sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'
 
 apt install -y certbot python3-certbot-nginx
-certbot --nginx -d mooreview.io -d www.mooreview.io
+certbot --nginx -d peaklogic.io -d www.peaklogic.io
 
 curl -s http://127.0.0.1:3100/health
 
 # --- MQTT (recommended: dedicated droplet — see CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md) ---
 # On cloud-mqtt-atl1: install-mqtt-droplet.sh
 # On this SaaS host:
-#   MOOREVIEW_MQTT_PRIVATE_IP=10.x.x.x bash .../configure-saas-mqtt-remote.sh
+#   PEAKLOGIC_MQTT_PRIVATE_IP=10.x.x.x bash .../configure-saas-mqtt-remote.sh
 #
 # Legacy colocated MQTT on this host:
-# cp .../droplet-saas/mqtt.env.template /etc/mooreview/mqtt.env
+# cp .../droplet-saas/mqtt.env.template /etc/peaklogic/mqtt.env
 # bash .../enable-saas-mqtt.sh
 
 # --- Archive compaction (after cloud 2 is up) ---
-cp /home/mooreview/deploy/cloud/phase1/droplet-saas/archive-compact.env.template /etc/mooreview/archive-compact.env
-nano /etc/mooreview/archive-compact.env
+cp /home/peaklogic/deploy/cloud/phase1/droplet-saas/archive-compact.env.template /etc/peaklogic/archive-compact.env
+nano /etc/peaklogic/archive-compact.env
 # ARCHIVE_SERVER_URL=http://10.x.x.x:8090  (archive private IP)
 # ARCHIVE_SERVER_TOKEN=<same as cloud 2>
 
-bash /home/mooreview/deploy/cloud/debian/enable-phase1-archive-compact.sh
+bash /home/peaklogic/deploy/cloud/debian/enable-phase1-archive-compact.sh
 
-sudo -u mooreview bash -lc 'cd /home/mooreview && ARCHIVE_COMPACT_DRY_RUN=1 node scripts/run-archive-compact.js'
+sudo -u peaklogic bash -lc 'cd /home/peaklogic && ARCHIVE_COMPACT_DRY_RUN=1 node scripts/run-archive-compact.js'

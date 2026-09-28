@@ -2,7 +2,7 @@
 # Replaces WinSCP — servers pull with deploy/update-from-github.sh
 param(
   [string]$EstRoot = (Split-Path $PSScriptRoot -Parent),
-  [string]$CloudRoot = (Join-Path (Split-Path $EstRoot -Parent) 'mooreview-cloud'),
+  [string]$CloudRoot = (Join-Path (Split-Path $EstRoot -Parent) 'peaklogic-cloud'),
   [string]$EstRemote = 'origin',
   [string]$CloudRemote = 'origin',
   [string]$Branch = '',
@@ -40,13 +40,13 @@ Invoke-Step 'Test est-pc' {
   try { npm test } finally { Pop-Location }
 }
 
-Invoke-Step 'Sync est-pc → mooreview-cloud' {
+Invoke-Step 'Sync est-pc → peaklogic-cloud' {
   if ($SkipCloudSync) {
     Write-Host 'Skipped (-SkipCloudSync)'
     return
   }
   if (-not (Test-Path $CloudRoot)) {
-    throw "mooreview-cloud not found at $CloudRoot"
+    throw "peaklogic-cloud not found at $CloudRoot"
   }
   & (Join-Path $PSScriptRoot 'sync-runtime-to-cloud.ps1') -CloudRoot $CloudRoot
 }
@@ -59,7 +59,7 @@ Invoke-Step 'Push est-pc' {
   git -C $EstRoot push $EstRemote $estBranch
 }
 
-Invoke-Step 'Push mooreview-cloud' {
+Invoke-Step 'Push peaklogic-cloud' {
   if ($SkipPush -or $SkipCloudSync) {
     Write-Host 'Skipped'
     return
@@ -71,14 +71,14 @@ Invoke-Step 'Push mooreview-cloud' {
 
 foreach ($host in $RemoteUpdate) {
   Invoke-Step "Remote update: $host" {
-    ssh $host 'sudo bash /home/mooreview/deploy/update-from-github.sh'
+    ssh $host 'sudo bash /home/peaklogic/deploy/update-from-github.sh'
   }
 }
 
 Write-Host ''
 Write-Host 'Published. On targets (no WinSCP):' -ForegroundColor Green
-Write-Host '  Cloud:     ssh root@<droplet> sudo bash /home/mooreview/deploy/update-from-github.sh'
-Write-Host '  IOT-LINK:  ssh root@<gateway>  sudo MOOREVIEW_INSTALL_DIR=/opt/mooreview bash /opt/mooreview/deploy/update-from-github.sh'
+Write-Host '  Cloud:     ssh root@<droplet> sudo bash /home/peaklogic/deploy/update-from-github.sh'
+Write-Host '  IOT-LINK:  ssh root@<gateway>  sudo PEAKLOGIC_INSTALL_DIR=/opt/peaklogic bash /opt/peaklogic/deploy/update-from-github.sh'
 Write-Host '  Or tag a release and use: sudo bash deploy/update-from-github.sh --release v<version>'
 Write-Host ''
 Write-Host 'See docs/UPDATES.md'

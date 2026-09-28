@@ -103,8 +103,8 @@ function createMessagingRoutes() {
     try {
       const info = await mailer.sendMail({
         to,
-        subject: 'MooreVIEW test email',
-        text: 'This is a test message from MooreVIEW alarm / account email delivery.',
+        subject: 'PeakLogic test email',
+        text: 'This is a test message from PeakLogic alarm / account email delivery.',
       });
       res.json({
         ok: true,
@@ -137,7 +137,7 @@ function createMessagingRoutes() {
     try {
       const data = await sms.sendSms({
         to,
-        body: 'MooreVIEW test SMS — alarm notification delivery is working.',
+        body: 'PeakLogic test SMS — alarm notification delivery is working.',
       });
       res.json({
         ok: true,

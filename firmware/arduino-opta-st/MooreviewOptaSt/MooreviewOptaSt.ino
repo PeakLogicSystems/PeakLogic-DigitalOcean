@@ -1,5 +1,5 @@
 /*
- * MooreVIEW ST runtime for Arduino Opta (Ethernet HTTP API + WiFi setup GUI).
+ * PeakLogic ST runtime for Arduino Opta (Ethernet HTTP API + WiFi setup GUI).
  */
 #include <Arduino.h>
 #include "mv_config.h"
@@ -204,7 +204,7 @@ static void registerApiRoutes() {
 void setup() {
   Serial.begin(115200);
   delay(1500);
-  MV_LOG("MooreVIEW Opta ST boot (Serial 115200)");
+  MV_LOG("PeakLogic Opta ST boot (Serial 115200)");
   mvRtcWarnIfUnset();
 
   mvRuntimeBegin(MV_SCAN_MS_DEFAULT);
@@ -236,7 +236,7 @@ void setup() {
   if (mvWifiApActive()) {
     MV_LOG2("Setup WiFi AP http://", mvWifiApIp().toString() + ":" + String(MV_WIFI_HTTP_PORT));
   }
-  MV_LOG("ready — Start/Stop ST from MooreVIEW (Remote ON)");
+  MV_LOG("ready — Start/Stop ST from PeakLogic (Remote ON)");
 }
 
 void loop() {

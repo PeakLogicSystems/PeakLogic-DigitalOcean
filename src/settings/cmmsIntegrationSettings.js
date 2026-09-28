@@ -4,15 +4,15 @@ const { DEFAULT_MQTT_PARC_BROKER } = require('../config');
 
 /** @typedef {import('../integrations/cmmsAlarmPublisher').CmmsIntegrationConfig} CmmsIntegrationConfig */
 
-const SCHEMA = 'mooreview-cmms-integration-v1';
+const SCHEMA = 'peaklogic-cmms-integration-v1';
 
 const DEFAULT_CMMS_INTEGRATION = {
   enabled: false,
   brokerUrl: DEFAULT_MQTT_PARC_BROKER || 'mqtt://127.0.0.1:1883',
-  topicPrefix: 'mooreview/v1',
+  topicPrefix: 'peaklogic/v1',
   siteId: 'local',
   tenantId: 'local',
-  clientId: 'mooreview-cmms',
+  clientId: 'peaklogic-cmms',
   username: '',
   password: '',
   qos: 1,
@@ -30,10 +30,10 @@ function normalizeCmmsIntegration(input, prev = {}) {
   return {
     enabled: input.enabled === true,
     brokerUrl: String(input.brokerUrl ?? base.brokerUrl).trim() || DEFAULT_CMMS_INTEGRATION.brokerUrl,
-    topicPrefix: String(input.topicPrefix ?? base.topicPrefix).trim().replace(/\/+$/, '') || 'mooreview/v1',
+    topicPrefix: String(input.topicPrefix ?? base.topicPrefix).trim().replace(/\/+$/, '') || 'peaklogic/v1',
     siteId: String(input.siteId ?? base.siteId).trim() || 'local',
     tenantId: String(input.tenantId ?? base.tenantId).trim() || 'local',
-    clientId: String(input.clientId ?? base.clientId).trim() || 'mooreview-cmms',
+    clientId: String(input.clientId ?? base.clientId).trim() || 'peaklogic-cmms',
     username: String(input.username ?? base.username ?? '').trim(),
     password: String(input.password ?? base.password ?? ''),
     qos: Number.isFinite(qos) && qos >= 0 && qos <= 2 ? qos : 1,

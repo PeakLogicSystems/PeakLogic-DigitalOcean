@@ -1,6 +1,6 @@
 # Integrated CMMS (appliance & cloud)
 
-Single-tenant **integrated CMMS** ships in the mooreVIEW monolith — the cloud SaaS equivalent on one site, without a separate TPS CMMS install.
+Single-tenant **integrated CMMS** ships in the PeakLogic monolith — the cloud SaaS equivalent on one site, without a separate TPS CMMS install.
 
 **Proactive, not reactive:** CMMS receives work from three automatic sources — **PdM pending failure** (early), **alarm transitions** (urgent), and **PM schedules** (calendar). See [pdm/PDM_PROACTIVE_CMMS.md](pdm/PDM_PROACTIVE_CMMS.md).
 

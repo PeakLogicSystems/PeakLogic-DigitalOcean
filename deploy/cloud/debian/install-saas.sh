@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
-# MooreVIEW multi-tenant SaaS — port 3100 only (login, CMMS, Studio).
-# Uses DO Managed MongoDB via MONGODB_URI in /etc/mooreview/saas.env.
+# PeakLogic multi-tenant SaaS — port 3100 only (login, CMMS, Studio).
+# Uses DO Managed MongoDB via MONGODB_URI in /etc/peaklogic/saas.env.
 # Optional edge runtime on 3090: deploy/cloud/debian/enable-runtime-3090.sh
 #
 # Run as root:
-#   sudo MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview \
+#   sudo PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic \
 #     bash deploy/cloud/debian/install-saas.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-SAAS_ENV="${MOOREVIEW_SAAS_ENV:-/etc/mooreview/saas.env}"
-DATA_DIR="${MOOREVIEW_DATA_DIR:-/var/lib/mooreview}"
-SERVICE_USER="${MOOREVIEW_USER:-mooreview}"
-SOURCE_DIR="${MOOREVIEW_SOURCE:-$REPO_ROOT}"
-DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+SAAS_ENV="${PEAKLOGIC_SAAS_ENV:-/etc/peaklogic/saas.env}"
+DATA_DIR="${PEAKLOGIC_DATA_DIR:-/var/lib/peaklogic}"
+SERVICE_USER="${PEAKLOGIC_USER:-peaklogic}"
+SOURCE_DIR="${PEAKLOGIC_SOURCE:-$REPO_ROOT}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
 
-log() { printf '[mooreview-saas] %s\n' "$*"; }
-die() { printf '[mooreview-saas] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-saas] %s\n' "$*"; }
+die() { printf '[peaklogic-saas] ERROR: %s\n' "$*" >&2; exit 1; }
 
 strip_crlf() {
   local f="$1"
@@ -35,7 +35,7 @@ if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
 fi
 
 if [[ ! -f "$SOURCE_DIR/package.json" ]] || [[ ! -f "$SOURCE_DIR/server.js" ]]; then
-  die "MooreVIEW source not found at $SOURCE_DIR (need server.js — set MOOREVIEW_SOURCE)"
+  die "PeakLogic source not found at $SOURCE_DIR (need server.js — set PEAKLOGIC_SOURCE)"
 fi
 
 export DEBIAN_FRONTEND=noninteractive
@@ -68,12 +68,12 @@ if ! id "$SERVICE_USER" >/dev/null 2>&1; then
   fi
 fi
 
-install -d -m 0750 -o root -g "$SERVICE_USER" /etc/mooreview
-for deploy_file in "$SCRIPT_DIR"/.env.saas.debian.example "$SCRIPT_DIR"/mooreview-saas.service \
-  "$SCRIPT_DIR"/mooreview-runtime.service "$SCRIPT_DIR"/nginx-mooreview-saas.conf \
+install -d -m 0750 -o root -g "$SERVICE_USER" /etc/peaklogic
+for deploy_file in "$SCRIPT_DIR"/.env.saas.debian.example "$SCRIPT_DIR"/peaklogic-saas.service \
+  "$SCRIPT_DIR"/peaklogic-runtime.service "$SCRIPT_DIR"/nginx-peaklogic-saas.conf \
   "$SCRIPT_DIR"/install-saas.sh "$SCRIPT_DIR"/enable-saas-mqtt.sh \
-  "$SCRIPT_DIR"/enable-phase1-archive-compact.sh "$SCRIPT_DIR"/mooreview-archive-compact.service \
-  "$SCRIPT_DIR"/mooreview-archive-compact.timer "$SCRIPT_DIR"/write-nginx-saas-site.sh; do
+  "$SCRIPT_DIR"/enable-phase1-archive-compact.sh "$SCRIPT_DIR"/peaklogic-archive-compact.service \
+  "$SCRIPT_DIR"/peaklogic-archive-compact.timer "$SCRIPT_DIR"/write-nginx-saas-site.sh; do
   strip_crlf "$deploy_file"
 done
 
@@ -93,8 +93,8 @@ elif ! grep -qE '^PORT=' "$SAAS_ENV" 2>/dev/null; then
   log "Adding PORT=3100 to $SAAS_ENV"
   printf '\nPORT=3100\n' >> "$SAAS_ENV"
 fi
-if grep -qE '^MOOREVIEW_PORT=3090' "$SAAS_ENV" 2>/dev/null; then
-  sed -i 's/^MOOREVIEW_PORT=3090/MOOREVIEW_PORT=3100/' "$SAAS_ENV"
+if grep -qE '^PEAKLOGIC_PORT=3090' "$SAAS_ENV" 2>/dev/null; then
+  sed -i 's/^PEAKLOGIC_PORT=3090/PEAKLOGIC_PORT=3100/' "$SAAS_ENV"
 fi
 
 # Block boot-loop from template placeholders
@@ -129,7 +129,7 @@ sudo -u "$SERVICE_USER" bash -lc "cd '$INSTALL_DIR' && npm ci --omit=dev"
 install -d -m 0750 -o "$SERVICE_USER" -g "$SERVICE_USER" "$DATA_DIR"
 install -d -m 0750 -o "$SERVICE_USER" -g "$SERVICE_USER" "$DATA_DIR/projects"
 
-# Legacy installs kept tenant users under $INSTALL_DIR/data before MOOREVIEW_DATA=/var/lib/mooreview.
+# Legacy installs kept tenant users under $INSTALL_DIR/data before PEAKLOGIC_DATA=/var/lib/peaklogic.
 LEGACY_DATA="$INSTALL_DIR/data"
 RUNTIME_TENANTS="$DATA_DIR/cloud_tenants.json"
 if [[ -f "$LEGACY_DATA/cloud_tenants.json" ]] && [[ ! -f "$RUNTIME_TENANTS" || "$(wc -c < "$RUNTIME_TENANTS" | tr -d ' ')" -lt 4096 ]]; then
@@ -159,7 +159,7 @@ if [[ -d "$LEGACY_DATA" ]] && [[ "$LEGACY_DATA" != "$DATA_DIR" ]]; then
   fi
 fi
 
-# Ship bundled Studio snapshots into runtime data dir (MOOREVIEW_DATA=/var/lib/mooreview).
+# Ship bundled Studio snapshots into runtime data dir (PEAKLOGIC_DATA=/var/lib/peaklogic).
 # Bundle extracts them under $INSTALL_DIR/data/projects; the service does not read that path.
 BUNDLED_PROJECTS_SRC=""
 if [[ -d "$SOURCE_DIR/data/projects" ]]; then
@@ -185,33 +185,33 @@ ln -sf "$SAAS_ENV" "$INSTALL_DIR/.env"
 chown -h "$SERVICE_USER:$SERVICE_USER" "$INSTALL_DIR/.env" 2>/dev/null || true
 
 # --- systemd: SaaS on 3100 ---
-sed "s|@MOOREVIEW_INSTALL_DIR@|${INSTALL_DIR}|g" "$SCRIPT_DIR/mooreview-saas.service" \
-  > /etc/systemd/system/mooreview-saas.service
-chmod 0644 /etc/systemd/system/mooreview-saas.service
+sed "s|@PEAKLOGIC_INSTALL_DIR@|${INSTALL_DIR}|g" "$SCRIPT_DIR/peaklogic-saas.service" \
+  > /etc/systemd/system/peaklogic-saas.service
+chmod 0644 /etc/systemd/system/peaklogic-saas.service
 
 # Runtime unit installed but not enabled (3090 — optional later)
-sed "s|@MOOREVIEW_INSTALL_DIR@|${INSTALL_DIR}|g" "$SCRIPT_DIR/mooreview-runtime.service" \
-  > /etc/systemd/system/mooreview-runtime.service
-chmod 0644 /etc/systemd/system/mooreview-runtime.service
+sed "s|@PEAKLOGIC_INSTALL_DIR@|${INSTALL_DIR}|g" "$SCRIPT_DIR/peaklogic-runtime.service" \
+  > /etc/systemd/system/peaklogic-runtime.service
+chmod 0644 /etc/systemd/system/peaklogic-runtime.service
 
 systemctl daemon-reload
-systemctl enable mooreview-saas.service
+systemctl enable peaklogic-saas.service
 
 # Retire legacy single-port appliance service if present
-if systemctl list-unit-files mooreview.service >/dev/null 2>&1; then
-  log "Disabling legacy mooreview.service (port 3090 appliance) — use mooreview-saas on 3100"
-  systemctl disable --now mooreview.service 2>/dev/null || true
+if systemctl list-unit-files peaklogic.service >/dev/null 2>&1; then
+  log "Disabling legacy peaklogic.service (port 3090 appliance) — use peaklogic-saas on 3100"
+  systemctl disable --now peaklogic.service 2>/dev/null || true
 fi
 
-if systemctl is-active --quiet mooreview-saas.service 2>/dev/null; then
-  systemctl restart mooreview-saas.service
+if systemctl is-active --quiet peaklogic-saas.service 2>/dev/null; then
+  systemctl restart peaklogic-saas.service
 else
-  systemctl start mooreview-saas.service
+  systemctl start peaklogic-saas.service
 fi
 
 # --- nginx -> 3100 ---
-NGINX_SITE="/etc/nginx/sites-available/mooreview-saas"
-MOOREVIEW_DOMAIN="$DOMAIN" MOOREVIEW_SAAS_PORT=3100 NGINX_SITE="$NGINX_SITE" \
+NGINX_SITE="/etc/nginx/sites-available/peaklogic-saas"
+PEAKLOGIC_DOMAIN="$DOMAIN" PEAKLOGIC_SAAS_PORT=3100 NGINX_SITE="$NGINX_SITE" \
   bash "$SCRIPT_DIR/write-nginx-saas-site.sh"
 
 # --- UFW (HTTP/HTTPS only; 3090 not exposed until runtime enabled) ---
@@ -223,14 +223,14 @@ if command -v ufw >/dev/null 2>&1; then
 fi
 
 log "Done — multi-tenant SaaS on port 3100"
-if systemctl is-active --quiet mooreview-saas.service 2>/dev/null; then
-  log "  mooreview-saas: active"
+if systemctl is-active --quiet peaklogic-saas.service 2>/dev/null; then
+  log "  peaklogic-saas: active"
 else
-  log "  mooreview-saas: NOT running (journalctl -u mooreview-saas -n 40)"
+  log "  peaklogic-saas: NOT running (journalctl -u peaklogic-saas -n 40)"
 fi
 log "  Health:  curl -s http://127.0.0.1:3100/health"
 log "  Login:   https://${DOMAIN}/login  (after TLS: certbot --nginx -d ${DOMAIN})"
 log "  Env:     $SAAS_ENV"
 log "  Seed:    sudo -u $SERVICE_USER bash -lc 'cd $INSTALL_DIR && npm run seed'  (once, after setting secrets)"
 log "  Runtime: enable port 3090 later: sudo bash $SCRIPT_DIR/enable-runtime-3090.sh"
-log "  Logs:    journalctl -u mooreview-saas -f"
+log "  Logs:    journalctl -u peaklogic-saas -f"

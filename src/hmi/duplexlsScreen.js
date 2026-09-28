@@ -7,7 +7,7 @@ const {
 } = require('./hmiComposites');
 
 const DUPLEXLS_GRID = { cols: 16, rows: 13, cellWidth: 64, cellHeight: 64 };
-const DUPLEXLS_SVG = '/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg';
+const DUPLEXLS_SVG = '/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg';
 const DUPLEXLS_OVERVIEW = { width: 1150, height: 620 };
 const DUPLEXLS_VIEWPORT = { displayMaxWidth: 1229, displayMaxHeight: 922, scale: 120 };
 const DUPLEX_3D_URL = '/samples/duplex-lift-station-ortho-3d.html';

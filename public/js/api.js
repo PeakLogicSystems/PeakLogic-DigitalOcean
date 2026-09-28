@@ -1,20 +1,20 @@
 'use strict';
 
-const API = (typeof window !== 'undefined' && window.MOOREVIEW_API_BASE) || '/api';
+const API = (typeof window !== 'undefined' && window.PEAKLOGIC_API_BASE) || '/api';
 
 function isCloudContext() {
   if (typeof window === 'undefined' || !window.location) return false;
-  if (window.MOOREVIEW_DEPLOYMENT === 'cloud') return true;
+  if (window.PEAKLOGIC_DEPLOYMENT === 'cloud') return true;
   const host = window.location.hostname || '';
   const port = window.location.port || '';
-  return port === '3100' || /mooreview\.io$/i.test(host);
+  return port === '3100' || /peaklogic\.io$/i.test(host);
 }
 
 function fetchErrorHint(origin) {
   if (isCloudContext()) {
-    return `Cannot reach the MooreView Cloud server at ${origin}. The site may be down or HTTPS/nginx needs attention on the SaaS host (port 3100).`;
+    return `Cannot reach the PeakLogic Cloud server at ${origin}. The site may be down or HTTPS/nginx needs attention on the SaaS host (port 3100).`;
   }
-  return `Cannot reach the MooreView server at ${origin}. Start MVP Suite with npm start (default http://127.0.0.1:3090/).`;
+  return `Cannot reach the PeakLogic server at ${origin}. Start MVP Suite with npm start (default http://127.0.0.1:3090/).`;
 }
 
 async function request(method, path, body) {
@@ -38,7 +38,7 @@ async function request(method, path, body) {
       || (Array.isArray(data.errors) && data.errors.length ? data.errors.join('; ') : null)
       || res.statusText;
     if (res.status === 413 && !data.error && !(Array.isArray(data.errors) && data.errors.length)) {
-      msg = `Request body too large (HTTP 413, limit may be too low). Restart MooreView (npm stop && npm start), then try again. Large projects need the current server — tags alone can be ~500 KB.`;
+      msg = `Request body too large (HTTP 413, limit may be too low). Restart PeakLogic (npm stop && npm start), then try again. Large projects need the current server — tags alone can be ~500 KB.`;
     }
     const err = new Error(msg);
     if (data.errors) err.errors = data.errors;
@@ -121,7 +121,7 @@ window.api = {
     }
     const name = String(fileOrBlob.name || 'project');
     if (/\.est\.zip$/i.test(name)) {
-      throw new Error('This server cannot import .est.zip yet — deploy the latest MooreView build, or use Project → Import after upgrading.');
+      throw new Error('This server cannot import .est.zip yet — deploy the latest PeakLogic build, or use Project → Import after upgrading.');
     }
     const text = await fileOrBlob.text();
     const doc = JSON.parse(text);
@@ -337,8 +337,8 @@ window.api = {
   testMessagingSms: (body) => request('POST', '/messaging/test/sms', body),
   listProjectHubLocal: () => request('GET', '/project-hub/catalog'),
   async listProjectHubCloud() {
-    if (typeof window !== 'undefined' && window.MOOREVIEW_PLATFORM_API) {
-      const platform = window.MOOREVIEW_PLATFORM_API;
+    if (typeof window !== 'undefined' && window.PEAKLOGIC_PLATFORM_API) {
+      const platform = window.PEAKLOGIC_PLATFORM_API;
       const res = await fetch(`${platform}/project-hub/catalog`, { credentials: 'include' });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || res.statusText || 'Cloud catalog failed');
@@ -350,8 +350,8 @@ window.api = {
   publishProjectHubCloud: (body) => request('POST', '/project-hub/cloud/publish', body || {}),
   deployProjectHub: (body) => request('POST', '/project-hub/deploy', body),
   async fetchCloudProjectDoc(id) {
-    if (typeof window !== 'undefined' && window.MOOREVIEW_PLATFORM_API) {
-      const platform = window.MOOREVIEW_PLATFORM_API;
+    if (typeof window !== 'undefined' && window.PEAKLOGIC_PLATFORM_API) {
+      const platform = window.PEAKLOGIC_PLATFORM_API;
       const res = await fetch(`${platform}/project-hub/catalog/${encodeURIComponent(id)}/est`, {
         credentials: 'include',
       });
@@ -371,7 +371,7 @@ window.api = {
     return res.blob();
   },
   async publishProjectHubPlatform(body) {
-    const platform = (typeof window !== 'undefined' && window.MOOREVIEW_PLATFORM_API) || '/api';
+    const platform = (typeof window !== 'undefined' && window.PEAKLOGIC_PLATFORM_API) || '/api';
     const res = await fetch(`${platform}/project-hub/publish`, {
       method: 'POST',
       credentials: 'include',

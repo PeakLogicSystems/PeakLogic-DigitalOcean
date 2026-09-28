@@ -318,7 +318,7 @@ function compileSimplexMotor(node, screenId, manifests, col, row) {
 
 /**
  * Compile MV Draw nodes with SCADA meta into an HMI screen + bindings.
- * @param {object} doc - mooreview-mvdraw document
+ * @param {object} doc - peaklogic-mvdraw document
  * @param {object} [options]
  * @param {string} [options.screenId]
  * @param {string} [options.screenName]

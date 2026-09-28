@@ -1,4 +1,4 @@
-# mooreVIEW Opta Room — room integration controller
+# PeakLogic Opta Room — room integration controller
 
 **Separate product** from `arduino-opta-mqtt-st`. Same ST + MQTT Parc runtime base; adds WiFi peripheral ingest for Shelly Flood Gen4 leak sensors in a room/zone.
 
@@ -7,7 +7,7 @@
 ## Role
 
 ```
-Shelly Flood (x N) --WiFi--> Opta AP (192.168.4.1) --PARC/MQTT (Ethernet)--> mooreVIEW
+Shelly Flood (x N) --WiFi--> Opta AP (192.168.4.1) --PARC/MQTT (Ethernet)--> PeakLogic
 ```
 
 The Opta aggregates up to `MV_SHELLY_MAX` (default 8) battery Shelly Flood Gen4 sensors. Each pushes state via HTTP webhook to the Opta WiFi AP. Tags flow to central over PARC like any other Opta tag and are usable in on-device ST.
@@ -28,7 +28,7 @@ cd firmware\arduino-opta-room\scripts
 .\bootstrap.ps1
 ```
 
-This creates `firmware/arduino-opta-room/mooreVIEWOptaRoom/` (gitignored generated tree). Open `mooreVIEWOptaRoom.ino` in Arduino IDE.
+This creates `firmware/arduino-opta-room/PeakLogicOptaRoom/` (gitignored generated tree). Open `PeakLogicOptaRoom.ino` in Arduino IDE.
 
 Re-run bootstrap after updating either the mqtt-st base or room overlays.
 
@@ -41,7 +41,7 @@ Re-run bootstrap after updating either the mqtt-st base or room overlays.
 
 ## Shelly pairing
 
-1. Enable WiFi AP on Opta (`mooreVIEW-Opta`, min 8-char password), Save/Reboot.
+1. Enable WiFi AP on Opta (`PeakLogic-Opta`, min 8-char password), Save/Reboot.
 2. Join each Shelly Flood to that AP.
 3. On each Shelly, add **Actions** (GET URL webhook) for flood on/off with a unique `dev` slot:
 
@@ -52,7 +52,7 @@ http://192.168.4.1:8080/api/peripheral/shelly?dev=2&flood=${flood:0.alarm}&tC=${
 
 The `/setup` **Room integration** card shows per-slot status.
 
-## mooreVIEW PC
+## PeakLogic PC
 
 Use the existing **Arduino Opta — MQTT Parc ST runtime** template (`mqtt_parc`, `tagsFromDevice`). No separate PC template — slotted `SHELLY<n>_*` tags appear automatically from device telemetry.
 
@@ -62,7 +62,7 @@ Example ST: `st/opta-room/09_shelly_flood.st`
 
 | File | Role |
 |------|------|
-| `mooreVIEWOptaRoom.ino` | Boot log, peripheral begin/tick |
+| `PeakLogicOptaRoom.ino` | Boot log, peripheral begin/tick |
 | `mv_peripheral.h` / `mv_peripheral.cpp` | Shelly webhook ingest, slotted tags |
 | `mv_setup_web.cpp` | Room setup UI + `/api/peripheral/shelly` |
 | `mv_version.h` | Product version `1.0.0` |

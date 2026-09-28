@@ -1,6 +1,6 @@
-# mooreVIEW Opta ST Runtime (Ethernet + WiFi setup)
+# PeakLogic Opta ST Runtime (Ethernet + WiFi setup)
 
-Runs mooreVIEW ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_remote`** driver in `est-pc`.
+Runs PeakLogic ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_remote`** driver in `est-pc`.
 
 ## Requirements
 
@@ -14,7 +14,7 @@ Runs mooreVIEW ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_
 
 ## Flash
 
-1. Open `mooreVIEWOptaSt/mooreVIEWOptaSt.ino`
+1. Open `PeakLogicOptaSt/PeakLogicOptaSt.ino`
 2. **Tools → Board → Arduino Opta** (WiFi / Lite / RS485) — required; `Ethernet.h` comes from this core
 3. **Tools → Board Manager** → install **Arduino Opta** (mbed_opta) if missing
 4. Install libraries: **ArduinoJson**, **Arduino_Opta_Blueprint**, and optionally **Arduino_Portenta_OTA**
@@ -24,13 +24,13 @@ Runs mooreVIEW ST programs on **Arduino Opta** over HTTP. Pair with the **`opta_
 
 Open **Tools → Serial Monitor** at **115200** on the Opta **USB** port (not the Ethernet link).
 
-After boot you should see timestamped lines like `[MV 2026-06-06 14:30:01 logic/21_all.st] mooreVIEW Opta ST boot`. The timestamp is **wall clock** from the Opta RTC, synced from your PC on **Connect** and **deploy** (`X-MV-Client-Time` / `clientTimeUnix`). Until sync, logs use uptime (`HH:MM:SS.mmm`) and boot prints an RTC warning.
+After boot you should see timestamped lines like `[MV 2026-06-06 14:30:01 logic/21_all.st] PeakLogic Opta ST boot`. The timestamp is **wall clock** from the Opta RTC, synced from your PC on **Connect** and **deploy** (`X-MV-Client-Time` / `clientTimeUnix`). Until sync, logs use uptime (`HH:MM:SS.mmm`) and boot prints an RTC warning.
 
 When a program is deployed, the **basename** of the active `.st` path appears in every debug line; full path is logged on deploy and **ST RUNTIME START**.
 
 `GET /api/status` returns `protocolVersion`, `firmwareVersion`, `programName`, and `rtcTime` when set.
 
-When mooreVIEW starts or stops remote ST you should see banner lines:
+When PeakLogic starts or stops remote ST you should see banner lines:
 
 ```
 [MV 00:00:15.230] ========================================
@@ -42,8 +42,8 @@ When mooreVIEW starts or stops remote ST you should see banner lines:
 
 **If you never see START/STOP:**
 
-1. **Re-flash** from `est-pc/firmware/arduino-opta-st/mooreVIEWOptaSt/` (includes `mv_runtime.cpp` + `mv_debug.h`).
-2. In mooreVIEW **Program**, enable **Remote** and click **Start** / **Stop** (I/O-only mode does not call `/api/runtime/start` on the Opta).
+1. **Re-flash** from `est-pc/firmware/arduino-opta-st/PeakLogicOptaSt/` (includes `mv_runtime.cpp` + `mv_debug.h`).
+2. In PeakLogic **Program**, enable **Remote** and click **Start** / **Stop** (I/O-only mode does not call `/api/runtime/start` on the Opta).
 3. Confirm deploy succeeds first — you should see `[MV] PUT /api/program` and `[MV] program OK` before START.
 4. Set `MV_DEBUG_VERBOSE` to `0` in `mv_config.h` to silence scan-cycle logs.
 
@@ -60,8 +60,8 @@ On **Opta WiFi**, the firmware starts a setup access point (default):
 
 | Setting | Default |
 |---------|---------|
-| SSID | `mooreVIEW-Opta` |
-| Password | `mooreview` |
+| SSID | `PeakLogic-Opta` |
+| Password | `peaklogic` |
 | AP IP | `192.168.4.1` |
 | Setup HTTP | port **8080** |
 
@@ -86,7 +86,7 @@ Settings are stored in flash (mbed KVStore when available).
 
 Slot **1** is the module closest to the Opta base. Use **Scan expansions** in the setup GUI to detect installed hardware.
 
-## mooreVIEW PC setup
+## PeakLogic PC setup
 
 1. **Drivers** → **`opta_remote`**, host = Opta Ethernet IP
 2. Apply template **Arduino Opta — Ethernet ST runtime** or **+ expansions**
@@ -95,10 +95,10 @@ Slot **1** is the module closest to the Opta base. Use **Scan expansions** in th
 
 ### Connect / Test fails with `ECONNRESET`
 
-mooreVIEW talks to **Ethernet port 80** (`http://192.168.1.234/api/status`). The WiFi setup page on **`192.168.4.1:8080` is a different path** — if that works but Test fails, Ethernet HTTP is still broken.
+PeakLogic talks to **Ethernet port 80** (`http://192.168.1.234/api/status`). The WiFi setup page on **`192.168.4.1:8080` is a different path** — if that works but Test fails, Ethernet HTTP is still broken.
 
-1. On **this PC** (same machine as mooreVIEW): open `http://192.168.1.234/api/status` in a browser, or run `npm run opta-test`.
-2. Re-flash **`est-pc/firmware/arduino-opta-st/mooreVIEWOptaSt`** (not the OneDrive fork). Serial @115200 should log `GET /api/status` when you click **Test**.
+1. On **this PC** (same machine as PeakLogic): open `http://192.168.1.234/api/status` in a browser, or run `npm run opta-test`.
+2. Re-flash **`est-pc/firmware/arduino-opta-st/PeakLogicOptaSt`** (not the OneDrive fork). Serial @115200 should log `GET /api/status` when you click **Test**.
 3. If curl/Node get **connection reset on send**, update and re-flash — Opta mbed requires keeping `EthernetClient` alive across `loop()` ticks (`mv_http.cpp`).
 
 ## HTTP API (runtime)
@@ -130,7 +130,7 @@ mooreVIEW talks to **Ethernet port 80** (`http://192.168.1.234/api/status`). The
 
 Full ST subset: logic, timers (TON/TOF/TP), counters (CTU/CTD), PID, AVG, REAL tags. See prior README sections for action/call lists.
 
-mooreVIEW PC parses `.st` to JSON AST (`src/engine/astJson.js`); the Opta **interpreter** (`mv_st.cpp`) loads that AST and executes it each scan cycle.
+PeakLogic PC parses `.st` to JSON AST (`src/engine/astJson.js`); the Opta **interpreter** (`mv_st.cpp`) loads that AST and executes it each scan cycle.
 
 ## Over-the-air firmware (OTA)
 
@@ -147,28 +147,28 @@ After **Sketch → Export compiled Binary**:
 
 ```powershell
 # Tools from ArduinoIoTCloud extras (or Arduino_Portenta_OTA repo extras/tools)
-python lzss.py --encode mooreVIEWOptaSt.ino.bin mooreVIEWOptaSt.ino.lzss
-python bin2ota.py OPTA mooreVIEWOptaSt.ino.lzss mooreVIEWOptaSt.ino.ota
+python lzss.py --encode PeakLogicOptaSt.ino.bin PeakLogicOptaSt.ino.lzss
+python bin2ota.py OPTA PeakLogicOptaSt.ino.lzss PeakLogicOptaSt.ino.ota
 ```
 
-Upload **`mooreVIEWOptaSt.ino.ota`** (not raw `.bin`).
+Upload **`PeakLogicOptaSt.ino.ota`** (not raw `.bin`).
 
 ### Deploy OTA
 
 1. **HTTP** (Ethernet or setup WiFi AP): `POST /api/firmware` with the `.ota` file body, `Content-Type: application/octet-stream`. Device stops ST runtime, writes to QSPI, decompresses, reboots. Progress: `GET /api/ota` or `GET /api/status` (`ota` object).
 
-2. **WiFi ArduinoOTA** (Opta WiFi, if available): connect to setup AP, use Arduino IDE **Network port** against hostname `mooreview-opta`.
+2. **WiFi ArduinoOTA** (Opta WiFi, if available): connect to setup AP, use Arduino IDE **Network port** against hostname `peaklogic-opta`.
 
 Optional password: `#define MV_OTA_PASSWORD "secret"` in `mv_config.h`. HTTP clients send header `X-MV-OTA-Password`.
 
-From mooreVIEW PC (`opta_remote` driver):
+From PeakLogic PC (`opta_remote` driver):
 
 ```javascript
 const fs = require('fs');
 const { OptaRemoteDriver } = require('./src/drivers/optaRemoteDriver');
 const d = new OptaRemoteDriver({ host: '192.168.1.50' });
 await d.connect({});
-await d.uploadFirmware(fs.readFileSync('mooreVIEWOptaSt.ino.ota'));
+await d.uploadFirmware(fs.readFileSync('PeakLogicOptaSt.ino.ota'));
 ```
 
 ## Limits

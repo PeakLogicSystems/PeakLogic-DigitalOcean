@@ -1,13 +1,13 @@
 {
   "tenant": {
-    "name": "MooreVIEW ATU Service",
+    "name": "PeakLogic ATU Service",
     "slug": "atu-cloud",
     "tenantId": "atu-cloud"
   },
   "sizingGuide": {
     "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
     "uplink": "cellular_mqtt",
-    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to MooreVIEW cloud Mosquitto",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
     "atuToLiftPairing": [
       {
         "atu": "single_atu",

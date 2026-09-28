@@ -3,7 +3,7 @@
   "label": "DUPLEXLS (duplex lift station overview)",
   "group": "Process equipment",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg",
+  "preview": "/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg",
   "tagRoles": {
     "tankLevel": { "pick": "tagId", "tagId": "TANK_LVL", "types": ["REAL"] },
     "lvlOff": { "pick": "tagId", "tagId": "LVL_OFF", "types": ["BOOL"] },
@@ -35,7 +35,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/lift-station-faceplates/mooreview/duplexls.svg"
+      "svg": "/hmi/svg/library/lift-station-faceplates/peaklogic/duplexls.svg"
     }
   ],
   "defaultBindings": [

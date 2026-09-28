@@ -4,7 +4,7 @@ const persistence = require('../persistence');
 
 function defaultCloudSimsSettings(prev = {}) {
   return {
-    enabled: prev.enabled === true || process.env.MOOREVIEW_CLOUD_SIMS === '1',
+    enabled: prev.enabled === true || process.env.PEAKLOGIC_CLOUD_SIMS === '1',
   };
 }
 

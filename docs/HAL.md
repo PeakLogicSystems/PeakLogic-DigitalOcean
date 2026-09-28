@@ -1,4 +1,4 @@
-# mooreVIEW HAL — built-in I/O driver
+# PeakLogic HAL — built-in I/O driver
 
 The **`hal`** driver exposes on-board digital, analog, and hardware counter I/O through a small hardware abstraction layer. Use it on embedded Linux (with a board plugin) or everywhere in **`sim`** mode for development.
 
@@ -53,11 +53,11 @@ Apply from **Drivers → device preset** in MVP Suite or ST MVP GUI.
 Implement `native/hal_plugin.h` in a shared library:
 
 ```c
-int mooreview_hal_init(const char* config_json);
-void mooreview_hal_shutdown(void);
-int mooreview_hal_read(enum mooreview_hal_kind kind, int index, double* out);
-int mooreview_hal_write(enum mooreview_hal_kind kind, int index, double value);
-int mooreview_hal_counter_read(int index, unsigned long long* count, double* freq_hz);
+int peaklogic_hal_init(const char* config_json);
+void peaklogic_hal_shutdown(void);
+int peaklogic_hal_read(enum peaklogic_hal_kind kind, int index, double* out);
+int peaklogic_hal_write(enum peaklogic_hal_kind kind, int index, double value);
+int peaklogic_hal_counter_read(int index, unsigned long long* count, double* freq_hz);
 ```
 
 Examples:
@@ -72,7 +72,7 @@ See **`hal/plugins/README_SM-I-001.md`** for Pi setup, I2C, pin map, and driver 
 ```bash
 cd hal/plugins
 make sm_i001
-sudo make install-sm_i001   # → /usr/lib/libmooreview_hal_sm_i001.so
+sudo make install-sm_i001   # → /usr/lib/libpeaklogic_hal_sm_i001.so
 ```
 
 Apply preset **Raspberry Pi 4 + Sequent SM-I-001 (HAL plugin)** or set `pluginPath` and `halConfig: { "stack": 0, "i2cBus": 1 }`.

@@ -9,7 +9,7 @@
 | | |
 |---|---|
 | **Document ID** | MV-FST-1.0 |
-| **Product** | mooreVIEW PC / Cloud Studio |
+| **Product** | PeakLogic PC / Cloud Studio |
 | **Platforms** | MVP Suite (Windows appliance) · IoT-Link (Linux) · Cloud SaaS |
 | **Generated** | Run `npm run build:full-system-test-pdf` for build date |
 
@@ -502,4 +502,4 @@ After changes in these areas, re-run the marked sections:
 
 ---
 
-*mooreVIEW Full System Test · MV-FST-1.0 · Help/training aligned 2026-07 · See also `docs/testing/CMMS_USER_TESTING.md` and `docs/BASELINE_TEST.md`.*
+*PeakLogic Full System Test · MV-FST-1.0 · Help/training aligned 2026-07 · See also `docs/testing/CMMS_USER_TESTING.md` and `docs/BASELINE_TEST.md`.*

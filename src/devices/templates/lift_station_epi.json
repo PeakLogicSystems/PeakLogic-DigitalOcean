@@ -15,7 +15,7 @@
     "brokerUrl": "mqtt://127.0.0.1:1883",
     "serialNum": "40a36bce47f3",
     "liftProfile": "epi_master",
-    "clientId": "mooreview",
+    "clientId": "peaklogic",
     "subscribeQos": 0,
     "publishQos": 0
   },
@@ -41,5 +41,5 @@
       { "assetId": "pump-2", "pumpIndex": 2, "pumpRole": "lag" }
     ]
   },
-  "notes": "Track A — Azure Function (deploy/azure/nexcomm-sb-mqtt-function) or nexcomm-sb-mqtt-bridge publishes to mqtts://mqtt.mooreview.io:8883 (lab: mqtt://127.0.0.1:1883). Nexcomm serials may arrive as xxxx-xxxxxx; use normalized serialNum without hyphens (e.g. 40a3-6bce47f3 → 40a36bce47f3). Subscribe /devices/<serial>/messages/events/. Default serial 40a36bce47f3 = Nexus Cloud Master Lift Station. Set liftProfile=liftpoint_light and serialNum=862406071948166 for LiftPoint Light. Sample: st/fixtures/edgepoint-lift-station-sample.json."
+  "notes": "Track A — Azure Function (deploy/azure/nexcomm-sb-mqtt-function) or nexcomm-sb-mqtt-bridge publishes to mqtts://mqtt.peaklogic.io:8883 (lab: mqtt://127.0.0.1:1883). Nexcomm serials may arrive as xxxx-xxxxxx; use normalized serialNum without hyphens (e.g. 40a3-6bce47f3 → 40a36bce47f3). Subscribe /devices/<serial>/messages/events/. Default serial 40a36bce47f3 = Nexus Cloud Master Lift Station. Set liftProfile=liftpoint_light and serialNum=862406071948166 for LiftPoint Light. Sample: st/fixtures/edgepoint-lift-station-sample.json."
 }

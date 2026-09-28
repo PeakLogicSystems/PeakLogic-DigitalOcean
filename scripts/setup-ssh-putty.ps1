@@ -1,4 +1,4 @@
-# One-time SSH + PuTTY key setup for any MooreVIEW workstation (Windows).
+# One-time SSH + PuTTY key setup for any PeakLogic workstation (Windows).
 # Syncs keys from the OneDrive repo, fixes OpenSSH ACLs, and creates PuTTY sessions.
 param(
   [string]$RepoRoot = '',
@@ -15,7 +15,7 @@ $RepoRoot = (Resolve-Path $RepoRoot).Path
 
 $repoSsh = Join-Path $RepoRoot '.ssh'
 $userSsh = Join-Path $env:USERPROFILE '.ssh'
-$keyName = 'id_ed25519_mooreview'
+$keyName = 'id_ed25519_peaklogic'
 $ppkName = "$keyName.ppk"
 
 $hosts = @(
@@ -84,7 +84,7 @@ function Set-PuttySession([string]$SessionName, [string]$HostName, [string]$PpkP
   Set-ItemProperty -Path $regPath -Name 'TryAgent' -Value 1
 }
 
-Write-Host '=== MooreVIEW SSH + PuTTY setup ===' -ForegroundColor Cyan
+Write-Host '=== PeakLogic SSH + PuTTY setup ===' -ForegroundColor Cyan
 Write-Host "Repo:  $RepoRoot"
 Write-Host "User:  $userSsh"
 Write-Host "PuTTY: $PuttyDir"
@@ -145,14 +145,14 @@ $gitPlinkForward = ($gitPlink -replace '\\', '/')
 Write-Host "Git core.sshCommand -> $gitPlinkForward" -ForegroundColor Green
 
 $startup = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Startup'
-$pageantLink = Join-Path $startup 'MooreVIEW-Pageant.lnk'
+$pageantLink = Join-Path $startup 'PeakLogic-Pageant.lnk'
 if (-not $SkipPageant -and (Test-Path $pageant) -and (Test-Path $ppkPath)) {
   $wsh = New-Object -ComObject WScript.Shell
   $shortcut = $wsh.CreateShortcut($pageantLink)
   $shortcut.TargetPath = $pageant
   $shortcut.Arguments = "`"$ppkPath`""
   $shortcut.WorkingDirectory = $PuttyDir
-  $shortcut.Description = 'Load mooreVIEW SSH key for PuTTY/Pageant'
+  $shortcut.Description = 'Load PeakLogic SSH key for PuTTY/Pageant'
   $shortcut.Save()
   Write-Host "Startup shortcut: $pageantLink" -ForegroundColor Green
   Start-Process -FilePath $pageant -ArgumentList "`"$ppkPath`"" -ErrorAction SilentlyContinue

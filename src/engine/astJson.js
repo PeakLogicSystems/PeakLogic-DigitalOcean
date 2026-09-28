@@ -1,6 +1,6 @@
 'use strict';
 
-/** Serialize parser AST to JSON for MooreVIEW Opta remote runtime. */
+/** Serialize parser AST to JSON for PeakLogic Opta remote runtime. */
 function astToJson(node) {
   if (!node || typeof node !== 'object') return null;
   switch (node.type) {

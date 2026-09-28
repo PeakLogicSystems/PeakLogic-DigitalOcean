@@ -1,4 +1,4 @@
-# mooreVIEW Cloud (DigitalOcean)
+# PeakLogic Cloud (DigitalOcean)
 
 Three deployment paths on DigitalOcean:
 
@@ -6,7 +6,7 @@ Three deployment paths on DigitalOcean:
 |------|------|-------|-----|
 | **Phase 1 ATL (recommended)** | **3100** + **8883** + **8090** | [docs/CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md](../../docs/CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md) | SaaS + **dedicated MQTT** + archive |
 | **Phase 1 production (legacy)** | **3100** + **8090** | [phase1/WINSCP-DEPLOY.md](phase1/WINSCP-DEPLOY.md) | MQTT colocated on SaaS |
-| **Phase 1 ATL legacy** | **3100** + **8090** | [docs/CLOUD_DEPLOY_DO_PHASE1_ATL.md](../../docs/CLOUD_DEPLOY_DO_PHASE1_ATL.md) | Atlanta prod + `test.mooreview.io` sandbox |
+| **Phase 1 ATL legacy** | **3100** + **8090** | [docs/CLOUD_DEPLOY_DO_PHASE1_ATL.md](../../docs/CLOUD_DEPLOY_DO_PHASE1_ATL.md) | Atlanta prod + `test.peaklogic.io` sandbox |
 | **Cloud SaaS only** | **3100** | [docs/CLOUD_DEPLOY_DO.md](../../docs/CLOUD_DEPLOY_DO.md) | Single droplet, no archive server |
 | **Cloud VM / hub** | 3090 | This README (Docker / debian install) | MQTT Parc ingest, headless hub, local Mongo |
 
@@ -14,8 +14,8 @@ Build Phase 1 bundles from Windows:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\create-phase1-bundles.ps1
-# Upload dist/mooreview-cloud-*d.tgz → cloud-1-saas
-# Upload dist/mooreview-archive-*.tgz → cloud-2-archive
+# Upload dist/peaklogic-cloud-*d.tgz → cloud-1-saas
+# Upload dist/peaklogic-archive-*.tgz → cloud-2-archive
 ```
 
 SaaS-only bundle:
@@ -28,23 +28,23 @@ See also: [docs/CLOUD_SAAS.md](../../docs/CLOUD_SAAS.md), [debian/INSTALL-SAAS.t
 
 ---
 
-# mooreVIEW Cloud VM (DigitalOcean) — port 3090 hub
+# PeakLogic Cloud VM (DigitalOcean) — port 3090 hub
 
-Headless mooreVIEW stack for initial cloud testing: **MongoDB**, **Mosquitto MQTT**, and the **mooreVIEW Node app** (API + historian + MQTT Parc hub + tenant telemetry ingest).
+Headless PeakLogic stack for initial cloud testing: **MongoDB**, **Mosquitto MQTT**, and the **PeakLogic Node app** (API + historian + MQTT Parc hub + tenant telemetry ingest).
 
 Target: **Ubuntu 22.04** droplet with Docker Compose.
 
-**Native Debian (no Docker):** see **[debian/README-debian.md](debian/README-debian.md)** — manual install on Debian 12 with systemd, MongoDB 7, Mosquitto, and Node 20. Default install path: **`/home/mooreview`**. Transfer **`mooreview-cloud`** (synced from est-pc) via `scripts/rsync-to-droplet.ps1`.
+**Native Debian (no Docker):** see **[debian/README-debian.md](debian/README-debian.md)** — manual install on Debian 12 with systemd, MongoDB 7, Mosquitto, and Node 20. Default install path: **`/home/peaklogic`**. Transfer **`peaklogic-cloud`** (synced from est-pc) via `scripts/rsync-to-droplet.ps1`.
 
 ## What runs
 
 | Service | Role | Host port |
 |---------|------|-----------|
-| `mongodb` | Config store (`mooreview_config`) + historian | internal only |
+| `mongodb` | Config store (`peaklogic_config`) + historian | internal only |
 | `mosquitto` | Parc + global + appliance uplink MQTT | **1883** (plain), **8883** (TLS when `MOSQUITTO_TLS=true`) |
-| `mooreview` | `server.js` with `MOOREVIEW_DEPLOYMENT=cloud` | **3090** |
+| `peaklogic` | `server.js` with `PEAKLOGIC_DEPLOYMENT=cloud` | **3090** |
 
-The app is the same codebase as the PC appliance (`est-pc`), not a separate cloud app. Site appliances relay Parc telemetry via `cloudRemote` → `applianceCloudRelay.js` to tenant topics `mooreview/v1/{tenantId}/{deviceId}/telemetry`.
+The app is the same codebase as the PC appliance (`est-pc`), not a separate cloud app. Site appliances relay Parc telemetry via `cloudRemote` → `applianceCloudRelay.js` to tenant topics `peaklogic/v1/{tenantId}/{deviceId}/telemetry`.
 
 **MQTT credentials, TLS, and topic layout:** see **[MQTT.md](MQTT.md)**.
 
@@ -62,8 +62,8 @@ sudo apt update && sudo apt install -y git docker.io docker-compose-v2
 sudo usermod -aG docker $USER
 # log out/in once so docker group applies
 
-git clone <your-repo-url> mooreview
-cd mooreview/deploy/cloud
+git clone <your-repo-url> peaklogic
+cd peaklogic/deploy/cloud
 cp .env.example .env
 docker compose up -d --build
 curl -s http://127.0.0.1:3090/health | jq .
@@ -75,7 +75,7 @@ Health should report `ok: true`, Mongo connected, and MQTT hub status when enabl
 
 ```bash
 sudo ufw allow OpenSSH
-sudo ufw allow 3090/tcp comment 'mooreVIEW API'
+sudo ufw allow 3090/tcp comment 'PeakLogic API'
 sudo ufw allow 1883/tcp comment 'MQTT Parc + cloud uplink'
 sudo ufw allow 8883/tcp comment 'MQTT TLS'
 # Do NOT expose 27017 — Mongo stays on the Docker network
@@ -88,15 +88,15 @@ For production, terminate TLS on 443 (nginx/Caddy) and restrict 1883 to known ap
 
 1. Copy `deploy/cloud/.env.example` → `.env` and adjust.
 2. First boot seeds Mongo config from empty `data/` if needed (`configStore` migration).
-3. Open `http://<droplet-ip>:3090/health` — use mooreVIEW PC client or REST `/api/*` for setup.
+3. Open `http://<droplet-ip>:3090/health` — use PeakLogic PC client or REST `/api/*` for setup.
 4. **MQTT Parc hub**: enabled by default when drivers exist; broker URL should be `mqtt://<droplet-ip>:1883` for field devices.
 5. **Global P2P tags**: set matching `globalSiteKey` in System setup (PC) and on each Opta `/setup` (firmware **v2.3.48+**).
 
 ### Appliance → cloud uplink
 
-On each site mooreVIEW appliance (`MOOREVIEW_DEPLOYMENT=appliance`):
+On each site PeakLogic appliance (`PEAKLOGIC_DEPLOYMENT=appliance`):
 
-- System setup → **Cloud remote**: `enabled`, `tenantId`, `gatewayId`, `brokerUrl=mqtts://mooreview.io:8883` (or plain `mqtt://<droplet-ip>:1883`)
+- System setup → **Cloud remote**: `enabled`, `tenantId`, `gatewayId`, `brokerUrl=mqtts://peaklogic.io:8883` (or plain `mqtt://<droplet-ip>:1883`)
 - Set **Cloud MQTT username/password** in System setup to match `MOSQUITTO_USER` / `MOSQUITTO_PASS` on the droplet.
 - Parc hub stays on local broker; `applianceCloudRelay` forwards telemetry to cloud tenant topics.
 
@@ -114,7 +114,7 @@ By default the cloud bundle **requires MQTT credentials**. Set in `.env`:
 
 Mount TLS certs under `deploy/cloud/certs/` (`server.crt`, `server.key`, optional `ca.crt`) when `MOSQUITTO_TLS=true`.
 
-Configure matching credentials on mooreVIEW (System setup → MQTT Parc username/password) and on appliances (`cloudRemote.username` / `cloudRemote.password` in settings).
+Configure matching credentials on PeakLogic (System setup → MQTT Parc username/password) and on appliances (`cloudRemote.username` / `cloudRemote.password` in settings).
 
 Self-signed test certs on a DO droplet:
 
@@ -128,23 +128,23 @@ openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 
 
 ```bash
 # Global tag (P2P) — hub mirrors into tag store when site key matches
-mosquitto_pub -h localhost -t 'mooreview/v1/g/0001/PumpRun' -m '{"v":true,"t":"BOOL"}' -r
+mosquitto_pub -h localhost -t 'peaklogic/v1/g/0001/PumpRun' -m '{"v":true,"t":"BOOL"}' -r
 
-# Tenant uplink shape (cloud hub ingests when MOOREVIEW_DEPLOYMENT=cloud)
-mosquitto_pub -h localhost -t 'mooreview/v1/demo-tenant/opta_01/telemetry' \
+# Tenant uplink shape (cloud hub ingests when PEAKLOGIC_DEPLOYMENT=cloud)
+mosquitto_pub -h localhost -t 'peaklogic/v1/demo-tenant/opta_01/telemetry' \
   -m '{"deviceId":"opta_01","tags":[{"id":"I1","type":"BOOL","value":true}]}'
 ```
 
 ## Cloud sim management (virtual devices)
 
-mooreVIEW Cloud includes a **sim management** system for demo and integration testing without physical Opta hardware.
+PeakLogic Cloud includes a **sim management** system for demo and integration testing without physical Opta hardware.
 
 | Item | Detail |
 |------|--------|
-| **UI** | `http://<droplet-ip>:3090/cloud/sims` (Tools → **Cloud Sims** when `MOOREVIEW_DEPLOYMENT=cloud`) |
+| **UI** | `http://<droplet-ip>:3090/cloud/sims` (Tools → **Cloud Sims** when `PEAKLOGIC_DEPLOYMENT=cloud`) |
 | **API** | `GET/POST /api/cloud/sims`, `POST …/:id/start`, `POST …/:id/stop`, `DELETE …/:id` |
 | **Persistence** | Mongo collection `cloud_sims` (or `data/cloud_sims.json` fallback) |
-| **Telemetry** | Publishes tenant topics `mooreview/v1/{tenantId}/{deviceId}/telemetry` |
+| **Telemetry** | Publishes tenant topics `peaklogic/v1/{tenantId}/{deviceId}/telemetry` |
 
 ### Quick start on cloud VM
 
@@ -168,7 +168,7 @@ curl -s http://127.0.0.1:3090/api/parc/devices | jq '.devices[] | select(.device
 
 Sim runners use the MQTT Parc hub broker URL from System setup (`settings.mqttParc.brokerUrl`, typically `mqtt://127.0.0.1:1883` inside the VM). Match Mosquitto credentials if auth is enabled.
 
-**Local dev:** set `MOOREVIEW_CLOUD_SIMS=1` with `npm start` to exercise sim APIs without full cloud deployment.
+**Local dev:** set `PEAKLOGIC_CLOUD_SIMS=1` with `npm start` to exercise sim APIs without full cloud deployment.
 
 **Phase 2 (planned):** multi-tenant sim orchestration, per-tenant quotas, Kubernetes sim worker pods, Modbus TCP slave processes, and auto-provisioned `mqtt_parc` drivers per sim.
 
@@ -187,7 +187,7 @@ Manage physical cellular modem SIMs and eSIMs via vendor REST APIs — for Opta/
 
 ```bash
 # Enable locally (appliance or cloud VM)
-export MOOREVIEW_CELLULAR_SIMS=1
+export PEAKLOGIC_CELLULAR_SIMS=1
 
 # Add Hologram vendor config
 curl -s -X POST http://127.0.0.1:3090/api/cellular/vendors \
@@ -214,7 +214,7 @@ Reflash **v2.3.48+** (`firmware/arduino-opta-mqtt-st`) for:
 
 - NV **global site key** on `/setup`
 - Global tag bytecode (`META_GLOBAL` / `GLOBAL_BOOL|INT|REAL`, `GB|GI|GR`)
-- MQTT publish/subscribe on `mooreview/v1/g/{siteKey4}/{tag}` at telemetry rate (retained QoS1)
+- MQTT publish/subscribe on `peaklogic/v1/g/{siteKey4}/{tag}` at telemetry rate (retained QoS1)
 
 ## Local dev (unchanged)
 
@@ -222,10 +222,10 @@ PC development still uses `npm start` and `npm run mqtt:start` with local Mongo/
 
 ## Debian native install
 
-On **Debian 12 (Bookworm)** without Docker — install path **`/home/mooreview`**:
+On **Debian 12 (Bookworm)** without Docker — install path **`/home/peaklogic`**:
 
 ```powershell
-# Dev machine (Windows): sync est-pc → mooreview-cloud, then rsync to droplet
+# Dev machine (Windows): sync est-pc → peaklogic-cloud, then rsync to droplet
 cd est-pc
 powershell -File scripts\sync-runtime-to-cloud.ps1
 powershell -File scripts\rsync-to-droplet.ps1 -DropletHost root@<droplet-ip>
@@ -233,9 +233,9 @@ powershell -File scripts\rsync-to-droplet.ps1 -DropletHost root@<droplet-ip>
 
 ```bash
 # Droplet: bootstrap MongoDB, Mosquitto, Node, systemd
-export MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview
-sudo -E bash /home/mooreview/deploy/cloud/debian/install.sh
-sudo nano /etc/mooreview/env   # set MOSQUITTO_PASS, then re-run install.sh
+export PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic
+sudo -E bash /home/peaklogic/deploy/cloud/debian/install.sh
+sudo nano /etc/peaklogic/env   # set MOSQUITTO_PASS, then re-run install.sh
 ```
 
 Full manual steps (UFW, Mosquitto auth, verification, updates): **[debian/README-debian.md](debian/README-debian.md)**.
@@ -243,14 +243,14 @@ Full manual steps (UFW, Mosquitto auth, verification, updates): **[debian/README
 ## Logs & ops
 
 ```bash
-docker compose logs -f mooreview
+docker compose logs -f peaklogic
 docker compose ps
-docker compose restart mooreview
+docker compose restart peaklogic
 ```
 
-Data volumes: `mongo-data`, `mooreview-data`, `mosquitto-data`.
+Data volumes: `mongo-data`, `peaklogic-data`, `mosquitto-data`.
 
 ## Production blockers
 
-- TLS termination on 443 (nginx/Caddy) for mooreVIEW API still manual.
+- TLS termination on 443 (nginx/Caddy) for PeakLogic API still manual.
 - Single-node Mongo — no replica set / backup automation in this compose file.

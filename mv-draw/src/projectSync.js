@@ -25,11 +25,11 @@ function readEstSnapshot() {
   return projectEst || workspaceEst || null;
 }
 
-function buildMooreviewProjectContext(settings, estSnapshot, activeMvDraw) {
+function buildPeaklogicProjectContext(settings, estSnapshot, activeMvDraw) {
   const projectName = String(settings?.project?.name || 'untitled').trim() || 'untitled';
   const estPath = `data/projects/${exportFilename(projectName)}`;
   const mvDraw = estSnapshot?.mvDraw || null;
-  const synced = String(activeMvDraw?.meta?.mooreviewProject || '').trim() === projectName;
+  const synced = String(activeMvDraw?.meta?.peaklogicProject || '').trim() === projectName;
   return {
     projectName,
     lastOpenedId: settings?.project?.lastOpenedId || null,
@@ -46,10 +46,10 @@ function buildMooreviewProjectContext(settings, estSnapshot, activeMvDraw) {
   };
 }
 
-function readMooreviewProjectContext() {
+function readPeaklogicProjectContext() {
   const settings = persistence.readJson('settings.json', {});
   const est = readEstSnapshot();
-  return buildMooreviewProjectContext(settings, est, readActiveProject());
+  return buildPeaklogicProjectContext(settings, est, readActiveProject());
 }
 
 function integrationLibraryFileBase(context, doc) {
@@ -58,7 +58,7 @@ function integrationLibraryFileBase(context, doc) {
   return String(context?.projectName || 'untitled').trim().replace(/[^\w.-]+/g, '_').slice(0, 80) || 'untitled';
 }
 
-function alignMvDrawForMooreviewProject(doc, context, settings = {}) {
+function alignMvDrawForPeaklogicProject(doc, context, settings = {}) {
   const projectName = String(context?.projectName || 'untitled').trim() || 'untitled';
   const site = String(settings?.project?.site || doc?.meta?.site || '').trim();
   const client = String(settings?.project?.client || doc?.meta?.client || '').trim();
@@ -66,7 +66,7 @@ function alignMvDrawForMooreviewProject(doc, context, settings = {}) {
     name: projectName,
     site,
     client,
-    mooreviewProject: projectName,
+    peaklogicProject: projectName,
   });
 }
 
@@ -118,10 +118,10 @@ function linkComposerTo3d(settings, facility3dUrl, options = {}) {
   return next;
 }
 
-function saveMvDrawToMooreviewProject(doc, options = {}) {
-  const context = readMooreviewProjectContext();
+function saveMvDrawToPeaklogicProject(doc, options = {}) {
+  const context = readPeaklogicProjectContext();
   const settings = persistence.readJson('settings.json', {});
-  const aligned = alignMvDrawForMooreviewProject(doc || readActiveProject(), context, settings);
+  const aligned = alignMvDrawForPeaklogicProject(doc || readActiveProject(), context, settings);
   const fileBase = integrationLibraryFileBase(context, aligned);
   const { project, file } = saveNamedProject(fileBase, aligned, { alignProjectName: true });
   writeActiveProject(project);
@@ -130,7 +130,7 @@ function saveMvDrawToMooreviewProject(doc, options = {}) {
   return {
     project,
     file,
-    context: buildMooreviewProjectContext(nextSettings, readEstSnapshot(), project),
+    context: buildPeaklogicProjectContext(nextSettings, readEstSnapshot(), project),
     estPath: context.estPath,
     estTouched,
     facilityPlanUrl: nextSettings.hmi?.layout?.facilityPlanUrl || null,
@@ -138,21 +138,21 @@ function saveMvDrawToMooreviewProject(doc, options = {}) {
   };
 }
 
-function loadMvDrawFromMooreviewProject() {
+function loadMvDrawFromPeaklogicProject() {
   const est = readEstSnapshot();
   if (!est?.mvDraw) {
-    throw Object.assign(new Error('No site plan in the open MooreVIEW project'), { status: 404 });
+    throw Object.assign(new Error('No site plan in the open PeakLogic project'), { status: 404 });
   }
-  const context = readMooreviewProjectContext();
+  const context = readPeaklogicProjectContext();
   const settings = persistence.readJson('settings.json', {});
-  const aligned = alignMvDrawForMooreviewProject(est.mvDraw, context, settings);
+  const aligned = alignMvDrawForPeaklogicProject(est.mvDraw, context, settings);
   const fileBase = integrationLibraryFileBase(context, aligned);
   const { project, file } = saveNamedProject(fileBase, aligned, { alignProjectName: true });
   const saved = writeActiveProject(project);
   return {
     project: saved,
     file,
-    context: buildMooreviewProjectContext(settings, est, saved),
+    context: buildPeaklogicProjectContext(settings, est, saved),
     estPath: context.estPath,
   };
 }
@@ -228,14 +228,14 @@ function compileAndApplyMvDrawHmi(doc, options = {}) {
 
 module.exports = {
   DEFAULT_FACILITY_PLAN_URL,
-  buildMooreviewProjectContext,
-  readMooreviewProjectContext,
-  alignMvDrawForMooreviewProject,
+  buildPeaklogicProjectContext,
+  readPeaklogicProjectContext,
+  alignMvDrawForPeaklogicProject,
   patchEstSnapshotsWithMvDraw,
   linkComposerToPlan,
   linkComposerTo3d,
-  saveMvDrawToMooreviewProject,
-  loadMvDrawFromMooreviewProject,
+  saveMvDrawToPeaklogicProject,
+  loadMvDrawFromPeaklogicProject,
   shouldAutoLoadFromProject,
   saveMvDrawToProjectLibrary,
   applyMvDrawHmiCompile,

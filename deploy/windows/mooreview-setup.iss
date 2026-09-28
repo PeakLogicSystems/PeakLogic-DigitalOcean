@@ -1,4 +1,4 @@
-; MooreVIEW MVP Suite — Windows installer (Inno Setup 6)
+; PeakLogic MVP Suite — Windows installer (Inno Setup 6)
 ; Build: powershell -File scripts\build-windows-installer.ps1
 
 #ifndef MyAppVersion
@@ -8,9 +8,9 @@
   #define StagingDir "..\..\dist\windows-installer\staging"
 #endif
 
-#define MyAppName "MooreVIEW MVP Suite"
+#define MyAppName "PeakLogic MVP Suite"
 #define MyAppPublisher "The Purple Standard"
-#define MyAppExeName "MooreVIEW.cmd"
+#define MyAppExeName "PeakLogic.cmd"
 
 [Setup]
 AppId={{8F4E2A91-6C3D-4B8E-9F01-2D7E5A4B6C90}
@@ -20,14 +20,14 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 OutputDir=..\..\dist\windows-installer
-OutputBaseFilename=MooreVIEW-MVP-Suite-{#MyAppVersion}-setup
+OutputBaseFilename=PeakLogic-MVP-Suite-{#MyAppVersion}-setup
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=no
-UninstallDisplayIcon={app}\MooreVIEW.cmd
+UninstallDisplayIcon={app}\PeakLogic.cmd
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -40,11 +40,11 @@ Source: "{#StagingDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
-Name: "{group}\Stop MooreVIEW"; Filename: "{app}\MooreVIEW-Stop.cmd"; WorkingDir: "{app}"
+Name: "{group}\Stop PeakLogic"; Filename: "{app}\PeakLogic-Stop.cmd"; WorkingDir: "{app}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; WorkingDir: "{app}"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent
 
 [Messages]
-WelcomeLabel2=This will install [name/ver] on your computer.%n%nRequires Node.js 18+ (nodejs.org). Projects and settings are stored under your user profile (%LOCALAPPDATA%\MooreVIEW\data).
+WelcomeLabel2=This will install [name/ver] on your computer.%n%nRequires Node.js 18+ (nodejs.org). Projects and settings are stored under your user profile (%LOCALAPPDATA%\PeakLogic\data).

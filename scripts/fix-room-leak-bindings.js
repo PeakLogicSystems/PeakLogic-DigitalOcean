@@ -56,7 +56,7 @@ const BROKEN_SUFFIXES = new Set(['val_pan_leak', 'val_stove', 'val_ac_hi', 'val_
 
 function serverLooksRunning() {
   try {
-    const pid = Number(fs.readFileSync(path.join(DATA_DIR, 'mooreview.pid'), 'utf8').trim());
+    const pid = Number(fs.readFileSync(path.join(DATA_DIR, 'peaklogic.pid'), 'utf8').trim());
     if (!Number.isFinite(pid) || pid <= 0) return false;
     process.kill(pid, 0);
     return pid;
@@ -180,7 +180,7 @@ async function main() {
   const running = serverLooksRunning();
   if (running && APPLY && !process.env.FORCE) {
     console.error(
-      `MooreVIEW appears to be running (pid ${running}). Stop it first (npm run stop) `
+      `PeakLogic appears to be running (pid ${running}). Stop it first (npm run stop) `
       + 'or re-run with FORCE=1 to override.',
     );
     process.exit(1);

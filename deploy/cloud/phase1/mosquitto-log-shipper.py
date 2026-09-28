@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tail Mosquitto broker log on mv-mqtt and POST raw lines to MooreVIEW SaaS ingest API."""
+"""Tail Mosquitto broker log on mv-mqtt and POST raw lines to PeakLogic SaaS ingest API."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ DEFAULT_BATCH_SEC = 2.0
 DEFAULT_MAX_LINES = 100
 
 
-DEFAULT_ENV = "/etc/mooreview/mqtt-log-shipper.env"
+DEFAULT_ENV = "/etc/peaklogic/mqtt-log-shipper.env"
 
 
 def load_env_file(path: str = DEFAULT_ENV) -> None:
@@ -56,15 +56,15 @@ def post_lines(api_url: str, token: str, host: str, lines: list[str]) -> dict:
 
 def main() -> int:
     load_env_file()
-    log_path = env("MOOREVIEW_MOSQUITTO_LOG_PATH", DEFAULT_LOG)
-    api_url = env("MOOREVIEW_MQTT_LOG_INGEST_URL") or env("PUBLIC_API_URL", "https://mooreview.io")
-    token = env("MOOREVIEW_MQTT_LOG_INGEST_TOKEN")
-    host = env("MOOREVIEW_MOSQUITTO_LOG_HOST", os.uname().nodename)
-    batch_sec = float(env("MOOREVIEW_MQTT_LOG_BATCH_SEC", str(DEFAULT_BATCH_SEC)) or DEFAULT_BATCH_SEC)
-    max_lines = int(env("MOOREVIEW_MQTT_LOG_BATCH_LINES", str(DEFAULT_MAX_LINES)) or DEFAULT_MAX_LINES)
+    log_path = env("PEAKLOGIC_MOSQUITTO_LOG_PATH", DEFAULT_LOG)
+    api_url = env("PEAKLOGIC_MQTT_LOG_INGEST_URL") or env("PUBLIC_API_URL", "https://peaklogic.io")
+    token = env("PEAKLOGIC_MQTT_LOG_INGEST_TOKEN")
+    host = env("PEAKLOGIC_MOSQUITTO_LOG_HOST", os.uname().nodename)
+    batch_sec = float(env("PEAKLOGIC_MQTT_LOG_BATCH_SEC", str(DEFAULT_BATCH_SEC)) or DEFAULT_BATCH_SEC)
+    max_lines = int(env("PEAKLOGIC_MQTT_LOG_BATCH_LINES", str(DEFAULT_MAX_LINES)) or DEFAULT_MAX_LINES)
 
     if not token:
-        print("MOOREVIEW_MQTT_LOG_INGEST_TOKEN is required", file=sys.stderr)
+        print("PEAKLOGIC_MQTT_LOG_INGEST_TOKEN is required", file=sys.stderr)
         return 2
 
     print(

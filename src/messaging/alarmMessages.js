@@ -56,7 +56,7 @@ function buildCloudCmmsAlarmPayload(tenant, alarm) {
     publishedAt: new Date().toISOString(),
     siteId: tenant.slug,
     tenantId,
-    source: 'mooreview-cloud',
+    source: 'peaklogic-cloud',
     projectName: tenant.name || tenant.slug,
     alarm: {
       tagId: alarm.tagId,

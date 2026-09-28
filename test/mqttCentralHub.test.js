@@ -92,7 +92,7 @@ describe('mqttCentralHub sendCommand', () => {
     const entry = published[0];
     assert.ok(entry?.id, 'command published');
     hub._onMessage(
-      `mooreview/v1/${deviceId}/cmd/response`,
+      `peaklogic/v1/${deviceId}/cmd/response`,
       Buffer.from(JSON.stringify({ id: entry.id, ok: true, body: { running: false } })),
     );
     const body = await cmdPromise;
@@ -115,7 +115,7 @@ describe('mqttCentralHub sendCommand', () => {
     });
     hub.cfg = defaultCentralSettings();
     hub._onMessage(
-      `mooreview/v1/${deviceId}/online`,
+      `peaklogic/v1/${deviceId}/online`,
       Buffer.from('{"online":true}'),
     );
     assert.equal(ingested.length, 1);

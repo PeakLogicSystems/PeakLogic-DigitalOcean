@@ -1,9 +1,9 @@
-# MooreVIEW Phase 1 — DigitalOcean deployment
+# PeakLogic Phase 1 — DigitalOcean deployment
 
 Two-droplet **Phase 1** layout for production launch (~237 sites Year 1). Step-by-step **WinSCP** instructions: **[deploy/cloud/phase1/WINSCP-DEPLOY.md](../deploy/cloud/phase1/WINSCP-DEPLOY.md)**.
 
 **Atlanta production (`atl1`) — recommended (dedicated MQTT):** **[CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md](CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md)**  
-**Atlanta legacy (MQTT on SaaS):** [CLOUD_DEPLOY_DO_PHASE1_ATL.md](CLOUD_DEPLOY_DO_PHASE1_ATL.md) · NYC sandbox: `test.mooreview.io`
+**Atlanta legacy (MQTT on SaaS):** [CLOUD_DEPLOY_DO_PHASE1_ATL.md](CLOUD_DEPLOY_DO_PHASE1_ATL.md) · NYC sandbox: `test.peaklogic.io`
 
 Single-droplet SaaS-only path (no archive server): [CLOUD_DEPLOY_DO.md](CLOUD_DEPLOY_DO.md).
 
@@ -21,22 +21,22 @@ Single-droplet SaaS-only path (no archive server): [CLOUD_DEPLOY_DO.md](CLOUD_DE
                              │
     ┌────────────────────────▼────────────────────────┐
     │  Droplet cloud-1-saas (4 GB, VPC)               │
-    │  nginx :443 → mooreview-saas :3100              │
+    │  nginx :443 → peaklogic-saas :3100              │
     │  Mosquitto :8883 (TLS)                          │
-    │  systemd: mooreview-archive-compact.timer       │
+    │  systemd: peaklogic-archive-compact.timer       │
     └────────────┬───────────────────────┬────────────┘
                  │ mongodb+srv://        │ http://10.x:8090
                  │                       │ (VPC private)
     ┌────────────▼────────────┐  ┌───────▼──────────────────┐
     │ DO Managed MongoDB    │  │ Droplet cloud-2-archive   │
-    │ 7-day hot telemetry   │  │ mooreview-archive :8090   │
-    │ mooreview_cloud       │  │ /data/archive (volume)    │
+    │ 7-day hot telemetry   │  │ peaklogic-archive :8090   │
+    │ peaklogic_cloud       │  │ /data/archive (volume)    │
     └───────────────────────┘  └───────────────────────────┘
 ```
 
 | Component | Port | Notes |
 |-----------|------|-------|
-| SaaS API / Studio | **3100** (internal), **443** (public) | `mooreview-saas.service` |
+| SaaS API / Studio | **3100** (internal), **443** (public) | `peaklogic-saas.service` |
 | MQTT TLS | **8883** | Field Opta / appliance uplink |
 | Archive API | **8090** | VPC-only; Bearer token |
 | Edge runtime | **3090** | Optional — not required Phase 1 |
@@ -64,8 +64,8 @@ powershell -ExecutionPolicy Bypass -File scripts\create-phase1-bundles.ps1
 
 | Bundle | Droplet |
 |--------|---------|
-| `dist/mooreview-cloud-YYYYMMDDd.tgz` | cloud-1-saas |
-| `dist/mooreview-archive-YYYYMMDD.tgz` | cloud-2-archive |
+| `dist/peaklogic-cloud-YYYYMMDDd.tgz` | cloud-1-saas |
+| `dist/peaklogic-archive-YYYYMMDD.tgz` | cloud-2-archive |
 
 ---
 
@@ -73,10 +73,10 @@ powershell -ExecutionPolicy Bypass -File scripts\create-phase1-bundles.ps1
 
 | Path | Template |
 |------|----------|
-| `/etc/mooreview/saas.env` | `deploy/cloud/phase1/droplet-saas/saas.env.template` |
-| `/etc/mooreview/mqtt.env` | `deploy/cloud/phase1/droplet-saas/mqtt.env.template` |
-| `/etc/mooreview/archive-compact.env` | `deploy/cloud/phase1/droplet-saas/archive-compact.env.template` |
-| `/etc/mooreview/archive.env` | `deploy/cloud/phase1/droplet-archive/archive.env.template` |
+| `/etc/peaklogic/saas.env` | `deploy/cloud/phase1/droplet-saas/saas.env.template` |
+| `/etc/peaklogic/mqtt.env` | `deploy/cloud/phase1/droplet-saas/mqtt.env.template` |
+| `/etc/peaklogic/archive-compact.env` | `deploy/cloud/phase1/droplet-saas/archive-compact.env.template` |
+| `/etc/peaklogic/archive.env` | `deploy/cloud/phase1/droplet-archive/archive.env.template` |
 
 ---
 
@@ -110,7 +110,7 @@ Checklist: **[deploy/cloud/phase1/CHECKLIST.txt](../deploy/cloud/phase1/CHECKLIS
 | Y2–Y3 (~700–1500 sites) | Scale Mongo 50–250 GB; archive volume 2–8 TB |
 | Y4+ | Split ingest/GUI tiers; object storage for archive |
 
-See [MooreVIEW-Infrastructure-Projections.md](marketing/MooreVIEW-Infrastructure-Projections.md).
+See [PeakLogic-Infrastructure-Projections.md](marketing/PeakLogic-Infrastructure-Projections.md).
 
 ---
 

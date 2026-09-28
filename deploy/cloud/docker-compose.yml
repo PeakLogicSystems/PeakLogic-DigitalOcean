@@ -29,31 +29,31 @@ services:
       MOSQUITTO_USER: ${MOSQUITTO_USER:-}
       MOSQUITTO_PASS: ${MOSQUITTO_PASS:-}
       MOSQUITTO_TLS: ${MOSQUITTO_TLS:-true}
-      MOOREVIEW_DOMAIN: ${MOOREVIEW_DOMAIN:-mooreview.io}
+      PEAKLOGIC_DOMAIN: ${PEAKLOGIC_DOMAIN:-peaklogic.io}
     networks:
       - mv-cloud
 
-  mooreview:
+  peaklogic:
     build:
       context: ../..
       dockerfile: deploy/cloud/Dockerfile
     restart: unless-stopped
     ports:
-      - '${MOOREVIEW_PORT:-3090}:3090'
+      - '${PEAKLOGIC_PORT:-3090}:3090'
     env_file:
       - .env
     environment:
-      MOOREVIEW_DEPLOYMENT: cloud
-      MOOREVIEW_MAX_TAGS: "70912"
-      MOOREVIEW_DATA: /data
+      PEAKLOGIC_DEPLOYMENT: cloud
+      PEAKLOGIC_MAX_TAGS: "70912"
+      PEAKLOGIC_DATA: /data
       PORT: '3090'
       MONGODB_URI: mongodb://mongodb:27017
-      MOOREVIEW_CONFIG_URI: mongodb://mongodb:27017
-      MOOREVIEW_MQTT_BROKER: mqtt://mosquitto:1883
+      PEAKLOGIC_CONFIG_URI: mongodb://mongodb:27017
+      PEAKLOGIC_MQTT_BROKER: mqtt://mosquitto:1883
       MOSQUITTO_USER: ${MOSQUITTO_USER:-}
       MOSQUITTO_PASS: ${MOSQUITTO_PASS:-}
     volumes:
-      - mooreview-data:/data
+      - peaklogic-data:/data
     depends_on:
       mongodb:
         condition: service_healthy
@@ -69,4 +69,4 @@ volumes:
   mongo-data:
   mosquitto-data:
   mosquitto-config:
-  mooreview-data:
+  peaklogic-data:

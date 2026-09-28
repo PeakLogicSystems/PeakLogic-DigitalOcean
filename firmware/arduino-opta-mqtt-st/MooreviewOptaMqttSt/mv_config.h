@@ -43,10 +43,10 @@
 
 // WiFi setup AP (Opta WiFi variant)
 #ifndef MV_WIFI_AP_SSID
-#define MV_WIFI_AP_SSID "MooreVIEW-Opta"
+#define MV_WIFI_AP_SSID "PeakLogic-Opta"
 #endif
 #ifndef MV_WIFI_AP_PASS
-#define MV_WIFI_AP_PASS "mooreview"
+#define MV_WIFI_AP_PASS "peaklogic"
 #endif
 #ifndef MV_WIFI_AP_IP
 #define MV_WIFI_AP_IP 192, 168, 4, 1
@@ -73,11 +73,11 @@
 #define MV_OTA_QSPI_OFFSET 2
 #endif
 
-/** Sketch / empty-NV defaults — mqtt.mooreview.io (Phase 1 ATL MOSQUITTO_*). */
+/** Sketch / empty-NV defaults — mqtt.peaklogic.io (Phase 1 ATL MOSQUITTO_*). */
 #ifndef MV_MQTT_SKETCH_BROKER_DEFAULT
-#define MV_MQTT_SKETCH_BROKER_DEFAULT "mqtt.mooreview.io"
+#define MV_MQTT_SKETCH_BROKER_DEFAULT "mqtt.peaklogic.io"
 #endif
-/** Local MooreVIEW appliance / PC broker when TLS is off (plain :1883). */
+/** Local PeakLogic appliance / PC broker when TLS is off (plain :1883). */
 #ifndef MV_MQTT_LAN_BROKER_DEFAULT
 #define MV_MQTT_LAN_BROKER_DEFAULT "192.168.1.233"
 #endif
@@ -88,7 +88,7 @@
 #define MV_MQTT_SKETCH_TLS_DEFAULT 1
 #endif
 #ifndef MV_MQTT_SKETCH_USER_DEFAULT
-#define MV_MQTT_SKETCH_USER_DEFAULT "mooreview"
+#define MV_MQTT_SKETCH_USER_DEFAULT "peaklogic"
 #endif
 #ifndef MV_MQTT_SKETCH_PASS_DEFAULT
 #define MV_MQTT_SKETCH_PASS_DEFAULT "f20ba87c93b64d6b5b0606357385b9e528af2a10bb883d1f"

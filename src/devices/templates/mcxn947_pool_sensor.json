@@ -1,6 +1,6 @@
 {
   "id": "mcxn947_pool_sensor",
-  "label": "MCXN947 Pool Sensor — chemistry (MooreVIEW Parc MQTT)",
+  "label": "MCXN947 Pool Sensor — chemistry (PeakLogic Parc MQTT)",
   "vendor": "NXP / Nexcomm",
   "model": "MCXN947 Pool Chemistry Sensor",
   "transport": "mqtt_parc_telemetry",
@@ -11,7 +11,7 @@
   "defaults": {
     "brokerUrl": "mqtt://192.168.1.50:1883",
     "deviceId": "pool_sensor_01",
-    "topicPrefix": "mooreview/v1"
+    "topicPrefix": "peaklogic/v1"
   },
   "driver": {
     "enabled": true,
@@ -50,5 +50,5 @@
     "tags": "Parc tag rows: PH_AI, ORP_AI, COND_AI, WATER_TEMP_C",
     "pool": "ref_kcl_mV, temp_C, ph, orp_mV, cond_uS_cm, cond_ppm, excitation_Hz"
   },
-  "notes": "Standalone MCXN947 pool chemistry firmware in C:/Users/Public/data/mcxn947-pool-sensor (not related to HVAC MCSA except MCU + MooreVIEW Parc MQTT). Publishes mooreview/v1/pool_sensor_01/telemetry (~1 Hz). CL/DO microlines planned via oversampled LPADC (not yet in firmware). Set MV_DEVICE_ID and MV_BROKER_ADDR in src/parc_mqtt.h. Sample: st/fixtures/pool-sensor-telemetry-sample.json."
+  "notes": "Standalone MCXN947 pool chemistry firmware in C:/Users/Public/data/mcxn947-pool-sensor (not related to HVAC MCSA except MCU + PeakLogic Parc MQTT). Publishes peaklogic/v1/pool_sensor_01/telemetry (~1 Hz). CL/DO microlines planned via oversampled LPADC (not yet in firmware). Set MV_DEVICE_ID and MV_BROKER_ADDR in src/parc_mqtt.h. Sample: st/fixtures/pool-sensor-telemetry-sample.json."
 }

@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #ifndef MV_MQTT_TOPIC_PREFIX
-#define MV_MQTT_TOPIC_PREFIX "mooreview/v1"
+#define MV_MQTT_TOPIC_PREFIX "peaklogic/v1"
 #endif
 
 uint16_t mvGlobalSiteKey() {

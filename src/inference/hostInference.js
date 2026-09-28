@@ -84,7 +84,7 @@ async function inferTarget(target, body, cfg) {
 }
 
 /**
- * Score Parc telemetry on the MooreVIEW host. Returns edge_inference docs (not yet persisted).
+ * Score Parc telemetry on the PeakLogic host. Returns edge_inference docs (not yet persisted).
  */
 async function runHostInferenceFromReport(body, opts = {}) {
   const cfg = opts.settings?.inference

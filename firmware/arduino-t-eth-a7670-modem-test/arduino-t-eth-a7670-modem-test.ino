@@ -1,5 +1,5 @@
 /*
- * MooreVIEW — A7670 modem AT test
+ * PeakLogic — A7670 modem AT test
  * Board: LilyGO T-ETH Elite (ESP32-S3) + LTE Shield (H744-02) + T-PCIE A7670
  *
  * Published UART (LilyGO utilities.h / T-ETH-Elite-LTE-Shield example):
@@ -139,7 +139,7 @@ void setup()
   delay(1500);
 
   logMsg("========================================");
-  logMsg("MooreVIEW A7670 modem AT test");
+  logMsg("PeakLogic A7670 modem AT test");
   logMsg("Published UART (LilyGO T-ETH Elite LTE):");
   logMsg("  Serial2 RX=GPIO%d (ESP RX <- modem TX)", MODEM_RX_PIN);
   logMsg("  Serial2 TX=GPIO%d (ESP TX -> modem RX)", MODEM_TX_PIN);

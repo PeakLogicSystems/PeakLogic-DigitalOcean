@@ -2,7 +2,7 @@
 
   Opta Split HVAC — single air handler + outdoor condenser
 
-  MooreVIEW Parc driver (Opta firmware v2.3.81+):
+  PeakLogic Parc driver (Opta firmware v2.3.81+):
     /mcsa  HVAC layout — I1/I2 comp CT, I3/I4 fan CT, expansion NTC T1–T4
     /ahu-env — AHU1 supply/return NTC (I5–I6), pan leak (D1608E X1_IRAW1)
 

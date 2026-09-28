@@ -73,7 +73,7 @@ function readImportablePath(absPath) {
   }
   const file = path.basename(fp);
   if (!isImportFile(file)) {
-    throw Object.assign(new Error('Not a MooreVIEW project file'), { status: 400 });
+    throw Object.assign(new Error('Not a PeakLogic project file'), { status: 400 });
   }
   if (!fs.existsSync(fp)) {
     throw Object.assign(new Error(`Project file not found: ${file}`), { status: 404 });

@@ -1,7 +1,7 @@
 #include "mv_mqtt_ca.h"
 
 /**
- * Trust mqtt.mooreview.io (Let's Encrypt Generation Y ECDSA, 2026).
+ * Trust mqtt.peaklogic.io (Let's Encrypt Generation Y ECDSA, 2026).
  *
  * Live chain: leaf → YE2 → Root YE → ISRG Root X2
  * Opta mbedTLS has no system store, and Mosquitto often sends only leaf+YE2.

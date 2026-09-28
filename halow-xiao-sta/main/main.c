@@ -1,5 +1,5 @@
 /*
- * MooreVIEW Parc MQTT peer for LilyGO T-HaLow.
+ * PeakLogic Parc MQTT peer for LilyGO T-HaLow.
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -118,7 +118,7 @@ static bool halow_connect(void)
 
 void app_main(void)
 {
-    printf("\n\n=== LilyGO T-HaLow MooreVIEW Parc (MQTT over HaLow) "
+    printf("\n\n=== LilyGO T-HaLow PeakLogic Parc (MQTT over HaLow) "
            __DATE__ " " __TIME__ " ===\n");
 
     esp_err_t err = nvs_flash_init();

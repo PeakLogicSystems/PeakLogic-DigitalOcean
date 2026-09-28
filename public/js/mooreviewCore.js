@@ -1,7 +1,7 @@
 'use strict';
 
-/** Shared DOM / string helpers for MooreView client modules */
-window.MooreviewCore = {
+/** Shared DOM / string helpers for PeakLogic client modules */
+window.PeaklogicCore = {
   $(id) {
     return document.getElementById(id);
   },

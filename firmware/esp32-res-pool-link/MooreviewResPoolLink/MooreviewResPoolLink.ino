@@ -1,5 +1,5 @@
 /*
- * MooreVIEW Res-Pool-Link — standalone residential pool & spa
+ * PeakLogic Res-Pool-Link — standalone residential pool & spa
  *
  * Home Wi-Fi. Local web menus. No IOT-LINK required.
  *
@@ -7,7 +7,7 @@
  *   UART2 4800  DFRobot SEN0711 + SEN0712 (separate Modbus pair)
  *   R1–R4       filter inlet / outlet / backwash waste / spare
  *
- * AP: MooreVIEW-ResPool / mooreview → http://192.168.4.1:8080/
+ * AP: PeakLogic-ResPool / peaklogic → http://192.168.4.1:8080/
  * Libraries: ArduinoJson 7.x, PubSubClient (optional MQTT uplink only)
  */
 #include <WiFi.h>
@@ -39,7 +39,7 @@ static bool mqttTls = MV_MQTT_SKETCH_TLS_DEFAULT;
 static bool mqttInsecure = false;
 static char mqttUser[40] = MV_MQTT_SKETCH_USER_DEFAULT;
 static char mqttPass[MV_MQTT_PASSWORD_SIZE] = MV_MQTT_SKETCH_PASS_DEFAULT;
-static char topicPrefix[32] = "mooreview/v1";
+static char topicPrefix[32] = "peaklogic/v1";
 
 static bool valveOn[VALVE_COUNT] = { true, true, false, false };
 static bool di1 = false;
@@ -155,7 +155,7 @@ static void loadCfg()
   if (!mqttHost[0]) strlcpy(mqttHost, MV_MQTT_SKETCH_BROKER_DEFAULT, sizeof(mqttHost));
   if (!mqttUser[0]) strlcpy(mqttUser, MV_MQTT_SKETCH_USER_DEFAULT, sizeof(mqttUser));
   if (!mqttPass[0]) strlcpy(mqttPass, MV_MQTT_SKETCH_PASS_DEFAULT, sizeof(mqttPass));
-  strlcpy(topicPrefix, prefs.getString("topicPfx", "mooreview/v1").c_str(), sizeof(topicPrefix));
+  strlcpy(topicPrefix, prefs.getString("topicPfx", "peaklogic/v1").c_str(), sizeof(topicPrefix));
   bwMs = prefs.getULong("bwMs", BW_MS_DEFAULT);
   rinseMs = prefs.getULong("rinseMs", RINSE_MS_DEFAULT);
   gPumpAddr = (uint8_t)prefs.getUChar("pumpAddr", PENTAIR_ADDR_DEFAULT);

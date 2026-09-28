@@ -12,10 +12,10 @@
   "doCount": 0,
   "aiCount": 2,
   "defaults": {
-    "brokerUrl": "mqtts://mqtt.mooreview.io:8883",
+    "brokerUrl": "mqtts://mqtt.peaklogic.io:8883",
     "serialNum": "862406071948166",
     "liftProfile": "liftpoint_light",
-    "clientId": "mooreview",
+    "clientId": "peaklogic",
     "subscribeQos": 0,
     "publishQos": 0
   },
@@ -31,5 +31,5 @@
     },
     "logicFixture": "tags.duplex_lift_station.json"
   },
-  "notes": "Matched to st/fixtures/nexcomm-csv/nexcomm-lpl-lift-station.csv + liftpoint_light MQTT map (edgepoint-liftpoint-light-sample.json). CSV columns → X1_I*/AI*/P*_STARTS/FLOW. Set serialNum (normalized). Broker mqtts://mqtt.mooreview.io:8883. Same profile as lift_station_epi with liftProfile=liftpoint_light."
+  "notes": "Matched to st/fixtures/nexcomm-csv/nexcomm-lpl-lift-station.csv + liftpoint_light MQTT map (edgepoint-liftpoint-light-sample.json). CSV columns → X1_I*/AI*/P*_STARTS/FLOW. Set serialNum (normalized). Broker mqtts://mqtt.peaklogic.io:8883. Same profile as lift_station_epi with liftProfile=liftpoint_light."
 }

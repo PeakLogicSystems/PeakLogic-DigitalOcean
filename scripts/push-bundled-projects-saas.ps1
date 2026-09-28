@@ -1,8 +1,8 @@
-# Copy new bundled .est.zip demo projects to mooreview.io and re-seed tenant libraries.
+# Copy new bundled .est.zip demo projects to peaklogic.io and re-seed tenant libraries.
 param(
   [string]$DropletHost = 'mv-saas',
-  [string]$SshKey = "$env:USERPROFILE\.ssh\id_ed25519_mooreview",
-  [string]$RemoteInstall = '/home/mooreview',
+  [string]$SshKey = "$env:USERPROFILE\.ssh\id_ed25519_peaklogic",
+  [string]$RemoteInstall = '/home/peaklogic',
   [switch]$DryRun,
   [switch]$MissingOnly,
   [string[]]$ProjectIds = @()
@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $EstRoot = Split-Path $PSScriptRoot -Parent
 if (-not (Test-Path $SshKey)) {
-  $repoKey = Join-Path $EstRoot '.ssh\id_ed25519_mooreview'
+  $repoKey = Join-Path $EstRoot '.ssh\id_ed25519_peaklogic'
   if (Test-Path $repoKey) { $SshKey = $repoKey }
 }
 $sshConfig = Join-Path $EstRoot '.ssh\portable-deploy.config'
@@ -118,8 +118,8 @@ for tid in __INSTALL__/data/tenants/*/projects; do
     fi
   done
 done
-chown -R mooreview:mooreview __INSTALL__/data/projects __INSTALL__/data/boilerplate/projects __INSTALL__/data/tenants 2>/dev/null || true
-sudo -u mooreview env HOME=/var/lib/mooreview MOOREVIEW_DEPLOYMENT=cloud bash -lc "cd __INSTALL__ && node scripts/seed-tenant-projects.js"
+chown -R peaklogic:peaklogic __INSTALL__/data/projects __INSTALL__/data/boilerplate/projects __INSTALL__/data/tenants 2>/dev/null || true
+sudo -u peaklogic env HOME=/var/lib/peaklogic PEAKLOGIC_DEPLOYMENT=cloud bash -lc "cd __INSTALL__ && node scripts/seed-tenant-projects.js"
 echo '[push-bundled] tenant libraries updated'
 find __INSTALL__/data/tenants -path '*/projects/*hvac*.est.zip' -print0 2>/dev/null | while IFS= read -r -d '' f; do stat -c '%s %n' "$f"; done
 '@ -replace '__INSTALL__', $RemoteInstall

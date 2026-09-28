@@ -1,6 +1,6 @@
-# mooreVIEW CMMS Integration v1
+# PeakLogic CMMS Integration v1
 
-mooreVIEW is the **authoritative source** for alarm MQTT integration. CMMS systems (including TPS CMMS) **subscribe** to mooreVIEW-published topics; mooreVIEW does not adapt to undocumented CMMS formats.
+PeakLogic is the **authoritative source** for alarm MQTT integration. CMMS systems (including TPS CMMS) **subscribe** to PeakLogic-published topics; PeakLogic does not adapt to undocumented CMMS formats.
 
 **Integrated `/cmms` (same process):** Alarm and **PdM proactive** work orders are created in `data/cmms.json` without MQTT. PdM → CMMS is documented in [pdm/PDM_PROACTIVE_CMMS.md](pdm/PDM_PROACTIVE_CMMS.md). External MQTT bridge below is optional and separate.
 
@@ -12,7 +12,7 @@ Tag alarm → alarm:transition → cmmsAlarmPublisher → MQTT broker → CMMS s
 
 ## MQTT topics
 
-Given `topicPrefix` (default `mooreview/v1`) and `siteId` (default `local`):
+Given `topicPrefix` (default `peaklogic/v1`) and `siteId` (default `local`):
 
 | Topic | Purpose |
 |-------|---------|
@@ -21,22 +21,22 @@ Given `topicPrefix` (default `mooreview/v1`) and `siteId` (default `local`):
 
 **Examples** (site `plant-a`):
 
-- `mooreview/v1/plant-a/alarms`
-- `mooreview/v1/plant-a/alarm-notify`
+- `peaklogic/v1/plant-a/alarms`
+- `peaklogic/v1/plant-a/alarm-notify`
 
 QoS defaults to **1**. Broker URL defaults to `mqtt://127.0.0.1:1883` (same as Parc).
 
-## JSON schema: `mooreview-cmms-integration-v1`
+## JSON schema: `peaklogic-cmms-integration-v1`
 
 ### Envelope (both topics)
 
 ```json
 {
-  "schema": "mooreview-cmms-integration-v1",
+  "schema": "peaklogic-cmms-integration-v1",
   "publishedAt": "2026-06-14T18:30:00.000Z",
   "siteId": "plant-a",
   "tenantId": "local",
-  "source": "mooreview",
+  "source": "peaklogic",
   "projectName": "line_a",
   "alarm": {
     "tagId": "TANK1_LEVEL",
@@ -52,11 +52,11 @@ QoS defaults to **1**. Broker URL defaults to `mqtt://127.0.0.1:1883` (same as P
 
 ```json
 {
-  "schema": "mooreview-cmms-integration-v1",
+  "schema": "peaklogic-cmms-integration-v1",
   "publishedAt": "2026-06-14T18:30:00.000Z",
   "siteId": "plant-a",
   "tenantId": "local",
-  "source": "mooreview",
+  "source": "peaklogic",
   "projectName": "line_a",
   "alarm": {
     "tagId": "TANK1_LEVEL",
@@ -104,13 +104,13 @@ QoS defaults to **1**. Broker URL defaults to `mqtt://127.0.0.1:1883` (same as P
 }
 ```
 
-Recipients are mooreVIEW **public user** rows, filtered by `shouldNotifyForLevel` and quiet hours (same rules as local email/SMS queue).
+Recipients are PeakLogic **public user** rows, filtered by `shouldNotifyForLevel` and quiet hours (same rules as local email/SMS queue).
 
 ## Alarm levels
 
 `innerLow`, `innerHigh`, `outerLow`, `outerHigh`, `alarm` (BOOL), `normal` (clear — not published on transition into alarm).
 
-## mooreVIEW configuration
+## PeakLogic configuration
 
 ### UI
 
@@ -127,10 +127,10 @@ Recipients are mooreVIEW **public user** rows, filtered by `shouldNotifyForLevel
   "cmmsIntegration": {
     "enabled": true,
     "brokerUrl": "mqtt://127.0.0.1:1883",
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "siteId": "plant-a",
     "tenantId": "acme",
-    "clientId": "mooreview-cmms",
+    "clientId": "peaklogic-cmms",
     "qos": 1,
     "publishAlarmTopic": true,
     "publishNotifyTopic": true
@@ -144,18 +144,18 @@ Recipients are mooreVIEW **public user** rows, filtered by `shouldNotifyForLevel
 
 ## TPS CMMS implementer notes
 
-TPS CMMS today ingests IoT via HTTP/MongoDB rules (`routes/iot.js`). To consume mooreVIEW alarms:
+TPS CMMS today ingests IoT via HTTP/MongoDB rules (`routes/iot.js`). To consume PeakLogic alarms:
 
-1. Subscribe to `mooreview/v1/{siteId}/alarm-notify` on your MQTT broker.
-2. On message, parse `schema === "mooreview-cmms-integration-v1"`.
+1. Subscribe to `peaklogic/v1/{siteId}/alarm-notify` on your MQTT broker.
+2. On message, parse `schema === "peaklogic-cmms-integration-v1"`.
 3. Create or update a work order from `alarm` + optional `recipients[0]` assignee hints.
 4. Map `alarm.level` to CMMS priority: e.g. `outerHigh`/`alarm` → `high` or `critical`.
 
-See `C:\Users\Public\data\tpscmms\docs\MOOREVIEW_CMMS.md` for a minimal subscriber checklist.
+See `C:\Users\Public\data\tpscmms\docs\PEAKLOGIC_CMMS.md` for a minimal subscriber checklist.
 
 ## Cloud multi-tenant (est-pc Cloud SaaS)
 
-Cloud SaaS runs from **est-pc** on port **3100** (`npm run start:saas` locally; `mooreview-saas` systemd unit in production). TPS CMMS / integrated CMMS is a first-class module enabled **per tenant** by platform administration — not bundled for every signup.
+Cloud SaaS runs from **est-pc** on port **3100** (`npm run start:saas` locally; `peaklogic-saas` systemd unit in production). TPS CMMS / integrated CMMS is a first-class module enabled **per tenant** by platform administration — not bundled for every signup.
 
 | Mode | CMMS availability |
 |------|-------------------|
@@ -163,7 +163,7 @@ Cloud SaaS runs from **est-pc** on port **3100** (`npm run start:saas` locally; 
 | **Standalone edge + cloud CMMS** | Edge publishes MQTT v1; cloud subscriber ingests with `tenantId` from payload |
 | **Cloud tenant** (`:3100`) | CMMS routes gated by tenant entitlement; platform admin enables per org |
 
-Tenant users see CMMS routes only when entitled on `GET /api/tenant` / `GET /api/auth/me`. mooreVIEW CMMS Integration v1 MQTT from edge appliances is unchanged — cloud ingest does not require the tenant UI flag, but product UI should respect entitlement.
+Tenant users see CMMS routes only when entitled on `GET /api/tenant` / `GET /api/auth/me`. PeakLogic CMMS Integration v1 MQTT from edge appliances is unchanged — cloud ingest does not require the tenant UI flag, but product UI should respect entitlement.
 
 See **`docs/CLOUD_USER_GUIDE.md`** (tenant operators) and **`docs/EST_PC_PARITY.md`** (edge vs cloud matrix). Platform admin runbook: **`docs/CLOUD_DEPLOY_DO.md`**.
 

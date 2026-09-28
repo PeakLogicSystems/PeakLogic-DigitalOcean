@@ -13,7 +13,7 @@
   "defaults": {
     "brokerUrl": "mqtt://192.168.1.50:1883",
     "deviceId": "unoq_mcsa_01",
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "reportIntervalSec": 1
   },
   "driver": {
@@ -24,7 +24,7 @@
   "telemetrySchema": {
     "mcsa": "Per-CT true FFT cooked spectra from the UNO Q Linux MPU. Each channel has fund [Hz,amp], rotor/bearing/ecc/pump [[Hz,amp],...].",
     "edgeAi": "On-device classification at motor start or spectral fault: healthy, seal_leak, clog_ragging, impeller_worn, bearing_wear, eccentricity.",
-    "tags": "AI1–AI6 RMS amps (A0–A5), P1_RUN_FB/P2_RUN_FB, MOTOR1_FAULT/MOTOR2_FAULT, MOTOR1_START_MS/MOTOR2_START_MS. Optional Opta globals UQ_* on mooreview/v1/g/{siteKey}/."
+    "tags": "AI1–AI6 RMS amps (A0–A5), P1_RUN_FB/P2_RUN_FB, MOTOR1_FAULT/MOTOR2_FAULT, MOTOR1_START_MS/MOTOR2_START_MS. Optional Opta globals UQ_* on peaklogic/v1/g/{siteKey}/."
   },
   "notes": "Flash firmware/arduino-uno-q-mcsa via Arduino App Lab. Six 14-bit ADC pins A0–A5 (3.3 V max) take six CTs with no mux — A0–A2 pump 1, A3–A5 pump 2. Wi-Fi MQTT can also push UQ_* global tags to Opta (same broker + site key). See docs/projects/UNO-Q-EDGE-MOTOR-FAULT.md.",
   "pdm": {

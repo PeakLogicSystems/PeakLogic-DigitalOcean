@@ -18,7 +18,7 @@ describe('triplex lift station HMI', () => {
     const manifest = listHmiComposites(PUBLIC)
       .find((c) => c.composite?.id === 'triplexls')?.composite;
     assert.ok(manifest, 'triplexls composite');
-    assert.equal(manifest.parts[0].svg, '/hmi/svg/library/lift-station-faceplates/mooreview/triplexls.svg');
+    assert.equal(manifest.parts[0].svg, '/hmi/svg/library/lift-station-faceplates/peaklogic/triplexls.svg');
     assert.ok(manifest.defaultBindings.some((b) => b.elementId === 'btn_p3_start'));
     assert.ok(manifest.defaultBindings.some((b) => b.elementId === 'lamp_float_lag2'));
     assert.ok(manifest.tagRoles.motor3Run);
@@ -26,7 +26,7 @@ describe('triplex lift station HMI', () => {
 
   it('triplexls svg includes three pump columns', () => {
     const svg = fs.readFileSync(
-      path.join(PUBLIC, 'hmi/svg/library/lift-station-faceplates/mooreview/triplexls.svg'),
+      path.join(PUBLIC, 'hmi/svg/library/lift-station-faceplates/peaklogic/triplexls.svg'),
       'utf8',
     );
     assert.match(svg, /TRIPLEXLS/);

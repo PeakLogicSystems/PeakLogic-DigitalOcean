@@ -1,7 +1,7 @@
 # Host inference models (optional)
 
 Drop quantized ONNX models here for host-side MCSA scoring. When a file is missing,
-mooreVIEW uses the built-in **rule** backend (same fault labels as Opta edge AI).
+PeakLogic uses the built-in **rule** backend (same fault labels as Opta edge AI).
 
 | File | Profile | Labels |
 |------|---------|--------|

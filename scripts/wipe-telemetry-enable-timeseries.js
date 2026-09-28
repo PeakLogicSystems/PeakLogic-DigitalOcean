@@ -9,7 +9,7 @@
  *        alarm_notify_queue (optional), plant_sensor_data (recreated as TS)
  *
  * Usage (droplet):
- *   WIPE_TELEMETRY=1 sudo -u mooreview bash -lc 'cd /home/mooreview && node scripts/wipe-telemetry-enable-timeseries.js'
+ *   WIPE_TELEMETRY=1 sudo -u peaklogic bash -lc 'cd /home/peaklogic && node scripts/wipe-telemetry-enable-timeseries.js'
  */
 
 const { connectMongo, closeMongo, getDb } = require('../src/db/mongo');
@@ -68,7 +68,7 @@ async function main() {
   console.log('[wipe] time-series init:', init);
   const stats = await sensorTs.getCollectionStats();
   console.log('[wipe] ts stats:', stats);
-  console.log('[wipe] done — tenants/locations/users preserved. Restart mooreview-saas.');
+  console.log('[wipe] done — tenants/locations/users preserved. Restart peaklogic-saas.');
   await closeMongo();
 }
 

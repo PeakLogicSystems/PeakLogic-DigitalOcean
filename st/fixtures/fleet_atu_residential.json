@@ -1,14 +1,14 @@
 {
   "description": "ATU cloud fleet — Oak Lane Residence (500 GPD design): 1 ATU, 0 lift stations, 100% cellular → cloud",
   "tenant": {
-    "name": "MooreVIEW ATU Service",
+    "name": "PeakLogic ATU Service",
     "slug": "atu-cloud",
     "tenantId": "atu-cloud"
   },
   "sizingGuide": {
     "description": "ATU trains run duplex alternation (ALT2) with TPO aeration schedules on-device. Lift stations handle wet-well collection/distribution on separate cellular gateways.",
     "uplink": "cellular_mqtt",
-    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to MooreVIEW cloud Mosquitto",
+    "deployment": "100% cloud — no site IOT-LINK; each Opta + modem publishes Parc to PeakLogic cloud Mosquitto",
     "atuToLiftPairing": [
       {
         "atu": "single_atu",
@@ -114,7 +114,7 @@
       "address": "142 Oak Lane, DeLand, FL 32724",
       "deviceId": "mv_atu_oak_01",
       "deviceSlug": "dev-oak-atu",
-      "owner": "MooreVIEW ATU Service",
+      "owner": "PeakLogic ATU Service",
       "templateId": "lift_station_single_atu",
       "defaultProgram": "logic/32_single_atu.st",
       "alarmTag": "ALT_FAULT",
@@ -142,7 +142,7 @@
   "importCsv": "st/fixtures/fleet_import_atu_residential.csv",
   "cloudProject": "atu-cloud-residential",
   "mqtt": {
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "cloudBrokerPort": 1883,
     "optaLanBroker": "192.168.1.1:1883"
   },

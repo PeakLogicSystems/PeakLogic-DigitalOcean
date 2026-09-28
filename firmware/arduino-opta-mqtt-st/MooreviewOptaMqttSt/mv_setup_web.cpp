@@ -21,7 +21,7 @@ extern bool g_runtimeRunning;
 
 static const char MV_SETUP_HTML[] = R"HTML(<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MooreVIEW Opta Setup</title>
+<title>PeakLogic Opta Setup</title>
 <style>
 body{font-family:'Segoe UI',system-ui,sans-serif;margin:1rem;background:#f1f5f9;color:#0f172a}
 h1{font-size:1.25rem}h2{font-size:1rem;margin-top:1.25rem;color:#49104F}
@@ -53,7 +53,7 @@ button.primary{background:#49104F;color:#fff;border-color:#49104F}
 .rbe-sec{margin:.55rem 0 .25rem;font-size:.85rem;color:#49104F;font-weight:600}
 )HTML" MV_WEB_NAV_CSS R"HTML(
 </style></head><body>
-<h1>MooreVIEW Opta Setup</h1>
+<h1>PeakLogic Opta Setup</h1>
 )HTML" MV_WEB_NAV_SETUP_ACTIVE R"HTML(
 <div id="stStatusBar" class="status-bar warn" role="status" aria-live="polite">Loading device status…</div>
 <p class="muted">ST + MQTT Parc. Configure Ethernet and expansions. Open <code>/setup</code> or root on Ethernet. MCSA load modes (fan/pump/compressor/turbine) are configured on <code>/mcsa</code>.</p>
@@ -96,15 +96,15 @@ button.primary{background:#49104F;color:#fff;border-color:#49104F}
 <div class="card"><h2>WiFi setup AP</h2>
 <p class="muted">Opta <strong>WiFi</strong> hardware only. Join this AP to configure the device, then use Ethernet to reach your router/LAN.</p>
 <label><input type="checkbox" id="wifiAp"> Enable AP for local setup</label>
-<label>SSID <input id="wifiSsid" placeholder="MooreVIEW-Opta"></label>
-<label>Password <input id="wifiPass" type="password" placeholder="mooreview (min 8 chars)"></label>
+<label>SSID <input id="wifiSsid" placeholder="PeakLogic-Opta"></label>
+<label>Password <input id="wifiPass" type="password" placeholder="peaklogic (min 8 chars)"></label>
 <p class="muted" id="wifiStatus"></p></div>
 <div class="card"><h2>MQTT Parc broker</h2>
-<p class="muted"><strong>TLS on + Save</strong> connects this Opta to <code>mqtt.mooreview.io:8883</code>. <strong>TLS off</strong> = local MooreVIEW appliance <code>:1883</code> (no TLS).</p>
-<label><input type="checkbox" id="mqttTls"> Cloud MQTT (TLS — mqtt.mooreview.io:8883)</label>
-<label>Broker host <input id="mqttBroker" placeholder="mqtt.mooreview.io or LAN IP"></label>
+<p class="muted"><strong>TLS on + Save</strong> connects this Opta to <code>mqtt.peaklogic.io:8883</code>. <strong>TLS off</strong> = local PeakLogic appliance <code>:1883</code> (no TLS).</p>
+<label><input type="checkbox" id="mqttTls"> Cloud MQTT (TLS — mqtt.peaklogic.io:8883)</label>
+<label>Broker host <input id="mqttBroker" placeholder="mqtt.peaklogic.io or LAN IP"></label>
 <label>Port <input id="mqttPort" type="number" min="1" max="65535" value="1883" readonly></label>
-<label>Username <input id="mqttUser" autocomplete="username" placeholder="mooreview (cloud)"></label>
+<label>Username <input id="mqttUser" autocomplete="username" placeholder="peaklogic (cloud)"></label>
 <label>Password <input id="mqttPass" type="password" autocomplete="new-password" placeholder="blank = firmware MOSQUITTO_PASS"></label>
 <p class="muted" id="mqttBrokerHint"></p>
 <div class="row">
@@ -112,7 +112,7 @@ button.primary{background:#49104F;color:#fff;border-color:#49104F}
 </div>
 <p id="mqttTestResult" class="muted" aria-live="polite"></p></div>
 <div class="card"><h2>Device to host scan rate</h2>
-<p class="muted">How often this Opta publishes MQTT Parc telemetry to the host. MooreVIEW may temporarily speed this up while Remote is attached. Range 100 ms–600 s.</p>
+<p class="muted">How often this Opta publishes MQTT Parc telemetry to the host. PeakLogic may temporarily speed this up while Remote is attached. Range 100 ms–600 s.</p>
 <label>Report interval (ms) <input id="reportMs" type="number" min="100" max="600000" step="100" placeholder="180000"></label>
 <p class="muted" id="reportMsHint"></p>
 </div>
@@ -128,7 +128,7 @@ button.primary{background:#49104F;color:#fff;border-color:#49104F}
 <div id="rbeGrid"></div>
 </div>
 <div class="card"><h2>Global site key</h2>
-<p class="muted">This key decides which MooreVIEW Cloud organization can see this Opta. Copy the org key from Cloud Studio (same value as <code>0x0001</code> / <code>000001</code>). Default <code>1</code>.</p>
+<p class="muted">This key decides which PeakLogic Cloud organization can see this Opta. Copy the org key from Cloud Studio (same value as <code>0x0001</code> / <code>000001</code>). Default <code>1</code>.</p>
 <label>Site key (decimal or hex, e.g. 1 or 0x0001) <input id="globalSiteKey" placeholder="1"></label>
 <p class="muted" id="globalSiteKeyHint"></p></div>
 <div class="card"><h2>Expansion modules (AFX00005 / AFX00007)</h2>
@@ -180,18 +180,18 @@ btnRbeDigital.onclick=()=>{
 };
 btnRbeNone.onclick=()=>{document.querySelectorAll('#rbeGrid input[data-rbe-id]').forEach(el=>{el.checked=false;});};
 let mqttLanHost='192.168.1.233';
-let mqttCloudHost='mqtt.mooreview.io';
+let mqttCloudHost='mqtt.peaklogic.io';
 function isCloudHost(h){
   h=(h||'').trim().toLowerCase();
-  return h==='mqtt.mooreview.io'||h==='mooreview.io';
+  return h==='mqtt.peaklogic.io'||h==='peaklogic.io';
 }
 function applyMqttPath(){
   if(mqttTls.checked){
     if(mqttBroker.value && !isCloudHost(mqttBroker.value)) mqttLanHost=mqttBroker.value.trim();
     mqttBroker.value=mqttCloudHost;
     mqttPort.value='8883';
-    if(!mqttUser.value.trim()) mqttUser.value='mooreview';
-    mqttBrokerHint.textContent='Cloud path — TLS mqtt.mooreview.io:8883. Blank password uses firmware MOSQUITTO_USER/PASS.';
+    if(!mqttUser.value.trim()) mqttUser.value='peaklogic';
+    mqttBrokerHint.textContent='Cloud path — TLS mqtt.peaklogic.io:8883. Blank password uses firmware MOSQUITTO_USER/PASS.';
   }else{
     mqttPort.value='1883';
     if(!mqttBroker.value.trim() || isCloudHost(mqttBroker.value)) mqttBroker.value=mqttLanHost;
@@ -204,8 +204,8 @@ async function loadCfg(){
   ethIp.value=ip4(c.ethIp); ethGw.value=ip4(c.ethGw); ethMask.value=ip4(c.ethMask); ethDns.value=ip4(c.ethDns);
   wifiSsid.value=c.wifiApSsid||'';
   wifiPass.value='';
-  wifiPass.placeholder=c.wifiApPassSet?'leave blank to keep saved':'mooreview (min 8 chars)';
-  mqttCloudHost=c.mqttCloudHost||'mqtt.mooreview.io';
+  wifiPass.placeholder=c.wifiApPassSet?'leave blank to keep saved':'peaklogic (min 8 chars)';
+  mqttCloudHost=c.mqttCloudHost||'mqtt.peaklogic.io';
   mqttLanHost=c.mqttLanHost||'192.168.1.233';
   mqttBroker.value=c.mqttBrokerHost||'';
   let tls=!!c.mqttUseTls || +(c.mqttBrokerPort||0)===8883;
@@ -229,7 +229,7 @@ async function loadCfg(){
   renderRbe(c.rbe||{});
   globalSiteKey.value=c.globalSiteKey!=null?('0x'+Number(c.globalSiteKey).toString(16).padStart(4,'0')):'0x0001';
   globalSiteKeyHint.textContent='Addr key: '+(c.globalAddrKey||'0001')+' — Cloud org with this site key sees the Opta';
-  const apSsid=c.wifiApSsid||'MooreVIEW-Opta';
+  const apSsid=c.wifiApSsid||'PeakLogic-Opta';
   const apPort=c.wifiApHttpPort||8080;
   wifiSsid.disabled=!c.wifiCapable;
   wifiPass.disabled=!c.wifiCapable;
@@ -317,7 +317,7 @@ btnSave.onclick=async()=>{
     expSlotType:[0,1,2,3,4].map(i=>+document.getElementById('exp'+i).value),
     a0602RtdEnable:a0602RtdEnable.checked?1:0};
   const r=await fetch('/api/setup/config',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-  const j=await r.json(); msg.textContent=j.ok?(mqttTls.checked?'Saved. Connecting to mqtt.mooreview.io:8883. Site key selects the Cloud org that can see this Opta. Ethernet IP changes need Reboot.':'Saved. Connecting to local :1883. Ethernet IP changes need Reboot.'):(j.error||'Save failed');
+  const j=await r.json(); msg.textContent=j.ok?(mqttTls.checked?'Saved. Connecting to mqtt.peaklogic.io:8883. Site key selects the Cloud org that can see this Opta. Ethernet IP changes need Reboot.':'Saved. Connecting to local :1883. Ethernet IP changes need Reboot.'):(j.error||'Save failed');
   if(j.ok) loadCfg();
 };
 btnReboot.onclick=async()=>{await fetch('/api/setup/reboot',{method:'POST'}); msg.textContent='Rebooting…';};
@@ -374,7 +374,7 @@ function updateStatusBar(s){
     return;
   }
   bar.className='status-bar warn';
-  bar.textContent='No program loaded — use MooreVIEW Parc Download & Start';
+  bar.textContent='No program loaded — use PeakLogic Parc Download & Start';
 }
 function fmtCtCal(s){
   const c=s.ctCal;
@@ -423,7 +423,7 @@ async function loadStatus(){
     else { stErrors.hidden=true; stErrors.textContent=''; }
     const info=[];
     if(s.programLoaded&&s.programName) info.push('Ready to run on device.');
-    else if(!s.programLoaded) info.push('No program — use MooreVIEW Parc Connect + Start.');
+    else if(!s.programLoaded) info.push('No program — use PeakLogic Parc Connect + Start.');
     if(!s.mqttConnected) info.push('MQTT broker not connected — check broker IP on /setup (active: '+(s.mqttBroker||'?')+':'+(s.mqttBrokerPort||1883)+').');
     const zc=s.ctCal?.zeroedCount??0;
     if(zc<6) info.push('CT calibration: '+zc+'/6 channels zeroed — open Calibrate CT before relying on amp readings.');
@@ -435,7 +435,7 @@ async function loadStatus(){
     const bar=document.getElementById('stStatusBar');
     if(bar){
       bar.className='status-bar err';
-      bar.textContent='Status unavailable: '+e.message+' (HTTP busy or offline — use MooreVIEW Download & Start)';
+      bar.textContent='Status unavailable: '+e.message+' (HTTP busy or offline — use PeakLogic Download & Start)';
     }
     stErrors.hidden=false;
     stErrors.textContent='Cannot reach /api/status. During MQTT deploy this is normal — wait 30s and refresh.';
@@ -586,7 +586,7 @@ static void fillConfigJson(JsonObject root) {
 }
 
 static bool mvMqttHostIsCloud(const char* h) {
-  return h && h[0] && (!strcmp(h, "mqtt.mooreview.io") || !strcmp(h, "mooreview.io"));
+  return h && h[0] && (!strcmp(h, "mqtt.peaklogic.io") || !strcmp(h, "peaklogic.io"));
 }
 
 static bool applyConfigJson(JsonObject root, String& err) {
@@ -639,7 +639,7 @@ static bool applyConfigJson(JsonObject root, String& err) {
     const char* h = root["mqttBrokerHost"].as<const char*>();
     if (!h) h = "";
     if (h[0] && (!strcmp(h, "127.0.0.1") || !strcmp(h, "localhost"))) {
-      err = "Broker cannot be 127.0.0.1 on device — use MooreVIEW / IOT-LINK LAN IP";
+      err = "Broker cannot be 127.0.0.1 on device — use PeakLogic / IOT-LINK LAN IP";
       return false;
     }
     if (h[0] && strlen(h) >= sizeof(cfg.mqttBrokerHost)) {
@@ -819,7 +819,7 @@ static bool parseMqttTestBody(JsonObject root, char* hostOut, size_t hostLen, ui
     return false;
   }
   if (!strcmp(host, "127.0.0.1") || !strcmp(host, "localhost")) {
-    err = "Broker cannot be 127.0.0.1 on device — use MooreVIEW / cloud LAN IP";
+    err = "Broker cannot be 127.0.0.1 on device — use PeakLogic / cloud LAN IP";
     return false;
   }
   if (strlen(host) >= hostLen) {

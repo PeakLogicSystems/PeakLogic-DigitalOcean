@@ -1,14 +1,14 @@
 [Unit]
-Description=mooreVIEW archive server (zstd blob store)
+Description=PeakLogic archive server (zstd blob store)
 After=network.target
 
 [Service]
 Type=simple
-User=mooreview
-Group=mooreview
-EnvironmentFile=/etc/mooreview/archive.env
-WorkingDirectory=/home/mooreview
-ExecStart=/usr/bin/node /home/mooreview/deploy/cloud/archive-server/server.js
+User=peaklogic
+Group=peaklogic
+EnvironmentFile=/etc/peaklogic/archive.env
+WorkingDirectory=/home/peaklogic
+ExecStart=/usr/bin/node /home/peaklogic/deploy/cloud/archive-server/server.js
 Restart=on-failure
 RestartSec=5
 NoNewPrivileges=true

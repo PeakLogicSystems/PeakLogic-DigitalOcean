@@ -63,7 +63,7 @@
     return 'This control is not available for operator hand mode.';
   }
 
-  window.MooreviewCloudHmiPolicy = {
+  window.PeaklogicCloudHmiPolicy = {
     canWriteHmiTag,
     hmiWriteDeniedReason,
     isHoaTagId,

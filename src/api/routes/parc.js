@@ -143,7 +143,7 @@ function createParcRoutes(deps = {}) {
     }
   });
 
-  /** Replace MooreVIEW tags for a driver from latest Parc telemetry. */
+  /** Replace PeakLogic tags for a driver from latest Parc telemetry. */
   router.post('/parc/devices/:id/sync-tags', async (req, res) => {
     if (!tagStore) return res.status(500).json({ error: 'tagStore required' });
     const driverId = req.body?.driverId;

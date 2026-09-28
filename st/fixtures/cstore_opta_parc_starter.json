@@ -22,7 +22,7 @@
   "commissioning": {
     "doc": "docs/OPTA_PARC_CLOUD.md",
     "brokerPort": 1883,
-    "topicPattern": "mooreview/v1/{deviceId}/telemetry",
+    "topicPattern": "peaklogic/v1/{deviceId}/telemetry",
     "addDriver": "Drivers → Add Opta Parc devices (from registry)",
     "applyTemplate": "lift_station_dual_duplex"
   }

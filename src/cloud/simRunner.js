@@ -22,7 +22,7 @@ class SimRunner {
 
   _topicCfg() {
     return {
-      topicPrefix: this.sim.config?.topicPrefix || this.mqttCfg.topicPrefix || 'mooreview/v1',
+      topicPrefix: this.sim.config?.topicPrefix || this.mqttCfg.topicPrefix || 'peaklogic/v1',
     };
   }
 
@@ -84,7 +84,7 @@ class SimRunner {
         online: true,
         tenantId: this.sim.tenantId,
         simId: this.sim.id,
-        source: 'mooreview-cloud-sim',
+        source: 'peaklogic-cloud-sim',
       }), { qos: 1 }, (err) => {
         if (err) reject(err);
         else resolve();

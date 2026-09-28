@@ -189,7 +189,7 @@ function renderPlayerSetupHtml(cameraId, message) {
       <p>${text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
       <ol>
         <li>Enable <strong>ONVIF</strong> on the camera (Reolink: Settings → Network → Advanced → Port Settings, port 8000).</li>
-        <li>In MooreVIEW: <strong>Cameras → Administration… → Inventory → Probe</strong> for <code>${name}</code>.</li>
+        <li>In PeakLogic: <strong>Cameras → Administration… → Inventory → Probe</strong> for <code>${name}</code>.</li>
         <li>Confirm credentials in Cameras → Settings, then use <strong>Sync streams to go2rtc</strong>.</li>
       </ol>
     </div>

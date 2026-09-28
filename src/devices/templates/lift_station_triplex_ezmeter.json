@@ -1,7 +1,7 @@
 {
   "id": "lift_station_triplex_ezmeter",
   "label": "TRIPLEXLS + EZ Meter — triplex lift + facility PQ",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "TRIPLEXLS (ALT3) + EZ Meter DDS-RGB on Opta RS485",
   "transport": "mqtt_parc",
   "stationType": "triplex",
@@ -41,7 +41,7 @@
   "facility": {
     "driver": "ezmeter"
   },
-  "notes": "TRIPLEXLS + EZ Meter: flash MooreviewOptaMqttSt with MV_FIELDBUS=1 MV_EZMETER=1; RS485 to DDS-RGB at main service. ST logic/39_triplex_lift_station_ezmeter.st drives R4 (station alarm) on LVL_HIGH, MECH_PQ_ALM, or motor fault DIs X1_I13–X1_I15. Pumps on R1–R3.",
+  "notes": "TRIPLEXLS + EZ Meter: flash PeaklogicOptaMqttSt with MV_FIELDBUS=1 MV_EZMETER=1; RS485 to DDS-RGB at main service. ST logic/39_triplex_lift_station_ezmeter.st drives R4 (station alarm) on LVL_HIGH, MECH_PQ_ALM, or motor fault DIs X1_I13–X1_I15. Pumps on R1–R3.",
   "pdm": {
     "motorType": "pump",
     "application": "lift_station",

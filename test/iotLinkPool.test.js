@@ -36,10 +36,10 @@ describe('iotLinkPool fixtures', () => {
   it('loadIotLinkPoolDrivers honors env port overrides', () => {
     const drivers = loadIotLinkPoolDrivers({
       env: {
-        MOOREVIEW_RS485_PORT_A: '/dev/ttyLP6',
-        MOOREVIEW_RS485_PORT_B: '/dev/ttyCUSTOM',
-        MOOREVIEW_POOL_PENTAIR: 'true',
-        MOOREVIEW_POOL_OPTA_IO: 'true',
+        PEAKLOGIC_RS485_PORT_A: '/dev/ttyLP6',
+        PEAKLOGIC_RS485_PORT_B: '/dev/ttyCUSTOM',
+        PEAKLOGIC_POOL_PENTAIR: 'true',
+        PEAKLOGIC_POOL_OPTA_IO: 'true',
       },
     });
     const badu = drivers.find((d) => d.id === 'badu_pump');
@@ -51,11 +51,11 @@ describe('iotLinkPool fixtures', () => {
     assert.equal(opta.enabled, true);
   });
 
-  it('loadIotLinkPoolDrivers swaps PORT B to modbus when MOOREVIEW_POOL_MODBUS_CHEM=true', () => {
+  it('loadIotLinkPoolDrivers swaps PORT B to modbus when PEAKLOGIC_POOL_MODBUS_CHEM=true', () => {
     const drivers = loadIotLinkPoolDrivers({
       env: {
-        MOOREVIEW_POOL_MODBUS_CHEM: 'true',
-        MOOREVIEW_POOL_PENTAIR: 'true',
+        PEAKLOGIC_POOL_MODBUS_CHEM: 'true',
+        PEAKLOGIC_POOL_PENTAIR: 'true',
       },
     });
     const pentair = drivers.find((d) => d.id === 'pentair_hp');
@@ -66,12 +66,12 @@ describe('iotLinkPool fixtures', () => {
     assert.equal(chem.serialPort, IOT_LINK_DEFAULT_PORTS.portB);
   });
 
-  it('loadIotLinkPoolDrivers enables pentair_bus when MOOREVIEW_POOL_PENTAIR_BUS=true', () => {
+  it('loadIotLinkPoolDrivers enables pentair_bus when PEAKLOGIC_POOL_PENTAIR_BUS=true', () => {
     const drivers = loadIotLinkPoolDrivers({
       env: {
-        MOOREVIEW_POOL_PENTAIR_BUS: 'true',
-        MOOREVIEW_POOL_INTELLIFLO: 'true',
-        MOOREVIEW_POOL_PENTAIR: 'true',
+        PEAKLOGIC_POOL_PENTAIR_BUS: 'true',
+        PEAKLOGIC_POOL_INTELLIFLO: 'true',
+        PEAKLOGIC_POOL_PENTAIR: 'true',
       },
     });
     const bus = drivers.find((d) => d.id === 'pentair_bus');
@@ -85,7 +85,7 @@ describe('iotLinkPool fixtures', () => {
 
   it('loadIotLinkPoolTags merges Pentair bus equipment tags', () => {
     const tags = loadIotLinkPoolTags({
-      env: { MOOREVIEW_POOL_PENTAIR_BUS: 'true', MOOREVIEW_POOL_INTELLIFLO: 'true' },
+      env: { PEAKLOGIC_POOL_PENTAIR_BUS: 'true', PEAKLOGIC_POOL_INTELLIFLO: 'true' },
     });
     const ids = tags.map((t) => t.id);
     assert.ok(ids.includes('IFLO_RPM'));
@@ -104,12 +104,12 @@ describe('iotLinkPool fixtures', () => {
     assert.equal(pentairVlv?.value, true);
   });
 
-  it('loadIotLinkPoolDrivers enables jandy_bus when MOOREVIEW_POOL_JANDY_BUS=true', () => {
+  it('loadIotLinkPoolDrivers enables jandy_bus when PEAKLOGIC_POOL_JANDY_BUS=true', () => {
     const drivers = loadIotLinkPoolDrivers({
       env: {
-        MOOREVIEW_POOL_JANDY_BUS: 'true',
-        MOOREVIEW_POOL_JANDY_EPUMP: 'true',
-        MOOREVIEW_POOL_PENTAIR_BUS: 'false',
+        PEAKLOGIC_POOL_JANDY_BUS: 'true',
+        PEAKLOGIC_POOL_JANDY_EPUMP: 'true',
+        PEAKLOGIC_POOL_PENTAIR_BUS: 'false',
       },
     });
     const bus = drivers.find((d) => d.id === 'jandy_bus');
@@ -122,7 +122,7 @@ describe('iotLinkPool fixtures', () => {
 
   it('loadIotLinkPoolTags merges Jandy bus equipment tags', () => {
     const tags = loadIotLinkPoolTags({
-      env: { MOOREVIEW_POOL_JANDY_BUS: 'true', MOOREVIEW_POOL_JANDY_EPUMP: 'true' },
+      env: { PEAKLOGIC_POOL_JANDY_BUS: 'true', PEAKLOGIC_POOL_JANDY_EPUMP: 'true' },
     });
     const ids = tags.map((t) => t.id);
     assert.ok(ids.includes('JEP_RPM'));
@@ -133,11 +133,11 @@ describe('iotLinkPool fixtures', () => {
     assert.equal(pumpRpm?.driverAddress?.jandy, 'rpm');
   });
 
-  it('loadIotLinkPoolDrivers enables hayward_bus when MOOREVIEW_POOL_HAYWARD_BUS=true', () => {
+  it('loadIotLinkPoolDrivers enables hayward_bus when PEAKLOGIC_POOL_HAYWARD_BUS=true', () => {
     const drivers = loadIotLinkPoolDrivers({
       env: {
-        MOOREVIEW_POOL_HAYWARD_BUS: 'true',
-        MOOREVIEW_POOL_HAYWARD_PUMP: 'true',
+        PEAKLOGIC_POOL_HAYWARD_BUS: 'true',
+        PEAKLOGIC_POOL_HAYWARD_PUMP: 'true',
       },
     });
     const bus = drivers.find((d) => d.id === 'hayward_bus');
@@ -148,7 +148,7 @@ describe('iotLinkPool fixtures', () => {
 
   it('loadIotLinkPoolTags merges Hayward VS pump tags', () => {
     const tags = loadIotLinkPoolTags({
-      env: { MOOREVIEW_POOL_HAYWARD_BUS: 'true', MOOREVIEW_POOL_HAYWARD_PUMP: 'true' },
+      env: { PEAKLOGIC_POOL_HAYWARD_BUS: 'true', PEAKLOGIC_POOL_HAYWARD_PUMP: 'true' },
     });
     assert.ok(tags.some((t) => t.id === 'HVS_RPM'));
     const pumpRpm = tags.find((t) => t.id === 'PUMP_RPM');

@@ -3,8 +3,8 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-cellular-sims-'));
-process.env.MOOREVIEW_CELLULAR_SIMS = '1';
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-cellular-sims-'));
+process.env.PEAKLOGIC_CELLULAR_SIMS = '1';
 
 const { describe, it, before, after, mock } = require('node:test');
 const assert = require('node:assert/strict');
@@ -684,7 +684,7 @@ describe('cellular sim API', () => {
   });
 
   it('returns 403 when cellular sims disabled', async () => {
-    delete process.env.MOOREVIEW_CELLULAR_SIMS;
+    delete process.env.PEAKLOGIC_CELLULAR_SIMS;
     persistence.writeJson('settings.json', { cellularSims: { enabled: false, vendors: [] } });
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/cellular/cellularSimsEnabled')];
@@ -700,7 +700,7 @@ describe('cellular sim API', () => {
       assert.equal(res.status, 403);
     } finally {
       await new Promise((r) => server.close(r));
-      process.env.MOOREVIEW_CELLULAR_SIMS = '1';
+      process.env.PEAKLOGIC_CELLULAR_SIMS = '1';
       delete require.cache[require.resolve('../src/config')];
       delete require.cache[require.resolve('../src/cellular/cellularSimsEnabled')];
       delete require.cache[require.resolve('../src/api/routes/cellularSims')];
@@ -708,14 +708,14 @@ describe('cellular sim API', () => {
   });
 
   it('allows cellular sims when settings.cellularSims.enabled is true', async () => {
-    delete process.env.MOOREVIEW_CELLULAR_SIMS;
+    delete process.env.PEAKLOGIC_CELLULAR_SIMS;
     persistence.writeJson('settings.json', { cellularSims: { enabled: true, vendors: [] } });
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/cellular/cellularSimsEnabled')];
     delete require.cache[require.resolve('../src/api/routes/cellularSims')];
     const { isCellularSimsEnabled } = require('../src/cellular/cellularSimsEnabled');
     assert.equal(isCellularSimsEnabled(), true);
-    process.env.MOOREVIEW_CELLULAR_SIMS = '1';
+    process.env.PEAKLOGIC_CELLULAR_SIMS = '1';
     delete require.cache[require.resolve('../src/cellular/cellularSimsEnabled')];
   });
 });
@@ -742,14 +742,14 @@ describe('gateway cellular ingest', () => {
 
     const { ingestGatewayCellularMessage } = require('../src/cellular/gatewayCellularIngest');
     const result = await ingestGatewayCellularMessage(
-      'mooreview/v1/gateway/gw_nanopi_ab12cd/cellular',
+      'peaklogic/v1/gateway/gw_nanopi_ab12cd/cellular',
       JSON.stringify({
         gatewayId: 'gw_nanopi_ab12cd',
         platform: 'nanopi-neo-cat1',
         iccid,
         imsi: '234500024513999',
       }),
-      { topicPrefix: 'mooreview/v1' },
+      { topicPrefix: 'peaklogic/v1' },
     );
 
     assert.equal(result.ok, true);
@@ -762,12 +762,12 @@ describe('gateway cellular ingest', () => {
   it('stores report and suggests sync when ICCID is unknown', async () => {
     const { ingestGatewayCellularMessage } = require('../src/cellular/gatewayCellularIngest');
     const result = await ingestGatewayCellularMessage(
-      'mooreview/v1/gateway/gw_nanopi_new01/cellular',
+      'peaklogic/v1/gateway/gw_nanopi_new01/cellular',
       JSON.stringify({
         gatewayId: 'gw_nanopi_new01',
         iccid: '89019900000003111111',
       }),
-      { topicPrefix: 'mooreview/v1' },
+      { topicPrefix: 'peaklogic/v1' },
     );
     assert.equal(result.ok, true);
     assert.equal(result.autoLink.suggestSync, true);

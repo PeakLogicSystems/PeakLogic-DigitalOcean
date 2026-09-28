@@ -18,7 +18,7 @@
 
   <script src="/js/pwa.js" defer></script>
 
-  <title>Connectivity — MooreView</title>
+  <title>Connectivity — PeakLogic</title>
 
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 
@@ -39,7 +39,7 @@
 
       <span id="cellular-sims-status" class="muted cell-mono" aria-live="polite">Loading…</span>
 
-      <span class="topbar-version muted cell-mono" title="MooreView release">v<%= appVersion %></span>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
 
       <a href="<%= homeUrl || '/' %>" class="btn popup-close page-close" title="Return to dashboard">Close</a>
 
@@ -119,7 +119,7 @@
 
         <label>From name
 
-          <input type="text" id="messaging-mail-from-name" value="MooreView">
+          <input type="text" id="messaging-mail-from-name" value="PeakLogic">
 
         </label>
 
@@ -305,7 +305,7 @@
 
       </div>
 
-      <p class="panel-hint">NanoPi gateways publish <code>mooreview/v1/gateway/{gatewayId}/cellular</code> with ICCID from the LTE modem. Cloud auto-links when the ICCID matches a synced Simetry SIM.</p>
+      <p class="panel-hint">NanoPi gateways publish <code>peaklogic/v1/gateway/{gatewayId}/cellular</code> with ICCID from the LTE modem. Cloud auto-links when the ICCID matches a synced Simetry SIM.</p>
 
       <div id="cellular-gateway-table-wrap"><p class="muted">Loading gateway reports…</p></div>
 
@@ -341,9 +341,9 @@
 
 
 
-  <script>window.MOOREVIEW_API_BASE = '<%= mooreviewApiBase || "/api" %>';</script>
+  <script>window.PEAKLOGIC_API_BASE = '<%= peaklogicApiBase || "/api" %>';</script>
 
-  <script>window.MOOREVIEW_DEPLOYMENT = '<%= deployment %>';</script>
+  <script>window.PEAKLOGIC_DEPLOYMENT = '<%= deployment %>';</script>
 
   <script src="/js/api.js?v=<%= assetV %>"></script>
 

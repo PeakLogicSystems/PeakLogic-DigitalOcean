@@ -227,8 +227,8 @@
     let mvApiRoot = String(window.MV_API_BASE || '').trim();
     if (!mvApiRoot) {
       try {
-        if (window.parent !== window && window.parent.MOOREVIEW_API_BASE) {
-          mvApiRoot = String(window.parent.MOOREVIEW_API_BASE).trim();
+        if (window.parent !== window && window.parent.PEAKLOGIC_API_BASE) {
+          mvApiRoot = String(window.parent.PEAKLOGIC_API_BASE).trim();
         }
       } catch { /* cross-origin */ }
     }
@@ -236,7 +236,7 @@
     window.addEventListener('message', (ev) => {
       const data = ev?.data;
       if (!data || typeof data !== 'object') return;
-      if (data.type === 'mooreview-api-base' && typeof data.apiBase === 'string' && data.apiBase.trim()) {
+      if (data.type === 'peaklogic-api-base' && typeof data.apiBase === 'string' && data.apiBase.trim()) {
         mvApiRoot = data.apiBase.trim().replace(/\/$/, '');
       }
       if (data.type === 'mv-hmi-poll-config' && typeof data.apiBase === 'string' && data.apiBase.trim()) {

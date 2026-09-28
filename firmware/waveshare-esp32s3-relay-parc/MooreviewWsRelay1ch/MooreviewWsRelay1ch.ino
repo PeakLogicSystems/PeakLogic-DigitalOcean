@@ -1,5 +1,5 @@
 /*
- * MooreVIEW MQTT Parc remote I/O — Waveshare ESP32-S3-Relay-1CH-U
+ * PeakLogic MQTT Parc remote I/O — Waveshare ESP32-S3-Relay-1CH-U
  *
  * IOT-LINK / Cloud Studio runs pool ST; this board is a satellite:
  *   write_outputs { R1: true }  → onboard isolated relay
@@ -35,7 +35,7 @@ static bool mqttTls = MV_MQTT_SKETCH_TLS_DEFAULT;
 static bool mqttInsecure = false;
 static char mqttUser[40] = MV_MQTT_SKETCH_USER_DEFAULT;
 static char mqttPass[MV_MQTT_PASSWORD_SIZE] = MV_MQTT_SKETCH_PASS_DEFAULT;
-static char topicPrefix[32] = "mooreview/v1";
+static char topicPrefix[32] = "peaklogic/v1";
 
 static bool relayOn = false;
 static bool di1 = false;
@@ -86,7 +86,7 @@ static void loadCfg()
   if (mqttTls && mqttPort == 1883) mqttPort = MV_MQTT_SKETCH_PORT_DEFAULT;
   strlcpy(mqttUser, prefs.getString("mqttUser", MV_MQTT_SKETCH_USER_DEFAULT).c_str(), sizeof(mqttUser));
   strlcpy(mqttPass, prefs.getString("mqttPass", MV_MQTT_SKETCH_PASS_DEFAULT).c_str(), sizeof(mqttPass));
-  strlcpy(topicPrefix, prefs.getString("topicPfx", "mooreview/v1").c_str(), sizeof(topicPrefix));
+  strlcpy(topicPrefix, prefs.getString("topicPfx", "peaklogic/v1").c_str(), sizeof(topicPrefix));
   prefs.end();
 
   bool migrated = false;
@@ -299,12 +299,12 @@ static void mqttEnsure()
 static void handleSetupGet()
 {
   String html = F("<!doctype html><html><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
-    "<title>MooreVIEW Pool &amp; Spa</title><style>body{font-family:sans-serif;max-width:36rem;margin:1.5rem auto;padding:0 1rem;color:#0f172a}"
+    "<title>PeakLogic Pool &amp; Spa</title><style>body{font-family:sans-serif;max-width:36rem;margin:1.5rem auto;padding:0 1rem;color:#0f172a}"
     "h1{font-size:1.35rem}p.hint{color:#475569;font-size:.95rem}label{display:block;margin:.7rem 0 .2rem;font-weight:600}"
     "input{width:100%;padding:.5rem;box-sizing:border-box}button{margin-top:1.1rem;padding:.6rem 1.1rem;background:#4f46e5;color:#fff;border:0;border-radius:6px}"
     "fieldset{border:1px solid #e2e8f0;border-radius:8px;margin:1rem 0;padding:.6rem 1rem 1rem}legend{padding:0 .4rem;color:#4f46e5}</style></head><body>"
-    "<h1>MooreVIEW Pool &amp; Spa</h1>"
-    "<p class=hint>You are on the setup network <b>MooreVIEW-Relay1CH</b>. Enter your <b>home Wi-Fi</b> so this module can reach the pool hub on your LAN. Relay opens if Wi-Fi or MQTT drops (fail-safe OFF).</p>"
+    "<h1>PeakLogic Pool &amp; Spa</h1>"
+    "<p class=hint>You are on the setup network <b>PeakLogic-Relay1CH</b>. Enter your <b>home Wi-Fi</b> so this module can reach the pool hub on your LAN. Relay opens if Wi-Fi or MQTT drops (fail-safe OFF).</p>"
     "<form method=post action=/setup>");
   html += "<fieldset><legend>This module</legend><label>Device name (deviceId)</label><input name=deviceId value='";
   html += deviceId;
@@ -326,10 +326,10 @@ static void handleSetupGet()
     "li.innerHTML='<a href=# onclick=\"document.querySelector('[name=staSsid]').value=\\''+n.ssid.replace(/'/g,\"\\\\'\")+'\\';return false\">'+n.ssid+'</a> · ch '+n.chan+' · '+n.rssi+' dBm';"
     "ul.appendChild(li);});}catch(e){ul.innerHTML='Scan failed';}}</script></fieldset>";
   html += "<fieldset><legend>Cloud MQTT (Opta Parc)</legend>"
-    "<p class=hint>Default: <code>mqtt.mooreview.io:8883</code>, user <code>mooreview</code>. Blank password keeps firmware default.</p>"
+    "<p class=hint>Default: <code>mqtt.peaklogic.io:8883</code>, user <code>peaklogic</code>. Blank password keeps firmware default.</p>"
     "<label>Broker host</label><input name=mqttHost value='";
   html += mqttHost;
-  html += "' placeholder='mqtt.mooreview.io'><label>MQTT port</label><input name=mqttPort type=number value='";
+  html += "' placeholder='mqtt.peaklogic.io'><label>MQTT port</label><input name=mqttPort type=number value='";
   html += String(mqttPort);
   html += "'><label><input type=checkbox name=mqttTls value=1";
   html += mqttTls ? " checked" : "";

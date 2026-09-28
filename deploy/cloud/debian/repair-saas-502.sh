@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Fix HTTP 502 on mooreview.io — nginx must proxy to 3100 and mooreview-saas must be running.
+# Fix HTTP 502 on peaklogic.io — nginx must proxy to 3100 and peaklogic-saas must be running.
 set -euo pipefail
 
 log() { printf '[repair-502] %s\n' "$*"; }
@@ -9,8 +9,8 @@ die() { printf '[repair-502] ERROR: %s\n' "$*" >&2; exit 1; }
 [[ "${EUID:-0}" -eq 0 ]] || die "Run as root"
 
 PORT=3100
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-SAAS_ENV="${MOOREVIEW_SAAS_ENV:-/etc/mooreview/saas.env}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+SAAS_ENV="${PEAKLOGIC_SAAS_ENV:-/etc/peaklogic/saas.env}"
 SCRIPT_DIR="${INSTALL_DIR}/deploy/cloud/debian"
 
 log "=== Current nginx upstream ==="
@@ -24,21 +24,21 @@ curl -sf "http://127.0.0.1:${PORT}/health" && log ":${PORT} OK" || warn ":${PORT
 curl -sf "http://127.0.0.1:3090/health" && log ":3090 OK" || warn ":3090 not responding"
 
 # --- nginx -> 3100 ---
-NGINX_SITE="/etc/nginx/sites-available/mooreview-saas"
-DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
-MOOREVIEW_DOMAIN="$DOMAIN" MOOREVIEW_SAAS_PORT="$PORT" NGINX_SITE="$NGINX_SITE" \
+NGINX_SITE="/etc/nginx/sites-available/peaklogic-saas"
+DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
+PEAKLOGIC_DOMAIN="$DOMAIN" PEAKLOGIC_SAAS_PORT="$PORT" NGINX_SITE="$NGINX_SITE" \
   bash "${SCRIPT_DIR}/write-nginx-saas-site.sh"
 systemctl restart nginx
 log "nginx now proxies to :${PORT}"
 
-# --- mooreview-saas service ---
-if [[ ! -f /etc/systemd/system/mooreview-saas.service ]]; then
+# --- peaklogic-saas service ---
+if [[ ! -f /etc/systemd/system/peaklogic-saas.service ]]; then
   if [[ -f "${SCRIPT_DIR}/install-saas.sh" ]]; then
-    log "mooreview-saas not installed — running install-saas.sh..."
-    MOOREVIEW_SOURCE="$INSTALL_DIR" MOOREVIEW_INSTALL_DIR="$INSTALL_DIR" \
+    log "peaklogic-saas not installed — running install-saas.sh..."
+    PEAKLOGIC_SOURCE="$INSTALL_DIR" PEAKLOGIC_INSTALL_DIR="$INSTALL_DIR" \
       bash "${SCRIPT_DIR}/install-saas.sh"
   else
-    die "Missing mooreview-saas.service and ${SCRIPT_DIR}/install-saas.sh — re-extract bundle to /home/mooreview"
+    die "Missing peaklogic-saas.service and ${SCRIPT_DIR}/install-saas.sh — re-extract bundle to /home/peaklogic"
   fi
 fi
 
@@ -52,25 +52,25 @@ if [[ -f "$SAAS_ENV" ]]; then
 fi
 
 systemctl daemon-reload
-systemctl enable mooreview-saas 2>/dev/null || true
-systemctl disable --now mooreview 2>/dev/null || true
-systemctl restart mooreview-saas || true
+systemctl enable peaklogic-saas 2>/dev/null || true
+systemctl disable --now peaklogic 2>/dev/null || true
+systemctl restart peaklogic-saas || true
 sleep 3
 
-log "=== mooreview-saas status ==="
-systemctl status mooreview-saas --no-pager -l | head -25 || true
+log "=== peaklogic-saas status ==="
+systemctl status peaklogic-saas --no-pager -l | head -25 || true
 
 if ! curl -sf "http://127.0.0.1:${PORT}/health" >/dev/null; then
   log "=== Last log lines (fix MONGODB_URI + DO Mongo allowlist) ==="
-  journalctl -u mooreview-saas -n 30 --no-pager || true
-  die "Backend still down on :${PORT}. Edit $SAAS_ENV then: systemctl restart mooreview-saas"
+  journalctl -u peaklogic-saas -n 30 --no-pager || true
+  die "Backend still down on :${PORT}. Edit $SAAS_ENV then: systemctl restart peaklogic-saas"
 fi
 
-CODE="$(curl -sf -o /dev/null -w '%{http_code}' -H 'Host: mooreview.io' http://127.0.0.1/login)"
+CODE="$(curl -sf -o /dev/null -w '%{http_code}' -H 'Host: peaklogic.io' http://127.0.0.1/login)"
 log "nginx /login -> HTTP ${CODE}"
 if [[ "$CODE" == "502" ]]; then
-  die "Still 502 after fix — paste: journalctl -u mooreview-saas -n 40"
+  die "Still 502 after fix — paste: journalctl -u peaklogic-saas -n 40"
 fi
 
-log "OK — open http://mooreview.io/login"
-log "HTTPS: certbot --nginx -d mooreview.io -d www.mooreview.io"
+log "OK — open http://peaklogic.io/login"
+log "HTTPS: certbot --nginx -d peaklogic.io -d www.peaklogic.io"

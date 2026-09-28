@@ -9,9 +9,9 @@ const { isPartnerRole } = require('../../tenants/tenantRoles');
 
 function ingestToken() {
   return String(
-    process.env.MOOREVIEW_MQTT_LOG_INGEST_TOKEN
+    process.env.PEAKLOGIC_MQTT_LOG_INGEST_TOKEN
     || process.env.PLATFORM_ADMIN_KEY
-    || process.env.MOOREVIEW_TOKEN
+    || process.env.PEAKLOGIC_TOKEN
     || '',
   ).trim();
 }
@@ -19,7 +19,7 @@ function ingestToken() {
 function authorizeIngest(req, res) {
   const expected = ingestToken();
   if (!expected) {
-    res.status(503).json({ error: 'MQTT log ingest not configured — set MOOREVIEW_MQTT_LOG_INGEST_TOKEN' });
+    res.status(503).json({ error: 'MQTT log ingest not configured — set PEAKLOGIC_MQTT_LOG_INGEST_TOKEN' });
     return false;
   }
   const hdr = String(req.headers.authorization || '');

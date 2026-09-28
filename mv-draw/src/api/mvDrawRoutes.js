@@ -28,9 +28,9 @@ const { projectStorageInfo } = require('../mvDrawStore');
 const { mirrorUpload } = require('../../../src/storage/gridfsMirror');
 const gridfs = require('../../../src/storage/gridfsStore');
 const {
-  readMooreviewProjectContext,
-  saveMvDrawToMooreviewProject,
-  loadMvDrawFromMooreviewProject,
+  readPeaklogicProjectContext,
+  saveMvDrawToPeaklogicProject,
+  loadMvDrawFromPeaklogicProject,
   saveMvDrawToProjectLibrary,
   linkComposerTo3d,
   applyMvDrawHmiCompile,
@@ -141,7 +141,7 @@ function createMvDrawRoutes() {
 
   router.get('/mv-draw/project/context', (req, res) => {
     try {
-      const context = readMooreviewProjectContext();
+      const context = readPeaklogicProjectContext();
       res.json({ ok: true, context, storage: projectStorageInfo(readActiveProject()) });
     } catch (e) {
       res.status(e.status || 500).json({ error: e.message || String(e) });
@@ -150,7 +150,7 @@ function createMvDrawRoutes() {
 
   router.post('/mv-draw/project/save-to-project', async (req, res) => {
     try {
-      const result = saveMvDrawToMooreviewProject(req.body?.project || readActiveProject(), {
+      const result = saveMvDrawToPeaklogicProject(req.body?.project || readActiveProject(), {
         linkComposer: req.body?.linkComposer !== false,
         setComposerMode: req.body?.setComposerMode !== false,
         facilityPlanUrl: req.body?.facilityPlanUrl,
@@ -179,7 +179,7 @@ function createMvDrawRoutes() {
 
   router.post('/mv-draw/project/load-from-project', (req, res) => {
     try {
-      const result = loadMvDrawFromMooreviewProject();
+      const result = loadMvDrawFromPeaklogicProject();
       res.json({
         ok: true,
         ...projectPayload(result.project),

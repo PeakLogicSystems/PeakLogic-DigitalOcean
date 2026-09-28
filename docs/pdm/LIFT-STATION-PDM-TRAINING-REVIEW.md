@@ -22,7 +22,7 @@
 
 This document captures the **design review and implementation reference** for lift-station PdM training data. It defines:
 
-1. **Setup criteria** mooreVIEW stores for each lift station (pull-down float ladder, simplex / duplex / triplex, location class, pump age, install/repair history).
+1. **Setup criteria** PeakLogic stores for each lift station (pull-down float ladder, simplex / duplex / triplex, location class, pump age, install/repair history).
 2. **Implemented PdM extensions** — motor asset setup, 30–360 day sim, feature batch, failure forecast, **proactive CMMS PM work orders**.
 3. **Training data path** — **Seed demo data** builds Mongo historian + edge + `pdm_features` for the full seed range.
 
@@ -34,7 +34,7 @@ See also [PDM_PROACTIVE_CMMS.md](./PDM_PROACTIVE_CMMS.md).
 
 ## 2. Summary of prior discussion
 
-mooreVIEW PdM today combines:
+PeakLogic PdM today combines:
 
 | Layer | Source | Role |
 |-------|--------|------|
@@ -63,7 +63,7 @@ Duplex **lag pump** (Pump 2) has fewer starts but often longer runs when `LVL_LA
 
 ### 3.1 Float ladder — pump-down (pull-down)
 
-mooreVIEW duplex logic uses cumulative floats (liquid **at or above** float = ON):
+PeakLogic duplex logic uses cumulative floats (liquid **at or above** float = ON):
 
 | Float | Tag (duplex) | Meaning |
 |-------|--------------|---------|
@@ -76,7 +76,7 @@ mooreVIEW duplex logic uses cumulative floats (liquid **at or above** float = ON
 
 ### 3.2 Pump configurations
 
-| Config | Pumps | mooreVIEW program (reference) | Alternator | Typical use |
+| Config | Pumps | PeakLogic program (reference) | Alternator | Typical use |
 |--------|-------|------------------------------|------------|-------------|
 | **Simplex** | 1 | `logic/lift_simplex` / single-pump ST | N/A | Small tenant, low flow |
 | **Duplex** | 2 | `logic/36_duplex_lift_station.st` / `37_duplex_lift_station_parc_st.st` | `ALT2` lead/lag | Mall, restaurant, ALF |

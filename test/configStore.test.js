@@ -25,8 +25,8 @@ describe('configStore memory backend', () => {
 
   beforeEach(() => {
     dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-config-mem-'));
-    process.env.MOOREVIEW_DATA = dir;
-    process.env.MOOREVIEW_CONFIG_URI = 'memory';
+    process.env.PEAKLOGIC_DATA = dir;
+    process.env.PEAKLOGIC_CONFIG_URI = 'memory';
     clearModuleCache();
   });
 
@@ -35,7 +35,7 @@ describe('configStore memory backend', () => {
       const configStore = require('../src/configStore');
       await configStore.shutdown().catch(() => {});
     } catch { /* ignore */ }
-    delete process.env.MOOREVIEW_DATA;
+    delete process.env.PEAKLOGIC_DATA;
     clearModuleCache();
     fs.rmSync(dir, { recursive: true, force: true });
   });
@@ -74,7 +74,7 @@ describe('configStore memory backend', () => {
 });
 
 describe('configStore mongo integration', () => {
-  const rawUri = process.env.MOOREVIEW_CONFIG_URI || process.env.MONGODB_URI || '';
+  const rawUri = process.env.PEAKLOGIC_CONFIG_URI || process.env.MONGODB_URI || '';
   const uri = rawUri && rawUri !== 'memory' ? rawUri : '';
   if (!uri) {
     it('skipped — set MONGODB_URI to run integration test', () => {
@@ -88,18 +88,18 @@ describe('configStore mongo integration', () => {
 
   before(() => {
     dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-config-mongo-'));
-    process.env.MOOREVIEW_DATA = dir;
-    process.env.MOOREVIEW_CONFIG_URI = uri;
-    process.env.MOOREVIEW_CONFIG_DB = testDb;
+    process.env.PEAKLOGIC_DATA = dir;
+    process.env.PEAKLOGIC_CONFIG_URI = uri;
+    process.env.PEAKLOGIC_CONFIG_DB = testDb;
     clearModuleCache();
   });
 
   after(async () => {
     const configStore = require('../src/configStore');
     await configStore.shutdown().catch(() => {});
-    delete process.env.MOOREVIEW_DATA;
-    delete process.env.MOOREVIEW_CONFIG_URI;
-    delete process.env.MOOREVIEW_CONFIG_DB;
+    delete process.env.PEAKLOGIC_DATA;
+    delete process.env.PEAKLOGIC_CONFIG_URI;
+    delete process.env.PEAKLOGIC_CONFIG_DB;
     clearModuleCache();
     fs.rmSync(dir, { recursive: true, force: true });
   });
@@ -122,9 +122,9 @@ describe('configStore mongo integration', () => {
     assert.equal(persistence.readJson('settings.json', {}).scanMs, 222);
 
     clearModuleCache();
-    process.env.MOOREVIEW_CONFIG_URI = uri;
-    process.env.MOOREVIEW_CONFIG_DB = testDb;
-    process.env.MOOREVIEW_DATA = dir;
+    process.env.PEAKLOGIC_CONFIG_URI = uri;
+    process.env.PEAKLOGIC_CONFIG_DB = testDb;
+    process.env.PEAKLOGIC_DATA = dir;
     const configStore2 = require('../src/configStore');
     const persistence2 = require('../src/persistence');
     await configStore2.init();
@@ -135,7 +135,7 @@ describe('configStore mongo integration', () => {
   });
 
   it('fails fast when Mongo URI is missing', async () => {
-    delete process.env.MOOREVIEW_CONFIG_URI;
+    delete process.env.PEAKLOGIC_CONFIG_URI;
     delete process.env.MONGODB_URI;
     clearModuleCache();
     const configStore = require('../src/configStore');
@@ -143,6 +143,6 @@ describe('configStore mongo integration', () => {
       () => configStore.init(),
       /MongoDB required for configuration/,
     );
-    process.env.MOOREVIEW_CONFIG_URI = uri;
+    process.env.PEAKLOGIC_CONFIG_URI = uri;
   });
 });

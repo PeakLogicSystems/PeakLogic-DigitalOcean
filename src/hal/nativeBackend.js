@@ -5,7 +5,7 @@ const { formatPin } = require('./parseChannel');
 
 let native = null;
 try {
-  native = require('../../native/build/Release/mooreview_native.node');
+  native = require('../../native/build/Release/peaklogic_native.node');
 } catch {
   native = null;
 }

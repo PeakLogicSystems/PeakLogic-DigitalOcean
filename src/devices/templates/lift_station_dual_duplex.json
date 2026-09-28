@@ -1,7 +1,7 @@
 {
   "id": "lift_station_dual_duplex",
   "label": "Lift station — dual duplex",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Opta + D1608E — dual duplex alternator (ALT2, 2 pumps)",
   "transport": "mqtt_parc",
   "stationType": "dual_duplex",

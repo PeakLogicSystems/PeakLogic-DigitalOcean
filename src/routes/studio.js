@@ -63,8 +63,8 @@ function createStudioRoutes() {
       appVersion: APP_VERSION,
       product: 'cloud-studio',
       deployment: DEPLOYMENT_MODE,
-      mooreviewApiBase: '/api/studio',
-      mooreviewPlatformApi: '/api',
+      peaklogicApiBase: '/api/studio',
+      peaklogicPlatformApi: '/api',
       homeUrl: '/studio',
       connectivityBuild: 'commissioning-v2-qr',
       useShellNav: true,
@@ -90,11 +90,11 @@ function createStudioRoutes() {
     withTenantRuntime((req, res) => {
       const studioLocationId = String(req.query.locationId || req.query.location || '').trim();
       res.render('scada-dashboard', {
-        title: 'mooreVIEW Studio',
+        title: 'PeakLogic Studio',
         assetV: APP_VERSION,
         product: 'cloud-studio',
         deployment: DEPLOYMENT_MODE,
-        mooreviewApiBase: '/api/studio',
+        peaklogicApiBase: '/api/studio',
         studioLocationId,
       });
     }),

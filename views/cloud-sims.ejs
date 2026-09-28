@@ -8,7 +8,7 @@
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/icon-512.png">
   <script src="/js/pwa.js" defer></script>
-  <title>Cloud Sims — MooreView</title>
+  <title>Cloud Sims — PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 </head>
 <body class="cloud-sims-body">
@@ -17,7 +17,7 @@
     <h1 class="standalone-title">Cloud Sim Management</h1>
     <div class="standalone-meta popup-header-actions">
       <span id="cloud-sims-status" class="muted cell-mono" aria-live="polite">Loading…</span>
-      <span class="topbar-version muted cell-mono" title="MooreView release">v<%= appVersion %></span>
+      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
       <a href="/" class="btn popup-close page-close" title="Return to dashboard">Close</a>
     </div>
   </header>
@@ -27,7 +27,7 @@
     <section class="cloud-sims-disabled panel" role="alert">
       <h2>Cloud Sim management is disabled</h2>
       <p>Enable it in <a href="/">System setup</a> → <strong>Features</strong> → check <strong>Enable Cloud Sim management</strong> → <strong>Apply all settings</strong>, then reload this page.</p>
-      <p class="muted">Or set <code>MOOREVIEW_CLOUD_SIMS=1</code> in <code>.env</code> and restart the server, or run with <code>MOOREVIEW_DEPLOYMENT=cloud</code>.</p>
+      <p class="muted">Or set <code>PEAKLOGIC_CLOUD_SIMS=1</code> in <code>.env</code> and restart the server, or run with <code>PEAKLOGIC_DEPLOYMENT=cloud</code>.</p>
     </section>
     <% } else { %>
     <p class="panel-hint cloud-sims-hint">
@@ -65,8 +65,8 @@
     <% } %>
   </main>
 
-  <script>window.MOOREVIEW_DEPLOYMENT = '<%= deployment %>';</script>
-  <script>window.MOOREVIEW_CLOUD_SIMS_ENABLED = <%= cloudSimsEnabled ? 'true' : 'false' %>;</script>
+  <script>window.PEAKLOGIC_DEPLOYMENT = '<%= deployment %>';</script>
+  <script>window.PEAKLOGIC_CLOUD_SIMS_ENABLED = <%= cloudSimsEnabled ? 'true' : 'false' %>;</script>
   <script src="/js/api.js?v=<%= assetV %>"></script>
   <script src="/js/cloudSimsPage.js?v=<%= assetV %>"></script>
 </body>

@@ -97,7 +97,7 @@ function createCloudSiteRoutes() {
 
   router.get('/sites', requireAuth, requireTenantAccess, (req, res) => {
     if (!cloudEnabled()) {
-      return res.status(404).json({ error: 'Cloud sites API requires MOOREVIEW_DEPLOYMENT=cloud' });
+      return res.status(404).json({ error: 'Cloud sites API requires PEAKLOGIC_DEPLOYMENT=cloud' });
     }
     const tid = activeTenantId(req);
     const isAdmin = req.mvAuth.user.role === 'platform_admin';
@@ -114,7 +114,7 @@ function createCloudSiteRoutes() {
 
   router.post('/sites', requireAuth, requireTenantAccess, (req, res) => {
     if (!cloudEnabled()) {
-      return res.status(404).json({ error: 'Cloud sites API requires MOOREVIEW_DEPLOYMENT=cloud' });
+      return res.status(404).json({ error: 'Cloud sites API requires PEAKLOGIC_DEPLOYMENT=cloud' });
     }
     try {
       const tid = activeTenantId(req);

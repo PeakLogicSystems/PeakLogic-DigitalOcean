@@ -1,12 +1,12 @@
-# mooreVIEW updates (no WinSCP)
+# PeakLogic updates (no WinSCP)
 
 One workflow: **push from your PC → pull on the target**. GitHub is the transfer layer.
 
 | Repo | Folder | Deploy target |
 |------|--------|---------------|
-| `mooreview-pc` | `est-pc/` | MVP Suite, IoT-Link, **Cloud SaaS** (`/opt/mooreview` or `/home/mooreview`) |
-| `mooreview-est` | `est/` | Embedded Linux / OpenWrt (`/opt/mooreview`) |
-| `mooreview-docs` | `mooreview-docs/` | Documentation only (no runtime) |
+| `peaklogic-pc` | `est-pc/` | MVP Suite, IoT-Link, **Cloud SaaS** (`/opt/peaklogic` or `/home/peaklogic`) |
+| `peaklogic-est` | `est/` | Embedded Linux / OpenWrt (`/opt/peaklogic`) |
+| `peaklogic-docs` | `peaklogic-docs/` | Documentation only (no runtime) |
 
 **Cloud SaaS** ships from **est-pc** (`npm run start:saas`, port **3100**) — not a separate application repo. Build production bundles with `scripts/create-saas-bundle.ps1`; install with `docs/CLOUD_DEPLOY_DO.md`.
 
@@ -55,20 +55,20 @@ git push origin main
 Refresh the public docs repo after marketing/training edits:
 
 ```powershell
-cd C:\Users\public\data\mooreview-docs
+cd C:\Users\public\data\peaklogic-docs
 powershell -File scripts\sync-from-sources.ps1
 git add content/; git commit -m "Sync docs"; git push
 ```
 
 ## Target host (Linux)
 
-All targets use the same script (preserves `data/`, `/etc/mooreview/*`, restarts systemd):
+All targets use the same script (preserves `data/`, `/etc/peaklogic/*`, restarts systemd):
 
 ```bash
 sudo bash deploy/update-from-github.sh
 ```
 
-### Cloud droplet (`/home/mooreview`)
+### Cloud droplet (`/home/peaklogic`)
 
 First-time: `deploy/cloud/debian/install-saas.sh` (see `docs/CLOUD_DEPLOY_DO.md`).
 
@@ -76,34 +76,34 @@ Updates:
 
 ```bash
 ssh root@YOUR_DROPLET_IP
-sudo bash /home/mooreview/deploy/update-from-github.sh
+sudo bash /home/peaklogic/deploy/update-from-github.sh
 ```
 
-Defaults: repo `mooreview/mooreview-pc`, service `mooreview-saas` (port 3100).
+Defaults: repo `peaklogic/peaklogic-pc`, service `peaklogic-saas` (port 3100).
 
-### IOT-LINK / appliance (`/opt/mooreview`)
+### IOT-LINK / appliance (`/opt/peaklogic`)
 
 ```bash
 ssh root@<gateway-ip>
-sudo MOOREVIEW_INSTALL_DIR=/opt/mooreview bash /opt/mooreview/deploy/update-from-github.sh
+sudo PEAKLOGIC_INSTALL_DIR=/opt/peaklogic bash /opt/peaklogic/deploy/update-from-github.sh
 ```
 
-Defaults: repo `mooreview/mooreview-pc`.
+Defaults: repo `peaklogic/peaklogic-pc`.
 
-### Embedded `est` (`/opt/mooreview`, port 3080)
+### Embedded `est` (`/opt/peaklogic`, port 3080)
 
 ```bash
 ssh root@<device>
-sudo bash /opt/mooreview/deploy/update-from-github.sh
+sudo bash /opt/peaklogic/deploy/update-from-github.sh
 ```
 
-Defaults: repo `mooreview/mooreview-est`, service `mooreview-runtime`.
+Defaults: repo `peaklogic/peaklogic-est`, service `peaklogic-runtime`.
 
 Override repo/branch:
 
 ```bash
-sudo MOOREVIEW_GITHUB_REPO=YourOrg/mooreview-pc \
-     MOOREVIEW_GITHUB_BRANCH=main \
+sudo PEAKLOGIC_GITHUB_REPO=YourOrg/peaklogic-pc \
+     PEAKLOGIC_GITHUB_BRANCH=main \
      bash deploy/update-from-github.sh
 ```
 
@@ -123,7 +123,7 @@ On a target without git (or pinned version):
 sudo bash deploy/update-from-github.sh --release v2.3.9
 ```
 
-Assets: `mooreview-appliance-<ver>.tgz`, `mooreview-saas-<ver>.tgz`, `mooreview-est-<ver>.tgz`.
+Assets: `peaklogic-appliance-<ver>.tgz`, `peaklogic-saas-<ver>.tgz`, `peaklogic-est-<ver>.tgz`.
 
 ## One-time: convert tarball install → git pull
 
@@ -131,21 +131,21 @@ If the host was installed from a `.tgz` (no `.git` yet), the update script clone
 
 ## GitHub setup
 
-1. Push `est-pc` → `mooreview/mooreview-pc`
-2. Push `est` → `mooreview/mooreview-est`
-3. Push docs → `mooreview/mooreview-docs` (optional, for distribution)
+1. Push `est-pc` → `peaklogic/peaklogic-pc`
+2. Push `est` → `peaklogic/peaklogic-est`
+3. Push docs → `peaklogic/peaklogic-docs` (optional, for distribution)
 4. On each server, clone once **or** run update script after first tarball install
 
 ## Legacy note
 
-Older workflows used a separate **`mooreview-cloud`** fork and `scripts/sync-runtime-to-cloud.ps1`. That path is **deprecated** — Cloud SaaS is built from **est-pc**. `publish-update.ps1` still calls the sync script only if a sibling `mooreview-cloud/` folder exists on your dev PC.
+Older workflows used a separate **`peaklogic-cloud`** fork and `scripts/sync-runtime-to-cloud.ps1`. That path is **deprecated** — Cloud SaaS is built from **est-pc**. `publish-update.ps1` still calls the sync script only if a sibling `peaklogic-cloud/` folder exists on your dev PC.
 
 ## What this replaces
 
 | Old | New |
 |-----|-----|
 | WinSCP bundle upload | `git push` + `update-from-github.sh` on host |
-| Separate cloud repo push | Single `mooreview-pc` push; SaaS bundle from `create-saas-bundle.ps1` |
+| Separate cloud repo push | Single `peaklogic-pc` push; SaaS bundle from `create-saas-bundle.ps1` |
 | USB / sneakernet | SSH + git pull (or `--release`) |
 
 Keep `create-saas-bundle.ps1` output for air-gapped cloud installs only.
@@ -157,8 +157,8 @@ Keep `create-saas-bundle.ps1` output for air-gapped cloud installs only.
 curl -sS http://127.0.0.1:3100/health
 
 # Service logs
-journalctl -u mooreview-saas -n 50 --no-pager
-journalctl -u mooreview-iot-link-generic -n 50 --no-pager
+journalctl -u peaklogic-saas -n 50 --no-pager
+journalctl -u peaklogic-iot-link-generic -n 50 --no-pager
 
 # Dry run
 sudo bash deploy/update-from-github.sh --dry-run

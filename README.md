@@ -1,8 +1,8 @@
-# mooreVIEW MVP Suite
+# PeakLogic MVP Suite
 
-**All-in-one** mooreVIEW for **Windows and Linux**: ST programming, integrated HMI, PLC runtime, tag historian, alarms, and MQTT Parc in a single Node application.
+**All-in-one** PeakLogic for **Windows and Linux**: ST programming, integrated HMI, PLC runtime, tag historian, alarms, and MQTT Parc in a single Node application.
 
-This folder (`est-pc`) is the **development source**. A distributable copy is generated as `mooreview-mvp-suite/` — see [docs/PRODUCT_FORKS.md](docs/PRODUCT_FORKS.md).
+This folder (`est-pc`) is the **development source**. A distributable copy is generated as `peaklogic-mvp-suite/` — see [docs/PRODUCT_FORKS.md](docs/PRODUCT_FORKS.md).
 
 - **Integrated dashboard** — program, tags, drivers, HMI, historian, alarms, Parc, **integrated CMMS**, **PdM (proactive maintenance)**, **BACnet/IP** (edge)
 - **IP cameras** — ONVIF discovery (Reolink), go2rtc live streaming, GridFS snapshots, vision AI
@@ -15,7 +15,7 @@ This folder (`est-pc`) is the **development source**. A distributable copy is ge
 | Area | Path |
 |------|------|
 | Training (F2) | [docs/training/](docs/training/) |
-| Marketing / sales PDFs | [docs/marketing/](docs/marketing/) · [mooreview-docs](https://github.com/mooreview/mooreview-docs) |
+| Marketing / sales PDFs | [docs/marketing/](docs/marketing/) · [peaklogic-docs](https://github.com/peaklogic/peaklogic-docs) |
 | Cloud SaaS | [docs/CLOUD_SAAS.md](docs/CLOUD_SAAS.md) · [docs/CLOUD_USER_GUIDE.md](docs/CLOUD_USER_GUIDE.md) |
 | Archive export (cloud fleet) | [docs/ARCHIVE_EXPORT.md](docs/ARCHIVE_EXPORT.md) |
 
@@ -41,7 +41,7 @@ npm run green
 
 Open **http://127.0.0.1:3090**
 
-Press **F1** for the in-app help guide. **Training** (F2) includes mooreVIEW modules M0–M15 and the IoT Condition-Based Monitoring course — see `docs/training/`. **Sales & marketing PDFs:** `docs/marketing/README.md`. **PdM → proactive CMMS:** `docs/pdm/PDM_PROACTIVE_CMMS.md`.
+Press **F1** for the in-app help guide. **Training** (F2) includes PeakLogic modules M0–M15 and the IoT Condition-Based Monitoring course — see `docs/training/`. **Sales & marketing PDFs:** `docs/marketing/README.md`. **PdM → proactive CMMS:** `docs/pdm/PDM_PROACTIVE_CMMS.md`.
 
 Toolbar: **Open project…** / **Import project file…** / **Save project** / **Save workspace** — portable **`.est.zip`** archives (legacy `.est.json` imports supported)
 
@@ -82,10 +82,10 @@ est-pc/                  # dev tree (= MVP Suite source)
 
 | Product | Folder | When to use |
 |---------|--------|-------------|
-| MVP Suite | `est-pc` / `mooreview-mvp-suite` | Full desktop app on Windows or Linux |
-| ST MVP | `mooreview-st-mvp` | Embedded Linux, API only |
-| MV Client | `mooreview-client` | UI only, remote server |
-| Cloud server | `mooreview-cloud` | Headless Linux server |
+| MVP Suite | `est-pc` / `peaklogic-mvp-suite` | Full desktop app on Windows or Linux |
+| ST MVP | `peaklogic-st-mvp` | Embedded Linux, API only |
+| MV Client | `peaklogic-client` | UI only, remote server |
+| Cloud server | `peaklogic-cloud` | Headless Linux server |
 
 ```powershell
 powershell -File scripts/create-product-forks.ps1
@@ -96,10 +96,10 @@ powershell -File scripts/create-product-forks.ps1
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `PORT` | 3090 | HTTP listen port |
-| `MOOREVIEW_PRODUCT` | `mvp-suite` | Product identifier |
-| `MOOREVIEW_DATA` | `./data` | Config/program storage |
+| `PEAKLOGIC_PRODUCT` | `mvp-suite` | Product identifier |
+| `PEAKLOGIC_DATA` | `./data` | Config/program storage |
 | `MONGODB_URI` | — | MongoDB tag historian (optional) |
-| `MONGODB_DB` | `mooreview` | Historian database |
+| `MONGODB_DB` | `peaklogic` | Historian database |
 | `MONGODB_COLLECTION` | `tag_logs` | Historian collection |
 | `MONGODB_SAMPLE_MS` | `5000` | Runtime pen sample interval |
 

@@ -22,7 +22,7 @@ const ST_MODE_CHANNELS = [
 ];
 
 function valveDeviceId(env = process.env) {
-  const raw = String(env.MOOREVIEW_POOL_ESP32_VALVES_DEVICE_ID || DEFAULT_DEVICE_ID).trim();
+  const raw = String(env.PEAKLOGIC_POOL_ESP32_VALVES_DEVICE_ID || DEFAULT_DEVICE_ID).trim();
   return raw.replace(/[^A-Za-z0-9_-]/g, '_') || DEFAULT_DEVICE_ID;
 }
 

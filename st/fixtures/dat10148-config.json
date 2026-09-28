@@ -1,6 +1,6 @@
 {
-  "schema": "mooreview.device-config.v1",
-  "purpose": "Port Datexel DAT10148 (16 DI Modbus RTU) to MooreVIEW C / embedded runtimes",
+  "schema": "peaklogic.device-config.v1",
+  "purpose": "Port Datexel DAT10148 (16 DI Modbus RTU) to PeakLogic C / embedded runtimes",
   "device": {
     "vendor": "Datexel",
     "model": "DAT10148",
@@ -35,7 +35,7 @@
     },
     {
       "id": "di_discrete",
-      "description": "Alternative scan — individual discrete inputs (MooreVIEW default template)",
+      "description": "Alternative scan — individual discrete inputs (PeakLogic default template)",
       "functionCode": 2,
       "table": "discrete",
       "startAddress": 0,
@@ -103,7 +103,7 @@
     }
   },
   "cPort": {
-    "headerGuards": "MOOREVIEW_DAT10148_H",
+    "headerGuards": "PEAKLOGIC_DAT10148_H",
     "defines": {
       "DAT10148_DI_COUNT": 16,
       "DAT10148_DEFAULT_BAUD": 9600,
@@ -114,7 +114,7 @@
       "DAT10148_FC_READ_HOLDING": 3
     },
     "scanExample": "Read FC03 @ HR 10 (1 word), set tag DI(n) = (word >> (n-1)) & 1 for n=1..16; or FC02 @ discrete 0, count 16.",
-    "mooreviewTemplate": "src/devices/templates/datexel_dat10148.json"
+    "peaklogicTemplate": "src/devices/templates/datexel_dat10148.json"
   },
   "multiModule": {
     "sharedBus": true,

@@ -3,11 +3,11 @@
 (function initProjectListSort() {
   function formatSavedAt(iso) {
     if (!iso) return '';
-    if (window.MooreviewTime?.formatFriendly) return window.MooreviewTime.formatFriendly(iso);
+    if (window.PeaklogicTime?.formatFriendly) return window.PeaklogicTime.formatFriendly(iso);
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return String(iso).slice(0, 19);
     return d.toLocaleString(undefined, {
-      timeZone: window.MooreviewTime?.getTimezone?.() || 'America/New_York',
+      timeZone: window.PeaklogicTime?.getTimezone?.() || 'America/New_York',
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -90,7 +90,7 @@
     return item;
   }
 
-  window.MooreviewProjectListSort = {
+  window.PeaklogicProjectListSort = {
     formatSavedAt,
     typeLabel,
     sortValue,

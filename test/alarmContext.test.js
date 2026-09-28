@@ -24,8 +24,8 @@ describe('alarmContext', () => {
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-alarm-ctx-'));
-    prevData = process.env.MOOREVIEW_DATA;
-    process.env.MOOREVIEW_DATA = tmpDir;
+    prevData = process.env.PEAKLOGIC_DATA;
+    process.env.PEAKLOGIC_DATA = tmpDir;
     resetModules();
     const { setApplianceRuntime } = require('../src/tenants/tenantRuntime');
     setApplianceRuntime(null);
@@ -49,7 +49,7 @@ describe('alarmContext', () => {
   });
 
   afterEach(() => {
-    process.env.MOOREVIEW_DATA = prevData;
+    process.env.PEAKLOGIC_DATA = prevData;
     resetModules();
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });

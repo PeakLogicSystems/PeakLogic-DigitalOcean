@@ -79,8 +79,8 @@ describe('programStore write guards', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-st-write-'));
     const stRoot = path.join(tmp, 'st');
     fs.mkdirSync(stRoot, { recursive: true });
-    const prev = process.env.MOOREVIEW_ST;
-    process.env.MOOREVIEW_ST = stRoot;
+    const prev = process.env.PEAKLOGIC_ST;
+    process.env.PEAKLOGIC_ST = stRoot;
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/programs/programStore')];
     const ps = require('../src/programs/programStore');
@@ -88,8 +88,8 @@ describe('programStore write guards', () => {
     assert.doesNotThrow(() => ps.writeProgram('.', '(* dot rel *)'));
     assert.doesNotThrow(() => ps.writeActive('(* no active *)'));
     assert.ok(fs.statSync(stRoot).isDirectory());
-    if (prev === undefined) delete process.env.MOOREVIEW_ST;
-    else process.env.MOOREVIEW_ST = prev;
+    if (prev === undefined) delete process.env.PEAKLOGIC_ST;
+    else process.env.PEAKLOGIC_ST = prev;
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/programs/programStore')];
   });

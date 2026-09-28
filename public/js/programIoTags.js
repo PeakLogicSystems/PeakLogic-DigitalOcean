@@ -1,8 +1,8 @@
 'use strict';
 
 /** Live I/O tag selection (mirrors src/programIoTags.js). */
-window.MooreviewProgramIoTags = (function () {
-  const expIo = () => window.MooreviewExpansionIo || {};
+window.PeaklogicProgramIoTags = (function () {
+  const expIo = () => window.PeaklogicExpansionIo || {};
   const PROGRAM_IO_TYPES = new Set(['BOOL', 'INT', 'REAL', 'PID', 'AVG']);
 
   function isProgramIoType(tag) {

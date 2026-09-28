@@ -1,7 +1,7 @@
 {
   "id": "arduino_opta_mcsa_monitor",
   "label": "Arduino Opta — MCSA monitor",
-  "vendor": "Arduino / MooreVIEW",
+  "vendor": "Arduino / PeakLogic",
   "model": "Opta MQTT ST + MCSA monitor",
   "transport": "mqtt_parc_telemetry",
   "sharedBus": false,
@@ -12,7 +12,7 @@
   "defaults": {
     "brokerUrl": "mqtt://192.168.1.50:1883",
     "deviceId": "opta_mcsa_01",
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "reportIntervalSec": 180
   },
   "driver": {

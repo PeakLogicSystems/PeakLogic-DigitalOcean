@@ -201,7 +201,7 @@ function classifyByInrush(inrushRatio) {
 }
 
 /**
- * Extract MooreView motor-start feature shape from a RUN segment.
+ * Extract PeakLogic motor-start feature shape from a RUN segment.
  * With ~5 min SCADA samples, startTimeMs is coarse; inrushRatio still useful.
  */
 function featuresFromRun(run, { ct, siteId, correlation } = {}) {

@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Generate all bundled MooreVIEW demo projects as portable .est.zip under data/projects/.
+ * Generate all bundled PeakLogic demo projects as portable .est.zip under data/projects/.
  *
  * Usage:
  *   node scripts/ensure-bundled-projects.js

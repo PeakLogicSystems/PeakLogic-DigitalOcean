@@ -2,8 +2,8 @@
 # Diagnose PLATFORM_ADMIN_KEY login failures on SaaS (port 3100).
 set -euo pipefail
 
-SAAS_ENV="${MOOREVIEW_SAAS_ENV:-/etc/mooreview/saas.env}"
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
+SAAS_ENV="${PEAKLOGIC_SAAS_ENV:-/etc/peaklogic/saas.env}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
 
 log() { printf '[diagnose-admin] %s\n' "$*"; }
 warn() { printf '[diagnose-admin] WARN: %s\n' "$*" >&2; }
@@ -44,12 +44,12 @@ if [[ -f "$SAAS_ENV" ]]; then
 fi
 
 if command -v systemctl >/dev/null 2>&1; then
-  systemctl is-active mooreview-saas >/dev/null 2>&1 && log "mooreview-saas: active" || warn "mooreview-saas: not active"
+  systemctl is-active peaklogic-saas >/dev/null 2>&1 && log "peaklogic-saas: active" || warn "peaklogic-saas: not active"
 fi
 
 if [[ -d "$INSTALL_DIR" ]] && command -v node >/dev/null 2>&1; then
-  log "Node config check (as mooreview user):"
-  sudo -u mooreview bash -lc "cd '$INSTALL_DIR' && node -e \"
+  log "Node config check (as peaklogic user):"
+  sudo -u peaklogic bash -lc "cd '$INSTALL_DIR' && node -e \"
     require('./src/loadEnv').loadEnv();
     const cfg = require('./src/config');
     const k = cfg.PLATFORM_ADMIN_KEY || '';
@@ -61,6 +61,6 @@ fi
 
 log ""
 log "After editing $SAAS_ENV:"
-log "  sudo systemctl restart mooreview-saas"
+log "  sudo systemctl restart peaklogic-saas"
 log "  curl -sf http://127.0.0.1:3100/health && echo OK"
 log "Then sign in at /admin/login with the exact key value (no quotes)."

@@ -1,16 +1,16 @@
 /*
- * MooreVIEW "Parc" MQTT client for the LilyGO T-HaLow node.
+ * PeakLogic "Parc" MQTT client for the LilyGO T-HaLow node.
  *
  * Speaks the same protocol as the Arduino Opta firmware
- * (firmware/arduino-opta-mqtt-st, namespace "mooreview/v1"), so MooreVIEW and
+ * (firmware/arduino-opta-mqtt-st, namespace "peaklogic/v1"), so PeakLogic and
  * the Opta see this board as a native Parc peer:
  *
- *   mooreview/v1/<deviceId>/telemetry     (pub)  verbose JSON snapshot + tags[]
- *   mooreview/v1/<deviceId>/online        (pub)  retained {"online":true|false} (LWT)
- *   mooreview/v1/<deviceId>/cmd           (sub)  {"id","op","body"}
- *   mooreview/v1/<deviceId>/cmd/response  (pub)  {"id","ok",...}
- *   mooreview/v1/<deviceId>/config        (sub)  {"pauseTelemetry","reportMs"}
- *   mooreview/v1/g/<siteKeyHex>/<tag>     (pub/sub, retained) {"v":..,"t":".."}
+ *   peaklogic/v1/<deviceId>/telemetry     (pub)  verbose JSON snapshot + tags[]
+ *   peaklogic/v1/<deviceId>/online        (pub)  retained {"online":true|false} (LWT)
+ *   peaklogic/v1/<deviceId>/cmd           (sub)  {"id","op","body"}
+ *   peaklogic/v1/<deviceId>/cmd/response  (pub)  {"id","ok",...}
+ *   peaklogic/v1/<deviceId>/config        (sub)  {"pauseTelemetry","reportMs"}
+ *   peaklogic/v1/g/<siteKeyHex>/<tag>     (pub/sub, retained) {"v":..,"t":".."}
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -32,7 +32,7 @@ typedef enum
 
 /**
  * Called when a global (peer-to-peer) tag arrives on
- * mooreview/v1/g/<siteKeyHex>/<tag>. This is how the node reacts to values the
+ * peaklogic/v1/g/<siteKeyHex>/<tag>. This is how the node reacts to values the
  * Opta (or any peer sharing the same site key) publishes.
  *
  * @param tag    Tag name (last topic segment), NUL-terminated.
@@ -43,7 +43,7 @@ typedef void (*parc_global_cb_t)(const char *tag, parc_tag_type_t type, double v
 
 /**
  * Called for each entry of a `write_outputs` command's `body.outputs` object
- * (mooreview/v1/<deviceId>/cmd). Use it to drive a GPIO/relay/setpoint.
+ * (peaklogic/v1/<deviceId>/cmd). Use it to drive a GPIO/relay/setpoint.
  *
  * @return true if the write was applied (counted in the response).
  */
@@ -51,7 +51,7 @@ typedef bool (*parc_write_cb_t)(const char *tag, double value);
 
 /**
  * Register a telemetry tag so it appears in the telemetry `tags[]` array (same
- * row shape the Opta/MooreVIEW expect). Call before parc_mqtt_start().
+ * row shape the Opta/PeakLogic expect). Call before parc_mqtt_start().
  *
  * @param id    Tag id (<=15 chars), e.g. "O1", "AI1".
  * @param type  Value type.
@@ -93,7 +93,7 @@ bool parc_mqtt_is_connected(void);
 void parc_mqtt_maybe_publish_telemetry(const char *ip, int32_t rssi, bool link_up);
 
 /**
- * Publish a global (P2P) tag, retained, to mooreview/v1/g/<siteKeyHex>/<tag>.
+ * Publish a global (P2P) tag, retained, to peaklogic/v1/g/<siteKeyHex>/<tag>.
  * Peers sharing the site key (e.g. the Opta) receive it as a global tag.
  */
 void parc_mqtt_publish_global_bool(const char *tag, bool v);

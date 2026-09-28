@@ -11,7 +11,7 @@ const GITHUB_API = 'https://api.github.com/repos/AlexxIT/go2rtc/releases/latest'
 function fetchJson(url) {
   return new Promise((resolve, reject) => {
     https.get(url, {
-      headers: { 'User-Agent': 'MooreVIEW-go2rtc-download' },
+      headers: { 'User-Agent': 'PeakLogic-go2rtc-download' },
     }, (res) => {
       const chunks = [];
       res.on('data', (c) => chunks.push(c));
@@ -30,7 +30,7 @@ function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest);
     https.get(url, {
-      headers: { 'User-Agent': 'MooreVIEW-go2rtc-download' },
+      headers: { 'User-Agent': 'PeakLogic-go2rtc-download' },
     }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         file.close();

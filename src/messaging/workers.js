@@ -111,7 +111,7 @@ async function handleAlarmNotify(message) {
 
 async function handleCmmsAlarm(message) {
   const body = message.body;
-  if (!body || body.schema !== 'mooreview-cmms-integration-v1') return;
+  if (!body || body.schema !== 'peaklogic-cmms-integration-v1') return;
 
   const db = getDb();
   await db.collection('cmms_alarm_events').insertOne({

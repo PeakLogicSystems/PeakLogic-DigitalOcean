@@ -1,8 +1,8 @@
-# mooreVIEW architecture
+# PeakLogic architecture
 
 ## Strategy (current)
 
-**Appliance and Cloud SaaS share one codebase** (`est-pc`). Deployment mode is set by `MOOREVIEW_DEPLOYMENT`:
+**Appliance and Cloud SaaS share one codebase** (`est-pc`). Deployment mode is set by `PEAKLOGIC_DEPLOYMENT`:
 
 | Mode | Port | Guide |
 |------|------|-------|
@@ -21,7 +21,7 @@ Goal: **nearly identical Studio UI and API**; field buses that need LAN stay on 
 | **Tenant** | Synthetic `tenantId: local` | Real tenant per organization |
 | **Alarm notify** | In-process + notification profiles | Same + CMMS entitlement |
 
-Set `MOOREVIEW_DEPLOYMENT=appliance` (default) or `cloud`. Health: `GET /health` returns `deployment` and `tenantId`.
+Set `PEAKLOGIC_DEPLOYMENT=appliance` (default) or `cloud`. Health: `GET /health` returns `deployment` and `tenantId`.
 
 ---
 
@@ -92,7 +92,7 @@ Virtual Opta/Modbus devices for cloud demo and test:
 
 - **Store:** `src/cloud/simStore.js` — Mongo `cloud_sims` or `data/cloud_sims.json`
 - **Runner:** `src/cloud/simRunner.js` — in-process MQTT publisher to tenant Parc topics
-- **API/UI:** `/api/cloud/sims`, page `/cloud/sims` (enabled when `MOOREVIEW_DEPLOYMENT=cloud` or `MOOREVIEW_CLOUD_SIMS=1`)
+- **API/UI:** `/api/cloud/sims`, page `/cloud/sims` (enabled when `PEAKLOGIC_DEPLOYMENT=cloud` or `PEAKLOGIC_CLOUD_SIMS=1`)
 - **Phase 2:** k8s sim workers, Modbus TCP slaves, tenant quotas, auto driver provisioning
 
 See `deploy/cloud/README.md` for VM usage.
@@ -104,7 +104,7 @@ IoT SIM/eSIM inventory from Hologram, Twilio Super SIM, and extensible vendor re
 - **Store:** `src/cellular/simStore.js` — Mongo `cellular_sims` or `data/cellular_sims.json`
 - **Adapters:** `src/cellular/vendors/` — vendor-agnostic `SimVendorAdapter` pattern
 - **API/UI:** `/api/cellular/sims`, `/api/cellular/vendors`, `/api/cellular/sync`, page `/cellular/sims`
-- **Enabled:** `MOOREVIEW_DEPLOYMENT=cloud` or `MOOREVIEW_CELLULAR_SIMS=1`
+- **Enabled:** `PEAKLOGIC_DEPLOYMENT=cloud` or `PEAKLOGIC_CELLULAR_SIMS=1`
 
 See `docs/CELLULAR_SIMS.md` for credentials and adding new vendors.
 
@@ -119,6 +119,6 @@ npm start          # http://127.0.0.1:3090
 npm run green      # full test suite
 ```
 
-Linux appliance: same tree; use `MOOREVIEW_DATA` for persistent data dir. Optional `npm run build-native` for HAL plugins.
+Linux appliance: same tree; use `PEAKLOGIC_DATA` for persistent data dir. Optional `npm run build-native` for HAL plugins.
 
 Cloud API (when needed): **est-pc Cloud SaaS** on port **3100** (`npm run start:saas`) — same codebase as the appliance. See `docs/EST_PC_PARITY.md`; do not block appliance work on cloud parity until the checklist above is satisfied.

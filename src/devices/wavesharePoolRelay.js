@@ -32,13 +32,13 @@ function slugId(raw, fallback) {
 }
 
 /**
- * Parse MOOREVIEW_POOL_WAVESHARE_RELAYS=role:deviceId[:diRole],…
- * or the single-board trio MOOREVIEW_POOL_WAVESHARE_RELAY / _ROLE / _DEVICE_ID.
+ * Parse PEAKLOGIC_POOL_WAVESHARE_RELAYS=role:deviceId[:diRole],…
+ * or the single-board trio PEAKLOGIC_POOL_WAVESHARE_RELAY / _ROLE / _DEVICE_ID.
  * @param {NodeJS.ProcessEnv} [env]
  * @returns {{ role: string, deviceId: string, driverId: string, diRole: string|null }[]}
  */
 function parseWaveshareRelayBindings(env = process.env) {
-  const list = String(env.MOOREVIEW_POOL_WAVESHARE_RELAYS || '').trim();
+  const list = String(env.PEAKLOGIC_POOL_WAVESHARE_RELAYS || '').trim();
   if (list) {
     return list.split(',').map((part, i) => {
       const bits = part.trim().split(':').map((s) => s.trim()).filter(Boolean);
@@ -60,14 +60,14 @@ function parseWaveshareRelayBindings(env = process.env) {
     }).filter((b) => b.role);
   }
 
-  const on = /^(1|true|yes|on)$/i.test(String(env.MOOREVIEW_POOL_WAVESHARE_RELAY || ''));
+  const on = /^(1|true|yes|on)$/i.test(String(env.PEAKLOGIC_POOL_WAVESHARE_RELAY || ''));
   if (!on) return [];
-  const role = String(env.MOOREVIEW_POOL_WAVESHARE_ROLE || 'dose_acid').trim().toLowerCase();
+  const role = String(env.PEAKLOGIC_POOL_WAVESHARE_ROLE || 'dose_acid').trim().toLowerCase();
   if (!POOL_RELAY_ROLES[role]) {
     throw new Error(`Unknown Waveshare pool relay role "${role}"`);
   }
-  const deviceId = slugId(env.MOOREVIEW_POOL_WAVESHARE_DEVICE_ID, 'ws_relay_01');
-  const diRaw = String(env.MOOREVIEW_POOL_WAVESHARE_DI || '').trim().toLowerCase();
+  const deviceId = slugId(env.PEAKLOGIC_POOL_WAVESHARE_DEVICE_ID, 'ws_relay_01');
+  const diRaw = String(env.PEAKLOGIC_POOL_WAVESHARE_DI || '').trim().toLowerCase();
   const diRole = diRaw && diRaw !== 'none' ? diRaw : null;
   if (diRole && !POOL_DI_ROLES[diRole]) {
     throw new Error(`Unknown Waveshare pool DI role "${diRole}"`);

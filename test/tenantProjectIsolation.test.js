@@ -14,7 +14,7 @@ describe('tenant project isolation', () => {
   let runWithProjectTenant;
 
   before(() => {
-    process.env.MOOREVIEW_DATA = dataDir;
+    process.env.PEAKLOGIC_DATA = dataDir;
     const boilerplate = path.join(dataDir, 'boilerplate', 'projects');
     fs.mkdirSync(boilerplate, { recursive: true });
     fs.writeFileSync(path.join(boilerplate, 'demo-a.est.zip'), Buffer.from('zip-a'));
@@ -32,7 +32,7 @@ describe('tenant project isolation', () => {
   });
 
   after(() => {
-    delete process.env.MOOREVIEW_DATA;
+    delete process.env.PEAKLOGIC_DATA;
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   });
 

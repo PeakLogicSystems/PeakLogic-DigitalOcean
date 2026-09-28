@@ -1,6 +1,6 @@
-# Dragino RS485-NB — cellular gateway to MooreVIEW Cloud
+# Dragino RS485-NB — cellular gateway to PeakLogic Cloud
 
-Commission **Dragino RS485-NB** as a **cellular RS485/Modbus gateway** that uplinks sensor data directly to MooreVIEW Cloud over NB-IoT — the same MQTT Parc path as an **Opta direct-to-cloud** connection, but for remote Modbus instruments instead of Opta I/O.
+Commission **Dragino RS485-NB** as a **cellular RS485/Modbus gateway** that uplinks sensor data directly to PeakLogic Cloud over NB-IoT — the same MQTT Parc path as an **Opta direct-to-cloud** connection, but for remote Modbus instruments instead of Opta I/O.
 
 For **Arduino Opta + local Ethernet**, use the **LilyGO T-ETH cellular gateway** ([cellular-opta-gateway/README.md](../cellular-opta-gateway/README.md)). Dragino does **not** bridge an Opta on LAN by default; it reads RS485 Modbus devices and publishes over cellular.
 
@@ -17,9 +17,9 @@ RS485 sensor(s) ──A/B──> Dragino RS485-NB
                               │ NB-IoT
                               │ MQTT :1883 (JSON AT+PRO=3,5)
                               ▼
-                    mooreview.io Mosquitto
+                    peaklogic.io Mosquitto
                               ▼
-              MooreVIEW Cloud Parc hub (auto-converts Dragino JSON → tags[])
+              PeakLogic Cloud Parc hub (auto-converts Dragino JSON → tags[])
                               ▼
                     mqtt_parc driver → HMI · historian · PdM
 ```
@@ -40,7 +40,7 @@ Use when an **Arduino Opta** is on RS485 as a **Modbus RTU slave** and a **Dragi
 Opta (Modbus slave ID 2) ──A/B──> Dragino RS485-NB
                                         │ NB-IoT MQTT
                                         ▼
-                              mooreview/v1/{tenant}/{device}/telemetry
+                              peaklogic/v1/{tenant}/{device}/telemetry
                                         ▼
                               Parc hub decodes → I1, R1, I1_RAW, mA_AI3, …
 ```
@@ -62,7 +62,7 @@ Matches MQTT Parc tag names from `arduino_opta_parc` plus pseudo-AI scalars:
 
 Default: **9600 8N1**, slave ID **2** (same as `opta_rtu_slave` base map; IR 8–23 are extensions for Dragino).
 
-**Opta firmware:** flash `firmware/arduino-opta-rtu-slave/MooreviewOptaRtuSlave` on the Opta RS485 port before commissioning Dragino.
+**Opta firmware:** flash `firmware/arduino-opta-rtu-slave/PeaklogicOptaRtuSlave` on the Opta RS485 port before commissioning Dragino.
 
 ### Cloud bind + commission
 
@@ -81,7 +81,7 @@ POST /api/parc/dragino-gateway/plan
 { "deviceId": "dragino_opta_01", "presetId": "opta_parc_modbus_dragino", "tenantId": "your-tenant" }
 ```
 
-Plan includes `AT+TDC=300` — Dragino polls Opta every **5 minutes** and uplinks to MooreVIEW.
+Plan includes `AT+TDC=300` — Dragino polls Opta every **5 minutes** and uplinks to PeakLogic.
 
 Apply `AT+COMMAND1`…`3` from the plan (FC02 ×8 DI, FC01 ×4 coils, FC04 ×24 IR). Set **`AT+TDC=300`** (5-minute poll + uplink). Tags use **Parc names** (`I1`, not `MB_REG_1`).
 
@@ -97,7 +97,7 @@ Use when a **JXCT JXBS-3001-NPK-RS** seven-in-one soil probe (pH, moisture, temp
 JXCT probe (Modbus slave 1) ──A/B──> Dragino RS485-NB
                                           │ NB-IoT MQTT
                                           ▼
-                                mooreview/v1/{tenant}/{device}/telemetry
+                                peaklogic/v1/{tenant}/{device}/telemetry
                                           ▼
                                 SOIL_PH, SOIL_MOIST_PCT, SOIL_TEMP_C, …
 ```
@@ -179,7 +179,7 @@ Device template: `src/devices/templates/dfrobot_pool_chemistry_dragino.json`. Sa
 |------|-------------|
 | Dragino | RS485-NB (GE version + your NB-IoT SIM) |
 | Cloud | Mosquitto **1883** open; `MOSQUITTO_USER` / `MOSQUITTO_PASS` |
-| MooreVIEW Cloud | `MOOREVIEW_DEPLOYMENT=cloud`; MQTT Parc hub enabled |
+| PeakLogic Cloud | `PEAKLOGIC_DEPLOYMENT=cloud`; MQTT Parc hub enabled |
 | Sensor | Modbus RTU on RS485 (baud/slave ID documented) |
 
 ---
@@ -189,7 +189,7 @@ Device template: `src/devices/templates/dfrobot_pool_chemistry_dragino.json`. Sa
 Same as Opta direct connect — see [OPTA_PARC_CLOUD.md §1](./OPTA_PARC_CLOUD.md#1-cloud-broker).
 
 ```bash
-mosquitto_pub -h mooreview.io -p 1883 -u mooreview -P "$MOSQUITTO_PASS" -t 'test/ping' -m ok
+mosquitto_pub -h peaklogic.io -p 1883 -u peaklogic -P "$MOSQUITTO_PASS" -t 'test/ping' -m ok
 ```
 
 ---
@@ -216,25 +216,25 @@ AT+TDC=300                          // uplink every 5 min (default 7200s)
 
 Use the Dragino RS485 Configure Tool for complex multi-register maps.
 
-### MQTT → MooreVIEW Cloud
+### MQTT → PeakLogic Cloud
 
 **Option A — flat topic (same as Opta direct):**
 
 ```text
 AT+PRO=3,5
-AT+SERVADDR=mooreview.io,1883
+AT+SERVADDR=peaklogic.io,1883
 AT+CLIENT=dragino_pump01
-AT+UNAME=mooreview
+AT+UNAME=peaklogic
 AT+PWD=<MOSQUITTO_PASS>
-AT+PUBTOPIC=mooreview/v1/dragino_pump01/telemetry
-AT+SUBTOPIC=mooreview/v1/dragino_pump01/downlink
+AT+PUBTOPIC=peaklogic/v1/dragino_pump01/telemetry
+AT+SUBTOPIC=peaklogic/v1/dragino_pump01/downlink
 ```
 
 **Option B — tenant-scoped topic (multi-tenant cloud):**
 
 ```text
-AT+PUBTOPIC=mooreview/v1/putnam-county-utilities/dragino_pump01/telemetry
-AT+SUBTOPIC=mooreview/v1/putnam-county-utilities/dragino_pump01/downlink
+AT+PUBTOPIC=peaklogic/v1/putnam-county-utilities/dragino_pump01/telemetry
+AT+SUBTOPIC=peaklogic/v1/putnam-county-utilities/dragino_pump01/downlink
 ```
 
 **Option C — legacy Dragino topic (hub auto-converts):**
@@ -266,7 +266,7 @@ Tags appear as `CELL_SIGNAL`, `CELL_BATTERY_V`, `MB_REG_1`… from Modbus decode
 | Check | Pass |
 |-------|------|
 | Dragino LED / NB attach | Registered on carrier |
-| Droplet `mosquitto_sub -t 'mooreview/v1/+/telemetry' -v` | Dragino JSON arrives |
+| Droplet `mosquitto_sub -t 'peaklogic/v1/+/telemetry' -v` | Dragino JSON arrives |
 | Cloud Parc registry | Device online |
 | Driver | Linked / OK |
 | Tags | `CELL_*` and `MB_REG_*` updating |
@@ -274,8 +274,8 @@ Tags appear as `CELL_SIGNAL`, `CELL_BATTERY_V`, `MB_REG_1`… from Modbus decode
 Smoke test from droplet (simulates Dragino JSON on Parc topic):
 
 ```bash
-mosquitto_pub -h 127.0.0.1 -p 1883 -u mooreview -P "$MOSQUITTO_PASS" \
-  -t 'mooreview/v1/dragino_pump01/telemetry' \
+mosquitto_pub -h 127.0.0.1 -p 1883 -u peaklogic -P "$MOSQUITTO_PASS" \
+  -t 'peaklogic/v1/dragino_pump01/telemetry' \
   -m '{"Model":"RS485-NB","IMEI":"863663062798815","Payload":"010304000100020008","battery":3.6,"signal":25}'
 ```
 
@@ -311,7 +311,7 @@ In tenant `settings.json`:
 }
 ```
 
-`cloudTenantIngest` subscribes to `mooreview/v1/{tenant}/{device}/telemetry` (auto on cloud deployment).
+`cloudTenantIngest` subscribes to `peaklogic/v1/{tenant}/{device}/telemetry` (auto on cloud deployment).
 
 ---
 

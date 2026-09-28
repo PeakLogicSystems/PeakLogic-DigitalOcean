@@ -93,31 +93,31 @@ describe('mqttParcBootstrap', () => {
 
   it('applyCloudMqttParcEnv pins non-local tenant broker to env on cloud', () => {
     const prev = {
-      MOOREVIEW_DEPLOYMENT: process.env.MOOREVIEW_DEPLOYMENT,
-      MOOREVIEW_MQTT_BROKER: process.env.MOOREVIEW_MQTT_BROKER,
+      PEAKLOGIC_DEPLOYMENT: process.env.PEAKLOGIC_DEPLOYMENT,
+      PEAKLOGIC_MQTT_BROKER: process.env.PEAKLOGIC_MQTT_BROKER,
       MOSQUITTO_USER: process.env.MOSQUITTO_USER,
       MOSQUITTO_PASS: process.env.MOSQUITTO_PASS,
     };
-    process.env.MOOREVIEW_DEPLOYMENT = 'cloud';
-    process.env.MOOREVIEW_MQTT_BROKER = 'mqtts://mqtt.mooreview.io:8883';
-    process.env.MOSQUITTO_USER = 'mooreview';
+    process.env.PEAKLOGIC_DEPLOYMENT = 'cloud';
+    process.env.PEAKLOGIC_MQTT_BROKER = 'mqtts://mqtt.peaklogic.io:8883';
+    process.env.MOSQUITTO_USER = 'peaklogic';
     process.env.MOSQUITTO_PASS = 'secret';
     try {
       const { settings, changed } = applyCloudMqttParcEnv({
         mqttParc: { enabled: true, brokerUrl: 'mqtt://127.0.0.1:1883', username: '', password: '' },
       });
       assert.equal(changed, true);
-      assert.equal(settings.mqttParc.brokerUrl, 'mqtts://mqtt.mooreview.io:8883');
-      assert.equal(settings.mqttParc.username, 'mooreview');
+      assert.equal(settings.mqttParc.brokerUrl, 'mqtts://mqtt.peaklogic.io:8883');
+      assert.equal(settings.mqttParc.username, 'peaklogic');
       assert.equal(settings.mqttParc.cloudTenantIngest, true);
       const other = applyCloudMqttParcEnv({
         mqttParc: { enabled: true, brokerUrl: 'mqtt://wrong-host:1883' },
       });
-      assert.equal(other.settings.mqttParc.brokerUrl, 'mqtts://mqtt.mooreview.io:8883');
+      assert.equal(other.settings.mqttParc.brokerUrl, 'mqtts://mqtt.peaklogic.io:8883');
       assert.equal(tenantMqttParcMayReloadHub(), false);
       const hubCfg = cloudHubMqttParcSettings({ enabled: false, brokerUrl: 'mqtt://127.0.0.1:1883' });
       assert.equal(hubCfg.enabled, true);
-      assert.equal(hubCfg.brokerUrl, 'mqtts://mqtt.mooreview.io:8883');
+      assert.equal(hubCfg.brokerUrl, 'mqtts://mqtt.peaklogic.io:8883');
     } finally {
       for (const [k, v] of Object.entries(prev)) {
         if (v === undefined) delete process.env[k];

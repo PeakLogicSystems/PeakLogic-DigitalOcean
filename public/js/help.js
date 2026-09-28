@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * MooreView in-app help â€” rendered into #help-content on first open.
+ * PeakLogic in-app help â€” rendered into #help-content on first open.
  */
-window.MooreviewHelp = (function () {
+window.PeaklogicHelp = (function () {
   /** Sidebar groups â€” defines nav order and section grouping. */
   const NAV_GROUPS = [
     { label: 'Overview', ids: ['start', 'tutorial', 'cloud-studio', 'layout', 'projects', 'faq'] },
@@ -31,7 +31,7 @@ window.MooreviewHelp = (function () {
       id: 'start',
       title: 'Getting started',
       html: `
-        <p>MooreView is a single-page SCADA app: <strong>ST editor</strong>, <strong>tag database</strong>, <strong>I/O drivers</strong>, <strong>HMI composer</strong>, and a <strong>scan-cycle runtime</strong> in one Node process.</p>
+        <p>PeakLogic is a single-page SCADA app: <strong>ST editor</strong>, <strong>tag database</strong>, <strong>I/O drivers</strong>, <strong>HMI composer</strong>, and a <strong>scan-cycle runtime</strong> in one Node process.</p>
         <h4>Where to open it</h4>
         <table class="help-table">
           <tr><th>Deployment</th><th>URL</th><th>Notes</th></tr>
@@ -40,7 +40,7 @@ window.MooreviewHelp = (function () {
         </table>
         <h4>First-time setup (appliance)</h4>
         <ol>
-          <li>Install: <code>npm install</code> in the MVP Suite folder (<code>est-pc</code> or <code>mooreview-mvp-suite</code>).</li>
+          <li>Install: <code>npm install</code> in the MVP Suite folder (<code>est-pc</code> or <code>peaklogic-mvp-suite</code>).</li>
           <li>Run: <code>npm start</code></li>
           <li>Open <code>http://127.0.0.1:3090</code> in your browser (default port 3090).</li>
           <li>Configure <strong>Drivers</strong> (Modbus, MQTT, HTTPS, or simulation), then <strong>Tags</strong> or apply a <strong>device template</strong>.</li>
@@ -75,7 +75,7 @@ window.MooreviewHelp = (function () {
       id: 'tutorial',
       title: 'Commissioning tutorial',
       html: `
-        <p>This tutorial walks through a typical MooreView commissioning path: create a project, connect hardware with a device template, then compose HMI screens. Use <strong>Drivers → Hardware wizard…</strong> for guided template apply, or follow the manual steps below.</p>
+        <p>This tutorial walks through a typical PeakLogic commissioning path: create a project, connect hardware with a device template, then compose HMI screens. Use <strong>Drivers → Hardware wizard…</strong> for guided template apply, or follow the manual steps below.</p>
         <h4>Step 1 — Create or open a project</h4>
         <ol>
           <li><strong>Project ▾ → New project…</strong> — starts a blank tag database (confirm when prompted).</li>
@@ -134,17 +134,17 @@ window.MooreviewHelp = (function () {
     },
     {
       id: 'cloud-studio',
-      title: 'MooreView Cloud Studio',
+      title: 'PeakLogic Cloud Studio',
       html: `
         <p>Hosted tenants use <strong>Studio</strong> â€” the same ST/HMI/runtime UI as the PC appliance, inside the cloud shell.</p>
         <ol>
-          <li>Run <code>mooreview-cloud</code>: <code>npm run seed</code> then <code>npm start</code> (port <strong>3100</strong>).</li>
+          <li>Run <code>peaklogic-cloud</code>: <code>npm run seed</code> then <code>npm start</code> (port <strong>3100</strong>).</li>
           <li>Sign in at <strong>/login</strong> (tenant slug + email + password).</li>
           <li>Open <strong>Studio</strong> from the nav bar or go to <strong>/studio</strong>.</li>
         </ol>
         <p>Runtime API base is <code>/api/studio</code> (tenant session cookie). Workspace files are isolated per tenant under <code>data/tenants/{tenantId}/</code> (tags, drivers, HMI, Parc registry).</p>
         <p><strong>MQTT Parc / Opta</strong> works in Studio when the hub and <code>mqtt_parc</code> drivers are configured â€” same as appliance. <strong>Modbus</strong> and other LAN field buses require an <strong>edge appliance</strong> or the cloud runtime fork (<code>npm run start:runtime</code> on port 3090), not the hosted multitenant process.</p>
-        <p>See <code>mooreview-cloud/docs/USER_GUIDE.md</code> and <code>docs/EST_PC_PARITY.md</code>.</p>
+        <p>See <code>peaklogic-cloud/docs/USER_GUIDE.md</code> and <code>docs/EST_PC_PARITY.md</code>.</p>
       `,
     },
     {
@@ -190,20 +190,20 @@ window.MooreviewHelp = (function () {
       id: 'projects',
       title: 'Projects',
       html: `
-        <p>Click <strong>Project â–¾</strong> (next to the MooreView brand) to expand or collapse the project menu â€” <strong>Statusâ€¦</strong>, <strong>System setupâ€¦</strong>, <strong>New projectâ€¦</strong>, <strong>Open projectâ€¦</strong>, <strong>Export project fileâ€¦</strong>, <strong>Save projectâ€¦</strong>, <strong>Save project asâ€¦</strong>, and <strong>Save workspace</strong>. Click again, press Escape, or click outside to collapse. The active project name is shown to the right as a status indicator.</p>
+        <p>Click <strong>Project â–¾</strong> (next to the PeakLogic brand) to expand or collapse the project menu â€” <strong>Statusâ€¦</strong>, <strong>System setupâ€¦</strong>, <strong>New projectâ€¦</strong>, <strong>Open projectâ€¦</strong>, <strong>Export project fileâ€¦</strong>, <strong>Save projectâ€¦</strong>, <strong>Save project asâ€¦</strong>, and <strong>Save workspace</strong>. Click again, press Escape, or click outside to collapse. The active project name is shown to the right as a status indicator.</p>
         <p><strong>System setup</strong> covers project identity, scan rate, <strong>starting HMI screen</strong>, hardware defaults, archive maintenance, <strong>PdM</strong> batch settings, HMI composer access, and saved projects under <code>data/projects/</code>. Trend pens and MongoDB logging are under <strong>Historian â†’ Pen configâ€¦</strong> and <strong>Logger configâ€¦</strong>. See <strong>Help â†’ System setup</strong> for each tab.</p>
-        <p><strong>Open projectâ€¦</strong> shows a picker of saved <code>.est.zip</code> projects in <code>data/projects/</code>. Use <strong>Import fileâ€¦</strong> to load a portable <code>.est.zip</code> / <code>.est.json</code> from another PC or MooreView version, or <strong>Export fileâ€¦</strong> to download the selected library project.</p>
-        <p><strong>Export project fileâ€¦</strong> downloads the current open project as <code>&lt;name&gt;.est.json</code> (tags, drivers, program, HMI, settings) for use on another machine or MooreView version.</p>
+        <p><strong>Open projectâ€¦</strong> shows a picker of saved <code>.est.zip</code> projects in <code>data/projects/</code>. Use <strong>Import fileâ€¦</strong> to load a portable <code>.est.zip</code> / <code>.est.json</code> from another PC or PeakLogic version, or <strong>Export fileâ€¦</strong> to download the selected library project.</p>
+        <p><strong>Export project fileâ€¦</strong> downloads the current open project as <code>&lt;name&gt;.est.json</code> (tags, drivers, program, HMI, settings) for use on another machine or PeakLogic version.</p>
         <p><strong>Save projectâ€¦</strong> writes the full snapshot to <code>data/projects/*.est.zip</code>. <strong>Save project asâ€¦</strong> prompts for a new name. <strong>Save workspace</strong> writes a working copy to <code>data/workspace.est.zip</code> without adding a library entry â€” used when startup mode is <strong>Last workspace</strong>.</p>
         <p><strong>Workspace &amp; Opta drivers:</strong> Adding or bulk-adding <code>mqtt_parc</code> drivers updates <code>workspace.est.json</code>. On restart, remote drivers in <code>drivers.json</code> are merged into the workspace snapshot so Opta drivers are not dropped.</p>
         <p>The <strong>Projects</strong> tab in System setup offers the same library plus <strong>Export fileâ€¦</strong> and <strong>Import fileâ€¦</strong>.</p>
         <p>Accepted formats (older and newer format versions are upgraded automatically on import):</p>
         <ul>
-          <li>Official: <code>format: "mooreview-est"</code>, <code>version: 1</code> (other format versions are migrated)</li>
+          <li>Official: <code>format: "peaklogic-est"</code>, <code>version: 1</code> (other format versions are migrated)</li>
           <li>Legacy bundle: JSON with <code>tags</code>, <code>drivers</code>, and <code>program</code> arrays (no format field)</li>
           <li>Tags-only JSON: array of tags or <code>{ "tags": [...] }</code></li>
         </ul>
-        <p>Exports include <code>exportedBy</code> (MooreView app version). Import may show upgrade notes when the file came from an older or newer copy.</p>
+        <p>Exports include <code>exportedBy</code> (PeakLogic app version). Import may show upgrade notes when the file came from an older or newer copy.</p>
         <p>A project import replaces tags (and drivers/program when present). Always check the tag count after opening a file.</p>
       `,
     },
@@ -228,7 +228,7 @@ window.MooreviewHelp = (function () {
         <p><strong>Apply all settings</strong> saves the starting screen even when the HMI composer is closed. Composer layout/bindings are included only when the composer is open and has unsaved edits.</p>
         <h4>MQTT Parc hub</h4>
         <p>On <strong>General</strong>, enable <strong>MQTT Parc hub</strong> and set the <strong>broker URL</strong> to your PC LAN address (e.g. <code>mqtt://192.168.1.233:1883</code>) â€” the same broker the Opta firmware uses (also set on the device <strong>/setup</strong> page). Enable <strong>Remote ST execution</strong> to deploy and run ST on the device.</p>
-        <p>Check <strong>Auto-run ST on Opta after power-up</strong> when the device should start ST from NV after a power cycle (deploy at least once so bytecode is stored in QSPI). MooreView also waits ~8 s after PC boot before auto-deploy so the Opta MQTT cmd link can settle.</p>
+        <p>Check <strong>Auto-run ST on Opta after power-up</strong> when the device should start ST from NV after a power cycle (deploy at least once so bytecode is stored in QSPI). PeakLogic also waits ~8 s after PC boot before auto-deploy so the Opta MQTT cmd link can settle.</p>
         <p>After restart, the hub connects automatically when enabled; <code>mqtt_parc</code> drivers <strong>auto-link</strong> (driver card shows <strong>OK</strong>). Use <strong>Download &amp; Start</strong> in Program to deploy bytecode â€” linking is not the same as running ST on the Opta. See <strong>Help â†’ MQTT Parc hub &amp; Opta</strong>.</p>
       `,
     },
@@ -251,7 +251,7 @@ window.MooreviewHelp = (function () {
           <tr><td><strong>Revert</strong></td><td>Discard unsaved editor changes (keeps the same active file)</td></tr>
           <tr><td><strong>Show</strong></td><td>Program tag list and Live I/O: display <strong>Tag id</strong>, <strong>Label</strong>, or <strong>Label Â· id</strong>. ST source always uses raw tag names; the chip row under the toolbar maps names to labels.</td></tr>
           <tr><td><strong>Validate</strong></td><td>Parse ST and check tag names exist</td></tr>
-          <tr><td><strong>Load for runtime</strong></td><td>Validate editor ST and load into MooreView runtime without saving to disk. Does <em>not</em> deploy to Opta â€” use <strong>Download &amp; Start</strong> when Remote is on.</td></tr>
+          <tr><td><strong>Load for runtime</strong></td><td>Validate editor ST and load into PeakLogic runtime without saving to disk. Does <em>not</em> deploy to Opta â€” use <strong>Download &amp; Start</strong> when Remote is on.</td></tr>
           <tr><td><strong>Remote</strong></td><td>When checked, ST runs on a remote device (<strong>mqtt_parc</strong> MQTT Opta recommended, or legacy <code>opta_remote</code> HTTP). When off, the PC scan engine runs ST locally.</td></tr>
           <tr><td><strong>Connect / Disconnect</strong></td><td>Link the Opta MQTT cmd channel (<code>runtime_status</code> + <code>sync_time</code>). With <code>mqtt_parc</code>, drivers usually auto-link on boot â€” use Connect only to retry. <strong>Connect</strong> does not deploy or run ST. Stop remote runtime before disconnecting.</td></tr>
           <tr><td><strong>Download &amp; Start</strong></td><td>When Remote is on, the green button deploys ST bytecode (<code>put_program</code>) then starts the device runtime (<code>runtime_start</code>). Skips deploy when Opta NV CRC already matches PC bytecode and ST is running from auto-run.</td></tr>
@@ -277,7 +277,7 @@ window.MooreviewHelp = (function () {
       html: `
         <p><strong>Start</strong> runs the scan loop at <code>scanMs</code> (default 100 ms). When <strong>Remote</strong> is on, the button reads <strong>Download &amp; Start</strong> â€” deploy ST to the Opta then run there.</p>
         <p><strong>Local</strong> (Program â†’ Remote off): read drivers â†’ execute ST on PC â†’ update timers/counters/PID/AVG â†’ write outputs.</p>
-        <p><strong>Remote</strong> (Remote on + <code>mqtt_parc</code> driver): hub must be connected; driver should show <strong>OK</strong> / linked (auto-link on boot). <strong>Connect</strong> verifies the cmd link only. <strong>Download &amp; Start</strong> deploys bytecode and runs ST on the device; tag values sync from Parc telemetry. On PC boot with auto-start, MooreView waits ~8 s before deploy so Opta MQTT commands are ready. If NV on the Opta already holds the same program CRC and ST is running, deploy is skipped.</p>
+        <p><strong>Remote</strong> (Remote on + <code>mqtt_parc</code> driver): hub must be connected; driver should show <strong>OK</strong> / linked (auto-link on boot). <strong>Connect</strong> verifies the cmd link only. <strong>Download &amp; Start</strong> deploys bytecode and runs ST on the device; tag values sync from Parc telemetry. On PC boot with auto-start, PeakLogic waits ~8 s before deploy so Opta MQTT commands are ready. If NV on the Opta already holds the same program CRC and ST is running, deploy is skipped.</p>
         <p><strong>Pause</strong> stops scan cycles but keeps the runtime loaded (program and driver links). Live I/O values freeze. Click <strong>Resume</strong> (the green button relabels while paused) to continue scanning.</p>
         <p><strong>Stop</strong> halts the loop completely; the last values remain visible.</p>
         <p>While running, open <strong>Program</strong> for the live ST trace overlay and <strong>Tags</strong> to force inputs/outputs for commissioning. Forces persist across Pause; clear them from <strong>Tags â†’ Clear forces</strong> when done.</p>
@@ -337,7 +337,7 @@ window.MooreviewHelp = (function () {
           <tr><td><strong>Force val</strong></td><td>BOOL: OFF/ON dropdown. INT/REAL: type a number. Click <strong>Apply</strong> or press <kbd>Enter</kbd> in the value field</td></tr>
           <tr><td>Toolbar</td><td><strong>Clear forces</strong> releases every forced tag at once</td></tr>
         </table>
-        <p>MooreView picks the force direction from tag <strong>role</strong>:</p>
+        <p>PeakLogic picks the force direction from tag <strong>role</strong>:</p>
         <ul>
           <li><strong>input</strong> â€” skips the driver read; logic sees your forced value</li>
           <li><strong>output</strong> / <strong>memory</strong> / <strong>fb</strong> â€” overrides logic and drives the output write</li>
@@ -391,7 +391,7 @@ window.MooreviewHelp = (function () {
         <p><strong>NextCentury API:</strong> Open <strong>Drivers â†’ NextCentury API</strong> for cloud credentials (not Modbus/COM). Use <strong>Fill from example</strong> for offline setup; <strong>Load example tags</strong> merges <code>st/fixtures/tags.nextcentury.json</code>. See <strong>Help â†’ NextCentury API</strong>.</p>
         <p><strong>Device templates</strong> (Modbus only, live reload): share one RS-485 driver per COM port. Each <strong>Apply template</strong> uses the <strong>next slave address</strong>. Tag names continue <code>DI1</code>, <code>Q1</code>, â€¦ â€” a second 16-input module adds <code>DI17</code>â€“<code>DI32</code>. JSON templates under <code>src/devices/templates/</code> hot-reload without server restart.</p>
         <p>Only <strong>one</strong> enabled <code>modbus_rtu</code> driver per COM port. <strong>Test</strong> briefly opens the port â€” avoid while runtime is scanning the same COM.</p>
-        <p><strong>Refresh ports</strong> rescans USB serial. If the saved port is missing, MooreView may auto-switch to an available port â€” update the driver to match.</p>
+        <p><strong>Refresh ports</strong> rescans USB serial. If the saved port is missing, PeakLogic may auto-switch to an available port â€” update the driver to match.</p>
         <p>See <strong>Help â†’ MQTT &amp; HTTPS</strong> for payload templates and REST/MQTT tag addressing.</p>
         <h4>Bulk add MQTT Parc Opta</h4>
         <p><strong>Drivers â†’ Add Opta Parc devices (bulk)</strong> â€” add one or many <code>mqtt_parc</code> drivers:</p>
@@ -413,7 +413,7 @@ window.MooreviewHelp = (function () {
       html: `
         <p>Manage IoT SIM and eSIM inventory from vendor APIs (Hologram, Twilio Super SIM, AT&amp;T, Verizon ThingSpace, T-Mobile, Simetry, and extensible stubs). Open <strong>System setup → Features → Open Cellular SIMs</strong> or <code>/cellular/sims</code>.</p>
         <h4>Enable</h4>
-        <p>Feature is on when <code>MOOREVIEW_DEPLOYMENT=cloud</code>, <code>MOOREVIEW_CELLULAR_SIMS=1</code> (local <code>.env</code>), or <strong>System setup → Enable Cellular SIM management</strong>.</p>
+        <p>Feature is on when <code>PEAKLOGIC_DEPLOYMENT=cloud</code>, <code>PEAKLOGIC_CELLULAR_SIMS=1</code> (local <code>.env</code>), or <strong>System setup → Enable Cellular SIM management</strong>.</p>
         <h4>Vendor credentials</h4>
         <table class="help-table">
           <tr><th>Vendor</th><th>Status</th><th>Credentials</th><th>Signup</th></tr>
@@ -441,13 +441,13 @@ window.MooreviewHelp = (function () {
       id: 'mqtt-parc',
       title: 'MQTT Parc hub & Opta',
       html: `
-        <p>MooreView PC is the <strong>central MQTT Parc hub</strong>. Opta firmware (<strong>MooreviewOptaMqttSt</strong>, currently <strong>v2.3.47</strong>) publishes <code>mooreview/v1/{deviceId}/telemetry</code>; the hub stores reports in <code>data/parc.json</code> for tag sync and remote ST. Integrator reference: <code>firmware/arduino-opta-mqtt-st/OPTa_FEATURES.md</code>.</p>
+        <p>PeakLogic PC is the <strong>central MQTT Parc hub</strong>. Opta firmware (<strong>PeaklogicOptaMqttSt</strong>, currently <strong>v2.3.47</strong>) publishes <code>peaklogic/v1/{deviceId}/telemetry</code>; the hub stores reports in <code>data/parc.json</code> for tag sync and remote ST. Integrator reference: <code>firmware/arduino-opta-mqtt-st/OPTa_FEATURES.md</code>.</p>
         <h4>Firmware vs Parc deploy</h4>
-        <p><strong>Parc deploy</strong> (<code>put_program</code> over MQTT) updates the ST program and NV storage only â€” it does <strong>not</strong> flash the Arduino sketch. After pulling firmware changes from git, open Arduino IDE and <strong>Upload</strong> <code>MooreviewOptaMqttSt.ino</code> again. Verify with GET <code>http://&lt;opta-ip&gt;/api/status</code>: <code>firmwareVersion</code> should match <code>mv_version.h</code> (e.g. <strong>2.3.8</strong>).</p>
+        <p><strong>Parc deploy</strong> (<code>put_program</code> over MQTT) updates the ST program and NV storage only â€” it does <strong>not</strong> flash the Arduino sketch. After pulling firmware changes from git, open Arduino IDE and <strong>Upload</strong> <code>PeaklogicOptaMqttSt.ino</code> again. Verify with GET <code>http://&lt;opta-ip&gt;/api/status</code>: <code>firmwareVersion</code> should match <code>mv_version.h</code> (e.g. <strong>2.3.8</strong>).</p>
         <h4>ATECC608 device identity</h4>
-        <p>On boot, Opta firmware reads the on-board <strong>ATECC608B</strong> serial (via <strong>ArduinoECCX08</strong>) and sets <strong>deviceId</strong> to <code>opta_</code> + 18 hex digits (e.g. <code>opta_012355b52d66a109ee</code>). The serial is shown on <strong>/setup</strong> and <code>/api/status</code> but is <strong>not</strong> included in MQTT telemetry. MooreView stores the serial in the Parc registry and on <code>mqtt_parc</code> drivers from first-seen telemetry, bulk-add from registry, or driver config <code>ateccSerial</code>.</p>
+        <p>On boot, Opta firmware reads the on-board <strong>ATECC608B</strong> serial (via <strong>ArduinoECCX08</strong>) and sets <strong>deviceId</strong> to <code>opta_</code> + 18 hex digits (e.g. <code>opta_012355b52d66a109ee</code>). The serial is shown on <strong>/setup</strong> and <code>/api/status</code> but is <strong>not</strong> included in MQTT telemetry. PeakLogic stores the serial in the Parc registry and on <code>mqtt_parc</code> drivers from first-seen telemetry, bulk-add from registry, or driver config <code>ateccSerial</code>.</p>
         <h4>Global site key (P2P globals)</h4>
-        <p>Commissioning: on Opta <strong>/setup</strong>, check <strong>Cloud MQTT (TLS)</strong> and Save — the device connects to <code>mqtt.mooreview.io:8883</code>. Set the Opta <strong>global site key</strong> to this organization’s key so only that Cloud tenant can see the Opta. The same key is used for program tag topics <code>mooreview/v1/g/{key}/{tagName}</code>.</p>
+        <p>Commissioning: on Opta <strong>/setup</strong>, check <strong>Cloud MQTT (TLS)</strong> and Save — the device connects to <code>mqtt.peaklogic.io:8883</code>. Set the Opta <strong>global site key</strong> to this organization’s key so only that Cloud tenant can see the Opta. The same key is used for program tag topics <code>peaklogic/v1/g/{key}/{tagName}</code>.</p>
         <p>Open the Opta setup page (<code>/setup</code>) to confirm <strong>Device ID</strong> and <strong>ATECC serial</strong>. Use <strong>Drivers â†’ Add from Parc registry</strong> to register units without hand-typing ids.</p>
         <h4>Opta web UI (Ethernet)</h4>
         <p>Native HTTP on the Opta (port 80). Top nav links <strong>Setup</strong> and <strong>I/O Map</strong>.</p>
@@ -476,7 +476,7 @@ window.MooreviewHelp = (function () {
           <li>Toggle physical input I1 â€” R1 should follow on the Opta relay/LED; telemetry and Live I/O show I1/R1.</li>
         </ol>
         <h4>MQTT commands (PC â†’ Opta)</h4>
-        <p>Topic: <code>mooreview/v1/{deviceId}/cmd</code>. Responses on <code>â€¦/cmd/response</code>.</p>
+        <p>Topic: <code>peaklogic/v1/{deviceId}/cmd</code>. Responses on <code>â€¦/cmd/response</code>.</p>
         <table class="help-table">
           <tr><th>Command</th><th>Purpose</th></tr>
           <tr><td><code>put_program</code></td><td>Deploy ST bytecode + tags; saves to QSPI NV (<code>/fs/mv_program.bin</code>)</td></tr>
@@ -494,17 +494,17 @@ window.MooreviewHelp = (function () {
           <li>Bytecode stored on QSPI FAT at <code>/fs/mv_program.bin</code> with CRC â€” loaded on boot before MQTT connects.</li>
           <li><strong>Auto-run on power-up:</strong> enable on Opta (<code>set_autorun</code> or <code>/api/program/autorun</code>) and/or <strong>System setup â†’ Auto-run ST on Opta after power-up</strong> (PC sends flag with deploy).</li>
           <li>After NV load + MQTT connect, firmware auto-starts ST ~500 ms later when auto-run is on.</li>
-          <li>MooreView skips <code>put_program</code> when telemetry <code>programNvCrc</code> matches PC bytecode and ST is already running.</li>
+          <li>PeakLogic skips <code>put_program</code> when telemetry <code>programNvCrc</code> matches PC bytecode and ST is already running.</li>
         </ul>
         <h4>Force &amp; I/O</h4>
         <p>Opta uses a PLC-style mux: <strong>logic</strong> fields hold hardware reads; <strong>effective</strong> values reflect forces. PC <strong>Tags â†’ Force</strong> sends <code>set_force</code> over MQTT when Remote is on. Relay outputs R1â€“R4 mirror to on-board relay LEDs (D0â€“D3). Expansion modules <strong>AFX00005 (D1608E)</strong> and <strong>AFX00007 (A0602)</strong> appear on <strong>/io-map</strong> and in telemetry after <strong>Scan expansions</strong>.</p>
         <h4>Time sync (RTC)</h4>
-        <p>MooreView sends <code>sync_time</code> on <strong>Connect</strong> and daily for linked Opta drivers. Firmware uses a <strong>software wall clock</strong> (immediate) and queues HAL RTC when safe â€” <code>put_program</code> does not sync time. Serial <code>[MV â€¦]</code> timestamps show wall clock after sync; before sync, uptime format (<code>00:04:14</code> = 4 min since boot).</p>
+        <p>PeakLogic sends <code>sync_time</code> on <strong>Connect</strong> and daily for linked Opta drivers. Firmware uses a <strong>software wall clock</strong> (immediate) and queues HAL RTC when safe â€” <code>put_program</code> does not sync time. Serial <code>[MV â€¦]</code> timestamps show wall clock after sync; before sync, uptime format (<code>00:04:14</code> = 4 min since boot).</p>
         <h4>Serial debug</h4>
         <p>USB serial <strong>115200</strong>. Always-on milestones use <code>[MV*]</code> (boot, MQTT subscribe, cmd rx) even when verbose debug is off. Look for <code>MQTT subscribed cmd+config</code> after boot.</p>
         <h4>Quick start (PC)</h4>
         <ol>
-          <li>Flash <strong>MooreviewOptaMqttSt</strong> v2.3.41+ via Arduino IDE; set broker on <code>/setup</code>.</li>
+          <li>Flash <strong>PeaklogicOptaMqttSt</strong> v2.3.41+ via Arduino IDE; set broker on <code>/setup</code>.</li>
           <li>Start Mosquitto on the PC (<code>npm run mqtt:start</code>) â€” broker must listen on your <strong>LAN IP</strong>, not only localhost.</li>
           <li><strong>System setup â†’ General</strong> â€” enable <strong>MQTT Parc hub</strong>, set <strong>broker URL</strong>, enable <strong>Remote ST execution</strong> â†’ <strong>Apply all settings</strong>.</li>
           <li><strong>Drivers</strong> â€” template <strong>Arduino Opta â€” MQTT Parc ST runtime</strong> or <strong>Add Opta Parc devices (bulk)</strong>. <strong>deviceId</strong> must match firmware.</li>
@@ -523,7 +523,7 @@ window.MooreviewHelp = (function () {
         <ul>
           <li>Hub starts when enabled (auto-enabled if an <code>mqtt_parc</code> driver exists or Remote is on).</li>
           <li><code>mqtt_parc</code> drivers <strong>auto-link</strong> after hub connect â€” driver card <strong>OK</strong>, Program shows <strong>Linked</strong>.</li>
-          <li>If <code>parc.json</code> has devices but no driver, MooreView may <strong>restore drivers from the Parc registry</strong> on boot.</li>
+          <li>If <code>parc.json</code> has devices but no driver, PeakLogic may <strong>restore drivers from the Parc registry</strong> on boot.</li>
           <li>PC auto-start waits ~8 s before Parc deploy when Remote is on (cmd link settle).</li>
           <li><strong>Linked</strong> â‰  ST running â€” use <strong>Download &amp; Start</strong> for deploy/run on device.</li>
         </ul>
@@ -542,7 +542,7 @@ window.MooreviewHelp = (function () {
           <tr><td>No telemetry</td><td>Broker URL on PC vs Opta <code>/setup</code>; firewall; Mosquitto running on LAN IP</td></tr>
           <tr><td>Telemetry OK, commands timeout</td><td>Reflash firmware <strong>v2.3.41+</strong>; Serial must show <code>MQTT subscribed cmd+config</code>; broker IP match; avoid old 2.3.8 (stack overflow)</td></tr>
           <tr><td>Opta /setup “Test request failed”</td><td>HTTP dropped during TLS test on older builds — reflash <strong>v2.4.4+</strong>; or Save settings and confirm Serial <code>MQTT subscribed cmd+config</code></td></tr>
-          <tr><td>Opta TLS/auth failed :8883</td><td>Reflash <strong>v2.4.6+</strong> (ISRG Root X2); host <code>mqtt.mooreview.io</code>, TLS on, user/pass = Mosquitto credentials</td></tr>
+          <tr><td>Opta TLS/auth failed :8883</td><td>Reflash <strong>v2.4.6+</strong> (ISRG Root X2); host <code>mqtt.peaklogic.io</code>, TLS on, user/pass = Mosquitto credentials</td></tr>
           <tr><td>USB shows IP, Ethernet dead</td><td>TLS test / reconnect wedged Ethernet — <strong>power-cycle</strong>; reflash <strong>v2.4.7+</strong></td></tr>
           <tr><td>Opta “Status unavailable: Failed to fetch”</td><td>HTTP not reachable — power-cycle; ping Opta IP; reflash <strong>v2.4.7+</strong> (TLS reconnect backoff)</td></tr>
           <tr><td>Broker mismatch</td><td>PC <code>mqtt://192.168.x.x:1883</code> and Opta <code>/setup</code> broker IP must be the same host â€” not <code>127.0.0.1</code> on device</td></tr>
@@ -821,7 +821,7 @@ window.MooreviewHelp = (function () {
       id: 'edgepoint-industrial',
       title: 'EdgePoint Industrial (MQTT)',
       html: `
-        <p><strong>EdgePoint Industrial</strong> (Nexus) publishes gateway I/O as <strong>JSON over MQTT</strong>. MooreView uses the standard <strong>mqtt</strong> driver â€” no Modbus map on the gateway link itself.</p>
+        <p><strong>EdgePoint Industrial</strong> (Nexus) publishes gateway I/O as <strong>JSON over MQTT</strong>. PeakLogic uses the standard <strong>mqtt</strong> driver â€” no Modbus map on the gateway link itself.</p>
         <h4>MQTT topics (serial number = Nexus MAC / gateway ID)</h4>
         <table class="help-table">
           <tr><th>Direction</th><th>Topic</th></tr>
@@ -859,7 +859,7 @@ window.MooreviewHelp = (function () {
         <h4>MQTT driver</h4>
         <ul>
           <li><strong>Broker</strong> â€” e.g. <code>mqtt://127.0.0.1:1883</code> or <code>mqtts://broker.example.com</code></li>
-          <li><strong>Client ID</strong> â€” optional (default <code>mooreview</code>)</li>
+          <li><strong>Client ID</strong> â€” optional (default <code>peaklogic</code>)</li>
           <li>Topics from mapped tags are <strong>auto-subscribed</strong> at runtime (plus any <code>subscriptions</code> array in <code>drivers.json</code>)</li>
           <li>Tag <strong>Addr</strong>: MQTT <strong>topic</strong> + payload template</li>
           <li>Outputs <strong>publish</strong> to the tag topic when logic marks them dirty</li>
@@ -1009,7 +1009,7 @@ HTTPS full:    { "url": "https://other.host/status", "payloadTemplate": "bool" }
         <table class="help-table">
           <tr><th>Field</th><th>Purpose</th></tr>
           <tr><td><strong>MongoDB URI</strong></td><td>e.g. <code>mongodb://127.0.0.1:27017</code> â€” or set <code>MONGODB_URI</code> env var</td></tr>
-          <tr><td><strong>Database</strong></td><td>Default <code>mooreview</code> (<code>MONGODB_DB</code>)</td></tr>
+          <tr><td><strong>Database</strong></td><td>Default <code>peaklogic</code> (<code>MONGODB_DB</code>)</td></tr>
           <tr><td><strong>SCADA collection</strong></td><td>Default <code>tag_logs</code> â€” <code>pen_sample</code> / <code>pen_selection</code> (<code>MONGODB_COLLECTION</code>)</td></tr>
           <tr><td><strong>Edge AI collection</strong></td><td>Default <code>edge_inference</code> â€” edge model scores from Parc telemetry (<code>MONGODB_EDGE_COLLECTION</code>)</td></tr>
           <tr><td><strong>Sample interval (ms)</strong></td><td>How often <strong>Hist</strong> tag values are written while runtime runs (default 5000; <code>MONGODB_SAMPLE_MS</code>)</td></tr>
@@ -1018,7 +1018,7 @@ HTTPS full:    { "url": "https://other.host/status", "payloadTemplate": "bool" }
         <h4>Hist tags</h4>
         <p>Plottable tags (BOOL, INT, REAL, PID, AVG, FLOW) can be checked for live buffer and MongoDB logging. The header checkbox selects or clears all plottable tags. This mirrors the <strong>Hist</strong> column in <strong>Tags</strong>; either place updates <code>graphEnabled</code> on the tag.</p>
         <h4>Auto-start runtime</h4>
-        <p><strong>Auto-start runtime on boot</strong> starts driver polling and historian logging when MooreView launches. When unchecked, use <strong>Program â†’ Start</strong> manually. API drivers (NextCentury, etc.) do not connect until the runtime starts or you connect them from the Drivers page.</p>
+        <p><strong>Auto-start runtime on boot</strong> starts driver polling and historian logging when PeakLogic launches. When unchecked, use <strong>Program â†’ Start</strong> manually. API drivers (NextCentury, etc.) do not connect until the runtime starts or you connect them from the Drivers page.</p>
         <h4>PdM assets</h4>
         <p>Map asset ids (e.g. <code>pump-101</code>) to one or more SCADA tag ids for combined PdM trends. Use <strong>New</strong>, pick tags in the multi-select, <strong>Save asset</strong>, or <strong>Delete</strong>. The table lists saved assets; <strong>Edit</strong> loads a row into the form. The same map is available as JSON on <strong>System setup â†’ PdM</strong>.</p>
         <p>Archive maintenance (90-day demo seed, purge range/all) remains under <strong>Project â†’ System setup â†’ Logging</strong> â€” see <strong>Help â†’ MongoDB logging</strong>.</p>
@@ -1063,7 +1063,7 @@ HTTPS full:    { "url": "https://other.host/status", "payloadTemplate": "bool" }
         <table class="help-table">
           <tr><th>Field</th><th>Purpose</th></tr>
           <tr><td><strong>MongoDB URI</strong></td><td>e.g. <code>mongodb://127.0.0.1:27017</code></td></tr>
-          <tr><td><strong>Database</strong></td><td>Default <code>mooreview</code></td></tr>
+          <tr><td><strong>Database</strong></td><td>Default <code>peaklogic</code></td></tr>
           <tr><td><strong>SCADA collection</strong></td><td>Default <code>tag_logs</code> â€” <code>pen_sample</code> / <code>pen_selection</code></td></tr>
           <tr><td><strong>Edge AI collection</strong></td><td>Default <code>edge_inference</code></td></tr>
           <tr><td><strong>Sample interval (ms)</strong></td><td>Default 5000</td></tr>
@@ -1626,14 +1626,14 @@ AvgReset(AVG1);</pre>
         <table class="help-table">
           <tr><th>Error</th><th>Typical cause</th></tr>
           <tr><td>File not found</td><td>Wrong COM number â€” check Device Manager</td></tr>
-          <tr><td>Access denied</td><td>Port in use: second driver, PuTTY, another MooreView, or Test while running</td></tr>
+          <tr><td>Access denied</td><td>Port in use: second driver, PuTTY, another PeakLogic, or Test while running</td></tr>
           <tr><td>No serial activity</td><td>Driver shows Off â€” fix port first; runtime does not poll a closed port</td></tr>
         </table>
         <p><strong>Fix checklist:</strong></p>
         <ol>
           <li>One RTU driver per COM port; remove duplicates in Drivers</li>
           <li>Match COM in Device Manager (unplug/replug USB if needed)</li>
-          <li>Restart MooreView after changing ports</li>
+          <li>Restart PeakLogic after changing ports</li>
           <li>Status â†’ Serial/Modbus must show <strong>OK</strong> before expecting I/O</li>
         </ol>
       `,
@@ -1659,10 +1659,10 @@ AvgReset(AVG1);</pre>
         <table class="help-table">
           <tr><th>Variable</th><th>Default</th><th>Purpose</th></tr>
           <tr><td>PORT</td><td>3090</td><td>HTTP listen port</td></tr>
-          <tr><td>MOOREVIEW_DATA</td><td>./data</td><td>Persistence directory</td></tr>
-          <tr><td>MOOREVIEW_ST</td><td>./st</td><td>Programs directory</td></tr>
+          <tr><td>PEAKLOGIC_DATA</td><td>./data</td><td>Persistence directory</td></tr>
+          <tr><td>PEAKLOGIC_ST</td><td>./st</td><td>Programs directory</td></tr>
           <tr><td>MONGODB_URI</td><td>â€”</td><td>MongoDB connection for historian archive</td></tr>
-          <tr><td>MONGODB_DB</td><td>mooreview</td><td>Database name</td></tr>
+          <tr><td>MONGODB_DB</td><td>peaklogic</td><td>Database name</td></tr>
           <tr><td>MONGODB_COLLECTION</td><td>tag_logs</td><td>SCADA collection for pen_sample / pen_selection</td></tr>
           <tr><td>MONGODB_EDGE_COLLECTION</td><td>edge_inference</td><td>Edge AI inference documents from Parc <code>edgeAi</code> payloads</td></tr>
           <tr><td>MONGODB_SAMPLE_MS</td><td>5000</td><td>Pen sample write interval while runtime runs</td></tr>
@@ -1684,7 +1684,7 @@ AvgReset(AVG1);</pre>
           <tr><td>Opta driver <strong>Not linked</strong>?</td><td>Enable MQTT Parc hub in System setup; check broker LAN IP; <code>deviceId</code> must match firmware. Drivers auto-link on boot when hub is up.</td></tr>
           <tr><td>Hub OK but no ST on Opta?</td><td><strong>Download &amp; Start</strong> with Remote on â€” linking is not deploy/run.</td></tr>
           <tr><td>Opta driver missing after restart?</td><td>Use bulk-add or template again; workspace merge preserves <code>mqtt_parc</code> drivers â€” bulk-add updates workspace.</td></tr>
-          <tr><td>Opta MQTT cmd timeout?</td><td>Reflash <strong>MooreviewOptaMqttSt v2.3.41+</strong>; match broker on PC and Opta <code>/setup</code>; Serial: <code>MQTT subscribed cmd+config</code>. Parc deploy does not update firmware.</td></tr>
+          <tr><td>Opta MQTT cmd timeout?</td><td>Reflash <strong>PeaklogicOptaMqttSt v2.3.41+</strong>; match broker on PC and Opta <code>/setup</code>; Serial: <code>MQTT subscribed cmd+config</code>. Parc deploy does not update firmware.</td></tr>
           <tr><td>Opta broker mismatch?</td><td>Use PC LAN IP (e.g. <code>192.168.1.233</code>) in both System setup and Opta <code>/setup</code> â€” not <code>127.0.0.1</code> on the device.</td></tr>
           <tr><td>HTTPS returns no data?</td><td>Verify base URL, path, bearer token, and payload template (<code>json:field</code>). Use driver <strong>Test</strong> and <strong>Status</strong>.</td></tr>
           <tr><td>Alarm state incomplete?</td><td>INT/REAL: enable <strong>Alm</strong> and set OL â‰¤ IL â‰¤ IH â‰¤ OH. BOOL: set <strong>Condition</strong> (When ON/OFF).</td></tr>

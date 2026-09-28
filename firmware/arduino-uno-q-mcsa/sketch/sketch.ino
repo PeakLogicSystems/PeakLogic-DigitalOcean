@@ -1,5 +1,5 @@
 /**
- * MooreVIEW UNO Q — MCU half of edge motor fault detection.
+ * PeakLogic UNO Q — MCU half of edge motor fault detection.
  *
  * STM32U585 samples AC current on A0–A5 (biased ~1.65 V), detects motor
  * starts (2 pumps × 3 CTs, Opta duplex map), and exposes windows + RMS over

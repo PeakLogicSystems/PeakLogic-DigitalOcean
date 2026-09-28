@@ -2,7 +2,7 @@
 'use strict';
 
 /** Copy bundled boilerplate into each tenant's isolated project library (cloud SaaS). */
-process.env.MOOREVIEW_DEPLOYMENT = process.env.MOOREVIEW_DEPLOYMENT || 'cloud';
+process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'cloud';
 
 const {
   seedAllTenantsBoilerplate,

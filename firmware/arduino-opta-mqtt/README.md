@@ -1,4 +1,4 @@
-# Arduino Opta — MQTT I/O (baseline + mooreVIEW Parc)
+# Arduino Opta — MQTT I/O (baseline + PeakLogic Parc)
 
 Baseline sketch source: `baselinedigankgexpansionwMQTT.ino` (built-in + digital/analog expansion, alarms, relay commands).
 
@@ -7,7 +7,7 @@ Baseline sketch source: `baselinedigankgexpansionwMQTT.ino` (built-in + digital/
 | Mode | Publish topic | Central ingest |
 |------|---------------|----------------|
 | **Legacy (your current sketch)** | `opta/status` | est-pc hub `legacyOpta` mapper → `parc.devices` |
-| **mooreVIEW v1** | `mooreview/v1/{deviceId}/telemetry` | Native Parc ingest |
+| **PeakLogic v1** | `peaklogic/v1/{deviceId}/telemetry` | Native Parc ingest |
 
 Your existing sketch works **without changes** if est-pc has:
 
@@ -32,13 +32,13 @@ POST /api/parc/devices/opta_full_io_01/cmd
 
 Publishes to `opta/set/relay/1` JSON `{ "relay": 1, "state": true }` (matches sketch callback).
 
-## mooreVIEW v1 firmware
+## PeakLogic v1 firmware
 
-See `mooreVIEWOptaMqtt/mooreVIEWOptaMqtt.ino` — same I/O logic, adds:
+See `PeakLogicOptaMqtt/PeakLogicOptaMqtt.ino` — same I/O logic, adds:
 
-- `mooreview/v1/{deviceId}/telemetry` with `tags[]` array
-- `mooreview/v1/{deviceId}/cmd` + `cmd/response` for `set_relay`, `reset_alarms`
-- `mooreview/v1/{deviceId}/online` retained birth/LWT
+- `peaklogic/v1/{deviceId}/telemetry` with `tags[]` array
+- `peaklogic/v1/{deviceId}/cmd` + `cmd/response` for `set_relay`, `reset_alarms`
+- `peaklogic/v1/{deviceId}/online` retained birth/LWT
 - Configurable `REPORT_MS` (default 180000 = 3 min Parc cadence)
 
 ## Broker

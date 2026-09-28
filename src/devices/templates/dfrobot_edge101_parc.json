@@ -92,5 +92,5 @@
       }
     ]
   },
-  "notes": "Flash firmware/dfrobot-edge101-parc. Setup AP MooreVIEW-Edge101 / mooreview → http://192.168.4.1:8080/setup. Ethernet WAN preferred; Wi-Fi STA is fallback. Isolated RS485: SEN0711 slave 1 + SEN0712 slave 2 @ 4800 8N1. Set unique probe addresses (holding 0x07D0) before both share the bus. Wiki: https://wiki.dfrobot.com/dfr0886/"
+  "notes": "Flash firmware/dfrobot-edge101-parc. Setup AP PeakLogic-Edge101 / peaklogic → http://192.168.4.1:8080/setup. Ethernet WAN preferred; Wi-Fi STA is fallback. Isolated RS485: SEN0711 slave 1 + SEN0712 slave 2 @ 4800 8N1. Set unique probe addresses (holding 0x07D0) before both share the bus. Wiki: https://wiki.dfrobot.com/dfr0886/"
 }

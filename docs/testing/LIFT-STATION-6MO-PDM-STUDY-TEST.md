@@ -10,7 +10,7 @@
 | | |
 |---|---|
 | **Document ID** | MV-LS6MO-PDM-1.0 |
-| **Product** | mooreVIEW MVP Suite (est-pc) |
+| **Product** | PeakLogic MVP Suite (est-pc) |
 | **Study run** | `ls-6mo-4way-2026-07-25T12-33-53` |
 | **Generated** | 2026-07-26T08:39:09.941Z |
 
@@ -233,7 +233,7 @@ node --test test/liftStationStudy.test.js test/hostInference.test.js
 | Total proactive WOs = 8 | **PASS** (8) |
 | **Release recommendation** | **PASS** |
 
-## 8. Manual verification in mooreVIEW UI
+## 8. Manual verification in PeakLogic UI
 
 
 After loading study settings:

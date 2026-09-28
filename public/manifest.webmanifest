@@ -1,6 +1,6 @@
 {
-  "name": "MooreView",
-  "short_name": "MooreView",
+  "name": "PeakLogic",
+  "short_name": "PeakLogic",
   "description": "Industrial SCADA studio — HMI, drivers, historian, and MQTT Parc edge runtime.",
   "id": "/",
   "start_url": "/",

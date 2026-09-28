@@ -1,4 +1,4 @@
-# Quick SSH connectivity check for mooreVIEW cloud droplets.
+# Quick SSH connectivity check for PeakLogic cloud droplets.
 param(
   [string]$HostAlias = 'mv-saas',
   [int]$Attempts = 3
@@ -11,7 +11,7 @@ function Get-PublicIp {
   catch { return 'unknown' }
 }
 
-Write-Host '=== MooreVIEW SSH check ===' -ForegroundColor Cyan
+Write-Host '=== PeakLogic SSH check ===' -ForegroundColor Cyan
 Write-Host "Public IP: $(Get-PublicIp)"
 Write-Host ''
 
@@ -46,7 +46,7 @@ if ($ok -eq $Attempts) {
 
 Write-Host "$ok/$Attempts succeeded." -ForegroundColor Yellow
 Write-Host ''
-Write-Host 'If port 22 fails but https://mooreview.io works:' -ForegroundColor Cyan
+Write-Host 'If port 22 fails but https://peaklogic.io works:' -ForegroundColor Cyan
 Write-Host '  1. Use Ethernet (ACE_Employees), not guest Wi-Fi'
 Write-Host '  2. DigitalOcean -> Firewalls -> fw-saas -> allow TCP 22 from your public IP'
 Write-Host '  3. Run: scripts\fix-ssh-routing.ps1'

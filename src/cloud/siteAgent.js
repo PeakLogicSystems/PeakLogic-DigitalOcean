@@ -85,7 +85,7 @@ function updateConfig(patch = {}) {
 }
 
 function cloudWsBase(cloudUrl) {
-  // Bare hostnames (mooreview.io) must use https/wss — defaulting to http yields ws://:80 and never pairs.
+  // Bare hostnames (peaklogic.io) must use https/wss — defaulting to http yields ws://:80 and never pairs.
   const raw = String(cloudUrl || '').trim();
   const withScheme = raw.includes('://') ? raw : `https://${raw}`;
   const u = new URL(withScheme);

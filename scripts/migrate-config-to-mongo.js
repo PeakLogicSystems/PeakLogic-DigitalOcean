@@ -10,7 +10,7 @@
 
  * Usage:
 
- *   MOOREVIEW_CONFIG_URI=mongodb://127.0.0.1:27017 node scripts/migrate-config-to-mongo.js
+ *   PEAKLOGIC_CONFIG_URI=mongodb://127.0.0.1:27017 node scripts/migrate-config-to-mongo.js
 
  */
 
@@ -22,9 +22,9 @@ const path = require('path');
 
 async function main() {
 
-  if (!process.env.MOOREVIEW_CONFIG_URI && !process.env.MONGODB_URI) {
+  if (!process.env.PEAKLOGIC_CONFIG_URI && !process.env.MONGODB_URI) {
 
-    console.error('Set MOOREVIEW_CONFIG_URI or MONGODB_URI');
+    console.error('Set PEAKLOGIC_CONFIG_URI or MONGODB_URI');
 
     process.exit(1);
 

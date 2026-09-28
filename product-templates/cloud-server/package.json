@@ -1,7 +1,7 @@
 {
-  "name": "mooreview-cloud",
+  "name": "peaklogic-cloud",
   "version": "2.3.7",
-  "description": "MooreVIEW Cloud Studio — full Studio + sites/cameras SaaS (port 3100)",
+  "description": "PeakLogic Cloud Studio — full Studio + sites/cameras SaaS (port 3100)",
   "main": "server.js",
   "engines": {
     "node": ">=18"

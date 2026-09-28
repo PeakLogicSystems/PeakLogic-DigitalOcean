@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Verify platform admin login (does not print password).
 set -euo pipefail
-ADMIN_EMAIL="$(grep '^MOOREVIEW_SEED_ADMIN_EMAIL=' /etc/mooreview/saas.env | cut -d= -f2-)"
-PASS="$(cat /home/mooreview/mv-system-admin-password.txt)"
+ADMIN_EMAIL="$(grep '^PEAKLOGIC_SEED_ADMIN_EMAIL=' /etc/peaklogic/saas.env | cut -d= -f2-)"
+PASS="$(cat /home/peaklogic/mv-system-admin-password.txt)"
 export ADMIN_EMAIL="$ADMIN_EMAIL"
 export ADMIN_PASS="$PASS"
 node <<'NODE'

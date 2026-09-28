@@ -1,6 +1,6 @@
 #pragma once
 
-/** Optional TLS trust for mqtt.mooreview.io.
+/** Optional TLS trust for mqtt.peaklogic.io.
  *  Default: mv_mqtt_ca.cpp ships with the current broker cert.
  *  To replace: edit mv_mqtt_ca.cpp PEM lines, or delete mv_mqtt_ca.cpp/.h to skip custom CA.
  */

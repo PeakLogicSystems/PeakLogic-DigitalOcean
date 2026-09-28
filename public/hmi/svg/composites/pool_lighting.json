@@ -3,7 +3,7 @@
   "label": "Pool lighting (6 zones)",
   "group": "Process equipment",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/pool-faceplates/mooreview/pool_lighting.svg",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_lighting.svg",
   "tagRoles": {
     "lightEn": { "pick": "tagId", "tagId": "LIGHT_EN", "types": ["BOOL"] },
     "lightOffline": { "pick": "tagId", "tagId": "LIGHT_OFFLINE", "types": ["BOOL"] },
@@ -51,7 +51,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_lighting.svg"
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_lighting.svg"
     }
   ],
   "defaultBindings": [

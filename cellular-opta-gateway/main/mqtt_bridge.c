@@ -1,5 +1,5 @@
 /*
- * MQTT bridge — local Opta broker <-> cloud MooreVIEW Mosquitto.
+ * MQTT bridge — local Opta broker <-> cloud PeakLogic Mosquitto.
  *
  * SPDX-License-Identifier: Apache-2.0
  */

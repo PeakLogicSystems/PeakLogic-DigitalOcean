@@ -87,7 +87,7 @@ async function pairAppliance(input) {
     gatewayDevice = created.device;
   }
 
-  const brokerUrl = process.env.MOOREVIEW_MQTT_BROKER
+  const brokerUrl = process.env.PEAKLOGIC_MQTT_BROKER
     || process.env.MQTT_BROKER_URL
     || 'mqtt://127.0.0.1:1883';
 
@@ -102,7 +102,7 @@ async function pairAppliance(input) {
     gatewayId: applianceId,
     gatewayDeviceId: gatewayDevice.id,
     brokerUrl,
-    topicPrefix: 'mooreview/v1',
+    topicPrefix: 'peaklogic/v1',
     clientId: `mv-appliance-${applianceId.slice(0, 8)}`,
     relayParc: true,
     relayAlarms: true,

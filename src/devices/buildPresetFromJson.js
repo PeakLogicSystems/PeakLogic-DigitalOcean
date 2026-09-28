@@ -233,7 +233,7 @@ function buildPresetFromJson(spec) {
           type: 'mqtt',
           enabled: d.enabled !== false,
           brokerUrl: opts.brokerUrl || opts.broker || d.brokerUrl || d.broker || defs.brokerUrl || 'mqtt://127.0.0.1:1883',
-          clientId: opts.clientId || d.clientId || defs.clientId || 'mooreview',
+          clientId: opts.clientId || d.clientId || defs.clientId || 'peaklogic',
           username: opts.username || d.username || defs.username,
           password: opts.password || d.password || defs.password,
           subscribeQos: opts.subscribeQos ?? d.subscribeQos ?? defs.subscribeQos ?? 0,

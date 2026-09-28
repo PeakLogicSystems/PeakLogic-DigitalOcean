@@ -2,7 +2,7 @@
 
 /**
  * Generate public/mv.ico (multi-size) and public/branding/mv-icon-256.png
- * from MooreVIEW Purple Standard colors. No npm dependencies.
+ * from PeakLogic Purple Standard colors. No npm dependencies.
  *
  * Usage: node scripts/generate-mv-icon.js
  */

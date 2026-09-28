@@ -1,5 +1,5 @@
 /*
- * MooreVIEW Opta — ST runtime + MQTT Parc (mooreview/v1)
+ * PeakLogic Opta — ST runtime + MQTT Parc (peaklogic/v1)
  * ST modules shared with arduino-opta-st; programs deployed via MQTT cmd.
  */
 #include <Arduino.h>
@@ -49,7 +49,7 @@ static MvMqttConfig g_mqttCfg = {
   MV_MQTT_SKETCH_BROKER_DEFAULT,
   MV_MQTT_SKETCH_PORT_DEFAULT,
   "opta_st_01",
-  "mooreview/v1",
+  "peaklogic/v1",
   180000,
 };
 
@@ -168,7 +168,7 @@ static void registerApiRoutes() {
 void setup() {
   Serial.begin(115200);
   delay(1500);
-  MV_LOG("MooreVIEW Opta ST+MQTT boot (Serial 115200)");
+  MV_LOG("PeakLogic Opta ST+MQTT boot (Serial 115200)");
   mvRtcWarnIfUnset();
   MV_LOG_CMD2("firmware ", MV_FIRMWARE_VERSION);
 

@@ -1,5 +1,5 @@
 /*
- * Mobile viewport + orientation handling for MooreVIEW cloud/studio.
+ * Mobile viewport + orientation handling for PeakLogic cloud/studio.
  * Uses the shorter screen dimension so phones match in portrait AND landscape.
  */
 (function () {
@@ -127,7 +127,7 @@
     window.visualViewport.addEventListener('scroll', syncChromeTop);
   }
 
-  window.MooreviewMobileViewport = {
+  window.PeaklogicMobileViewport = {
     run,
     syncChromeTop,
     isMobileLayout,

@@ -38,7 +38,7 @@ extern uint32_t g_lastCycleUs;
 
 void mvFillDeviceStatus(JsonObject root) {
   root["ok"] = true;
-  root["device"] = "mooreview-opta-mqtt-st";
+  root["device"] = "peaklogic-opta-mqtt-st";
   root["deviceId"] = mvIdentityDeviceId();
   root["ateccStatus"] = mvIdentityAteccStatus();
   root["running"] = g_runtimeRunning;

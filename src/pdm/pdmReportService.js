@@ -59,7 +59,7 @@ async function storeAssetReportPdf(assetId, opts = {}) {
   const { buf, fromMs, toMs } = await buildAssetReportPdf(assetId, opts);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const safeAsset = String(assetId).replace(/[^\w.-]+/g, '_').slice(0, 40);
-  const filename = `MooreVIEW_PdM_${safeAsset}_${stamp}.pdf`;
+  const filename = `PeakLogic_PdM_${safeAsset}_${stamp}.pdf`;
   let gridfsFile = null;
   if (opts.storeInMongo !== false) {
     gridfsFile = await mirrorUpload(gridfs.BUCKETS.report_pdfs, buf, {

@@ -1,6 +1,6 @@
 # Developer mode & companion workflow
 
-MooreVIEW MVP Suite is the **appliance / plant PC** runtime. **Cursor + GitHub** are the companion for product development and version control.
+PeakLogic MVP Suite is the **appliance / plant PC** runtime. **Cursor + GitHub** are the companion for product development and version control.
 
 ## Split
 

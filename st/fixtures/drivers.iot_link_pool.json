@@ -24,7 +24,7 @@
     "pollIntervalMs": 300000,
     "timeoutMs": 2000,
     "frameDelayMs": 30,
-    "comment": "Legacy single-device heat pump — use pentair_bus when MOOREVIEW_POOL_PENTAIR_BUS=true"
+    "comment": "Legacy single-device heat pump — use pentair_bus when PEAKLOGIC_POOL_PENTAIR_BUS=true"
   },
   {
     "id": "pentair_bus",
@@ -56,7 +56,7 @@
     "timeoutMs": 2000,
     "frameDelayMs": 30,
     "busGapMs": 120,
-    "comment": "Shared Jandy AquaLink RS-485 — ePump, AquaPure, JXi/LX heaters (MOOREVIEW_POOL_JANDY_BUS=true)"
+    "comment": "Shared Jandy AquaLink RS-485 — ePump, AquaPure, JXi/LX heaters (PEAKLOGIC_POOL_JANDY_BUS=true)"
   },
   {
     "id": "hayward_bus",
@@ -73,7 +73,7 @@
     "frameDelayMs": 30,
     "keepaliveMs": 1000,
     "maxRpm": 3450,
-    "comment": "Hayward low-speed bus — VS pumps (MOOREVIEW_POOL_HAYWARD_BUS=true)"
+    "comment": "Hayward low-speed bus — VS pumps (PEAKLOGIC_POOL_HAYWARD_BUS=true)"
   },
   {
     "id": "opta_mqtt_st",

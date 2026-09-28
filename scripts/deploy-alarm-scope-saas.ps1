@@ -4,15 +4,15 @@ param(
   [string]$ProxyJumpHost = '',
   [string]$SshKey = '',
   [string]$SshConfig = '',
-  [string]$RemoteInstall = '/home/mooreview',
-  [string]$ServiceName = 'mooreview-saas',
+  [string]$RemoteInstall = '/home/peaklogic',
+  [string]$ServiceName = 'peaklogic-saas',
   [switch]$DryRun
 )
 
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path $PSScriptRoot -Parent
 if (-not $SshKey) {
-  $SshKey = Join-Path $Root '.ssh\id_ed25519_mooreview'
+  $SshKey = Join-Path $Root '.ssh\id_ed25519_peaklogic'
 }
 if (-not $SshConfig) {
   $SshConfig = Join-Path $Root '.ssh\config'
@@ -72,7 +72,7 @@ foreach ($rel in $files) {
 
 $remoteScript = @"
 set -euo pipefail
-chown -R mooreview:mooreview '$RemoteInstall/src' '$RemoteInstall/public' '$RemoteInstall/views' '$RemoteInstall/docs/ALARM_NOTIFICATIONS.md'
+chown -R peaklogic:peaklogic '$RemoteInstall/src' '$RemoteInstall/public' '$RemoteInstall/views' '$RemoteInstall/docs/ALARM_NOTIFICATIONS.md'
 systemctl restart $ServiceName
 sleep 2
 systemctl is-active $ServiceName
@@ -85,8 +85,8 @@ if ($DryRun) {
   exit 0
 }
 
-Write-Host 'Restarting mooreview-saas...' -ForegroundColor Green
+Write-Host 'Restarting peaklogic-saas...' -ForegroundColor Green
 $remoteScript = ($remoteScript -replace "`r", '')
 $remoteScript | & ssh @sshArgs $DropletHost 'bash -s'
 if ($LASTEXITCODE -ne 0) { throw 'Remote restart failed' }
-Write-Host 'Alarm-scope deploy complete. Hard-refresh https://mooreview.io/people' -ForegroundColor Green
+Write-Host 'Alarm-scope deploy complete. Hard-refresh https://peaklogic.io/people' -ForegroundColor Green

@@ -14,7 +14,7 @@ extern uint32_t g_cycles;
 
 static const char MV_IO_MAP_HTML[] = R"HTML(<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MooreVIEW Opta I/O Map</title>
+<title>PeakLogic Opta I/O Map</title>
 <style>
 body{font-family:system-ui,sans-serif;margin:1rem;background:#f1f5f9;color:#0f172a}
 h1{font-size:1.25rem}h2{font-size:1rem;margin-top:1.25rem}
@@ -38,7 +38,7 @@ h1{font-size:1.25rem}h2{font-size:1rem;margin-top:1.25rem}
 .err-box{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:.5rem .65rem;border-radius:6px;font-size:.85rem;margin:.5rem 0}
 </style></head><body>
 )HTML" MV_WEB_NAV_IO_MAP_ACTIVE R"HTML(
-<h1>MooreVIEW Opta I/O Map</h1>
+<h1>PeakLogic Opta I/O Map</h1>
 <p class="muted">Physical digital and analog I/O (base Opta + expansion modules).</p>
 <div class="live-row">
 <label><input type="checkbox" id="ioLiveUpdate"> Enable I/O update</label>

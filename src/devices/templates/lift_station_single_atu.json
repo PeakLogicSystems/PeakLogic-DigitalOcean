@@ -1,7 +1,7 @@
 {
   "id": "lift_station_single_atu",
   "label": "Lift station — single ATU",
-  "vendor": "MooreVIEW",
+  "vendor": "PeakLogic",
   "model": "Single ATU (duplex + TPO schedule)",
   "transport": "mqtt_parc",
   "stationType": "single_atu",

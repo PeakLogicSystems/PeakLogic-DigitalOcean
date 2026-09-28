@@ -1,8 +1,8 @@
-# DFRobot Edge101 — MooreVIEW Parc
+# DFRobot Edge101 — PeakLogic Parc
 
 Arduino firmware for the **DFRobot Edge101** (SKU **DFR0886**): industrial ESP32 with isolated RS-485, isolated CAN, 10/100 Ethernet, and optional mini-PCIe 4G.
 
-This tree is the MooreVIEW **MQTT Parc** field controller. The board polls DFRobot water probes on the isolated RS-485 port and publishes tags to the cloud broker. It is **not** an on-device ST/MVBC PLC (use `cellular-parc-st` / Opta for that).
+This tree is the PeakLogic **MQTT Parc** field controller. The board polls DFRobot water probes on the isolated RS-485 port and publishes tags to the cloud broker. It is **not** an on-device ST/MVBC PLC (use `cellular-parc-st` / Opta for that).
 
 Wiki: https://wiki.dfrobot.com/dfr0886/
 
@@ -11,7 +11,7 @@ Wiki: https://wiki.dfrobot.com/dfr0886/
 | Job | How |
 |-----|-----|
 | WAN | **Ethernet** (IP101GRI RMII) first; 2.4 GHz Wi-Fi STA as fallback |
-| Commission | Setup AP `MooreVIEW-Edge101` / `mooreview` → `http://192.168.4.1:8080/setup` |
+| Commission | Setup AP `PeakLogic-Edge101` / `peaklogic` → `http://192.168.4.1:8080/setup` |
 | Chemistry | Isolated RS-485, **4800 8N1**, SEN0711 slave **1** + SEN0712 slave **2** |
 | Cloud | MQTT Parc (`platform`: `dfrobot-edge101`, protocol **2**) |
 
@@ -51,16 +51,16 @@ Do not reuse GPIO0 or GPIO2 — they belong to the Ethernet PHY.
 2. Optional DFRobot package URL: `https://downloadcd.dfrobot.com.cn/DFRobot_Edge101/package_Edge101_index.json` → board **Edge101 IOT Controller**
 3. Or board **ESP32 Dev Module** (pins are in `mv_board.h`)
 4. Libraries: **ArduinoJson** 7.x, **PubSubClient**
-5. Open `MooreviewEdge101Parc/MooreviewEdge101Parc.ino` and upload (USB-C / CH9102F)
+5. Open `PeaklogicEdge101Parc/PeaklogicEdge101Parc.ino` and upload (USB-C / CH9102F)
 
 ## Commission
 
-1. Join AP **`MooreVIEW-Edge101`** / `mooreview`
+1. Join AP **`PeakLogic-Edge101`** / `peaklogic`
 2. Open `http://192.168.4.1:8080/setup`
 3. Set a unique `deviceId` (default `edge101_01`)
 4. Plug Ethernet **or** enter 2.4 GHz Wi-Fi
 5. Confirm WAN IP and `http://192.168.4.1:8080/api/status` (also on the Ethernet/STA IP after join)
-6. In MooreVIEW: **Drivers → Device template → DFRobot Edge101 — MQTT Parc**
+6. In PeakLogic: **Drivers → Device template → DFRobot Edge101 — MQTT Parc**
 
 ## vs other DFRobot paths
 

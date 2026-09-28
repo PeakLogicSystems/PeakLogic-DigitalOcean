@@ -10,9 +10,9 @@
   "defaultProgram": "logic/hvac_opta_parc.st",
   "commissioning": {
     "doc": "docs/OPTA_PARC_CLOUD.md",
-    "firmware": "firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt v2.3.63+",
+    "firmware": "firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt v2.3.63+",
     "wifiSetup": {
-      "apSsid": "MooreVIEW-Opta",
+      "apSsid": "PeakLogic-Opta",
       "apPassMinLen": 8,
       "apUrl": "http://192.168.4.1:8080/setup",
       "setupPages": [
@@ -21,13 +21,13 @@
         "/api/status"
       ],
       "enableApField": "wifiApEnable",
-      "note": "Connect phone to MooreVIEW-Opta AP → open /setup for broker, device ID, expansions, WiFi AP password"
+      "note": "Connect phone to PeakLogic-Opta AP → open /setup for broker, device ID, expansions, WiFi AP password"
     },
     "mqttParc": {
-      "topicPattern": "mooreview/v1/{deviceId}/telemetry",
-      "cmdPattern": "mooreview/v1/{deviceId}/cmd",
+      "topicPattern": "peaklogic/v1/{deviceId}/telemetry",
+      "cmdPattern": "peaklogic/v1/{deviceId}/cmd",
       "globalSiteKey": 1,
-      "testTopic": "mooreview/v1/{deviceId}/setup-test"
+      "testTopic": "peaklogic/v1/{deviceId}/setup-test"
     },
     "configs": [
       {
@@ -76,7 +76,7 @@
       }
     ],
     "steps": [
-      "Flash MooreviewOptaMqttSt; enable WiFi AP on /setup",
+      "Flash PeaklogicOptaMqttSt; enable WiFi AP on /setup",
       "Set device ID, broker, MQTT user/pass (≤47 chars), global site key",
       "Scan expansions on /setup when config C or D (D1608E slot 1)",
       "Set HVAC_CFG tag (0–3) to match installed hardware",

@@ -43,7 +43,7 @@ function renderPortalFrameHtml(session) {
   </style>
 </head>
 <body>
-  <p class="nc-portal-bar">Signed in as <strong>${email}</strong> via MooreVIEW API.
+  <p class="nc-portal-bar">Signed in as <strong>${email}</strong> via PeakLogic API.
     <a href="${portalUrlAttr}" target="_blank" rel="noopener noreferrer">Open in new tab</a>
     · <a href="${loginUrlAttr}" target="_blank" rel="noopener noreferrer">Portal login</a>
     <a href="/" class="nc-portal-close" title="Return to dashboard">Close</a>
@@ -79,7 +79,7 @@ function createNextcenturyPortalRoutes() {
     const session = getPortalSession(req.params.sessionId);
     if (!session) {
       res.status(404).type('html').send(
-        '<!DOCTYPE html><html><body><p>Portal session expired or invalid. Return to MooreVIEW Drivers and open the portal again.</p></body></html>',
+        '<!DOCTYPE html><html><body><p>Portal session expired or invalid. Return to PeakLogic Drivers and open the portal again.</p></body></html>',
       );
       return;
     }
@@ -103,7 +103,7 @@ function createNextcenturyPortalRoutes() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NextCentury portal — MooreVIEW</title>
+  <title>NextCentury portal — PeakLogic</title>
   <style>html,body{margin:0;height:100%}iframe{display:block;width:100%;height:100%;border:0}</style>
 </head>
 <body>

@@ -8,28 +8,28 @@
 |-----------|------|------|
 | MV-ST-OEM runtime | `server.js` + `src/` | Program, tags, drivers, I/O map web UI + `/api` |
 | C++ SDK | `sdk/` | OEM daemons: tags, program, runtime control over HTTP |
-| OpenWrt package stub | `sdk/openwrt/libmooreview-sdk/` | Feed recipe for `libmooreview-sdk` |
+| OpenWrt package stub | `sdk/openwrt/libpeaklogic-sdk/` | Feed recipe for `libpeaklogic-sdk` |
 | HAL plugins (Pi bench) | `hal/plugins/` | SM-I-001 plugin for Pi bring-up; OpenWrt uses Modbus/serial drivers |
 
 ## Runtime on the router
 
-Install Node.js on OpenWrt (`CONFIG_PACKAGE_node=y`), copy the MV-ST-OEM tree to `/opt/mooreview-st-oem`, then:
+Install Node.js on OpenWrt (`CONFIG_PACKAGE_node=y`), copy the MV-ST-OEM tree to `/opt/peaklogic-st-oem`, then:
 
 ```bash
-cd /opt/mooreview-st-oem
+cd /opt/peaklogic-st-oem
 npm install --production
-/etc/init.d/mooreview-st-oem enable
-/etc/init.d/mooreview-st-oem start
+/etc/init.d/peaklogic-st-oem enable
+/etc/init.d/peaklogic-st-oem start
 ```
 
-Use `deploy/mooreview-st-oem.service` as a template for `/etc/init.d/mooreview-st-oem` (adapt paths for OpenWrt procd).
+Use `deploy/peaklogic-st-oem.service` as a template for `/etc/init.d/peaklogic-st-oem` (adapt paths for OpenWrt procd).
 
 Environment:
 
 | Variable | Value |
 |----------|--------|
-| `MOOREVIEW_PRODUCT` | `st-oem` |
-| `MOOREVIEW_DATA` | `/etc/mooreview` (recommended on router) |
+| `PEAKLOGIC_PRODUCT` | `st-oem` |
+| `PEAKLOGIC_DATA` | `/etc/peaklogic` (recommended on router) |
 | `PORT` | `3090` |
 
 Web UI: `http://<router-ip>:3090` — API base: `http://127.0.0.1:3090/api`
@@ -44,7 +44,7 @@ export STAGING_DIR=/path/to/openwrt/staging_dir/toolchain-mipsel_24kc_gcc-12.3.0
 cmake -S sdk -B build-mips \
   -DCMAKE_TOOLCHAIN_FILE=sdk/cmake/toolchain-openwrt.cmake \
   -DCMAKE_PREFIX_PATH=$STAGING_DIR/usr \
-  -DMOOREVIEW_SDK_BUILD_SHARED=OFF
+  -DPEAKLOGIC_SDK_BUILD_SHARED=OFF
 
 cmake --build build-mips
 ```
@@ -53,11 +53,11 @@ Static linking is recommended on routers. Copy the resulting binary to the devic
 
 ### OpenWrt feed package
 
-Copy `sdk/openwrt/libmooreview-sdk` into your feed as `package/libmooreview-sdk`, then:
+Copy `sdk/openwrt/libpeaklogic-sdk` into your feed as `package/libpeaklogic-sdk`, then:
 
 ```bash
-make package/libmooreview-sdk/compile V=s
-opkg install libmooreview-sdk
+make package/libpeaklogic-sdk/compile V=s
+opkg install libpeaklogic-sdk
 ```
 
 ## SDK usage on device
@@ -70,7 +70,7 @@ export MV_PORT=3090
 mv_poll_tags
 ```
 
-C++ API: `mooreview::Client` — see `sdk/README.md` for `get_tags()`, `put_program()`, `runtime_start()`, etc.
+C++ API: `peaklogic::Client` — see `sdk/README.md` for `get_tags()`, `put_program()`, `runtime_start()`, etc.
 
 ## Raspberry Pi (development / HAL bench)
 

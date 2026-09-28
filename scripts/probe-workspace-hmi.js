@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { unpackArchive } = require('../src/project/projectArchive');
 
-const DATA = process.env.MOOREVIEW_DATA || '/home/mooreview/data';
+const DATA = process.env.PEAKLOGIC_DATA || '/home/peaklogic/data';
 const zipPath = path.join(DATA, 'workspace.est.zip');
 
 function screensFromSettings(file) {

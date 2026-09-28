@@ -1,6 +1,6 @@
-# Opta Parc — direct connect to MooreVIEW Cloud
+# Opta Parc — direct connect to PeakLogic Cloud
 
-Commissioning guide for **Arduino Opta** (`MooreviewOptaMqttSt`) publishing MQTT Parc telemetry directly to a hosted MooreVIEW cloud droplet.
+Commissioning guide for **Arduino Opta** (`PeaklogicOptaMqttSt`) publishing MQTT Parc telemetry directly to a hosted PeakLogic cloud droplet.
 
 For LAN/appliance hub setup see [MQTT_PARC.md](./MQTT_PARC.md). For broker ports and TLS see [deploy/cloud/MQTT.md](../deploy/cloud/MQTT.md). For Cloud Studio login and tenants see [CLOUD_USER_GUIDE.md](./CLOUD_USER_GUIDE.md).
 
@@ -13,19 +13,19 @@ In-app: press **F1** → **MQTT Parc hub & Opta**.
 **Direct to cloud** (Opta has outbound internet):
 
 ```text
-Arduino Opta (MooreviewOptaMqttSt)
+Arduino Opta (PeaklogicOptaMqttSt)
         │  MQTT :1883  (plain — Opta has no TLS yet)
-        │  mooreview/v1/{deviceId}/telemetry
-        │  mooreview/v1/{deviceId}/cmd
+        │  peaklogic/v1/{deviceId}/telemetry
+        │  peaklogic/v1/{deviceId}/cmd
         ▼
 Cloud droplet Mosquitto (MOSQUITTO_USER / MOSQUITTO_PASS)
         ▼
-MooreVIEW Cloud Studio — MQTT Parc hub → registry → mqtt_parc driver → tags · HMI · PdM
+PeakLogic Cloud Studio — MQTT Parc hub → registry → mqtt_parc driver → tags · HMI · PdM
 ```
 
 **Via cellular gateway** (typical field site): Opta → `192.168.1.1:1883` (LilyGO gateway LAN broker) → cellular → cloud Mosquitto. Same topics once traffic reaches the droplet. See [training/reference/hardware/cellular-opta-gateway.md](./training/reference/hardware/cellular-opta-gateway.md).
 
-**Via site appliance relay** (alternative): Opta stays on LAN broker; appliance uplinks with tenant-scoped topics `mooreview/v1/{tenantId}/{deviceId}/telemetry`. Configure **System setup → Cloud remote** on the appliance, not on the Opta.
+**Via site appliance relay** (alternative): Opta stays on LAN broker; appliance uplinks with tenant-scoped topics `peaklogic/v1/{tenantId}/{deviceId}/telemetry`. Configure **System setup → Cloud remote** on the appliance, not on the Opta.
 
 ---
 
@@ -33,7 +33,7 @@ MooreVIEW Cloud Studio — MQTT Parc hub → registry → mqtt_parc driver → t
 
 | Item | Requirement |
 |------|-------------|
-| Firmware | `firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt` **v2.3.63+** (MQTT auth on `/setup`); **v2.3.41+** for reliable cmd/deploy |
+| Firmware | `firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt` **v2.3.63+** (MQTT auth on `/setup`); **v2.3.41+** for reliable cmd/deploy |
 | Arduino IDE | Board **Arduino Opta** (`mbed_opta` in Board Manager) |
 | Libraries | ArduinoJson 7.x, PubSubClient, Arduino_Opta_Blueprint |
 | Cloud | Mosquitto listening on **1883**; firewall allows inbound TCP 1883 |
@@ -42,7 +42,7 @@ MooreVIEW Cloud Studio — MQTT Parc hub → registry → mqtt_parc driver → t
 
 Flash steps: [firmware/arduino-opta-mqtt-st/README.md](../firmware/arduino-opta-mqtt-st/README.md).
 
-**Canonical firmware tree:** build from **`est-pc`**. Product forks (e.g. `mooreview-cloud`) must stay in sync with `est-pc` or compile errors and missing features will occur.
+**Canonical firmware tree:** build from **`est-pc`**. Product forks (e.g. `peaklogic-cloud`) must stay in sync with `est-pc` or compile errors and missing features will occur.
 
 ---
 
@@ -51,12 +51,12 @@ Flash steps: [firmware/arduino-opta-mqtt-st/README.md](../firmware/arduino-opta-
 On the droplet:
 
 ```bash
-grep MOSQUITTO /etc/mooreview/env
+grep MOSQUITTO /etc/peaklogic/env
 ```
 
 | Variable | Typical value |
 |----------|----------------|
-| `MOSQUITTO_USER` | `mooreview` |
+| `MOSQUITTO_USER` | `peaklogic` |
 | `MOSQUITTO_PASS` | Strong secret — **max 47 chars** for Opta |
 | `MOSQUITTO_ALLOW_ANONYMOUS` | `false` (production) |
 
@@ -64,7 +64,7 @@ Open firewall and verify:
 
 ```bash
 sudo ufw allow 1883/tcp
-mosquitto_pub -h 127.0.0.1 -p 1883 -u mooreview -P "$MOSQUITTO_PASS" -t 'test/ping' -m ok
+mosquitto_pub -h 127.0.0.1 -p 1883 -u peaklogic -P "$MOSQUITTO_PASS" -t 'test/ping' -m ok
 ```
 
 Rotate credentials: edit env, re-run `deploy/cloud/debian/install.sh`.
@@ -75,16 +75,16 @@ Putnam tenant example env: [deploy/cloud/.env.putnam.example](../deploy/cloud/.e
 
 ## 2. Opta field config
 
-Open **`http://<opta-ip>/setup`** (Ethernet or WiFi AP `MooreVIEW-Opta` → `http://192.168.4.1:8080/setup`).
+Open **`http://<opta-ip>/setup`** (Ethernet or WiFi AP `PeakLogic-Opta` → `http://192.168.4.1:8080/setup`).
 
 ### MQTT Parc broker
 
 | Field | Direct to cloud |
 |-------|-----------------|
-| Broker host | TLS on → `mqtt.mooreview.io`. TLS off → local appliance IP (`192.168.1.233`) |
+| Broker host | TLS on → `mqtt.peaklogic.io`. TLS off → local appliance IP (`192.168.1.233`) |
 | Port | **8883** cloud TLS / **1883** local appliance (no TLS) |
 | TLS | `/setup` **Cloud MQTT** checkbox |
-| Username | Cloud: `MOSQUITTO_USER` (`mooreview`). Local: unused |
+| Username | Cloud: `MOSQUITTO_USER` (`peaklogic`). Local: unused |
 | Password | Cloud: `MOSQUITTO_PASS` (≤ 47 chars). Local: unused |
 
 ### Global site key
@@ -93,7 +93,7 @@ Default `1` (`0x0001`). Must match Cloud Studio **System setup → MQTT Parc →
 
 ### Actions
 
-1. **Test MQTT connection** — connects and publishes `mooreview/v1/{deviceId}/setup-test`
+1. **Test MQTT connection** — connects and publishes `peaklogic/v1/{deviceId}/setup-test`
 2. **Save settings**
 3. **Reboot device**
 
@@ -140,7 +140,7 @@ Template **`arduino_opta_parc_ezmeter`** — MQTT Parc lift I/O plus **EZ Meter 
 
 | Step | Action |
 |------|--------|
-| Flash | `MooreviewOptaMqttSt` with compile flags **`-DMV_FIELDBUS=1 -DMV_EZMETER=1`** (Arduino IDE → Board → compile flags) |
+| Flash | `PeaklogicOptaMqttSt` with compile flags **`-DMV_FIELDBUS=1 -DMV_EZMETER=1`** (Arduino IDE → Board → compile flags) |
 | Wire | EZ Meter L1/L2/L3 + neutral; RS485 A/B to Opta terminal |
 | Cloud | Apply template **Arduino Opta — MQTT Parc + EZ Meter PQ (RS485)** |
 | Program | Deploy **`logic/38_duplex_lift_station_ezmeter.st`** (duplex) or **`logic/39_triplex_lift_station_ezmeter.st`** (triplex) |
@@ -162,8 +162,8 @@ Firmware polls `DDS_*` every 30 s and publishes via MQTT Parc. **THD** tags (`ME
 Listen on droplet (optional):
 
 ```bash
-mosquitto_sub -h 127.0.0.1 -p 1883 -u mooreview -P "$MOSQUITTO_PASS" \
-  -t 'mooreview/v1/+/telemetry' -v
+mosquitto_sub -h 127.0.0.1 -p 1883 -u peaklogic -P "$MOSQUITTO_PASS" \
+  -t 'peaklogic/v1/+/telemetry' -v
 ```
 
 ---
@@ -191,13 +191,13 @@ See [nexcomm/putnam-county-integration.md](./nexcomm/putnam-county-integration.m
 | **`MQTT password too long`** | Password > 47 chars | Shorten `MOSQUITTO_PASS` on server; re-run install |
 | `MQTT connect refused (auth)` | User/pass mismatch | Match Opta `/setup` to droplet env exactly |
 | No telemetry | Firewall / routing | Open **1883**; confirm Opta has internet |
-| Broker `127.0.0.1` on Opta | Invalid on device | Use `mooreview.io`, droplet IP, or gateway `192.168.1.1` |
+| Broker `127.0.0.1` on Opta | Invalid on device | Use `peaklogic.io`, droplet IP, or gateway `192.168.1.1` |
 | Used port 8883 on Opta | TLS off or old firmware | Check **Use TLS (port 8883)** on `/setup` and reflash this tree |
 | Registry online, no driver | Driver not added | Bulk-add from registry with position ID |
 | Telemetry OK, deploy timeout | Old firmware | Reflash **v2.3.41+**; Serial: `MQTT subscribed cmd+config` |
 | Driver deviceId mismatch | Legacy `opta_*` vs new `mv_*` | Update driver deviceId to match firmware `/api/status` |
 
-MooreVIEW driver hints (Connect / Download & Start failures) use the same broker and auth rules — see `src/parc/cmdFailureHint.js`.
+PeakLogic driver hints (Connect / Download & Start failures) use the same broker and auth rules — see `src/parc/cmdFailureHint.js`.
 
 ---
 
@@ -205,11 +205,11 @@ MooreVIEW driver hints (Connect / Download & Start failures) use the same broker
 
 | Topic | Direction |
 |-------|-----------|
-| `mooreview/v1/{deviceId}/telemetry` | Opta → cloud |
-| `mooreview/v1/{deviceId}/online` | Opta → cloud (retained) |
-| `mooreview/v1/{deviceId}/cmd` | Cloud → Opta |
-| `mooreview/v1/{deviceId}/cmd/response` | Opta → cloud |
-| `mooreview/v1/g/{siteKey}/{tag}` | Global P2P tags (optional) |
+| `peaklogic/v1/{deviceId}/telemetry` | Opta → cloud |
+| `peaklogic/v1/{deviceId}/online` | Opta → cloud (retained) |
+| `peaklogic/v1/{deviceId}/cmd` | Cloud → Opta |
+| `peaklogic/v1/{deviceId}/cmd/response` | Opta → cloud |
+| `peaklogic/v1/g/{siteKey}/{tag}` | Global P2P tags (optional) |
 
 ---
 

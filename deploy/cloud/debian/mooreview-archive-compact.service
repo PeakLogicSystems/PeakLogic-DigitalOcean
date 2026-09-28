@@ -1,16 +1,16 @@
 [Unit]
-Description=MooreVIEW day-7 Mongo to zstd archive compaction
-Documentation=file:///home/mooreview/docs/ARCHIVE_EXPORT.md
-After=network-online.target mooreview-saas.service
+Description=PeakLogic day-7 Mongo to zstd archive compaction
+Documentation=file:///home/peaklogic/docs/ARCHIVE_EXPORT.md
+After=network-online.target peaklogic-saas.service
 Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=mooreview
-Group=mooreview
-WorkingDirectory=@MOOREVIEW_INSTALL_DIR@
-EnvironmentFile=-/etc/mooreview/saas.env
-EnvironmentFile=/etc/mooreview/archive-compact.env
+User=peaklogic
+Group=peaklogic
+WorkingDirectory=@PEAKLOGIC_INSTALL_DIR@
+EnvironmentFile=-/etc/peaklogic/saas.env
+EnvironmentFile=/etc/peaklogic/archive-compact.env
 ExecStart=/usr/bin/node scripts/run-archive-compact.js
 Nice=10
 

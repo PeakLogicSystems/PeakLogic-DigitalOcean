@@ -11,13 +11,13 @@ describe('projectDiskCatalog', () => {
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-disk-catalog-'));
-    process.env.MOOREVIEW_DATA = tmpDir;
+    process.env.PEAKLOGIC_DATA = tmpDir;
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/project/projectDiskCatalog')];
   });
 
   afterEach(() => {
-    delete process.env.MOOREVIEW_DATA;
+    delete process.env.PEAKLOGIC_DATA;
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
 

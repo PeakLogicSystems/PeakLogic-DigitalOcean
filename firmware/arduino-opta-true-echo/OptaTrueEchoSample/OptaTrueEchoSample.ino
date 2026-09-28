@@ -2,7 +2,7 @@
  * OptaTrueEchoSample — APG True Echo radar (Modbus RTU) on Arduino Opta RS-485
  *
  * Standalone bring-up sketch (no MQTT / ST). Polls process values and prints
- * to Serial (115200). Same register map as MooreVIEW template apg_true_echo_rtu
+ * to Serial (115200). Same register map as PeakLogic template apg_true_echo_rtu
  * and mqtt-st mv_fieldbus (MV_FIELDBUS=1).
  *
  * Wiring: Opta RS-485 A/B/GND ↔ True Echo RS-485 A/B/GND

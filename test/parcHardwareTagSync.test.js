@@ -79,12 +79,12 @@ describe('mqttCentralHub duplex float ladder', () => {
       ...defaultCentralSettings(),
       enabled: true,
       globalSiteKey: 1,
-      topicPrefix: 'mooreview/v1',
+      topicPrefix: 'peaklogic/v1',
     };
     hub.setGlobalMirrorDeps({ tagStore: store });
 
     hub._mirrorGlobalTag(
-      'mooreview/v1/g/0001/LVL_LAG',
+      'peaklogic/v1/g/0001/LVL_LAG',
       encodeGlobalMqttPayload('BOOL', true),
     );
     mirrorDuplexFloatLevels(store);

@@ -1,4 +1,4 @@
-# mooreVIEW MVP Suite — Windows installer
+# PeakLogic MVP Suite — Windows installer
 
 Builds a standard **setup.exe** for the full est-pc appliance (ST, HMI, runtime, Parc, historian-ready).
 
@@ -22,13 +22,13 @@ Or:
 npm run build:installer
 ```
 
-Output: `est-pc\dist\windows-installer\mooreVIEW-MVP-Suite-<version>-setup.exe`
+Output: `est-pc\dist\windows-installer\PeakLogic-MVP-Suite-<version>-setup.exe`
 
 ### Options
 
 | Flag | Purpose |
 |------|---------|
-| `-SkipFork` | Reuse existing `..\mooreview-mvp-suite` folder |
+| `-SkipFork` | Reuse existing `..\peaklogic-mvp-suite` folder |
 | `-SkipNpmInstall` | Smaller staging; user runs `npm install` on first launch |
 | `-InnoSetupCompiler "C:\path\to\ISCC.exe"` | Custom Inno Setup path |
 
@@ -36,12 +36,12 @@ If Inno Setup is not installed, the script still fills `dist\windows-installer\s
 
 ## End-user install
 
-1. Run **mooreVIEW-MVP-Suite-*-setup.exe**
+1. Run **PeakLogic-MVP-Suite-*-setup.exe**
 2. Install **Node.js 18+** if prompted ([nodejs.org](https://nodejs.org/))
-3. Start **mooreVIEW MVP Suite** from the Start Menu (or desktop shortcut)
+3. Start **PeakLogic MVP Suite** from the Start Menu (or desktop shortcut)
 
 - Web UI: **http://127.0.0.1:3090**
-- Data: `%LOCALAPPDATA%\mooreVIEW\data` (writable without admin)
+- Data: `%LOCALAPPDATA%\PeakLogic\data` (writable without admin)
 - Optional: MongoDB for historian, `npm run mqtt:start` for local MQTT
 
 ## USB portable copy
@@ -56,7 +56,7 @@ powershell -File scripts\create-usb-install.ps1 -DriveLetter E
 
 | File | Role |
 |------|------|
-| `deploy/windows/mooreview-setup.iss` | Inno Setup script |
-| `deploy/windows/mooreVIEW.cmd` | Launch (checks Node, opens browser) |
-| `deploy/windows/mooreVIEW-Stop.cmd` | Stop background server |
+| `deploy/windows/peaklogic-setup.iss` | Inno Setup script |
+| `deploy/windows/PeakLogic.cmd` | Launch (checks Node, opens browser) |
+| `deploy/windows/PeakLogic-Stop.cmd` | Stop background server |
 | `scripts/build-windows-installer.ps1` | Stage + compile |

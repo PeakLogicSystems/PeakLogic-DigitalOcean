@@ -42,7 +42,7 @@ const DATA_REGISTERS = [
   { id: 'DDS_VA_C', address: 46, type: 'REAL', wordWidth: 32, signed: true, scale: 0.1, comment: 'HR 40047 — Phase C apparent power (VA)' },
 ];
 
-/** Control / status — HR 41001+ (offset 1010 from data base 40001). Read-only in MooreVIEW. */
+/** Control / status — HR 41001+ (offset 1010 from data base 40001). Read-only in PeakLogic. */
 const CONTROL_REGISTERS = [
   { id: 'DDS_CTL_PROT_LVL', address: 1010, type: 'INT', signed: false, graphEnabled: false, role: 'input', comment: 'HR 41011 — Protection level' },
   { id: 'DDS_CTL_SER_NO', address: 1011, type: 'INT', wordWidth: 32, signed: false, graphEnabled: false, role: 'input', comment: 'HR 41012 — Serial number (MS 3-byte SN + LSB ID)' },

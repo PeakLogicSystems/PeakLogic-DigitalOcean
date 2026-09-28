@@ -36,7 +36,7 @@ describe('cmdFailureHint', () => {
   it('mentions mosquitto auth when hub uses credentials but no telemetry', () => {
     const msg = cmdFailureHint(null, {
       hubBrokerUrl: 'mqtt://127.0.0.1:1883',
-      mqttHubUsername: 'mooreview',
+      mqttHubUsername: 'peaklogic',
     });
     assert.match(msg, /MOSQUITTO_ALLOW_ANONYMOUS=true/);
   });
@@ -48,7 +48,7 @@ describe('cmdFailureHint', () => {
       dev: { meta: { firmwareVersion: '2.3.44' }, stale: false, ageSec: 2 },
       hubBrokerUrl: 'mqtt://192.168.1.233:1883',
     });
-    assert.match(msg, /mooreview\/v1\/opta_test\/cmd/);
+    assert.match(msg, /peaklogic\/v1\/opta_test\/cmd/);
     assert.match(msg, /runtime_status/);
   });
 

@@ -23,8 +23,8 @@ describe('notificationScopeCatalog', () => {
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-scope-cat-'));
-    prevData = process.env.MOOREVIEW_DATA;
-    process.env.MOOREVIEW_DATA = tmpDir;
+    prevData = process.env.PEAKLOGIC_DATA;
+    process.env.PEAKLOGIC_DATA = tmpDir;
     resetModules();
     fs.writeFileSync(path.join(tmpDir, 'settings.json'), JSON.stringify({
       cmmsIntegration: { siteId: 'plant-a' },
@@ -39,7 +39,7 @@ describe('notificationScopeCatalog', () => {
   });
 
   afterEach(() => {
-    process.env.MOOREVIEW_DATA = prevData;
+    process.env.PEAKLOGIC_DATA = prevData;
     resetModules();
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });

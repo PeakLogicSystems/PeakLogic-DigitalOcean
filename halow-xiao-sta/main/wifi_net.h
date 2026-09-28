@@ -2,7 +2,7 @@
  * ESP32 2.4 GHz Wi-Fi station helper for LilyGO T-HaLow.
  *
  * The TX-AH HaLow module does not expose a TCP/IP stack to the ESP32. MQTT
- * reaches the MooreVIEW broker over the ESP32's built-in Wi-Fi interface.
+ * reaches the PeakLogic broker over the ESP32's built-in Wi-Fi interface.
  *
  * SPDX-License-Identifier: Apache-2.0
  */

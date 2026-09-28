@@ -36,7 +36,7 @@ function loadIotLinkGenericDrivers(opts = {}) {
   for (const d of drivers) {
     if (d.id === 'rs485_a') d.serialPort = ports.portA;
     if (d.id === 'rs485_b') d.serialPort = ports.portB;
-    if (truthyEnv(env, 'MOOREVIEW_RS485_ENABLE', true) && (d.id === 'rs485_a' || d.id === 'rs485_b')) {
+    if (truthyEnv(env, 'PEAKLOGIC_RS485_ENABLE', true) && (d.id === 'rs485_a' || d.id === 'rs485_b')) {
       d.enabled = true;
     }
   }
@@ -53,15 +53,15 @@ function loadIotLinkGenericSettings(opts = {}) {
   const env = opts.env || process.env;
   const ports = resolveSerialPorts(env);
   const base = readFixtureJson('settings.iot_link.json');
-  const mqttEnabled = truthyEnv(env, 'MOOREVIEW_MQTT_ENABLED', false);
-  const rs485Enabled = truthyEnv(env, 'MOOREVIEW_RS485_ENABLE', true);
+  const mqttEnabled = truthyEnv(env, 'PEAKLOGIC_MQTT_ENABLED', false);
+  const rs485Enabled = truthyEnv(env, 'PEAKLOGIC_RS485_ENABLE', true);
 
   return {
     ...base,
     mqttParc: {
       ...(base.mqttParc || {}),
       enabled: mqttEnabled,
-      brokerUrl: env.MOOREVIEW_MQTT_BROKER || base.mqttParc?.brokerUrl || DEFAULT_MQTT_PARC_BROKER,
+      brokerUrl: env.PEAKLOGIC_MQTT_BROKER || base.mqttParc?.brokerUrl || DEFAULT_MQTT_PARC_BROKER,
       username: env.MOSQUITTO_USER || base.mqttParc?.username || '',
       password: env.MOSQUITTO_PASS || base.mqttParc?.password || '',
     },
@@ -94,7 +94,7 @@ function buildWorkspaceEst(tags, drivers, settings) {
 }
 
 /**
- * Write generic IOT-LINK appliance config into MOOREVIEW_DATA.
+ * Write generic IOT-LINK appliance config into PEAKLOGIC_DATA.
  * @param {{ writeJson: Function, flushConfig?: Function, readJson?: Function }} persistence
  * @param {{ force?: boolean, env?: NodeJS.ProcessEnv }} [opts]
  */

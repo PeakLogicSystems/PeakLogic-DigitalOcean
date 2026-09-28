@@ -4,7 +4,7 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 
 /**
- * Open a native file picker defaulting to initialDir (MooreVIEW PC appliance).
+ * Open a native file picker defaulting to initialDir (PeakLogic PC appliance).
  * Returns absolute path, or null when cancelled / unavailable.
  */
 function pickProjectImportFile(initialDir) {
@@ -16,8 +16,8 @@ function pickProjectImportFile(initialDir) {
       'Add-Type -AssemblyName System.Windows.Forms',
       '$d = New-Object System.Windows.Forms.OpenFileDialog',
       `$d.InitialDirectory = ${JSON.stringify(dir)}`,
-      "$d.Filter = 'MooreVIEW projects (*.est.zip;*.est.json)|*.est.zip;*.est.json;*.mvbundle;*.json|All files (*.*)|*.*'",
-      "$d.Title = 'Import MooreVIEW project'",
+      "$d.Filter = 'PeakLogic projects (*.est.zip;*.est.json)|*.est.zip;*.est.json;*.mvbundle;*.json|All files (*.*)|*.*'",
+      "$d.Title = 'Import PeakLogic project'",
       'if ($d.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $d.FileName }',
     ].join('; ');
     try {
@@ -37,7 +37,7 @@ function pickProjectImportFile(initialDir) {
     try {
       const out = execFileSync(
         'osascript',
-        ['-e', `POSIX path of (choose file with prompt "Import MooreVIEW project" default location (POSIX file ${JSON.stringify(dir)}))`],
+        ['-e', `POSIX path of (choose file with prompt "Import PeakLogic project" default location (POSIX file ${JSON.stringify(dir)}))`],
         { encoding: 'utf8', timeout: 300000 },
       );
       const picked = String(out || '').trim();
@@ -52,7 +52,7 @@ function pickProjectImportFile(initialDir) {
       'zenity',
       [
         '--file-selection',
-        '--title=Import MooreVIEW project',
+        '--title=Import PeakLogic project',
         `--filename=${dir.replace(/\/$/, '')}/`,
         '--file-filter=*.est.zip *.est.json *.mvbundle *.json',
       ],

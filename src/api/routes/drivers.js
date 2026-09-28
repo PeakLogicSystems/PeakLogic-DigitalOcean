@@ -693,7 +693,7 @@ function createDriverRoutes(deps) {
         previousDeviceId: replaced.previousDeviceId,
         newDeviceId: replaced.newDeviceId,
         swapType: historyRecord?.swapType,
-      }, { user: req.mooreviewUser || undefined });
+      }, { user: req.peaklogicUser || undefined });
     } catch (e) {
       console.warn('[hardware-history] swap:', e.message || e);
       mongoSysLog.error('hardware', 'Hardware swap record failed', { message: e.message, positionId });

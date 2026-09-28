@@ -2,7 +2,7 @@
   "id": "arduino_opta_parc",
   "label": "Arduino Opta — MQTT Parc ST",
   "vendor": "Arduino",
-  "model": "Opta — MooreVIEW ST over MQTT (base + expansions via sync)",
+  "model": "Opta — PeakLogic ST over MQTT (base + expansions via sync)",
   "transport": "mqtt_parc",
   "driverId": "opta_st_01",
   "tagsFromDevice": true,

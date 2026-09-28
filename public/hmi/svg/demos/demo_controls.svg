@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 800" width="1024" height="800">
   <rect width="1024" height="800" fill="#f1f5f9"/>
-  <text x="32" y="40" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#0f172a">MooreVIEW  Control graphics demo</text>
+  <text x="32" y="40" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#0f172a">PeakLogic  Control graphics demo</text>
   <text x="32" y="68" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">MV round pilot + start/stop buttons � browse MV symbols in HMI Setup � vendor folder mv</text>
 
   <!-- MV round pilot (DI1) -->

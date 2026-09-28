@@ -1,5 +1,5 @@
 /**
- * MooreVIEW Opta — Modbus RTU slave on RS485
+ * PeakLogic Opta — Modbus RTU slave on RS485
  *
  * Exposes Parc-equivalent I/O for Dragino RS485-NB gateway polling.
  * Register map matches opta_parc_modbus_dragino.json (slave ID 2, 9600 8N1).

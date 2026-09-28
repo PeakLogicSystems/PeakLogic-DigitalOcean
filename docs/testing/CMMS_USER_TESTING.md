@@ -7,11 +7,11 @@ Use these checklists for integrated CMMS (work orders, PM schedules, alarm-drive
 ## MVP Suite — Windows PC appliance (`:3090`)
 
 ```
-mooreVIEW CMMS — MVP Suite (Windows)
+PeakLogic CMMS — MVP Suite (Windows)
 ├── Install & boot
 │   ├── Build: npm run build:appliance:pc (or use existing dist folder)
-│   ├── Run Install mooreVIEW.bat on target PC
-│   ├── Start mooreVIEW.bat → http://127.0.0.1:3090/login loads
+│   ├── Run Install PeakLogic.bat on target PC
+│   ├── Start PeakLogic.bat → http://127.0.0.1:3090/login loads
 │   └── Health: GET /health returns deployment appliance
 ├── Login & access
 │   ├── Sign in admin@local / ChangeMeAdmin!
@@ -40,7 +40,7 @@ mooreVIEW CMMS — MVP Suite (Windows)
 │   └── Export CSV/PDF includes CMMS rows
 ├── MQTT bridge (optional)
 │   ├── System setup → CMMS / MQTT integration → enable publish
-│   └── Alarm transition publishes mooreview-cmms-integration-v1 topic
+│   └── Alarm transition publishes peaklogic-cmms-integration-v1 topic
 └── Operator role
     ├── Sign in operator@local (Features: CMMS enabled)
     ├── Can open /cmms and edit WOs
@@ -52,16 +52,16 @@ mooreVIEW CMMS — MVP Suite (Windows)
 ## IoT-Link generic — Linux appliance (`:3090`)
 
 ```
-mooreVIEW CMMS — IoT-Link generic (Linux)
+PeakLogic CMMS — IoT-Link generic (Linux)
 ├── Install & boot
-│   ├── Deploy mooreview-appliance-iot-link-generic-*.tgz to /opt/mooreview
+│   ├── Deploy peaklogic-appliance-iot-link-generic-*.tgz to /opt/peaklogic
 │   ├── install-generic.sh completes (Node, MongoDB, Mosquitto, systemd)
-│   ├── systemctl status mooreview-iot-link-generic active
+│   ├── systemctl status peaklogic-iot-link-generic active
 │   └── http://<gateway-ip>:3090/login loads
 ├── Login & access
 │   ├── Sign in admin@local / ChangeMeAdmin!
 │   ├── CMMS top bar link visible
-│   └── Data persists in /var/lib/mooreview/data/cmms.json
+│   └── Data persists in /var/lib/peaklogic/data/cmms.json
 ├── CMMS app (/cmms)
 │   ├── Overview, WO, PM tabs load (same as Windows)
 │   ├── Create WO + PM after reboot still present
@@ -82,7 +82,7 @@ mooreVIEW CMMS — IoT-Link generic (Linux)
 ## Cloud SaaS — multi-tenant Studio (`:3100`)
 
 ```
-mooreVIEW CMMS — Cloud SaaS (:3100)
+PeakLogic CMMS — Cloud SaaS (:3100)
 ├── Install & seed
 │   ├── npm run start:saas (or production droplet on :3100)
 │   ├── npm run seed → demo org created

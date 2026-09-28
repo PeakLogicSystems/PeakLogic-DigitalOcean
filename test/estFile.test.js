@@ -53,7 +53,7 @@ describe('estFile', () => {
     assert.equal(doc.project.name, 'my_test');
     assert.deepEqual(doc.tags, []);
     assert.deepEqual(doc.drivers, []);
-    assert.ok(doc.program.includes('New MooreVIEW project'));
+    assert.ok(doc.program.includes('New PeakLogic project'));
     assert.equal(doc.activeProgram, null);
     assert.ok(doc.settings?.hmi?.screens?.length);
   });
@@ -105,7 +105,7 @@ describe('estFile', () => {
     assert.equal(store.list().some((t) => t.forceOutput), false);
   });
 
-  it('packs mooreview-est document', () => {
+  it('packs peaklogic-est document', () => {
     const doc = pack(deps, { name: 'demo' });
     assert.equal(doc.format, EST_FORMAT);
     assert.equal(doc.version, EST_VERSION);
@@ -138,7 +138,7 @@ describe('estFile', () => {
 
   it('validates format and rejects bad docs', () => {
     assert.equal(validate(null), 'Invalid JSON object');
-    assert.equal(validate({ format: 'x' }), 'Expected "mooreview-est" or JSON with tags, drivers, and/or program');
+    assert.equal(validate({ format: 'x' }), 'Expected "peaklogic-est" or JSON with tags, drivers, and/or program');
     assert.equal(validate({
       format: EST_FORMAT,
       version: 99,
@@ -150,7 +150,7 @@ describe('estFile', () => {
     assert.equal(validate({ format: EST_FORMAT, version: EST_VERSION }), null);
   });
 
-  it('migrates older and newer mooreview-est format versions', () => {
+  it('migrates older and newer peaklogic-est format versions', () => {
     const older = migrateImportDoc({
       format: EST_FORMAT,
       version: 0,
@@ -173,7 +173,7 @@ describe('estFile', () => {
       settings: { project: { name: 'future' } },
     });
     assert.equal(newer.doc.version, EST_VERSION);
-    assert.ok(newer.warnings.some((w) => /newer than this MooreVIEW/i.test(w)));
+    assert.ok(newer.warnings.some((w) => /newer than this PeakLogic/i.test(w)));
   });
 
   it('exportFilename sanitizes project names', () => {

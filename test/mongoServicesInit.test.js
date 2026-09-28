@@ -3,7 +3,7 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-mongo-init-'));
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-mongo-init-'));
 
 const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert/strict');
@@ -43,10 +43,10 @@ describe('mongo services init', () => {
 
   it('prefers mongoLogger saved in settings.json', async () => {
     persistence.writeJson('settings.json', {
-      mongoLogger: { uri: 'mongodb://127.0.0.1:27017', db: 'mooreview_test' },
+      mongoLogger: { uri: 'mongodb://127.0.0.1:27017', db: 'peaklogic_test' },
     });
     await initMongoServicesFromSettings();
-    assert.equal(mongoSysLog.status().db, 'mooreview_test');
-    assert.equal(hardwareHistoryStore.status().db, 'mooreview_test');
+    assert.equal(mongoSysLog.status().db, 'peaklogic_test');
+    assert.equal(hardwareHistoryStore.status().db, 'peaklogic_test');
   });
 });

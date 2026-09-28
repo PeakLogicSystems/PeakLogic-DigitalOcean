@@ -1,8 +1,8 @@
 'use strict';
 /**
- * Resolve MooreVIEW REST root for facility / sample 3D pages.
+ * Resolve PeakLogic REST root for facility / sample 3D pages.
  * Appliance and cloud SaaS both mount studio routes at `/api` (e.g. `/api/dashboard`).
- * Override: ?mvApi=… · window.MV_API_BASE · parent.MOOREVIEW_API_BASE · postMessage apiBase
+ * Override: ?mvApi=… · window.MV_API_BASE · parent.PEAKLOGIC_API_BASE · postMessage apiBase
  */
 (function initMvLiveApiRoot(global) {
   function fromQuery() {
@@ -15,8 +15,8 @@
   }
   function fromParent() {
     try {
-      if (global.parent && global.parent !== global && global.parent.MOOREVIEW_API_BASE) {
-        return String(global.parent.MOOREVIEW_API_BASE).trim();
+      if (global.parent && global.parent !== global && global.parent.PEAKLOGIC_API_BASE) {
+        return String(global.parent.PEAKLOGIC_API_BASE).trim();
       }
     } catch { /* cross-origin */ }
     return '';
@@ -31,7 +31,7 @@
   global.addEventListener('message', (ev) => {
     const data = ev?.data;
     if (!data || typeof data !== 'object') return;
-    if (data.type === 'mooreview-api-base' && typeof data.apiBase === 'string') {
+    if (data.type === 'peaklogic-api-base' && typeof data.apiBase === 'string') {
       applyApiBase(data.apiBase);
     }
     if (data.type === 'mv-hmi-poll-config' && typeof data.apiBase === 'string') {

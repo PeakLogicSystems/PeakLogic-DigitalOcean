@@ -8,7 +8,7 @@ const persistence = require('../../persistence');
 function requireCellularSims(req, res, next) {
   if (!isCellularSimsEnabled()) {
     return res.status(403).json({
-      error: 'Cellular SIM management requires MOOREVIEW_DEPLOYMENT=cloud, MOOREVIEW_CELLULAR_SIMS=1, or settings cellularSims.enabled',
+      error: 'Cellular SIM management requires PEAKLOGIC_DEPLOYMENT=cloud, PEAKLOGIC_CELLULAR_SIMS=1, or settings cellularSims.enabled',
     });
   }
   return next();

@@ -1,4 +1,4 @@
-menu "MooreVIEW Parc ST"
+menu "PeakLogic Parc ST"
 
     choice BOARD_VARIANT
         prompt "LilyGO board"
@@ -14,11 +14,11 @@ menu "MooreVIEW Parc ST"
 
     config DEVCFG_WIFI_AP_SSID_DEFAULT
         string "Setup AP SSID"
-        default "MooreVIEW-ParcST"
+        default "PeakLogic-ParcST"
 
     config DEVCFG_WIFI_AP_PASS_DEFAULT
         string "Setup AP password (min 8 chars)"
-        default "mooreview"
+        default "peaklogic"
 
     config DEVCFG_WIFI_AP_HTTP_PORT
         int "Setup HTTP port on AP"

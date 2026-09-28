@@ -1,6 +1,6 @@
 # MV Draw
 
-Scaled site-plan layout editor for septic system design. Ships as a mooreVIEW module with a standalone UI at `/mv-draw` and optional embed in `.est` project files.
+Scaled site-plan layout editor for septic system design. Ships as a PeakLogic module with a standalone UI at `/mv-draw` and optional embed in `.est` project files.
 
 ## Features (current)
 
@@ -14,7 +14,7 @@ Scaled site-plan layout editor for septic system design. Ships as a mooreVIEW mo
 - Background image upload (PNG/JPG)
 - **File menu** — New, Open (server library or local `.mvdraw.json`), Save, Save as, **Help**
 - In-app **Help** dialog (<kbd>F1</kbd>) — tools, symbols, snap/align, shortcuts
-- Save/load `.mvdraw` projects and mooreVIEW `.est` integration (`mvDraw` section)
+- Save/load `.mvdraw` projects and PeakLogic `.est` integration (`mvDraw` section)
 - PDF export (vector layout + optional background)
 - DXF export (lines, polylines, blocks — basic R12-style)
 
@@ -22,7 +22,7 @@ Scaled site-plan layout editor for septic system design. Ships as a mooreVIEW mo
 
 The header reads left to right:
 
-1. **mooreVIEW** (home link) · **File** menu · **Composer** mode (2D grid / 3D / Plan)
+1. **PeakLogic** (home link) · **File** menu · **Composer** mode (2D grid / 3D / Plan)
 2. Current project name and saved path
 3. **MV Draw** title
 4. **Drawing toolbar** — Select, Rotate, Stretch, Place, Connect, Calibrate, Extents, Snap, Undo/Redo, export (PDF/DXF), etc.
@@ -35,7 +35,7 @@ Tools flow from the left; status and Close stay pinned on the right. Press **F1*
 - DXF/DWG background import
 - Dimension annotations and title block templates
 - Setback advisory overlays
-- Link diagram nodes to mooreVIEW tags / Parc devices
+- Link diagram nodes to PeakLogic tags / Parc devices
 
 ## API
 
@@ -56,7 +56,7 @@ Tools flow from the left; status and Close stay pinned on the right. Press **F1*
 
 ```json
 {
-  "format": "mooreview-mvdraw",
+  "format": "peaklogic-mvdraw",
   "version": 1,
   "units": "ft",
   "scale": { "method": "twoPoint", "pixelsPerUnit": 12.5, "unitLabel": "ft" },
@@ -70,19 +70,19 @@ Tools flow from the left; status and Close stay pinned on the right. Press **F1*
 
 One JSON file carries the full project plus embedded MV Draw background images:
 
-- **mooreVIEW:** **Project → Export project file…** → `name.mvbundle` (tags, drivers, program, HMI, settings, site plan, backgrounds)
+- **PeakLogic:** **Project → Export project file…** → `name.mvbundle` (tags, drivers, program, HMI, settings, site plan, backgrounds)
 - **MV Draw:** **File → Export package…** → `name.mvbundle` (layout + backgrounds)
 - **Import:** accepts `.mvbundle`, legacy `.est.json`, and `.mvdraw.json`
 
 ```json
 {
-  "format": "mooreview-bundle",
+  "format": "peaklogic-bundle",
   "version": 1,
   "kind": "est",
   "name": "my-site",
-  "doc": { "... mooreview-est or mooreview-mvdraw ..." },
+  "doc": { "... peaklogic-est or peaklogic-mvdraw ..." },
   "assets": [{ "ref": "uploads/plot.png", "mime": "image/png", "base64": "..." }]
 }
 ```
 
-mooreVIEW `.est` files may still include an optional top-level `mvDraw` object (same shape as inside a bundle `doc`).
+PeakLogic `.est` files may still include an optional top-level `mvDraw` object (same shape as inside a bundle `doc`).

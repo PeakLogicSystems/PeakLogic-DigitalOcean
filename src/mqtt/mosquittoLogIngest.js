@@ -175,9 +175,9 @@ function startTailer(filePath, opts = {}) {
 }
 
 function startFromEnv() {
-  const path = String(process.env.MOOREVIEW_MOSQUITTO_LOG_PATH || '').trim();
+  const path = String(process.env.PEAKLOGIC_MOSQUITTO_LOG_PATH || '').trim();
   if (!path) return null;
-  const host = String(process.env.MOOREVIEW_MOSQUITTO_LOG_HOST || os.hostname()).trim();
+  const host = String(process.env.PEAKLOGIC_MOSQUITTO_LOG_HOST || os.hostname()).trim();
   return startTailer(path, { host });
 }
 

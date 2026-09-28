@@ -12,7 +12,7 @@ bool mvCheckClientProtocol(int clientProtocol, const char* clientVersion, char* 
   if (clientProtocol == MV_PROTOCOL_VERSION) return true;
   if (errOut && errLen > 0) {
     snprintf(errOut, errLen,
-             "protocol version mismatch (Opta=%d MooreVIEW=%d)",
+             "protocol version mismatch (Opta=%d PeakLogic=%d)",
              MV_PROTOCOL_VERSION, clientProtocol);
   }
   return false;

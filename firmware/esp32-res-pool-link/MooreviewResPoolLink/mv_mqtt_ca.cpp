@@ -1,8 +1,8 @@
 #include "mv_mqtt_ca.h"
 
 /**
- * Trust mqtt.mooreview.io (Let's Encrypt Generation Y ECDSA, 2026).
- * Same bundle as firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt/mv_mqtt_ca.cpp
+ * Trust mqtt.peaklogic.io (Let's Encrypt Generation Y ECDSA, 2026).
+ * Same bundle as firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt/mv_mqtt_ca.cpp
  */
 const char mv_mqtt_ca_pem[] =
   /* ISRG Root X2 */

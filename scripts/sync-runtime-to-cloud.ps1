@@ -1,7 +1,7 @@
-# Sync est-pc Studio runtime into mooreview-cloud without wiping MongoDB SaaS platform files.
+# Sync est-pc Studio runtime into peaklogic-cloud without wiping MongoDB SaaS platform files.
 # Preserves createCloudApp entry (src/server.js), platform routes/services/db, and Mongo cloudSites auth.
 param(
-  [string]$CloudRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) 'mooreview-cloud')
+  [string]$CloudRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) 'peaklogic-cloud')
 )
 
 $ErrorActionPreference = 'Stop'
@@ -26,7 +26,7 @@ if ($isSaas) {
   Write-Host "Detected MongoDB SaaS platform (createCloudApp) — preserving platform files" -ForegroundColor Yellow
 }
 
-Write-Host "Sync Studio runtime -> mooreview-cloud (SaaS on :3100)" -ForegroundColor Cyan
+Write-Host "Sync Studio runtime -> peaklogic-cloud (SaaS on :3100)" -ForegroundColor Cyan
 Write-Host "  from: $EstRoot"
 Write-Host "  to:   $CloudRoot"
 
@@ -173,7 +173,7 @@ $cloudDeploy = Join-Path $CloudRoot 'deploy'
 if (Test-Path $estDeploy) {
   if (-not (Test-Path $cloudDeploy)) { New-Item -ItemType Directory -Path $cloudDeploy -Force | Out-Null }
   if ($isSaas) {
-    robocopy $estDeploy $cloudDeploy /E /XF mooreview-saas.service /R:1 /W:2 /NFL /NDL /NJH /NJS /nc /ns /np | Out-Null
+    robocopy $estDeploy $cloudDeploy /E /XF peaklogic-saas.service /R:1 /W:2 /NFL /NDL /NJH /NJS /nc /ns /np | Out-Null
   } else {
     robocopy $estDeploy $cloudDeploy /E /R:1 /W:2 /NFL /NDL /NJH /NJS /nc /ns /np | Out-Null
   }

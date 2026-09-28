@@ -2,7 +2,7 @@
 
   Opta Double Split HVAC — dual air handlers + dual outdoor condensers
 
-  MooreVIEW Parc driver (Opta firmware v2.3.81+):
+  PeakLogic Parc driver (Opta firmware v2.3.81+):
     /mcsa  Dual-cond facility — I1–I8 fan/comp start+run CTs, expansion NTC U1/U2 hi/lo
     /ahu-env — AHU1/AHU2 supply+return (I5–I8), pan leaks (X1_IRAW1–2)
 

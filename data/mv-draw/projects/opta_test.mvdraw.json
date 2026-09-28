@@ -1,5 +1,5 @@
 {
-  "format": "mooreview-mvdraw",
+  "format": "peaklogic-mvdraw",
   "version": 1,
   "savedAt": "2026-08-03T09:14:37.573Z",
   "name": "opta_test",
@@ -79,6 +79,6 @@
     "client": "",
     "site": "",
     "notes": "",
-    "mooreviewProject": ""
+    "peaklogicProject": ""
   }
 }

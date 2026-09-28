@@ -15,7 +15,7 @@ static String mvSetupHtmlBody();
 
 static const char MV_SETUP_HTML[] = R"HTML(<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MooreVIEW Opta Setup</title>
+<title>PeakLogic Opta Setup</title>
 <style>
 body{font-family:system-ui,sans-serif;margin:1rem;background:#f1f5f9;color:#0f172a}
 h1{font-size:1.25rem}h2{font-size:1rem;margin-top:1.25rem}
@@ -36,10 +36,10 @@ button.primary{background:#2563eb;color:#fff;border-color:#2563eb}
 .badge.run{background:#dcfce7;color:#166534}
 .badge.stop{background:#f1f5f9;color:#475569}
 </style></head><body>
-<h1>MooreVIEW Opta Setup</h1>
+<h1>PeakLogic Opta Setup</h1>
 <p class="muted">Configure Ethernet and expansion modules. Connect via WiFi AP or open <code>/setup</code> on Ethernet.</p>
 <div class="card"><h2>ST runtime status</h2>
-<p class="muted">Updated from MooreVIEW deploy / Start. Refreshes every 3 s.</p>
+<p class="muted">Updated from PeakLogic deploy / Start. Refreshes every 3 s.</p>
 <dl class="status-grid">
 <dt>Program</dt><dd id="stProgramName">—</dd>
 <dt>Runtime</dt><dd id="stRunning">—</dd>
@@ -66,8 +66,8 @@ button.primary{background:#2563eb;color:#fff;border-color:#2563eb}
 <div class="card"><h2>WiFi setup AP</h2>
 <p class="muted">Opta <strong>WiFi</strong> hardware only. Join this AP to configure the device, then use Ethernet to reach your router/LAN.</p>
 <label><input type="checkbox" id="wifiAp"> Enable AP for local setup</label>
-<label>SSID <input id="wifiSsid" placeholder="MooreVIEW-Opta"></label>
-<label>Password <input id="wifiPass" type="password" placeholder="mooreview (min 8 chars)"></label>
+<label>SSID <input id="wifiSsid" placeholder="PeakLogic-Opta"></label>
+<label>Password <input id="wifiPass" type="password" placeholder="peaklogic (min 8 chars)"></label>
 <p class="muted" id="wifiStatus"></p></div>
 <div class="card"><h2>Expansion modules (AFX00005 / AFX00007)</h2>
 <p class="muted">Slot 1 is closest to the Opta base. AFX00005 = D1608E (16 DI + 8 relays). AFX00007 = A0602 (8 analog ch + 4 PWM).</p>
@@ -93,7 +93,7 @@ async function loadCfg(){
   ethIp.value=ip4(c.ethIp); ethGw.value=ip4(c.ethGw); ethMask.value=ip4(c.ethMask); ethDns.value=ip4(c.ethDns);
   wifiSsid.value=c.wifiApSsid||'';
   wifiPass.value=c.wifiApPass||'';
-  const apSsid=c.wifiApSsid||'MooreVIEW-Opta';
+  const apSsid=c.wifiApSsid||'PeakLogic-Opta';
   const apPort=c.wifiApHttpPort||8080;
   if(!c.wifiCapable){
     wifiStatus.textContent=c.wifiApError||'WiFi not available — reflash with Board → Arduino Opta WiFi, or use Ethernet /setup';
@@ -138,7 +138,7 @@ function collectErrors(s){
 async function loadStatus(){
   try{
     const r=await fetch('/api/status'); const s=await r.json();
-    stProgramName.textContent=s.programName||s.programShortName||'(none — deploy from MooreVIEW Remote)';
+    stProgramName.textContent=s.programName||s.programShortName||'(none — deploy from PeakLogic Remote)';
     stRunning.innerHTML=fmtRun(s);
     stProgramLoaded.textContent=s.programLoaded?'Yes':'No';
     stScan.textContent=s.running?(`${s.scanMs||'?'} ms · ${s.cycles||0} cycles`):'—';
@@ -151,7 +151,7 @@ async function loadStatus(){
     else { stErrors.hidden=true; stErrors.textContent=''; }
     const info=[];
     if(s.programLoaded&&s.programName) info.push('Ready to run on device.');
-    else if(!s.programLoaded) info.push('No program deployed — use MooreVIEW Connect + Start (Remote ON).');
+    else if(!s.programLoaded) info.push('No program deployed — use PeakLogic Connect + Start (Remote ON).');
     if(s.ota&&s.ota.phase) info.push('OTA: '+s.ota.phase+(s.ota.percent!=null?(' '+s.ota.percent+'%'):''));
     if(info.length){ stInfo.hidden=false; stInfo.textContent=info.join('\n'); }
     else { stInfo.hidden=true; stInfo.textContent=''; }

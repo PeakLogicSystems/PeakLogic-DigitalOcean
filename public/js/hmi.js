@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * MooreView HMI — load SVG/GIF/PNG screens, layout, and tag bindings.
+ * PeakLogic HMI — load SVG/GIF/PNG screens, layout, and tag bindings.
  */
 (function (global) {
   // User zoom for the live display viewport (mobile readability / tap targets).
@@ -24,7 +24,7 @@
   }
 
   function isTpoFaceplateAssetPath(assetPath) {
-    return /schedules\/mooreview\/tpo_daily|tpo_daily/i.test(String(assetPath || ''));
+    return /schedules\/peaklogic\/tpo_daily|tpo_daily/i.test(String(assetPath || ''));
   }
 
   function isPoolFaceplateAssetPath(assetPath) {
@@ -2605,8 +2605,8 @@
       const label = String(t.label || '').trim() || t.id;
       const rowCls = acked ? 'alarm-row-acked' : `alarm-row-active alarm-row-${level}`;
       const sinceStr = since
-        ? (window.MooreviewTime?.formatFriendly?.(since)
-          || new Date(since).toLocaleString(undefined, window.MooreviewTime?.localeOpts?.() || {}))
+        ? (window.PeaklogicTime?.formatFriendly?.(since)
+          || new Date(since).toLocaleString(undefined, window.PeaklogicTime?.localeOpts?.() || {}))
         : '—';
       const levelLabel = HMI_ALARM_LABELS[level] || level;
       const ackCell = editable

@@ -2,7 +2,7 @@
    Opta ST — 10K NTC divider: piecewise °C from raw ADC (0..1023)
 
    Use when ST runs ON the Opta and you need temperature in logic without LN().
-   PC MooreVIEW can instead set Tags → Cal… → NTC 10K on the same channel for
+   PC PeakLogic can instead set Tags → Cal… → NTC 10K on the same channel for
    HMI/historian in °C while this program keeps raw thresholds on I6_RAW.
 
    Wiring: Vref → 10K NTC → analog in → 10K to GND (lower raw = hotter).

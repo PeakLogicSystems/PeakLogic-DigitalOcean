@@ -1,4 +1,4 @@
-# MooreVIEW cellular Parc ST peer — ESP32 soft PLC (T-ETH-ELITE-A7670X)
+# PeakLogic cellular Parc ST peer — ESP32 soft PLC (T-ETH-ELITE-A7670X)
 cmake_minimum_required(VERSION 3.16)
 set(PARTITION_TABLE_CSV_PATH "${CMAKE_SOURCE_DIR}/partitions.csv")
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)

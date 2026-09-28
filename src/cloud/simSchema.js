@@ -21,7 +21,7 @@ function defaultDeviceId(type = 'opta') {
 function defaultConfig(type = 'opta') {
   const base = {
     intervalMs: 2000,
-    topicPrefix: 'mooreview/v1',
+    topicPrefix: 'peaklogic/v1',
     brokerUrl: '',
   };
   if (type === 'modbus') {

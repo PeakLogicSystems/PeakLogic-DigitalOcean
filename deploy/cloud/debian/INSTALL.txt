@@ -1,4 +1,4 @@
-MooreVIEW Cloud Studio — WinSCP / tarball install
+PeakLogic Cloud Studio — WinSCP / tarball install
 =================================================
 
 Full Cloud Studio on the SaaS droplet (port 3100): ST, Projects, HMI, Drivers,
@@ -6,19 +6,19 @@ Historian, Training — plus Sites & remote cameras via site agents.
 
 This is not a headless API-only page. Home URL serves the Studio dashboard.
 
-1. Upload mooreview-cloud-*.tgz to /tmp/ on the droplet (WinSCP or scp).
+1. Upload peaklogic-cloud-*.tgz to /tmp/ on the droplet (WinSCP or scp).
 
 2. SSH as root and extract:
 
-   mkdir -p /home/mooreview
-   tar xzf /tmp/mooreview-cloud-*.tgz -C /home/mooreview --strip-components=1
+   mkdir -p /home/peaklogic
+   tar xzf /tmp/peaklogic-cloud-*.tgz -C /home/peaklogic --strip-components=1
 
 3. Install:
 
-   export MOOREVIEW_SOURCE=/home/mooreview
-   export MOOREVIEW_INSTALL_DIR=/home/mooreview
-   sed -i 's/\r$//' /home/mooreview/deploy/cloud/debian/install-saas.sh
-   bash /home/mooreview/deploy/cloud/debian/install-saas.sh
+   export PEAKLOGIC_SOURCE=/home/peaklogic
+   export PEAKLOGIC_INSTALL_DIR=/home/peaklogic
+   sed -i 's/\r$//' /home/peaklogic/deploy/cloud/debian/install-saas.sh
+   bash /home/peaklogic/deploy/cloud/debian/install-saas.sh
 
 4. Verify:
 
@@ -28,7 +28,7 @@ This is not a headless API-only page. Home URL serves the Studio dashboard.
    curl -sI http://127.0.0.1:3100/ | head -5
    # expect HTML (dashboard), not plain-text SaaS stub
 
-5. Open https://mooreview.io/  (nginx must proxy to 127.0.0.1:3100)
+5. Open https://peaklogic.io/  (nginx must proxy to 127.0.0.1:3100)
 
    Sign in (seeded): Organization ID demo / operator@demo.local / demo
    Platform admin: admin@demo.local / ChangeMeAdmin!
@@ -36,5 +36,5 @@ This is not a headless API-only page. Home URL serves the Studio dashboard.
    Full Studio: ST, Projects, HMI, Drivers…
    Tools → Sites / Devices / Assets / People / CMMS / Tenants (admin)
 
-Data: /var/lib/mooreview
-Env:   /etc/mooreview/saas.env  (PORT=3100, MOOREVIEW_DEPLOYMENT=cloud)
+Data: /var/lib/peaklogic
+Env:   /etc/peaklogic/saas.env  (PORT=3100, PEAKLOGIC_DEPLOYMENT=cloud)

@@ -1,8 +1,8 @@
-# Build mooreview-cloud-YYYYMMDD.tgz — full Cloud Studio for droplet (WinSCP).
-# Port 3100 / mooreview-saas: ST, projects, HMI, drivers + sites/remote cameras.
+# Build peaklogic-cloud-YYYYMMDD.tgz — full Cloud Studio for droplet (WinSCP).
+# Port 3100 / peaklogic-saas: ST, projects, HMI, drivers + sites/remote cameras.
 param(
   [string]$EstRoot = (Split-Path $PSScriptRoot -Parent),
-  [string]$CloudRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) 'mooreview-cloud'),
+  [string]$CloudRoot = (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) 'peaklogic-cloud'),
   [string]$OutputDir = (Join-Path (Split-Path $PSScriptRoot -Parent) 'dist'),
   [string]$BundleName = '',
   [switch]$SkipSync
@@ -15,11 +15,11 @@ $InstallTxt = Join-Path $EstRoot 'deploy/cloud/debian/INSTALL.txt'
 if (-not (Test-Path $EstRoot)) { throw "est-pc not found at $EstRoot" }
 
 if (-not $SkipSync) {
-  Write-Host "Syncing full Cloud Studio into mooreview-cloud..." -ForegroundColor Cyan
+  Write-Host "Syncing full Cloud Studio into peaklogic-cloud..." -ForegroundColor Cyan
   & (Join-Path $EstRoot 'scripts/sync-runtime-to-cloud.ps1') -CloudRoot $CloudRoot
 }
 
-if (-not (Test-Path $CloudRoot)) { throw "mooreview-cloud not found at $CloudRoot" }
+if (-not (Test-Path $CloudRoot)) { throw "peaklogic-cloud not found at $CloudRoot" }
 if (-not (Test-Path (Join-Path $CloudRoot 'server.js'))) { throw "Missing server.js" }
 if (-not (Test-Path (Join-Path $CloudRoot 'views\dashboard.ejs'))) { throw "Missing dashboard (full Studio)" }
 if (-not (Test-Path (Join-Path $CloudRoot 'src\api\cloudApp.js'))) {
@@ -35,9 +35,9 @@ if (Test-Path $srcServerPath) {
 if ($existingSrcServer -notmatch 'createCloudApp') {
   $srcServer = @"
 'use strict';
-process.env.MOOREVIEW_DEPLOYMENT = process.env.MOOREVIEW_DEPLOYMENT || 'cloud';
-process.env.MOOREVIEW_PRODUCT = process.env.MOOREVIEW_PRODUCT || 'mvp-suite';
-if (!process.env.PORT && !process.env.MOOREVIEW_PORT) { process.env.PORT = '3100'; }
+process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'cloud';
+process.env.PEAKLOGIC_PRODUCT = process.env.PEAKLOGIC_PRODUCT || 'mvp-suite';
+if (!process.env.PORT && !process.env.PEAKLOGIC_PORT) { process.env.PORT = '3100'; }
 require('../server.js');
 "@
   Set-Content -Path $srcServerPath -Value $srcServer -Encoding UTF8
@@ -48,7 +48,7 @@ require('../server.js');
 if (-not (Test-Path $OutputDir)) { New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null }
 
 if (-not $BundleName) {
-  $BundleName = "mooreview-cloud-$(Get-Date -Format 'yyyyMMdd').tgz"
+  $BundleName = "peaklogic-cloud-$(Get-Date -Format 'yyyyMMdd').tgz"
 }
 $BundlePath = Join-Path $OutputDir $BundleName
 $ManifestPath = [System.IO.Path]::ChangeExtension($BundlePath, '.txt')
@@ -61,8 +61,8 @@ Get-ChildItem $CloudRoot -Recurse -File -Include '*.sh', '*.service' -ErrorActio
   }
 }
 
-$stageParent = Join-Path $env:TEMP "mooreview-bundle-$([Guid]::NewGuid().ToString('N').Substring(0, 8))"
-$stageRoot = Join-Path $stageParent 'mooreview-cloud'
+$stageParent = Join-Path $env:TEMP "peaklogic-bundle-$([Guid]::NewGuid().ToString('N').Substring(0, 8))"
+$stageRoot = Join-Path $stageParent 'peaklogic-cloud'
 New-Item -ItemType Directory -Path $stageRoot -Force | Out-Null
 
 $excludeDirs = @('node_modules', '.git', 'dist', 'test', 'fork-manifests', 'product-templates', 'data')
@@ -99,7 +99,7 @@ if (Test-Path $projectsSrc) {
   robocopy $projectsSrc $projectsDest /E /NFL /NDL /NJH /NJS /nc /ns /np | Out-Null
 }
 
-# Prefer mooreview-cloud deploy when packing older SaaS/fleet (src/server.js createCloudApp).
+# Prefer peaklogic-cloud deploy when packing older SaaS/fleet (src/server.js createCloudApp).
 # Only fall back to est-pc deploy for missing files.
 $debianCloud = Join-Path $CloudRoot 'deploy\cloud\debian'
 $debianEst = Join-Path $EstRoot 'deploy\cloud\debian'
@@ -108,8 +108,8 @@ if (-not (Test-Path $debianDest)) { New-Item -ItemType Directory -Path $debianDe
 $saasEntry = Get-Content -Path (Join-Path $CloudRoot 'src\server.js') -Raw -ErrorAction SilentlyContinue
 $preferCloudDeploy = $saasEntry -match 'createCloudApp'
 foreach ($f in @(
-  'install-saas.sh', 'saas.env.example', 'mooreview-saas.service',
-  'nginx-mooreview-saas.conf', 'mosquitto-debian.conf', 'INSTALL.txt', 'rsync-exclude.txt',
+  'install-saas.sh', 'saas.env.example', 'peaklogic-saas.service',
+  'nginx-peaklogic-saas.conf', 'mosquitto-debian.conf', 'INSTALL.txt', 'rsync-exclude.txt',
   '.env.saas.debian.example', 'INSTALL-SAAS.txt'
 )) {
   $cloudFile = Join-Path $debianCloud $f
@@ -136,7 +136,7 @@ if (Test-Path $BundlePath) { Remove-Item $BundlePath -Force }
 
 Push-Location $stageParent
 try {
-  & tar -czf $BundlePath mooreview-cloud
+  & tar -czf $BundlePath peaklogic-cloud
   if ($LASTEXITCODE -ne 0) { throw "tar failed with exit code $LASTEXITCODE" }
 } finally {
   Pop-Location
@@ -146,7 +146,7 @@ try {
 $sizeMb = [math]::Round((Get-Item $BundlePath).Length / 1MB, 1)
 $entryMode = if ($preferCloudDeploy) { 'MongoDB multitenant SaaS (createCloudApp)' } else { 'Hybrid Studio runtime (server.js stub)' }
 $manifest = @"
-MooreVIEW Cloud SaaS droplet bundle
+PeakLogic Cloud SaaS droplet bundle
 Built: $(Get-Date -Format o)
 Archive: $BundleName
 Size: $sizeMb MB
@@ -157,15 +157,15 @@ Includes:
   - MongoDB multitenant platform: login, Sites, fleet, Team, CMMS, Studio
   - Entry: node src/server.js (createCloudApp) on port 3100
   - Remote cameras / site agent hub APIs (HMI iframe + cloud player)
-  - install-saas.sh -> mooreview-saas.service (ExecStart=src/server.js)
+  - install-saas.sh -> peaklogic-saas.service (ExecStart=src/server.js)
 
 WinSCP: upload to /tmp/, then:
-  mkdir -p /home/mooreview
-  tar xzf /tmp/$BundleName -C /home/mooreview --strip-components=1
-  sed -i 's/\r$//' /home/mooreview/deploy/cloud/debian/install-saas.sh
-  MOOREVIEW_SOURCE=/home/mooreview MOOREVIEW_INSTALL_DIR=/home/mooreview bash /home/mooreview/deploy/cloud/debian/install-saas.sh
+  mkdir -p /home/peaklogic
+  tar xzf /tmp/$BundleName -C /home/peaklogic --strip-components=1
+  sed -i 's/\r$//' /home/peaklogic/deploy/cloud/debian/install-saas.sh
+  PEAKLOGIC_SOURCE=/home/peaklogic PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash /home/peaklogic/deploy/cloud/debian/install-saas.sh
   curl -s http://127.0.0.1:3100/health
-  # open https://mooreview.io/  (nginx -> :3100) — expect /login Bootstrap shell
+  # open https://peaklogic.io/  (nginx -> :3100) — expect /login Bootstrap shell
 "@
 Set-Content -Path $ManifestPath -Value $manifest -Encoding UTF8
 

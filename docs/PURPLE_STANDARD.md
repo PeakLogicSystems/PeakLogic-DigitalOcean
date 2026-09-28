@@ -1,6 +1,6 @@
 # Purple Standard design system
 
-Canonical visual identity for **mooreVIEW** products (appliance, cloud, CMMS integration). Product name is always **mooreVIEW**; palette and patterns come from TPS CMMS / Purple Standard.
+Canonical visual identity for **PeakLogic** products (appliance, cloud, CMMS integration). Product name is always **PeakLogic**; palette and patterns come from TPS CMMS / Purple Standard.
 
 ## Color tokens
 
@@ -35,9 +35,9 @@ font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Ari
 - Headings: `font-weight: 700`
 - Wordmark: `letter-spacing: 0.02em`
 
-## Wordmark: mooreVIEW
+## Wordmark: PeakLogic
 
-- **Product name:** `mooreVIEW` (camelCase; not “Purple Standard CMMS” as product name)
+- **Product name:** `PeakLogic` (camelCase; not “Purple Standard CMMS” as product name)
 - **On dark purple backgrounds:** `moore` in white, `VIEW` in `#e9d5ff`
 - **On light backgrounds:** `moore` in `#212529`, `VIEW` in `#6f42c1`
 
@@ -70,14 +70,14 @@ Match TPS CMMS class names where possible:
 
 - Left: hero image + purple gradient overlay (`135deg`, start → end tokens)
 - Right: white card, floating labels, purple submit button
-- Reference: `tpscmms/views/login.ejs`, `mooreview-cloud/views/login.ejs`
+- Reference: `tpscmms/views/login.ejs`, `peaklogic-cloud/views/login.ejs`
 
 ## Repo application
 
 | Repo | Styles |
 |------|--------|
 | **est-pc** | `public/css/pc.css` — `:root` accent, topbar |
-| **mooreview-cloud** | `public/css/mooreview.css` — web + admin UI |
+| **peaklogic-cloud** | `public/css/peaklogic.css` — web + admin UI |
 | **tpscmms** | Inline + partial styles in EJS (reference source) |
 
 ## Do not use

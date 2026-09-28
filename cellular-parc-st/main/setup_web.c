@@ -105,7 +105,7 @@ static esp_err_t setup_get(httpd_req_t *req)
                      ".muted{color:#64748b;font-size:.85rem}"
                      "button{padding:.45rem .9rem;border:1px solid #64748b;border-radius:6px;background:#e2e8f0;cursor:pointer}"
                      "a{color:#0369a1}</style></head><body>"
-                     "<h1>MooreVIEW Parc ST</h1>"
+                     "<h1>PeakLogic Parc ST</h1>"
                      "<p class=muted>ESP32 soft PLC — T-ETH-ELITE · fw %s · Opta Parc protocol</p>"
                      "<p class=muted><a href=/api/status>/api/status</a></p>"
                      "<form method=POST action=/setup>"

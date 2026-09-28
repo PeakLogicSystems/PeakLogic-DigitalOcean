@@ -12,7 +12,7 @@
     "brokerUrl": "mqtt://127.0.0.1:1883",
     "deviceId": "halow_01",
     "topicPrefix": "nexcomm/halow",
-    "clientId": "mooreview",
+    "clientId": "peaklogic",
     "subscribeQos": 0,
     "publishQos": 0
   },

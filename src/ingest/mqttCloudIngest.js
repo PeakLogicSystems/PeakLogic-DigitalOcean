@@ -4,15 +4,15 @@
  * Cloud-side MQTT ingest — Optas talk MQTT directly to the cloud.
  *
  * The cloud droplet subscribes to the MQTT broker that field Optas publish to
- * (mooreview/v1/{deviceId}/telemetry and /online), resolves the owning
+ * (peaklogic/v1/{deviceId}/telemetry and /online), resolves the owning
  * tenant/system from the bound device record, and writes the SaaS operational
  * collections (parc_devices / device_telemetry_latest) via storeSlimTelemetry —
  * the same store the Sites/Fleet pages read. No HTTP gateway relay in between:
  * the device is the MQTT client, the cloud is the MQTT subscriber.
  *
  * Config (env):
- *   MOOREVIEW_MQTT_BROKER        broker URL (default mqtt://127.0.0.1:1883)
- *   MOOREVIEW_MQTT_TOPIC_PREFIX  topic prefix (default mooreview/v1)
+ *   PEAKLOGIC_MQTT_BROKER        broker URL (default mqtt://127.0.0.1:1883)
+ *   PEAKLOGIC_MQTT_TOPIC_PREFIX  topic prefix (default peaklogic/v1)
  *   MQTT_INGEST_USERNAME/PASSWORD optional broker auth
  *   CLOUD_MQTT_INGEST=false      disable this subscriber
  */
@@ -23,7 +23,7 @@ const { getDb } = require('../db/mongo');
 const { DEFAULT_MQTT_PARC_BROKER } = require('../config');
 const { storeSlimTelemetry } = require('./storeSlimTelemetry');
 
-const TOPIC_PREFIX = String(process.env.MOOREVIEW_MQTT_TOPIC_PREFIX || 'mooreview/v1')
+const TOPIC_PREFIX = String(process.env.PEAKLOGIC_MQTT_TOPIC_PREFIX || 'peaklogic/v1')
   .trim()
   .replace(/\/+$/, '');
 const OWNER_CACHE_TTL_MS = 60_000;

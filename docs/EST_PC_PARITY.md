@@ -1,6 +1,6 @@
 # est-pc vs Cloud SaaS — feature parity
 
-mooreVIEW uses one codebase (`est-pc`) with deployment mode controlled by `MOOREVIEW_DEPLOYMENT`.
+PeakLogic uses one codebase (`est-pc`) with deployment mode controlled by `PEAKLOGIC_DEPLOYMENT`.
 
 ## Deployment matrix
 
@@ -82,7 +82,7 @@ Appliance **notification users** (`users.json`) are separate from login accounts
 npm start                          # :3090, login required
 
 # Cloud hub (dev)
-npm run start:cloud                # :3090, MOOREVIEW_DEPLOYMENT=cloud
+npm run start:cloud                # :3090, PEAKLOGIC_DEPLOYMENT=cloud
 
 # Cloud SaaS (dev)
 npm run start:saas                 # :3100

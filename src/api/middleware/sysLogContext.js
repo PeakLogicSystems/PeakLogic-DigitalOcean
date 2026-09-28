@@ -5,7 +5,7 @@ const { TENANT_ID, DEPLOYMENT_MODE } = require('../../config');
 
 function sysLogRequestContext(req, res, next) {
   const user = userFromRequest(req);
-  if (user) req.mooreviewUser = user;
+  if (user) req.peaklogicUser = user;
   runWithContext({
     tenantId: TENANT_ID,
     deployment: DEPLOYMENT_MODE,

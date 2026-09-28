@@ -159,7 +159,7 @@
     "linkApi": "/api/cellular/sims/:id/link"
   },
   "mqtt": {
-    "topicPrefix": "mooreview/v1",
+    "topicPrefix": "peaklogic/v1",
     "cloudBrokerPort": 1883,
     "optaLanBroker": "192.168.1.1:1883"
   }

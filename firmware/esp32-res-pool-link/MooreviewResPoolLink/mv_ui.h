@@ -113,20 +113,20 @@ table{width:100%;border-collapse:collapse;font-size:.92rem}td,th{text-align:left
       <input name="staSsid" id="staSsid" autocomplete="off">
       <label>Home Wi-Fi password</label>
       <input name="staPass" id="staPass" type="password" autocomplete="new-password">
-      <p class="hint">MQTT Parc matches Opta: <code>mqtt.mooreview.io:8883</code>, user <code>mooreview</code>, firmware MOSQUITTO_PASS. Blank password keeps the Opta default. The pad still runs if the cloud link is down.</p>
+      <p class="hint">MQTT Parc matches Opta: <code>mqtt.peaklogic.io:8883</code>, user <code>peaklogic</code>, firmware MOSQUITTO_PASS. Blank password keeps the Opta default. The pad still runs if the cloud link is down.</p>
       <label>MQTT host</label>
-      <input name="mqttHost" id="mqttHost" placeholder="mqtt.mooreview.io">
+      <input name="mqttHost" id="mqttHost" placeholder="mqtt.peaklogic.io">
       <label>MQTT port</label>
       <input name="mqttPort" id="mqttPort" type="number" value="8883">
       <label><input type="checkbox" name="mqttTls" id="mqttTls" value="1"> TLS (8883)</label>
       <label><input type="checkbox" name="mqttInsecure" id="mqttInsecure" value="1"> Allow self-signed cert</label>
       <label>MQTT user</label>
-      <input name="mqttUser" id="mqttUser" placeholder="mooreview">
+      <input name="mqttUser" id="mqttUser" placeholder="peaklogic">
       <label>MQTT password</label>
       <input name="mqttPass" id="mqttPass" type="password" placeholder="blank = Opta firmware default">
       <div class="btns"><input type="submit" value="Save &amp; join home Wi-Fi"></div>
     </form>
-    <p class="hint">Setup AP stays up: <code>MooreVIEW-ResPool</code> / <code>mooreview</code> → <code>http://192.168.4.1:8080/</code></p>
+    <p class="hint">Setup AP stays up: <code>PeakLogic-ResPool</code> / <code>peaklogic</code> → <code>http://192.168.4.1:8080/</code></p>
   </div>
 </section>
 </main>

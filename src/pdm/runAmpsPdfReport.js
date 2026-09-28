@@ -41,7 +41,7 @@ function drawFooter(doc) {
   const y = doc.page.height - 28;
   doc.fontSize(8).fillColor('#64748b');
   doc.text(
-    `MooreVIEW · Putnam County RUN↔amps · Page ${doc._mvPageNum || 1}`,
+    `PeakLogic · Putnam County RUN↔amps · Page ${doc._mvPageNum || 1}`,
     left,
     y,
     { width, align: 'left', lineBreak: false },
@@ -177,9 +177,9 @@ function buildRunAmpsPdfReport({ report, training, meta = {} } = {}) {
     sectionTitle(doc, '1. Executive summary');
     doc.fontSize(10).fillColor('#334155');
     doc.text(
-      'Historian CSVs from five Putnam County lift stations were imported into MooreVIEW. '
+      'Historian CSVs from five Putnam County lift stations were imported into PeakLogic. '
       + 'Each site was analyzed to correlate RUN (or inverted fault) digitals with CT amp channels, '
-      + 'segment motor run intervals, and extract MooreView motor-start features '
+      + 'segment motor run intervals, and extract PeakLogic motor-start features '
       + '(peakStartCurrentA, runCurrentA, inrushRatio, startTimeMs) for AI training.',
       { width, align: 'left' },
     );
@@ -261,7 +261,7 @@ function buildRunAmpsPdfReport({ report, training, meta = {} } = {}) {
     }
     doc.fontSize(9).fillColor('#64748b');
     doc.text(
-      'Labels reuse MooreView single-phase start classifier when settle time is available; '
+      'Labels reuse PeakLogic single-phase start classifier when settle time is available; '
       + 'otherwise inrush ratio (peak/run) thresholds are applied. '
       + '~5-minute historian samples limit true inrush timing resolution.',
       { width },
@@ -295,7 +295,7 @@ function buildRunAmpsPdfReport({ report, training, meta = {} } = {}) {
     const bullets = [
       'Auto-discover strongest digital↔CT pair (including inverted contacts such as MS 2 Fault Off = running).',
       'Segment contiguous RUN intervals; require amp support so idle inverted contacts do not invent runs.',
-      'Features match MooreView motor-start shape used by PdM / edge_inference.',
+      'Features match PeakLogic motor-start shape used by PdM / edge_inference.',
       'Artifacts: training.csv, training.json, edge_inference.json, correlation-report.json.',
       'API: POST /api/pdm/import/run-amps-csv  ·  CLI: npm run build-putnam-training',
     ];

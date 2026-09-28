@@ -11,9 +11,9 @@ Related: [OPTA_PARC_CLOUD.md](./OPTA_PARC_CLOUD.md) (field Opta), [CLOUD_USER_GU
 ## Architecture
 
 ```text
-MooreVIEW Cloud SaaS (:3100)          Edge runtime (:3090) + Mosquitto
+PeakLogic Cloud SaaS (:3100)          Edge runtime (:3090) + Mosquitto
   /admin/tenants — create customer  ←→  MQTT Parc hub, ST runtime, Parc registry
-  Login per org → Cloud Studio          Opta :1883 → mooreview/v1/{deviceId}/telemetry
+  Login per org → Cloud Studio          Opta :1883 → peaklogic/v1/{deviceId}/telemetry
   Import cstore-opta-parc-starter       Per-store DUPLEXLS + remote ST
 ```
 
@@ -33,21 +33,21 @@ Upload and install per [CLOUD_DEPLOY_DO.md](./CLOUD_DEPLOY_DO.md):
 
 ```bash
 bash deploy/cloud/debian/install-saas.sh
-sudo -u mooreview bash -lc 'cd /home/mooreview && npm run seed'
+sudo -u peaklogic bash -lc 'cd /home/peaklogic && npm run seed'
 ```
 
 Enable **Opta Parc runtime** on the same droplet (Mosquitto + Studio drivers):
 
 ```bash
-sudo MOOREVIEW_INSTALL_DIR=/home/mooreview bash deploy/cloud/debian/enable-runtime-3090.sh
+sudo PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash deploy/cloud/debian/enable-runtime-3090.sh
 ```
 
-Edit `/etc/mooreview/runtime.env` — use [deploy/cloud/.env.cstore-opta-parc.example](../deploy/cloud/.env.cstore-opta-parc.example):
+Edit `/etc/peaklogic/runtime.env` — use [deploy/cloud/.env.cstore-opta-parc.example](../deploy/cloud/.env.cstore-opta-parc.example):
 
 - `MOSQUITTO_PASS` — **≤ 47 characters** (Opta NV limit)
 - Open firewall **TCP 1883** for field Optas
 
-**Do not** set `MOOREVIEW_TENANT_ID` on multi-tenant SaaS (:3100). Tenants are created in admin.
+**Do not** set `PEAKLOGIC_TENANT_ID` on multi-tenant SaaS (:3100). Tenants are created in admin.
 
 ---
 
@@ -132,7 +132,7 @@ Per [OPTA_PARC_CLOUD.md](./OPTA_PARC_CLOUD.md):
 
 | Opta /setup | Value |
 |-------------|-------|
-| Broker host | Cloud public IP or `mooreview.io` |
+| Broker host | Cloud public IP or `peaklogic.io` |
 | Port | **1883** |
 | Username / password | Match Mosquitto env |
 | Global site key | `1` (match Studio **System setup → MQTT Parc**) |

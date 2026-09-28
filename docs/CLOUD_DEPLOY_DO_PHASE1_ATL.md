@@ -1,11 +1,11 @@
-# MooreVIEW Phase 1 — Atlanta production rollout (legacy: MQTT on SaaS)
+# PeakLogic Phase 1 — Atlanta production rollout (legacy: MQTT on SaaS)
 
-> **Recommended:** dedicated MQTT droplet from day one — **[CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md](CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md)** + [CHECKLIST-ATL-MQTT.txt](../deploy/cloud/phase1/CHECKLIST-ATL-MQTT.txt). Future scale = add SaaS + bump Mongo; broker stays on `mqtt.mooreview.io`.
+> **Recommended:** dedicated MQTT droplet from day one — **[CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md](CLOUD_DEPLOY_DO_PHASE1_ATL-MQTT.md)** + [CHECKLIST-ATL-MQTT.txt](../deploy/cloud/phase1/CHECKLIST-ATL-MQTT.txt). Future scale = add SaaS + bump Mongo; broker stays on `mqtt.peaklogic.io`.
 
 **This doc:** two-droplet layout with Mosquitto **on cloud-1-saas** (colocated).
 
 **Production (Year 1):** DigitalOcean region **`atl1`** (Atlanta) — two-droplet layout + Managed MongoDB.  
-**Sandbox:** separate **`nyc1`** single-server stack at **`test.mooreview.io`** (see [NYC sandbox](#nyc1-sandbox-testmooreviewio) below).
+**Sandbox:** separate **`nyc1`** single-server stack at **`test.peaklogic.io`** (see [NYC sandbox](#nyc1-sandbox-testpeaklogicio) below).
 WinSCP procedure: [deploy/cloud/phase1/WINSCP-DEPLOY.md](../deploy/cloud/phase1/WINSCP-DEPLOY.md)  
 Checklist: [deploy/cloud/phase1/CHECKLIST-ATL.txt](../deploy/cloud/phase1/CHECKLIST-ATL.txt)
 
@@ -16,14 +16,14 @@ Checklist: [deploy/cloud/phase1/CHECKLIST-ATL.txt](../deploy/cloud/phase1/CHECKL
 | | **Production (ATL)** | **Sandbox (NYC)** |
 |---|---------------------|-------------------|
 | **Region** | `atl1` Atlanta | `nyc1` New York |
-| **DNS** | `mooreview.io` (after verification) | `test.mooreview.io` |
+| **DNS** | `peaklogic.io` (after verification) | `test.peaklogic.io` |
 | **Layout** | Cloud 1 SaaS + Cloud 2 archive | Single droplet, all roles |
 | **Mongo** | DO Managed Mongo (`atl1`) | DO Managed Mongo (`nyc1`) or smaller tier |
 | **MQTT** | Cloud 1 Mosquitto :8883 | Same droplet :8883 |
 | **Archive** | Cloud 2 dedicated + volume | Local `:8090` on same droplet (dev) |
 | **Purpose** | Y1 fleet (~237 sites) | Integration / demo / pre-prod |
 
-Deploy and verify production on **`atl1` using the droplet public IP** (or a temporary hostname). **Cut DNS to `mooreview.io` only after the verification gate** at the end of this doc.
+Deploy and verify production on **`atl1` using the droplet public IP** (or a temporary hostname). **Cut DNS to `peaklogic.io` only after the verification gate** at the end of this doc.
 
 ---
 
@@ -38,16 +38,16 @@ Deploy and verify production on **`atl1` using the droplet public IP** (or a tem
               └──────────────┬──────────────┘
                              │
     ┌────────────────────────▼────────────────────────┐
-    │  cloud-1-saas-atl1 (4 GB, VPC mooreview-prod)   │
-    │  nginx :443 → mooreview-saas :3100              │
+    │  cloud-1-saas-atl1 (4 GB, VPC peaklogic-prod)   │
+    │  nginx :443 → peaklogic-saas :3100              │
     │  Mosquitto :8883                                │
-    │  mooreview-archive-compact.timer                │
+    │  peaklogic-archive-compact.timer                │
     └────────────┬───────────────────────┬────────────┘
                  │ mongodb+srv://       │ http://10.x.x.x:8090
                  │ (Managed Mongo atl1) │ VPC private
     ┌────────────▼────────────┐  ┌───────▼──────────────────────┐
     │ DO Managed MongoDB      │  │ cloud-2-archive-atl1         │
-    │ mooreview_cloud         │  │ mooreview-archive :8090      │
+    │ peaklogic_cloud         │  │ peaklogic-archive :8090      │
     │ automated backups ON    │  │ volume /data/archive         │
     └─────────────────────────┘  │ volume snapshots ON          │
                                  └──────────────────────────────┘
@@ -62,8 +62,8 @@ Deploy and verify production on **`atl1` using the droplet public IP** (or a tem
 
 | Resource | Name | Region | Notes |
 |----------|------|--------|-------|
-| VPC | `mooreview-prod-atl1` | atl1 | |
-| MongoDB cluster | `mooreview-prod-mongo` | atl1 | 10–20 GB; DB `mooreview_cloud` |
+| VPC | `peaklogic-prod-atl1` | atl1 | |
+| MongoDB cluster | `peaklogic-prod-mongo` | atl1 | 10–20 GB; DB `peaklogic_cloud` |
 | Droplet | `cloud-1-saas-atl1` | atl1 | 4 GB / 2 vCPU |
 | Droplet | `cloud-2-archive-atl1` | atl1 | 1–2 GB |
 | Volume | `archive-prod-atl1` | atl1 | 100 GB+ → `/data/archive` |
@@ -126,26 +126,26 @@ PUBLIC_API_URL=http://YOUR_DROPLET_IP
 ### After DNS cutover to production
 
 ```ini
-PUBLIC_APP_URL=https://mooreview.io
-PUBLIC_API_URL=https://mooreview.io
+PUBLIC_APP_URL=https://peaklogic.io
+PUBLIC_API_URL=https://peaklogic.io
 ```
 
 | File (cloud 1) | Template |
 |----------------|----------|
-| `/etc/mooreview/saas.env` | `deploy/cloud/phase1/droplet-saas/saas.env.template` |
-| `/etc/mooreview/mqtt.env` | `deploy/cloud/phase1/droplet-saas/mqtt.env.template` |
-| `/etc/mooreview/archive-compact.env` | `deploy/cloud/phase1/droplet-saas/archive-compact.env.template` |
+| `/etc/peaklogic/saas.env` | `deploy/cloud/phase1/droplet-saas/saas.env.template` |
+| `/etc/peaklogic/mqtt.env` | `deploy/cloud/phase1/droplet-saas/mqtt.env.template` |
+| `/etc/peaklogic/archive-compact.env` | `deploy/cloud/phase1/droplet-saas/archive-compact.env.template` |
 
 | File (cloud 2) | Template |
 |----------------|----------|
-| `/etc/mooreview/archive.env` | `deploy/cloud/phase1/droplet-archive/archive.env.template` |
+| `/etc/peaklogic/archive.env` | `deploy/cloud/phase1/droplet-archive/archive.env.template` |
 
 **`archive-compact.env`** — use cloud 2 **VPC private IP**:
 
 ```ini
 ARCHIVE_SERVER_URL=http://10.x.x.x:8090
 ARCHIVE_SERVER_TOKEN=<same as cloud 2 archive.env>
-MONGODB_DB=mooreview_cloud
+MONGODB_DB=peaklogic_cloud
 ```
 
 ---
@@ -159,11 +159,11 @@ MONGODB_DB=mooreview_cloud
 5. Mongo **Trusted sources** → cloud-1 **public** IP
 6. `npm run seed` (demo tenant)
 7. **Verify on IP** (see gate below) — *before DNS*
-8. `certbot --nginx -d mooreview.io -d www.mooreview.io` *(after DNS, or use `-d` with IP-only if using temporary name)*
+8. `certbot --nginx -d peaklogic.io -d www.peaklogic.io` *(after DNS, or use `-d` with IP-only if using temporary name)*
 9. `enable-saas-mqtt.sh` → `enable-phase1-archive-compact.sh`
 10. Dry-run compact job
-11. **DNS cutover** → `mooreview.io`
-12. Update `PUBLIC_*` in `saas.env` if needed → `systemctl restart mooreview-saas`
+11. **DNS cutover** → `peaklogic.io`
+12. Update `PUBLIC_*` in `saas.env` if needed → `systemctl restart peaklogic-saas`
 
 ---
 
@@ -179,7 +179,7 @@ Cloud 2 stays **same region as cloud 1** — no cross-region primary archive at 
 
 ---
 
-## Verification gate (before `mooreview.io` DNS)
+## Verification gate (before `peaklogic.io` DNS)
 
 Complete on **cloud-1 public IP** (or temporary A record):
 
@@ -192,13 +192,13 @@ curl -sI https://YOUR_DROPLET_IP/login   # after certbot, or http before TLS
 curl -s http://10.x.x.x:8090/health
 
 # MQTT
-mosquitto_pub -h 127.0.0.1 -u mooreview -P '...' -t test -m ok
+mosquitto_pub -h 127.0.0.1 -u peaklogic -P '...' -t test -m ok
 
 # Compact dry-run
-sudo -u mooreview bash -lc 'cd /home/mooreview && ARCHIVE_COMPACT_DRY_RUN=1 node scripts/run-archive-compact.js'
+sudo -u peaklogic bash -lc 'cd /home/peaklogic && ARCHIVE_COMPACT_DRY_RUN=1 node scripts/run-archive-compact.js'
 
 # Services
-systemctl status mooreview-saas mooreview-archive mosquitto
+systemctl status peaklogic-saas peaklogic-archive mosquitto
 systemctl list-timers | grep archive-compact
 ```
 
@@ -206,10 +206,10 @@ Browser: login org `demo`, Studio loads, Sites page reachable.
 
 **Only then:**
 
-1. Point **A** `mooreview.io` → cloud-1 public IP  
-2. Point **A/CNAME** `www.mooreview.io` → same  
+1. Point **A** `peaklogic.io` → cloud-1 public IP  
+2. Point **A/CNAME** `www.peaklogic.io` → same  
 3. Re-run certbot if certs were IP-only  
-4. Update appliance docs: `mqtts://mooreview.io:8883`
+4. Update appliance docs: `mqtts://peaklogic.io:8883`
 
 ---
 
@@ -217,9 +217,9 @@ Browser: login org `demo`, Studio loads, Sites page reachable.
 
 | Hostname | Target | When |
 |----------|--------|------|
-| `mooreview.io` | cloud-1-saas-atl1 public IP | After verification gate |
-| `www.mooreview.io` | same | With production cutover |
-| `test.mooreview.io` | NYC sandbox droplet IP | Independent; keep for sandbox |
+| `peaklogic.io` | cloud-1-saas-atl1 public IP | After verification gate |
+| `www.peaklogic.io` | same | With production cutover |
+| `test.peaklogic.io` | NYC sandbox droplet IP | Independent; keep for sandbox |
 
 Production and sandbox use **separate Mongo clusters** and **separate secrets** — do not point sandbox at prod Mongo.
 
@@ -241,14 +241,14 @@ Internet → DO LB :443 → cloud-1a / cloud-1b (nginx → :3100)
 
 ---
 
-## NYC1 sandbox (`test.mooreview.io`)
+## NYC1 sandbox (`test.peaklogic.io`)
 
 Single droplet for integration testing — **all Phase 1 functions on one box**:
 
 | Function | On sandbox droplet |
 |----------|-------------------|
 | SaaS :3100 | Yes |
-| nginx + TLS | Yes (`test.mooreview.io`) |
+| nginx + TLS | Yes (`test.peaklogic.io`) |
 | Mosquitto :8883 | Yes |
 | Archive :8090 | Yes (`127.0.0.1` — not a second droplet) |
 | Managed Mongo | Yes (`nyc1`, separate cluster) |
@@ -258,10 +258,10 @@ Env template: [deploy/cloud/phase1/droplet-sandbox/saas.env.template](../deploy/
 
 ```
 Region nyc1 — single droplet (2–4 GB)
-├── mooreview-saas :3100
-├── nginx → test.mooreview.io
+├── peaklogic-saas :3100
+├── nginx → test.peaklogic.io
 ├── Mosquitto :8883
-├── mooreview-archive :8090 → /var/lib/mooreview/archive (local disk)
+├── peaklogic-archive :8090 → /var/lib/peaklogic/archive (local disk)
 ├── archive-compact → http://127.0.0.1:8090
 └── Managed Mongo (nyc1, separate from prod)
 ```

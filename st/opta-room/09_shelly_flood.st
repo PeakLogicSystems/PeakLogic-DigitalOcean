@@ -6,7 +6,7 @@
 
    Each Shelly joins the Opta WiFi AP and pushes to
    http://192.168.4.1:8080/api/peripheral/shelly?dev=<n>&...
-   Slotted tags SHELLY<n>_* flow to MooreVIEW over PARC.
+   Slotted tags SHELLY<n>_* flow to PeakLogic over PARC.
 
    R1 = shutoff valve (energise on ANY leak).
    R2 = alarm (any leak OR any sensor offline).

@@ -1,11 +1,11 @@
-# Transfer mooreview-cloud to a Debian droplet at /home/mooreview (rsync over SSH).
-# Run from est-pc after sync-runtime-to-cloud.ps1 has updated mooreview-cloud.
+# Transfer peaklogic-cloud to a Debian droplet at /home/peaklogic (rsync over SSH).
+# Run from est-pc after sync-runtime-to-cloud.ps1 has updated peaklogic-cloud.
 param(
   [Parameter(Mandatory = $true)]
   [string]$DropletHost,
 
   [string]$CloudRoot = '',
-  [string]$RemotePath = '/home/mooreview',
+  [string]$RemotePath = '/home/peaklogic',
   [switch]$SkipSync,
   [switch]$DryRun
 )
@@ -13,17 +13,17 @@ param(
 $ErrorActionPreference = 'Stop'
 $EstRoot = if ($PSScriptRoot) { Split-Path $PSScriptRoot -Parent } else { Split-Path (Get-Location) -Parent }
 if (-not $CloudRoot) {
-  $CloudRoot = Join-Path (Split-Path $EstRoot -Parent) 'mooreview-cloud'
+  $CloudRoot = Join-Path (Split-Path $EstRoot -Parent) 'peaklogic-cloud'
 }
 $ExcludeFile = Join-Path $EstRoot 'deploy/cloud/debian/rsync-exclude.txt'
 
 if (-not $SkipSync) {
-  Write-Host 'Syncing est-pc runtime into mooreview-cloud…' -ForegroundColor Cyan
+  Write-Host 'Syncing est-pc runtime into peaklogic-cloud…' -ForegroundColor Cyan
   & (Join-Path $PSScriptRoot 'sync-runtime-to-cloud.ps1') -CloudRoot $CloudRoot
 }
 
 if (-not (Test-Path $CloudRoot)) {
-  throw "mooreview-cloud not found at $CloudRoot"
+  throw "peaklogic-cloud not found at $CloudRoot"
 }
 if (-not (Test-Path (Join-Path $CloudRoot 'server.js'))) {
   throw "Runtime entry server.js missing in $CloudRoot - run sync-runtime-to-cloud.ps1 first"
@@ -43,7 +43,7 @@ rsync not found in PATH. Install one of:
   - Git for Windows (add Git\usr\bin to PATH)
   - cwRsync / MSYS2
 
-Or transfer manually (from mooreview-cloud):
+Or transfer manually (from peaklogic-cloud):
   rsync -avz --delete --exclude-from=../est-pc/deploy/cloud/debian/rsync-exclude.txt ./ ${DropletHost}:${RemotePath}/
 "@
 }
@@ -73,5 +73,5 @@ if (Test-Path $estProjects) {
 Write-Host ''
 Write-Host 'Transfer complete. On the droplet:' -ForegroundColor Cyan
 Write-Host "  ssh $DropletHost"
-Write-Host "  sudo MOOREVIEW_SOURCE=$RemotePath MOOREVIEW_INSTALL_DIR=$RemotePath bash $RemotePath/deploy/cloud/debian/install.sh"
-Write-Host "  sudo -u mooreview bash -lc 'cd $RemotePath && npm run seed:bundled-projects'"
+Write-Host "  sudo PEAKLOGIC_SOURCE=$RemotePath PEAKLOGIC_INSTALL_DIR=$RemotePath bash $RemotePath/deploy/cloud/debian/install.sh"
+Write-Host "  sudo -u peaklogic bash -lc 'cd $RemotePath && npm run seed:bundled-projects'"

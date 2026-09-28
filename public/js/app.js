@@ -3,7 +3,7 @@
 (function () {
   const $ = (id) => document.getElementById(id);
 
-  function mooreviewApiFetch(method, path, query = null) {
+  function peaklogicApiFetch(method, path, query = null) {
     const q = new URLSearchParams();
     if (query && typeof query === 'object') {
       Object.entries(query).forEach(([k, v]) => {
@@ -25,17 +25,17 @@
 
   function patchReportMongoApi() {
     if (typeof api === 'undefined') return;
-    api.sysLogStatus = () => mooreviewApiFetch('GET', '/sys-log/status');
-    api.sysLogQuery = (params = {}) => mooreviewApiFetch('GET', '/sys-log', params);
-    api.mongoLoggerStatus = () => mooreviewApiFetch('GET', '/logger/mongo/status');
-    api.hardwareHistoryStatus = () => mooreviewApiFetch('GET', '/hardware-history/status');
+    api.sysLogStatus = () => peaklogicApiFetch('GET', '/sys-log/status');
+    api.sysLogQuery = (params = {}) => peaklogicApiFetch('GET', '/sys-log', params);
+    api.mongoLoggerStatus = () => peaklogicApiFetch('GET', '/logger/mongo/status');
+    api.hardwareHistoryStatus = () => peaklogicApiFetch('GET', '/hardware-history/status');
     api.hardwareHistory = (params = {}) => {
       const q = {};
       if (params.positionId) q.positionId = params.positionId;
       if (params.serial) q.serial = params.serial;
       if (params.recent) q.recent = '1';
       if (params.limit) q.limit = String(params.limit);
-      return mooreviewApiFetch('GET', '/hardware-history', q);
+      return peaklogicApiFetch('GET', '/hardware-history', q);
     };
   }
   patchReportMongoApi();
@@ -71,7 +71,7 @@
   let reportConfigDirty = false;
   const DEFAULT_MONGO_LOGGER = {
     uri: 'mongodb://127.0.0.1:27017',
-    db: 'mooreview',
+    db: 'peaklogic',
     collection: 'tag_logs',
     edgeCollection: 'edge_inference',
     sampleIntervalMs: 5000,
@@ -107,7 +107,7 @@
   let tagsDirty = false;
   let driversDirty = false;
   let tagSort = { key: 'id', dir: 'asc' };
-  const TAG_VIEW_FILTERS_KEY = 'mooreview-tags-view-filters';
+  const TAG_VIEW_FILTERS_KEY = 'peaklogic-tags-view-filters';
   const TAG_VIEW_FILTER_IDS = ['io', 'i', 'r', 'b', 'fb'];
   let tagViewFilters = readTagViewFilters();
   let projects = [];
@@ -134,11 +134,11 @@
   let authUsersForMatrix = [];
 
   function isApplianceDeployment() {
-    return window.MOOREVIEW_BUILD?.deployment === 'appliance';
+    return window.PEAKLOGIC_BUILD?.deployment === 'appliance';
   }
 
   function isCloudDeployment() {
-    return window.MOOREVIEW_BUILD?.deployment === 'cloud';
+    return window.PEAKLOGIC_BUILD?.deployment === 'cloud';
   }
 
   function authUserHasFeature(featureKey) {
@@ -909,7 +909,7 @@
     lastLive = live;
     updateAlarmsTabBadge(collectActiveAlarms(tags, lastLive).filter((r) => !r.acked).length);
     if (isPopupOpen('alarms')) renderAlarmsPanel();
-    window.MooreviewHmi?.refreshLiveBindings?.();
+    window.PeaklogicHmi?.refreshLiveBindings?.();
   }
 
   function renderAlarmsPanel() {
@@ -936,7 +936,7 @@
     const trs = rows.map(({ tag: t, live, level, acked, ackedBy, since }) => {
       const rowCls = acked ? 'alarm-row-acked' : `alarm-row-active alarm-row-${level}`;
       const sinceStr = since
-        ? (window.MooreviewTime?.formatFriendly?.(since) || new Date(since).toLocaleString(undefined, window.MooreviewTime?.localeOpts?.() || {}))
+        ? (window.PeaklogicTime?.formatFriendly?.(since) || new Date(since).toLocaleString(undefined, window.PeaklogicTime?.localeOpts?.() || {}))
         : '—';
       const ackHtml = acked
         ? (alarmAckCellHtml(true, ackedBy) || '<span class="muted">Acked</span>')
@@ -1947,13 +1947,13 @@
     }
   }
 
-  const TAGS_LAYOUT_KEY = 'mooreview-tags-layout';
+  const TAGS_LAYOUT_KEY = 'peaklogic-tags-layout';
   const TAGS_MIN_W = 720;
   const TAGS_MIN_H = 360;
   const TAGS_DEFAULT_W = 1480;
   const TAGS_DEFAULT_H = 720;
 
-  const LIVE_IO_LAYOUT_KEY = 'mooreview-live-io-layout';
+  const LIVE_IO_LAYOUT_KEY = 'peaklogic-live-io-layout';
   const LIVE_IO_MIN_W = 280;
   const LIVE_IO_MIN_H = 200;
   const LIVE_IO_DEFAULT_W = 420;
@@ -1966,23 +1966,23 @@
   let historianLoggerFloater = null;
   let alarmsFloater = null;
   let reportFloater = null;
-  const ALARMS_LAYOUT_KEY = 'mooreview-alarms-layout';
+  const ALARMS_LAYOUT_KEY = 'peaklogic-alarms-layout';
   const ALARMS_MIN_W = 480;
   const ALARMS_MIN_H = 280;
   const ALARMS_DEFAULT_W = 720;
   const ALARMS_DEFAULT_H = 420;
-  const REPORT_LAYOUT_KEY = 'mooreview-report-layout';
+  const REPORT_LAYOUT_KEY = 'peaklogic-report-layout';
   const REPORT_MIN_W = 560;
   const REPORT_MIN_H = 360;
   const REPORT_DEFAULT_W = 1150;
   const REPORT_DEFAULT_H = 720;
-  const HISTORIAN_LAYOUT_KEY = 'mooreview-historian-layout';
-  const HISTORIAN_CONFIG_LAYOUT_KEY = 'mooreview-historian-config-layout';
+  const HISTORIAN_LAYOUT_KEY = 'peaklogic-historian-layout';
+  const HISTORIAN_CONFIG_LAYOUT_KEY = 'peaklogic-historian-config-layout';
   const HISTORIAN_CONFIG_MIN_W = 640;
   const HISTORIAN_CONFIG_MIN_H = 400;
   const HISTORIAN_CONFIG_DEFAULT_W = 960;
   const HISTORIAN_CONFIG_DEFAULT_H = 560;
-  const HISTORIAN_LOGGER_LAYOUT_KEY = 'mooreview-historian-logger-layout';
+  const HISTORIAN_LOGGER_LAYOUT_KEY = 'peaklogic-historian-logger-layout';
   const HISTORIAN_LOGGER_MIN_W = 640;
   const HISTORIAN_LOGGER_MIN_H = 480;
   const HISTORIAN_LOGGER_DEFAULT_W = 920;
@@ -1999,7 +1999,7 @@
     if (!programFloater) programFloater = MvFloater.create({
       chromeId: 'program-chrome',
       popupName: 'program',
-      layoutKey: 'mooreview-program-layout',
+      layoutKey: 'peaklogic-program-layout',
       minW: 480,
       minH: 320,
       defaultW: 960,
@@ -2010,7 +2010,7 @@
       sizedClass: 'program-sized',
       onOpen() {
         setTabActive('program', true);
-        window.MooreviewProgram?.updateProgramRemoteUi?.(lastDashboardData);
+        window.PeaklogicProgram?.updateProgramRemoteUi?.(lastDashboardData);
         setTimeout(() => $('program-src')?.dispatchEvent(new Event('focus')), 0);
       },
       onClose() {
@@ -2559,7 +2559,7 @@
     applyLiveIoLayout(readLiveIoLayout());
     chrome.classList.remove('view-hidden');
     window.MvWindowStack?.onOpen(chrome);
-    window.MooreviewProgram?.renderProgramIoPanel(lastLive, lastRuntime);
+    window.PeaklogicProgram?.renderProgramIoPanel(lastLive, lastRuntime);
   }
 
   function closeLiveIoWindow() {
@@ -2587,7 +2587,7 @@
 
   function isPopupOpen(name) {
     if (name === 'hmi-setup') {
-      return !!window.MooreviewHmi?.isHmiSetupOpen?.();
+      return !!window.PeaklogicHmi?.isHmiSetupOpen?.();
     }
     if (name === 'live-io') {
       return isLiveIoOpen();
@@ -2951,19 +2951,19 @@
   function buildSettingsPayloadFromSetupForm() {
     const prev = lastSettings || {};
     let hmiCfg = null;
-    if (window.MooreviewHmi) {
-      const hmiDirty = window.MooreviewHmi.isDirty?.();
-      const hmiOpen = window.MooreviewHmi.isHmiSetupOpen?.();
+    if (window.PeaklogicHmi) {
+      const hmiDirty = window.PeaklogicHmi.isDirty?.();
+      const hmiOpen = window.PeaklogicHmi.isHmiSetupOpen?.();
       if (hmiDirty || hmiOpen) {
-        window.MooreviewHmi.syncFromFieldsIfDirty();
-        hmiCfg = window.MooreviewHmi.getConfigForSave?.() || window.MooreviewHmi.getConfig();
+        window.PeaklogicHmi.syncFromFieldsIfDirty();
+        hmiCfg = window.PeaklogicHmi.getConfigForSave?.() || window.PeaklogicHmi.getConfig();
       } else {
-        hmiCfg = prev.hmi || window.MooreviewHmi.getConfig?.();
+        hmiCfg = prev.hmi || window.PeaklogicHmi.getConfig?.();
       }
       if (hmiCfg) {
-        hmiCfg.activeScreen = window.MooreviewHmi.readStartingScreenFromSetup?.()
+        hmiCfg.activeScreen = window.PeaklogicHmi.readStartingScreenFromSetup?.()
           || hmiCfg.activeScreen
-          || window.MooreviewHmi.HOME_SCREEN_ID;
+          || window.PeaklogicHmi.HOME_SCREEN_ID;
       }
     }
     const formName = isPopupOpen('project') ? $('proj-name')?.value?.trim() : '';
@@ -2975,7 +2975,7 @@
       scanMs,
       timezone: $('proj-timezone')?.value
         || prev.timezone
-        || window.MooreviewTime?.DEFAULT_TIMEZONE
+        || window.PeaklogicTime?.DEFAULT_TIMEZONE
         || 'America/New_York',
       hmi: hmiCfg?.screens?.length ? hmiCfg : (prev.hmi || {}),
       activeProgram: activeProgram || null,
@@ -3007,7 +3007,7 @@
     return JSON.stringify({
       project: st.project || {},
       scanMs: st.scanMs ?? 100,
-      timezone: st.timezone || window.MooreviewTime?.DEFAULT_TIMEZONE || 'America/New_York',
+      timezone: st.timezone || window.PeaklogicTime?.DEFAULT_TIMEZONE || 'America/New_York',
       mongoLogger: st.mongoLogger || {},
       startup: st.startup || {},
       autoStartRuntime: st.autoStartRuntime === true,
@@ -3067,7 +3067,7 @@
       await persistCurrentProjectSnapshot();
     }
     clearSetupDirty();
-    window.MooreviewHmi?.clearDirty?.();
+    window.PeaklogicHmi?.clearDirty?.();
     mongoLoggerDirty = false;
     if (!opts.quiet && $('proj-msg')) {
       $('proj-msg').textContent = 'Settings and workspace saved';
@@ -3107,12 +3107,12 @@
     if (!btn) return;
     const id = sectionId || 'start';
     btn.dataset.helpSection = id;
-    const title = window.MooreviewHelp?.sectionTitle?.(id) || 'Help';
+    const title = window.PeaklogicHelp?.sectionTitle?.(id) || 'Help';
     btn.title = `Help: ${title}`;
   }
 
   function openContextHelp(sectionId) {
-    const help = window.MooreviewHelp;
+    const help = window.PeaklogicHelp;
     const id = help?.SECTION_IDS?.has(sectionId) ? sectionId : 'start';
     openPopup('help');
     requestAnimationFrame(() => help?.scrollToSection?.(id));
@@ -3142,7 +3142,7 @@
   }
 
   function fillSetupHmiSummary() {
-    const cfg = window.MooreviewHmi?.getConfig?.();
+    const cfg = window.PeaklogicHmi?.getConfig?.();
     const screens = cfg?.screens || lastSettings?.hmi?.screens || [];
     const bindings = cfg?.bindings || lastSettings?.hmi?.bindings || [];
     const countEl = $('setup-hmi-screen-count');
@@ -3150,7 +3150,7 @@
     const homeEl = $('setup-hmi-home-label');
     if (countEl) countEl.textContent = String(screens.length);
     if (bindEl) bindEl.textContent = String(bindings.length);
-    window.MooreviewHmi?.updateHomeScreenLabel?.();
+    window.PeaklogicHmi?.updateHomeScreenLabel?.();
     if (homeEl) {
       const sel = $('proj-hmi-home-screen');
       const opt = sel?.selectedOptions?.[0];
@@ -3412,8 +3412,8 @@
     if ($('cmms-broker-url')) $('cmms-broker-url').value = c.brokerUrl || 'mqtt://127.0.0.1:1883';
     if ($('cmms-site-id')) $('cmms-site-id').value = c.siteId || 'local';
     if ($('cmms-tenant-id')) $('cmms-tenant-id').value = c.tenantId || 'local';
-    if ($('cmms-topic-prefix')) $('cmms-topic-prefix').value = c.topicPrefix || 'mooreview/v1';
-    if ($('cmms-client-id')) $('cmms-client-id').value = c.clientId || 'mooreview-cmms';
+    if ($('cmms-topic-prefix')) $('cmms-topic-prefix').value = c.topicPrefix || 'peaklogic/v1';
+    if ($('cmms-client-id')) $('cmms-client-id').value = c.clientId || 'peaklogic-cmms';
     if ($('cmms-publish-alarms')) $('cmms-publish-alarms').checked = c.publishAlarmTopic !== false;
     if ($('cmms-publish-notify')) $('cmms-publish-notify').checked = c.publishNotifyTopic !== false;
   }
@@ -3424,8 +3424,8 @@
       brokerUrl: $('cmms-broker-url')?.value?.trim() || 'mqtt://127.0.0.1:1883',
       siteId: $('cmms-site-id')?.value?.trim() || 'local',
       tenantId: $('cmms-tenant-id')?.value?.trim() || 'local',
-      topicPrefix: $('cmms-topic-prefix')?.value?.trim() || 'mooreview/v1',
-      clientId: $('cmms-client-id')?.value?.trim() || 'mooreview-cmms',
+      topicPrefix: $('cmms-topic-prefix')?.value?.trim() || 'peaklogic/v1',
+      clientId: $('cmms-client-id')?.value?.trim() || 'peaklogic-cmms',
       publishAlarmTopic: $('cmms-publish-alarms')?.checked !== false,
       publishNotifyTopic: $('cmms-publish-notify')?.checked !== false,
     };
@@ -3459,9 +3459,9 @@
   function openPopup(name) {
     const el = document.querySelector(`[data-popup="${name}"]`);
     if (!el && name !== 'hmi-setup') return;
-    if (name === 'help' && window.MooreviewHelp) MooreviewHelp.ensureRendered();
+    if (name === 'help' && window.PeaklogicHelp) PeaklogicHelp.ensureRendered();
     if (name === 'hmi-setup') {
-      window.MooreviewHmi?.openSetupPopup();
+      window.PeaklogicHmi?.openSetupPopup();
       setTabActive(name, true);
       return;
     }
@@ -3534,10 +3534,10 @@
       ensureDevicePresets().then(fillDevicePresetUi);
     }
     if (name === 'cameras') {
-      window.MooreviewCameras?.open?.();
+      window.PeaklogicCameras?.open?.();
     }
-    if (name === 'training' && window.MooreviewTraining) {
-      MooreviewTraining.ensureRendered();
+    if (name === 'training' && window.PeaklogicTraining) {
+      PeaklogicTraining.ensureRendered();
     }
     if (name === 'historian') {
       historianHoverState = null;
@@ -3562,7 +3562,7 @@
 
   async function closePopup(name) {
     if (name === 'hmi-setup') {
-      const closed = window.MooreviewHmi?.closeSetupPopup?.();
+      const closed = window.PeaklogicHmi?.closeSetupPopup?.();
       if (closed !== false) setTabActive(name, false);
       return;
     }
@@ -3715,7 +3715,7 @@
   }
 
   async function printProjectConfigurationDoc() {
-    const printMod = window.MooreviewProjectConfigPrint;
+    const printMod = window.PeaklogicProjectConfigPrint;
     if (!printMod?.print) {
       alert('Print module not loaded');
       return;
@@ -3727,7 +3727,7 @@
     } catch {
       /* optional runtime line */
     }
-    let programList = window.MooreviewProgram?.getProgramCatalog?.() || [];
+    let programList = window.PeaklogicProgram?.getProgramCatalog?.() || [];
     if (!programList.length) {
       try {
         const r = await api.listPrograms();
@@ -3740,7 +3740,7 @@
       ...(lastSettings || {}),
       ...(isPopupOpen('project') ? buildSettingsPayloadFromSetupForm() : {}),
     };
-    const hmi = window.MooreviewHmi?.getConfig?.() || settings.hmi || {};
+    const hmi = window.PeaklogicHmi?.getConfig?.() || settings.hmi || {};
     const r = printMod.print({
       projectName: settings.project?.name || projectName || 'untitled',
       appVersion: health.version || '',
@@ -3918,7 +3918,7 @@
     const prefix = est.cloudSizing ? 'Cloud sizing' : 'Deploy estimate';
     let line = `${prefix}: ${devTxt} → ${tagTxt} · ${pollTxt} · ${loadTxt}`;
     if (est.overLimit && est.recommendedMaxTags) {
-      line += ` · need MOOREVIEW_MAX_TAGS≥${est.recommendedMaxTags}`;
+      line += ` · need PEAKLOGIC_MAX_TAGS≥${est.recommendedMaxTags}`;
     } else if (est.cloudSizing && !est.overLimit) {
       line += ` · within cloud tag cap (${est.maxTags})`;
     }
@@ -3927,7 +3927,7 @@
       ? 'prog-deploy-estimate err cell-mono'
       : (est.pct >= 80 ? 'prog-deploy-estimate warn cell-mono' : 'prog-deploy-estimate muted cell-mono');
     el.title = est.overLimit
-      ? `Over tag limit by ${Math.abs(est.headroom)} — cloud VM: set MOOREVIEW_MAX_TAGS=${est.recommendedMaxTags} in /etc/mooreview/env`
+      ? `Over tag limit by ${Math.abs(est.headroom)} — cloud VM: set PEAKLOGIC_MAX_TAGS=${est.recommendedMaxTags} in /etc/peaklogic/env`
       : (est.cloudSizing
         ? 'Cloud hub sizing — 15 sites × 1500 devices, 3 tags/device, 15 min poll'
         : 'Planning estimate (3 tags/device + 2 status tags per driver)');
@@ -4187,7 +4187,7 @@
       return '\n\nNextCentury tips:\n• Use Drivers → NextCentury API tab (not Modbus/COM)\n• Set email + password, then Save & connect\n• Or set NEXTCENTURY_EMAIL / NEXTCENTURY_PASSWORD env vars';
     }
     if (d.type === 'opta_remote') {
-      return `\n\nOpta tips:\n• Test on this PC: npm run opta-test\n• Browser must use Ethernet http://${d.host || '192.168.1.234'}/api/status (not WiFi AP :8080)\n• Re-flash est-pc/firmware/arduino-opta-st/MooreviewOptaSt\n• Serial @115200: expect "GET /api/status" when you Test`;
+      return `\n\nOpta tips:\n• Test on this PC: npm run opta-test\n• Browser must use Ethernet http://${d.host || '192.168.1.234'}/api/status (not WiFi AP :8080)\n• Re-flash est-pc/firmware/arduino-opta-st/PeaklogicOptaSt\n• Serial @115200: expect "GET /api/status" when you Test`;
     }
     if (d.type === 'mqtt_parc') {
       return '\n\nMQTT Parc tips:\n• Start Mosquitto (npm run mqtt:start)\n• Check System setup → mqttParc broker URL\n• deviceId must match Opta firmware\n• Wait for telemetry before Sync tags';
@@ -4555,13 +4555,13 @@
     $('btn-features-user-save')?.addEventListener('click', () => saveFeatUserForm().catch(console.error));
     $('btn-features-user-cancel')?.addEventListener('click', () => resetFeatUserForm());
     $('btn-topbar-logout')?.addEventListener('click', () => {
-      window.MooreviewSignOut?.perform?.();
+      window.PeaklogicSignOut?.perform?.();
     });
     $('btn-help-sign-out')?.addEventListener('click', () => {
-      window.MooreviewSignOut?.perform?.();
+      window.PeaklogicSignOut?.perform?.();
     });
     $('btn-cloud-nav-logout')?.addEventListener('click', () => {
-      window.MooreviewSignOut?.perform?.();
+      window.PeaklogicSignOut?.perform?.();
     });
     document.querySelectorAll('[data-drivers-tab-btn]').forEach((b) => {
       b.onclick = () => showDriversTab(b.dataset.driversTabBtn);
@@ -4737,7 +4737,7 @@
     bindProjectMenu();
     bindDataMenu();
     window.addEventListener('resize', () => {
-      window.MooreviewHmi?.clampHmiSetupOnResize();
+      window.PeaklogicHmi?.clampHmiSetupOnResize();
       clampLiveIoOnResize();
       programFloater?.clampOnResize();
       tagsFloater?.clampOnResize();
@@ -4781,7 +4781,7 @@
   }
   function liveValCellHtml(tag, liveEntry) {
     const val = esc(formatLive(tag, liveEntry));
-    const tsApi = window.MooreviewIoTimestamp;
+    const tsApi = window.PeaklogicIoTimestamp;
     const stopped = !runtimeScanActive(lastRuntime);
     const ts = liveEntry?.updatedAt;
     const tsHtml = tsApi?.ioTsSpan?.(ts, { stopped }) || '';
@@ -5195,8 +5195,8 @@
   }
 
   function finishDashboardBoot(data) {
-    if (data?.activeProgram) MooreviewProgram?.setProgramActivePath(data.activeProgram);
-    MooreviewProgram?.setStEditorPath(data?.activeProgram);
+    if (data?.activeProgram) PeaklogicProgram?.setProgramActivePath(data.activeProgram);
+    PeaklogicProgram?.setStEditorPath(data?.activeProgram);
     refreshProjectLibrary().catch(console.error);
     refreshPdmAssetLists().catch(console.error);
     const urlParams = new URLSearchParams(location.search);
@@ -5204,7 +5204,7 @@
     const projectParam = urlParams.get('project');
     const openParam = urlParams.get('open');
     const runHmi = () => {
-      if (hmiParam) MooreviewHmi?.openFromUrlParam?.(hmiParam, { force: true });
+      if (hmiParam) PeaklogicHmi?.openFromUrlParam?.(hmiParam, { force: true });
     };
     const deepLink = projectParam && openParam === '1'
       ? openProjectById(projectParam, { silent: true }).then(runHmi)
@@ -5212,7 +5212,7 @@
     return deepLink.then(() => {
     const composerOpen = urlParams.get('composerOpen');
     if (composerOpen) {
-      MooreviewHmi?.openComposerEditing?.(composerOpen);
+      PeaklogicHmi?.openComposerEditing?.(composerOpen);
       urlParams.delete('composerOpen');
       const qs = urlParams.toString();
       history.replaceState(null, '', qs ? `${location.pathname}?${qs}` : location.pathname);
@@ -5993,7 +5993,7 @@
     if (t === 'mqtt') {
       return `<div class="driver-fields form-grid compact">
         <label>Broker <input data-df="brokerUrl" value="${esc(d.brokerUrl || d.broker || 'mqtt://127.0.0.1')}"></label>
-        <label>Client ID <input data-df="clientId" value="${esc(d.clientId || 'mooreview')}"></label>
+        <label>Client ID <input data-df="clientId" value="${esc(d.clientId || 'peaklogic')}"></label>
       </div>`;
     }
     if (t === 'https') {
@@ -6052,7 +6052,7 @@
       const i2cBus = hc.i2cBus != null ? hc.i2cBus : 1;
       return `<div class="driver-fields form-grid compact">
         <label>Backend <select data-df="backend">${opts(['sim', 'native'], d.backend || 'sim')}</select></label>
-        <label>Plugin path <input data-df="pluginPath" value="${esc(d.pluginPath || '')}" placeholder="/usr/lib/libmooreview_hal_sm_i001.so"></label>
+        <label>Plugin path <input data-df="pluginPath" value="${esc(d.pluginPath || '')}" placeholder="/usr/lib/libpeaklogic_hal_sm_i001.so"></label>
         <label>Stack level <input data-hal-cfg="stack" type="number" min="0" max="7" value="${stack}" title="HAT stack 0–7 (SM-I-001 jumpers)"></label>
         <label>I2C bus <input data-hal-cfg="i2cBus" type="number" min="0" max="10" value="${i2cBus}" title="/dev/i2c-N (usually 1 on Pi 4)"></label>
         <p class="muted panel-hint">Tag pins: <code>DI0</code>, <code>DO0</code>, <code>AI0</code>, <code>AO0</code>, <code>CNT0</code>. Presets: <strong>Built-in HAL (sim)</strong>, <strong>Raspberry Pi 4 + Sequent SM-I-001</strong>. <code>stack</code> / <code>i2cBus</code> passed to the board <code>.so</code> as <code>halConfig</code>.</p>
@@ -6133,7 +6133,7 @@
   }
 
   function formatTs(value) {
-    return window.MooreviewTime?.formatDateTime?.(value)
+    return window.PeaklogicTime?.formatDateTime?.(value)
       || String(value || '').slice(0, 19).replace('T', ' ');
   }
 
@@ -6197,7 +6197,7 @@
     const msg = err?.message || String(err || 'Load failed');
     if (/Cellular SIM management requires|Cloud sim management requires/i.test(msg)) {
       const where = context ? ` (${context})` : '';
-      return `Server blocked a non-connectivity API${where}. Restart MooreView (npm restart), then reopen Reports.`;
+      return `Server blocked a non-connectivity API${where}. Restart PeakLogic (npm restart), then reopen Reports.`;
     }
     if (/Authentication required/i.test(msg)) {
       return 'Session expired — sign in again, then reopen Reports.';
@@ -6206,11 +6206,11 @@
   }
 
   async function reportMongoSysLogQuery(params = {}) {
-    return mooreviewApiFetch('GET', '/sys-log', params);
+    return peaklogicApiFetch('GET', '/sys-log', params);
   }
 
   async function reportMongoMqttBrokerLog(params = {}) {
-    return mooreviewApiFetch('GET', '/mqtt-broker-log', params);
+    return peaklogicApiFetch('GET', '/mqtt-broker-log', params);
   }
 
   function formatMqttBrokerEventLabel(entry) {
@@ -6255,7 +6255,7 @@
     const q = {};
     if (params.recent) q.recent = '1';
     if (params.limit) q.limit = String(params.limit);
-    return mooreviewApiFetch('GET', '/hardware-history', q);
+    return peaklogicApiFetch('GET', '/hardware-history', q);
   }
 
   function formatReportSysLogHtml(entries) {
@@ -6603,10 +6603,10 @@
     }
     try {
       const [sysRes, hwRes, tagRes, mqttRes] = await Promise.allSettled([
-        mooreviewApiFetch('GET', '/sys-log/status'),
-        mooreviewApiFetch('GET', '/hardware-history/status'),
-        mooreviewApiFetch('GET', '/logger/mongo/status'),
-        mooreviewApiFetch('GET', '/mqtt-broker-log/status'),
+        peaklogicApiFetch('GET', '/sys-log/status'),
+        peaklogicApiFetch('GET', '/hardware-history/status'),
+        peaklogicApiFetch('GET', '/logger/mongo/status'),
+        peaklogicApiFetch('GET', '/mqtt-broker-log/status'),
       ]);
       const sysSt = sysRes.status === 'fulfilled' ? sysRes.value : { enabled: false, fallback: true };
       const hwSt = hwRes.status === 'fulfilled' ? hwRes.value : { enabled: false, fallback: true };
@@ -6873,7 +6873,7 @@
   }
 
   function openHwWizard(options = {}) {
-    window.MooreviewHwWizard?.open({
+    window.PeaklogicHwWizard?.open({
       transportGroups: wizardTransportGroups,
       presets: devicePresets,
       serialPorts,
@@ -6893,13 +6893,13 @@
 
   function maybePromptHwWizard(data) {
     try {
-      if (sessionStorage.getItem('mooreview-hw-wizard-dismissed')) return;
+      if (sessionStorage.getItem('peaklogic-hw-wizard-dismissed')) return;
       const noDrivers = !(data?.drivers?.length);
       const fewTags = (data?.tagCount ?? 0) < 2;
       if (!noDrivers && !fewTags) return;
-      sessionStorage.setItem('mooreview-hw-wizard-dismissed', '1');
+      sessionStorage.setItem('peaklogic-hw-wizard-dismissed', '1');
       if (window.confirm(
-        'Welcome to MooreView.\n\nOpen the Hardware wizard to connect your first device template?'
+        'Welcome to PeakLogic.\n\nOpen the Hardware wizard to connect your first device template?'
       )) {
         openHwWizard();
       }
@@ -7508,8 +7508,8 @@
   function updateLiveValues(live, runtime) {
     lastLive = live || [];
     if (runtime) lastRuntime = runtime;
-    window.MooreviewProgram?.updateProgramIoLive(live, runtime || lastRuntime);
-    window.MooreviewProgram?.updateProgramTrace(runtime?.programTrace, runtime || lastRuntime);
+    window.PeaklogicProgram?.updateProgramIoLive(live, runtime || lastRuntime);
+    window.PeaklogicProgram?.updateProgramTrace(runtime?.programTrace, runtime || lastRuntime);
     if (editingTags && tagEditRow != null) return;
     const map = new Map((live || []).map((t) => [t.tagId, t]));
     document.querySelectorAll('[data-live]').forEach((cell) => {
@@ -7521,7 +7521,7 @@
       const valEl = cell.querySelector('.live-val-text');
       if (valEl) valEl.textContent = formatLive(tag, entry);
       else cell.textContent = formatLive(tag, entry);
-      const tsApi = window.MooreviewIoTimestamp;
+      const tsApi = window.PeaklogicIoTimestamp;
       let tsEl = cell.querySelector('.io-ts');
       if (!tsEl && tsApi?.ioTsSpan) {
         tsEl = document.createElement('span');
@@ -7537,7 +7537,7 @@
       tag.alarmLevel = t.alarmLevel ?? tag.alarmLevel;
       cell.innerHTML = tagAlarmStateHtml(tag, t);
     });
-    window.MooreviewHmi?.refreshLiveBindings(live);
+    window.PeaklogicHmi?.refreshLiveBindings(live);
   }
 
   function opts(list, sel) {
@@ -7551,11 +7551,11 @@
   /** Saved-project timestamp in workspace timezone (Mongo stores UTC ISO). */
   function formatProjectSavedAt(iso) {
     if (!iso) return '';
-    if (window.MooreviewTime?.formatFriendly) return window.MooreviewTime.formatFriendly(iso);
+    if (window.PeaklogicTime?.formatFriendly) return window.PeaklogicTime.formatFriendly(iso);
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return String(iso).slice(0, 19);
     return d.toLocaleString(undefined, {
-      timeZone: window.MooreviewTime?.getTimezone?.() || 'America/New_York',
+      timeZone: window.PeaklogicTime?.getTimezone?.() || 'America/New_York',
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -7565,7 +7565,7 @@
   }
 
   function projectFormatLabel(p) {
-    return window.MooreviewProjectListSort?.typeLabel(p)
+    return window.PeaklogicProjectListSort?.typeLabel(p)
       || (() => {
         const f = String(p?.format || '').toLowerCase();
         if (f === 'zip' || f === 'archive') return 'est.zip';
@@ -7575,7 +7575,7 @@
   }
 
   function projectSortValue(p, key) {
-    if (window.MooreviewProjectListSort) return window.MooreviewProjectListSort.sortValue(p, key);
+    if (window.PeaklogicProjectListSort) return window.PeaklogicProjectListSort.sortValue(p, key);
     if (key === 'date') return String(p?.savedAt || p?.updatedAt || '');
     if (key === 'type') return projectFormatLabel(p).toLowerCase() || 'project';
     return String(p?.name || p?.file || p?.id || '').toLowerCase();
@@ -7583,8 +7583,8 @@
 
   function sortProjectItems(items, scope) {
     const state = projectListSort[scope] || { key: 'date', dir: 'desc' };
-    if (window.MooreviewProjectListSort) {
-      return window.MooreviewProjectListSort.sortItems(items, state);
+    if (window.PeaklogicProjectListSort) {
+      return window.PeaklogicProjectListSort.sortItems(items, state);
     }
     const mul = state.dir === 'asc' ? 1 : -1;
     return [...(Array.isArray(items) ? items : [])].sort((a, b) => {
@@ -7599,25 +7599,25 @@
   function syncProjectSortButtons(scope) {
     const state = projectListSort[scope];
     if (!state) return;
-    window.MooreviewProjectListSort?.syncButtons(scope, state);
+    window.PeaklogicProjectListSort?.syncButtons(scope, state);
   }
 
   function cycleProjectSort(scope, key) {
     const state = projectListSort[scope];
     if (!state || !key) return;
-    window.MooreviewProjectListSort?.cycleSort(state, key);
+    window.PeaklogicProjectListSort?.cycleSort(state, key);
   }
 
   function normalizeProjectRecord(p, defaults) {
-    if (window.MooreviewProjectListSort) {
-      return window.MooreviewProjectListSort.normalizeRecord(p, defaults);
+    if (window.PeaklogicProjectListSort) {
+      return window.PeaklogicProjectListSort.normalizeRecord(p, defaults);
     }
     return p;
   }
 
   function projectOptionLabel(p) {
-    if (window.MooreviewProjectListSort) {
-      return window.MooreviewProjectListSort.optionLabel(p);
+    if (window.PeaklogicProjectListSort) {
+      return window.PeaklogicProjectListSort.optionLabel(p);
     }
     const name = p.name || p.file || p.id || '';
     const type = projectFormatLabel(p);
@@ -7638,8 +7638,8 @@
         const key = btn.getAttribute('data-project-sort');
         cycleProjectSort(scope, key);
         syncProjectSortButtons(scope);
-        if (scope === 'hub' && isCloudDeployment() && window.MooreviewProjectHubUi?.refreshHubList) {
-          window.MooreviewProjectHubUi.refreshHubList().catch(console.error);
+        if (scope === 'hub' && isCloudDeployment() && window.PeaklogicProjectHubUi?.refreshHubList) {
+          window.PeaklogicProjectHubUi.refreshHubList().catch(console.error);
           return;
         }
         if (scope === 'picker') fillProjectPickerList(projects, $('project-picker-list')?.value);
@@ -7894,8 +7894,8 @@
     const el = $('proj-mqtt-hub-status');
     if (!el) return;
     const mqtt = lastDashboardData?.parc?.mqtt;
-    const cloud = window.MOOREVIEW_BUILD?.deployment === 'cloud'
-      || window.MOOREVIEW_DEPLOYMENT === 'cloud';
+    const cloud = window.PEAKLOGIC_BUILD?.deployment === 'cloud'
+      || window.PEAKLOGIC_DEPLOYMENT === 'cloud';
     if (!mqtt) {
       el.textContent = cloud
         ? 'Platform MQTT hub status unknown — refresh after SaaS restart.'
@@ -7908,7 +7908,7 @@
       el.textContent = `MQTT hub not connected${mqtt.brokerUrl ? ` (${mqtt.brokerUrl})` : ''}. Restart SaaS or check the broker.`;
     } else {
       el.textContent = cloud
-        ? 'Platform MQTT hub is off — check MOOREVIEW_MQTT_BROKER on the SaaS host.'
+        ? 'Platform MQTT hub is off — check PEAKLOGIC_MQTT_BROKER on the SaaS host.'
         : 'MQTT Parc hub is disabled.';
     }
   }
@@ -7942,8 +7942,8 @@
     if ($('proj-mqtt-parc-auto-discover')) {
       $('proj-mqtt-parc-auto-discover').checked = mp.autoDiscoverDrivers === true;
     }
-    const cloud = window.MOOREVIEW_BUILD?.deployment === 'cloud'
-      || window.MOOREVIEW_DEPLOYMENT === 'cloud';
+    const cloud = window.PEAKLOGIC_BUILD?.deployment === 'cloud'
+      || window.PEAKLOGIC_DEPLOYMENT === 'cloud';
     for (const id of ['proj-mqtt-parc-broker', 'proj-mqtt-parc-user', 'proj-mqtt-parc-pass']) {
       if ($(id)) $(id).readOnly = cloud;
     }
@@ -7956,7 +7956,7 @@
       enabled: !!$('proj-mqtt-parc-enabled')?.checked,
       brokerUrl: $('proj-mqtt-parc-broker')?.value?.trim() || prev.brokerUrl || 'mqtt://127.0.0.1:1883',
       globalSiteKey: $('proj-mqtt-parc-global-site-key')?.value?.trim() || '0x0001',
-      topicPrefix: prev.topicPrefix || 'mooreview/v1',
+      topicPrefix: prev.topicPrefix || 'peaklogic/v1',
       clientId: prev.clientId || 'mv-central-hmi',
       username: $('proj-mqtt-parc-user')?.value?.trim() || prev.username || '',
       password: $('proj-mqtt-parc-pass')?.value !== undefined && $('proj-mqtt-parc-pass')?.value !== ''
@@ -7991,8 +7991,8 @@
       tenantId: $('proj-cloud-tenant-id')?.value?.trim() || '',
       gatewayId: $('proj-cloud-gateway-id')?.value?.trim() || '',
       brokerUrl: $('proj-cloud-broker-url')?.value?.trim() || prev.brokerUrl || 'mqtt://127.0.0.1:1883',
-      topicPrefix: prev.topicPrefix || 'mooreview/v1',
-      clientId: prev.clientId || 'mooreview-appliance-remote',
+      topicPrefix: prev.topicPrefix || 'peaklogic/v1',
+      clientId: prev.clientId || 'peaklogic-appliance-remote',
       username: $('proj-cloud-mqtt-user')?.value?.trim() || prev.username || '',
       password: $('proj-cloud-mqtt-pass')?.value !== undefined && $('proj-cloud-mqtt-pass')?.value !== ''
         ? $('proj-cloud-mqtt-pass').value
@@ -8792,7 +8792,7 @@
     const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `MooreView_PdM_${assetId.replace(/[^\w.-]+/g, '_')}_${stamp}.pdf`;
+    a.download = `PeakLogic_PdM_${assetId.replace(/[^\w.-]+/g, '_')}_${stamp}.pdf`;
     a.click();
     URL.revokeObjectURL(a.href);
     if (msgEl) { msgEl.textContent = `PdM PDF downloaded for ${assetId}`; msgEl.className = 'muted ok-text'; }
@@ -8907,7 +8907,7 @@
   }
 
   function refreshRoiCalculatorDisplay() {
-    const calc = window.MooreviewRoi;
+    const calc = window.PeaklogicRoi;
     if (!calc) return;
     const roi = readRoiFields();
     const leak = calc.computeLeakDetectionRoi(roi.leakDetection);
@@ -9126,7 +9126,7 @@
     const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `MooreView_pdm_${pdmAssetId || 'asset'}_${Date.now()}.csv`;
+    a.download = `PeakLogic_pdm_${pdmAssetId || 'asset'}_${Date.now()}.csv`;
     a.click();
     URL.revokeObjectURL(a.href);
   }
@@ -9177,9 +9177,9 @@
 
   function applyDisplayTimezone(settings = lastSettings) {
     const tz = settings?.timezone
-      || window.MooreviewTime?.DEFAULT_TIMEZONE
+      || window.PeaklogicTime?.DEFAULT_TIMEZONE
       || 'America/New_York';
-    window.MooreviewTime?.setTimezone?.(tz);
+    window.PeaklogicTime?.setTimezone?.(tz);
     return tz;
   }
 
@@ -9187,15 +9187,15 @@
     const sel = $('proj-timezone');
     if (!sel) return;
     const tz = st?.timezone
-      || window.MooreviewTime?.getTimezone?.()
+      || window.PeaklogicTime?.getTimezone?.()
       || 'America/New_York';
-    if (window.MooreviewTime?.isValidTimeZone?.(tz) && ![...sel.options].some((o) => o.value === tz)) {
+    if (window.PeaklogicTime?.isValidTimeZone?.(tz) && ![...sel.options].some((o) => o.value === tz)) {
       const opt = document.createElement('option');
       opt.value = tz;
       opt.textContent = tz;
       sel.insertBefore(opt, sel.firstChild);
     }
-    sel.value = window.MooreviewTime?.isValidTimeZone?.(tz) ? tz : 'America/New_York';
+    sel.value = window.PeaklogicTime?.isValidTimeZone?.(tz) ? tz : 'America/New_York';
   }
 
   function applySettingsResponse(res) {
@@ -9477,8 +9477,8 @@
         alert('Purge end time must be after start time');
         return;
       }
-      const a = window.MooreviewTime?.formatFriendly?.(from) || new Date(from).toLocaleString();
-      const b = window.MooreviewTime?.formatFriendly?.(to) || new Date(to).toLocaleString();
+      const a = window.PeaklogicTime?.formatFriendly?.(from) || new Date(from).toLocaleString();
+      const b = window.PeaklogicTime?.formatFriendly?.(to) || new Date(to).toLocaleString();
       if (!confirm(`Delete MongoDB historian documents from ${a} to ${b}?`)) return;
       if (msgEl) msgEl.textContent = 'Purging…';
       try {
@@ -9591,7 +9591,7 @@
       title: 'Historian Report',
       subtitle: '',
       company: '',
-      footer: 'MooreView historian export',
+      footer: 'PeakLogic historian export',
       pageSize: 'A4',
       orientation: 'landscape',
       chartMaxHeight: 220,
@@ -9708,7 +9708,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `MooreView_${assetPart}${safe}_${stamp}.pdf`;
+      a.download = `PeakLogic_${assetPart}${safe}_${stamp}.pdf`;
       a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
@@ -9778,7 +9778,7 @@
 
 
   function dashboardPollMsFromSettings(settings) {
-    return window.MooreviewHmiViewMode?.hmiPollMsFromSettings?.(settings ?? lastSettings) ?? 2_000;
+    return window.PeaklogicHmiViewMode?.hmiPollMsFromSettings?.(settings ?? lastSettings) ?? 2_000;
   }
 
   function restartDashboardPoll() {
@@ -9798,8 +9798,8 @@
   }
 
   function startLiveWebSocket() {
-    if (!window.MooreviewLiveWs) return;
-    window.MooreviewLiveWs.start({
+    if (!window.PeaklogicLiveWs) return;
+    window.PeaklogicLiveWs.start({
       onMessage: (data) => {
         applyLivePollData(data);
       },
@@ -9840,7 +9840,7 @@
     if (Array.isArray(data.live)) syncTagsFromLive(data.live);
     updateStatusCards(data.runtime, { count: data.tagCount ?? tags.length }, data.driverHealth);
     updateRuntimeButtons(data.runtime);
-    window.MooreviewProgram?.updateProgramIoLive(data.live, data.runtime);
+    window.PeaklogicProgram?.updateProgramIoLive(data.live, data.runtime);
     if (data.graph) lastGraphHistory = data.graph;
     if (isPopupOpen('historian') || isPopupOpen('report')) {
       if (historianSource === 'live' && !historianUseCustom) syncHistorianPresetDates();
@@ -9858,7 +9858,7 @@
     }
     if (isPopupOpen('alarms')) renderAlarmsPanel();
     else updateAlarmsTabBadge(collectActiveAlarms(tags, data.live).filter((r) => !r.acked).length);
-    window.MooreviewHmi?.refreshLiveBindings?.(data.live);
+    window.PeaklogicHmi?.refreshLiveBindings?.(data.live);
   }
 
   async function refreshLive(opts = {}) {
@@ -9920,8 +9920,8 @@
     }
     if (!data) return lastDashboardData;
     try {
-    if (data.activeProgram && !MooreviewProgram?.getProgramActivePath?.()) {
-      MooreviewProgram?.setProgramActivePath(data.activeProgram);
+    if (data.activeProgram && !PeaklogicProgram?.getProgramActivePath?.()) {
+      PeaklogicProgram?.setProgramActivePath(data.activeProgram);
     }
     if (!editingTags && tagEditRow == null && !tagsDirty) {
       tags = data.tags;
@@ -9952,8 +9952,8 @@
     }
     updateStatusCards(data.runtime, { count: data.tagCount }, data.driverHealth);
     updateRuntimeButtons(data.runtime);
-    window.MooreviewProgram?.updateProgramRemoteUi?.(data);
-    window.MooreviewProgram?.updateProgramIoLive(data.live, data.runtime);
+    window.PeaklogicProgram?.updateProgramRemoteUi?.(data);
+    window.PeaklogicProgram?.updateProgramIoLive(data.live, data.runtime);
     if (isPopupOpen('tags')) {
       if (tagsTableTagSignature(tags) !== tagsTableTagSig) {
         renderTags();
@@ -9988,7 +9988,7 @@
     }
     if (isPopupOpen('alarms')) renderAlarmsPanel();
     else updateAlarmsTabBadge(collectActiveAlarms(tags, data.live).filter((r) => !r.acked).length);
-    window.MooreviewProgram?.handleDashboardPoll(data);
+    window.PeaklogicProgram?.handleDashboardPoll(data);
     const scanEl = $('set-scan');
     const graphPtsEl = $('set-graph-pts');
     if (scanEl) scanEl.value = data.settings?.scanMs || 100;
@@ -10008,7 +10008,7 @@
     }
     if (isPopupOpen('historian-logger')) updateMongoLoggerStatus();
     try {
-      window.MooreviewHmi?.handleDashboardPoll(data);
+      window.PeaklogicHmi?.handleDashboardPoll(data);
     } catch (e) {
       console.error('[dashboard] HMI poll:', e);
     }
@@ -10082,7 +10082,7 @@
     projectSaveInFlight = true;
     setProjectSaveUi(true, 'Saving project…');
     try {
-      await window.MooreviewHmi?.flushHmiToSettingsForProjectSave?.().catch((e) => {
+      await window.PeaklogicHmi?.flushHmiToSettingsForProjectSave?.().catch((e) => {
         throw new Error(e.message || 'Could not sync HMI settings before save');
       });
       const formName = isPopupOpen('project') ? $('proj-name')?.value?.trim() : '';
@@ -10173,7 +10173,7 @@
   }
 
   async function exportCurrentEstFile(nameOverride) {
-    await window.MooreviewHmi?.applyHmiSettingsIfDirty?.();
+    await window.PeaklogicHmi?.applyHmiSettingsIfDirty?.();
     const formName = isPopupOpen('project') ? $('proj-name')?.value?.trim() : '';
     const name = String(nameOverride ?? (formName || projectName || 'untitled')).trim() || 'untitled';
     const blob = await api.saveEstBlob(name);
@@ -10271,9 +10271,9 @@
   }
 
   function openProjectHubDialog(mode) {
-    if (isCloudDeployment() && window.MooreviewProjectHubUi?.openHubDialog) {
+    if (isCloudDeployment() && window.PeaklogicProjectHubUi?.openHubDialog) {
       closeProjectMenu();
-      window.MooreviewProjectHubUi.openHubDialog(mode).catch((e) => alert(e.message));
+      window.PeaklogicProjectHubUi.openHubDialog(mode).catch((e) => alert(e.message));
       return;
     }
     projectHubMode = mode;
@@ -10298,11 +10298,11 @@
   }
 
   async function runProjectHubPublish() {
-    await window.MooreviewHmi?.applyHmiSettingsIfDirty?.();
+    await window.PeaklogicHmi?.applyHmiSettingsIfDirty?.();
     const name = String($('proj-name')?.value?.trim() || projectName || 'project').trim() || 'project';
     const description = '';
     if (projectHubTab === 'cloud') {
-      if (window.MOOREVIEW_PLATFORM_API) {
+      if (window.PEAKLOGIC_PLATFORM_API) {
         const blob = await api.saveEstBlob(name);
         const archiveBase64 = await blob.arrayBuffer().then((ab) => {
           const bytes = new Uint8Array(ab);
@@ -10373,7 +10373,7 @@
       if (!confirmProjectReplace('Deploy', listedLabel)) return;
       const source = projectHubTab === 'cloud' ? 'cloud' : 'local';
       let opened;
-      if (source === 'cloud' && window.MOOREVIEW_PLATFORM_API) {
+      if (source === 'cloud' && window.PEAKLOGIC_PLATFORM_API) {
         opened = await api.deployProjectHub({ id, source: 'cloud' });
       } else {
         opened = await api.deployProjectHub({ id, source });
@@ -10587,7 +10587,7 @@
       if (typeof api.importProjectFile === 'function') {
         opened = await api.importProjectFile(file);
       } else if (/\.est\.zip$/i.test(file.name)) {
-        throw new Error('This server cannot import .est.zip yet. Deploy the latest MooreView build to the server, then try again.');
+        throw new Error('This server cannot import .est.zip yet. Deploy the latest PeakLogic build to the server, then try again.');
       } else {
         const doc = JSON.parse(await file.text());
         opened = await api.openEst(doc);
@@ -10803,7 +10803,7 @@
     });
     $('btn-save-ws').onclick = () => {
       closeProjectMenu();
-      window.MooreviewHmi?.applyHmiSettingsIfDirty?.()
+      window.PeaklogicHmi?.applyHmiSettingsIfDirty?.()
         .then(() => api.saveWorkspace({ name: projectName }))
         .then(() => alert('Workspace saved to data/ (HMI included if you edited it).'))
         .catch((e) => alert(e.message));
@@ -10813,14 +10813,14 @@
       const progSel = $('proj-active-program');
       if (!progSel) return;
       const s = lastSettings || {};
-      let list = window.MooreviewProgram?.getProgramCatalog?.() || [];
+      let list = window.PeaklogicProgram?.getProgramCatalog?.() || [];
       if (!list.length) {
         try {
           const r = await api.listPrograms();
           list = r.programs || [];
         } catch { /* keep empty */ }
       }
-      const active = window.MooreviewProgram?.getProgramActivePath?.() || s.activeProgram || '';
+      const active = window.PeaklogicProgram?.getProgramActivePath?.() || s.activeProgram || '';
       const noneOpt = '<option value="">(none)</option>';
       if (list.length) {
         progSel.innerHTML = noneOpt + list.map((p) =>
@@ -10851,9 +10851,9 @@
       fillRoiSettingsFields(lastSettings?.roi);
       refreshRoiCalculatorDisplay();
       refreshPdmAssetLists().catch(console.error);
-      window.MooreviewHmi?.updateHomeScreenLabel();
+      window.PeaklogicHmi?.updateHomeScreenLabel();
       fillSetupHmiSummary();
-      window.MooreviewHmi?.syncComposerModeFromSettings?.();
+      window.PeaklogicHmi?.syncComposerModeFromSettings?.();
       fillProjectListsInSetup();
       fillMqttParcFields(s);
       fillCloudRemoteFields(s);
@@ -10874,14 +10874,14 @@
       projectName = next.project?.name || projectName || 'untitled';
       if ($('project-name')) $('project-name').textContent = projectName;
       if (next.activeProgram) {
-        window.MooreviewProgram?.setProgramActivePath?.(next.activeProgram);
+        window.PeaklogicProgram?.setProgramActivePath?.(next.activeProgram);
       } else {
-        window.MooreviewProgram?.setProgramActivePath?.('');
+        window.PeaklogicProgram?.setProgramActivePath?.('');
       }
       if ($('set-scan')) $('set-scan').value = next.scanMs ?? 100;
       return api.putSettings(next).then((res) => {
         applySettingsResponse(res);
-        window.MooreviewHmi?.clearDirty?.();
+        window.PeaklogicHmi?.clearDirty?.();
         return refreshAll();
       });
     }
@@ -10942,7 +10942,7 @@
       lastGraphHistory = null;
       const prog = $('program-src');
       if (prog) prog.dataset.dirty = '';
-      window.MooreviewHmi?.clearDirty?.();
+      window.PeaklogicHmi?.clearDirty?.();
     }
 
     function applyProjectLoadToUi(name, data) {
@@ -10962,8 +10962,8 @@
         graphPens = data.graphPens?.length ? data.graphPens : (data.settings?.graphPens || []);
         reportConfig = mergeReportConfig(data.reportConfig ?? data.settings?.reportConfig);
         lastGraphHistory = data.graph ?? null;
-        window.MooreviewProgram?.forceReloadFromDashboard?.(data);
-        window.MooreviewHmi?.forceReloadFromDashboard?.(data);
+        window.PeaklogicProgram?.forceReloadFromDashboard?.(data);
+        window.PeaklogicHmi?.forceReloadFromDashboard?.(data);
       }
       fillProjectPopup();
       if (isPopupOpen('tags')) renderTags();
@@ -10972,7 +10972,7 @@
       if (isPopupOpen('historian') || isPopupOpen('report')) drawHistorianPopups();
       if (isHistorianSetupOpen()) renderGraphPensSetup();
       if (isPopupOpen('alarms')) renderAlarmsPanel();
-      window.MooreviewProgram?.renderProgramIoPanel?.(lastLive, lastRuntime);
+      window.PeaklogicProgram?.renderProgramIoPanel?.(lastLive, lastRuntime);
     }
     window.applyProjectLoadToUi = applyProjectLoadToUi;
 
@@ -11468,7 +11468,7 @@
     syncUserScopeModeUi();
     $('proj-timezone')?.addEventListener('change', () => {
       markSetupDirty();
-      window.MooreviewTime?.setTimezone?.($('proj-timezone').value);
+      window.PeaklogicTime?.setTimezone?.($('proj-timezone').value);
     });
     $('proj-startup-mode')?.addEventListener('change', () => {
       markSetupDirty();
@@ -11607,7 +11607,7 @@
     restartDashboardPoll();
     restartFullRefreshTimer();
     if (pollTimer === null) startLiveWebSocket();
-    MooreviewHmi?.refreshAfterPageRestore?.();
+    PeaklogicHmi?.refreshAfterPageRestore?.();
   });
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -11641,16 +11641,16 @@
       runtimeScanActive,
       openAlarmsPopup: () => openPopup('alarms'),
     };
-    if (window.MooreviewProgram) MooreviewProgram.init(appDeps);
-    if (window.MooreviewHmi) {
-      MooreviewHmi.init(appDeps);
-      MooreviewHmi.bindHmiToolbar();
+    if (window.PeaklogicProgram) PeaklogicProgram.init(appDeps);
+    if (window.PeaklogicHmi) {
+      PeaklogicHmi.init(appDeps);
+      PeaklogicHmi.bindHmiToolbar();
     }
     bindPopups();
     bindContextHelp();
     bindRoiCalculatorInputs();
     bindToolbar();
-    if (window.MooreviewProgram) MooreviewProgram.bindProgramToolbar();
+    if (window.PeaklogicProgram) PeaklogicProgram.bindProgramToolbar();
     loadAuthSession()
       .then(() => refreshAll())
       .then((data) => finishDashboardBoot(data))
@@ -11659,7 +11659,7 @@
       })
       .finally(() => {
         fillModbusPortSelect();
-        MooreviewHmi?.initMainHmi();
+        PeaklogicHmi?.initMainHmi();
         startDashboardRuntime();
       });
   });

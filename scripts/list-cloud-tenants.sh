@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-FILE="${1:-/home/mooreview/data/cloud_tenants.json}"
+FILE="${1:-/home/peaklogic/data/cloud_tenants.json}"
 export LIST_TENANTS_FILE="$FILE"
 node -e "
 const fs = require('fs');

@@ -36,7 +36,7 @@ process.stdin.on('end', () => {
   const block = [
     '',
     '# ---------------------------------------------------------------------------',
-    '# Email (synced from mv-saas /etc/mooreview/saas.env)',
+    '# Email (synced from mv-saas /etc/peaklogic/saas.env)',
     '# ---------------------------------------------------------------------------',
     ...Object.entries(remoteMap).map(([k, v]) => `${k}=${v}`),
   ].join('\n');

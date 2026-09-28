@@ -21,13 +21,13 @@ Arduino IDE or CLI:
 - FQBN: `esp32:esp32:esp32s3:CDCOnBoot=cdc,USBMode=hwcdc,UploadMode=cdc`
 - Libraries: **ArduinoJson 7.x**, **PubSubClient**
 
-Sketch: `MooreviewWsPentairLink/MooreviewWsPentairLink.ino`
+Sketch: `PeaklogicWsPentairLink/PeaklogicWsPentairLink.ino`
 
 ## Use
 
-1. Join AP **`MooreVIEW-Pentair`** / `mooreview`
+1. Join AP **`PeakLogic-Pentair`** / `peaklogic`
 2. Open **http://192.168.4.1:8080/**
-3. **Wi-Fi** tab → home network + optional `mqtt.mooreview.io`
+3. **Wi-Fi** tab → home network + optional `mqtt.peaklogic.io`
 4. **IntelliFlo** / **IntelliChlor** tabs for pump and cell control
 
 Pump keeps running locally if Wi-Fi or MQTT drops (unlike the relay-parc dose satellite).

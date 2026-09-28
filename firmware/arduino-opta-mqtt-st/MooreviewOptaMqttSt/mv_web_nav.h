@@ -15,16 +15,16 @@
   "<a href=\"/io-map\">I/O Map</a> <a href=\"/ct-cal\">Calibrate CT</a> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a>"
 
 #define MV_WEB_NAV_SETUP_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><strong>Setup</strong> " MV_WEB_NAV_LINKS "</nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><strong>Setup</strong> " MV_WEB_NAV_LINKS "</nav>"
 
 #define MV_WEB_NAV_IO_MAP_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><a href=\"/setup\">Setup</a> <strong>I/O Map</strong> <a href=\"/ct-cal\">Calibrate CT</a> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a></nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><a href=\"/setup\">Setup</a> <strong>I/O Map</strong> <a href=\"/ct-cal\">Calibrate CT</a> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a></nav>"
 
 #define MV_WEB_NAV_CT_CAL_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><a href=\"/setup\">Setup</a> <a href=\"/io-map\">I/O Map</a> <strong>Calibrate CT</strong> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a></nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><a href=\"/setup\">Setup</a> <a href=\"/io-map\">I/O Map</a> <strong>Calibrate CT</strong> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a></nav>"
 
 #define MV_WEB_NAV_AHU_ENV_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><a href=\"/setup\">Setup</a> <a href=\"/io-map\">I/O Map</a> <a href=\"/ct-cal\">Calibrate CT</a> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <strong>AHU env</strong></nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><a href=\"/setup\">Setup</a> <a href=\"/io-map\">I/O Map</a> <a href=\"/ct-cal\">Calibrate CT</a> <a href=\"/mcsa\">MCSA</a> <a href=\"/hvac\">HVAC</a> <strong>AHU env</strong></nav>"
 
 #define MV_WEB_NAV_MCSA_ACTIVE \
-  "<nav class=\"nav\" aria-label=\"MooreVIEW\"><a href=\"/setup\">Setup</a> <a href=\"/io-map\">I/O Map</a> <a href=\"/ct-cal\">Calibrate CT</a> <strong>MCSA</strong> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a></nav>"
+  "<nav class=\"nav\" aria-label=\"PeakLogic\"><a href=\"/setup\">Setup</a> <a href=\"/io-map\">I/O Map</a> <a href=\"/ct-cal\">Calibrate CT</a> <strong>MCSA</strong> <a href=\"/hvac\">HVAC</a> <a href=\"/ahu-env\">AHU env</a></nav>"

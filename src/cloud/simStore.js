@@ -6,7 +6,7 @@ const { CONFIG_URI, CONFIG_DB } = require('../config');
 const { normalizeSimInput, summarizeSim } = require('./simSchema');
 
 const FALLBACK_FILE = 'cloud_sims.json';
-const COLLECTION = String(process.env.MOOREVIEW_CLOUD_SIMS_COLLECTION || 'cloud_sims').trim() || 'cloud_sims';
+const COLLECTION = String(process.env.PEAKLOGIC_CLOUD_SIMS_COLLECTION || 'cloud_sims').trim() || 'cloud_sims';
 
 let client = null;
 let collection = null;

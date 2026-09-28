@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Fix mooreview.io when nginx shows 502 — SaaS on port 3100.
+# Fix peaklogic.io when nginx shows 502 — SaaS on port 3100.
 # Run as root on the droplet after install-saas.sh.
 set -euo pipefail
 
@@ -8,15 +8,15 @@ die() { printf '[fix-saas] ERROR: %s\n' "$*" >&2; exit 1; }
 
 [[ "${EUID:-0}" -eq 0 ]] || die "Run as root: sudo bash $0"
 
-PORT="${MOOREVIEW_SAAS_PORT:-3100}"
-DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-SAAS_ENV="${MOOREVIEW_SAAS_ENV:-/etc/mooreview/saas.env}"
-NGINX_SITE="/etc/nginx/sites-available/mooreview-saas"
+PORT="${PEAKLOGIC_SAAS_PORT:-3100}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+SAAS_ENV="${PEAKLOGIC_SAAS_ENV:-/etc/peaklogic/saas.env}"
+NGINX_SITE="/etc/nginx/sites-available/peaklogic-saas"
 
 log "=== Diagnose ==="
 ss -tlnp | grep -E ":${PORT} |:80 |:443 " || ss -tlnp | head -15
-systemctl is-active mooreview-saas 2>/dev/null && log "mooreview-saas: active" || log "mooreview-saas: NOT active"
+systemctl is-active peaklogic-saas 2>/dev/null && log "peaklogic-saas: active" || log "peaklogic-saas: NOT active"
 curl -sf "http://127.0.0.1:${PORT}/health" && log "health OK on :${PORT}" || log "health FAILED on :${PORT} (see journalctl below)"
 
 if [[ -f "$SAAS_ENV" ]]; then
@@ -30,8 +30,8 @@ else
   log "WARNING: missing $SAAS_ENV"
 fi
 
-log "=== Recent mooreview-saas logs ==="
-journalctl -u mooreview-saas -n 25 --no-pager 2>/dev/null || true
+log "=== Recent peaklogic-saas logs ==="
+journalctl -u peaklogic-saas -n 25 --no-pager 2>/dev/null || true
 
 log "=== UFW ==="
 if command -v ufw >/dev/null 2>&1; then
@@ -48,21 +48,21 @@ apt-get install -y -qq nginx
 
 WRITE_NGINX="${INSTALL_DIR}/deploy/cloud/debian/write-nginx-saas-site.sh"
 [[ -f "$WRITE_NGINX" ]] || WRITE_NGINX="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/write-nginx-saas-site.sh"
-MOOREVIEW_DOMAIN="$DOMAIN" MOOREVIEW_SAAS_PORT="$PORT" bash "$WRITE_NGINX"
+PEAKLOGIC_DOMAIN="$DOMAIN" PEAKLOGIC_SAAS_PORT="$PORT" bash "$WRITE_NGINX"
 
-log "=== Restart mooreview-saas ==="
-if systemctl list-unit-files mooreview-saas.service >/dev/null 2>&1; then
-  systemctl restart mooreview-saas || true
+log "=== Restart peaklogic-saas ==="
+if systemctl list-unit-files peaklogic-saas.service >/dev/null 2>&1; then
+  systemctl restart peaklogic-saas || true
   sleep 2
-  systemctl status mooreview-saas --no-pager -l | head -20 || true
+  systemctl status peaklogic-saas --no-pager -l | head -20 || true
 else
-  log "mooreview-saas.service not installed — run install-saas.sh first"
+  log "peaklogic-saas.service not installed — run install-saas.sh first"
 fi
 
 if curl -sf "http://127.0.0.1:${PORT}/health" >/dev/null; then
   log "Backend OK on :${PORT}"
 else
-  die "Backend still down. Fix $SAAS_ENV (MONGODB_URI + secrets), allowlist droplet IP on DO Mongo, then: systemctl restart mooreview-saas"
+  die "Backend still down. Fix $SAAS_ENV (MONGODB_URI + secrets), allowlist droplet IP on DO Mongo, then: systemctl restart peaklogic-saas"
 fi
 
 curl -sf -o /dev/null -w "nginx :80 -> %{http_code}\n" -H "Host: ${DOMAIN}" http://127.0.0.1/ || die "nginx still failing"

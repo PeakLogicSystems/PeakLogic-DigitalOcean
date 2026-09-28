@@ -20,7 +20,7 @@ function esc(s) {
 
 function isCloudSimsFeatureEnabled() {
 
-  return window.MOOREVIEW_CLOUD_SIMS_ENABLED === true;
+  return window.PEAKLOGIC_CLOUD_SIMS_ENABLED === true;
 
 }
 

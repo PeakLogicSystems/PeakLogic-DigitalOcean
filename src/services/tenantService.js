@@ -60,7 +60,7 @@ async function updateTenantCmms(tenantId, patch, opts = {}) {
 }
 
 /**
- * Update MooreVIEW subscription plan and/or CMMS entitlement in one write.
+ * Update PeakLogic subscription plan and/or CMMS entitlement in one write.
  * @param {string} tenantId
  * @param {{ plan?: string, cmms?: object }} patch
  * @param {{ enabledBy?: string|null }} [opts]

@@ -38,7 +38,7 @@
     localFilePath: null,
     storage: null,
     fileMenuOpen: false,
-    mooreviewContext: null,
+    peaklogicContext: null,
     estProjectPath: null,
     exportOrientation: 'landscape',
     marquee: null,
@@ -2566,13 +2566,13 @@
     return 'data/mv-draw/active.json (not saved to library)';
   }
 
-  function mooreviewProjectLabel() {
-    const name = state.mooreviewContext?.projectName;
-    if (!name) return 'MooreView project: —';
-    const synced = state.project?.meta?.mooreviewProject === name;
-    const est = state.estProjectPath || state.mooreviewContext?.estPath;
+  function peaklogicProjectLabel() {
+    const name = state.peaklogicContext?.projectName;
+    if (!name) return 'PeakLogic project: —';
+    const synced = state.project?.meta?.peaklogicProject === name;
+    const est = state.estProjectPath || state.peaklogicContext?.estPath;
     const estNote = synced && est ? ` · ${est}` : '';
-    return `MooreView project: ${name}${synced ? ' (synced)' : ''}${estNote}`;
+    return `PeakLogic project: ${name}${synced ? ' (synced)' : ''}${estNote}`;
   }
 
   function closeFileMenu() {
@@ -2601,7 +2601,7 @@
     const nameEl = document.getElementById('mv-project-name');
     const pathEl = document.getElementById('mv-project-path');
     const menuPathEl = document.getElementById('mv-file-menu-path');
-    const menuMooreviewEl = document.getElementById('mv-file-menu-mooreview');
+    const menuPeaklogicEl = document.getElementById('mv-file-menu-peaklogic');
     const menuSessionEl = document.getElementById('mv-file-menu-session');
     const name = displayProjectName();
     const dirtyMark = state.dirty ? ' •' : '';
@@ -2616,7 +2616,7 @@
       pathEl.title = path;
     }
     if (menuPathEl) menuPathEl.textContent = path;
-    if (menuMooreviewEl) menuMooreviewEl.textContent = mooreviewProjectLabel();
+    if (menuPeaklogicEl) menuPeaklogicEl.textContent = peaklogicProjectLabel();
     if (menuSessionEl) menuSessionEl.textContent = `Session: ${sessionPath}`;
     document.title = `${name}${state.dirty ? ' *' : ''} — MV Draw`;
   }
@@ -2855,34 +2855,34 @@
     setStatus(`Saved to ${savedFile}`);
   }
 
-  async function fetchMooreviewContext() {
+  async function fetchPeaklogicContext() {
     const data = await api('GET', '/project/context');
-    state.mooreviewContext = data.context || null;
+    state.peaklogicContext = data.context || null;
     if (data.context?.estPath) state.estProjectPath = data.context.estPath;
     if (data.storage) state.storage = data.storage;
     fillProjectFields();
     updateProjectStatus();
-    syncComposerModeButtons(state.mooreviewContext?.composer?.composerMode || 'plan');
+    syncComposerModeButtons(state.peaklogicContext?.composer?.composerMode || 'plan');
     return data.context;
   }
 
-  async function saveToMooreviewProject() {
+  async function saveToPeaklogicProject() {
     closeFileMenu();
     readProjectFields();
-    const mooreviewName = String(state.mooreviewContext?.projectName || '').trim() || 'MooreView project';
+    const peaklogicName = String(state.peaklogicContext?.projectName || '').trim() || 'PeakLogic project';
     const linkComposer = window.confirm(
-      `Save site plan to MooreView project "${mooreviewName}"?\n\n`
-      + 'This aligns the layout name with the MooreView project, embeds it in the .est snapshot, and links the HMI composer (Plan mode).',
+      `Save site plan to PeakLogic project "${peaklogicName}"?\n\n`
+      + 'This aligns the layout name with the PeakLogic project, embeds it in the .est snapshot, and links the HMI composer (Plan mode).',
     );
     if (!linkComposer) return;
-    setStatus('Saving to MooreView project…');
+    setStatus('Saving to PeakLogic project…');
     const data = await api('POST', '/project/save-to-project', {
       project: state.project,
       linkComposer: true,
       setComposerMode: true,
     });
     applyProjectPayload(data);
-    if (data.context) state.mooreviewContext = data.context;
+    if (data.context) state.peaklogicContext = data.context;
     if (data.estPath) state.estProjectPath = data.estPath;
     state.localFilePath = null;
     state.dirty = false;
@@ -2890,7 +2890,7 @@
     const composerNote = data.composerMode === 'plan'
       ? ' HMI composer set to Plan mode.'
       : '';
-    setStatus(`Saved to ${data.estPath || mooreviewName}.${composerNote}`);
+    setStatus(`Saved to ${data.estPath || peaklogicName}.${composerNote}`);
   }
 
   function formatCompileSummary(data) {
@@ -2930,7 +2930,7 @@
     }
     const apply = window.confirm(
       `Compile HMI faceplates from this site plan?\n\n${formatCompileSummary(preview)}\n\n`
-      + 'Apply will merge the screen into MooreView settings (Composer grid).',
+      + 'Apply will merge the screen into PeakLogic settings (Composer grid).',
     );
     if (!apply) {
       setStatus('Compile preview — not applied.');
@@ -2953,27 +2953,27 @@
     }
   }
 
-  async function loadFromMooreviewProject() {
+  async function loadFromPeaklogicProject() {
     closeFileMenu();
     if (!confirmDiscard()) return;
-    setStatus('Loading from MooreView project…');
+    setStatus('Loading from PeakLogic project…');
     const data = await api('POST', '/project/load-from-project');
     showMvOpenOverlay(false);
     applyProjectPayload(data);
-    if (data.context) state.mooreviewContext = data.context;
+    if (data.context) state.peaklogicContext = data.context;
     if (data.estPath) state.estProjectPath = data.estPath;
     await loadProject(data.project, data.file || data.project?.libraryFile);
-    setStatus(`Loaded from ${data.estPath || state.mooreviewContext?.projectName || 'project'}`);
+    setStatus(`Loaded from ${data.estPath || state.peaklogicContext?.projectName || 'project'}`);
   }
 
-  async function maybeAutoLoadFromMooreviewProject(context) {
+  async function maybeAutoLoadFromPeaklogicProject(context) {
     if (!context?.hasProjectMvDraw) return false;
     const nodes = state.project?.nodes || [];
     const isBlank = nodes.length === 0 && !state.project?.background && !state.project?.scale;
     const isUntitled = !String(state.project?.name || '').trim()
       || String(state.project?.name || '').trim().toLowerCase() === 'untitled';
     if (!isBlank || !isUntitled || context.synced) return false;
-    await loadFromMooreviewProject();
+    await loadFromPeaklogicProject();
     return true;
   }
 
@@ -3839,7 +3839,7 @@
 
   function bindComposerModeUi() {
     syncComposerModeButtons(
-      state.mooreviewContext?.composer?.composerMode || 'plan',
+      state.peaklogicContext?.composer?.composerMode || 'plan',
     );
     document.querySelectorAll('.mv-composer-mode-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -3912,13 +3912,13 @@
       exportPackage().catch((e) => setStatus(e.message, true));
     });
     document.getElementById('mv-menu-save-to-project')?.addEventListener('click', () => {
-      saveToMooreviewProject().catch((e) => setStatus(e.message, true));
+      saveToPeaklogicProject().catch((e) => setStatus(e.message, true));
     });
     document.getElementById('mv-menu-compile-hmi')?.addEventListener('click', () => {
       compileHmiFromPlan().catch((e) => setStatus(e.message, true));
     });
     document.getElementById('mv-menu-load-from-project')?.addEventListener('click', () => {
-      loadFromMooreviewProject().catch((e) => setStatus(e.message, true));
+      loadFromPeaklogicProject().catch((e) => setStatus(e.message, true));
     });
     document.getElementById('mv-menu-help')?.addEventListener('click', () => openHelp());
     document.getElementById('mv-btn-help')?.addEventListener('click', () => openHelp());
@@ -4139,7 +4139,7 @@
       const [projData, symData, context] = await Promise.all([
         api('GET', '/project'),
         api('GET', '/symbols?includeHmi=1'),
-        fetchMooreviewContext().catch(() => null),
+        fetchPeaklogicContext().catch(() => null),
       ]);
       state.project = projData.project;
       state.storage = projData.storage || state.storage || null;
@@ -4161,7 +4161,7 @@
       updateGroupButtons();
       updateDeleteButton();
       updateProjectStatus();
-      if (context && await maybeAutoLoadFromMooreviewProject(context)) {
+      if (context && await maybeAutoLoadFromPeaklogicProject(context)) {
         draw();
         requestAnimationFrame(() => fitViewToContent());
         return;

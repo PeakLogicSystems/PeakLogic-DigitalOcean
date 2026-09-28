@@ -1,6 +1,6 @@
 # Cellular SIM management
 
-mooreVIEW includes a **vendor-agnostic cellular SIM/eSIM management** layer for IoT connectivity at remote sites (Opta appliances with cellular modems, cloud gateways, etc.).
+PeakLogic includes a **vendor-agnostic cellular SIM/eSIM management** layer for IoT connectivity at remote sites (Opta appliances with cellular modems, cloud gateways, etc.).
 
 ## Architecture
 
@@ -41,9 +41,9 @@ Normalized SIM records include: `iccid`, `imsi`, `eid`, `msisdn`, `vendor`, `ven
 
 | Environment | Flag |
 |-------------|------|
-| Cloud VM | `MOOREVIEW_DEPLOYMENT=cloud` (default in cloud compose) |
-| Local dev | `MOOREVIEW_CELLULAR_SIMS=1` |
-| Also works | `MOOREVIEW_CLOUD_SIMS=1` (shared dev flag) |
+| Cloud VM | `PEAKLOGIC_DEPLOYMENT=cloud` (default in cloud compose) |
+| Local dev | `PEAKLOGIC_CELLULAR_SIMS=1` |
+| Also works | `PEAKLOGIC_CLOUD_SIMS=1` (shared dev flag) |
 
 ## UI
 
@@ -136,7 +136,7 @@ API keys from Simetry Connectivity Marketplace → **Account**. Uses the Teal in
 - List SIMs: `GET /esims` → poll `GET /operation-result?requestId=…`
 - Enable / disable data: `POST /esims/enable|disable` with `{ "entries": ["<eid>"] }`
 - Usage: `GET /data-consumption/data?eid=…&dataType=MONTHLY&periodStart=…&periodEnd=…`
-- Every request requires `requestId` (UUID) and `callbackUrl` query params; mooreVIEW polls operation results (callback URL is a placeholder unless you configure webhooks separately).
+- Every request requires `requestId` (UUID) and `callbackUrl` query params; PeakLogic polls operation results (callback URL is a placeholder unless you configure webhooks separately).
 
 Optional `clientUuid` filters inventory to one Simetry client/account.
 
@@ -166,13 +166,13 @@ Optional `clientUuid` filters inventory to one Simetry client/account.
 
 ## Persistence
 
-- Mongo collection: `cellular_sims` (override: `MOOREVIEW_CELLULAR_SIMS_COLLECTION`)
+- Mongo collection: `cellular_sims` (override: `PEAKLOGIC_CELLULAR_SIMS_COLLECTION`)
 - Fallback: `data/cellular_sims.json`
 - Indexes: `id`, `(iccid, vendor)`, `deviceId`, `tenantId`
 
 ## Integration
 
-Link SIMs to mooreVIEW devices after sync:
+Link SIMs to PeakLogic devices after sync:
 
 ```bash
 curl -X PUT http://127.0.0.1:3090/api/cellular/sims/<sim-id>/link \
@@ -185,7 +185,7 @@ Use Parc `deviceId` from the MQTT registry or `cloudRemote.gatewayId` from appli
 ## Tests
 
 ```bash
-MOOREVIEW_CELLULAR_SIMS=1 npm test -- test/cellularSims.test.js
+PEAKLOGIC_CELLULAR_SIMS=1 npm test -- test/cellularSims.test.js
 ```
 
 Uses mocked `fetch` — no live API keys required.

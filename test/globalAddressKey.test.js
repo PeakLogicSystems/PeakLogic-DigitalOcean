@@ -27,14 +27,14 @@ describe('globalAddressKey', () => {
   });
 
   it('builds global MQTT topics', () => {
-    const cfg = { topicPrefix: 'mooreview/v1' };
+    const cfg = { topicPrefix: 'peaklogic/v1' };
     assert.equal(
       globalTopic(cfg, 0x0001, 'PumpRun'),
-      'mooreview/v1/g/0001/PumpRun',
+      'peaklogic/v1/g/0001/PumpRun',
     );
     assert.equal(
       globalTopic(cfg, 0xabcd, 'TankLevel'),
-      'mooreview/v1/g/abcd/TankLevel',
+      'peaklogic/v1/g/abcd/TankLevel',
     );
     assert.equal(
       globalTopic({ topicPrefix: 'plant/mv/v2/' }, 42, 'DI1'),

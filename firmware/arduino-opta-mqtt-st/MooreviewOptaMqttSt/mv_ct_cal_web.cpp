@@ -9,7 +9,7 @@
 
 static const char MV_CT_CAL_HTML[] = R"HTML(<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MooreVIEW Opta — CT Calibration</title>
+<title>PeakLogic Opta — CT Calibration</title>
 <style>
 body{font-family:'Segoe UI',system-ui,sans-serif;margin:1rem;background:#f1f5f9;color:#0f172a}
 h1{font-size:1.25rem}h2{font-size:1rem;margin-top:1rem;color:#49104F}

@@ -49,9 +49,9 @@ for (const [re, rep] of replacements) {
 const header = `'use strict';
 
 /** HMI live view + setup composer */
-window.MooreviewHmi = (function () {
-  const { esc } = window.MooreviewCore;
-  const domGet = window.MooreviewCore.$;
+window.PeaklogicHmi = (function () {
+  const { esc } = window.PeaklogicCore;
+  const domGet = window.PeaklogicCore.$;
   const HmiView = window.HmiView;
 
   const HMI_BINDING_PROPS = ['visibility', 'fill', 'fill8', 'backgroundFill', 'stroke', 'text', 'opacity', 'class'];

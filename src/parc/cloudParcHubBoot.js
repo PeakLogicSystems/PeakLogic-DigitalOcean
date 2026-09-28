@@ -14,10 +14,10 @@ function cloudMqttParcSettingsFromEnv() {
 
 /**
  * Start the global Parc MQTT ingest hub on cloud SaaS.
- * Field Optas publish to mqtt.mooreview.io; this hub fills the fleet parc.json registry.
+ * Field Optas publish to mqtt.peaklogic.io; this hub fills the fleet parc.json registry.
  */
 async function bootstrapCloudParcMqttHub(registry) {
-  if (process.env.MOOREVIEW_DEPLOYMENT !== 'cloud') {
+  if (process.env.PEAKLOGIC_DEPLOYMENT !== 'cloud') {
     return { started: false, skipped: 'not cloud' };
   }
   if (typeof registry?.reloadFromPersistence === 'function') {
@@ -41,7 +41,7 @@ async function bootstrapCloudParcMqttHub(registry) {
   if (!String(mqttParc.brokerUrl || '').trim()) {
     return {
       started: false,
-      error: 'MOOREVIEW_MQTT_BROKER unset — cloud Parc hub cannot ingest field Optas',
+      error: 'PEAKLOGIC_MQTT_BROKER unset — cloud Parc hub cannot ingest field Optas',
     };
   }
   const hub = getMqttCentralHub(registry);

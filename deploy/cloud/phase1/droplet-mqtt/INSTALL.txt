@@ -4,35 +4,35 @@
 
 # --- Bundle (same SaaS bundle carries deploy/ scripts) ---
 # Windows: npm run build:phase1-bundles
-# WinSCP mooreview-cloud-*d.tgz → /tmp/ on MQTT droplet
+# WinSCP peaklogic-cloud-*d.tgz → /tmp/ on MQTT droplet
 
 ssh root@MQTT_DROPLET_IP
 
-mkdir -p /opt/mooreview-mqtt
-tar xzf /tmp/mooreview-cloud-*d.tgz -C /opt/mooreview-mqtt --strip-components=1
+mkdir -p /opt/peaklogic-mqtt
+tar xzf /tmp/peaklogic-cloud-*d.tgz -C /opt/peaklogic-mqtt --strip-components=1
 
 # --- Secrets (same user/pass as SaaS / field appliances) ---
-mkdir -p /etc/mooreview
-cp /opt/mooreview-mqtt/deploy/cloud/phase1/droplet-mqtt/mqtt.env.template /etc/mooreview/mqtt.env
-nano /etc/mooreview/mqtt.env
+mkdir -p /etc/peaklogic
+cp /opt/peaklogic-mqtt/deploy/cloud/phase1/droplet-mqtt/mqtt.env.template /etc/peaklogic/mqtt.env
+nano /etc/peaklogic/mqtt.env
 
 # --- DNS first (or use IP for certbot staging) ---
-# A record: mqtt.mooreview.io → this droplet public IP
+# A record: mqtt.peaklogic.io → this droplet public IP
 
 # --- TLS (standalone certbot before Mosquitto binds 8883) ---
-certbot certonly --standalone -d mqtt.mooreview.io \
-  --non-interactive --agree-tos -m admin@mooreview.io
+certbot certonly --standalone -d mqtt.peaklogic.io \
+  --non-interactive --agree-tos -m admin@peaklogic.io
 
-MOOREVIEW_INSTALL_DIR=/opt/mooreview-mqtt \
-  bash /opt/mooreview-mqtt/deploy/cloud/debian/install-mqtt-droplet.sh
+PEAKLOGIC_INSTALL_DIR=/opt/peaklogic-mqtt \
+  bash /opt/peaklogic-mqtt/deploy/cloud/debian/install-mqtt-droplet.sh
 
 # --- Verify ---
-mosquitto_pub -h 127.0.0.1 -u mooreview -P 'YOUR_PASS' -t test -m ok
-curl -sI https://mqtt.mooreview.io:8883 || true   # TLS handshake only
+mosquitto_pub -h 127.0.0.1 -u peaklogic -P 'YOUR_PASS' -t test -m ok
+curl -sI https://mqtt.peaklogic.io:8883 || true   # TLS handshake only
 systemctl status mosquitto
 
 # --- Record private IP for SaaS ---
 ip -4 addr show | grep 'inet 10\.'
 
 # On cloud-1-saas-atl1:
-#   MOOREVIEW_MQTT_PRIVATE_IP=10.x.x.x bash .../configure-saas-mqtt-remote.sh
+#   PEAKLOGIC_MQTT_PRIVATE_IP=10.x.x.x bash .../configure-saas-mqtt-remote.sh

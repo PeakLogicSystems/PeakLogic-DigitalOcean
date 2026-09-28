@@ -1,17 +1,17 @@
 'use strict';
 
-/** Reset or create platform_admin from MOOREVIEW_SEED_ADMIN_* in saas.env */
+/** Reset or create platform_admin from PEAKLOGIC_SEED_ADMIN_* in saas.env */
 require('../src/loadEnv');
-process.env.MOOREVIEW_DEPLOYMENT = process.env.MOOREVIEW_DEPLOYMENT || 'cloud';
+process.env.PEAKLOGIC_DEPLOYMENT = process.env.PEAKLOGIC_DEPLOYMENT || 'cloud';
 
 const { hashPassword, randomToken } = require('../src/tenants/authCrypto');
 const { tenantStore } = require('../src/tenants/tenantStore');
 
-const email = String(process.env.MOOREVIEW_SEED_ADMIN_EMAIL || 'admin@mooreview.io').trim().toLowerCase();
-const password = String(process.env.MOOREVIEW_SEED_ADMIN_PASSWORD || '').trim();
+const email = String(process.env.PEAKLOGIC_SEED_ADMIN_EMAIL || 'admin@peaklogic.io').trim().toLowerCase();
+const password = String(process.env.PEAKLOGIC_SEED_ADMIN_PASSWORD || '').trim();
 
 if (!password || /CHANGE_ME/i.test(password)) {
-  console.error('[reset-platform-admin] Set MOOREVIEW_SEED_ADMIN_PASSWORD in saas.env first');
+  console.error('[reset-platform-admin] Set PEAKLOGIC_SEED_ADMIN_PASSWORD in saas.env first');
   process.exit(1);
 }
 
@@ -25,7 +25,7 @@ if (!admin) {
   admin = {
     userId,
     email,
-    name: 'MooreVIEW System Admin',
+    name: 'PeakLogic System Admin',
     role: 'platform_admin',
     tenantId: null,
     passwordHash: hashPassword(password),

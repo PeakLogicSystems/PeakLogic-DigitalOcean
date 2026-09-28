@@ -19,7 +19,7 @@ static String mvSetupHtmlBody();
 
 static const char MV_SETUP_HTML[] = R"HTML(<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MooreVIEW Opta Room</title>
+<title>PeakLogic Opta Room</title>
 <style>
 body{font-family:system-ui,sans-serif;margin:1rem;background:#f1f5f9;color:#0f172a}
 h1{font-size:1.25rem}h2{font-size:1rem;margin-top:1.25rem}
@@ -46,7 +46,7 @@ button.primary{background:#2563eb;color:#fff;border-color:#2563eb}
 )HTML" MV_WEB_NAV_CSS R"HTML(
 </style></head><body>
 )HTML" MV_WEB_NAV_SETUP_ACTIVE R"HTML(
-<h1>MooreVIEW Opta Room</h1>
+<h1>PeakLogic Opta Room</h1>
 <p class="muted">Room integration controller — ST + MQTT Parc + Shelly Flood WiFi peripherals. <a href="/io-map">View I/O Map</a>.</p>
 <div class="card"><h2>ST runtime status</h2>
 <p class="muted">Refreshes every 8 s from <code>/api/status/lite</code> (full status on Refresh).</p>
@@ -81,25 +81,25 @@ button.primary{background:#2563eb;color:#fff;border-color:#2563eb}
 </div>
 <p class="muted" id="ethStatus"></p></div>
 <div class="card"><h2>WiFi setup AP</h2>
-<p class="muted">Opta <strong>WiFi</strong> hardware only (not RS485/Lite). Default SSID <code>MooreVIEW-Opta</code>, password <code>mooreview</code>, setup at <code>http://192.168.4.1:8080</code>.</p>
+<p class="muted">Opta <strong>WiFi</strong> hardware only (not RS485/Lite). Default SSID <code>PeakLogic-Opta</code>, password <code>peaklogic</code>, setup at <code>http://192.168.4.1:8080</code>.</p>
 <label><input type="checkbox" id="wifiAp"> Enable AP for local setup</label>
-<label>SSID <input id="wifiSsid" placeholder="MooreVIEW-Opta"></label>
-<label>Password <input id="wifiPass" type="password" placeholder="mooreview (min 8 chars)"></label>
+<label>SSID <input id="wifiSsid" placeholder="PeakLogic-Opta"></label>
+<label>Password <input id="wifiPass" type="password" placeholder="peaklogic (min 8 chars)"></label>
 <p class="muted" id="wifiStatus"></p></div>
 <div class="card"><h2>Room integration — Shelly Flood Gen4 (WiFi)</h2>
-<p class="muted">Enable the AP above, then join each room Shelly to it. On each Shelly add an <strong>Action</strong> URL webhook using a unique <code>dev</code> slot (1..<span id="shellyMax">8</span>). Pushed values appear as tags <code>SHELLY&lt;n&gt;_FLOOD</code>, <code>SHELLY&lt;n&gt;_TEMP_C</code>, <code>SHELLY&lt;n&gt;_BATT</code>, <code>SHELLY&lt;n&gt;_ONLINE</code> and flow to MooreVIEW over PARC.</p>
+<p class="muted">Enable the AP above, then join each room Shelly to it. On each Shelly add an <strong>Action</strong> URL webhook using a unique <code>dev</code> slot (1..<span id="shellyMax">8</span>). Pushed values appear as tags <code>SHELLY&lt;n&gt;_FLOOD</code>, <code>SHELLY&lt;n&gt;_TEMP_C</code>, <code>SHELLY&lt;n&gt;_BATT</code>, <code>SHELLY&lt;n&gt;_ONLINE</code> and flow to PeakLogic over PARC.</p>
 <dl class="status-grid">
 <dt>Webhook (slot 1)</dt><dd id="shellyUrl">—</dd>
 <dt>Active sensors</dt><dd id="shellyList">—</dd>
 </dl>
 <p class="muted">Per Shelly, set <code>dev</code> and append: <code>&amp;flood=${flood:0.alarm}&amp;tC=${temperature:0.tC}&amp;batt=${devicepower:0.battery.percent}</code></p></div>
 <div class="card"><h2>MQTT Parc broker</h2>
-<p class="muted">Must match MooreVIEW Mosquitto LAN IP (IOT-LINK gateway IP, not 127.0.0.1). MQTT reconnects on save.</p>
-<label>Broker IP <input id="mqttBroker" placeholder="MooreVIEW / IOT-LINK LAN IP"></label>
+<p class="muted">Must match PeakLogic Mosquitto LAN IP (IOT-LINK gateway IP, not 127.0.0.1). MQTT reconnects on save.</p>
+<label>Broker IP <input id="mqttBroker" placeholder="PeakLogic / IOT-LINK LAN IP"></label>
 <label>Port <input id="mqttPort" type="number" min="1" max="65535" value="1883"></label>
 <p class="muted" id="mqttBrokerHint"></p></div>
 <div class="card"><h2>Global site key</h2>
-<p class="muted">Shared 16-bit key for P2P global tags (<code>mooreview/v1/g/{key}/{tag}</code>). Commissioning assigns 0x0001–0xFFFF; default <code>0001</code>.</p>
+<p class="muted">Shared 16-bit key for P2P global tags (<code>peaklogic/v1/g/{key}/{tag}</code>). Commissioning assigns 0x0001–0xFFFF; default <code>0001</code>.</p>
 <label>Site key (decimal or hex, e.g. 1 or 0xABCD) <input id="globalSiteKey" placeholder="1"></label>
 <p class="muted" id="globalSiteKeyHint"></p></div>
 <div class="card"><h2>Device mode</h2>
@@ -134,7 +134,7 @@ async function loadCfg(){
   ethIp.value=ip4(c.ethIp); ethGw.value=ip4(c.ethGw); ethMask.value=ip4(c.ethMask); ethDns.value=ip4(c.ethDns);
   wifiSsid.value=c.wifiApSsid||c.wifiApSsidDefault||'';
   wifiPass.value=c.wifiApPass||'';
-  const apSsid=c.wifiApSsid||c.wifiApSsidDefault||'MooreVIEW-Opta';
+  const apSsid=c.wifiApSsid||c.wifiApSsidDefault||'PeakLogic-Opta';
   const apPort=c.wifiApHttpPort||8080;
   if(!c.wifiCapable){
     wifiStatus.textContent=c.wifiApError||'WiFi not available — reflash with Board → Arduino Opta WiFi, or use Ethernet /setup';
@@ -166,7 +166,7 @@ async function loadCfg(){
     ?('Saved — active broker '+active+' (MQTT reconnects on save)')
     :('Active broker '+active+' from sketch default — enter LAN IP and Save to persist');
   globalSiteKey.value=c.globalSiteKey!=null?('0x'+Number(c.globalSiteKey).toString(16).padStart(4,'0')):'0x0001';
-  globalSiteKeyHint.textContent='Addr key: '+(c.globalAddrKey||'0001')+' — must match MooreVIEW System setup global site key';
+  globalSiteKeyHint.textContent='Addr key: '+(c.globalAddrKey||'0001')+' — must match PeakLogic System setup global site key';
   deviceMode.value=c.deviceMode==='remote_io'?'remote_io':'standalone';
   deviceModeHint.textContent=c.deviceModeSet?'Saved mode (reboot after change)':'Default standalone until saved';
   (c.expSlotType||[]).forEach((t,i)=>{const el=document.getElementById('exp'+i); if(el) el.value=t;});
@@ -251,7 +251,7 @@ async function loadStatus(full){
     stBytecode.textContent=ps.bc;
     stCodeData.textContent=ps.cd;
     stScan.textContent=s.running?(`${s.scanMs||'?'} ms · ${s.cycles||0} cycles`):'—';
-    stClock.textContent=s.rtcTime||'(RTC not set — deploy from MooreVIEW to sync)';
+    stClock.textContent=s.rtcTime||'(RTC not set — deploy from PeakLogic to sync)';
     stMqtt.innerHTML=fmtMqtt(s);
     stMqttBroker.textContent=(s.mqttBroker||'?')+':'+(s.mqttBrokerPort||1883);
     stDeviceMode.textContent=s.deviceMode==='remote_io'?'Remote I/O (PC runs ST)':'Standalone (ST on Opta)';
@@ -263,7 +263,7 @@ async function loadStatus(full){
     else { stErrors.hidden=true; stErrors.textContent=''; }
     const info=[];
     if(s.programLoaded&&s.programName) info.push('Ready to run on device.');
-    else if(!s.programLoaded && s.deviceMode!=='remote_io') info.push('No program — use MooreVIEW Parc Connect + Start.');
+    else if(!s.programLoaded && s.deviceMode!=='remote_io') info.push('No program — use PeakLogic Parc Connect + Start.');
     else if(s.deviceMode==='remote_io') info.push('Remote I/O mode — PC runs ST; Opta scans physical I/O.');
     if(s.programInstallBusy) info.push('Program install in progress — page will refresh when done.');
     if(!s.mqttConnected) info.push('MQTT broker not connected — set broker IP on this page or check Ethernet.');
@@ -278,7 +278,7 @@ async function loadStatus(full){
       stInfo.textContent='Device busy (MQTT deploy or ST scan) — keeping last status, retrying…';
       if(!loadStatus._hadOk) {
         stErrors.hidden=false;
-        stErrors.textContent='Status slow — wait for MooreVIEW deploy to finish or reboot Opta';
+        stErrors.textContent='Status slow — wait for PeakLogic deploy to finish or reboot Opta';
       }
     }else{
       stErrors.hidden=false;
@@ -532,7 +532,7 @@ static bool applyConfigJson(JsonObject root, String& err) {
     const char* h = root["mqttBrokerHost"].as<const char*>();
     if (!h) h = "";
     if (h[0] && (!strcmp(h, "127.0.0.1") || !strcmp(h, "localhost"))) {
-      err = "Broker cannot be 127.0.0.1 on device — use MooreVIEW / IOT-LINK LAN IP";
+      err = "Broker cannot be 127.0.0.1 on device — use PeakLogic / IOT-LINK LAN IP";
       return false;
     }
     strncpy(cfg.mqttBrokerHost, h, sizeof(cfg.mqttBrokerHost) - 1);

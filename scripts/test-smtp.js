@@ -23,7 +23,7 @@ async function main() {
   console.log('[test-smtp] pass:', cfg.pass ? '(set)' : '(empty)');
 
   if (!isMailConfigured()) {
-    console.error('[test-smtp] FAIL — set SMTP_HOST in /etc/mooreview/saas.env');
+    console.error('[test-smtp] FAIL — set SMTP_HOST in /etc/peaklogic/saas.env');
     process.exit(1);
   }
   if (!cfg.pass) {
@@ -33,9 +33,9 @@ async function main() {
 
   const info = await sendMail({
     to,
-    subject: 'MooreVIEW SMTP test',
-    text: 'If you received this message, SMTP is working on your MooreVIEW server.',
-    html: '<p>If you received this message, <strong>SMTP is working</strong> on your MooreVIEW server.</p>',
+    subject: 'PeakLogic SMTP test',
+    text: 'If you received this message, SMTP is working on your PeakLogic server.',
+    html: '<p>If you received this message, <strong>SMTP is working</strong> on your PeakLogic server.</p>',
   });
   console.log('[test-smtp] OK — messageId:', info.messageId || info.response || '(sent)');
 }

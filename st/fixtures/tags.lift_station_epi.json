@@ -1,6 +1,6 @@
 {
   "templateId": "lift_station_epi",
-  "description": "Nexus Cloud → MooreVIEW register map for EdgePoint Industrial lift stations",
+  "description": "Nexus Cloud → PeakLogic register map for EdgePoint Industrial lift stations",
   "defaultSerial": "40a36bce47f3",
   "defaultProfile": "epi_master",
   "mqttTopic": "/devices/<serial>/messages/events/",

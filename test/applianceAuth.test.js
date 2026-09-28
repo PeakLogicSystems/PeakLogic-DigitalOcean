@@ -4,7 +4,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-auth-'));
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-auth-'));
 
 const { describe, it, beforeEach } = require('node:test');
 const assert = require('node:assert/strict');
@@ -28,7 +28,7 @@ describe('applianceAuthStore', () => {
     assert.ok(admin);
     const result = applianceAuthStore.login({
       email: admin.email,
-      password: process.env.MOOREVIEW_SEED_ADMIN_PASSWORD || 'ChangeMeAdmin!',
+      password: process.env.PEAKLOGIC_SEED_ADMIN_PASSWORD || 'ChangeMeAdmin!',
     });
     assert.ok(result.token);
     assert.equal(result.user.email, admin.email);

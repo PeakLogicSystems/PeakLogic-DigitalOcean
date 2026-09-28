@@ -12,7 +12,7 @@ const DEFAULT_REPORT_CONFIG = {
   title: 'Historian Report',
   subtitle: '',
   company: '',
-  footer: 'MooreVIEW historian export',
+  footer: 'PeakLogic historian export',
   pageSize: 'A4',
   orientation: 'landscape',
   sections: { ...DEFAULT_SECTIONS },

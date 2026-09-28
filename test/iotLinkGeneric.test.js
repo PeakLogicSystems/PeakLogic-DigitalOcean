@@ -34,9 +34,9 @@ describe('iotLinkGeneric fixtures', () => {
   it('loadIotLinkGenericDrivers honors env port overrides', () => {
     const drivers = loadIotLinkGenericDrivers({
       env: {
-        MOOREVIEW_RS485_PORT_A: '/dev/ttyCUSTOM_A',
-        MOOREVIEW_RS485_PORT_B: '/dev/ttyCUSTOM_B',
-        MOOREVIEW_RS485_ENABLE: 'false',
+        PEAKLOGIC_RS485_PORT_A: '/dev/ttyCUSTOM_A',
+        PEAKLOGIC_RS485_PORT_B: '/dev/ttyCUSTOM_B',
+        PEAKLOGIC_RS485_ENABLE: 'false',
       },
     });
     const portA = drivers.find((d) => d.id === 'rs485_a');
@@ -61,11 +61,11 @@ describe('iotLinkGeneric fixtures', () => {
     assert.ok(!settings.hmi.screens?.some((s) => s.tiles?.[0]?.compositeId === 'pool_overview'));
   });
 
-  it('loadIotLinkGenericSettings enables mqtt when MOOREVIEW_MQTT_ENABLED=true', () => {
+  it('loadIotLinkGenericSettings enables mqtt when PEAKLOGIC_MQTT_ENABLED=true', () => {
     const settings = loadIotLinkGenericSettings({
       env: {
-        MOOREVIEW_MQTT_ENABLED: 'true',
-        MOOREVIEW_MQTT_BROKER: 'mqtt://broker:1883',
+        PEAKLOGIC_MQTT_ENABLED: 'true',
+        PEAKLOGIC_MQTT_BROKER: 'mqtt://broker:1883',
         MOSQUITTO_USER: 'mv',
         MOSQUITTO_PASS: 'secret',
       },

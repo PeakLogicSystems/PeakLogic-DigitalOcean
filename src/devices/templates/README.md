@@ -1,6 +1,6 @@
 # Device templates (JSON)
 
-Add a new Modbus device template by creating a `.json` file in this folder. MooreVIEW picks up `*.json` files automatically (no server restart) and lists them under **Drivers → Device template** on the next dashboard poll.
+Add a new Modbus device template by creating a `.json` file in this folder. PeakLogic picks up `*.json` files automatically (no server restart) and lists them under **Drivers → Device template** on the next dashboard poll.
 
 ## Example
 
@@ -136,7 +136,7 @@ DLE/STX/ETX framing — **not Modbus**. One `jandy_rs485` driver polls multiple 
 | `jandy_lx_heater.json` | `lx_heater` | 56 (0x38) | LX running/error |
 | `jandy_heat_pump.json` | `heat_pump` | 112 (0x70) | Heat pump status |
 
-Fixtures: `st/fixtures/drivers.jandy_pool_bus.json`, `tags.jandy_*.json`. IOT-LINK seed: `MOOREVIEW_POOL_JANDY_BUS=true`.
+Fixtures: `st/fixtures/drivers.jandy_pool_bus.json`, `tags.jandy_*.json`. IOT-LINK seed: `PEAKLOGIC_POOL_JANDY_BUS=true`.
 
 ## Hayward low-speed RS-485 (19200 8N2)
 
@@ -148,7 +148,7 @@ Proprietary VS pump bus (EcoStar, TriStar VS, MaxFlo VS). Pump must be in **RS48
 | `hayward_ecostar_vs.json` | `vs_pump` | 0 | EcoStar (8N1 simple frames) |
 | `hayward_tristar_vs.json` | `vs_pump` | 0 | TriStar VS (OmniLogic 8N2) |
 
-Driver type: **`hayward_rs485`**. Sends keepalive speed commands ~1 s; pump stops if commands cease. Fixtures: `st/fixtures/drivers.hayward_pool_bus.json`, `tags.hayward_vs_pump.json`. IOT-LINK seed: `MOOREVIEW_POOL_HAYWARD_BUS=true`.
+Driver type: **`hayward_rs485`**. Sends keepalive speed commands ~1 s; pump stops if commands cease. Fixtures: `st/fixtures/drivers.hayward_pool_bus.json`, `tags.hayward_vs_pump.json`. IOT-LINK seed: `PEAKLOGIC_POOL_HAYWARD_BUS=true`.
 
 ## SPECK BADU Pro-VI UVS (VGreen RS-485)
 
@@ -184,7 +184,7 @@ Topic: `nexcomm/halow/<deviceId>/telemetry`. JSON per channel: `CHn.leak`, `CHn.
 
 Topic: `nexcomm/env/<deviceId>/telemetry`. JSON under `bme688`: `temp_C`, `rh_pct`, `press_hPa`, `gas_ohm`, `iaq`, `iaq_acc`, `voc_ppm`, `co2_eq_ppm`. Sample: `st/fixtures/bme688-telemetry-sample.json`.
 
-## MCXN947 edge devices (MooreVIEW Parc MQTT)
+## MCXN947 edge devices (PeakLogic Parc MQTT)
 
 Independent firmware projects on **NXP MCXN947**; only shared elements are the MCU and Parc MQTT topic layout.
 
@@ -193,11 +193,11 @@ Independent firmware projects on **NXP MCXN947**; only shared elements are the M
 | `mcxn947_hvac_mcsa.json` | `C:/Users/Public/data/MCSA` | HVAC motor MCSA monitor |
 | `mcxn947_pool_sensor.json` | `C:/Users/Public/data/mcxn947-pool-sensor` | Pool chemistry (CENSAR chip interface) |
 
-Topic: `mooreview/v1/<deviceId>/telemetry`. Pool sensor sample: `st/fixtures/pool-sensor-telemetry-sample.json`.
+Topic: `peaklogic/v1/<deviceId>/telemetry`. Pool sensor sample: `st/fixtures/pool-sensor-telemetry-sample.json`.
 
-## Lift stations (MooreVIEW Parc MQTT — ST lives on the device)
+## Lift stations (PeakLogic Parc MQTT — ST lives on the device)
 
-Wet-well sewage/stormwater lift stations for discrete field locations. Each type is a self-contained edge device (Arduino Opta) that **runs its own ST program on-device** via remote execution. Applying the template deploys the matching ST program and publishes the station's alarm/status tags to the SCADA tag database and MooreVIEW cloud.
+Wet-well sewage/stormwater lift stations for discrete field locations. Each type is a self-contained edge device (Arduino Opta) that **runs its own ST program on-device** via remote execution. Applying the template deploys the matching ST program and publishes the station's alarm/status tags to the SCADA tag database and PeakLogic cloud.
 
 | Template | Type | Pumps | ST program | Key alarm/status tags |
 |----------|------|-------|------------|-----------------------|
@@ -207,7 +207,7 @@ Wet-well sewage/stormwater lift stations for discrete field locations. Each type
 
 Pump alternation uses the `ALT` function block (`ALT2`/`ALT3`) — lead rotation, lag/lag2 staging, high-level all-call, and auto-fault skip of offline pumps. Tag fixtures: `st/fixtures/tags.lift_station_{simplex,duplex,triplex}.json`.
 
-## Split HVAC (MooreVIEW Parc MQTT — ST lives on the device)
+## Split HVAC (PeakLogic Parc MQTT — ST lives on the device)
 
 Single and double split systems (outdoor condenser + air handler). Opta firmware v2.3.81+ with `/mcsa` (HVAC or dual-cond facility preset) and `/ahu-env` for supply/return NTC + pan leak.
 

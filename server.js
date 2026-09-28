@@ -48,7 +48,7 @@ const mosquittoLogIngest = require('./src/mqtt/mosquittoLogIngest');
 const tenantRuntime = require('./src/tenants/tenantRuntime');
 const { createTenantRuntimeProxies } = require('./src/tenants/tenantRuntimeProxy');
 
-const PRODUCT = process.env.MOOREVIEW_PRODUCT || 'mvp-suite';
+const PRODUCT = process.env.PEAKLOGIC_PRODUCT || 'mvp-suite';
 const IS_CLOUD = DEPLOYMENT_MODE === 'cloud';
 
 registerApplianceServices();
@@ -124,7 +124,7 @@ if (DEPLOYMENT_MODE === 'cloud') {
 app.use((err, req, res, next) => {
   if (err?.type === 'entity.too.large') {
     return res.status(413).json({
-      error: `Request body too large for ${req.method} ${req.path} (limit ${REQUEST_JSON_LIMIT}). Restart MooreView after updating, or reduce tags/HMI payload size.`,
+      error: `Request body too large for ${req.method} ${req.path} (limit ${REQUEST_JSON_LIMIT}). Restart PeakLogic after updating, or reduce tags/HMI payload size.`,
       limit: REQUEST_JSON_LIMIT,
       path: req.path,
     });
@@ -135,7 +135,7 @@ app.use((err, req, res, next) => {
 app.get('/health', (req, res) => {
   res.json({
     ok: true,
-    app: 'MooreView',
+    app: 'PeakLogic',
     product: PRODUCT,
     deployment: DEPLOYMENT_MODE,
     tenantId: TENANT_ID,
@@ -149,7 +149,7 @@ app.get('/health', (req, res) => {
 });
 
 async function boot() {
-  console.log('[boot] MooreVIEW starting…');
+  console.log('[boot] PeakLogic starting…');
   persistence.ensureDataDir();
   const configInit = await configStore.init();
   console.log('[configStore]', configInit.status?.db || 'mongo');
@@ -220,7 +220,7 @@ async function boot() {
     httpServer = app.listen(port, '0.0.0.0');
     httpServer.once('listening', () => {
       try {
-        fs.writeFileSync(path.join(DATA_DIR, 'mooreview.pid'), String(process.pid), 'utf8');
+        fs.writeFileSync(path.join(DATA_DIR, 'peaklogic.pid'), String(process.pid), 'utf8');
       } catch { /* ignore */ }
       resolve();
     });
@@ -240,7 +240,7 @@ async function boot() {
   } catch (e) {
     console.warn('[live-ws] attach failed (HTTP GET /api/live remains):', e.message || e);
   }
-  console.log(`MooreVIEW MVP Suite  http://127.0.0.1:${port}`);
+  console.log(`PeakLogic MVP Suite  http://127.0.0.1:${port}`);
   console.log(`Data: ${DATA_DIR}`);
   console.log(`ST programs: ${ST_DIR}`);
   console.log(`API JSON body limit: ${REQUEST_JSON_LIMIT}`);
@@ -268,7 +268,7 @@ async function boot() {
     console.log(`[mqtt-log] tailing Mosquitto log → sys_log (${mqttLogTail.tailer.path})`);
     mongoSysLog.maintenance('mqtt', 'Mosquitto log tailer started', { path: mqttLogTail.tailer.path });
   }
-  mongoSysLog.maintenance('boot', 'MooreVIEW started', {
+  mongoSysLog.maintenance('boot', 'PeakLogic started', {
     product: PRODUCT,
     deployment: DEPLOYMENT_MODE,
     tenantId: TENANT_ID,
@@ -321,7 +321,7 @@ async function boot() {
     const { optaBrokerHint } = require('./src/parc/mqttBrokerHint');
     const brokerHint = optaBrokerHint();
     if (brokerHint.lanIp !== '127.0.0.1') {
-      console.log(`[mqtt-parc] Opta /setup broker → ${brokerHint.optaBrokerIp}:1883 (MooreVIEW Mosquitto LAN)`);
+      console.log(`[mqtt-parc] Opta /setup broker → ${brokerHint.optaBrokerIp}:1883 (PeakLogic Mosquitto LAN)`);
     } else {
       console.log(`[mqtt-parc] Opta /setup broker → gateway LAN IP:1883 (hub uses ${bootMqtt.hub?.status?.brokerUrl || 'mqtt://127.0.0.1:1883'})`);
     }
@@ -402,13 +402,13 @@ async function boot() {
 
 boot().catch((e) => {
   console.error(e);
-  mongoSysLog.error('boot', 'MooreVIEW boot failed', { message: e.message || String(e), stack: e.stack });
+  mongoSysLog.error('boot', 'PeakLogic boot failed', { message: e.message || String(e), stack: e.stack });
   process.exit(1);
 });
 
 function removePidFile() {
   try {
-    fs.unlinkSync(path.join(DATA_DIR, 'mooreview.pid'));
+    fs.unlinkSync(path.join(DATA_DIR, 'peaklogic.pid'));
   } catch { /* ignore */ }
 }
 

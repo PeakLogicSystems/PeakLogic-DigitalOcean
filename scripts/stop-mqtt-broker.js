@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const DATA_DIR = process.env.MOOREVIEW_DATA || path.join(__dirname, '..', 'data');
+const DATA_DIR = process.env.PEAKLOGIC_DATA || path.join(__dirname, '..', 'data');
 const PID_FILE = path.join(DATA_DIR, 'mosquitto-dev.pid');
 
 function isWindows() {
@@ -50,7 +50,7 @@ function main() {
       if (status === 'Running') {
         console.log('Mosquitto Windows service is running. Stop with:');
         console.log('  Stop-Service mosquitto   (PowerShell as Administrator)');
-        console.log('Or leave it running for MooreVIEW / Opta.');
+        console.log('Or leave it running for PeakLogic / Opta.');
         return;
       }
     } catch { /* ignore */ }

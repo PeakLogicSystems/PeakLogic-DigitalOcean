@@ -356,7 +356,7 @@ class MqttParcOptaDriver {
       return {
         ok: false,
         errors: [
-          `Opta firmware v${fw} is too old for Parc deploy — upload MooreviewOptaMqttSt v2.3.18+ via Arduino IDE (Parc deploy does not flash firmware)`,
+          `Opta firmware v${fw} is too old for Parc deploy — upload PeaklogicOptaMqttSt v2.3.18+ via Arduino IDE (Parc deploy does not flash firmware)`,
         ],
       };
     }
@@ -406,7 +406,7 @@ class MqttParcOptaDriver {
     }
     const scanMs = Number(this.cfg.scanMs) || 100;
     const deviceId = this._deviceId();
-    this._reg().attach(deviceId, { sessionId: 'mooreview-pc' });
+    this._reg().attach(deviceId, { sessionId: 'peaklogic-pc' });
     const reportMs = Math.max(100, Math.min(600000, Number(this.cfg.reportIntervalMs) || scanMs * 2));
     this._hub().publishDeviceConfig(deviceId, {
       pauseTelemetry: false,

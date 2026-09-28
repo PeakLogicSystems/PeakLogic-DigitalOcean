@@ -566,7 +566,7 @@ class DriverManager {
     const factory = FACTORIES[type];
     if (!factory) {
       throw new Error(
-        `Unknown driver type ${type || '(missing)'}. Restart MooreVIEW after upgrading; known types: ${Object.keys(FACTORIES).join(', ')}`,
+        `Unknown driver type ${type || '(missing)'}. Restart PeakLogic after upgrading; known types: ${Object.keys(FACTORIES).join(', ')}`,
       );
     }
     const savedCfg = cfg.id ? this.configs.find((c) => c.id === cfg.id) : null;

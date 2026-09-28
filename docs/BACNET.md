@@ -1,6 +1,6 @@
-# mooreVIEW BACnet/IP integration
+# PeakLogic BACnet/IP integration
 
-mooreVIEW includes a first-class **BACnet/IP** driver for edge appliances. Use it to read (and optionally write) BACnet points into the same tag database as Modbus, MQTT Parc, and cloud APIs — for proactive CMMS, PdM, and fleet views **alongside** an existing campus BMS.
+PeakLogic includes a first-class **BACnet/IP** driver for edge appliances. Use it to read (and optionally write) BACnet points into the same tag database as Modbus, MQTT Parc, and cloud APIs — for proactive CMMS, PdM, and fleet views **alongside** an existing campus BMS.
 
 ## Deployment
 
@@ -91,11 +91,11 @@ Suggested tag types: **BOOL** for binary objects, **INT** for multi-state, **REA
 
 ## Coexistence with BMS
 
-mooreVIEW is **not** a BMS replacement. Typical use:
+PeakLogic is **not** a BMS replacement. Typical use:
 
 - Import **read-mostly** points (space temp, status, energy, critical alarms)
 - Leave sequences, schedules, and compliance logic on the incumbent BMS
-- Layer mooreVIEW **CMMS**, **PdM**, and contractor fleet workflows on top
+- Layer PeakLogic **CMMS**, **PdM**, and contractor fleet workflows on top
 
 Keep **Allow writes** off until setpoint ownership is agreed with facilities/controls.
 

@@ -1,4 +1,4 @@
-# MooreVIEW Res-Pool-Link
+# PeakLogic Res-Pool-Link
 
 Product id: **`res-pool-link`**. The **ESP32 is the appliance**: home Wi-Fi, DFRobot chemistry, IntelliFlo setup, IntelliChlor status, and a local backwash sequencer. **No IOT-LINK.**
 
@@ -14,7 +14,7 @@ Home Wi-Fi
 ```
 
 Firmware: `firmware/esp32-res-pool-link/`  
-Join AP **`MooreVIEW-ResPool`** / `mooreview` → `http://192.168.4.1:8080/` → enter **home Wi-Fi**. MQTT defaults match Opta Parc (`mqtt.mooreview.io:8883`, user `mooreview`).
+Join AP **`PeakLogic-ResPool`** / `peaklogic` → `http://192.168.4.1:8080/` → enter **home Wi-Fi**. MQTT defaults match Opta Parc (`mqtt.peaklogic.io:8883`, user `peaklogic`).
 
 ## Two RS-485 pairs
 
@@ -51,7 +51,7 @@ Pilot actuators or contactors. Do not switch a pump motor on the relay contacts.
 
 ## MQTT Parc (same as Opta)
 
-Defaults are the Opta sketch values: host `mqtt.mooreview.io`, TLS **8883**, user `mooreview`, firmware MOSQUITTO_PASS. The pad keeps running when that link is down.
+Defaults are the Opta sketch values: host `mqtt.peaklogic.io`, TLS **8883**, user `peaklogic`, firmware MOSQUITTO_PASS. The pad keeps running when that link is down.
 
 An IOT-LINK seed still exists for shops that want a PC hub (`deploy/iot-link/.env.res-pool-link.example`). That is **not** required for this device.
 

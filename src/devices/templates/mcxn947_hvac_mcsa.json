@@ -1,6 +1,6 @@
 {
   "id": "mcxn947_hvac_mcsa",
-  "label": "MCXN947 HVAC Monitor — MCSA (MooreVIEW Parc MQTT)",
+  "label": "MCXN947 HVAC Monitor — MCSA (PeakLogic Parc MQTT)",
   "vendor": "NXP / Nexcomm",
   "model": "MCXN947 HVAC Monitor",
   "transport": "mqtt_parc_telemetry",
@@ -11,7 +11,7 @@
   "defaults": {
     "brokerUrl": "mqtt://192.168.1.50:1883",
     "deviceId": "hvac_mcsa_01",
-    "topicPrefix": "mooreview/v1"
+    "topicPrefix": "peaklogic/v1"
   },
   "driver": {
     "enabled": true,
@@ -22,5 +22,5 @@
     "mcsa": "Array of per-CT cooked diagnostic spectra. Each channel has fund [Hz,amp], rotor/bearing/ecc [[Hz,amp],...], optional load groups (fan/pump/compressor/turbine), and stator [Hz,amp].",
     "env": "T1_C..T4_C, WATER_ROPE_MV, WR_DETECT, WR_INPUT_ON"
   },
-  "notes": "Firmware publishes MooreVIEW Parc v1 telemetry to mooreview/v1/hvac_mcsa_01/telemetry (~1 Hz). Payload carries MCSA cooked freq/amplitude pairs from FFT diagnostic bins (not severity scalars). Enable MQTT Parc hub in MooreVIEW with the same broker. Set MV_DEVICE_ID and MV_BROKER_ADDR in src/mcsa_mqtt.h to match."
+  "notes": "Firmware publishes PeakLogic Parc v1 telemetry to peaklogic/v1/hvac_mcsa_01/telemetry (~1 Hz). Payload carries MCSA cooked freq/amplitude pairs from FFT diagnostic bins (not severity scalars). Enable MQTT Parc hub in PeakLogic with the same broker. Set MV_DEVICE_ID and MV_BROKER_ADDR in src/mcsa_mqtt.h to match."
 }

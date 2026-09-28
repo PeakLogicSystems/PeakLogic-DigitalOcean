@@ -45,7 +45,7 @@ Platform: `waveshare-esp32s3-relay-1ch`
 ## Commission
 
 1. Flash `firmware/waveshare-esp32s3-relay-parc` (Arduino IDE, ESP32S3 Dev Module, USB CDC on).
-2. Join AP **`MooreVIEW-Relay1CH`** / `mooreview` → `http://192.168.4.1:8080/setup`.
+2. Join AP **`PeakLogic-Relay1CH`** / `peaklogic` → `http://192.168.4.1:8080/setup`.
 3. Enter **home Wi-Fi** name + password and the **pool hub** LAN IP (IOT-LINK Mosquitto `:1883`).
 4. Unique `deviceId`. Save.
 5. **Drivers → MQTT Parc → Waveshare ESP32-S3-Relay-1CH-U** with that `deviceId`.
@@ -58,16 +58,16 @@ IOT-LINK pool already runs ST on the appliance (`remoteExecution: false`). The P
 Single board:
 
 ```bash
-MOOREVIEW_POOL_WAVESHARE_RELAY=true
-MOOREVIEW_POOL_WAVESHARE_ROLE=dose_acid
-MOOREVIEW_POOL_WAVESHARE_DEVICE_ID=ws_relay_acid
-MOOREVIEW_POOL_WAVESHARE_DI=flow_sw
+PEAKLOGIC_POOL_WAVESHARE_RELAY=true
+PEAKLOGIC_POOL_WAVESHARE_ROLE=dose_acid
+PEAKLOGIC_POOL_WAVESHARE_DEVICE_ID=ws_relay_acid
+PEAKLOGIC_POOL_WAVESHARE_DI=flow_sw
 ```
 
 Several boards (recommended):
 
 ```bash
-MOOREVIEW_POOL_WAVESHARE_RELAYS=dose_acid:ws_relay_acid:flow_sw,dose_cl:ws_relay_cl,light_z1:ws_relay_lz1
+PEAKLOGIC_POOL_WAVESHARE_RELAYS=dose_acid:ws_relay_acid:flow_sw,dose_cl:ws_relay_cl,light_z1:ws_relay_lz1
 ```
 
 Format: `role:deviceId[:diRole]`. Then:
@@ -78,7 +78,7 @@ node deploy/iot-link/seed-pool-config.js --force
 
 Roles: `dose_acid`, `dose_base`, `dose_cl`, `dose_salt`, `light_z1`…`light_z6`, `pump_pilot`, `heater`, `bw_valve`, `spa_jets`. Optional DI: `flow_sw`.
 
-Residential pool & spa (`MOOREVIEW_POOL_PROFILE=residential-spa`) defaults to `spa_jets:ws_relay_spa` if no list is set. See `docs/RESIDENTIAL_POOL_SPA.md`.
+Residential pool & spa (`PEAKLOGIC_POOL_PROFILE=residential-spa`) defaults to `spa_jets:ws_relay_spa` if no list is set. See `docs/RESIDENTIAL_POOL_SPA.md`.
 
 ## Chemistry: SEN0711 + SEN0712
 
@@ -92,8 +92,8 @@ Hang the probes on **IOT-LINK PORT B**, not on the Waveshare RS-485 (this firmwa
 Set unique Modbus addresses (holding **0x07D0**) **before** both share A/B. Enable 120 Ω if the run is long.
 
 ```bash
-MOOREVIEW_POOL_MODBUS_CHEM=true
-MOOREVIEW_POOL_WAVESHARE_RELAYS=dose_acid:ws_relay_acid:flow_sw,dose_cl:ws_relay_cl
+PEAKLOGIC_POOL_MODBUS_CHEM=true
+PEAKLOGIC_POOL_WAVESHARE_RELAYS=dose_acid:ws_relay_acid:flow_sw,dose_cl:ws_relay_cl
 node deploy/iot-link/seed-pool-config.js --force
 ```
 

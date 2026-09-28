@@ -11,8 +11,8 @@
   "aiCount": 10,
   "defaults": {
     "deviceId": "dragino_01",
-    "topicPrefix": "mooreview/v1",
-    "cloudBrokerHost": "mooreview.io",
+    "topicPrefix": "peaklogic/v1",
+    "cloudBrokerHost": "peaklogic.io",
     "cloudBrokerPort": 1883,
     "cloudTenantId": "",
     "draginoTopicPrefix": "dragino",
@@ -68,5 +68,5 @@
     "tags": "CELL_SIGNAL, CELL_BATTERY_V, MB_REG_n (auto from Payload hex)",
     "dragino": "imei, imsi, model, payloadHex, time"
   },
-  "notes": "Cellular RS485 gateway to MooreVIEW Cloud (NB-IoT). Not an Opta LAN bridge — use LilyGO T-ETH for Opta→cloud. Configure Dragino AT+SERVADDR=mooreview.io,1883 and AT+PUBTOPIC=mooreview/v1/dragino_01/telemetry (or tenant-scoped mooreview/v1/{tenantId}/dragino_01/telemetry). Hub auto-converts Dragino JSON to Parc tags. See docs/DRAGINO_PARC_CLOUD.md. Sample: st/fixtures/dragino-rs485-nb-telemetry-sample.json."
+  "notes": "Cellular RS485 gateway to PeakLogic Cloud (NB-IoT). Not an Opta LAN bridge — use LilyGO T-ETH for Opta→cloud. Configure Dragino AT+SERVADDR=peaklogic.io,1883 and AT+PUBTOPIC=peaklogic/v1/dragino_01/telemetry (or tenant-scoped peaklogic/v1/{tenantId}/dragino_01/telemetry). Hub auto-converts Dragino JSON to Parc tags. See docs/DRAGINO_PARC_CLOUD.md. Sample: st/fixtures/dragino-rs485-nb-telemetry-sample.json."
 }

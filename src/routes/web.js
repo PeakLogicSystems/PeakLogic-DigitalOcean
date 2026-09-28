@@ -183,7 +183,7 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(servicePayload());
   }
   if (!req.auth) {
-    return res.render('public-home', { title: 'mooreVIEW Cloud' });
+    return res.render('public-home', { title: 'PeakLogic Cloud' });
   }
   const ctx = await loadShellContext(req);
   if (!ctx) {

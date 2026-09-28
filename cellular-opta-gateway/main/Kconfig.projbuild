@@ -1,4 +1,4 @@
-menu "MooreVIEW Opta Gateway"
+menu "PeakLogic Opta Gateway"
 
     choice BOARD_VARIANT
         prompt "LilyGO board"
@@ -16,11 +16,11 @@ menu "MooreVIEW Opta Gateway"
 
     config DEVCFG_WIFI_AP_SSID_DEFAULT
         string "Setup AP SSID"
-        default "MooreVIEW-Gateway"
+        default "PeakLogic-Gateway"
 
     config DEVCFG_WIFI_AP_PASS_DEFAULT
         string "Setup AP password (min 8 chars)"
-        default "mooreview"
+        default "peaklogic"
 
     config DEVCFG_WIFI_AP_HTTP_PORT
         int "Setup HTTP port on AP (192.168.4.1)"

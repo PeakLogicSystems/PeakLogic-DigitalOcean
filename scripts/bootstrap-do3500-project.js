@@ -52,7 +52,7 @@ const built = buildFromPreset('icon_do3500', { serialPort: 'COM3', slaveId: 1 })
 const tags = built.tags.map(estTagShape);
 
 const doc = {
-  format: 'mooreview-est',
+  format: 'peaklogic-est',
   version: 1,
   savedAt: new Date().toISOString(),
   project: { name: 'icon-do3500' },
@@ -100,10 +100,10 @@ const doc = {
                 {
                   kind: 'staticImage',
                   z: 0,
-                  svg: '/hmi/svg/library/sensor-faceplates/mooreview/icon_do3500.svg',
+                  svg: '/hmi/svg/library/sensor-faceplates/peaklogic/icon_do3500.svg',
                 },
               ],
-              svg: '/hmi/svg/library/sensor-faceplates/mooreview/icon_do3500.svg',
+              svg: '/hmi/svg/library/sensor-faceplates/peaklogic/icon_do3500.svg',
             },
           ],
           gridCols: 8,

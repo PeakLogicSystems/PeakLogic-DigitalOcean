@@ -2,7 +2,7 @@
   "id": "lilygo_t_eth_parc_st",
   "label": "LilyGO T-ETH + SM-I-010 — MQTT Parc ST",
   "vendor": "LilyGO / Sequent Microsystems",
-  "model": "T-ETH-ELITE-A7670X + SM-I-010 (4relind) — MooreVIEW ST over MQTT Parc",
+  "model": "T-ETH-ELITE-A7670X + SM-I-010 (4relind) — PeakLogic ST over MQTT Parc",
   "transport": "mqtt_parc",
   "driverId": "eth_parc_st_01",
   "tagsFromDevice": true,

@@ -1,12 +1,12 @@
-# mooreVIEW Parc MQTT peer — LilyGO T-HaLow
+# PeakLogic Parc MQTT peer — LilyGO T-HaLow
 
 
 
 ESP-IDF firmware for the **LilyGO T-HaLow** (ESP32-S3). It publishes sensor
 
-telemetry to **mooreVIEW PC / IOT-link** over the **mooreVIEW Parc** MQTT protocol
+telemetry to **PeakLogic PC / IOT-link** over the **PeakLogic Parc** MQTT protocol
 
-(`mooreview/v1`), same as the Arduino Opta.
+(`peaklogic/v1`), same as the Arduino Opta.
 
 
 
@@ -20,7 +20,7 @@ TX-AH `AT+TXDATA` / `+RXDATA`).
 
 
 
-**Wi-Fi is setup-only** — the ESP32 soft-AP (`mooreVIEW-T-HaLow`) exposes
+**Wi-Fi is setup-only** — the ESP32 soft-AP (`PeakLogic-T-HaLow`) exposes
 
 `http://192.168.4.1:8080/setup` for broker, device ID, and HaLow IP config
 
@@ -80,7 +80,7 @@ No `MMIOT_ROOT` or Morse Micro SDK required.
 
 | **TX-AH** | pairing vs manual SSID, UART pins |
 
-| **mooreVIEW Parc** | device ID (`thalow_01`), site key |
+| **PeakLogic Parc** | device ID (`thalow_01`), site key |
 
 | **Sensors** | template + GPIO pins |
 
@@ -92,7 +92,7 @@ No `MMIOT_ROOT` or Morse Micro SDK required.
 
 1. Flash firmware; put HaLow AP in **pairing mode** (LilyGO workflow).
 
-2. Connect phone/laptop to Wi-Fi AP `mooreVIEW-T-HaLow` / `mooreview`.
+2. Connect phone/laptop to Wi-Fi AP `PeakLogic-T-HaLow` / `peaklogic`.
 
 3. Open `http://192.168.4.1:8080/setup` — set broker IP, HaLow IP, device ID.
 
@@ -165,7 +165,7 @@ Leak latch reset via MQTT `write_outputs`: `LEAK_RST`, `LEAK1_RST`, `LEAK_PAN_RS
 
 | `main/tx_ah.c/.h` | TX-AH UART AT + frame TX/RX |
 
-| `main/mqtt_parc.c/.h` | mooreVIEW Parc client |
+| `main/mqtt_parc.c/.h` | PeakLogic Parc client |
 
 | `main/sensors.c/.h` | Flow, CT, leak rope |
 

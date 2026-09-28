@@ -1,7 +1,7 @@
 /*
- * MQTT bridge — local broker (Opta) <-> cloud Mosquitto (MooreVIEW droplet).
+ * MQTT bridge — local broker (Opta) <-> cloud Mosquitto (PeakLogic droplet).
  *
- * Forwards mooreview/v1/# transparently in both directions.
+ * Forwards peaklogic/v1/# transparently in both directions.
  * Cloud side carries username/password; Opta stays anonymous on LAN.
  *
  * SPDX-License-Identifier: Apache-2.0

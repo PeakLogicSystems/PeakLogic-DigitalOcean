@@ -20,7 +20,7 @@ describe('draginoGatewayCommission', () => {
 
   it('resolveDraginoCloudBroker maps localhost hub to public cloud host', () => {
     const broker = resolveDraginoCloudBroker({}, { brokerUrl: 'mqtt://127.0.0.1:1883' });
-    assert.equal(broker.host, 'mooreview.io');
+    assert.equal(broker.host, 'peaklogic.io');
     assert.equal(broker.port, 1883);
   });
 
@@ -30,7 +30,7 @@ describe('draginoGatewayCommission', () => {
       tenantId: 'acme-corp',
       presetId: 'dfrobot_sen0706_ec',
       slaveId: 1,
-    }, { topicPrefix: 'mooreview/v1' });
+    }, { topicPrefix: 'peaklogic/v1' });
 
     assert.equal(plan.role, 'rs485_mqtt_gateway');
     assert.equal(plan.reportIntervalSec, 300);
@@ -47,7 +47,7 @@ describe('draginoGatewayCommission', () => {
       deviceId: 'dragino_opta_01',
       presetId: 'opta_parc_modbus_dragino',
       slaveId: 2,
-    }, { topicPrefix: 'mooreview/v1' });
+    }, { topicPrefix: 'peaklogic/v1' });
 
     assert.equal(plan.reportIntervalSec, 300);
     assert.ok(plan.atCommands.includes('AT+TDC=300'));

@@ -1,4 +1,4 @@
-"""MooreVIEW Parc v1 MQTT publisher for UNO Q edge MCSA."""
+"""PeakLogic Parc v1 MQTT publisher for UNO Q edge MCSA."""
 from __future__ import annotations
 
 import json
@@ -17,7 +17,7 @@ def load_config(path: str | None = None) -> dict[str, Any]:
         "deviceId": os.environ.get("MV_DEVICE_ID", "unoq_mcsa_01"),
         "name": os.environ.get("MV_DEVICE_NAME", "UNO Q edge motor fault"),
         "broker": os.environ.get("MV_BROKER", "mqtt://127.0.0.1:1883"),
-        "topicPrefix": os.environ.get("MV_TOPIC_PREFIX", "mooreview/v1"),
+        "topicPrefix": os.environ.get("MV_TOPIC_PREFIX", "peaklogic/v1"),
         "username": os.environ.get("MV_MQTT_USER", ""),
         "password": os.environ.get("MV_MQTT_PASS", ""),
         "fundHz": float(os.environ.get("MV_FUND_HZ", "60")),
@@ -143,7 +143,7 @@ class ParcMqtt:
             return
         if len(key) <= 4 and key.isdigit():
             key = key.zfill(4)
-        prefix = self.cfg.get("topicPrefix", "mooreview/v1").rstrip("/")
+        prefix = self.cfg.get("topicPrefix", "peaklogic/v1").rstrip("/")
         tags = body.get("tags") or []
         want = {f"AI{i}" for i in range(1, 7)}
         want.update({"MOTOR1_FAULT", "MOTOR2_FAULT", "P1_RUN_FB", "P2_RUN_FB", "MOTOR1_START_MS", "MOTOR2_START_MS"})

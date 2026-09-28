@@ -1,8 +1,8 @@
-# Arduino Opta Modbus RTU (MooreVIEW)
+# Arduino Opta Modbus RTU (PeakLogic)
 
 Matches the **Opta Modbus RTU slave** sketch (slave ID **2**, **9600 8N1**):
 
-| Modbus | Address | MooreVIEW tags |
+| Modbus | Address | PeakLogic tags |
 |--------|---------|----------------|
 | Discrete inputs | 0–7 | `I1`–`I8` |
 | Coils (relays) | 0–3 | `R1`–`R4` |
@@ -24,15 +24,15 @@ ST on device; deploy over **MQTT** (no HTTP to Opta required for programming). S
 
 ## PC setup (Ethernet ST on Opta)
 
-ST logic runs **on the Opta**; MooreVIEW deploys the program over HTTP.
+ST logic runs **on the Opta**; PeakLogic deploys the program over HTTP.
 
-1. Flash firmware: `firmware/arduino-opta-st/MooreviewOptaSt/` (see README there).
+1. Flash firmware: `firmware/arduino-opta-st/PeaklogicOptaSt/` (see README there).
 2. **Drivers → Apply device template → Arduino Opta — Ethernet ST runtime** (or `fixtures/drivers.opta_eth.json`).
 3. Set **Host** to the Opta IP, enable driver, **Save drivers**.
 4. Load `opta/01_i1_to_r1.st` with fixtures `tags.opta_eth.json`.
 5. **Validate** → **Start** — program AST is sent to the Opta; scan cycles run remotely.
 
-Commission Ethernet and expansions on the device first: connect to WiFi AP `MooreVIEW-Opta` → `http://192.168.4.1:8080/setup`, or open `/setup` on the Ethernet IP. Configure AFX00005 (slot 1) and AFX00007 (slot 2) as needed, then use `tags.opta_eth_exp.json` for `X1_` / `X2_` tags.
+Commission Ethernet and expansions on the device first: connect to WiFi AP `PeakLogic-Opta` → `http://192.168.4.1:8080/setup`, or open `/setup` on the Ethernet IP. Configure AFX00005 (slot 1) and AFX00007 (slot 2) as needed, then use `tags.opta_eth_exp.json` for `X1_` / `X2_` tags.
 
 ## Programs
 

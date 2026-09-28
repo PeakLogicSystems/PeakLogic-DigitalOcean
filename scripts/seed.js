@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Idempotent dev/demo seed for mooreview-cloud.
+ * Idempotent dev/demo seed for peaklogic-cloud.
  * Ensures dev .env defaults, then seeds demo tenants and hierarchy.
  * Safe to re-run — skips existing records by slug.
  */
@@ -164,8 +164,8 @@ function printSummary({
   platformAdminKey,
 }) {
   const base = `http://localhost:${PORT}`;
-  console.log('\n=== mooreVIEW Cloud seed complete ===\n');
-  console.log('Product:      mooreVIEW (Purple Standard) — CMMS is a module inside the shell');
+  console.log('\n=== PeakLogic Cloud seed complete ===\n');
+  console.log('Product:      PeakLogic (Purple Standard) — CMMS is a module inside the shell');
   console.log(`Database:     ${MONGODB_DB}`);
   console.log('\n--- Demo tenant (CMMS enabled) ---');
   console.log(`  Tenant slug:  ${demo.tenant.slug} (${demo.tenant.name})`);

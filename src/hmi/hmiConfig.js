@@ -318,11 +318,11 @@ function isMotorFaceplateSvgPath(svgPath) {
 }
 
 function isDuplexlsFaceplateSvgPath(svgPath) {
-  return /lift-station-faceplates\/mooreview\/duplexls|\/duplexls\.svg/i.test(String(svgPath || ''));
+  return /lift-station-faceplates\/peaklogic\/duplexls|\/duplexls\.svg/i.test(String(svgPath || ''));
 }
 
 function isTpoFaceplateSvgPath(svgPath) {
-  return /schedules\/mooreview\/tpo_daily|tpo_daily/i.test(String(svgPath || ''));
+  return /schedules\/peaklogic\/tpo_daily|tpo_daily/i.test(String(svgPath || ''));
 }
 
 function isPoolFaceplateSvgPath(svgPath) {
@@ -355,14 +355,14 @@ function normalizeAlarmList(raw) {
   };
 }
 
-function isMooreviewStripChart3PenPath(svgPath) {
-  return /\/mooreview\/strip_chart_3pen/i.test(String(svgPath || ''));
+function isPeaklogicStripChart3PenPath(svgPath) {
+  return /\/peaklogic\/strip_chart_3pen/i.test(String(svgPath || ''));
 }
 
 function isStripChartSvgPath(svgPath) {
   const p = String(svgPath || '');
   if (!/\/charts-trends\/strip-charts\//i.test(p)) return false;
-  if (isMooreviewStripChart3PenPath(p)) return false;
+  if (isPeaklogicStripChart3PenPath(p)) return false;
   return /strip_chart/i.test(p);
 }
 
@@ -812,7 +812,7 @@ function normalizeLayer(raw, publicRoot = null) {
   if (isPilotLightSvgPath(svg) && layerKind === 'staticImage') layerKind = 'dynamicImage';
   if (isGaugeColumnSvgPath(svg) && layerKind === 'staticImage') layerKind = 'dynamicImage';
   if (label && layerKind === 'staticImage' && !isCompositeFaceplateSvgPath(svg)) layerKind = 'staticText';
-  if (isStripChartSvgPath(svg) && !isMooreviewStripChart3PenPath(svg)) {
+  if (isStripChartSvgPath(svg) && !isPeaklogicStripChart3PenPath(svg)) {
     if (!/\/chart-strip\/strip_chart\.svg$/i.test(svg)) {
       svg = '/hmi/svg/library/charts-trends/strip-charts/mv/chart-strip/strip_chart.svg';
     }

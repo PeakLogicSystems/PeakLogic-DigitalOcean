@@ -265,7 +265,7 @@ function packArchive(deps, meta = {}, io = {}) {
 
 function unpackArchive(buf) {
   if (!isZipBuffer(buf)) {
-    throw Object.assign(new Error('Expected a MooreVIEW project archive (.est.zip)'), { status: 400 });
+    throw Object.assign(new Error('Expected a PeakLogic project archive (.est.zip)'), { status: 400 });
   }
   let files;
   try {
@@ -402,7 +402,7 @@ function parseImportJsonBuffer(buf) {
   const { resolveImportPayload } = require('./projectBundle');
   const { type, doc, warnings } = resolveImportPayload(raw);
   if (type !== 'est') {
-    throw Object.assign(new Error('Expected a MooreVIEW project file (.est.json or .est.zip)'), { status: 400 });
+    throw Object.assign(new Error('Expected a PeakLogic project file (.est.json or .est.zip)'), { status: 400 });
   }
   return { doc, warnings: warnings || [] };
 }

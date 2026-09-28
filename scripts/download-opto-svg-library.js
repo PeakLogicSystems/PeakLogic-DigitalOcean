@@ -27,7 +27,7 @@ const RETRIES = 3;
 
 function fetchText(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'MooreVIEW/1.0 (Opto library sync)' } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': 'PeakLogic/1.0 (Opto library sync)' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         return resolve(fetchText(new URL(res.headers.location, url).href));
@@ -45,7 +45,7 @@ function fetchText(url) {
 
 function fetchBuffer(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'MooreVIEW/1.0 (Opto library sync)' } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': 'PeakLogic/1.0 (Opto library sync)' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         return resolve(fetchBuffer(new URL(res.headers.location, url).href));

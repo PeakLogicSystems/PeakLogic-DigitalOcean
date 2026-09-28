@@ -1,28 +1,28 @@
 # Arduino Opta — ST over MQTT Parc (bytecode IR)
 
-Structured Text runs **on the Opta**; MooreVIEW **est-pc** deploys **bytecode** (`MVBC`) and controls runtime over **MQTT** (`mqtt_parc` driver). Alpha — JSON AST (protocol v1) is removed.
+Structured Text runs **on the Opta**; PeakLogic **est-pc** deploys **bytecode** (`MVBC`) and controls runtime over **MQTT** (`mqtt_parc` driver). Alpha — JSON AST (protocol v1) is removed.
 
 ## 1. Flash firmware
 
-`firmware/arduino-opta-mqtt-st/MooreviewOptaMqttSt/`
+`firmware/arduino-opta-mqtt-st/PeaklogicOptaMqttSt/`
 
 Add **`mv_bc.cpp`**, **`mv_base64.cpp`** to the sketch (same folder as `mv_st.cpp`).
 
-In `MooreviewOptaMqttSt.ino`, set MQTT broker + device id:
+In `PeaklogicOptaMqttSt.ino`, set MQTT broker + device id:
 
 ```cpp
 static MvMqttConfig g_mqttCfg = {
-  "192.168.1.233",  // MQTT broker IP (MooreVIEW PC LAN)
+  "192.168.1.233",  // MQTT broker IP (PeakLogic PC LAN)
   1883,
   "opta_st_01",     // must match driver deviceId
-  "mooreview/v1",
+  "peaklogic/v1",
   180000,
 };
 ```
 
 ## 2. Local MQTT broker (Windows)
 
-MooreVIEW PC runs the **Parc hub**; Opta connects to the same broker on the LAN.
+PeakLogic PC runs the **Parc hub**; Opta connects to the same broker on the LAN.
 
 | Item | Value |
 |------|-------|
@@ -54,13 +54,13 @@ Set `mqttParc.brokerUrl` to your PC LAN IP (e.g. `mqtt://192.168.1.233:1883`). F
 "mqttParc": {
   "enabled": true,
   "brokerUrl": "mqtt://192.168.1.233:1883",
-  "topicPrefix": "mooreview/v1"
+  "topicPrefix": "peaklogic/v1"
 }
 ```
 
 Restart est-pc after enabling.
 
-## 4. MooreVIEW project
+## 4. PeakLogic project
 
 1. **Drivers → Apply template → Arduino Opta — MQTT Parc ST runtime**
 2. **deviceId** = `opta_st_01` (same as firmware)
@@ -69,7 +69,7 @@ Restart est-pc after enabling.
 
 Deploy payload is `{ protocolVersion: 2, bc: "<base64 MVBC>", programName }` — typically **5–20× smaller** than JSON AST.
 
-While attached, MooreVIEW sets Parc `reportMs` ≈ `2× scanMs` for HMI tag refresh (default firmware telemetry is 180 s when idle).
+While attached, PeakLogic sets Parc `reportMs` ≈ `2× scanMs` for HMI tag refresh (default firmware telemetry is 180 s when idle).
 
 ## Wire format
 

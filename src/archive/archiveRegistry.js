@@ -13,7 +13,7 @@ function uri() {
 }
 
 function dbName() {
-  return process.env.MONGODB_DB || 'mooreview';
+  return process.env.MONGODB_DB || 'peaklogic';
 }
 
 async function connect() {

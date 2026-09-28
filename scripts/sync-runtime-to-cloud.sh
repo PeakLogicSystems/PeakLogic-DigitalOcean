@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Sync est-pc runtime into mooreview-cloud (bash port of sync-runtime-to-cloud.ps1).
+# Sync est-pc runtime into peaklogic-cloud (bash port of sync-runtime-to-cloud.ps1).
 # Used on Linux CI and dev machines without PowerShell.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EST_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-CLOUD_ROOT="${1:-${MOOREVIEW_CLOUD_ROOT:-$(cd "$EST_ROOT/../mooreview-cloud" 2>/dev/null && pwd || true)}}"
+CLOUD_ROOT="${1:-${PEAKLOGIC_CLOUD_ROOT:-$(cd "$EST_ROOT/../peaklogic-cloud" 2>/dev/null && pwd || true)}}"
 
 log() { printf '[sync-cloud] %s\n' "$*"; }
 die() { printf '[sync-cloud] ERROR: %s\n' "$*" >&2; exit 1; }
 
-[[ -d "$CLOUD_ROOT" ]] || die "mooreview-cloud not found at $CLOUD_ROOT"
+[[ -d "$CLOUD_ROOT" ]] || die "peaklogic-cloud not found at $CLOUD_ROOT"
 [[ -d "$EST_ROOT/src" ]] || die "est-pc src/ missing at $EST_ROOT"
 
 PRESERVE_SRC=(
@@ -144,4 +144,4 @@ NODE
 log "  merged: package.json deps/scripts"
 
 log ""
-log "Done. In mooreview-cloud: npm install && npm run test:all"
+log "Done. In peaklogic-cloud: npm install && npm run test:all"

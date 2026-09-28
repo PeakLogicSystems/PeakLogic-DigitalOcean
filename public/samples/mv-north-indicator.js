@@ -1,5 +1,5 @@
 /**
- * MooreVIEW 3D map — north compass overlay.
+ * PeakLogic 3D map — north compass overlay.
  * World north defaults to -Z (matches lat/lng fleet maps: increasing latitude → -Z).
  */
 import * as THREE from 'three';

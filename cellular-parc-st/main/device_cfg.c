@@ -19,7 +19,7 @@ void parc_cfg_set_defaults(parc_st_cfg_t *cfg)
     strncpy(cfg->device_name, "T-ETH Parc ST", sizeof(cfg->device_name) - 1);
     strncpy(cfg->mqtt_host, CONFIG_DEVCFG_CLOUD_MQTT_HOST_DEFAULT, sizeof(cfg->mqtt_host) - 1);
     cfg->mqtt_port = CONFIG_DEVCFG_CLOUD_MQTT_PORT_DEFAULT;
-    strncpy(cfg->topic_prefix, "mooreview/v1", sizeof(cfg->topic_prefix) - 1);
+    strncpy(cfg->topic_prefix, "peaklogic/v1", sizeof(cfg->topic_prefix) - 1);
     cfg->report_ms = 180000;
     strncpy(cfg->modem_apn, CONFIG_DEVCFG_MODEM_APN_DEFAULT, sizeof(cfg->modem_apn) - 1);
     strncpy(cfg->wifi_ap_ssid, CONFIG_DEVCFG_WIFI_AP_SSID_DEFAULT, sizeof(cfg->wifi_ap_ssid) - 1);

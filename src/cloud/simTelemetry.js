@@ -38,7 +38,7 @@ function buildSimTelemetry(sim, tick = 0) {
     runtime: { running: true, firmware: 'cloud-sim', deviceMode: 'simulated' },
     driverHealth: [{ id: 'mqtt', type: 'mqtt', connected: true, message: 'OK' }],
     meta: {
-      source: 'mooreview-cloud-sim',
+      source: 'peaklogic-cloud-sim',
       simId: sim.id,
       tenantId: sim.tenantId,
       simType: sim.type,

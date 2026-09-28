@@ -16,7 +16,7 @@ const WIZARD_TRANSPORT_GROUPS = [
   {
     id: 'mqtt_parc',
     label: 'MQTT Parc — Arduino Opta',
-    hint: 'Remote ST on Opta; MooreVIEW syncs tags from device telemetry',
+    hint: 'Remote ST on Opta; PeakLogic syncs tags from device telemetry',
   },
   {
     id: 'mqtt',

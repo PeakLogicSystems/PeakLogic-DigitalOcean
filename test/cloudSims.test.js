@@ -3,9 +3,9 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-process.env.MOOREVIEW_CONFIG_URI = 'memory';
-process.env.MOOREVIEW_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-cloud-sims-'));
-process.env.MOOREVIEW_CLOUD_SIMS = '1';
+process.env.PEAKLOGIC_CONFIG_URI = 'memory';
+process.env.PEAKLOGIC_DATA = fs.mkdtempSync(path.join(os.tmpdir(), 'mv-cloud-sims-'));
+process.env.PEAKLOGIC_CLOUD_SIMS = '1';
 
 const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert/strict');
@@ -48,7 +48,7 @@ describe('simTelemetry', () => {
       r0.tags.find((t) => t.id === 'I1').value,
       r1.tags.find((t) => t.id === 'I1').value,
     );
-    assert.equal(r0.meta.source, 'mooreview-cloud-sim');
+    assert.equal(r0.meta.source, 'peaklogic-cloud-sim');
   });
 
   it('builds modbus register tags', () => {
@@ -118,14 +118,14 @@ describe('cloudSettings', () => {
     );
   });
 
-  it('defaults enabled from MOOREVIEW_CLOUD_SIMS env', () => {
-    const prev = process.env.MOOREVIEW_CLOUD_SIMS;
-    process.env.MOOREVIEW_CLOUD_SIMS = '1';
+  it('defaults enabled from PEAKLOGIC_CLOUD_SIMS env', () => {
+    const prev = process.env.PEAKLOGIC_CLOUD_SIMS;
+    process.env.PEAKLOGIC_CLOUD_SIMS = '1';
     try {
       assert.deepEqual(normalizeCloudSimsSettings(undefined, {}), { enabled: true });
     } finally {
-      if (prev === undefined) delete process.env.MOOREVIEW_CLOUD_SIMS;
-      else process.env.MOOREVIEW_CLOUD_SIMS = prev;
+      if (prev === undefined) delete process.env.PEAKLOGIC_CLOUD_SIMS;
+      else process.env.PEAKLOGIC_CLOUD_SIMS = prev;
     }
   });
 });
@@ -170,7 +170,7 @@ describe('cloud sim API', () => {
   });
 
   it('returns 403 when cloud sims disabled', async () => {
-    delete process.env.MOOREVIEW_CLOUD_SIMS;
+    delete process.env.PEAKLOGIC_CLOUD_SIMS;
     persistence.writeJson('settings.json', { cloudSims: { enabled: false } });
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/cloud/cloudSimsEnabled')];
@@ -186,7 +186,7 @@ describe('cloud sim API', () => {
       assert.equal(res.status, 403);
     } finally {
       await new Promise((r) => server.close(r));
-      process.env.MOOREVIEW_CLOUD_SIMS = '1';
+      process.env.PEAKLOGIC_CLOUD_SIMS = '1';
       delete require.cache[require.resolve('../src/config')];
       delete require.cache[require.resolve('../src/cloud/cloudSimsEnabled')];
       delete require.cache[require.resolve('../src/api/routes/cloudSims')];
@@ -194,14 +194,14 @@ describe('cloud sim API', () => {
   });
 
   it('allows cloud sims when settings.cloudSims.enabled is true', async () => {
-    delete process.env.MOOREVIEW_CLOUD_SIMS;
+    delete process.env.PEAKLOGIC_CLOUD_SIMS;
     persistence.writeJson('settings.json', { cloudSims: { enabled: true } });
     delete require.cache[require.resolve('../src/config')];
     delete require.cache[require.resolve('../src/cloud/cloudSimsEnabled')];
     delete require.cache[require.resolve('../src/api/routes/cloudSims')];
     const { isCloudSimsEnabled } = require('../src/cloud/cloudSimsEnabled');
     assert.equal(isCloudSimsEnabled(), true);
-    process.env.MOOREVIEW_CLOUD_SIMS = '1';
+    process.env.PEAKLOGIC_CLOUD_SIMS = '1';
     delete require.cache[require.resolve('../src/cloud/cloudSimsEnabled')];
   });
 });

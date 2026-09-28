@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Write full nginx server block for SaaS (:3100). Does not overwrite TLS (certbot) configs.
 #
-#   MOOREVIEW_DOMAIN=test.mooreview.io bash deploy/cloud/debian/write-nginx-saas-site.sh
-#   MOOREVIEW_DOMAIN=mooreview.io MOOREVIEW_SAAS_PORT=3100 bash ...
+#   PEAKLOGIC_DOMAIN=test.peaklogic.io bash deploy/cloud/debian/write-nginx-saas-site.sh
+#   PEAKLOGIC_DOMAIN=peaklogic.io PEAKLOGIC_SAAS_PORT=3100 bash ...
 set -euo pipefail
 
-DOMAIN="${MOOREVIEW_DOMAIN:-mooreview.io}"
-PORT="${MOOREVIEW_SAAS_PORT:-3100}"
-NGINX_SITE="${NGINX_SITE:-/etc/nginx/sites-available/mooreview-saas}"
+DOMAIN="${PEAKLOGIC_DOMAIN:-peaklogic.io}"
+PORT="${PEAKLOGIC_SAAS_PORT:-3100}"
+NGINX_SITE="${NGINX_SITE:-/etc/nginx/sites-available/peaklogic-saas}"
 ENABLE_LINK="${NGINX_ENABLE_LINK:-1}"
 
 log() { printf '[write-nginx-saas] %s\n' "$*"; }
@@ -48,8 +48,8 @@ EOF
 fi
 
 if [[ "$ENABLE_LINK" == "1" ]]; then
-  ln -sf "$NGINX_SITE" /etc/nginx/sites-enabled/mooreview-saas
-  rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/mooreview 2>/dev/null || true
+  ln -sf "$NGINX_SITE" /etc/nginx/sites-enabled/peaklogic-saas
+  rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/peaklogic 2>/dev/null || true
 fi
 
 nginx -t

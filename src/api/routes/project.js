@@ -122,7 +122,7 @@ function createProjectRoutes(deps) {
     try {
       const raw = Buffer.isBuffer(req.body) ? req.body : null;
       if (!raw || !raw.length) {
-        return res.status(400).json({ error: 'Expected a MooreVIEW project file (.est.zip or .est.json)' });
+        return res.status(400).json({ error: 'Expected a PeakLogic project file (.est.zip or .est.json)' });
       }
       const result = await importProjectBuffer(raw);
       res.json(result);

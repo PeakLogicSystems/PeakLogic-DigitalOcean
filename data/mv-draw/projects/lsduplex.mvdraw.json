@@ -1,5 +1,5 @@
 {
-  "format": "mooreview-mvdraw",
+  "format": "peaklogic-mvdraw",
   "version": 1,
   "savedAt": "2026-08-02T11:44:21.338Z",
   "name": "lsduplex",
@@ -24,6 +24,6 @@
     "client": "",
     "site": "",
     "notes": "",
-    "mooreviewProject": ""
+    "peaklogicProject": ""
   }
 }

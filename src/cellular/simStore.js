@@ -6,7 +6,7 @@ const { CONFIG_URI, CONFIG_DB } = require('../config');
 const { normalizeSimRecord, summarizeSim, normalizeIccid } = require('./simRecordSchema');
 
 const FALLBACK_FILE = 'cellular_sims.json';
-const COLLECTION = String(process.env.MOOREVIEW_CELLULAR_SIMS_COLLECTION || 'cellular_sims').trim() || 'cellular_sims';
+const COLLECTION = String(process.env.PEAKLOGIC_CELLULAR_SIMS_COLLECTION || 'cellular_sims').trim() || 'cellular_sims';
 
 let client = null;
 let collection = null;

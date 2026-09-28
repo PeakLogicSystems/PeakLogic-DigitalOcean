@@ -8,7 +8,7 @@
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/icon-512.png">
   <script src="/js/pwa.js" defer></script>
-  <title>MV Draw — MooreView</title>
+  <title>MV Draw — PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>&mvdraw=12">
   <link rel="stylesheet" href="/css/mv-draw.css?v=<%= assetV %>&mvdraw=12">
 </head>
@@ -26,16 +26,16 @@
         <button type="button" class="topbar-menu-item" id="mv-menu-save" role="menuitem">Save</button>
         <button type="button" class="topbar-menu-item" id="mv-menu-save-as" role="menuitem">Save as…</button>
         <button type="button" class="topbar-menu-item" id="mv-menu-export-package" role="menuitem">Export package…</button>
-        <button type="button" class="topbar-menu-item" id="mv-menu-save-to-project" role="menuitem">Save to MooreView project…</button>
+        <button type="button" class="topbar-menu-item" id="mv-menu-save-to-project" role="menuitem">Save to PeakLogic project…</button>
         <button type="button" class="topbar-menu-item" id="mv-menu-compile-hmi" role="menuitem">Compile HMI faceplates…</button>
-        <button type="button" class="topbar-menu-item" id="mv-menu-load-from-project" role="menuitem">Load from MooreView project</button>
+        <button type="button" class="topbar-menu-item" id="mv-menu-load-from-project" role="menuitem">Load from PeakLogic project</button>
         <div class="topbar-menu-sep" role="separator"></div>
         <button type="button" class="topbar-menu-item" id="mv-menu-help" role="menuitem">Help</button>
         <div class="topbar-menu-sep" role="separator"></div>
         <div class="mv-file-menu-path" aria-live="polite">
           <div class="mv-file-menu-path-label">Current file</div>
           <div id="mv-file-menu-path" class="mv-file-menu-path-value cell-mono">—</div>
-          <div id="mv-file-menu-mooreview" class="mv-file-menu-mooreview cell-mono">MooreView project: —</div>
+          <div id="mv-file-menu-peaklogic" class="mv-file-menu-peaklogic cell-mono">PeakLogic project: —</div>
           <div id="mv-file-menu-session" class="mv-file-menu-session cell-mono">Session: data/mv-draw/active.json</div>
         </div>
       </div>
@@ -135,7 +135,7 @@
         <label>Height × <input type="number" id="mv-insp-scale-y" step="0.05" min="0.2" max="8"></label>
         <hr class="mv-inspector-sep">
         <h3 class="mv-sidebar-subtitle">3D / SCADA</h3>
-        <p class="panel-hint">Bind symbols to MooreView devices for live alarm/level colors in the 3D viewer.</p>
+        <p class="panel-hint">Bind symbols to PeakLogic devices for live alarm/level colors in the 3D viewer.</p>
         <label>Device ID <input type="text" id="mv-insp-device-id" maxlength="80" placeholder="e.g. ls_house_1" class="cell-mono"></label>
         <label>Zone ID <input type="text" id="mv-insp-zone-id" maxlength="80" placeholder="e.g. zone-a" class="cell-mono"></label>
         <label>Role
@@ -312,6 +312,6 @@
   <script src="/js/mvDrawLabelWrap.js?v=<%= assetV %>&mvdraw=12"></script>
   <script src="/js/mvDrawHelp.js?v=<%= assetV %>&mvdraw=12"></script>
   <script src="/js/mvDrawApp.js?v=<%= assetV %>&mvdraw=12"></script>
-  <script>MooreviewSignOut.bind('btn-standalone-sign-out');</script>
+  <script>PeaklogicSignOut.bind('btn-standalone-sign-out');</script>
 </body>
 </html>

@@ -14,7 +14,7 @@ function normalizeDeviceId(id) {
 }
 
 function topicPrefix(cfg) {
-  const p = (cfg?.topicPrefix || 'mooreview/v1').replace(/\/+$/, '');
+  const p = (cfg?.topicPrefix || 'peaklogic/v1').replace(/\/+$/, '');
   return p;
 }
 
@@ -97,7 +97,7 @@ function telemetryTopicInfo(topic, cfg) {
 const GLOBAL_ADDR_KEY_RE = /^[0-9a-f]{4}$/i;
 const GLOBAL_TAG_RE = /^[a-zA-Z0-9._-]{1,64}$/;
 
-/** Parse global tag topic mooreview/v1/g/{siteKey4}/{tagName}. */
+/** Parse global tag topic peaklogic/v1/g/{siteKey4}/{tagName}. */
 function parseGlobalTopic(topic, cfg) {
   const prefix = `${topicPrefix(cfg)}/g/`;
   if (!topic.startsWith(prefix)) return null;
@@ -114,7 +114,7 @@ function parseGlobalTopic(topic, cfg) {
   };
 }
 
-/** Global P2P tag topics under mooreview/v1/g/{siteKey4}/{tagName}. */
+/** Global P2P tag topics under peaklogic/v1/g/{siteKey4}/{tagName}. */
 function globalTopics(cfg, siteKey, tagName) {
   const tag = String(tagName || '').trim();
   if (!tag) throw new Error('tagName required');

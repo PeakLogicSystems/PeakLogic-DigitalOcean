@@ -38,7 +38,7 @@ window.GraphDraw = {
   formatAxisTime(ms, spanMs) {
     const d = new Date(ms);
     if (!Number.isFinite(ms)) return '—';
-    const tz = window.MooreviewTime?.localeOpts?.() || {};
+    const tz = window.PeaklogicTime?.localeOpts?.() || {};
     const dayMs = 24 * 60 * 60 * 1000;
     if ((spanMs || 0) >= 7 * dayMs) {
       return d.toLocaleString(undefined, { ...tz, month: 'short', day: 'numeric' });
@@ -395,7 +395,7 @@ window.GraphDraw = {
     });
 
     const lines = [
-      `# MooreView historian export`,
+      `# PeakLogic historian export`,
       `# project: ${meta.projectName || 'untitled'}`,
       `# exported: ${new Date().toISOString()}`,
       headers.join(','),
@@ -425,7 +425,7 @@ window.GraphDraw = {
     const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
     const url = URL.createObjectURL(blob);
     a.href = url;
-    a.download = `MooreView_historian_${stamp}.csv`;
+    a.download = `PeakLogic_historian_${stamp}.csv`;
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
@@ -459,7 +459,7 @@ window.GraphDraw = {
 
     const html = `<!DOCTYPE html><html><head>
       <meta charset="utf-8">
-      <title>MooreView Historian Report — ${escapeHtml(meta.projectName || 'untitled')}</title>
+      <title>PeakLogic Historian Report — ${escapeHtml(meta.projectName || 'untitled')}</title>
       <style>
         body { font-family: Segoe UI, system-ui, sans-serif; margin: 24px; color: #0f172a; }
         h1 { font-size: 1.35rem; margin: 0 0 0.25rem; }
@@ -471,7 +471,7 @@ window.GraphDraw = {
         @media print { body { margin: 12px; } }
       </style>
     </head><body>
-      <h1>MooreView — Historian Report</h1>
+      <h1>PeakLogic — Historian Report</h1>
       <p class="meta">Project: ${escapeHtml(meta.projectName || 'untitled')} · ${escapeHtml(meta.rangeLabel || '')} · Printed ${escapeHtml(new Date().toLocaleString())}</p>
       <img src="${img}" alt="Historian trend">
       <table>
@@ -482,7 +482,7 @@ window.GraphDraw = {
 
     // Hidden iframe — avoids popup blockers and window.open(..., 'noopener') returning null.
     const iframe = document.createElement('iframe');
-    iframe.setAttribute('title', 'MooreView historian print');
+    iframe.setAttribute('title', 'PeakLogic historian print');
     iframe.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0;pointer-events:none';
     document.body.appendChild(iframe);
     const win = iframe.contentWindow;

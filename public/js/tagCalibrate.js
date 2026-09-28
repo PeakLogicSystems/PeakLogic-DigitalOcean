@@ -1,7 +1,7 @@
 'use strict';
 
 /** Browser mirror of src/tags/tagLinearize.js + tagCalibrate.js (keep in sync). */
-window.MooreviewTagCal = (function () {
+window.PeaklogicTagCal = (function () {
   function normalizeEngUnit(unit) {
     return unit === 'F' ? 'F' : 'C';
   }

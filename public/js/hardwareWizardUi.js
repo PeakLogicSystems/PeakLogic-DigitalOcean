@@ -3,9 +3,9 @@
 /**
  * Hardware connection wizard — guided device template apply for new users.
  */
-window.MooreviewHwWizard = (function () {
-  const { esc } = window.MooreviewCore || { esc: (s) => String(s ?? '') };
-  const domGet = window.MooreviewCore?.$ || ((id) => document.getElementById(id));
+window.PeaklogicHwWizard = (function () {
+  const { esc } = window.PeaklogicCore || { esc: (s) => String(s ?? '') };
+  const domGet = window.PeaklogicCore?.$ || ((id) => document.getElementById(id));
 
   const STEPS = ['transport', 'template', 'connection', 'apply', 'done'];
   let transportGroups = [];
@@ -95,7 +95,7 @@ window.MooreviewHwWizard = (function () {
           label: 'MQTT broker (Opta /setup)',
           type: 'hint',
           default: '',
-          hint: 'Set MooreView / IOT-LINK gateway LAN IP:1883 on the Opta /setup page (not 127.0.0.1). System setup broker stays mqtt://127.0.0.1:1883 on the gateway.',
+          hint: 'Set PeakLogic / IOT-LINK gateway LAN IP:1883 on the Opta /setup page (not 127.0.0.1). System setup broker stays mqtt://127.0.0.1:1883 on the gateway.',
         },
       ];
     }
@@ -202,7 +202,7 @@ window.MooreviewHwWizard = (function () {
       { id: 'mqtt_parc', label: 'MQTT Parc / Opta', hint: 'Arduino Opta remote ST' },
     ];
     body.innerHTML = `
-      <p class="panel-hint">Choose how this device talks to MooreView. You can add more drivers later from <strong>Drivers</strong>.</p>
+      <p class="panel-hint">Choose how this device talks to PeakLogic. You can add more drivers later from <strong>Drivers</strong>.</p>
       <div class="hw-wizard-transport-grid">
         ${groups.map((g) => `
           <button type="button" class="hw-wizard-card${state.transportGroup === g.id ? ' selected' : ''}" data-transport-group="${esc(g.id)}">

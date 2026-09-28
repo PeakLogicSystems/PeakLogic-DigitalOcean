@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # Enable daily Mongo → zstd archive compaction on cloud 1 (SaaS droplet).
-# Requires full est-pc bundle at MOOREVIEW_INSTALL_DIR and archive server on cloud 2.
+# Requires full est-pc bundle at PEAKLOGIC_INSTALL_DIR and archive server on cloud 2.
 #
-#   sudo MOOREVIEW_INSTALL_DIR=/home/mooreview bash deploy/cloud/debian/enable-phase1-archive-compact.sh
+#   sudo PEAKLOGIC_INSTALL_DIR=/home/peaklogic bash deploy/cloud/debian/enable-phase1-archive-compact.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-COMPACT_ENV="${MOOREVIEW_ARCHIVE_COMPACT_ENV:-/etc/mooreview/archive-compact.env}"
-SERVICE_USER="${MOOREVIEW_USER:-mooreview}"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+COMPACT_ENV="${PEAKLOGIC_ARCHIVE_COMPACT_ENV:-/etc/peaklogic/archive-compact.env}"
+SERVICE_USER="${PEAKLOGIC_USER:-peaklogic}"
 
-log() { printf '[mooreview-archive-compact] %s\n' "$*"; }
-die() { printf '[mooreview-archive-compact] ERROR: %s\n' "$*" >&2; exit 1; }
+log() { printf '[peaklogic-archive-compact] %s\n' "$*"; }
+die() { printf '[peaklogic-archive-compact] ERROR: %s\n' "$*" >&2; exit 1; }
 
 strip_crlf() {
   local f="$1"
@@ -32,7 +32,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
 apt-get install -y -qq zstd
 
-install -d -m 0750 -o root -g "$SERVICE_USER" /etc/mooreview
+install -d -m 0750 -o root -g "$SERVICE_USER" /etc/peaklogic
 
 ENV_TEMPLATE=""
 for candidate in \
@@ -63,22 +63,22 @@ if grep -qE 'ARCHIVE_SERVER_TOKEN=CHANGE_ME' "$COMPACT_ENV" 2>/dev/null; then
   die "Edit $COMPACT_ENV — set ARCHIVE_SERVER_TOKEN (must match archive droplet)"
 fi
 
-for unit in mooreview-archive-compact.service mooreview-archive-compact.timer; do
+for unit in peaklogic-archive-compact.service peaklogic-archive-compact.timer; do
   strip_crlf "$SCRIPT_DIR/$unit"
 done
 
-sed "s|@MOOREVIEW_INSTALL_DIR@|${INSTALL_DIR}|g" \
-  "$SCRIPT_DIR/mooreview-archive-compact.service" \
-  > /etc/systemd/system/mooreview-archive-compact.service
-install -m 0644 "$SCRIPT_DIR/mooreview-archive-compact.timer" \
-  /etc/systemd/system/mooreview-archive-compact.timer
+sed "s|@PEAKLOGIC_INSTALL_DIR@|${INSTALL_DIR}|g" \
+  "$SCRIPT_DIR/peaklogic-archive-compact.service" \
+  > /etc/systemd/system/peaklogic-archive-compact.service
+install -m 0644 "$SCRIPT_DIR/peaklogic-archive-compact.timer" \
+  /etc/systemd/system/peaklogic-archive-compact.timer
 
 systemctl daemon-reload
-systemctl enable mooreview-archive-compact.timer
-systemctl start mooreview-archive-compact.timer
+systemctl enable peaklogic-archive-compact.timer
+systemctl start peaklogic-archive-compact.timer
 
 log "Archive compaction timer enabled (daily 02:15 UTC)"
 log "  Dry run: sudo -u $SERVICE_USER bash -lc 'cd $INSTALL_DIR && ARCHIVE_COMPACT_DRY_RUN=1 node scripts/run-archive-compact.js'"
-log "  Timer:   systemctl list-timers mooreview-archive-compact.timer"
-log "  Logs:    journalctl -u mooreview-archive-compact.service -n 50"
+log "  Timer:   systemctl list-timers peaklogic-archive-compact.timer"
+log "  Logs:    journalctl -u peaklogic-archive-compact.service -n 50"
 log "  Env:     $COMPACT_ENV"

@@ -104,7 +104,7 @@ function main() {
     total: catalog.length,
     groups: [...new Set(catalog.map((c) => c.group))].sort(),
     pidFaceplateCandidates: pidCandidates.slice(0, 80),
-    pidNote: 'Use library/pid-faceplates/mooreview/pid_loop_standard.svg or compose from MV gauge dial + bar graph + bezels.',
+    pidNote: 'Use library/pid-faceplates/peaklogic/pid_loop_standard.svg or compose from MV gauge dial + bar graph + bezels.',
   };
 
   if (!dryRun) {
@@ -113,7 +113,7 @@ function main() {
     }
     fs.writeFileSync(path.join(SVG_ROOT, 'graphics-catalog.json'), JSON.stringify({ summary, assets: catalog }, null, 2));
     fs.writeFileSync(path.join(SVG_ROOT, 'pid-faceplate-index.json'), JSON.stringify({
-      composite: '/hmi/svg/library/pid-faceplates/mooreview/pid_loop_standard.svg',
+      composite: '/hmi/svg/library/pid-faceplates/peaklogic/pid_loop_standard.svg',
       parts: pidCandidates.filter((p) => !p.includes('pid_loop_standard')).slice(0, 40),
       note: summary.pidNote,
     }, null, 2));

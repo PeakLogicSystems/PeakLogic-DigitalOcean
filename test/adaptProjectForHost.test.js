@@ -13,8 +13,8 @@ describe('adaptProjectForHost', () => {
       ],
     };
     const { doc: out, warnings } = adaptProjectForHost(doc, {
-      MOOREVIEW_RS485_PORT_A: 'COM3',
-      MOOREVIEW_RS485_PORT_B: 'COM5',
+      PEAKLOGIC_RS485_PORT_A: 'COM3',
+      PEAKLOGIC_RS485_PORT_B: 'COM5',
     });
     assert.equal(out.drivers[0].serialPort, 'COM3');
     assert.equal(out.drivers[1].serialPort, 'COM5');

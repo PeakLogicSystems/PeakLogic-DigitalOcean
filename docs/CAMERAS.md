@@ -1,10 +1,10 @@
-# mooreVIEW IP cameras — integration guide
+# PeakLogic IP cameras — integration guide
 
-mooreVIEW MVP Suite includes full IP camera integration for **Reolink** and other **ONVIF** cameras: discovery, live viewing, snapshot archive, vision AI, and HMI operator popups.
+PeakLogic MVP Suite includes full IP camera integration for **Reolink** and other **ONVIF** cameras: discovery, live viewing, snapshot archive, vision AI, and HMI operator popups.
 
 ## Discovery
 
-mooreVIEW uses **three** methods to find cameras (run together on **Scan network**):
+PeakLogic uses **three** methods to find cameras (run together on **Scan network**):
 
 | Method | How | When it helps |
 |--------|-----|----------------|
@@ -19,7 +19,7 @@ Disable subnet sweep on the **Discover** tab with **Subnet TCP sweep** unchecked
 ## Quick start (Reolink)
 
 1. On each camera web UI: enable **ONVIF** (port **8000**) and **RTSP** (port **554**).
-2. Start mooreVIEW: `npm start` → http://127.0.0.1:3090
+2. Start PeakLogic: `npm start` → http://127.0.0.1:3090
 3. **Tools → Cameras → Settings**: set default username/password.
 
 > **DHCP camera not found by scan?** Discovery probes every network adapter and subnet broadcast, but some networks block multicast. Use **Discover → Add & probe by IP** and enter the camera's address (from your router's DHCP list or the Reolink app).
@@ -147,7 +147,7 @@ Response:
 
 ### Alarm integration
 
-Set **Alarm tag** to a BOOL memory tag (e.g. `CAM_ALARM`). When `score >= threshold`, mooreVIEW sets the tag `true` and logs `inference_alarm` in `camera_events`.
+Set **Alarm tag** to a BOOL memory tag (e.g. `CAM_ALARM`). When `score >= threshold`, PeakLogic sets the tag `true` and logs `inference_alarm` in `camera_events`.
 
 ## Top-bar quick access
 
@@ -259,14 +259,14 @@ Symbols: `valve`, `pump`, `motor`, `dot`, `text`, `box`. Latest AI inference bou
 ## Security notes
 
 - Camera credentials stored locally in `data/cameras.json` (not encrypted).
-- go2rtc binds to `127.0.0.1` only; mooreVIEW proxies `/api/go2rtc`.
+- go2rtc binds to `127.0.0.1` only; PeakLogic proxies `/api/go2rtc`.
 - RTSP URLs contain embedded passwords — protect project exports.
 
 ## Appliance → SaaS (Cloud Studio)
 
 LAN cameras stay on the **site appliance** (port **3090**) for discover/probe/credentials. The **SaaS droplet** runs **full Cloud Studio** on port **3100** (ST, Projects, HMI, Drivers, …) plus **Tools → Sites & remote cameras** for pairing and live view through the site agent. Cloud never runs WS-Discovery or subnet sweeps.
 
-**Operator flow (cloud):** open `https://mooreview.io/` (full Studio) → **Tools → Sites & remote cameras** → create site → copy pairing code → on the appliance paste under **Cameras → Settings → Cloud Studio** → **Open live**.
+**Operator flow (cloud):** open `https://peaklogic.io/` (full Studio) → **Tools → Sites & remote cameras** → create site → copy pairing code → on the appliance paste under **Cameras → Settings → Cloud Studio** → **Open live**.
 
 ```
 [Reolink] ← ONVIF/RTSP → [Appliance + go2rtc + siteAgent]
@@ -305,7 +305,7 @@ Media: appliance opens `WSS /api/sites/:siteId/agent/media?token=&sessionId=&cam
 
 ### Pairing (Phase 1)
 
-1. On cloud (`MOOREVIEW_DEPLOYMENT=cloud` or `MOOREVIEW_CLOUD_SITES=1`): `POST /api/sites` → `{ site, pairingCode, agentToken }`.
+1. On cloud (`PEAKLOGIC_DEPLOYMENT=cloud` or `PEAKLOGIC_CLOUD_SITES=1`): `POST /api/sites` → `{ site, pairingCode, agentToken }`.
 2. Appliance **Tools → Cameras → Settings → Cloud Studio**: Cloud URL, Site ID, Pairing code → **Save cloud pairing**.
 3. Agent connects; cloud rotates/issues `agentToken` in `welcome` (pairing code invalidated).
 4. Inventory syncs automatically; cloud `GET /api/sites/:siteId/cameras`.
@@ -330,8 +330,8 @@ Media: appliance opens `WSS /api/sites/:siteId/agent/media?token=&sessionId=&cam
 
 | Variable | Effect |
 |----------|--------|
-| `MOOREVIEW_DEPLOYMENT=cloud` | Enable agent hub + `/api/sites/*` |
-| `MOOREVIEW_CLOUD_SITES=1` | Same sites API on a non-cloud process (dev/test) |
+| `PEAKLOGIC_DEPLOYMENT=cloud` | Enable agent hub + `/api/sites/*` |
+| `PEAKLOGIC_CLOUD_SITES=1` | Same sites API on a non-cloud process (dev/test) |
 
 ## See also
 

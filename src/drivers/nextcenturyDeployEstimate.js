@@ -50,7 +50,7 @@ function resolveDevicesPerSite(cfg, opts = {}, siteCount) {
 }
 
 /**
- * Estimate MooreVIEW deployment load for a NextCentury driver (per site / property).
+ * Estimate PeakLogic deployment load for a NextCentury driver (per site / property).
  * @param {object} cfg - nextcentury driver config
  * @param {object} [opts]
  * @param {number} [opts.scanMs] - runtime scan interval (default 100)

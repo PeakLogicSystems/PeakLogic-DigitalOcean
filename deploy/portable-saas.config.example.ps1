@@ -2,7 +2,7 @@
 # Works on any PC where this OneDrive repo folder is synced.
 #
 # Usage (PowerShell):
-#   cd <OneDrive>\mooreview-mvp-suite
+#   cd <OneDrive>\peaklogic-mvp-suite
 #   powershell -ExecutionPolicy Bypass -File scripts\deploy-hvac-from-onedrive.ps1
 #
 # Or double-click: deploy\Deploy-HVAC-SaaS.cmd
@@ -12,15 +12,15 @@
   # Set only if you run the script from outside the repo folder.
   RepoRoot = ''
 
-  # SSH target (mooreview.io SaaS droplet)
+  # SSH target (peaklogic.io SaaS droplet)
   HostAlias    = 'mv-saas'
   HostName     = '159.223.154.210'
   SshUser      = 'root'
-  RemoteRoot   = '/home/mooreview'
+  RemoteRoot   = '/home/peaklogic'
   ConnectTimeoutSec = 45
 
-  # SSH key — synced via OneDrive at .ssh\id_ed25519_mooreview
-  # Leave blank to use: <RepoRoot>\.ssh\id_ed25519_mooreview
+  # SSH key — synced via OneDrive at .ssh\id_ed25519_peaklogic
+  # Leave blank to use: <RepoRoot>\.ssh\id_ed25519_peaklogic
   IdentityFile = ''
 
   # ACE org tenant on production (bundled project seed target)
@@ -32,5 +32,5 @@
   # After upload: copy clean zips into tenant library + restart service
   ReseedTenants = $true
   RestartService = $true
-  ServiceName = 'mooreview-saas'
+  ServiceName = 'peaklogic-saas'
 }

@@ -2,8 +2,8 @@
 # Restore cloud-1-saas-nyc1 code files known to differ from 8.13 bundle baseline.
 set -euo pipefail
 
-INSTALL_DIR="${MOOREVIEW_INSTALL_DIR:-/home/mooreview}"
-BACKUP_DIR="/tmp/mooreview-pre-813-repair-$(date +%Y%m%d%H%M%S)"
+INSTALL_DIR="${PEAKLOGIC_INSTALL_DIR:-/home/peaklogic}"
+BACKUP_DIR="/tmp/peaklogic-pre-813-repair-$(date +%Y%m%d%H%M%S)"
 
 log() { printf '[repair-813] %s\n' "$*"; }
 
@@ -20,7 +20,7 @@ log "Fix st/program.st (was corrupted fragment TurnON(Q);)"
 cat > "$INSTALL_DIR/st/program.st" <<'EOF'
 (* no active *)
 EOF
-chown mooreview:mooreview "$INSTALL_DIR/st/program.st"
+chown peaklogic:peaklogic "$INSTALL_DIR/st/program.st"
 
 log "Ensure putnam fleet rollup ST exists (cloud bundle baseline)"
 if [[ ! -f "$INSTALL_DIR/st/logic/putnam_fleet_rollup.st" ]]; then
@@ -28,12 +28,12 @@ if [[ ! -f "$INSTALL_DIR/st/logic/putnam_fleet_rollup.st" ]]; then
 fi
 
 log "Reset runtime activeProgram if stuck on local putnam-county dev project"
-SETTINGS="/var/lib/mooreview/settings.json"
+SETTINGS="/var/lib/peaklogic/settings.json"
 if [[ -f "$SETTINGS" ]]; then
   python3 - <<'PY'
 import json
 from pathlib import Path
-p = Path("/var/lib/mooreview/settings.json")
+p = Path("/var/lib/peaklogic/settings.json")
 s = json.loads(p.read_text())
 proj = ((s.get("project") or {}).get("name") or "").strip()
 active = (s.get("activeProgram") or "").strip()
@@ -54,7 +54,7 @@ if changed:
 else:
     print("settings unchanged:", "project=", proj, "activeProgram=", active)
 PY
-  chown mooreview:mooreview "$SETTINGS" 2>/dev/null || true
+  chown peaklogic:peaklogic "$SETTINGS" 2>/dev/null || true
 fi
 
 log "Current checksums"
@@ -68,10 +68,10 @@ md5sum \
   "$INSTALL_DIR/package.json" 2>/dev/null || true
 
 log "Runtime data snapshot"
-if [[ -f /var/lib/mooreview/settings.json ]]; then
+if [[ -f /var/lib/peaklogic/settings.json ]]; then
   python3 - <<'PY'
 import json
-for path in ("/var/lib/mooreview/settings.json",):
+for path in ("/var/lib/peaklogic/settings.json",):
     try:
         s = json.load(open(path))
         print("activeProgram:", s.get("activeProgram"))
@@ -80,11 +80,11 @@ for path in ("/var/lib/mooreview/settings.json",):
         print(path, e)
 PY
 fi
-wc -c /var/lib/mooreview/project.est.json 2>/dev/null || true
+wc -c /var/lib/peaklogic/project.est.json 2>/dev/null || true
 
-log "Restart mooreview-saas"
-systemctl restart mooreview-saas
+log "Restart peaklogic-saas"
+systemctl restart peaklogic-saas
 sleep 2
 curl -sf "http://127.0.0.1:3100/health" | python3 -m json.tool || curl -sf "http://127.0.0.1:3100/health" || true
 
-log "Done. If programOk is still false, redeploy mooreview-cloud-20260813d.tgz bundle."
+log "Done. If programOk is still false, redeploy peaklogic-cloud-20260813d.tgz bundle."

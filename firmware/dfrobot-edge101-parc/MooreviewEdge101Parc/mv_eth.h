@@ -12,7 +12,7 @@ static void mvEthOnEvent(arduino_event_id_t event, arduino_event_info_t info)
   (void)info;
   switch (event) {
     case ARDUINO_EVENT_ETH_START:
-      ETH.setHostname("mooreview-edge101");
+      ETH.setHostname("peaklogic-edge101");
       Serial.println("[eth] start");
       break;
     case ARDUINO_EVENT_ETH_CONNECTED:

@@ -1,4 +1,4 @@
-# MooreVIEW Parc MQTT peer for LilyGO T-HaLow.
+# PeakLogic Parc MQTT peer for LilyGO T-HaLow.
 # No Morse Micro / mm-iot-esp32 dependencies — the TX-AH module uses UART AT.
 dependencies:
   idf:

@@ -7,7 +7,7 @@ const CLOUD_NC_TAGS_PER_DEVICE = 3;
 const CLOUD_NC_STATUS_TAGS = 2;
 
 /**
- * Recommended MOOREVIEW_MAX_TAGS for cloud hub with full NC auto-sync.
+ * Recommended PEAKLOGIC_MAX_TAGS for cloud hub with full NC auto-sync.
  * 15 sites × 1500 devices × 3 tags/device + 2 status tags, plus 5% headroom, rounded to 256.
  */
 function recommendCloudMaxTags(opts = {}) {

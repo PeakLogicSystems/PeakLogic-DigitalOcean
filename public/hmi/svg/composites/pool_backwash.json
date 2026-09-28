@@ -3,7 +3,7 @@
   "label": "Pool backwash sequence",
   "group": "Process equipment",
   "subgroup": "composites",
-  "preview": "/hmi/svg/library/pool-faceplates/mooreview/pool_backwash.svg",
+  "preview": "/hmi/svg/library/pool-faceplates/peaklogic/pool_backwash.svg",
   "tagRoles": {
     "bwSta": { "pick": "tagId", "tagId": "POOL_BW_STA", "types": ["INT"] },
     "bwBusy": { "pick": "tagId", "tagId": "POOL_BW_BUSY", "types": ["BOOL"] },
@@ -16,7 +16,7 @@
       "role": "faceplate",
       "z": 0,
       "kind": "staticImage",
-      "svg": "/hmi/svg/library/pool-faceplates/mooreview/pool_backwash.svg"
+      "svg": "/hmi/svg/library/pool-faceplates/peaklogic/pool_backwash.svg"
     }
   ],
   "defaultBindings": [

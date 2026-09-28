@@ -28,7 +28,7 @@ describe('assisted living halow + pool subsystem', () => {
   });
 
   it('pool halow drivers replace opta', () => {
-    const env = { MOOREVIEW_POOL_OPTA_IO: 'false', MOOREVIEW_POOL_HALOW_IO: 'true' };
+    const env = { PEAKLOGIC_POOL_OPTA_IO: 'false', PEAKLOGIC_POOL_HALOW_IO: 'true' };
     const est = buildIotLinkPoolEstDoc({ env });
     assert.equal(est.drivers.find((d) => d.id === 'opta_mqtt_st')?.enabled, false);
     const drivers = [...est.drivers.filter((d) => d.id !== 'opta_mqtt_st'), ...poolHalowDrivers()];

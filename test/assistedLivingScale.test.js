@@ -31,13 +31,13 @@ describe('assisted living 2000-room scale', () => {
     assert.equal(buildFacilityConfig(9999).totalRooms, MAX_SUPPORTED_ROOMS);
   });
 
-  it('generates 2000-room project when MOOREVIEW_MAX_TAGS is raised', () => {
+  it('generates 2000-room project when PEAKLOGIC_MAX_TAGS is raised', () => {
     const out = execFileSync(
       process.execPath,
       ['scripts/assisted-living/generate-est.js', '--rooms', '2000'],
       {
         cwd: ROOT,
-        env: { ...process.env, MOOREVIEW_MAX_TAGS: '25000' },
+        env: { ...process.env, PEAKLOGIC_MAX_TAGS: '25000' },
         encoding: 'utf8',
       },
     );

@@ -1,4 +1,4 @@
-# Top-level ESP-IDF project — LilyGO T-HaLow MooreVIEW Parc node.
+# Top-level ESP-IDF project — LilyGO T-HaLow PeakLogic Parc node.
 
 cmake_minimum_required(VERSION 3.16)
 

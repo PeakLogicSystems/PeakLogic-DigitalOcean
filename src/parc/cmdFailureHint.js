@@ -19,7 +19,7 @@ function parseBrokerHost(brokerUrl) {
 function brokerMismatchMessage(dev, hubBrokerUrl) {
   const hint = optaBrokerHint();
   const hubHost = parseBrokerHost(hubBrokerUrl) || hint.lanIp;
-  /** On IOT-LINK / appliance MooreVIEW uses mqtt://127.0.0.1 — Opta must use LAN IP. */
+  /** On IOT-LINK / appliance PeakLogic uses mqtt://127.0.0.1 — Opta must use LAN IP. */
   const expectedHost = hubHost === '127.0.0.1' ? hint.lanIp : hubHost;
   const devBroker = String(dev?.meta?.mqttBroker || dev?.mqttBroker || '').trim();
   const devPort = dev?.meta?.mqttBrokerPort || dev?.mqttBrokerPort || 1883;
@@ -28,7 +28,7 @@ function brokerMismatchMessage(dev, hubBrokerUrl) {
     return `Opta MQTT broker is ${devBroker} — open http://<opta-ip>/setup → MQTT Parc broker → ${expectedHost}:1883, save`;
   }
   if (expectedHost && expectedHost !== 'your PC LAN IP' && devBroker !== expectedHost) {
-    return `Opta broker ${devBroker}:${devPort} ≠ MooreVIEW Mosquitto ${expectedHost}:1883 — fix on Opta /setup → MQTT Parc broker`;
+    return `Opta broker ${devBroker}:${devPort} ≠ PeakLogic Mosquitto ${expectedHost}:1883 — fix on Opta /setup → MQTT Parc broker`;
   }
   return '';
 }
@@ -96,19 +96,19 @@ function cmdFailureHint(dev, opts = {}) {
   }
 
   if (fw && semverCompare(fw, '2.3.18') < 0) {
-    return `Firmware ${fw} — upload MooreviewOptaMqttSt v2.3.18+ via Arduino IDE (Parc deploy does not flash firmware)`;
+    return `Firmware ${fw} — upload PeaklogicOptaMqttSt v2.3.18+ via Arduino IDE (Parc deploy does not flash firmware)`;
   }
   if (fw && semverCompare(fw, '2.3.41') < 0) {
-    return `Telemetry OK but MQTT commands timeout on ${fw} — reflash MooreviewOptaMqttSt v2.3.41+; Serial should show "MQTT subscribed cmd+config"`;
+    return `Telemetry OK but MQTT commands timeout on ${fw} — reflash PeaklogicOptaMqttSt v2.3.41+; Serial should show "MQTT subscribed cmd+config"`;
   }
   if (fw) {
     return `Telemetry OK but MQTT commands timeout on ${fw} — Serial: look for "MQTT subscribed cmd+config" (not "subscribe FAILED"); verify /setup broker ${hint.optaBrokerIp}:1883; put_program blocks other cmds until done`;
   }
-  return `MQTT commands timeout — reflash MooreviewOptaMqttSt v2.3.41+; set broker ${hint.optaBrokerIp}:1883 on Opta /setup`;
+  return `MQTT commands timeout — reflash PeaklogicOptaMqttSt v2.3.41+; set broker ${hint.optaBrokerIp}:1883 on Opta /setup`;
 }
 
 function cmdTimeoutMessage({ deviceId, op, dev, hubBrokerUrl, registry }) {
-  const topic = `mooreview/v1/${deviceId}/cmd`;
+  const topic = `peaklogic/v1/${deviceId}/cmd`;
   const detail = cmdFailureHint(dev, { hubBrokerUrl, deviceId, registry });
   return `MQTT command timeout (${op}) on ${topic} — ${detail}`;
 }

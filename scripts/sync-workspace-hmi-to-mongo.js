@@ -20,7 +20,7 @@ function loadEnvFile(filePath) {
   }
 }
 
-loadEnvFile(process.env.MOOREVIEW_SAAS_ENV || '/etc/mooreview/saas.env');
+loadEnvFile(process.env.PEAKLOGIC_SAAS_ENV || '/etc/peaklogic/saas.env');
 
 const { unpackArchive } = require('../src/project/projectArchive');
 const configStore = require('../src/configStore');
@@ -31,7 +31,7 @@ function arg(name, fallback = '') {
 }
 
 (async () => {
-  const dataDir = process.env.MOOREVIEW_DATA || '/home/mooreview/data';
+  const dataDir = process.env.PEAKLOGIC_DATA || '/home/peaklogic/data';
   const zipPath = arg('workspace-zip', path.join(dataDir, 'workspace.est.zip'));
   const buf = fs.readFileSync(zipPath);
   const unpacked = unpackArchive(buf);
