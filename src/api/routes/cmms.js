@@ -57,7 +57,7 @@ function createCmmsRoutes() {
     mongoSysLog.maintenance('cmms', `Created work order ${wo.number}`, {
       workOrderId: wo.id,
       title: wo.title,
-    }, { user: req.user || null }).catch(() => {});
+    }, { user: req.user || null });
     res.status(201).json({ ok: true, workOrder: wo });
   });
 
@@ -78,7 +78,7 @@ function createCmmsRoutes() {
     if (!wo) return res.status(404).json({ error: 'Work order not found' });
     mongoSysLog.maintenance('cmms', `Completed work order ${wo.number}`, {
       workOrderId: wo.id,
-    }, { user: req.user || null }).catch(() => {});
+    }, { user: req.user || null });
     res.json({ ok: true, workOrder: wo });
   });
 
@@ -100,7 +100,7 @@ function createCmmsRoutes() {
     const pm = cmmsStore.createPmSchedule(req.body || {});
     mongoSysLog.maintenance('cmms', `Created PM schedule ${pm.title}`, {
       pmId: pm.id,
-    }, { user: req.user || null }).catch(() => {});
+    }, { user: req.user || null });
     res.status(201).json({ ok: true, pmSchedule: pm });
   });
 
@@ -122,7 +122,7 @@ function createCmmsRoutes() {
     mongoSysLog.maintenance('cmms', `PM completed: ${pm.title}`, {
       pmId: pm.id,
       nextDueAt: pm.nextDueAt,
-    }, { user: req.user || null }).catch(() => {});
+    }, { user: req.user || null });
     res.json({ ok: true, pmSchedule: pm });
   });
 
@@ -131,7 +131,7 @@ function createCmmsRoutes() {
     if (result.count) {
       mongoSysLog.maintenance('cmms', `Generated ${result.count} PM work order(s)`, {
         count: result.count,
-      }, { user: req.user || null }).catch(() => {});
+      }, { user: req.user || null });
     }
     res.json({ ok: true, ...result });
   });
