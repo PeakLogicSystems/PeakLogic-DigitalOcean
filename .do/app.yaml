@@ -4,7 +4,7 @@ region: nyc
 services:
   - name: api
     github:
-      repo: RoyMooreACE/peaklogic-cloud
+      repo: PeakLogicSystems/PeakLogic-DigitalOcean
       branch: main
       deploy_on_push: true
     source_dir: /
@@ -20,10 +20,15 @@ services:
         value: production
       - key: PORT
         value: "3100"
+      - key: PEAKLOGIC_DEPLOYMENT
+        value: cloud
       - key: MONGODB_URI
         scope: RUN_TIME
         type: SECRET
       - key: JWT_SECRET
+        scope: RUN_TIME
+        type: SECRET
+      - key: PLATFORM_ADMIN_KEY
         scope: RUN_TIME
         type: SECRET
       - key: MONGODB_DB
