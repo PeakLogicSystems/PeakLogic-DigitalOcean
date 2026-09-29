@@ -15,8 +15,8 @@
       --ps-purple-dark: #6d28d9;
       --ps-purple-deep: #5b21b6;
       --ps-purple-light: #ede9fe;
-      --ps-gradient-start: rgba(124, 58, 237, 0.9);
-      --ps-gradient-end: rgba(91, 33, 182, 0.95);
+      --peaklogic-navy: #0f172a;
+      --peaklogic-navy-soft: #1e293b;
       --bg: #f8f9fa;
       --text: #212529;
       --muted: #6c757d;
@@ -43,8 +43,8 @@
     .login-hero {
       position: relative;
       background:
-        linear-gradient(135deg, var(--ps-gradient-start), var(--ps-gradient-end)),
-        radial-gradient(circle at 20% 80%, rgba(239, 217, 242, 0.15), transparent 55%);
+        radial-gradient(circle at 15% 85%, rgba(124, 58, 237, 0.25), transparent 55%),
+        var(--peaklogic-navy);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -61,7 +61,7 @@
       margin-bottom: 0.75rem;
     }
     .login-hero .brand img { width: 34px; height: 34px; }
-    .login-hero .brand .logic { color: var(--ps-purple-light); font-weight: 800; }
+    .login-hero .brand .logic { color: var(--ps-purple); font-weight: 800; }
     .login-hero .tagline {
       max-width: 22rem;
       font-size: 1.05rem;
