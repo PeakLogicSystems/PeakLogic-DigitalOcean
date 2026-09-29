@@ -3,6 +3,7 @@
 const { isCloudDeployment } = require('../cloud/agentProtocol');
 const { tenantStore } = require('../tenants/tenantStore');
 const { applianceAuthStore } = require('../auth/applianceAuthStore');
+const { isPartnerHomeSession } = require('./partnerAccess');
 
 const COOKIE = 'mv_session';
 
@@ -93,6 +94,11 @@ function activeTenantId(req) {
   return req.mvAuth.user.tenantId || null;
 }
 
+function isPartnerHome(req) {
+  if (!req.mvAuth?.user) return false;
+  return isPartnerHomeSession(req.mvAuth.user, activeTenantId(req));
+}
+
 function setSessionCookie(res, token, expiresAt) {
   const maxAge = Math.max(0, Math.floor((expiresAt - Date.now()) / 1000));
   res.setHeader(
@@ -113,6 +119,7 @@ module.exports = {
   requireApplianceAdmin,
   requireTenantAccess,
   activeTenantId,
+  isPartnerHome,
   setSessionCookie,
   clearSessionCookie,
   extractToken,
