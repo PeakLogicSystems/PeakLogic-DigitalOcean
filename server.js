@@ -100,8 +100,8 @@ app.use(createHmiAssetRedirect(publicRoot));
 ensureUserImportsDir(DATA_DIR);
 app.use('/hmi/user', express.static(path.join(DATA_DIR, 'hmi-imports'), { fallthrough: false }));
 app.use(express.static(publicRoot));
+app.use(attachSession);
 if (DEPLOYMENT_MODE === 'cloud') {
-  app.use(attachSession);
   app.get('/login', (req, res) => {
     if (req.mvAuth) return res.redirect(String(req.query.next || '/'));
     return res.render('cloud-login');
@@ -117,6 +117,11 @@ if (DEPLOYMENT_MODE === 'cloud') {
   app.get('/reset-password', (req, res) => {
     if (req.mvAuth) return res.redirect('/');
     return res.render('reset-password');
+  });
+} else {
+  app.get('/login', (req, res) => {
+    if (req.mvAuth) return res.redirect(String(req.query.next || '/'));
+    return res.render('appliance-login');
   });
 }
 app.use(createPageRoutes({ appVersion: APP_VERSION, product: PRODUCT, deployment: DEPLOYMENT_MODE }));

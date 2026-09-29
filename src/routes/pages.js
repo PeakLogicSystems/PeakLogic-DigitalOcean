@@ -20,6 +20,13 @@ function createPageRoutes({ appVersion, product, deployment }) {
       || String(req.query.embedded || '').toLowerCase() === 'true';
     res.render('facility-draw', dashboardViewLocals({ appVersion, product, deployment, embedded }));
   });
+  if (deployment !== 'cloud') {
+    // Cloud mode's /cmms is handled by createCloudStudioPages (cloud-studio.ejs,
+    // multi-tenant CMMS embed) — this standalone page is appliance-only.
+    router.get('/cmms', (req, res) => {
+      res.render('cmms', dashboardViewLocals({ appVersion, product, deployment }));
+    });
+  }
   router.get('/cloud/sims', (req, res) => {
     res.render('cloud-sims', dashboardViewLocals({ appVersion, product, deployment }));
   });
@@ -53,7 +60,7 @@ function dashboardViewLocals({ appVersion, product, deployment, embedded }) {
     embedded: !!embedded,
     cellularSimsEnabled: isCellularSimsEnabled(),
     cloudSimsEnabled: isCloudSimsEnabled(),
-    companyName: 'The Purple Standard',
+    companyName: 'PeakLogic',
     estVersion: EST_VERSION,
   };
 }
