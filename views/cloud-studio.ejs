@@ -14,9 +14,10 @@
        data-version="<%= appVersion %>"
        data-role="<%= user && user.role || '' %>"
        data-tenant="<%= tenant && tenant.tenantSlug || '' %>">
+    <div class="cs-top-accent"></div>
     <header class="cs-top">
-      <a class="cs-brand" href="/">Peak<span>Logic</span></a>
-      <span class="cs-cloud-badge" title="Cloud Studio">Cloud</span>
+      <a class="cs-brand" href="/"><img src="/branding/peaklogic-icon.svg" alt="" class="cs-brand-icon">Peak<span>Logic</span></a>
+      <span class="cs-cloud-badge" title="PeakLogic Control Center">Control Center</span>
       <nav class="cs-nav" aria-label="Cloud Studio">
         <a href="/">Studio</a>
         <a href="/sites" data-nav="sites">Sites</a>
@@ -33,6 +34,7 @@
           Org
           <select id="cs-org-switch" class="cs-org-switch" aria-label="Switch organization"></select>
         </label>
+        <span class="cs-user-avatar" id="cs-user-avatar"><%= tenant && tenant.tenantSlug ? tenant.tenantSlug.charAt(0).toUpperCase() : '?' %></span>
         <span id="cs-user-label"><%= tenant && tenant.tenantSlug ? tenant.tenantSlug : '' %></span>
         <button type="button" class="btn" id="cs-logout" style="margin-left:0.5rem">Sign out</button>
       </div>

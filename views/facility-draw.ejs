@@ -8,13 +8,14 @@
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/icon-512.png">
   <script src="/js/pwa.js" defer></script>
-  <title>Facility Draw — PeakLogic</title>
+  <title>Facility Builder — PeakLogic</title>
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>&facilitydraw=12">
   <link rel="stylesheet" href="/css/facility-draw.css?v=<%= assetV %>&facilitydraw=12">
 </head>
 <body class="facility-draw-body<%= (typeof embedded !== 'undefined' && embedded) ? ' facility-draw-embedded' : '' %>">
+  <div class="top-accent-bar"></div>
   <header class="topbar standalone-topbar facility-draw-topbar">
-    <div class="topbar-brand"><a href="/" class="standalone-home-link">Peak<span>Logic</span></a></div>
+    <div class="topbar-brand"><a href="/" class="standalone-home-link"><img src="/branding/peaklogic-icon.svg" alt="" class="topbar-brand-icon">Peak<span>Logic</span></a><span class="topbar-cloud-badge" title="PeakLogic Control Center">Control Center</span></div>
     <div class="mv-file-menu-wrap">
       <button type="button" id="mv-file-menu-btn" class="topbar-project-trigger mv-file-menu-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="mv-file-menu-panel">
         File <span class="topbar-project-caret" aria-hidden="true">▾</span>
@@ -44,13 +45,13 @@
       <span class="mv-composer-modes-label muted">Composer</span>
       <button type="button" class="btn btn-sm mv-composer-mode-btn" data-composer-mode="grid" title="2D tile grid — edit HMI symbols, composites, and tag bindings">2D grid</button>
       <button type="button" class="btn btn-sm mv-composer-mode-btn" data-composer-mode="3d" title="3D facility spatial preview">3D</button>
-      <button type="button" class="btn btn-sm mv-composer-mode-btn active" data-composer-mode="plan" title="Facility Draw site plan (this view)">Plan</button>
+      <button type="button" class="btn btn-sm mv-composer-mode-btn active" data-composer-mode="plan" title="Facility Builder site plan (this view)">Plan</button>
     </div>
     <div class="mv-project-status-block">
       <span id="mv-project-name" class="topbar-project-status mv-project-name" title="Current project">Loading…</span>
       <span id="mv-project-path" class="mv-project-path cell-mono" title="Saved file path">—</span>
     </div>
-    <h1 class="standalone-title">Facility Draw</h1>
+    <h1 class="standalone-title">Facility Builder</h1>
     <div class="facility-draw-toolbar" role="toolbar" aria-label="Drawing tools">
       <button type="button" class="btn btn-sm facility-draw-btn mv-tool active" data-tool="select" title="Select / move" aria-pressed="true">Select</button>
       <button type="button" class="btn btn-sm facility-draw-btn mv-tool" data-tool="rotate" title="Rotate symbol (Shift = 15° snap)" aria-pressed="false">Rotate</button>
@@ -260,7 +261,7 @@
 
   <dialog id="mv-help-dialog" class="mv-dialog mv-help-dialog" aria-labelledby="mv-help-title">
     <div class="mv-help-header">
-      <h3 id="mv-help-title">Facility Draw help</h3>
+      <h3 id="mv-help-title">Facility Builder help</h3>
       <button type="button" class="btn btn-sm" id="mv-help-close" aria-label="Close help">Close</button>
     </div>
     <div class="mv-help-layout">

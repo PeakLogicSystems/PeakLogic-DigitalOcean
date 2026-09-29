@@ -16,7 +16,7 @@ const FEATURE_CATALOG = [
   { key: 'project', label: 'Projects (open/save/deploy)' },
   { key: 'setup', label: 'System setup' },
   { key: 'users', label: 'User accounts & access' },
-  { key: 'facilityDraw', label: 'Facility Draw' },
+  { key: 'facilityDraw', label: 'Facility Builder' },
   { key: 'connectivity', label: 'Connectivity tools' },
 ];
 

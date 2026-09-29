@@ -1,4 +1,4 @@
-// Facility Draw site layout viewer — typed models at plan positions + pipe polylines + zones.
+// Facility Builder site layout viewer — typed models at plan positions + pipe polylines + zones.
 //
 // Usage:
 //   import { mountFacilityDrawSiteScene } from './facilitydraw-site-viewer.js';

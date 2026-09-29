@@ -5,7 +5,7 @@ const { listSymbols, getSymbol } = require('./symbolLibrary');
 const FACILITY_DRAW_ASSET_PREFIX = '@facilitydraw/';
 const HMI_SYMBOL_PREFIX = '@hmi/';
 
-/** HMI catalog groups exposed in the Facility Draw symbol library. */
+/** HMI catalog groups exposed in the Facility Builder symbol library. */
 const HMI_GROUPS_IN_FACILITY_DRAW = new Set([
   'Tanks & vessels',
   'Pumps',
@@ -93,7 +93,7 @@ function listFacilityDrawHmiAssets() {
     path: facilityDrawAssetPath(s.type),
     name: `${s.type}.facilitydraw`,
     type: 'facilitydraw',
-    group: 'Site plan (Facility Draw)',
+    group: 'Site plan (Facility Builder)',
     subgroup: s.group,
     vendor: 'peaklogic',
     label: s.label,

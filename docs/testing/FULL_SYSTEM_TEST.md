@@ -141,7 +141,7 @@ Tools
 ├── [ ] Tag editor…
 ├── [ ] Driver setup…
 ├── [ ] Camera admin…
-├── [ ] Facility Draw (opens /facility-draw or embedded)
+├── [ ] Facility Builder (opens /facility-draw or embedded)
 ├── [ ] IO map (when project provides map)
 ├── [ ] Connectivity
 │   ├── [ ] Cellular SIMs (/cellular/sims) — if entitled
@@ -375,7 +375,7 @@ Standalone routes
 ├── /facility-draw
 │   ├── [ ] Canvas editor loads
 │   ├── [ ] Save / open drawing
-│   └── [ ] Help panel in Facility Draw
+│   └── [ ] Help panel in Facility Builder
 ├── /io-map (project-specific)
 │   ├── [ ] PDF or SVG map displays
 │   └── [ ] Point labels match tag names

@@ -1,4 +1,4 @@
-// Shared Facility Draw edge routing — orthogonal site-plan pipes between ports.
+// Shared Facility Builder edge routing — orthogonal site-plan pipes between ports.
 (function edgePathModuleFactory(root, factory) {
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = factory();

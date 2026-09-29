@@ -203,7 +203,7 @@ function aggregateZones(doc, placements) {
 }
 
 /**
- * Compile Facility Draw document into a neutral site scene for 3D viewers.
+ * Compile Facility Builder document into a neutral site scene for 3D viewers.
  * @param {object} rawProject
  * @param {{ feetPerUnit?: number }} opts
  */

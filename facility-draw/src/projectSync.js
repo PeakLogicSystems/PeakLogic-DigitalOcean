@@ -218,7 +218,7 @@ function compileAndApplyFacilityDrawHmi(doc, options = {}) {
     publicRoot,
   });
   if (!compiled.stats.nodesCompiled) {
-    throw Object.assign(new Error('No compilable Facility Draw symbols with SCADA meta found'), { status: 400 });
+    throw Object.assign(new Error('No compilable Facility Builder symbols with SCADA meta found'), { status: 400 });
   }
   return {
     compiled,

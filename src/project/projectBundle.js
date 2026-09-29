@@ -174,7 +174,7 @@ function resolveImportPayload(raw, io = {}) {
     if (kind === 'est' || doc?.format === EST_FORMAT) {
       return { type: 'est', doc, warnings };
     }
-    throw Object.assign(new Error('Bundle doc is not a PeakLogic or Facility Draw project'), { status: 400 });
+    throw Object.assign(new Error('Bundle doc is not a PeakLogic or Facility Builder project'), { status: 400 });
   }
   if (raw.format === FACILITY_DRAW_FORMAT) {
     return { type: 'facilitydraw', doc: normalizeFacilityDraw(raw), warnings: [] };

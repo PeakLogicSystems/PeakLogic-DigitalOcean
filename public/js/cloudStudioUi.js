@@ -102,6 +102,7 @@
     const wrap = document.getElementById('cs-org-wrap');
     const sel = document.getElementById('cs-org-switch');
     const label = document.getElementById('cs-user-label');
+    const avatar = document.getElementById('cs-user-avatar');
     const peopleNav = document.querySelector('.cs-nav a[data-nav="people"]');
     const partnerNav = document.getElementById('nav-partner');
     if (!sel || !wrap) return;
@@ -112,6 +113,7 @@
       const isPlatformAdmin = user.role === 'platform_admin';
       const isPartner = !!me.isPartner;
       if (label && me.tenant?.tenantSlug) label.textContent = me.tenant.tenantSlug;
+      if (avatar && me.tenant?.tenantSlug) avatar.textContent = me.tenant.tenantSlug.charAt(0).toUpperCase();
       if (isPartner && user.role === 'partner_admin' && partnerNav) {
         partnerNav.classList.remove('view-hidden');
       }

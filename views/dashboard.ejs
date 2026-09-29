@@ -12,8 +12,12 @@
   <link rel="stylesheet" href="/css/pc.css?v=<%= assetV %>">
 </head>
 <body class="dashboard-body<%= isCloud ? ' dashboard-cloud' : '' %>">
+  <div class="top-accent-bar"></div>
   <header class="topbar">
-    <div class="topbar-brand">Peak<span>Logic</span><% if (isCloud) { %><span class="topbar-cloud-badge" title="Cloud Studio">Cloud</span><% } %></div>
+    <div class="topbar-brand">
+      <img src="/branding/peaklogic-icon.svg" alt="" class="topbar-brand-icon">
+      Peak<span>Logic</span><span class="topbar-cloud-badge" title="PeakLogic Control Center">Control Center</span>
+    </div>
     <div class="topbar-project-bar">
       <% if (isCloud) { %>
       <label class="topbar-site-select-wrap view-hidden" id="studio-org-wrap">
@@ -66,7 +70,7 @@
     <button type="button" class="topbar-action-btn" id="btn-topbar-pdm" data-historian-logger-open="pdm" title="PdM asset setup and simulation">PdM</button>
     <button type="button" class="topbar-action-btn view-tab" id="btn-topbar-alarms" data-popup-open="alarms" title="Active alarms">Alarms <span id="alarms-tab-badge" class="alarms-tab-badge view-hidden" aria-hidden="true"></span></button>
     <a href="/cmms" class="topbar-action-btn topbar-action-link" id="btn-topbar-cmms" title="Work orders and preventive maintenance">CMMS</a>
-    <a href="/facility-draw" class="topbar-action-btn topbar-action-link" id="btn-topbar-facility-draw" title="Site plan editor">Facility Draw</a>
+    <a href="/facility-draw" class="topbar-action-btn topbar-action-link" id="btn-topbar-facility-draw" title="Site plan editor">Facility Builder</a>
     <details class="topbar-tools-details topbar-project-details" id="tools-menu-details">
       <summary class="topbar-project-trigger topbar-tools-trigger">Tools <span class="topbar-project-caret" aria-hidden="true">&#x25BE;</span></summary>
       <nav class="topbar-tools-dropdown topbar-project-dropdown" id="view-nav" aria-label="Tools" role="menu">
@@ -93,10 +97,23 @@
       </nav>
     </details>
     <div class="topbar-about-meta">
-      <span class="topbar-user-meta view-hidden" id="topbar-user-meta" title="Signed-in user"></span>
-      <button type="button" class="topbar-action-btn view-hidden" id="btn-topbar-logout" title="Sign out of PeakLogic">Sign out</button>
-      <button type="button" class="topbar-text-btn" id="btn-topbar-about" title="About PeakLogic">About</button>
-      <span class="topbar-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+      <button type="button" class="topbar-theme-toggle" id="btn-theme-toggle" title="Toggle dark / light mode" aria-label="Toggle dark / light mode">
+        <svg id="theme-toggle-icon-dark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="theme-toggle-icon-light" class="view-hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <details class="topbar-project-details topbar-user-details" id="user-menu-details">
+        <summary class="topbar-user-trigger" title="Account">
+          <span class="topbar-user-avatar" id="topbar-user-avatar">&#8230;</span>
+          <span class="topbar-user-meta view-hidden" id="topbar-user-meta" title="Signed-in user"></span>
+          <span class="topbar-project-caret" aria-hidden="true">&#x25BE;</span>
+        </summary>
+        <div class="topbar-project-dropdown topbar-user-dropdown" role="menu" aria-label="Account">
+          <button type="button" class="topbar-menu-item" id="btn-topbar-about" role="menuitem">About</button>
+          <button type="button" class="topbar-menu-item view-hidden" id="btn-topbar-logout" role="menuitem">Sign out</button>
+          <div class="topbar-menu-sep" role="separator"></div>
+          <span class="topbar-menu-version muted cell-mono" title="PeakLogic release">v<%= appVersion %></span>
+        </div>
+      </details>
     </div>
   </header>
   <% if (isCloud) { %>
@@ -109,8 +126,6 @@
     <a href="/cmms" class="cloud-studio-nav-link" data-cloud-nav="cmms">CMMS</a>
     <a href="/admin/tenants" class="cloud-studio-nav-link view-hidden" id="cloud-nav-admin" data-cloud-nav="admin">Admin</a>
     <span class="cloud-studio-nav-spacer"></span>
-    <span class="cloud-studio-nav-user muted cell-mono" id="cloud-nav-user" title="Signed-in user"></span>
-    <button type="button" class="btn btn-sm cloud-studio-nav-signout" id="btn-cloud-nav-logout" title="Sign out">Sign out</button>
   </nav>
   <% } %>
 
@@ -795,7 +810,7 @@
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-go2rtc-enabled" checked> Enable go2rtc (auto-start on server boot)</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-add" checked> Auto-add discovered cameras to inventory</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-probe" checked> Auto-probe after discover</label>
-              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/Facility Draw uploads to GridFS</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/Facility Builder uploads to GridFS</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-snapshot-archive" checked> Archive camera snapshots to GridFS</label>
               <label>Snapshot interval (ms) <input id="cam-set-snapshot-ms" type="number" min="15000" max="3600000" step="1000" value="60000"></label>
               <label>Snapshot retention (days) <input id="cam-set-snapshot-days" type="number" min="1" max="365" value="30"></label>
@@ -1822,7 +1837,7 @@
       <div class="popup-body popup-scroll hmi-setup-popup-body">
         <div class="hmi-setup-grid">
           <div class="hmi-setup-editor">
-            <p class="panel-hint hmi-composer-intro">Build each screen on the <strong>tile grid</strong> (right on wide windows) or use <strong>3D facility view</strong> / <strong>Facility Draw site plan</strong> via <strong>Composer mode</strong> below. Use the <strong>vertical section menu</strong> for settings. Click <strong>Apply HMI settings</strong> to save.</p>
+            <p class="panel-hint hmi-composer-intro">Build each screen on the <strong>tile grid</strong> (right on wide windows) or use <strong>3D facility view</strong> / <strong>Facility Builder site plan</strong> via <strong>Composer mode</strong> below. Use the <strong>vertical section menu</strong> for settings. Click <strong>Apply HMI settings</strong> to save.</p>
             <div class="hmi-composer-shell">
               <nav class="hmi-composer-nav" id="hmi-composer-nav" aria-label="Composer sections">
                 <button type="button" class="hmi-composer-nav-item active" data-hmi-section="layout">Project layout</button>
@@ -1895,7 +1910,7 @@
                   <option value="all" selected>All types</option>
                   <option value="svg">SVG only</option>
                   <option value="composite">Composites only</option>
-                  <option value="facilitydraw">Site plan (Facility Draw)</option>
+                  <option value="facilitydraw">Site plan (Facility Builder)</option>
                   <option value="gif">GIF only</option>
                   <option value="png">PNG only</option>
                 </select>
@@ -2175,10 +2190,10 @@
                 </select>
               </label>
               <label>Composer mode
-                <select id="hmi-composer-mode" title="Grid tile editor, 3D facility spatial preview, or Facility Draw site plan">
+                <select id="hmi-composer-mode" title="Grid tile editor, 3D facility spatial preview, or Facility Builder site plan">
                   <option value="grid">Grid — 2D tile editing</option>
                   <option value="3d">3D — facility spatial view</option>
-                  <option value="plan">Plan — Facility Draw site plan</option>
+                  <option value="plan">Plan — Facility Builder site plan</option>
                 </select>
               </label>
             </div>
@@ -2267,7 +2282,7 @@
               <div class="hmi-composer-preview-modes" role="group" aria-label="Composer preview mode">
                 <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="grid" title="2D tile grid — place and edit symbols, composites, and bindings">2D grid</button>
                 <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="3d" title="3D facility spatial preview on home screen">3D</button>
-                <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="plan" title="Facility Draw site plan preview on home screen">Plan</button>
+                <button type="button" class="btn btn-sm hmi-preview-mode-btn" data-hmi-preview-mode="plan" title="Facility Builder site plan preview on home screen">Plan</button>
               </div>
               <div class="hmi-grid-toolbar">
                 <button type="button" id="btn-hmi-delete-tile" class="btn danger" title="Remove selected cell">Remove cell</button>
@@ -2280,8 +2295,8 @@
             <div id="hmi-setup-3d-preview" class="hmi-viewport hmi-setup-3d-preview view-hidden" aria-label="3D facility composer preview">
               <iframe id="hmi-setup-3d-frame" title="3D facility composer"></iframe>
             </div>
-            <div id="hmi-setup-plan-preview" class="hmi-viewport hmi-setup-plan-preview view-hidden" aria-label="Facility Draw site plan composer preview">
-              <iframe id="hmi-setup-plan-frame" title="Facility Draw site plan composer"></iframe>
+            <div id="hmi-setup-plan-preview" class="hmi-viewport hmi-setup-plan-preview view-hidden" aria-label="Facility Builder site plan composer preview">
+              <iframe id="hmi-setup-plan-frame" title="Facility Builder site plan composer"></iframe>
             </div>
           </div>
         </div>
@@ -2439,7 +2454,7 @@
       <div class="program-picker-form-body">
         <div class="setup-tabs" role="tablist" id="project-hub-tabs">
           <button type="button" class="setup-tab active" data-hub-tab="local" role="tab"><%= isCloud ? 'Workspace library' : 'Local repository' %></button>
-          <button type="button" class="setup-tab" data-hub-tab="cloud" role="tab">MV Cloud</button>
+          <button type="button" class="setup-tab" data-hub-tab="cloud" role="tab">PeakLogic Cloud</button>
           <button type="button" class="setup-tab" data-hub-tab="file" role="tab">File</button>
         </div>
         <% if (isCloud) { %>
@@ -2449,7 +2464,7 @@
           </label>
         </div>
         <% } %>
-        <p class="panel-hint" id="project-hub-hint"><%= isCloud ? 'Deploy a saved workspace project, one from MV Cloud, or upload a file.' : 'One-step deploy — drivers and ports adapt to this device automatically.' %></p>
+        <p class="panel-hint" id="project-hub-hint"><%= isCloud ? 'Deploy a saved workspace project, one from PeakLogic Cloud, or upload a file.' : 'One-step deploy — drivers and ports adapt to this device automatically.' %></p>
         <div class="project-list-sort" data-project-sort-scope="hub" role="group" aria-label="Sort repository projects">
           <span class="project-list-sort-label">Sort</span>
           <button type="button" class="btn btn-sm project-sort-btn" data-project-sort="name">Name</button>

@@ -6,7 +6,7 @@ window.FacilityDrawHelp = (function () {
       id: 'start',
       title: 'Getting started',
       html: `
-        <p>Facility Draw is a scaled site-plan editor for septic and DWTS layouts. Place tanks, lift stations, ATU trains, and drip dispersal on a calibrated background, then export PDF or DXF for submittals.</p>
+        <p>Facility Builder is a scaled site-plan editor for septic and DWTS layouts. Place tanks, lift stations, ATU trains, and drip dispersal on a calibrated background, then export PDF or DXF for submittals.</p>
         <h4>Typical workflow (blank sheet)</h4>
         <ol>
           <li><strong>File → New</strong> (or <strong>Save as…</strong> to name the file).</li>

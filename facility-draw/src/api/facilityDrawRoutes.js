@@ -126,7 +126,7 @@ function createFacilityDrawRoutes() {
     try {
       const resolved = resolveImportPayload(req.body);
       if (resolved.type !== 'facilitydraw') {
-        return res.status(400).json({ error: 'Expected an Facility Draw bundle or .facilitydraw.json file' });
+        return res.status(400).json({ error: 'Expected an Facility Builder bundle or .facilitydraw.json file' });
       }
       const project = writeActiveProject(resolved.doc);
       res.json({

@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Generate 3D layout artifacts from an Facility Draw project file.
+ * Generate 3D layout artifacts from an Facility Builder project file.
  *
  * Usage:
  *   node scripts/facility-draw/generate-3d-artifacts.js --input data/facility-draw/projects/DWTS.facilitydraw.json
@@ -63,7 +63,7 @@ function main() {
   const slug = args.slug || slugFromPath(inputPath, doc);
   const artifacts = writeFacilityDraw3dArtifacts(site, slug);
 
-  console.log('Facility Draw 3D artifacts generated:');
+  console.log('Facility Builder 3D artifacts generated:');
   console.log(`  Input: ${path.relative(ROOT, inputPath)}`);
   console.log(`  Placements: ${site.placements.length}`);
   console.log(`  Typed models: ${site.placements.filter((p) => p.model3d !== 'box').length}`);

@@ -1,12 +1,12 @@
 'use strict';
 
 /**
- * Build a standalone Facility Draw 3D viewer HTML page from a scene config.
+ * Build a standalone Facility Builder 3D viewer HTML page from a scene config.
  * @param {object} site — buildSceneFromFacilityDraw() output
  * @param {{ title?: string, subtitle?: string, configFile?: string }} opts
  */
 function buildFacilityDraw3dHtml(site, opts = {}) {
-  const title = String(opts.title || site?.name || 'Facility Draw 3D').replace(/</g, '&lt;');
+  const title = String(opts.title || site?.name || 'Facility Builder 3D').replace(/</g, '&lt;');
   const subtitle = String(opts.subtitle || '').replace(/</g, '&lt;');
   const configFile = String(opts.configFile || './site-config.js').replace(/"/g, '&quot;');
   const generated = new Date().toISOString();
@@ -46,7 +46,7 @@ function buildFacilityDraw3dHtml(site, opts = {}) {
   <div id="title-panel" class="panel">
     <h1>${title}</h1>
     ${subtitle ? `<p>${subtitle}</p>` : ''}
-    <p class="hint">Typed 3D models from Facility Draw — click a symbol for details. Generated ${generated}</p>
+    <p class="hint">Typed 3D models from Facility Builder — click a symbol for details. Generated ${generated}</p>
   </div>
   <div id="detail-panel" class="panel">
     <h2 id="detail-title">Symbol</h2>
@@ -57,7 +57,7 @@ function buildFacilityDraw3dHtml(site, opts = {}) {
     <div class="legend-item">Lift stations, tanks, drip fields use typed 3D models</div>
     <div class="legend-item">Purple pads = zone aggregation (zone ID or group)</div>
     <div class="legend-item">Blue pipes follow connection polylines</div>
-    <div class="legend-item">Bind device ID + tags in Facility Draw for live SCADA colors</div>
+    <div class="legend-item">Bind device ID + tags in Facility Builder for live SCADA colors</div>
   </div>
   <div id="live-status" class="panel">Connecting…</div>
   <script type="importmap">{ "imports": { "three": "/vendor/three/build/three.module.js", "three/addons/": "/vendor/three/examples/jsm/" } }</script>

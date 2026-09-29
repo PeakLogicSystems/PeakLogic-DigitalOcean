@@ -16,7 +16,7 @@ const PILOT_SVG = '/hmi/svg/library/controls/pilot-lights/mv/pl-canonical/pilot_
 
 const GRID = { cols: 16, rows: 13, cellWidth: 64, cellHeight: 64 };
 
-/** Facility Draw symbol types that compile to full duplex MCC (alternator + 2× motor_hoa). */
+/** Facility Builder symbol types that compile to full duplex MCC (alternator + 2× motor_hoa). */
 const DUPLEX_MCC_TYPES = new Set([
   'lift_duplex',
   'atu_dual',
@@ -54,7 +54,7 @@ function sanitizePrefix(raw) {
     .slice(0, 20);
 }
 
-/** Derive MOTORn-style prefix from Facility Draw node meta. */
+/** Derive MOTORn-style prefix from Facility Builder node meta. */
 function motorPrefixFromNode(meta, index, fallback) {
   const explicit = sanitizePrefix(meta.tagPrefix || meta.compositeTagPrefix);
   if (explicit) {
@@ -317,7 +317,7 @@ function compileSimplexMotor(node, screenId, manifests, col, row) {
 }
 
 /**
- * Compile Facility Draw nodes with SCADA meta into an HMI screen + bindings.
+ * Compile Facility Builder nodes with SCADA meta into an HMI screen + bindings.
  * @param {object} doc - peaklogic-facilitydraw document
  * @param {object} [options]
  * @param {string} [options.screenId]
@@ -328,7 +328,7 @@ function compileFacilityDrawToHmi(doc, options = {}) {
   const normalized = normalizeFacilityDraw(doc);
   const publicRoot = options.publicRoot || path.join(__dirname, '../../public');
   const screenId = String(options.screenId || DEFAULT_SCREEN_ID).trim() || DEFAULT_SCREEN_ID;
-  const screenName = String(options.screenName || 'Facility Draw — MCC').trim();
+  const screenName = String(options.screenName || 'Facility Builder — MCC').trim();
   const manifests = manifestById(publicRoot);
 
   const compilable = (normalized.nodes || []).filter((node) => {

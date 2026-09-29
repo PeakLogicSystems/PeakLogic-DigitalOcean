@@ -12,7 +12,7 @@ window.PeaklogicTraining = (function () {
       hours: 1,
       level: 'Foundation',
       prereq: '—',
-      outcomes: 'Name appliance vs Cloud Studio vs embedded est; start MVP Suite; open dashboard (not Facility Draw); open F1 help.',
+      outcomes: 'Name appliance vs Cloud Studio vs embedded est; start MVP Suite; open dashboard (not Facility Builder); open F1 help.',
       lab: 'npm install → npm start → http://127.0.0.1:3090 (dashboard) → F1 Getting started.',
       help: 'F1 → Getting started',
     },
@@ -108,13 +108,13 @@ window.PeaklogicTraining = (function () {
     },
     {
       id: 'm10',
-      title: 'M10 — Facility Draw site plans',
+      title: 'M10 — Facility Builder site plans',
       hours: 2,
       level: 'Specialty',
       prereq: 'M1',
-      outcomes: 'Open Facility Draw; scale plan; place symbols; save into .est.zip project.',
+      outcomes: 'Open Facility Builder; scale plan; place symbols; save into .est.zip project.',
       lab: 'Open assisted-living plan; place symbols; Save to PeakLogic project; export .est.zip.',
-      help: 'F1 → Facility Draw; facility-draw/README.md',
+      help: 'F1 → Facility Builder; facility-draw/README.md',
     },
     {
       id: 'm11',
@@ -211,7 +211,7 @@ window.PeaklogicTraining = (function () {
     { id: 'm7', title: 'M7 — Parc hub & Opta', time: '180 min', prep: 'Opta flashed; broker up; BASELINE_TEST on board.', teach: 'Parc topics; hub enable; mqtt_parc; Download & Start.', lab: 'Rotate pairs on Opta bench.', pitfalls: 'Hub off; deviceId typo.', verify: 'Checkpoint C telemetry + remote start.' },
     { id: 'm8', title: 'M8 — Historian & reports', time: '120 min', prep: 'Mongo optional; two changing tags.', teach: 'Hist vs pens; logger; CSV export.', lab: '5 min capture; export CSV.', pitfalls: 'Hist unchecked; runtime stopped.', verify: 'CSV has timestamps.' },
     { id: 'm9', title: 'M9 — Alarms & CMMS', time: '120 min', prep: 'Tag with IH limit; CMMS enabled for student login.', teach: 'Limits; ack; integrated /cmms WO + alarm auto-WO (reactive); PdM proactive PM WO (early warning); external MQTT bridge (optional).', lab: 'Trip alarm; Ack; open CMMS; seed PdM and verify proactive WO.', pitfalls: 'Wrong tag type for limit; confusing integrated CMMS vs MQTT publish; reactive vs proactive WO.', verify: 'Alarm trips, acks, CMMS WO visible; student explains proactive vs reactive.' },
-    { id: 'm10', title: 'M10 — Facility Draw', time: '120 min', prep: 'Assisted-living plan asset.', teach: 'Scale plan; symbols; Save to PeakLogic project; .est.zip includes facility-draw/.', lab: 'Place symbols; save to project; export .est.zip; reload.', pitfalls: 'Lost scale factor; Plan composer mode vs dashboard.', verify: 'Symbols persist after import on second machine.' },
+    { id: 'm10', title: 'M10 — Facility Builder', time: '120 min', prep: 'Assisted-living plan asset.', teach: 'Scale plan; symbols; Save to PeakLogic project; .est.zip includes facility-draw/.', lab: 'Place symbols; save to project; export .est.zip; reload.', pitfalls: 'Lost scale factor; Plan composer mode vs dashboard.', verify: 'Symbols persist after import on second machine.' },
     { id: 'm11', title: 'M11 — PdM & ROI', time: '90 min', prep: 'Demo with Hist or edge samples; Mongo recommended.', teach: 'Asset setup; health index; forecast; proactive CMMS; ROI calc — proactive not reactive.', lab: 'Seed demo data; build features; proactive check; CMMS WO; PdM PDF.', pitfalls: 'No data — use Seed demo data; proactive disabled in settings.', verify: 'Student explains forecast + proactive PM WO.' },
     { id: 'm12', title: 'M12 — Cloud Studio', time: '120 min', prep: 'Local: npm run start:saas + npm run seed. Or hosted DO droplet.', teach: 'Organization ID login; Sites, All devices, Assets map, /cmms entitlement; edge vs cloud field buses (Modbus, BACnet/IP); Deploy/Share project. Optional: CLOUD_DEPLOY_DO.md for integrators.', lab: 'Sign in org demo; tour /sites, /sites/devices, /fleet, /cmms; Deploy/Share in Studio; explain appliance + cloud remote uplink.', pitfalls: 'Cloud down — use slides; Modbus/BACnet on cloud fails by design — use edge appliance.', verify: 'Login + device inventory + map colors explained; CMMS entitlement articulated if enabled.' },
     { id: 'm13', title: 'M13 — Vertical lab', time: '180 min', prep: 'Vertical .est.zip per team.', teach: 'Assign vertical; M2–M6 on domain demo.', lab: 'Peer demo 10 min.', pitfalls: 'Team skips alarms.', verify: 'Final demo rubric.' },
@@ -710,7 +710,7 @@ window.PeaklogicTraining = (function () {
             <tr><td>ONVIF</td><td>IP camera discovery and control standard (UDP 3702)</td></tr>
             <tr><td>go2rtc</td><td>Local RTSP→WebRTC/MSE streaming proxy for camera live view</td></tr>
             <tr><td>GridFS</td><td>MongoDB file storage for camera snapshots (optional; projects use .est.zip on disk)</td></tr>
-            <tr><td>.est.zip</td><td>Portable PeakLogic project archive (tags, drivers, ST programs, HMI, Facility Draw)</td></tr>
+            <tr><td>.est.zip</td><td>Portable PeakLogic project archive (tags, drivers, ST programs, HMI, Facility Builder)</td></tr>
             <tr><td>PdM</td><td>Predictive maintenance — SCADA + edge features, failure forecast, proactive CMMS PM</td></tr>
           </table>
         </section>

@@ -1,4 +1,4 @@
-// Shared Facility Draw port placement — attach pipes to symbol outlines, not just bounding boxes.
+// Shared Facility Builder port placement — attach pipes to symbol outlines, not just bounding boxes.
 (function portModuleFactory(root, factory) {
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = factory();

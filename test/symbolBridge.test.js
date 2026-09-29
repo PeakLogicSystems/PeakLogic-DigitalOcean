@@ -14,16 +14,16 @@ const {
 const { listHmiAssets } = require('../src/hmi/hmiConfig');
 
 describe('symbolBridge', () => {
-  it('exports Facility Draw symbols for Composer as @facilitydraw assets', () => {
+  it('exports Facility Builder symbols for Composer as @facilitydraw assets', () => {
     const assets = listFacilityDrawHmiAssets();
     assert.ok(assets.length >= 20);
     assert.ok(assets.every((a) => a.type === 'facilitydraw'));
     assert.ok(assets.every((a) => isFacilityDrawAssetPath(a.path)));
     assert.ok(assets.some((a) => a.path === facilityDrawAssetPath('septic_tank_1000')));
-    assert.ok(assets.every((a) => a.group === 'Site plan (Facility Draw)'));
+    assert.ok(assets.every((a) => a.group === 'Site plan (Facility Builder)'));
   });
 
-  it('bridges HMI process-equipment assets into Facility Draw symbol shape', () => {
+  it('bridges HMI process-equipment assets into Facility Builder symbol shape', () => {
     const publicRoot = path.join(__dirname, '..', 'public');
     const hmiAssets = listHmiAssets(publicRoot);
     const bridged = listBridgedHmiSymbols(hmiAssets);
@@ -35,7 +35,7 @@ describe('symbolBridge', () => {
     assert.equal(tank.type, hmiSymbolTypeFromPath(tank.hmiSvg));
   });
 
-  it('builds preview SVG for Facility Draw symbols', () => {
+  it('builds preview SVG for Facility Builder symbols', () => {
     const svg = buildFacilityDrawPreviewSvg({ type: 'cleanout', label: 'Cleanout', width: 2, height: 2, fill: '#fbbf24', stroke: '#92400e' });
     assert.match(svg, /<svg/);
     assert.match(svg, /Cleanout/);

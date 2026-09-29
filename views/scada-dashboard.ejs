@@ -8,8 +8,9 @@
   <link rel="stylesheet" href="/css/cloud-studio.css?v=<%= assetV %>">
 </head>
 <body class="dashboard-body" data-mv-deployment="<%= typeof deployment !== 'undefined' ? deployment : 'cloud' %>">
+  <div class="top-accent-bar"></div>
   <header class="topbar">
-    <div class="topbar-brand"><a href="/" class="text-white text-decoration-none">Peak<span>Logic</span></a></div>
+    <div class="topbar-brand"><a href="/" class="text-white text-decoration-none"><img src="/branding/peaklogic-icon.svg" alt="" class="topbar-brand-icon">Peak<span>Logic</span></a><span class="topbar-cloud-badge" title="PeakLogic Control Center">Control Center</span></div>
     <a href="/" class="btn btn-sm btn-outline-light ms-2" style="align-self:center">Cloud home</a>
     <a href="/sites" class="btn btn-sm btn-outline-light ms-1" style="align-self:center">Sites</a>
     <a href="/remote-sites" class="btn btn-sm btn-outline-light ms-1" style="align-self:center" title="Generate pairing codes for appliance cameras">Camera sites</a>
@@ -330,7 +331,7 @@
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-go2rtc-enabled" checked> Enable go2rtc (auto-start on server boot)</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-add" checked> Auto-add discovered cameras to inventory</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-auto-probe" checked> Auto-probe after discover</label>
-              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/Facility Draw uploads to GridFS</label>
+              <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-gridfs-mirror" checked> Mirror HMI/Facility Builder uploads to GridFS</label>
               <label class="checkbox-inline span-all"><input type="checkbox" id="cam-set-snapshot-archive" checked> Archive camera snapshots to GridFS</label>
               <label>Snapshot interval (ms) <input id="cam-set-snapshot-ms" type="number" min="15000" max="3600000" step="1000" value="60000"></label>
               <label>Snapshot retention (days) <input id="cam-set-snapshot-days" type="number" min="1" max="365" value="30"></label>
@@ -1808,7 +1809,7 @@
       <div class="program-picker-form-body">
         <div class="setup-tabs" role="tablist" id="project-hub-tabs">
           <button type="button" class="setup-tab active" data-hub-tab="local" role="tab">Local repository</button>
-          <button type="button" class="setup-tab" data-hub-tab="cloud" role="tab">MV Cloud</button>
+          <button type="button" class="setup-tab" data-hub-tab="cloud" role="tab">PeakLogic Cloud</button>
           <button type="button" class="setup-tab" data-hub-tab="file" role="tab">File</button>
         </div>
         <p class="panel-hint" id="project-hub-hint">One-step deploy — drivers and ports adapt to this device automatically.</p>

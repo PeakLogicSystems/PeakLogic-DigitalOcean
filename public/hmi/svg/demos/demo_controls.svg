@@ -2,10 +2,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 800" width="1024" height="800">
   <rect width="1024" height="800" fill="#f1f5f9"/>
   <text x="32" y="40" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#0f172a">PeakLogic — Control graphics demo</text>
-  <text x="32" y="68" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">MV round pilot + start/stop buttons � browse MV symbols in HMI Setup � vendor folder mv</text>
+  <text x="32" y="68" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">Round pilot + start/stop buttons · browse symbols in HMI Setup · filter by vendor</text>
 
-  <!-- MV round pilot (DI1) -->
-  <text x="180" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">MV pilot (DI1)</text>
+  <!-- Round pilot (DI1) -->
+  <text x="180" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">Pilot (DI1)</text>
   <g transform="translate(130, 140) scale(1.1)">
     <g id="pilot_di1">
       <g id="frame"><rect fill="none" width="100" height="100"/></g>
@@ -20,8 +20,8 @@
   </g>
   <text id="label_di1" x="180" y="290" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" fill="#0f172a">DI1 OFF</text>
 
-  <!-- MV round START (Q1 run indicator) -->
-  <text x="420" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">MV START (Q1)</text>
+  <!-- Round START (Q1 run indicator) -->
+  <text x="420" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">START (Q1)</text>
   <g transform="translate(370, 140) scale(1.1)">
     <g id="btn_start">
       <circle cx="50" cy="50" r="49" fill="#64748b"/>
@@ -29,8 +29,8 @@
     </g>
   </g>
 
-  <!-- MV round STOP -->
-  <text x="580" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">MV STOP</text>
+  <!-- Round STOP -->
+  <text x="580" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">STOP</text>
   <g transform="translate(530, 140) scale(1.1)">
     <g id="btn_stop">
       <circle cx="50" cy="50" r="49" fill="#187aa0"/>
@@ -39,8 +39,8 @@
   </g>
   <text id="label_q1" x="500" y="290" text-anchor="middle" font-family="Segoe UI, Arial" font-size="16" font-weight="600" fill="#0f172a">Pump STOP</text>
 
-  <!-- MV round pilot (Q1) -->
-  <text x="820" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">MV pilot (Q1)</text>
+  <!-- Round pilot (Q1) -->
+  <text x="820" y="120" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">Pilot (Q1)</text>
   <g transform="translate(770, 130)">
     <g id="mb_pilot_q1">
       <polygon transform="translate(5,5)" fill="grey" stroke="none" points="63,0 27,0 0,27 0,63 27,90 63,90 90,63 90,27 63,0"/>
@@ -49,8 +49,8 @@
     </g>
   </g>
 
-  <!-- MV momentary push button (visual) -->
-  <text x="820" y="320" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">MV push button</text>
+  <!-- Momentary push button (visual) -->
+  <text x="820" y="320" text-anchor="middle" font-family="Segoe UI, Arial" font-size="15" font-weight="600" fill="#334155">Push button</text>
   <g transform="translate(765, 340)">
     <g id="mb_btn_red">
       <rect x="7" y="7" width="100" height="35" rx="15" fill="grey" stroke="none"/>
@@ -60,9 +60,9 @@
   </g>
 
   <rect x="32" y="420" width="960" height="340" rx="12" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="56" y="458" font-family="Segoe UI, Arial" font-size="18" font-weight="600" fill="#0f172a">MV symbol library (3400+ SVGs)</text>
-  <text x="56" y="488" font-family="Segoe UI, Arial" font-size="14" fill="#475569">HMI Setup � filter vendor mv � Pilot_Light � PB_Momentary � Gauge_Dial � Pump � Pipes � Tanks</text>
-  <text x="56" y="518" font-family="Segoe UI, Arial" font-size="14" fill="#475569">Examples: library/controls/pilot-lights/mv/ � library/controls/push-buttons/momentary/mv/</text>
+  <text x="56" y="458" font-family="Segoe UI, Arial" font-size="18" font-weight="600" fill="#0f172a">PeakLogic symbol library (3400+ SVGs)</text>
+  <text x="56" y="488" font-family="Segoe UI, Arial" font-size="14" fill="#475569">HMI Setup · filter by vendor · Pilot_Light · PB_Momentary · Gauge_Dial · Pump · Pipes · Tanks</text>
+  <text x="56" y="518" font-family="Segoe UI, Arial" font-size="14" fill="#475569">Examples: library/controls/pilot-lights/ · library/controls/push-buttons/momentary/</text>
   <text x="56" y="548" font-family="Segoe UI, Arial" font-size="14" fill="#475569">Bind element id <tspan font-family="Consolas, monospace">lamp</tspan> (pilot) or <tspan font-family="Consolas, monospace">button</tspan> (push button) to your tags.</text>
-  <text x="56" y="600" font-family="Segoe UI, Arial" font-size="14" fill="#64748b">Use Force tab to toggle Q1 � DI1 reflects input state on the MV pilot above.</text>
+  <text x="56" y="600" font-family="Segoe UI, Arial" font-size="14" fill="#64748b">Use Force tab to toggle Q1 · DI1 reflects input state on the pilot above.</text>
 </svg>

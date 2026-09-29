@@ -1,4 +1,4 @@
-# Facility Draw
+# Facility Builder
 
 Scaled site-plan layout editor for septic system design. Ships as a PeakLogic module with a standalone UI at `/facility-draw` and optional embed in `.est` project files.
 
@@ -24,7 +24,7 @@ The header reads left to right:
 
 1. **PeakLogic** (home link) · **File** menu · **Composer** mode (2D grid / 3D / Plan)
 2. Current project name and saved path
-3. **Facility Draw** title
+3. **Facility Builder** title
 4. **Drawing toolbar** — Select, Rotate, Stretch, Place, Connect, Calibrate, Extents, Snap, Undo/Redo, export (PDF/DXF), etc.
 5. **Help**, version, **Close** (right)
 
@@ -68,10 +68,10 @@ Tools flow from the left; status and Close stay pinned on the right. Press **F1*
 
 ## Portable packages (`.mvbundle`)
 
-One JSON file carries the full project plus embedded Facility Draw background images:
+One JSON file carries the full project plus embedded Facility Builder background images:
 
 - **PeakLogic:** **Project → Export project file…** → `name.mvbundle` (tags, drivers, program, HMI, settings, site plan, backgrounds)
-- **Facility Draw:** **File → Export package…** → `name.mvbundle` (layout + backgrounds)
+- **Facility Builder:** **File → Export package…** → `name.mvbundle` (layout + backgrounds)
 - **Import:** accepts `.mvbundle`, legacy `.est.json`, and `.facilitydraw.json`
 
 ```json

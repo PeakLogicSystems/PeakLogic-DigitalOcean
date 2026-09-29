@@ -147,7 +147,7 @@ function buildFacilityDrawPdf(project, opts = {}) {
     pdf.on('end', () => resolve(Buffer.concat(chunks)));
     pdf.on('error', reject);
 
-    pdf.fontSize(16).font('Helvetica-Bold').text(doc.name || 'Facility Draw layout', margin, margin);
+    pdf.fontSize(16).font('Helvetica-Bold').text(doc.name || 'Facility Builder layout', margin, margin);
     pdf.font('Helvetica').fontSize(10).fillColor('#475569');
     const sub = [
       doc.meta?.site ? `Site: ${doc.meta.site}` : null,

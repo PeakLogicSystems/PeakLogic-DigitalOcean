@@ -24,7 +24,7 @@ function facility3dUrlForSlug(slug) {
 }
 
 /**
- * Write site config + HTML viewer for an Facility Draw scene.
+ * Write site config + HTML viewer for an Facility Builder scene.
  * @param {object} site — buildSceneFromFacilityDraw() output
  * @param {string} slug
  * @param {{ outDir?: string }} opts
@@ -41,7 +41,7 @@ function writeFacilityDraw3dArtifacts(site, slug, opts = {}) {
   fs.writeFileSync(
     path.join(outDir, htmlName),
     buildFacilityDraw3dHtml(site, {
-      title: `${site.name} — Facility Draw 3D`,
+      title: `${site.name} — Facility Builder 3D`,
       subtitle: `${site.placements.length} symbols · ${site.pipes.length} pipes · ${site.zones?.length || 0} zones`,
       configFile: configRel,
     }),

@@ -160,7 +160,7 @@ window.PeaklogicHelp = (function () {
           <tr><td><strong>Reporting &#9662;</strong></td><td>Historian reports — CSV export and print/PDF</td></tr>
           <tr><td><strong>Tools &#9662;</strong></td><td>Program, Tags, Drivers, Connectivity</td></tr>
           <tr><td><strong>Help &#9662;</strong></td><td>This panel (<kbd>F1</kbd>)</td></tr>
-          <tr><td><strong>Facility Draw</strong></td><td>Site-plan layout editor (<code>/facility-draw</code>)</td></tr>
+          <tr><td><strong>Facility Builder</strong></td><td>Site-plan layout editor (<code>/facility-draw</code>)</td></tr>
           <tr><td><strong>Alarms</strong></td><td>Active alarm list — scroll, per-row <strong>Ack</strong>, badge on button</td></tr>
           <tr><td><strong>Tags</strong></td><td>Floating tag database — edit tags, scale/alarms, <strong>Force</strong> I/O, <strong>Live I/O…</strong></td></tr>
           <tr><td><strong>Drivers</strong></td><td>Driver list, device templates, Modbus RTU tool (modal popup)</td></tr>

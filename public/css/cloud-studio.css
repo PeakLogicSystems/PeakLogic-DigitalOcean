@@ -4,6 +4,10 @@
   --ps-purple-dark: #6d28d9;
   --ps-purple-deep: #5b21b6;
   --ps-purple-light: #ede9fe;
+  --peaklogic-navy: #0f172a;
+  --peaklogic-navy-soft: #1e293b;
+  --peaklogic-navy-border: #334155;
+  --peaklogic-green-dark: #15803d;
   --bg: #f1f5f9;
   --sidebar: #1e293b;
   --accent: #7c3aed;
@@ -32,42 +36,52 @@ html, body {
 .cs-shell { min-height: 100vh; display: flex; flex-direction: column; }
 
 /* Same chrome as Studio .topbar */
+.cs-top-accent {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ps-purple-deep), var(--ps-purple) 55%, var(--peaklogic-green-dark));
+  position: sticky;
+  top: 0;
+  z-index: 11;
+}
 .cs-top {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0.65rem 1.25rem;
-  background: var(--ps-purple);
+  background: var(--peaklogic-navy);
   color: #e2e8f0;
   position: sticky;
-  top: 0;
+  top: 3px;
   z-index: 10;
 }
 .cs-brand {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.02em;
   text-decoration: none;
   color: #e2e8f0;
 }
+.cs-brand-icon { width: 22px; height: 22px; }
 .cs-brand span {
-  color: var(--ps-purple-light);
-  font-weight: 600;
+  color: var(--ps-purple-mid, #8b5cf6);
+  font-weight: 800;
   font-size: 1.25rem;
 }
 .cs-cloud-badge {
-  margin-left: -0.35rem;
-  padding: 0.12rem 0.45rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  background: rgba(239, 217, 242, 0.15);
-  color: var(--ps-purple-light);
-  border: 1px solid rgba(239, 217, 242, 0.35);
+  letter-spacing: 0.03em;
+  background: rgba(139, 92, 246, 0.18);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.35);
 }
 .cs-nav { display: flex; gap: 2px; flex: 1; flex-wrap: wrap; align-items: center; }
 .cs-nav a {
@@ -79,6 +93,19 @@ html, body {
 }
 .cs-nav a:hover { background: var(--ps-purple-dark); color: #fff; }
 .cs-nav a.active { background: var(--accent); color: #fff; font-weight: 600; }
+.cs-user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--ps-purple);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
 .cs-meta {
   color: #cbd5e1;
   font-size: 0.85rem;

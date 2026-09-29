@@ -157,7 +157,7 @@ Requires platform admin login or `PLATFORM_ADMIN_KEY` for API calls.
 | Projects | — | ✓ | — | — |
 | System setup | — | ✓ | — | — |
 | User accounts | — | — | — | — |
-| Facility Draw | — | — | — | — |
+| Facility Builder | — | — | — | — |
 | Connectivity tools | — | ✓ | — | — |
 
 Non-admin users can open **People** to view role defaults and their own permissions (read-only).

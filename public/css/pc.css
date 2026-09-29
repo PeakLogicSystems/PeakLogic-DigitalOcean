@@ -5,6 +5,11 @@
   --ps-purple-deep: #5b21b6;
   --ps-purple-light: #ede9fe;
   --ps-purple-mid: #8b5cf6;
+  --peaklogic-navy: #0f172a;
+  --peaklogic-navy-soft: #1e293b;
+  --peaklogic-navy-border: #334155;
+  --peaklogic-green: #22c55e;
+  --peaklogic-green-dark: #15803d;
   --bg: #f1f5f9;
   --sidebar: #1e293b;
   --accent: #7c3aed;
@@ -1444,16 +1449,24 @@ body.hmi-composer-col-split-active {
 html {
   height: -webkit-fill-available;
 }
+.top-accent-bar {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ps-purple-deep), var(--ps-purple) 55%, var(--peaklogic-green-dark));
+  position: sticky;
+  top: 0;
+  z-index: 11;
+}
 .topbar {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0.75rem 1.25rem;
-  background: var(--ps-purple);
+  background: var(--peaklogic-navy);
   color: #e2e8f0;
   position: sticky;
-  top: 0;
+  top: 3px;
   z-index: 10;
 }
 .dashboard-header-chrome {
@@ -1514,20 +1527,27 @@ html {
     align-items: stretch;
   }
 }
-.topbar-brand { flex: 0 0 auto; font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em; }
-.topbar-brand span { color: var(--ps-purple-light); font-weight: 600; font-size: 1.25rem; }
+.topbar-brand {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.topbar-brand-icon { width: 24px; height: 24px; margin-right: 0.5rem; }
+.topbar-brand span { color: var(--ps-purple-mid); font-weight: 800; font-size: 1.25rem; }
 .topbar-cloud-badge {
-  margin-left: 0.45rem;
-  padding: 0.1rem 0.45rem;
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   vertical-align: middle;
-  background: rgba(239, 217, 242, 0.15);
-  color: var(--ps-purple-light);
-  border: 1px solid rgba(239, 217, 242, 0.35);
+  background: rgba(139, 92, 246, 0.18);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.35);
 }
 
 /* Cloud SaaS — second nav row on Studio dashboard (peaklogic.io) */
@@ -1537,11 +1557,11 @@ html {
   gap: 0.15rem;
   flex-wrap: wrap;
   padding: 0.35rem 1.25rem;
-  background: var(--ps-purple-deep);
+  background: var(--peaklogic-navy-soft);
   color: #e2e8f0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--peaklogic-navy-border);
   position: sticky;
-  top: 3.25rem;
+  top: calc(3.25rem + 3px);
   z-index: 9;
 }
 .cloud-studio-nav-link {
@@ -1815,6 +1835,51 @@ html {
 }
 .topbar-text-btn:hover { background: var(--ps-purple-dark); color: #fff; }
 .topbar-version { opacity: 0.85; font-size: 0.78rem; }
+.topbar-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  background: #334155;
+  color: #f8fafc;
+  cursor: pointer;
+}
+.topbar-theme-toggle:hover { background: var(--ps-purple-dark); border-color: var(--ps-purple-dark); }
+.topbar-user-details { position: relative; }
+.topbar-user-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.55rem 0.25rem 0.25rem;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  background: #334155;
+  color: #f8fafc;
+  cursor: pointer;
+  list-style: none;
+}
+.topbar-user-trigger::-webkit-details-marker { display: none; }
+.topbar-user-details:hover .topbar-user-trigger,
+.topbar-user-details[open] > .topbar-user-trigger { background: var(--ps-purple-dark); border-color: var(--ps-purple-dark); }
+.topbar-user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--ps-purple);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.topbar-user-meta { font-size: 0.85rem; max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-user-dropdown { right: 0; left: auto; min-width: 11rem; }
+.topbar-menu-version { display: block; padding: 0.35rem 0.9rem 0.1rem; }
 .topbar .btn { border-color: rgba(255, 255, 255, 0.25); background: var(--ps-purple-dark); color: #f8fafc; }
 .topbar .btn:hover { background: var(--ps-purple-deep); }
 .topbar .btn.primary { background: var(--accent); border-color: var(--accent); }

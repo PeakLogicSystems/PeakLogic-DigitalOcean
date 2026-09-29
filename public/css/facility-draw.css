@@ -417,7 +417,7 @@ body.facility-draw-body:has(#mv-open-overlay:not(.view-hidden)) .mv-file-menu-pa
   margin-bottom: 0.5rem;
 }
 
-/* Facility Draw buttons — matches top toolbar (slate default, purple + outline when .active) */
+/* Facility Builder buttons — matches top toolbar (slate default, purple + outline when .active) */
 body.facility-draw-body button.facility-draw-btn {
   appearance: none;
   box-sizing: border-box;

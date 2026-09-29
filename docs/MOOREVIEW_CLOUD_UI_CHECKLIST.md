@@ -80,7 +80,7 @@
 | SHELL-14 | Topbar — PdM shortcut | Click **PdM** | PdM asset setup popup opens | ☐ | |
 | SHELL-15 | Topbar — Alarms shortcut | Click **Alarms** | Alarms popup opens; badge shows count if active | ☐ | |
 | SHELL-16 | Topbar — CMMS shortcut | Click **CMMS** in topbar | Navigate to `/cmms` | ☐ | |
-| SHELL-17 | Topbar — Facility Draw | Click **Facility Draw** | Navigate to `/facility-draw` in same or new tab | ☐ | |
+| SHELL-17 | Topbar — Facility Builder | Click **Facility Builder** | Navigate to `/facility-draw` in same or new tab | ☐ | |
 | SHELL-18 | Topbar — Tools menu | Open **Tools ▾** | Program, Tags, Drivers, Connectivity (`/cellular/sims`) | ☐ | |
 | SHELL-19 | Topbar — Camera menu | Open **Camera ▾** | Camera admin popup + live camera shortcuts | ☐ | |
 | SHELL-20 | Topbar — Help menu | Open **Help ▾** | Training (F2), Help (F1), Sign out | ☐ | |
@@ -368,7 +368,7 @@
 | IOMAP-02 | Enable I/O update | Toggle checkbox | Live I/O updates when enabled | ☐ | |
 | IOMAP-03 | Driver bindings | View bindings sidebar | Driver wiring and HMI screen bindings listed | ☐ | |
 
-### 16b. Facility Draw (`/facility-draw`)
+### 16b. Facility Builder (`/facility-draw`)
 
 | ID | Test case | Steps | Expected result | Result | Notes |
 |----|-----------|-------|-----------------|--------|-------|

@@ -41,7 +41,7 @@ describe('facilityDraw project sync', () => {
     assert.equal(shouldAutoLoadFromProject({ ...ctx, synced: true }, blankFacilityDrawDoc()), false);
   });
 
-  it('DEFAULT_FACILITY_PLAN_URL points at embedded Facility Draw', () => {
+  it('DEFAULT_FACILITY_PLAN_URL points at embedded Facility Builder', () => {
     assert.match(DEFAULT_FACILITY_PLAN_URL, /^\/facility-draw\?embedded=1$/);
   });
 });

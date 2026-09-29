@@ -1513,7 +1513,7 @@
       'HMI — Valves',
       'HMI — Process equipment',
     ];
-    const DEFAULT_OPEN = new Set(['Tanks', 'Lift & ATU panels', 'Power panels', 'Drainfield', 'Site plan (Facility Draw)']);
+    const DEFAULT_OPEN = new Set(['Tanks', 'Lift & ATU panels', 'Power panels', 'Drainfield', 'Site plan (Facility Builder)']);
     const q = String(state.librarySearch || '').trim().toLowerCase();
     let expanded = null;
     try {
@@ -2618,7 +2618,7 @@
     if (menuPathEl) menuPathEl.textContent = path;
     if (menuPeaklogicEl) menuPeaklogicEl.textContent = peaklogicProjectLabel();
     if (menuSessionEl) menuSessionEl.textContent = `Session: ${sessionPath}`;
-    document.title = `${name}${state.dirty ? ' *' : ''} — Facility Draw`;
+    document.title = `${name}${state.dirty ? ' *' : ''} — Facility Builder`;
   }
 
   function updateProjectTitle() {

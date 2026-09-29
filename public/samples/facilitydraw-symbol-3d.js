@@ -1,4 +1,4 @@
-// Typed 3D objects for Facility Draw placements — dispatches to shared site builders.
+// Typed 3D objects for Facility Builder placements — dispatches to shared site builders.
 //
 // Usage:
 //   import { buildPlacementObject } from './facilitydraw-symbol-3d.js';

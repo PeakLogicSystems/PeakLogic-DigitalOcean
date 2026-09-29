@@ -6,7 +6,7 @@ This folder (`est-pc`) is the **development source**. A distributable copy is ge
 
 - **Integrated dashboard** — program, tags, drivers, HMI, historian, alarms, Parc, **integrated CMMS**, **PdM (proactive maintenance)**, **BACnet/IP** (edge)
 - **IP cameras** — ONVIF discovery (Reolink), go2rtc live streaming, GridFS snapshots, vision AI
-- **Portable `.est.zip` projects** — tags, drivers, ST, HMI, Facility Draw, settings in one archive
+- **Portable `.est.zip` projects** — tags, drivers, ST, HMI, Facility Builder, settings in one archive
 - **HTTP polling** — `GET /api/dashboard`
 - **`.est` project files** — portable project export/import (includes camera inventory)
 

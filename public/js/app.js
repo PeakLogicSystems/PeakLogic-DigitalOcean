@@ -3,6 +3,36 @@
 (function () {
   const $ = (id) => document.getElementById(id);
 
+  const THEME_STORAGE_KEY = 'peaklogic-theme';
+
+  function getStoredTheme() {
+    try { return localStorage.getItem(THEME_STORAGE_KEY); } catch { return null; }
+  }
+
+  function applyTheme(theme) {
+    const dark = theme === 'dark';
+    document.documentElement.classList.toggle('theme-dark', dark);
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    $('theme-toggle-icon-dark')?.classList.toggle('view-hidden', dark);
+    $('theme-toggle-icon-light')?.classList.toggle('view-hidden', !dark);
+  }
+
+  function initTheme() {
+    applyTheme(getStoredTheme() === 'dark' ? 'dark' : 'light');
+    $('btn-theme-toggle')?.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem(THEME_STORAGE_KEY, next); } catch { /* ignore */ }
+    });
+  }
+
+  applyTheme(getStoredTheme() === 'dark' ? 'dark' : 'light');
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+  } else {
+    initTheme();
+  }
+
   function peaklogicApiFetch(method, path, query = null) {
     const q = new URLSearchParams();
     if (query && typeof query === 'object') {
@@ -197,10 +227,9 @@
 
   function applyAuthChrome() {
     const userMeta = $('topbar-user-meta');
+    const userAvatar = $('topbar-user-avatar');
     const logoutBtn = $('btn-topbar-logout');
     const helpSignOut = $('btn-help-sign-out');
-    const cloudNavUser = $('cloud-nav-user');
-    const cloudNavLogout = $('btn-cloud-nav-logout');
     const cloudNavAdmin = $('cloud-nav-admin');
     if (currentAuthUser) {
       const label = currentAuthUser.name || currentAuthUser.email || 'Signed in';
@@ -208,10 +237,11 @@
         userMeta.textContent = label;
         userMeta.classList.remove('view-hidden');
       }
-      if (cloudNavUser) cloudNavUser.textContent = label;
+      if (userAvatar) userAvatar.textContent = label.trim().charAt(0).toUpperCase() || '?';
       logoutBtn?.classList.remove('view-hidden');
       helpSignOut?.classList.remove('view-hidden');
     } else {
+      if (userAvatar) userAvatar.textContent = '?';
       logoutBtn?.classList.add('view-hidden');
       helpSignOut?.classList.add('view-hidden');
     }
@@ -4558,9 +4588,6 @@
       window.PeaklogicSignOut?.perform?.();
     });
     $('btn-help-sign-out')?.addEventListener('click', () => {
-      window.PeaklogicSignOut?.perform?.();
-    });
-    $('btn-cloud-nav-logout')?.addEventListener('click', () => {
       window.PeaklogicSignOut?.perform?.();
     });
     document.querySelectorAll('[data-drivers-tab-btn]').forEach((b) => {
@@ -10178,7 +10205,7 @@
     const name = String(nameOverride ?? (formName || projectName || 'untitled')).trim() || 'untitled';
     const blob = await api.saveEstBlob(name);
     downloadBlob(blob, safeEstFilename(name));
-    const note = `Exported "${safeEstFilename(name)}" — portable project archive (ST, JSON, HMI, Facility Draw)`;
+    const note = `Exported "${safeEstFilename(name)}" — portable project archive (ST, JSON, HMI, Facility Builder)`;
     if ($('proj-msg')) $('proj-msg').textContent = note;
     else alert(note);
   }
@@ -10283,12 +10310,12 @@
     if (mode === 'share') {
       title.textContent = 'Share project';
       hint.textContent = isCloudDeployment()
-        ? 'Publish the current project to MV Cloud for the selected site.'
+        ? 'Publish the current project to PeakLogic Cloud for the selected site.'
         : 'Publish a complete .est.zip (project + ST + HMI + site plan) to a repository or export a file.';
     } else {
       title.textContent = 'Deploy project';
       hint.textContent = isCloudDeployment()
-        ? 'Deploy a saved workspace project, one from MV Cloud, or upload a file.'
+        ? 'Deploy a saved workspace project, one from PeakLogic Cloud, or upload a file.'
         : 'Load a complete .est.zip or legacy .est.json in one step. Serial ports adapt to this host (IOT-LINK PORT A/B, Linux tty, COM ports).';
     }
     setProjectHubTab(isCloudDeployment() ? 'local' : 'local');

@@ -87,7 +87,7 @@
     const hint = $('project-hub-hint');
     if (hint) {
       hint.textContent = tab === 'cloud'
-        ? 'Deploy a project published to MV Cloud for this site.'
+        ? 'Deploy a project published to PeakLogic Cloud for this site.'
         : tab === 'file'
           ? 'Choose a .est or .json project file from your computer.'
           : 'Deploy a project saved in this Studio workspace (data/projects).';
@@ -184,15 +184,15 @@
 
   async function publishCurrentProject() {
     const locationId = selectedLocationId();
-    if (!locationId) throw new Error('Choose a site before publishing to MV Cloud.');
+    if (!locationId) throw new Error('Choose a site before publishing to PeakLogic Cloud.');
     const name = currentProjectName();
-    if (!window.confirm(`Publish "${name}" to MV Cloud for this site?`)) return;
+    if (!window.confirm(`Publish "${name}" to PeakLogic Cloud for this site?`)) return;
     await window.PeaklogicHmi?.applyHmiSettingsIfDirty?.();
     const doc = await api.exportEstDoc(name);
     const result = await api.publishProjectHub({ name, doc, locationId });
     const entry = result.entry || result;
     setHubMsg(`Published ${entry.name || name} (v${entry.version || 1}).`);
-    alert(`Published to MV Cloud: ${entry.name || name}`);
+    alert(`Published to PeakLogic Cloud: ${entry.name || name}`);
   }
 
   async function runPrimaryAction() {
@@ -219,14 +219,14 @@
     const tabs = $('project-hub-tabs');
     if (mode === 'share') {
       if (title) title.textContent = 'Share project';
-      if (primary) primary.textContent = 'Publish to MV Cloud';
+      if (primary) primary.textContent = 'Publish to PeakLogic Cloud';
       if (secondary) secondary.hidden = true;
       if (tabs) tabs.hidden = true;
       hubTab = 'cloud';
       const locWrap = $('project-hub-location-wrap');
       if (locWrap) locWrap.classList.remove('view-hidden');
       const hint = $('project-hub-hint');
-      if (hint) hint.textContent = 'Publish the current Studio project to MV Cloud for the selected site.';
+      if (hint) hint.textContent = 'Publish the current Studio project to PeakLogic Cloud for the selected site.';
       const list = $('project-hub-list');
       if (list) {
         list.hidden = true;

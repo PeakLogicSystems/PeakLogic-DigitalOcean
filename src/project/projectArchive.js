@@ -349,7 +349,7 @@ async function restoreArchiveMembers(unpacked, io = {}) {
     try {
       writeAsset(asset.ref, asset.data);
     } catch (e) {
-      warnings.push(`Could not restore Facility Draw asset ${asset.ref}: ${e.message || e}`);
+      warnings.push(`Could not restore Facility Builder asset ${asset.ref}: ${e.message || e}`);
     }
   }
 
@@ -358,7 +358,7 @@ async function restoreArchiveMembers(unpacked, io = {}) {
       const { writeActiveProject } = require('../../facility-draw/src/facilityDrawStore');
       writeActiveProject(normalizeFacilityDraw(unpacked.facilityDraw));
     } catch (e) {
-      warnings.push(`Could not restore Facility Draw document: ${e.message || e}`);
+      warnings.push(`Could not restore Facility Builder document: ${e.message || e}`);
     }
   }
 

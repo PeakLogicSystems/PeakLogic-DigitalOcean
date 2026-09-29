@@ -57,7 +57,7 @@ describe('facilityDraw scene from layout', () => {
     assert.equal(meta.levelTag, 'SPX_LEVEL');
   });
 
-  it('aggregates zones from meta and Facility Draw groups', () => {
+  it('aggregates zones from meta and Facility Builder groups', () => {
     const placements = [
       { id: 'a', scene: { x: 0, z: 0 }, size: { widthFt: 4, depthFt: 4 }, meta: { zoneId: 'z1' } },
       { id: 'b', scene: { x: 10, z: 0 }, size: { widthFt: 4, depthFt: 4 }, meta: { zoneId: 'z1' } },

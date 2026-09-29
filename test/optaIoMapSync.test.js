@@ -31,7 +31,7 @@ describe('findRegistryDeviceForDriver', () => {
     };
     registry._store.devices[mvId] = {
       deviceId: mvId,
-      name: 'MV Opta',
+      name: 'PeakLogic Opta',
       lastReportAt: new Date().toISOString(),
       tags: [],
       meta: { ateccSerial: SERIAL },
@@ -58,7 +58,7 @@ describe('findRegistryDeviceForDriver', () => {
     const mvId = mvDeviceIdFromAteccSerial(SERIAL);
     registry._store.devices[mvId] = {
       deviceId: mvId,
-      name: 'MV Opta',
+      name: 'PeakLogic Opta',
       lastReportAt: new Date().toISOString(),
       tags: [{ id: 'I1', type: 'BOOL', role: 'input', value: false }],
       meta: { ateccSerial: SERIAL },
