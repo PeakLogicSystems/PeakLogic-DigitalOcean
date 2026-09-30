@@ -333,6 +333,62 @@ class TenantStore {
     };
   }
 
+  /** Switch an existing session's active tenant (platform admin drilling into a
+   * tenant portal, or a partner switching between linked customers). */
+  switchActiveTenant(token, tenantId) {
+    if (!token) throw Object.assign(new Error('Session required'), { status: 401 });
+    this.purgeExpiredSessions();
+    const sid = hashToken(token);
+    const sess = this._store.sessions[sid];
+    if (!sess || sess.expiresAt < Date.now()) {
+      throw Object.assign(new Error('Session expired'), { status: 401 });
+    }
+    const user = this._store.users[sess.userId];
+    if (!user) throw Object.assign(new Error('User not found'), { status: 401 });
+    const target = this.getTenant(tenantId);
+    if (!target) throw Object.assign(new Error('Unknown organization'), { status: 404 });
+    const { canAccessTenant } = require('./partnerAccess');
+    if (!canAccessTenant(user, target.tenantId, (id) => this.getTenant(id))) {
+      throw Object.assign(new Error('Not authorized for this organization'), { status: 403 });
+    }
+    sess.activeTenantId = target.tenantId;
+    save(this._store);
+    return {
+      user: this.publicUser(user, target),
+      tenant: this.publicTenant(target),
+    };
+  }
+
+  /** Platform Control Center "drill into this tenant" — mints a real tenant-
+   * portal session for the seeded platform_admin user, scoped to the given
+   * tenant, so the admin lands in the actual live portal (not a read-only
+   * detail page). Bridges the separate mv_platform_admin cookie auth (which
+   * has no tenantStore session at all) into a normal mv_session. */
+  createPlatformAdminSession(tenantId) {
+    const admin = Object.values(this._store.users).find((u) => u.role === 'platform_admin');
+    if (!admin) throw Object.assign(new Error('No platform admin user configured'), { status: 500 });
+    const target = this.getTenant(tenantId);
+    if (!target) throw Object.assign(new Error('Unknown organization'), { status: 404 });
+    this.purgeExpiredSessions();
+    const token = randomToken(24);
+    const sid = hashToken(token);
+    const expiresAt = Date.now() + SESSION_TTL_MS;
+    this._store.sessions[sid] = {
+      sessionId: sid,
+      userId: admin.userId,
+      activeTenantId: target.tenantId,
+      createdAt: new Date().toISOString(),
+      expiresAt,
+    };
+    save(this._store);
+    return {
+      token,
+      expiresAt,
+      user: this.publicUser(admin, target),
+      tenant: this.publicTenant(target),
+    };
+  }
+
   logout(token) {
     if (!token) return;
     delete this._store.sessions[hashToken(token)];

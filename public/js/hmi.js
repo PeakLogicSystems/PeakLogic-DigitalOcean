@@ -4777,7 +4777,37 @@
     container.addEventListener('pointercancel', endDrag);
   }
 
+  let cameraPopupCloseBound = false;
+
+  function closeCameraPopup() {
+    const popup = document.getElementById('hmi-camera-popup');
+    if (!popup) return;
+    popup.classList.add('view-hidden');
+    popup.setAttribute('aria-hidden', 'true');
+    const frame = document.getElementById('hmi-camera-popup-frame');
+    if (frame) frame.src = 'about:blank';
+  }
+
+  function openCameraPopup(url, opts = {}) {
+    const popup = document.getElementById('hmi-camera-popup');
+    const frame = document.getElementById('hmi-camera-popup-frame');
+    if (!popup || !frame || !url) return;
+    const title = document.getElementById('hmi-camera-popup-title');
+    if (title) title.textContent = opts.title || 'Camera';
+    frame.src = url;
+    popup.classList.remove('view-hidden');
+    popup.setAttribute('aria-hidden', 'false');
+    if (!cameraPopupCloseBound) {
+      cameraPopupCloseBound = true;
+      popup.addEventListener('click', (e) => {
+        if (e.target.closest('[data-hmi-camera-close]')) closeCameraPopup();
+      });
+    }
+  }
+
   global.HmiView = {
+    openCameraPopup,
+    closeCameraPopup,
     GRID_SIZE,
     MAX_GRID_COLS,
     MAX_GRID_ROWS,

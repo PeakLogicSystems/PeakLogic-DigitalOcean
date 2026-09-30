@@ -10655,7 +10655,7 @@ window.PeaklogicHmi = (function () {
       positionHmiSetupPopup(true);
       clampHmiSetupOnResize();
     });
-    void openSetupPopupLoad();
+    return openSetupPopupLoad();
   }
 
   async function openSetupPopupLoad() {
@@ -10857,10 +10857,21 @@ window.PeaklogicHmi = (function () {
     navigateHmiView(sid);
   }
 
+  /** Facility Builder's standalone "View 3D" (and "2D grid") buttons deep-link
+   * here via /?composerOpen=<mode> when not embedded in an iframe — open the
+   * HMI Composer and switch it straight into that mode. Waits for the setup
+   * popup's server-settings load to finish first, since that load applies
+   * the project's saved composerMode and would otherwise clobber this. */
+  async function openComposerEditing(mode) {
+    await openSetupPopup();
+    setComposerMode(mode, { skipDirty: true });
+  }
+
   return {
     init,
     initMainHmi,
     openFromUrlParam,
+    openComposerEditing,
     isHmiViewActive,
     isHmiSetupOpen,
     openSetupPopup,

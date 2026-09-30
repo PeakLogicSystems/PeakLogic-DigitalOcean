@@ -17,7 +17,7 @@
 
 <%- include('_nav') %>
 
-<main class="container pb-5">
+<main class="container pt-4 pb-5">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="h4 mb-0">Tenants</h2>
     <a href="/admin/tenants/new" class="btn btn-purple btn-sm">New customer</a>
@@ -42,7 +42,13 @@
           <% } else { %>
             <% tenants.forEach(function(t) { %>
               <tr>
-                <td><%= t.name %></td>
+                <td>
+                  <form method="POST" action="/admin/tenants/<%= t.id %>/enter" class="d-inline">
+                    <button type="submit" class="btn btn-link p-0 text-start fw-semibold text-decoration-none tenant-row-open" title="Open <%= t.name %>'s portal">
+                      <%= t.name %> <i class="bi bi-box-arrow-up-right small text-muted"></i>
+                    </button>
+                  </form>
+                </td>
                 <td><code><%= t.tenantSlug %></code></td>
                 <td>
                   <% if (t.cmmsEnabled) { %>

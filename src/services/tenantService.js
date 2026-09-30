@@ -72,10 +72,22 @@ async function getTenantCmmsEntitlement(tenantId) {
   };
 }
 
+/** Mint a real tenant-portal session so a platform admin can drill straight
+ * into a tenant's live portal from the Control Center tenant list. */
+async function enterTenantPortal(tenantId) {
+  try {
+    const session = tenantStore.createPlatformAdminSession(tenantId);
+    return { ok: true, ...session };
+  } catch (err) {
+    return { ok: false, status: err.status || 400, error: err.message };
+  }
+}
+
 module.exports = {
   listAllTenants,
   getTenantDetail,
   createTenantAsPlatform,
   updateTenantCmms,
   getTenantCmmsEntitlement,
+  enterTenantPortal,
 };

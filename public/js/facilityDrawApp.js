@@ -4020,14 +4020,24 @@
       const node = state.project.nodes.find((n) => n.id === state.selectedId);
       if (node) readInspectorMeta(node);
       setStatus('Building 3D view…');
+      // Open the tab synchronously, inside the click handler, so the browser
+      // still counts it as a trusted user gesture — popup blockers silently
+      // drop window.open() calls made after an await (the URL isn't known
+      // until the API call below resolves).
+      const pending = window.open('', '_blank', 'noopener');
       try {
         const data = await api('POST', '/view-3d', {
           project: state.project,
           linkComposer: true,
         });
-        window.open(data.url, '_blank', 'noopener');
+        if (pending) {
+          pending.location.href = data.url;
+        } else {
+          window.open(data.url, '_blank', 'noopener');
+        }
         setStatus(`3D view opened — ${data.placements} symbols, ${data.zones} zones`);
       } catch (e) {
+        pending?.close();
         setStatus(e.message, true);
       }
     });

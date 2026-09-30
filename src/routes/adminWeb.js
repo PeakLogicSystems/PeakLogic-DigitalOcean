@@ -14,6 +14,7 @@ const {
   isValidPlatformAdminSession,
   getPlatformAdminCookie,
 } = require('../auth/platformAdminSession');
+const { setSessionCookie } = require('../tenants/authMiddleware');
 const tenantService = require('../services/tenantService');
 
 const router = express.Router();
@@ -131,6 +132,13 @@ router.post('/tenants/:id/cmms', requirePlatformAdminWeb, asyncHandler(async (re
   const result = await tenantService.updateTenantCmms(req.params.id, { enabled, externalUrl });
   if (!result.ok) return res.status(result.status).send(result.error);
   res.redirect(`/admin/tenants/${req.params.id}?cmms=updated`);
+}));
+
+router.post('/tenants/:id/enter', requirePlatformAdminWeb, asyncHandler(async (req, res) => {
+  const result = await tenantService.enterTenantPortal(req.params.id);
+  if (!result.ok) return res.status(result.status).send(result.error);
+  setSessionCookie(res, result.token, result.expiresAt);
+  res.redirect('/');
 }));
 
 module.exports = router;

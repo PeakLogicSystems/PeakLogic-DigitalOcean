@@ -14,7 +14,7 @@ function createCloudStudioPages(opts = {}) {
 
   function renderStudio(req, res, page) {
     res.render('cloud-studio', {
-      title: 'PeakLogic Cloud Studio',
+      title: 'PeakLogic Control Center',
       appVersion,
       product,
       deployment: 'cloud',

@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign in · PeakLogic Cloud Studio</title>
+  <title>Sign in · PeakLogic Control Center</title>
   <link rel="icon" href="/branding/peaklogic-favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* PeakLogic brand — matches public/css/peaklogic.css (verified #7C3AED, see that file's header comment) */
+    /* PeakLogic brand — matches public/css/peaklogic.css (verified #7C3AED, see that file's header comment).
+       Layout modeled on the NextCentury Meters login (app.nextcenturymeters.com/login):
+       a single centered card on a full-page diagonal gradient, rather than a split hero/card shell. */
     :root {
       --ps-purple: #7c3aed;
       --ps-purple-dark: #6d28d9;
@@ -17,179 +19,177 @@
       --ps-purple-light: #ede9fe;
       --peaklogic-navy: #0f172a;
       --peaklogic-navy-soft: #1e293b;
-      --bg: #f8f9fa;
-      --text: #212529;
-      --muted: #6c757d;
+      --muted: #94a3b8;
       --border: #dee2e6;
     }
-    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
       min-height: 100%;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem 5rem;
+      background: linear-gradient(135deg, #1e2947 0%, var(--peaklogic-navy) 55%, var(--ps-purple-deep) 140%);
+      color: #fff;
+      position: relative;
     }
     .login-shell {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 860px) {
-      .login-shell { grid-template-columns: 1fr; }
-      .login-hero { min-height: 12rem; }
-    }
-    .login-hero {
-      position: relative;
-      background: linear-gradient(135deg, #1e2947, var(--peaklogic-navy) 65%);
-      color: #fff;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 2.5rem 2rem;
-    }
-    .login-hero .brand {
-      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.75rem;
+      width: 100%;
     }
-    .login-hero .brand img { width: 34px; height: 34px; }
-    .login-hero .brand .logic { color: var(--ps-purple); font-weight: 800; }
-    .login-hero .tagline {
-      max-width: 22rem;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.92);
-    }
-    .login-panel {
+    .login-brand {
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 2rem 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+    /* Sized and proportioned per the PeakLogic brand guide's "Logotype" spec:
+       mark + wordmark in one SVG (viewBox 0 0 230 48), scaled as a single
+       unit so the mark-to-wordmark ratio and gap never drift from brand. */
+    .login-logotype {
+      width: 38rem;
+      max-width: 100%;
+      height: auto;
     }
     .login-card {
       width: 100%;
-      max-width: 420px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.75rem;
-      box-shadow: 0 4px 24px rgba(73, 16, 79, 0.08);
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+      padding: 2.5rem 2.5rem 1.75rem;
     }
     .login-card h1 {
       margin: 0 0 0.35rem;
       font-size: 1.35rem;
       font-weight: 700;
-      color: var(--text);
+      color: #fff;
+      text-align: center;
     }
     .login-card .lead {
-      margin: 0 0 1.25rem;
-      color: var(--muted);
-      font-size: 0.95rem;
+      margin: 0 0 1.5rem;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.9rem;
+      text-align: center;
     }
     .login-card label {
       display: block;
       margin: 0.85rem 0 0.35rem;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.65);
     }
     .login-optional {
       font-weight: 400;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.45);
       font-size: 0.8rem;
     }
     .login-card input {
       width: 100%;
-      padding: 0.55rem 0.75rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      border-radius: 4px;
+      border: none;
       background: #fff;
-      color: var(--text);
+      color: var(--peaklogic-navy);
       font-size: 0.95rem;
     }
+    .login-card input::placeholder { color: var(--muted); }
     .login-card input:focus {
       outline: 2px solid var(--ps-purple);
       outline-offset: 1px;
-      border-color: var(--ps-purple);
     }
     .login-card button {
       width: 100%;
-      margin-top: 1.25rem;
-      padding: 0.6rem 0.9rem;
-      border: 1px solid var(--ps-purple);
+      margin-top: 1.5rem;
+      padding: 0.7rem 0.9rem;
+      border: none;
       border-radius: 6px;
       background: var(--ps-purple);
       color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+      transition: background 0.15s ease;
     }
-    .login-card button:hover {
-      background: var(--ps-purple-dark);
-      border-color: var(--ps-purple-dark);
-      box-shadow: 0 4px 12px rgba(73, 16, 79, 0.25);
-    }
+    .login-card button:hover { background: var(--ps-purple-dark); }
     .login-card button.secondary {
       margin-top: 0.65rem;
-      background: #fff;
-      color: var(--ps-purple);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: rgba(255, 255, 255, 0.85);
     }
-    .login-card button.secondary:hover {
-      background: #f8f9fa;
-      box-shadow: none;
-    }
+    .login-card button.secondary:hover { background: rgba(255, 255, 255, 0.08); }
     .login-err {
-      color: #dc3545;
-      font-size: 0.9rem;
+      color: #fca5a5;
+      font-size: 0.88rem;
       min-height: 1.25em;
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
+      text-align: center;
     }
     .login-links {
-      margin-top: 1rem;
-      font-size: 0.9rem;
+      margin-top: 1.1rem;
+      font-size: 0.88rem;
+      text-align: center;
     }
-    .login-links a { color: var(--ps-purple); }
+    .login-links a { color: rgba(255, 255, 255, 0.75); }
+    .login-links a:hover { color: #fff; }
+    .login-footer {
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 0 1rem;
+    }
     .step-hidden { display: none; }
   </style>
 </head>
 <body>
   <div class="login-shell">
-    <aside class="login-hero" aria-hidden="true">
-      <div class="brand"><img src="/branding/peaklogic-icon.svg" alt=""><span>Peak<span class="logic">Logic</span></span></div>
-      <p class="tagline">Cloud Studio — multi-tenant SCADA, historian, CMMS, and site fleet management.</p>
-    </aside>
-    <main class="login-panel">
-      <form class="login-card" id="login-form" autocomplete="on">
-        <div id="step-credentials">
-          <h1>Sign in</h1>
-          <p class="lead">Email and password. Organization ID is for tenant users; <strong>system admin leaves it blank</strong>.</p>
-          <label for="organizationId">Organization ID <span class="login-optional">(optional for system admin)</span></label>
-          <input id="organizationId" name="organizationId" autocomplete="organization" placeholder="e.g. ace — leave blank for system admin">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="username" required>
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required>
-          <button type="submit">Sign in</button>
-          <p class="login-links"><a href="/forgot-password">Forgot password?</a></p>
-        </div>
-        <div id="step-mfa" class="step-hidden">
-          <h1>Verification code</h1>
-          <p class="lead" id="mfa-lead">Enter the 6-digit code sent to your email.</p>
-          <label for="mfaCode">Code</label>
-          <input id="mfaCode" name="mfaCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8">
-          <button type="submit">Verify and sign in</button>
-          <button type="button" class="secondary" id="mfa-back">Back</button>
-        </div>
-        <div class="login-err" id="login-err" role="alert"></div>
-      </form>
-    </main>
+    <div class="login-brand">
+      <svg class="login-logotype" viewBox="0 0 230 48" fill="none" role="img" aria-label="PeakLogic">
+        <g transform="translate(0,6)">
+          <path d="M0,36 L16,0 L28,20 L38,4 L48,36 Z" fill="#7C3AED"/>
+          <path d="M28,20 L38,4 L48,36 Z" fill="#22C55E" opacity="0.85"/>
+        </g>
+        <text x="62" y="33" font-family="Inter, 'Segoe UI', sans-serif" font-weight="800" font-size="30" letter-spacing="-1" fill="#FFFFFF">Peak<tspan fill="#7C3AED">Logic</tspan></text>
+      </svg>
+    </div>
+    <form class="login-card" id="login-form" autocomplete="on">
+      <div id="step-credentials">
+        <h1>Sign in</h1>
+        <label for="organizationId">Organization ID <span class="login-optional">(optional)</span></label>
+        <input id="organizationId" name="organizationId" autocomplete="organization">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="username" required>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button type="submit">Sign in</button>
+        <p class="login-links"><a href="/forgot-password">Forgot password?</a></p>
+      </div>
+      <div id="step-mfa" class="step-hidden">
+        <h1>Verification code</h1>
+        <p class="lead" id="mfa-lead">Enter the 6-digit code sent to your email.</p>
+        <label for="mfaCode">Code</label>
+        <input id="mfaCode" name="mfaCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8">
+        <button type="submit">Verify and sign in</button>
+        <button type="button" class="secondary" id="mfa-back">Back</button>
+      </div>
+      <div class="login-err" id="login-err" role="alert"></div>
+    </form>
+  </div>
+  <div class="login-footer">
+    Copyright &copy; <%= new Date().getFullYear() %> PeakLogic. All rights reserved.
   </div>
   <script>
     const next = new URLSearchParams(location.search).get('next') || '/';
