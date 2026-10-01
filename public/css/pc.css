@@ -1023,6 +1023,7 @@ body.hmi-composer-col-split-active {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
+    margin-left: 0;
   }
   .topbar-project-status {
     max-width: 100%;
@@ -1530,20 +1531,36 @@ html {
 .topbar-brand {
   flex: 0 0 auto;
   display: inline-flex;
-  align-items: center;
+  /* baseline (not center) so the icon and the "Control Center" badge both
+     sit on the same text baseline as the PeakLogic wordmark, matching the
+     brand guide's combined mark+wordmark lockup. */
+  align-items: baseline;
+  align-self: baseline;
+  /* The page body's base font is Segoe UI (see body{} above) — the brand
+     guide's wordmark spec is Inter weight 800, so it must be set here
+     explicitly rather than inherited, or it silently falls back to Segoe UI
+     despite Inter being loaded on the page. */
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0.02em;
 }
-/* Icon sized relative to .topbar-brand's own font-size (1.2:1, the ratio locked
-   in by the brand guide's combined mark+wordmark lockup) so it can't drift out
-   of proportion at the 720px-breakpoint font-size step below. */
-.topbar-brand-icon { width: 1.2em; height: 1.2em; margin-right: 0.4em; flex-shrink: 0; }
+/* Icon's viewBox is cropped tight to the mark's own shape (no internal
+   padding — see public/branding/peaklogic-icon.svg), so it's sized at its
+   true 4:3 aspect (not square) and the brand guide's 1.2:1 mark-height-to-
+   wordmark-font-size ratio renders at its real size instead of looking
+   small inside padding that used to be invisible. `top: 0.3em` hangs the
+   mark's bottom edge below the text baseline by the same proportion as the
+   brand guide's own combined SVG (mark bottom sits 9 of 30 units below the
+   baseline there = 0.3em) — flex baseline alignment alone stops at the
+   baseline, short of where "Logic"'s g-descender actually bottoms out. */
+.topbar-brand-icon { width: 1.6em; height: 1.2em; margin-right: 0.4em; flex-shrink: 0; position: relative; top: 0.3em; }
 .topbar-brand span:not(.topbar-cloud-badge) { color: var(--ps-purple-mid); font-weight: 800; font-size: 1em; }
 .topbar-cloud-badge {
-  margin-left: 0.4rem;
+  margin-left: 0.65rem;
+  align-self: baseline;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   vertical-align: middle;
@@ -1667,6 +1684,9 @@ html {
   align-items: center;
   gap: 0.55rem;
   flex: 0 0 auto;
+  /* Nudges the whole tools-menu cluster off the brand lockup so it never
+     reads as crowded/overlapping next to the logo. */
+  margin-left: 0.75rem;
 }
 .topbar-project-details { position: relative; font-size: 0.92rem; }
 .topbar-project-details > summary { list-style: none; }

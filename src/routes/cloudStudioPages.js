@@ -22,7 +22,7 @@ function createCloudStudioPages(opts = {}) {
       page: page || 'sites',
       siteId: req.params.siteId || '',
       // Bump when People/auth UI changes so browsers do not keep stale cloudStudioUi.js
-      assetV: `${appVersion}-csui34`,
+      assetV: `${appVersion}-csui40`,
       user: req.mvAuth?.user || null,
       tenant: req.mvAuth?.tenant || null,
     });

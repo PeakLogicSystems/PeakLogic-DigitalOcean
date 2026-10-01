@@ -51,15 +51,40 @@ body.bg-light {
 .brand-logotype-logic { color: var(--ps-purple); }
 .footer-peaklogic .brand-logotype-peak { color: var(--peaklogic-navy); }
 
-/* Sized relative to whatever font-size its wrapping heading/nav context sets
-   (inherited, same as .brand-logotype's own text) — locks the icon to the
-   brand guide's 1.2:1 mark-to-wordmark ratio wherever this pairing is used,
-   instead of drifting whenever the surrounding heading size changes. */
+/* Icon's viewBox is cropped tight to the mark's own shape (no internal
+   padding — see public/branding/peaklogic-icon.svg), so it's sized at its
+   true 4:3 aspect (not square) and the brand guide's 1.2:1 mark-height-to-
+   wordmark-font-size ratio renders at its real size instead of looking
+   small inside padding that used to be invisible. Sized relative to
+   whatever font-size its wrapping heading/nav context sets (inherited,
+   same as .brand-logotype's own text). */
 .brand-logo-icon {
-  width: 1.2em;
+  width: 1.6em;
   height: 1.2em;
-  vertical-align: -0.2em;
+  flex-shrink: 0;
+  align-self: baseline;
   margin-right: 0.15em;
+  /* Hangs the mark's bottom edge below the text baseline by the same
+     proportion as the brand guide's own combined SVG (0.3em) — see the
+     matching comment in pc.css's .topbar-brand-icon for the derivation. */
+  position: relative;
+  top: 0.3em;
+}
+
+/* "Control Center" badge — matches pc.css's .topbar-cloud-badge and
+   cloud-studio.css's .cs-cloud-badge. Not Bootstrap's text-white-50
+   utility, since that sets `color` with !important and this needs its own
+   margin/align-self alongside it (building this as its own class, not an
+   inline style, keeps that consistent if the color ever changes again). */
+.badge-gradient-text {
+  font-size: 0.9rem;
+  margin-left: 0.65rem;
+  flex-shrink: 0;
+  align-self: baseline;
+  color: rgba(255, 255, 255, 0.5);
+}
+.brand-logotype {
+  align-self: baseline;
 }
 
 /* Top nav */
@@ -169,7 +194,7 @@ body.bg-light {
 }
 .footer-powered-by {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.35rem;
 }
 
