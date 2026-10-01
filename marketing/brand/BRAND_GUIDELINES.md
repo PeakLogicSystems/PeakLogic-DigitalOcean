@@ -53,7 +53,7 @@ On a dark background, swap the "Peak" fill to `#FFFFFF`. The mark colors never c
 
 ## 3. The Logotype Typeface
 
-**This is called out on its own, separate from the general color rule, because it is the second most-violated rule in the brand system** — found wrong (silently falling back to the OS default sans-serif) across most repos that render the logotype.
+Called out on its own, not folded into a general typography note, because the typeface is as much a fixed part of the wordmark as its color.
 
 ![The logotype is always set in Inter — Weight 800](diagrams/logotype-typeface.png)
 
@@ -69,7 +69,7 @@ Load the full weight range, every time:
 
 Note the range ends at `800`. Loading only up to `700` and then applying `font-weight: 800` in CSS doesn't error — it silently substitutes the nearest loaded weight or a synthetic bold, and the wordmark renders subtly wrong in a way that's easy to miss in code review.
 
-**Never substitute.** Every one of these has been found standing in for Inter somewhere in the fleet, always by omission (a missing font link), never by deliberate choice: `system-ui`, `Segoe UI`, `Arial`, `Helvetica Neue`, `Roboto`. A surface that genuinely cannot load Google Fonts (offline-first, strict CSP) should fall back to the system sans-serif stack deliberately and visibly documented as a fallback — never silently, and never left unnoticed for months.
+**Never substitute.** The wordmark is never set in any of these, or any other fallback — Inter only: `system-ui`, `Segoe UI`, `Arial`, `Helvetica Neue`, `Roboto`. A surface that genuinely cannot load Google Fonts (offline-first, strict CSP) should fall back to the system sans-serif stack deliberately and visibly documented as a fallback — never silently.
 
 ## 4. Clear Space & Minimum Size
 
@@ -96,6 +96,8 @@ Clear space is measured in **X** — the mark's own height. Nothing else (text, 
 | | Purple-mid | `#8B5CF6` | UI accents, hover states, gradient stops. **Never the wordmark.** |
 | | Purple-soft | `#EDE9FE` | Tint backgrounds, badges. |
 | | Green-soft | `#DCFCE7` | Success-state tint backgrounds. |
+
+The extended shades exist for interface work — a hover state, a tinted badge, a gradient stop. The logo itself (the mark and the wordmark) never uses them: it is always exactly the three core colors above.
 
 ### The one rule that never bends
 
