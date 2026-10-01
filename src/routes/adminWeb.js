@@ -27,7 +27,7 @@ function adminLocals(req, extra = {}) {
     // Bump this suffix whenever peaklogic.css changes, so browsers fetch the
     // fresh stylesheet instead of serving a stale cached copy (this link had
     // no cache-busting query string at all before).
-    assetV: `${APP_VERSION}-adm4`,
+    assetV: `${APP_VERSION}-adm5`,
     activeNav: extra.activeNav || '',
     error: extra.error || null,
     success: extra.success || null,

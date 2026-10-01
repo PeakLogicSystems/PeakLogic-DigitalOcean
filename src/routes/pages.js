@@ -52,7 +52,7 @@ function dashboardViewLocals({ appVersion, product, deployment, embedded }) {
   const dep = deployment || 'appliance';
   return {
     title: dep === 'cloud' ? 'PeakLogic Cloud Studio' : 'PeakLogic',
-    assetV: `${appVersion}-ps21`,
+    assetV: `${appVersion}-ps22`,
     appVersion,
     product: product || 'mvp-suite',
     deployment: dep,

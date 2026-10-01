@@ -89,8 +89,12 @@ html, body {
    baseline there = 0.3em) — flex baseline alignment alone stops at the
    baseline, short of where "Logic"'s g-descender actually bottoms out. */
 .cs-brand-icon { width: 1.6em; height: 1.2em; margin-right: 0.5rem; flex-shrink: 0; position: relative; top: 0.3em; }
+/* "Logic" is always exactly #7C3AED (--ps-purple) — brand guide §5, no
+   exception. --ps-purple-mid (#8B5CF6) is for UI accents/hover states
+   only, never the wordmark; using it here was a real violation, found in
+   the 2026-10-01 cross-repo brand audit. */
 .cs-brand span {
-  color: var(--ps-purple-mid, #8b5cf6);
+  color: var(--ps-purple);
   font-weight: 800;
   font-size: 1em;
 }

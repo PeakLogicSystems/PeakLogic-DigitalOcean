@@ -8,6 +8,7 @@ history and this session's own record, not maintained contemporaneously.
 ## [Unreleased]
 
 ### Added
+- Documented a pre-production deploy risk (MQTT topic prefix changed from `mooreview/v1` to `peaklogic/v1`, matching Arduino Opta firmware never compiled/flashed to real hardware) in `CLAUDE.md` and `docs/architecture/technical-debt-register.md` (TD-22) — not yet resolved, flagged for explicit sign-off before any deploy where real field devices might connect.
 - Admin "Control Center" tenant list can now drill directly into a tenant's live portal by clicking the tenant name, instead of only reaching a read-only detail page (`POST /admin/tenants/:id/enter`, `tenantStore.createPlatformAdminSession()`, `tenantService.enterTenantPortal()`).
 - `docs/architecture/` — a new architecture-first documentation set (Vision, PRD, SRS, Domain Model, Security Architecture, and others — see that directory's `README.md` for the full index and status).
 - Root `CLAUDE.md` and this `CHANGELOG.md` — did not exist before this session.

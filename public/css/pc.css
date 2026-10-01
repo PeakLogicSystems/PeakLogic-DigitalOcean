@@ -1555,7 +1555,11 @@ html {
    baseline there = 0.3em) — flex baseline alignment alone stops at the
    baseline, short of where "Logic"'s g-descender actually bottoms out. */
 .topbar-brand-icon { width: 1.6em; height: 1.2em; margin-right: 0.4em; flex-shrink: 0; position: relative; top: 0.3em; }
-.topbar-brand span:not(.topbar-cloud-badge) { color: var(--ps-purple-mid); font-weight: 800; font-size: 1em; }
+/* "Logic" is always exactly #7C3AED (--ps-purple) — brand guide §5, no
+   exception. --ps-purple-mid (#8B5CF6) is for UI accents/hover states
+   only, never the wordmark; using it here was a real violation, found in
+   the 2026-10-01 cross-repo brand audit. */
+.topbar-brand span:not(.topbar-cloud-badge) { color: var(--ps-purple); font-weight: 800; font-size: 1em; }
 .topbar-cloud-badge {
   margin-left: 0.65rem;
   align-self: baseline;
