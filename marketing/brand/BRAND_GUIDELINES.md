@@ -25,7 +25,7 @@ The PeakLogic mark is a two-facet triangle: a solid purple peak with one green h
 - The mark is always scaled uniformly. Never stretch it non-uniformly to fit a layout.
 - Two viewBox variants are both correct, used in different contexts:
   - **Padded (`0 0 32 32`)** — the standalone mark, used for favicons and app icons.
-  - **Tight-cropped (`4 10 24 18`, or the geometrically identical re-originned `0 0 24 18`)** — used for every inline mark+wordmark lockup in product UI, because it's what makes the sizing rule in §6 land cleanly on a text baseline.
+  - **Tight-cropped (`4 10 24 18`, or the geometrically identical re-originned `0 0 24 18`)** — used for every inline mark+wordmark lockup in product UI, because it's what makes the sizing rule in §8 land cleanly on a text baseline.
 
 ## 2. The Logotype
 
@@ -51,7 +51,35 @@ On a dark background, swap the "Peak" fill to `#FFFFFF`. The mark colors never c
 | `marketing/brand/peaklogic-logotype.svg` | Full logotype, light backgrounds |
 | `marketing/brand/peaklogic-logotype-dark.svg` | Full logotype, dark backgrounds |
 
-## 3. Color Palette
+## 3. The Logotype Typeface
+
+**This is called out on its own, separate from the general color rule, because it is the second most-violated rule in the brand system** — found wrong (silently falling back to the OS default sans-serif) across most repos that render the logotype.
+
+![The logotype is always set in Inter — Weight 800](diagrams/logotype-typeface.png)
+
+The logotype's typeface is **Inter, weight 800** — never a lighter or heavier weight, never a different family — with tight negative tracking (`letter-spacing: -1` in SVG units; `-0.02em` to `-0.03em` in CSS).
+
+Load the full weight range, every time:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+```
+
+Note the range ends at `800`. Loading only up to `700` and then applying `font-weight: 800` in CSS doesn't error — it silently substitutes the nearest loaded weight or a synthetic bold, and the wordmark renders subtly wrong in a way that's easy to miss in code review.
+
+**Never substitute.** Every one of these has been found standing in for Inter somewhere in the fleet, always by omission (a missing font link), never by deliberate choice: `system-ui`, `Segoe UI`, `Arial`, `Helvetica Neue`, `Roboto`. A surface that genuinely cannot load Google Fonts (offline-first, strict CSP) should fall back to the system sans-serif stack deliberately and visibly documented as a fallback — never silently, and never left unnoticed for months.
+
+## 4. Clear Space & Minimum Size
+
+Clear space is measured in **X** — the mark's own height. Nothing else (text, UI chrome, a container edge) may enter that margin on any side.
+
+![Clear space diagram showing the mark and wordmark surrounded by a margin of X on all sides, plus the mark at 16px, 24px, and 48px to show the minimum legible sizes](diagrams/clear-space.png)
+
+**Minimum size**: below the digital floor (16px), the green facet starts to disappear into anti-aliasing and the two colors read as one blob — stop shrinking before that happens. 24px is the practical floor for any in-app placement; 48px is comfortable for a primary lockup.
+
+## 5. Color Palette
 
 ### Core — the brand
 
@@ -73,27 +101,19 @@ On a dark background, swap the "Peak" fill to `#FFFFFF`. The mark colors never c
 
 > **"Logic" is always exactly `#7C3AED`.** Not `#8B5CF6`, not any other shade, on any background, under any condition. There is no light/dark exception for the wordmark — only "Peak" flips between ink and white.
 
-## 4. Typography
+## 6. Logo in Context
 
-**Inter**, weight 800, with tight negative tracking (`letter-spacing: -1` in SVG units; `-0.02em` to `-0.03em` in CSS) for the wordmark.
+Three real placements, at the spacing and viewBox crop each one actually calls for:
 
-Load it with the full weight range including 800:
+![Three mockups: a browser tab showing the padded mark as a favicon, an app navigation bar showing the tight-cropped mark with an HTML text span, and a login screen showing the fused inline SVG lockup](diagrams/logo-in-context.png)
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-```
-
-Falls back to `system-ui, -apple-system, "Segoe UI", Roboto, sans-serif` only when Inter genuinely cannot load — never by omission.
-
-## 5. Logo Usage
+## 7. Logo Usage
 
 **Do**
 
 - Render "Logic" as exactly `#7C3AED`, every time, on every background.
 - Load Inter weight 800 explicitly wherever the wordmark renders.
-- Size the mark at `1.2em` height relative to the wordmark's own font-size (§6).
+- Size the mark at `1.2em` height relative to the wordmark's own font-size (§8).
 - Use the tight-cropped viewBox for in-app lockups, the padded viewBox for standalone assets.
 - Scale the mark and logotype uniformly — the same factor on both axes.
 - Use a single fused inline SVG (mark + real SVG text) for login and splash screens.
@@ -109,7 +129,7 @@ Falls back to `system-ui, -apple-system, "Segoe UI", Roboto, sans-serif` only wh
 - Use an `<img>` icon plus a text span for a full-size login or splash lockup.
 - Ship a product surface with no favicon reference at all.
 
-## 6. Implementation Specification
+## 8. Implementation Specification
 
 **Mark-to-wordmark sizing** — the mark's rendered height is always `1.2×` the wordmark's font-size, implemented with em-relative units so the ratio holds at every screen size:
 
@@ -122,7 +142,7 @@ Falls back to `system-ui, -apple-system, "Segoe UI", Roboto, sans-serif` only wh
 
 **In-app chrome (nav, sidebar, footer)** — an inline `<svg>` mark paired with an HTML text span for the wordmark is the accepted standard pattern. This is not the same as an `<img>`-icon-plus-span composition, which is reserved for the smallest, most compact placements only (e.g. a toolbar favicon-style icon), never a primary lockup.
 
-## 7. Favicon
+## 9. Favicon
 
 The padded mark, no background shape:
 
@@ -132,7 +152,7 @@ The padded mark, no background shape:
 
 Every product surface — every portal, every marketing property — ships this reference. There is no acceptable surface with no favicon at all.
 
-## 8. White-Label Distinction
+## 10. White-Label Distinction
 
 PeakLogic's channel partners render their own branding inside the product — a monogram, a color pair, a wordmark of their own. That is a separate, deliberate white-label system and is not governed by this document. The one place the two can meet is a "Powered by PeakLogic" attribution line placed beside a partner's own mark — that small attribution is PeakLogic's own brand, and is subject to every rule above.
 
